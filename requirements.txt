@@ -1,0 +1,9 @@
+jinja2
+kivy
+ffpyplayer
+pillow
+requests
+git+https://github.com/yumoqing/kivycalendar
+git+https://github.com/yumoqing/appPublic
+git+https://github.com/yumoqing/sqlor
+git+https://github.com/yumoqing/ahserver
