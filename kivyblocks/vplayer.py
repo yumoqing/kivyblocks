@@ -213,6 +213,7 @@ class VPlayer(FloatLayout):
 			return
 
 		if value:
+			Window.fullscreen = True
 			self._fullscreen_state = state = {
 				'parent': self.parent,
 				'pos': self.pos,
@@ -237,6 +238,7 @@ class VPlayer(FloatLayout):
 			self.pos_hint = {}
 			self.size_hint = (1, 1)
 		else:
+			Window.fullscreen = False
 			state = self._fullscreen_state
 			window.remove_widget(self)
 			for child in state['window_children']:
