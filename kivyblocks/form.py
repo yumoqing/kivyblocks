@@ -29,6 +29,7 @@ form options
 			"uitype",
 			"uiparams",
 			"default",
+			"readonly",
 			"required"
 		},
 	]
@@ -137,14 +138,20 @@ class InputBox(BoxLayout):
 		options['allow_copy'] = True
 		if self.options.get('tip'):
 			options['hint_text'] = i18n(self.options.get('tip'))
+
 		self.input_widget = self.uidef['wclass'](**options)
-		self.form[self.options['name']] = self.input_widget
+		if self.options.get('readonly'):
+			self.input_widget.disabled = True
+		self.form.widget_ids[self.options['name']] = self.input_widget
 		self.add_widget(self.input_widget)
 		self.initflag = True
 		self.input_widget.bind(on_focus=self.on_focus)
 		if self.options.get('default'):
 			self.input_widget.setValue(self.options.get('default'))
 			
+	def clear(self):
+		self.input_widget.setValue('')
+
 	def on_focus(self,o,v):
 		if v:
 			self.old_value = o.text
@@ -227,7 +234,6 @@ class Form(BoxLayout):
 	
 class StrSearchForm(BoxLayout):
 	def __init__(self,img_url=None,**options):
-		print('here ---------------')
 		self.name = options.get('name','search_string')
 		BoxLayout.__init__(self,orientation='horizontal',size_hint_y=None,height=CSize(3))
 		self.inputwidget = TextInput(
@@ -247,7 +253,6 @@ class StrSearchForm(BoxLayout):
 		self.inputwidget.bind(on_text_validate=self.submit_input)
 
 	def submit_input(self,o,v=None):
-		print('StrSearchForm():submit_input() called')
 		text = self.inputwidget.text
 		if text != '':
 			d = {

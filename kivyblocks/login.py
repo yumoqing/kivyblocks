@@ -24,7 +24,7 @@ logformdesc = {
 				"uitype":"password"
 			}
 		]
-	}
+	},
 	"binds":[
 		"wid":"self",
 		"event":"on_submit",

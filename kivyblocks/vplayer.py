@@ -190,6 +190,10 @@ class VPlayer(FloatLayout):
 		return True
 
 	def on_state(self,o,v):
+		if self._video.state == 'play':
+			Window.allow_screensaver = False
+		else:
+			Window.allow_screensaver = True
 		print('onstate()',o,v,self._video.state)
 
 	def on_fullscreen(self, instance, value):

@@ -40,6 +40,7 @@ signal.signal(signal.SIGINT, signal_handler)
 class BlocksApp(App):
 	def build(self):
 		x = PageContainer()
+		self.userinfo = {}
 		self.title = 'Test Title'
 		self.blocks = Blocks()
 		config = getConfig()
@@ -51,6 +52,13 @@ class BlocksApp(App):
 		WindowBase.softinput_mode='below_target'
 		Clock.schedule_once(self.build1)
 		return x
+
+	def setUserInfo(self,uinfo):
+		d = {}
+		d['userid'] = uinfo['userid']
+		d['password'] = uinfo.get('password','')
+		d['authcode'] = uinfo.get('authcode','')
+		self.userinfo = d
 
 	def build1(self,t):
 		x = None
