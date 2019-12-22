@@ -237,6 +237,7 @@ class StrSearchForm(BoxLayout):
 		self.name = options.get('name','search_string')
 		BoxLayout.__init__(self,orientation='horizontal',size_hint_y=None,height=CSize(3))
 		self.inputwidget = TextInput(
+				text='',
 				multiline=False,
 				font_size=CSize(1),
 				size_hint_y=None,
