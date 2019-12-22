@@ -198,7 +198,7 @@ class VPlayer(FloatLayout):
 
 	def on_fullscreen(self, instance, value):
 		window = self.get_parent_window()
-		print('window.size=',window.size)
+		print('window.size=',window.size,'Window size=',Window.size)
 		if not window:
 			Logger.warning('VideoPlayer: Cannot switch to fullscreen, '
 						   'window not found.')
@@ -214,6 +214,7 @@ class VPlayer(FloatLayout):
 
 		if value:
 			Window.fullscreen = True
+			print('Window size=',Window.size)
 			self._fullscreen_state = state = {
 				'parent': self.parent,
 				'pos': self.pos,
