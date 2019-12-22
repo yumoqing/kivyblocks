@@ -19,9 +19,10 @@ class PageContainer(FloatLayout):
 		#			on_orientation=self.reshowBackButton)
 
 	def on_window_size(self,o,v=None):
-		print('on_window_size event fired ....',Window.size)
-		self.size = Window.size
-		self.reshowBackButton()
+		if self.size != Window.size:
+			print('on_window_size event fired ....',Window.size)
+			self.size = Window.size
+			self.reshowBackButton()
 
 	def reshowBackButton(self,o=None,v=None):
 		print(self.size)
