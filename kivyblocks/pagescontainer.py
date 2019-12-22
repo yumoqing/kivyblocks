@@ -52,13 +52,7 @@ class PageContainer(FloatLayout):
 	def previous(self,v=None):
 		if len(self.pageWidgets) <= 1:
 			return 
-		w = self.pageWidgets[-1]
-		if hasattr(w, 'beforeDestroy'):
-			x = w.beforeDestroy()
-			if not x:
-				return
 		self.pageWidgets = self.pageWidgets[:-1]
-		del w
 		self.showLastPage()
 
 	def add_widget(self,widget):
