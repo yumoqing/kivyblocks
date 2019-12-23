@@ -244,7 +244,6 @@ class VPlayer(FloatLayout):
 		else:
 			Window.fullscreen = False
 			state = self._fullscreen_state
-			Window.size = state['WindowSize']
 			window.remove_widget(self)
 			for child in state['window_children']:
 				window.add_widget(child)
@@ -254,6 +253,8 @@ class VPlayer(FloatLayout):
 			self.size = state['size']
 			if state['parent'] is not window:
 				state['parent'].add_widget(self)
+			Window.size = state['WindowSize']
+			print('state_size=',state['WindowSize'], 'windowsize=',Window.size)
 
 	def buildMenu(self,obj,touch):
 		if not self.collide_point(*touch.pos):
