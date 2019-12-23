@@ -18,6 +18,13 @@ from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, \
 from .utils import *
 from .baseWidget import PressableImage
 
+desktopOSs=[
+	"win",
+	"linux",
+	"macosx"
+]
+
+othersplatforms=['ios','android']
 
 class VPlayer(FloatLayout):
 	fullscreen = BooleanProperty(False)
@@ -226,7 +233,7 @@ class VPlayer(FloatLayout):
 				'window_children': window.children[:]}
 
 			print('vplayer fullscreen,platform=',platform)
-			if platform in ['windows', 'linux','macOS' ]:
+			if platform in desktopOSs:
 				Window.maximize()
 			# remove all window children
 			for child in window.children[:]:
@@ -256,7 +263,7 @@ class VPlayer(FloatLayout):
 			if state['parent'] is not window:
 				state['parent'].add_widget(self)
 			print('vplayer fullscreen,platform=',platform)
-			if platform in ['windows', 'linux','macOS' ]:
+			if platform in desktopOSs:
 				Window.restore()
 
 	def buildMenu(self,obj,touch):
