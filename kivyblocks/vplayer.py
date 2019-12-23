@@ -214,8 +214,10 @@ class VPlayer(FloatLayout):
 
 		if value:
 			Window.fullscreen = True
+
 			print('Window size=',Window.size)
 			self._fullscreen_state = state = {
+				"WindowSize":Window.size,
 				'parent': self.parent,
 				'pos': self.pos,
 				'size': self.size,
@@ -223,6 +225,7 @@ class VPlayer(FloatLayout):
 				'size_hint': self.size_hint,
 				'window_children': window.children[:]}
 
+			Window.maximize()
 			# remove all window children
 			for child in window.children[:]:
 				window.remove_widget(child)
@@ -241,6 +244,7 @@ class VPlayer(FloatLayout):
 		else:
 			Window.fullscreen = False
 			state = self._fullscreen_state
+			Window.size = state['WindowSize']
 			window.remove_widget(self)
 			for child in state['window_children']:
 				window.add_widget(child)
