@@ -32,7 +32,9 @@ class VPlayer(FloatLayout):
 	stoped_play = BooleanProperty(False)
 	paused_play = BooleanProperty(False)
 	
-	def __init__(self,vfile=None,loop=False,
+	def __init__(self,vfile=None,
+			playlist=None,
+			loop=False,
 			openfile_img=None,
 			exit_img = None,
 			pause_img = None,
