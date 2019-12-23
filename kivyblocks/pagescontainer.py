@@ -15,8 +15,6 @@ class PageContainer(FloatLayout):
 							height=CSize(1.8),width=CSize(1.8))
 		self.backButton.bind(on_press=self.previous)
 		Window.bind(size=self.on_window_size)
-		# self.bind(size=self.reshowBackButton,
-		#			on_orientation=self.reshowBackButton)
 
 	def on_window_size(self,o,v=None):
 		if self.size != Window.size:
