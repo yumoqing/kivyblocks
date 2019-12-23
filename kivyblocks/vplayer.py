@@ -1,5 +1,6 @@
 import os
 import sys
+from kivy.utils import platform
 from traceback import print_exc
 from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
@@ -217,7 +218,6 @@ class VPlayer(FloatLayout):
 
 			print('Window size=',Window.size)
 			self._fullscreen_state = state = {
-				"WindowSize":Window.size,
 				'parent': self.parent,
 				'pos': self.pos,
 				'size': self.size,
@@ -225,7 +225,9 @@ class VPlayer(FloatLayout):
 				'size_hint': self.size_hint,
 				'window_children': window.children[:]}
 
-			Window.maximize()
+			print('vplayer fullscreen,platform=',platform)
+			if platform in ['windows', 'linux','macOS' ]:
+				Window.maximize()
 			# remove all window children
 			for child in window.children[:]:
 				window.remove_widget(child)
@@ -253,8 +255,9 @@ class VPlayer(FloatLayout):
 			self.size = state['size']
 			if state['parent'] is not window:
 				state['parent'].add_widget(self)
-			Window.size = state['WindowSize']
-			print('state_size=',state['WindowSize'], 'windowsize=',Window.size)
+			print('vplayer fullscreen,platform=',platform)
+			if platform in ['windows', 'linux','macOS' ]:
+				Window.restore()
 
 	def buildMenu(self,obj,touch):
 		if not self.collide_point(*touch.pos):

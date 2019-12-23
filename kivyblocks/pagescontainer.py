@@ -17,7 +17,7 @@ class PageContainer(FloatLayout):
 		Window.bind(size=self.on_window_size)
 
 	def on_window_size(self,o,v=None):
-		if self.size != Window.size:
+		if self.size[0] != Window.size[0] or self.size[1] != Window.size[1]:
 			print('on_window_size event fired ....',self.size, Window.size)
 			self.size = Window.size
 			self.reshowBackButton()
