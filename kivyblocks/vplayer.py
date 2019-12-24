@@ -316,7 +316,7 @@ class VPlayer(FloatLayout):
 								height = CSize(2),
 								width = CSize(10),
                                 step=0.07)
-		slider.bind(on_value=self.setVolume)
+		slider.bind(on_touch_up=self.setVolume)
 		self.menubar.add_widget(slider)
 		self.menubar.add_widget(self.pb)
 		self.menubar.pos = CSize(0,0)
@@ -338,9 +338,9 @@ class VPlayer(FloatLayout):
 		if self.ffplayer is not None:
 			self.ffplayer.request_channel('audio')
 
-	def setVolume(self,obj,v):
+	def setVolume(self,obj,touh):
 		print('setVolume() called .....',v)
-		self._video.volume = v
+		self._video.volume = obj.value
 
 	def mute(self,btn):
 		if self._video.volume > 0.001:
