@@ -73,6 +73,7 @@ class VPlayer(FloatLayout):
 		self._popup = None
 		self.menu_status = False
 		self.manualMode = False
+		self.update_task = None
 		self.old_path = os.getcwd()
 		self.pb = None
 		if vfile:
@@ -88,7 +89,6 @@ class VPlayer(FloatLayout):
 		self._video.bind(eos=self.video_end)
 		self._video.bind(state=self.on_state)
 		self._video.bind(loaded=self.createProgressbar)
-		self._video.bind(on_touch_down=self.buildMenu)
 		self.register_event_type('on_playend')
 	
 	def play(self,o=None,v=None):
@@ -142,7 +142,8 @@ class VPlayer(FloatLayout):
 			self.pb.add_widget(self.curposition)
 			self.pb.add_widget(self.slider)
 			self.pb.add_widget(self.maxposition)
-			Clock.schedule_interval(self.update_slider,1)
+			self.update_task = Clock.schedule_interval(self.update_slider,1)
+			self.buildMenu()
 
 	def enterManualMode(self,obj,touch):
 		if not self.slider.collide_point(*touch.pos):
@@ -167,6 +168,9 @@ class VPlayer(FloatLayout):
 	def beforeDestroy(self):
 		try:
 			self.pause()
+			if self.update_task:
+				self.update_task.cancel()
+			self.update_task = None
 			del self._video
 
 		except Exception as e:
@@ -208,7 +212,7 @@ class VPlayer(FloatLayout):
 				'size_hint': self.size_hint,
 				'window_children': window.children[:]}
 
-			print('vplayer fullscreen,platform=',platform)
+			print('vplayer fullscreen,platform=',platform,desktopOSs)
 			if platform in desktopOSs:
 				Window.maximize()
 			# remove all window children
@@ -238,7 +242,7 @@ class VPlayer(FloatLayout):
 			self.size = state['size']
 			if state['parent'] is not window:
 				state['parent'].add_widget(self)
-			print('vplayer fullscreen,platform=',platform)
+			print('vplayer fullscreen,platform=',platform,desktopOSs)
 			if platform in desktopOSs:
 				Window.restore()
 
