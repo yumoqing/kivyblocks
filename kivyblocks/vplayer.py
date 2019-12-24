@@ -314,7 +314,7 @@ class VPlayer(FloatLayout):
                                 orientation='horizontal',
 								size_hint=(None,None),
 								height = CSize(2),
-								width = CSize(6),
+								width = CSize(10),
                                 step=0.07)
 		slider.bind(on_value=self.setVolume)
 		self.menubar.add_widget(slider)
@@ -339,16 +339,19 @@ class VPlayer(FloatLayout):
 			self.ffplayer.request_channel('audio')
 
 	def setVolume(self,obj,v):
+		print('setVolume() called .....',v)
 		self._video.volume = v
 
 	def mute(self,btn):
 		if self._video.volume > 0.001:
 			self.old_volume = self._video.volume
 			self._video.volume = 0.0
-			btn.source = blockImage('volume.jpg')
+			if self.menubar:
+				btn.source = blockImage('volume.jpg')
 		else:
 			self._video.volume = self.old_volume
-			btn.source = blockImage('mute.jpg')
+			if self.menubar:
+				btn.source = blockImage('mute.jpg')
 
 	def stop(self):
 		try:
@@ -364,10 +367,12 @@ class VPlayer(FloatLayout):
 	def pause(self,t=None):
 		if self._video.state == 'play':
 			self._video.state = 'pause'
-			self.btn_pause.source  = blockImage('play.jpg')
+			if self.menubar:
+				self.btn_pause.source  = blockImage('play.jpg')
 		else:
 			self._video.state = 'play'
-			self.btn_pause.source = blockImage('pause.jpg')
+			if self.menubar:
+				self.btn_pause.source = blockImage('pause.jpg')
 
 	def openfile(self,t):
 		if self._popup is None:
