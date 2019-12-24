@@ -89,7 +89,7 @@ class VPlayer(FloatLayout):
 		self._video.bind(eos=self.video_end)
 		self._video.bind(state=self.on_state)
 		self._video.bind(loaded=self.createProgressbar)
-		self._video.bind(on_touch_down=self.on_touch_down)
+		self._video.bind(on_touch_down=self.show_hide_menu)
 		self.register_event_type('on_playend')
 	
 	def play(self,o=None,v=None):
@@ -247,7 +247,7 @@ class VPlayer(FloatLayout):
 			if platform in desktopOSs:
 				Window.restore()
 
-	def on_touch_down(self,obj=None,touch=None):
+	def show_hide_menu(self,obj,touch):
 		if not self.collide_point(*touch.pos):
 			print('not inside the player')
 			return 
@@ -258,7 +258,6 @@ class VPlayer(FloatLayout):
 			return 
 
 		if self.menubar:
-			print('delete menubar')
 			self.remove_widget(self.menubar)
 			self.menu_status = not self.menu_status
 			if self.menu_status:
