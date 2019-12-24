@@ -339,7 +339,6 @@ class VPlayer(FloatLayout):
 			self.ffplayer.request_channel('audio')
 
 	def setVolume(self,obj,touh):
-		print('setVolume() called .....',v)
 		self._video.volume = obj.value
 
 	def mute(self,btn):
