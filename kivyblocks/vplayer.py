@@ -194,7 +194,7 @@ class VPlayer(FloatLayout):
 
 	def beforeDestroy(self):
 		try:
-			self.stop()
+			self.pause()
 		except Exception as e:
 			print_exc()
 		return True

@@ -52,7 +52,10 @@ class PageContainer(FloatLayout):
 		if len(self.pageWidgets) <= 1:
 			return 
 		w = self.pageWidgets[-1]
-		w.beforeDestroy()	
+		try:
+			w.beforeDestroy()	
+		except:
+			pass
 		self.pageWidgets = self.pageWidgets[:-1]
 		self.showLastPage()
 
