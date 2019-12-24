@@ -71,6 +71,7 @@ class VPlayer(FloatLayout):
 		self.ffplayer = None
 		self.menubar = None
 		self._popup = None
+		self.menu_status = False
 		self.manualMode = False
 		self.old_path = os.getcwd()
 		self.pb = None
@@ -123,17 +124,12 @@ class VPlayer(FloatLayout):
 		if self.pb is None:
 			self.pb = BoxLayout(orientation='horizontal',
 				size_hint = (0.99,None),height=CSize(1.4))
-			btn_menu=Button(text='M',size_hint=(None,None),text_size=CSize(1,1),size=CSize(1.2,1,2))
-			btn_menu.bind(on_press=self.buildMenu)
-			btn_volume=Button(text='V',size_hint=(None,None),text_size=CSize(1,1),size=CSize(1.2,1,2))
-			btn_volume.bind(on_press=self.volumeControl)
 			self.curposition = Label(text='0',width=CSize(4),
 				size_hint_x=None)
 			self.curposition.align='right'
 			self.maxposition = Label(text=self.totime(self._video.duration),
 				width=CSize(4),size_hint_x=None)
 			self.maxposition.align = 'left'
-			# self.slider = ProgressBar(value=0,max=max)
 			self.slider = Slider(min=0, 
 				max=self._video.duration, 
 				value=0, 
@@ -143,34 +139,10 @@ class VPlayer(FloatLayout):
 			self.slider.bind(on_touch_up=self.endManualMode)
 			self.manual_mode=False
 
-			self.add_widget(self.pb)
-			self.pb.add_widget(btn_menu)
 			self.pb.add_widget(self.curposition)
 			self.pb.add_widget(self.slider)
 			self.pb.add_widget(self.maxposition)
-			# self.pb.add_widget(self.btn_volume)
-			self.pb.pos = (0,0)
 			Clock.schedule_interval(self.update_slider,1)
-
-	def volumeControl(self,obj,v):
-		self.volumeCtrl = BoxLayout(orientation='vertical',size_hint=(None,None),size=CSize(1.4,10))
-		self.pos = self.width - self.volumeCtrl.width,CSize(1.4)
-		self.add_widget(self.volumeCtrl)
-		btn_mute = Button(text='Mute',size_hint_y=None,height=CSize(1.4))
-		if self._video.volume <= 0.001:
-			btn_mute.text = 'Sound'
-		btn_menu.bind(on_press=self.mute)
-		self.volumeCtrl.add_widget(btn_mute)
-		slider = Slider(min=0,
-                                max=1,
-                                value=self._video.volume,
-                                orientation='vertical',
-                                step=0.01)
-		slider.bind(on_value=self.setVolume)
-		self.volumeCtrl.add_widegt(slider)
-		btn_audioswitch = Button(text='track',size_hint_y=None,height=CSize(1.4))
-		btn_audioswitch.bind(on_press=self.audioswitch)
-		self.volumeCtrl.add_widget(btn_audioswitch)
 
 	def enterManualMode(self,obj,touch):
 		if not self.slider.collide_point(*touch.pos):
@@ -275,15 +247,17 @@ class VPlayer(FloatLayout):
 
 		if touch.is_double_tap:
 			self.fullscreen = False if self.fullscreen else True
-			if self.menubar:
-				self.remove_widget(self.menubar)
 			print('doube_tap')
 			return 
 
 		if self.menubar:
 			print('delete menubar')
 			self.remove_widget(self.menubar)
-			self.menubar = None
+			self.menu_status = not self.menu_status
+			if self.menu_status:
+				self.add_widget(self.menubar)
+			else:
+				self.remove_widget(self.menubar)
 			return 
 
 		self.menubar = BoxLayout(orientation='horizontal',
@@ -327,8 +301,20 @@ class VPlayer(FloatLayout):
 					
 		self.btn_audioswitch.bind(on_press=self.audioswitch)
 		self.menubar.add_widget(self.btn_audioswitch)
-		self.menubar.pos = CSize(0,1.4)
+		slider = Slider(min=0,
+                                max=1,
+                                value=self._video.volume,
+                                orientation='horizontal',
+								size_hint=(None,None),
+								height = CSize(2),
+								width = CSize(6),
+                                step=0.07)
+		slider.bind(on_value=self.setVolume)
+		self.menubar.add_widget(slider)
+		self.menubar.add_widget(self.pb)
+		self.menubar.pos = CSize(0,0)
 		self.add_widget(self.menubar)
+		self.menu_status = True
 
 	def endplay(self,btn):
 		self._video.seek(1.0,precise=True)
