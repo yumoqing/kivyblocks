@@ -194,7 +194,7 @@ class VPlayer(FloatLayout):
 
 	def beforeDestroy(self):
 		try:
-			self.pause()
+			self.stop()
 		except Exception as e:
 			print_exc()
 		return True
@@ -358,8 +358,10 @@ class VPlayer(FloatLayout):
 			btn.source = blockImage('mute.jpg')
 
 	def stop(self):
-		print(self)
-		self._video.state = 'stop'
+		try:
+			self._video.state = 'stop'
+		except:
+			print_exc()
 
 	def on_disabled(self,o,v):
 		if self.disabled:

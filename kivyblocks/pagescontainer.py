@@ -51,6 +51,8 @@ class PageContainer(FloatLayout):
 	def previous(self,v=None):
 		if len(self.pageWidgets) <= 1:
 			return 
+		w = self.pageWidgets[-1]
+		w.beforeDestroy()	
 		self.pageWidgets = self.pageWidgets[:-1]
 		self.showLastPage()
 
