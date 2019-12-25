@@ -83,7 +83,10 @@ class PageLoader:
 			self.dir = 'up'
 
 	def show_page(self,o,d):
-		pass
+		p = self.curpage * self.page_rows + 1
+		for r in d['rows']:
+			r['__posInSet__'] = p
+			p += 1
 
 	def loadPage(self,p):
 		self.curpage = p
@@ -154,6 +157,7 @@ class RelatedLoader(PageLoader):
 		del self.objectPages[page]
 			
 	def show_page(self,o,data):
+		super().show_page(o,data)
 		if self.objectPages.get(self.curpage):
 			self.deleteBuffer(self.curpage)
 		else:
@@ -252,6 +256,7 @@ class Paging(PageLoader):
 			self.widget.add_widget(self.filter)
 
 	def show_page(self,o,d):
+		super().show_page(o,data)
 		d = DictObject(**d)
 		self.total_cnt = d.total
 		self.calculateTotalPage()
