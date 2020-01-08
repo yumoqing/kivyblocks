@@ -15,7 +15,7 @@ logformdesc = {
 				"name":"userid",
 				"label":"user name",
 				"datatype":"str",
-				"uitype":"str"
+				"uitype":"string"
 			},
 			{
 				"name":"passwd",
@@ -26,12 +26,14 @@ logformdesc = {
 		]
 	},
 	"binds":[
-		"wid":"self",
-		"event":"on_submit",
-		"datawidegt":"self",
-		"actiontype":"registedfunction",
-		"rfname":"setupUserInfo"
-	}
+		{
+			"wid":"self",
+			"event":"on_submit",
+			"datawidegt":"self",
+			"actiontype":"registedfunction",
+			"rfname":"setupUserInfo"
+		}
+	]
 }
 
 @SingletonDecorator

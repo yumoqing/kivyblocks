@@ -7,9 +7,8 @@ from .baseWidget import Text
 
 @SingletonDecorator
 class I18n:
-	def __init__(self,url):
+	def __init__(self):
 		self.kvlang={}
-		self.loadUrl = url
 		self.lang = locale.getdefaultlocale()[0]
 		self.loadI18n(self.lang)
 		self.i18nWidgets = []
@@ -18,11 +17,11 @@ class I18n:
 		self.i18nWidgets.append(w)
 	
 	def loadI18n(self,lang):
-		if not self.loadUrl:
-			self.kvlang[lang] = {}
-			return
 		app = App.get_running_app()
-		d = app.hc.get('%s?lang=%s' % (self.loadUrl,lang))
+		config = getConfig()
+		url = '%s%s/%s' % (config.uihome, config.i18n_url, lang)
+		d = app.hc.get(url)
+		print('i18n() %s get data=' % url, d, type(d))
 		self.kvlang[lang] = d
 		
 	def __call__(self,msg,lang=None):
@@ -39,10 +38,6 @@ class I18n:
 		for w in self.i18nWidgets:
 			w.changeLang(lang)
 	
-def getI18n(url=None):
-	i18n=I18n(url)
-	return i18n
-
 class I18nText(Text):
 	lang=StringProperty('')
 	otext=StringProperty('')
@@ -53,7 +48,7 @@ class I18nText(Text):
 		if kw.get('otext'):
 			del kw['otext']
 		super().__init__(**kw)
-		self.i18n = getI18n()
+		self.i18n = I18n()
 		self.i18n.addI18nWidget(self)
 		self.otext = otext
 

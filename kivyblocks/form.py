@@ -1,12 +1,14 @@
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
+from kivycalendar import DatePicker
+from .responsivelayout import VResponsiveLayout
 from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, AmountInput, Password
 from .baseWidget import *
-from kivycalendar import DatePicker
 from .utils import *
-from .i18n import getI18n
+from .i18n import I18nText, I18n
+from .toolbar import Toolbar
 """
 form options
 {
@@ -42,6 +44,10 @@ uitypes = {
 	"string":{
 		"orientation":"horizontal",
 		"wclass":StrInput,
+	},
+	"password":{
+		"orientation":"horizontal",
+		"wclass":Password,
 	},
 	"number":{
 		"orientation":"horizontal",
@@ -92,7 +98,7 @@ class InputBox(BoxLayout):
 	def __init__(self, form, **options):
 		self.form = form
 		self.options = options
-		self.uitype = options.get('uityoe','string')
+		self.uitype = options.get('uitype','string')
 		self.uidef = uitypes[self.uitype]
 		orientation = self.uidef['orientation']
 		width = self.form.inputwidth
@@ -101,7 +107,7 @@ class InputBox(BoxLayout):
 		kwargs = {
 			"orientation":orientation,
 			"size_hint_y":None,
-			"height":CSzie(height)
+			"height":height
 		}
 		if width <= 1:
 			kwargs['size_hint_x'] = width
@@ -114,8 +120,11 @@ class InputBox(BoxLayout):
 					pos=self.setSize)
 		self.register_event_type("on_datainput")
 
+	def on_datainput(self,o,v=None):
+		print('on_datainput fired ...',o,v)
+
 	def init(self):
-		i18n = getI18n()
+		i18n = I18n()
 		if self.initflag:
 			return
 		label = self.options.get('label',self.options.get('name'))
@@ -123,7 +132,9 @@ class InputBox(BoxLayout):
 			label = label + '*'
 		kwargs = {
 			"otext":label,
-			"font_size":CSize(1)
+			"font_size":CSize(1),
+			"size_hint_y":None,
+			"height":CSize(2)
 		}
 		if self.labelwidth<=1:
 			kwargs['size_hint_x'] = self.labelwidth
@@ -139,6 +150,7 @@ class InputBox(BoxLayout):
 		if self.options.get('tip'):
 			options['hint_text'] = i18n(self.options.get('tip'))
 
+		print('uitype=',self.options['uitype'], self.uitype, 'uidef=',self.uidef)
 		self.input_widget = self.uidef['wclass'](**options)
 		if self.options.get('readonly'):
 			self.input_widget.disabled = True
@@ -166,13 +178,13 @@ class InputBox(BoxLayout):
 		self.input_widget.setValue(v)
 	
 	def getValue(self):
-		return self.input_widget.getValue()
+		return {self.options.get('name'):self.input_widget.getValue()}
 	
 def defaultToolbar():
 	return {
-		img_size:1.5,
-		text_size:0.7,
-		tools:[
+		"img_size":1.5,
+		"text_size":0.7,
+		"tools":[
 			{
 				"name":"__submit",
 				"img_src":blockImage("clear.png"),
@@ -197,12 +209,6 @@ class Form(BoxLayout):
 			self.cols = 1
 		self.inputwidth = Window.width / self.cols
 		self.inputheight = CSize(self.options.get('inputheight',3))
-		self.toolbar = Toolbar(options.get('toolbar',defaultToolbar()))
-		self.fsc = VResponsiveLayout(cols=self.cols, 
-						box_width=self.inputwidth)
-		self.add_widget(self.toolbar)
-		self.add_widget(self.fsc)
-		self.register_event_type('on_submit')
 		self.initflag = False
 		self.bind(size=self.on_size,
 					pos=self.on_size)
@@ -210,20 +216,41 @@ class Form(BoxLayout):
 	def init(self):
 		if self.initflag:
 			return
+		self.toolbar = Toolbar(ancestor=self,**self.options.get('toolbar',defaultToolbar()))
+		self.fsc = VResponsiveLayout(cols=self.cols, 
+						box_width=self.inputwidth)
+		self.add_widget(self.toolbar)
+		self.add_widget(self.fsc)
+		self.register_event_type('on_submit')
 		self.fieldWidgets=[]
 		for f in self.options['fields']:
-			w = InputBox(self, self, **f)
+			w = InputBox(self, **f)
+			# print('w size=',w.size)
 			self.fsc.add_widget(w)
 			self.fieldWidgets.append(w)
 		blocks = App.get_running_app().blocks
-		wid = getWidgetById(self,'__submit')
+		wid = self.widget_ids['__submit']
+		# wid = getWidgetById(self,'__submit')
+		# print('ids=',self.widget_ids.keys())
 		wid.bind(on_press=self.on_submit_button)
-		wid = getWidgetById(self,'__clear')
+		# wid = getWidgetById(self,'__clear')
+		wid = self.widget_ids['__clear']
 		wid.bind(on_press=self.on_clear_button)
 		self.initflag = True
 
+	def getData(self):
+		d = {}
+		for f in self.fieldWidgets:
+			v = f.getValue()
+			d.update(v)
+		return d
+
+	def on_submit(self,o,v=None):
+		print(o,v)
+
 	def on_submit_button(self,o,v=None):
-		self.dispatch('on_submit')
+		d = self.getData()
+		self.dispatch('on_submit',self,d)
 
 	def on_clear_button(self,o,v=None):
 		for fw in self.fieldWidgets:

@@ -51,6 +51,7 @@ class BlocksApp(App):
 		self.hc = HttpClient()
 		WindowBase.softinput_mode='below_target'
 		Clock.schedule_once(self.build1)
+		print('build() called......')
 		return x
 
 	def setUserInfo(self,uinfo):
@@ -59,6 +60,9 @@ class BlocksApp(App):
 		d['password'] = uinfo.get('password','')
 		d['authcode'] = uinfo.get('authcode','')
 		self.userinfo = d
+
+	def on_start(self):
+		print('on_start() called ...')
 
 	def build1(self,t):
 		x = None

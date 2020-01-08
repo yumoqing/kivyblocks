@@ -103,4 +103,5 @@ class BoxViewer(BoxLayout):
 		self.dispatch('on_selected',o.getRecord())
 
 	def getData(self):
+		self.selected_data['__dataloader__'] = self.dataloader
 		return self.selected_data

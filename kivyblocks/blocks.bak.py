@@ -181,6 +181,93 @@ class Blocks:
 			dic = App.get_running_app().hc(url,method=method,params=params)
 		return dic, url
 
+	def register(self,name : str ,base:str=None,
+					defaultOpts:dict={},optkeys:list=[],
+					properties:list=[]):
+		"""
+		"""
+		self.registedWidgets[name] = {
+			"defaultOpts":defaultOpts,
+			"base":base,
+			"properties":properties, # property: 0 name, 1 type
+			"optkeys":optkeys,
+			"infos":{}
+		}
+	
+	def buildRegistedWidgetInfo(self, widgettype:str):
+		"""
+		setup registed widget defaultOpts and optkeys
+		by merge its and it's bases widgets
+		"""
+		rw = self.registedWidgets.get(widgettype)
+		if not rw:
+			raise NotRegistedWidget(widgettype)
+		rw['infos']['defaultOpts'] = rw['defaultOpts']
+		rw['infos']['optkeys'] = rw['optkeys']
+		for b in base:
+			brw = self.registedWidgets.get(b)
+			if not brw:
+				raise NotRegistedWidget(b)
+			opts = self.getWidgetOptions(b)
+			opts.update(rw['defaultOpts'])
+			rw['infos']['defaultOpts'].update({'defaultOpts':opts})
+			rw['infos']['optkeys']  = list(set(self.getWidgetOptkeys(b) + rw['infos']['optkeys']))
+		return rw['infos']
+
+	def getWidgetOptkeys(self,widgettype:str):
+		"""
+		"""
+		if widgettype not in self.registedWidgets.keys():
+			raise NotRegistedWidget(widgettype)
+		infos = self.registedWidgets.get(widgettype)['infos']
+		if infos == {}:
+			infos = self.buildRegistedWidgetInfo(widgettype)
+		return infos['optkeys']
+
+	def getWidgetOptions(self,widgettype:str, opts:dict={}):
+		"""
+		get widget type valid options, from it's registed info
+		and it given argument:opts
+		"""
+		if widgettype not in self.registedWidgets.keys():
+			raise NotRegistedWidget(widgettype)
+		infos = self.registedWidgets.get(widgettype)['infos']
+		if infos == {}:
+			infos = self.buildRegistedWidgetInfo(widgettype)
+		opt = infos['defaultOpts']
+		keys = opts.keys()
+		for k in infos['optkeys']:
+			if k in keys:
+				opt.update({k:opts[k]})
+		return opt
+
+	def getObject(self,klass:str ,bases:list=[],
+					properties:list=[]):
+		pstrs = [ "%s = %s\n" % (n,t) for n, t in properties ]
+
+		if klass not in globals().keys():
+			script="""
+class %s(%s):
+	%s
+	def __init__(self):
+		super().__init__()
+			""" % (klass, '\t'.join(pstrs),','.join(bases))
+			exec(script,globals(),globals())
+
+		return globals().get(klass)()
+
+	def isBaseWidget(self,widgettype):
+		rw = self.registedWidgets.get(widgettype)
+		if not rw:
+			raise NotRegistedWidget(widgettype)
+		return rw['bases'] == []
+
+	def getBases(self, widgettype:str):
+		rw = self.registedWidgets.get(widgettype)
+		if not rw:
+			raise NotRegistedWidget(widgettype)
+		return rw['bases']
+	
 	def strValueExpr(self,s:str,localnamespace:dict={}):
 		if not s.startswith('py::'):
 			return s
@@ -365,15 +452,8 @@ class Blocks:
 
 	def scriptAction(self, widget, desc):
 		script = desc.get('script')
-		if not script:
-			return 
-		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
-		d = self.getActionData(widget,desc)
-		ns = {
-			"self":target
-		}
-		ns.update(d)	
-		self.eval(script, ns)
+		if script:
+			self.eval(script, {'self': widget})
 	
 	def methodAction(self, widget, desc):
 		method = desc.get('method')

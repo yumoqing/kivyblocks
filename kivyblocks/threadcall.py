@@ -5,6 +5,7 @@ import requests
 from kivy.event import EventDispatcher
 from kivy.clock import Clock
 from kivy.app import App
+from .login import LoginForm
 
 class NeedLogin(Exception):
 	pass
@@ -30,9 +31,6 @@ class ThreadCall(Thread,EventDispatcher):
 		try:
 			self.rez = self.target(*self.args,**self.kwargs)
 			self.dispatch('on_result',self.rez)
-		except NeedLogin as e:
-			lf = LoginForm()
-			lf.needlogin(url,method,params,headers,callback,errback)
 
 		except Exception as e:
 			self.dispatch('on_error',e)
@@ -86,13 +84,13 @@ class HttpClient:
 		self.s = requests.Session()
 		self.workers = App.get_running_app().workers
 		
-	def webcall(self,url,method="GET",params={},headers={}):
+	def webcall(self,url,method="GET",params={},files={},headers={}):
 		if method in ['GET']:
 			req = requests.Request(method,url,
 					params=params,headers=headers)
 		else:
 			req = requests.Request(method,url,
-					data=params,headers=headers)
+					data=params,files=files,headers=headers)
 		prepped = self.s.prepare_request(req)
 		resp = self.s.send(prepped)
 		if resp.status_code == 200:
@@ -114,18 +112,18 @@ class HttpClient:
 		print('Error', url, method, params, resp.status_code,type(resp.status_code))
 		raise Exception('error:%s' % url)
 		
-	def __call__(self,url,method="GET",params={},headers={},callback=None,errback=None):
+	def __call__(self,url,method="GET",params={},headers={},files={},callback=None,errback=None):
 		def cb(t,resp):
 			return resp
 
 		if callback is None:
 			try:
 				resp = self.webcall(url, method=method,
-						params=params, headers=headers)
+						params=params, files=files, headers=headers)
 				return cb(None,resp)
 			except NeedLogin as e:
 				lf = LoginForm()
-				lf.needlogin(url,method,params,headers,callback,errback)
+				lf.needlogin(url,method,params,files,headers,callback,errback)
 				return None
 			except Exception as e:
 				if errback is not None:
@@ -135,6 +133,7 @@ class HttpClient:
 			"url":url,
 			"method":method,
 			"params":params,
+			"files":files,
 			"headers":headers
 		}
 		self.workers.add(self.webcall,callback,errback,kwargs=kwargs)
@@ -143,8 +142,8 @@ class HttpClient:
 		return self.__call__(url,method='GET',params=params,
 				headers=headers, callback=callback,
 				errback=errback)
-	def post(self, url, params={}, headers={}, callback=None, errback=None):
-		return self.__call__(url,method='POST',params=params,
+	def post(self, url, params={}, headers={}, files={}, callback=None, errback=None):
+		return self.__call__(url,method='POST',params=params, files=files,
 				headers=headers, callback=callback,
 				errback=errback)
 

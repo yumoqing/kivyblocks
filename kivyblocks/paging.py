@@ -28,6 +28,25 @@ class PagingButton(Button):
 	filter
 }
 """
+
+class HttpLoader:
+	def __init__(self, url, method, params):
+		self.page_rows = page_rows
+		self.url = url
+		self.method = method,
+		self.params = params
+	
+	def setParams(self,params):
+		self.params = params
+
+	def load(self, callback, errback):
+		hc = App.get_running_app().hc
+		x = hc(self.url,
+				method=self.method,
+				params=self.params,
+				callback=callback,
+				errback=errback)
+		
 class PageLoader:
 	def __init__(self, **options):
 		self.loading = False
@@ -36,12 +55,9 @@ class PageLoader:
 			self.filter = StrSearchForm(**options['filter'])
 			self.filter.bind(on_submit=self.do_search)
 
-		self.locater = options.get('locater')
-		self.params = options.get('params')
+		self.params = options.get('params',{})
 		self.method = options.get('method','GET')
 		self.url = options.get('dataurl')
-		if not self.url:
-			raise Exception('dataurl must be present:options=%s' % str(options))
 		self.total_cnt = 0
 		self.total_page = 0
 		self.page_rows = options.get('page_rows',0)
@@ -83,12 +99,14 @@ class PageLoader:
 			self.dir = 'up'
 
 	def show_page(self,o,d):
-		p = self.curpage * self.page_rows + 1
+		p = (self.curpage - 1) * self.page_rows + 1
 		for r in d['rows']:
 			r['__posInSet__'] = p
 			p += 1
 
 	def loadPage(self,p):
+		if not self.url:
+			raise Exception('dataurl must be present:options=%s' % str(options))
 		self.curpage = p
 		self.loading = True
 		params = self.params.copy()
@@ -123,6 +141,7 @@ class RelatedLoader(PageLoader):
 	def __init__(self, **options):
 		super().__init__(**options)
 		self.adder = options.get('adder')
+		self.locater = options.get('locater',None)
 		self.remover = options.get('remover')
 		self.clearer = options.get('clearer')
 		self.target = options.get('target')
@@ -139,8 +158,6 @@ class RelatedLoader(PageLoader):
 			self.calculateTotalPage()
 		self.reload()
 	
-		pass
-
 	def doBufferMaintain(self):
 		siz = len(self.objectPages.keys())
 		if siz >= self.MaxbufferPage:
@@ -179,12 +196,13 @@ class RelatedLoader(PageLoader):
 		self.objectPages[self.curpage] = widgets
 		pages = len(self.objectPages.keys())
 		loc = 1.0 / float(pages)
-		if pages == 1:
-			self.locater(1)
-		elif self.dir == 'up':
-			self.locater(1 - loc)
-		else:
-			self.locater(loc)
+		if self.locater:
+			if pages == 1:
+				self.locater(1)
+			elif self.dir == 'up':
+				self.locater(1 - loc)
+			else:
+				self.locater(loc)
 
 		self.loading = False
 		print('buffer pages=',len(self.objectPages.keys()),'pages=',self.objectPages.keys())
@@ -288,4 +306,16 @@ class Paging(PageLoader):
 			print('return not loading')
 			return
 		self.loadPage(self.total_page)
+
+class OneRecordLoader(PageLoader):
+	def __init__(self,**options):
+		PageLoader.__init__(self,**options)
+		self.adder = options.get('adder')
+		self.page_rows = 1
+
+	def calculateTotalPage(self):
+		self.total_page = self.total_cnt
+
+	def show_page(self,o,d):
+		self.adder(d['rows'][0])
 

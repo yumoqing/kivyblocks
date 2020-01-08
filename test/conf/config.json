@@ -15,7 +15,7 @@
 	"root":{
 		"widgettype":"urlwidget",
 		"options":{
-			"url":"/toolpage.ui"
+			"url":"/test/loginform.ui"
 		}
 	}
 }
