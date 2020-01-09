@@ -52,14 +52,9 @@ class PageContainer(FloatLayout):
 		if len(self.pageWidgets) <= 1:
 			return 
 		w = self.pageWidgets[-1]
-		try:
-			print(' ******* del last widget begin******')
-			del w
-			print(' ******* del last widget end ******')
-		except:
-			pass
 		self.pageWidgets = self.pageWidgets[:-1]
 		self.showLastPage()
+		w.__del__()
 
 	def add_widget(self,widget):
 		self.pageWidgets.append(widget)
