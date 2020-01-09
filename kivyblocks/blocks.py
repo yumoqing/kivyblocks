@@ -409,7 +409,7 @@ class Blocks:
 			desc, parenturl = self.getUrlData(opts,parenturl)
 			if not isinstance(desc,dict):
 				print("getUrlData() return error data",opts,parenturl)
-				alert(str(dict) + 'format error')
+				# alert(str(desc) + 'format error',title='widgetBuild()')
 				return None
 			desc = self.valueExpr(desc)
 			desc['parenturl'] = parenturl

@@ -204,7 +204,7 @@ class Form(BoxLayout):
 		self.options = options
 		BoxLayout.__init__(self, orientation='vertical')
 		self.widget_ids = {}
-		self.cols = self.options_cols = self.options['cols']
+		self.cols = self.options_cols = self.options.get('cols',1)
 		if isHandHold() and Window.width < Window.height:
 			self.cols = 1
 		self.inputwidth = Window.width / self.cols
@@ -217,8 +217,11 @@ class Form(BoxLayout):
 		if self.initflag:
 			return
 		self.toolbar = Toolbar(ancestor=self,**self.options.get('toolbar',defaultToolbar()))
-		self.fsc = VResponsiveLayout(cols=self.cols, 
-						box_width=self.inputwidth)
+		self.fsc = VResponsiveLayout(
+						self.inputwidth,
+						self.cols 
+		)
+		print('box_width=%d,cols=%d' % (self.inputwidth, self.cols))
 		self.add_widget(self.toolbar)
 		self.add_widget(self.fsc)
 		self.register_event_type('on_submit')

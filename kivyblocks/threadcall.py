@@ -123,7 +123,7 @@ class HttpClient:
 				return cb(None,resp)
 			except NeedLogin as e:
 				lf = LoginForm()
-				lf.needlogin(url,method,params,files,headers,callback,errback)
+				lf.open()
 				return None
 			except Exception as e:
 				if errback is not None:

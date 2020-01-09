@@ -14,6 +14,7 @@ class VResponsiveLayout(ScrollView):
 		self.box_cols = cols
 		super(VResponsiveLayout, self).__init__(**kw)
 		self.options = kw
+		print('VResponsiveLayout():cols=',self.org_cols,'box_width=',self.box_width)
 		self._inner = GridLayout(cols=self.org_cols, padding=2, 
 						spacing=2,size_hint=(1,None))
 		super(VResponsiveLayout,self).add_widget(self._inner)

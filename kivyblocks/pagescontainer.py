@@ -53,7 +53,9 @@ class PageContainer(FloatLayout):
 			return 
 		w = self.pageWidgets[-1]
 		try:
-			w.beforeDestroy()	
+			print(' ******* del last widget begin******')
+			del w
+			print(' ******* del last widget end ******')
 		except:
 			pass
 		self.pageWidgets = self.pageWidgets[:-1]

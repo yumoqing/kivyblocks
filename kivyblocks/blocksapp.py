@@ -37,29 +37,23 @@ def  signal_handler(signal, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
+
 class BlocksApp(App):
 	def build(self):
-		x = PageContainer()
+		config = getConfig()
+		self.config = config
 		self.userinfo = {}
 		self.title = 'Test Title'
 		self.blocks = Blocks()
-		config = getConfig()
-		self.config = config
 		self.workers = Workers(maxworkers=config.maxworkers or 80)
 		Window.bind(on_request_close=self.on_close)
 		self.workers.start()
 		self.hc = HttpClient()
 		WindowBase.softinput_mode='below_target'
+		x = PageContainer()
 		Clock.schedule_once(self.build1)
 		print('build() called......')
 		return x
-
-	def setUserInfo(self,uinfo):
-		d = {}
-		d['userid'] = uinfo['userid']
-		d['password'] = uinfo.get('password','')
-		d['authcode'] = uinfo.get('authcode','')
-		self.userinfo = d
 
 	def on_start(self):
 		print('on_start() called ...')

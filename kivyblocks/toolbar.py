@@ -101,7 +101,7 @@ class Toolbar(GridLayout):
 			opt.img_size = self.opts.img_size
 			opt.text_size = self.opts.text_size
 			purl = None
-			if ancestor:
+			if ancestor and hasattr(ancestor, 'parenturl'):
 				purl = ancestor.parenturl
 			opt.img_src = absurl(opt.img_src,purl)
 			tool = Tool(ancestor=ancestor, **opt)

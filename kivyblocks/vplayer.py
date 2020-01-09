@@ -49,7 +49,7 @@ class VPlayer(FloatLayout):
 			can_changevolume=True
 		):
 		super().__init__()
-		self.allow_screensaver = False
+		Window.allow_screensaver = False
 		print(self,vfile)
 		self._video = Video(allow_stretch=True,pos_hint={'x': 0, 'y': 0},size_hint=(1,1))
 		self.add_widget(self._video)
@@ -92,6 +92,16 @@ class VPlayer(FloatLayout):
 		self._video.bind(on_touch_down=self.show_hide_menu)
 		self.register_event_type('on_playend')
 	
+	def __del__(self):
+		print('********** delete VPlayer instance ********')
+		self._video.state = 'stop'
+		if self.update_task:
+			self.update_task.cancel()
+		self.update_task = None
+		Window.allow_screensaver = True
+		del self._video
+		self._video = None
+
 	def play(self,o=None,v=None):
 		if self.curplay >= 0:
 			self._video.source = self.playlist[self.curplay]
@@ -168,11 +178,7 @@ class VPlayer(FloatLayout):
 
 	def beforeDestroy(self):
 		try:
-			self.pause()
-			if self.update_task:
-				self.update_task.cancel()
-			self.update_task = None
-			del self._video
+			del self
 
 		except Exception as e:
 			print_exc()
