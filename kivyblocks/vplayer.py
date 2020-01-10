@@ -94,6 +94,8 @@ class VPlayer(FloatLayout):
 	
 	def __del__(self):
 		print('********** delete VPlayer instance ********')
+		if self._video is None:
+			return
 		if self.update_task:
 			self.update_task.cancel()
 		self.update_task = None
