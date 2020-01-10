@@ -99,7 +99,7 @@ class VPlayer(FloatLayout):
 		if self.update_task:
 			self.update_task.cancel()
 		self.update_task = None
-		self._video.state = 'stop'
+		self._video.state = 'pause'
 		Window.allow_screensaver = True
 		del self._video
 		self._video = None
