@@ -187,12 +187,12 @@ def defaultToolbar():
 		"tools":[
 			{
 				"name":"__submit",
-				"img_src":blockImage("clear.png"),
+				"img_src":"/imgs/submit.png",
 				"label":"submit"
 			},
 			{
 				"name":"__clear",
-				"img_src":blockImage("clear.png"),
+				"img_src":"/imgs/clear.png",
 				"label":"clear"
 			}
 		]
