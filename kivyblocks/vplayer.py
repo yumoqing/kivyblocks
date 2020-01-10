@@ -94,10 +94,10 @@ class VPlayer(FloatLayout):
 	
 	def __del__(self):
 		print('********** delete VPlayer instance ********')
-		self._video.state = 'stop'
 		if self.update_task:
 			self.update_task.cancel()
 		self.update_task = None
+		self._video.state = 'stop'
 		Window.allow_screensaver = True
 		del self._video
 		self._video = None
