@@ -2,34 +2,15 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.popup import Popup
 from appPublic.Singleton import SingletonDecorator
+from appPublic.jsonConfig import getConfig
 from appPublic.registerfunction import RegisterFunction
-from appPublic.rsa import RSA
-# from .form import Form
-
-class ServerInfo:
-	def __init__(self):
-		self.rsaEngine = RSA()
-		config = getConfig()
-		url = '%s%s' % (config.uihome, config.publickey_url)
-		hc = App.get_running_app().hc
-		d = hc.get(url)
-		self.publickey = self.rsaEngine. publickeyFromText(d)
-	
-	def encode(self,uinfo):
-		if uinfo['authmethod'] == 'password':
-			authinfo = '%s::%s::%s' % (uinfo['authmethod'], uinfo['userid'], uinfo['password'])
-			txt = self.serverinfo.encode(authinfo)
-			x = self.rsaEngine.encode(self.publickey, txt)
-			return x
-		return None
-
 logformdesc = {
 	"widgettype":"Form",
 	"options":{
 		"cols":1,
-		"labelwidth":0.3,
+		"labelwidth":0.4,
 		"textsize":1,
-		"inputheight":3,
+		"inputheight":4,
 		"fields":[
 			{
 				"name":"userid",
@@ -44,61 +25,43 @@ logformdesc = {
 				"uitype":"password"
 			}
 		]
-	},
-	"binds":[
-		{
-			"wid":"self",
-			"event":"on_submit",
-			"datawidegt":"self",
-			"actiontype":"registedfunction",
-			"rfname":"setupUserInfo"
-		}
-	]
+	}
 }
 
 @SingletonDecorator
 class LoginForm(Popup):
 	def __init__(self):
 		super().__init__(size_hint=(0.8,0.8))
-		
-		app = App.get_running_app()
-		print('here ..1............')
-		self.content = app.blocks.widgetBuild(logformdesc)
-		# self.content.bind(on_submit=setipUserInfo)
-		print('here ..2............',self.content)
 		self.title = 'login'
-		self.blockCalls = []
-		self.open_status = False
-		print('here ..3............')
+		self.initflag = False
+		self.bind(size=self.buildContent,
+					pos=self.buildContent)
+	
+	def buildContent(self,o,size):
+		print('build Content. ....')
+		if self.initflag:
+			return
+		print('build Content ....... ....')
+		self.initflag = True
+		app = App.get_running_app()
+		self.content = app.blocks.widgetBuild(logformdesc)
 		self.content.bind(on_submit=self.on_submit)
-		self.content.bind(on_cancel=self.on_submit)
-		print('here ..4............')
-		self.open()
 		
-	def close(self):
-		self.open_status = False
+	def on_submit(self,o,userinfo):
+		print('login(),on_submit fired ....')
 		self.dismiss()
+		print('userinfo=',userinfo)
+		app = App.get_running_app()
 
-	def on_submit(self,o,v):
-		self.dismiss()
+		if userinfo.get('passwd',False):
+			userinfo['authmethod'] = 'password'
+		authinfo = app.serverinfo.encode(userinfo)
+		login_url = '%s%s' % (app.config.uihome, app.config.login_url)
+		x = app.hc.get(login_url)
+		print('login return=', x, login_url, authinfo)
 	
 	def on_cancel(self,o,v):
+		print('login() on_cancel fired .....')
 		self.dismiss()
 
-def setupUserInfo(obj, userinfo):
-	app = App.get_running_app()
-	if not hasattr(app, 'serverinfo'):
-		app.serverinfo = ServerInfo()
-
-	if userinfo.get('password',False):
-		userinfo['authmethod'] = 'password'
-	authinfo = app.serverinfo.encode(userinfo)
-	headers = {
-		"authorization":authinfo
-	}
-	login_url = '%s%s' % (app.config.uihome, app.config.login_url)
-	app.hc.get(login_url,headers=headers)
-
-rf = RegisterFunction()
-rf.register('setupUserInfo',setupUserInfo)
 

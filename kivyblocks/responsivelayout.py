@@ -51,7 +51,11 @@ class VResponsiveLayout(ScrollView):
 
 	def setCols(self,t=None):
 		self.box_width = self.org_box_width
-		self.cols = int(self.width / self.box_width)
+		if self.width < self.box_width:
+			self.cols = self.org_cols
+		else:
+			self.cols = int(self.width / self.box_width)
+		print('VResponsiveLayout()::setCols():self.cols=',self.cols, 'self.box_width=',self.box_width,'self.org_cols=',self.org_cols)
 		if isHandHold():
 			w,h = self.size
 			if w < h:

@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from kivy.utils import platform
 from traceback import print_exc
 from kivy.core.window import Window
@@ -15,6 +16,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, \
     NumericProperty, DictProperty, OptionProperty
+from pythonosc import dispatcher, osc_server
 from .utils import *
 from .baseWidget import PressableImage
 
@@ -26,79 +28,26 @@ desktopOSs=[
 
 othersplatforms=['ios','android']
 
-class VPlayer(FloatLayout):
+class BaseVPlayer(FloatLayout):
 	fullscreen = BooleanProperty(False)
-	exit = BooleanProperty(False)
-	stoped_play = BooleanProperty(False)
-	paused_play = BooleanProperty(False)
-	
-	def __init__(self,vfile=None,
-			playlist=None,
-			loop=False,
-			openfile_img=None,
-			exit_img = None,
-			pause_img = None,
-			play_img = None,
-			mute_img = None,
-			track_img = None,
-			next_img = None,
-			replay_img = None,
-			can_openfile=False,
-			can_cut=False,
-			can_replay=False,
-			can_changevolume=True
-		):
+	def __init__(self,vfile=None):
 		super().__init__()
 		Window.allow_screensaver = False
-		print(self,vfile)
 		self._video = Video(allow_stretch=True,pos_hint={'x': 0, 'y': 0},size_hint=(1,1))
 		self.add_widget(self._video)
-		self.loop = loop
-		self.openfile_img = openfile_img
-		self.can_openfile = can_openfile
-		self.can_replay = can_replay
-		self.can_cut = can_cut
-		self.can_changevolume = can_changevolume
-		if self.openfile_img:
-			self.can_openfile = True
-		self.exit_img = exit_img
-		self.play_img = play_img
-		self.pause_img = pause_img
-		self.mute_img = mute_img
-		self.track_img = track_img
-		self.next_img = next_img
-		self.replay_img = replay_img
 		self.ffplayer = None
-		self.menubar = None
-		self._popup = None
-		self.menu_status = False
-		self.manualMode = False
-		self.update_task = None
-		self.old_path = os.getcwd()
-		self.pb = None
-		if vfile:
-			if type(vfile) == type([]):
-				self.playlist = vfile
-			else:
-				self.playlist = [vfile]
-			self.curplay = 0
-			self.play()
+		if type(vfile) == type([]):
+			self.playlist = vfile
 		else:
-			self.playlist = []
-			self.curplay = -1
+			self.playlist = [vfile]
+		self.curplay = 0
+		self.play()
 		self._video.bind(eos=self.video_end)
 		self._video.bind(state=self.on_state)
-		self._video.bind(loaded=self.createProgressbar)
-		self._video.bind(on_touch_down=self.show_hide_menu)
-		self.register_event_type('on_playend')
 	
 	def __del__(self):
-		print('********** delete VPlayer instance ********')
 		if self._video is None:
 			return
-		if self.update_task:
-			self.update_task.cancel()
-		self.update_task = None
 		self._video.state = 'pause'
 		Window.allow_screensaver = True
 		del self._video
@@ -117,74 +66,9 @@ class VPlayer(FloatLayout):
 
 	def video_end(self,t,v):
 		self.curplay += 1
-		if not self.loop and self.curplay >= len(self.playlist):
-			self.dispatch('on_playend')
-			return
 		self.curplay = self.curplay % len(self.playlist)
 		self._video.source = self.playlist[self.curplay]
 		self._video.state = 'play'
-
-	def totime(self,dur):
-		h = dur / 3600
-		m = dur % 3600 / 60
-		s = dur % 60
-		return '%02d:%02d:%02d' % (h,m,s)
-		
-	def createProgressbar(self,obj,v):
-		if hasattr(self._video._video, '_ffplayer'):
-			self.ffplayer = self._video._video._ffplayer
-
-		if self.pb is None:
-			self.pb = BoxLayout(orientation='horizontal',
-				size_hint = (0.99,None),height=CSize(1.4))
-			self.curposition = Label(text='0',width=CSize(4),
-				size_hint_x=None)
-			self.curposition.align='right'
-			self.maxposition = Label(text=self.totime(self._video.duration),
-				width=CSize(4),size_hint_x=None)
-			self.maxposition.align = 'left'
-			self.slider = Slider(min=0, 
-				max=self._video.duration, 
-				value=0, 
-				orientation='horizontal', 
-				step=0.01)
-			self.slider.bind(on_touch_down=self.enterManualMode)
-			self.slider.bind(on_touch_up=self.endManualMode)
-			self.manual_mode=False
-
-			self.pb.add_widget(self.curposition)
-			self.pb.add_widget(self.slider)
-			self.pb.add_widget(self.maxposition)
-			self.update_task = Clock.schedule_interval(self.update_slider,1)
-			self.buildMenu()
-
-	def enterManualMode(self,obj,touch):
-		if not self.slider.collide_point(*touch.pos):
-			return
-		self.manualMode = True
-
-	def endManualMode(self,obj,touch):
-		if not self.manualMode:
-			return
-		if self._video.duration < 0.0001:
-			return
-		self._video.seek(self.slider.value/self._video.duration)
-		self.manualMode = False
-
-	def update_slider(self,t):
-		self.curposition.text = self.totime(self._video.position)
-		if not self.manualMode:
-			self.slider.value = self._video.position
-			self.slider.max = self._video.duration
-		self.maxposition.text = self.totime(self._video.duration)
-
-	def beforeDestroy(self):
-		try:
-			del self
-
-		except Exception as e:
-			print_exc()
-		return True
 
 	def on_state(self,o,v):
 		if self._video.state == 'play':
@@ -212,7 +96,6 @@ class VPlayer(FloatLayout):
 		if value:
 			Window.fullscreen = True
 
-			print('Window size=',Window.size)
 			self._fullscreen_state = state = {
 				'parent': self.parent,
 				'pos': self.pos,
@@ -221,7 +104,6 @@ class VPlayer(FloatLayout):
 				'size_hint': self.size_hint,
 				'window_children': window.children[:]}
 
-			print('vplayer fullscreen,platform=',platform,desktopOSs)
 			if platform in desktopOSs:
 				Window.maximize()
 			# remove all window children
@@ -251,9 +133,181 @@ class VPlayer(FloatLayout):
 			self.size = state['size']
 			if state['parent'] is not window:
 				state['parent'].add_widget(self)
-			print('vplayer fullscreen,platform=',platform,desktopOSs)
 			if platform in desktopOSs:
 				Window.restore()
+
+	def endplay(self,btn):
+		self._video.seek(1.0,precise=True)
+
+	def replay(self,btn):
+		self._video.seek(0.0,precise=True)
+
+	def audioswitch(self,btn):
+		if self.ffplayer is not None:
+			self.ffplayer.request_channel('audio')
+
+	def setVolume(self,obj,v):
+		self._video.volume = v
+
+	def setPosition(self,obj,v):
+		self._video.seek(v)
+
+	def mute(self,btn):
+		if self._video.volume > 0.001:
+			self.old_volume = self._video.volume
+			self._video.volume = 0.0
+		else:
+			self._video.volume = self.old_volume
+
+	def stop(self):
+		try:
+			self._video.state = 'stop'
+		except:
+			print_exc()
+
+	def pause(self,t=None):
+		if self._video.state == 'play':
+			self._video.state = 'pause'
+		else:
+			self._video.state = 'play'
+
+class OSCVPlayer(BaseVPlayer):
+	def __init__(self,ip,port,vfile=None):
+		self.ip = ip
+		self.port = port
+		self.dispatcher = dispatcher.Dispatcher()
+		self.server = osc_server.ThreadingOSCUDPServer( (self.ip, self.port), self.dispatcher)
+		BaseVPlayer.__init__(self,vfile=vfile)
+		self.map('/mute',self.mute)
+		self.map('/pause',self.pause)
+		self.map('/atrack',self.audioswitch)
+		self.map('/endplay',self.endplay)
+		self.map('/replay',self.replay)
+		self.map('/setvalume',self.setVolume)
+		self.map('/setposition',self.setPosition)
+		self.map('/next',self.next)
+	
+		self.server.serve_forever()
+		self.fullscreen = True
+		label = Label(text='%s %d' % (self.ip,self.port), font_size=CSize(2))
+		label.size = self.width - label.width, 0
+		self.add_widget(label)
+
+	def next(self,obj):
+		self.source = self.vfile + '?t=%f' % time.time()
+
+	def map(self,p,f):
+		self.dispatcher.map(p,f,None)
+	
+class VPlayer(BaseVPlayer):
+	def __init__(self,vfile=None,
+			playlist=None,
+			loop=False
+		):
+		super().__init__(vfile=vfile)
+		self.loop = loop
+		self.menubar = None
+		self._popup = None
+		self.menu_status = False
+		self.manualMode = False
+		self.update_task = None
+		self.pb = None
+		if vfile:
+			if type(vfile) == type([]):
+				self.playlist = vfile
+			else:
+				self.playlist = [vfile]
+			self.curplay = 0
+			self.play()
+		else:
+			self.playlist = []
+			self.curplay = -1
+		self._video.bind(on_touch_down=self.show_hide_menu)
+		self.register_event_type('on_playend')
+	
+	def __del__(self):
+		print('********** delete VPlayer instance ********')
+		if self._video is None:
+			return
+		if self.update_task:
+			self.update_task.cancel()
+		self.update_task = None
+		self._video.state = 'pause'
+		Window.allow_screensaver = True
+		del self._video
+		self._video = None
+
+
+	def video_end(self,t,v):
+		self.curplay += 1
+		if not self.loop and self.curplay >= len(self.playlist):
+			self.dispatch('on_playend')
+			return
+		self.curplay = self.curplay % len(self.playlist)
+		self._video.source = self.playlist[self.curplay]
+		self._video.state = 'play'
+
+	def totime(self,dur):
+		h = dur / 3600
+		m = dur % 3600 / 60
+		s = dur % 60
+		return '%02d:%02d:%02d' % (h,m,s)
+		
+	def createProgressBar(self):
+		if hasattr(self._video._video, '_ffplayer'):
+			self.ffplayer = self._video._video._ffplayer
+
+		if self.pb is None:
+			self.pb = BoxLayout(orientation='horizontal',
+				size_hint = (0.99,None),height=CSize(1.4))
+			self.curposition = Label(text='0',width=CSize(4),
+				size_hint_x=None)
+			self.curposition.align='right'
+			self.maxposition = Label(text=self.totime(self._video.duration),
+				width=CSize(4),size_hint_x=None)
+			self.maxposition.align = 'left'
+			self.slider = Slider(min=0, 
+				max=self._video.duration, 
+				value=0, 
+				orientation='horizontal', 
+				step=0.01)
+			self.slider.bind(on_touch_down=self.enterManualMode)
+			self.slider.bind(on_touch_up=self.endManualMode)
+			self.manual_mode=False
+
+			self.pb.add_widget(self.curposition)
+			self.pb.add_widget(self.slider)
+			self.pb.add_widget(self.maxposition)
+			self.menubar.add_widget(self.pb)
+			self.update_task = Clock.schedule_interval(self.update_slider,1)
+
+	def enterManualMode(self,obj,touch):
+		if not self.slider.collide_point(*touch.pos):
+			return
+		self.manualMode = True
+
+	def endManualMode(self,obj,touch):
+		if not self.manualMode:
+			return
+		if self._video.duration < 0.0001:
+			return
+		self._video.seek(self.slider.value/self._video.duration)
+		self.manualMode = False
+
+	def update_slider(self,t):
+		self.curposition.text = self.totime(self._video.position)
+		if not self.manualMode:
+			self.slider.value = self._video.position
+			self.slider.max = self._video.duration
+		self.maxposition.text = self.totime(self._video.duration)
+
+	def beforeDestroy(self):
+		try:
+			del self
+
+		except Exception as e:
+			print_exc()
+		return True
 
 	def show_hide_menu(self,obj,touch):
 		if not self.collide_point(*touch.pos):
@@ -265,14 +319,15 @@ class VPlayer(FloatLayout):
 			print('doube_tap')
 			return 
 
-		if self.menubar:
+		if not self.menubar:
+			self.buildMenu()
+			return
+
+		if self.menu_status:
 			self.remove_widget(self.menubar)
-			self.menu_status = not self.menu_status
-			if self.menu_status:
-				self.add_widget(self.menubar)
-			else:
-				self.remove_widget(self.menubar)
-			return 
+		else:
+			self.add_widget(self.menubar)
+		self.menu_status = not self.menu_status
 
 	def buildMenu(self):
 		self.menubar = BoxLayout(orientation='horizontal',
@@ -291,10 +346,6 @@ class VPlayer(FloatLayout):
 		)
 		self.btn_mute.bind(on_press=self.mute)
 		self.menubar.add_widget(self.btn_mute)
-		if self.can_openfile:
-			btn_open = Button(text='open')
-			btn_open.bind(on_press=self.openfile)
-			self.menubar.add_widget(btn_open)
 		btn_cut = PressableImage(source=blockImage('next.jpg'),
 				size_hint=(None,None),
 				size=CSize(3,3)
@@ -326,123 +377,30 @@ class VPlayer(FloatLayout):
                                 step=0.07)
 		slider.bind(on_touch_up=self.setVolume)
 		self.menubar.add_widget(slider)
-		self.menubar.add_widget(self.pb)
 		self.menubar.pos = CSize(0,0)
+		self.createProgressBar()
 		self.add_widget(self.menubar)
 		self.menu_status = True
 
-	def endplay(self,btn):
-		self._video.seek(1.0,precise=True)
-
-	def replay(self,btn):
-		self._video.seek(0.0,precise=True)
-
-	def hideMenu(self):
-		self._popup.dismiss()
-		self.remove_widget(self.menubar)
-		self.menubar = None
-
-	def audioswitch(self,btn):
-		if self.ffplayer is not None:
-			self.ffplayer.request_channel('audio')
-
-	def setVolume(self,obj,touh):
-		self._video.volume = obj.value
+	def setVolume(self,obj,v=None):
+		BaseVPlayer.setVolume(self,obj,obj.value)
 
 	def mute(self,btn):
-		if self._video.volume > 0.001:
-			self.old_volume = self._video.volume
-			self._video.volume = 0.0
-			if self.menubar:
+		BaseVPlayer.mute(self,btn)
+		if self.menubar:
+			if self._video.volume < 0.001:
 				btn.source = blockImage('volume.jpg')
-		else:
-			self._video.volume = self.old_volume
-			if self.menubar:
+			else:
 				btn.source = blockImage('mute.jpg')
 
-	def stop(self):
-		try:
-			self._video.state = 'stop'
-		except:
-			print_exc()
-
-	def on_disabled(self,o,v):
-		if self.disabled:
-			self.stop()
-			del self._video
-
 	def pause(self,t=None):
-		if self._video.state == 'play':
-			self._video.state = 'pause'
-			if self.menubar:
+		BaseVPlayer.pause(self,t)
+		if self.menubar:
+			if self._video.state == 'pause':
 				self.btn_pause.source  = blockImage('play.jpg')
-		else:
-			self._video.state = 'play'
-			if self.menubar:
+			else:
 				self.btn_pause.source = blockImage('pause.jpg')
 
-	def openfile(self,t):
-		if self._popup is None:
-			def vfilter(path,filename):
-				vexts = ['.avi',
-                                        '.mpg',
-                                        '.mpe',
-                                        '.mpeg',
-                                        '.mlv',
-                                        '.dat',
-                                        '.mp4',
-                                        '.flv',
-                                        '.mov',
-                                        '.rm',
-                                        '.mkv',
-                                        '.rmvb',
-                                        '.asf',
-                                        '.3gp'
-				]
-				for ext in vexts:
-					if filename.endswith(ext):
-						return True
-				return False
-			c = BoxLayout(orientation='vertical')
-			self.file_chooser = FileChooserListView()
-			self.file_chooser.filters = [vfilter]
-			self.file_chooser.multiselect = True
-			self.file_chooser.path = self.old_path
-			self.file_chooser.bind(on_submit=self.loadFilepath)
-			c.add_widget(self.file_chooser)
-			b = BoxLayout(size_hint_y=None,height=35)
-			c.add_widget(b)
-			cancel = Button(text='Cancel')
-			cancel.bind(on_press=self.cancelopen)
-			load = Button(text='load')
-			load.bind(on_press=self.playfile)
-			b.add_widget(load)
-			b.add_widget(cancel)
-			self._popup = Popup(title='Open file',content=c,size_hint=(0.9,0.9))
-		self._popup.open()
-
-	def cancelopen(self,obj):
-		self.hideMenu()
-
-	def loadFilepath(self,obj,fpaths,evt):
-		print('fp=',fpaths,type(fpaths),'evt=',evt)
-		self.hideMenu()
-		self.playlist = fpaths
-		self.curplay = 0
-		self._video.source = self.playlist[self.curplay]
-		self._video.state = 'play'
-
-	def playfile(self,obj):
-		print('obj')
-		self.hideMenu()
-		self.playlist = []
-		for f in self.file_chooser.selection:
-			fp = os.path.join(self.file_chooser.path,f)
-			self.playlist.append(fp)
-		self.curplay = 0
-		self._video.source = self.playlist[self.curplay]
-		self._video.state = 'play'
-			
 if __name__ == '__main__':
 	class MyApp(App):
 		def build(self):

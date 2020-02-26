@@ -28,6 +28,32 @@ from .utils import *
 from .pagescontainer import PageContainer
 from .widgetExt.messager import Messager
 from .blocks import Blocks
+from appPublic.rsa import RSA
+
+class ServerInfo:
+	def __init__(self):
+		self.rsaEngine = RSA()
+		self.publickey = None
+		self.authCode = None
+	
+	def getServerPK(self):
+		config = getConfig()
+		url = '%s%s' % (config.uihome, config.publickey_url)
+		hc = App.get_running_app().hc
+		d = hc.get(url)
+		self.publickey = self.rsaEngine. publickeyFromText(d)
+	
+	def encode(self,uinfo):
+		if self.publickey is None:
+			self.getServerPK()
+
+		if uinfo['authmethod'] == 'password':
+			authinfo = '%s::%s::%s' % (uinfo['authmethod'], uinfo['userid'], uinfo['passwd'])
+			x = self.rsaEngine.encode(self.publickey, authinfo)
+			self.authCode = x
+			return x
+		return None
+
 
 def  signal_handler(signal, frame):
 	app = App.get_running_app()
@@ -42,7 +68,7 @@ class BlocksApp(App):
 	def build(self):
 		config = getConfig()
 		self.config = config
-		self.userinfo = {}
+		self.serverinfo = ServerInfo()
 		self.title = 'Test Title'
 		self.blocks = Blocks()
 		self.workers = Workers(maxworkers=config.maxworkers or 80)
@@ -54,6 +80,18 @@ class BlocksApp(App):
 		Clock.schedule_once(self.build1)
 		print('build() called......')
 		return x
+
+	def getAuthHeader(self):
+		if not hasattr(self,'serverinfo'):
+			print('app serverinfo not found')
+			return {}
+		serverinfo = self.serverinfo
+		if hasattr(serverinfo,'authCode'):
+			return {
+				'authorization':serverinfo.authCode
+			}
+		print('serverinfo authCode not found')
+		return {}
 
 	def on_start(self):
 		print('on_start() called ...')

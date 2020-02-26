@@ -210,6 +210,7 @@ class Form(BoxLayout):
 		self.inputwidth = Window.width / self.cols
 		self.inputheight = CSize(self.options.get('inputheight',3))
 		self.initflag = False
+		self.register_event_type('on_submit')
 		self.bind(size=self.on_size,
 					pos=self.on_size)
 
@@ -224,7 +225,6 @@ class Form(BoxLayout):
 		print('box_width=%d,cols=%d' % (self.inputwidth, self.cols))
 		self.add_widget(self.toolbar)
 		self.add_widget(self.fsc)
-		self.register_event_type('on_submit')
 		self.fieldWidgets=[]
 		for f in self.options['fields']:
 			w = InputBox(self, **f)
@@ -232,12 +232,11 @@ class Form(BoxLayout):
 			self.fsc.add_widget(w)
 			self.fieldWidgets.append(w)
 		blocks = App.get_running_app().blocks
-		wid = self.widget_ids['__submit']
-		# wid = getWidgetById(self,'__submit')
-		# print('ids=',self.widget_ids.keys())
+		# wid = self.widget_ids['__submit']
+		wid = blocks.getWidgetByIdPath(self,'__submit')
 		wid.bind(on_press=self.on_submit_button)
-		# wid = getWidgetById(self,'__clear')
-		wid = self.widget_ids['__clear']
+		wid = blocks.getWidgetByIdPath(self,'__clear')
+		# wid = self.widget_ids['__clear']
 		wid.bind(on_press=self.on_clear_button)
 		self.initflag = True
 
@@ -248,12 +247,13 @@ class Form(BoxLayout):
 			d.update(v)
 		return d
 
-	def on_submit(self,o,v=None):
-		print(o,v)
+	def on_submit(self,v=None):
+		print('Form():on_submit fired ...',v)
+		return False
 
 	def on_submit_button(self,o,v=None):
 		d = self.getData()
-		self.dispatch('on_submit',self,d)
+		self.dispatch('on_submit',d)
 
 	def on_clear_button(self,o,v=None):
 		for fw in self.fieldWidgets:
@@ -291,6 +291,6 @@ class StrSearchForm(BoxLayout):
 			}
 			self.dispatch('on_submit',d)
 
-	def on_submit(self,o,v=None):
+	def on_submit(self,v=None):
 		print('StrSearchForm():on_submit fired ..........')
 

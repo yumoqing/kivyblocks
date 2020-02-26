@@ -42,7 +42,7 @@ class ThreadCall(Thread,EventDispatcher):
 		pass
 
 	def checkStop(self,timestamp):
-		x = self.join(timeout=0.0001)
+		x = self.join(timeout=0.001)
 		if self.is_alive():
 			self.timing = Clock.schedule_once(self.checkStop,0)
 			return
@@ -79,12 +79,28 @@ class Workers(Thread):
 		with self.lock:
 			self.tasks.insert(0,[callee,callback,errback,kwargs])
 
+hostsessions = {}
+
 class HttpClient:
 	def __init__(self):
 		self.s = requests.Session()
 		self.workers = App.get_running_app().workers
 		
+	def url2domain(self,url):
+		parts = url.split('/')[:3]
+		pre = '/'.join(parts)
+		return pre
+
 	def webcall(self,url,method="GET",params={},files={},headers={}):
+		app = App.get_running_app()
+		domain = self.url2domain(url)
+		sessionid = hostsessions.get(domain,None)
+		print('hostsessions=', hostsessions, 'sessionid=',sessionid, 'domain=',domain)
+		if sessionid:
+			headers.update({'session':sessionid})
+		elif app.getAuthHeader():
+			headers.update(app.getAuthHeader())
+		print('headers=',headers)
 		if method in ['GET']:
 			req = requests.Request(method,url,
 					params=params,headers=headers)
@@ -94,6 +110,11 @@ class HttpClient:
 		prepped = self.s.prepare_request(req)
 		resp = self.s.send(prepped)
 		if resp.status_code == 200:
+			h = resp.headers.get('Set-Cookie',None)
+			if h:
+				print('*************set-Cookie=',h,'domain=',domain)
+				sessionid = h.split(';')[0]
+				hostsessions[domain] = sessionid
 			try:
 				data = resp.json()
 				if type(data) != type({}):
@@ -128,7 +149,7 @@ class HttpClient:
 			except Exception as e:
 				if errback is not None:
 					errback(e)
-
+				return None
 		kwargs = {
 			"url":url,
 			"method":method,
