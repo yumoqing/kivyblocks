@@ -7,8 +7,9 @@ import math
 
 def toArrayColor(color):
 	if isinstance(color,str):
-		sc = color
-		return get_color_from_hex(sc)
+		color = get_color_from_hex(color)
+		if len(color) == 3:
+			color.append(1)
 	return color
 	
 def distance(color1,color2):
@@ -18,6 +19,7 @@ def distance(color1,color2):
 		math.pow(abs(color2[1] - color1[1]),2) + \
 		math.pow(abs(color2[2] - color1[2]),2)
 	d = math.sqrt(x)
+	return d
 
 def reverseColor(color):
 	center = [0.5,0.5,0.5]
@@ -28,8 +30,8 @@ def reverseColor(color):
 	point= [0,0,0]
 	for i in range(3):
 		m = color[i] - center[i]
-		m1 = m * d1 / d
-		point[i] = color[i] - m1 if m < 0? color[i] + m1
+		m1 = abs(m) * d1 / d
+		point[i] = color[i] - m1 if m < 0 else color[i] + m1
 	return point
 
 #DIVIDE
@@ -50,121 +52,3 @@ def divide(point1,point2,divide_cnt):
 		ps.append(p)
 	ps.append(point2)
 	return ps
-
-class Bar(Widget):
-	"""
-	a BAR class
-	"""
-	def __init__(self,**options):
-		"""
-		options={
-			width,
-			height,
-			title,
-			keyField,
-			valueField,
-			data=[
-				{
-					name,
-					value,
-				},{
-				}
-			]
-		}
-		"""
-		self.options = options
-		self.initflag = False
-		super().__init__()
-		self.bind(size=self.onSize,pos=self.onSize)
-
-	def data2bar(self):
-		data = self.options.get('data',[])
-		kvs = [ [i[self.options['keyField']],i[self.options['valueField']]] for i in data ]
-		m = max([i[1] for i in kvs ])
-		cnt = len(kvs)
-		points = divide([0,0],[self.width,0],cnt)
-		color1='8833ee'
-		color2='ed8234'
-		colors = divideColor(color1,color2,cnt-1)
-		self.canvas.clear()
-		for i in range(cnt):
-			h = self.height * kvs[i][1] / m
-			with self.canvas:
-				Color(*colors[i])
-				Rectangle(pos=points[i],
-					size=(points[i+1][0] - points[i][0],h))
-		
-	def onSize(self,o,v):
-		self.build()
-
-	def build(self):
-		self.initflag = True
-		self.data2bar()
-
-class Pie(Widget):
-	def __init__(self,**options):
-		"""
-		options={
-			width,
-			height,
-			title,
-			keyField,
-			valueField,
-			data=[
-				{
-					name,
-					value,
-				},{
-				}
-			]
-		}
-		"""
-		self.options = options
-		self.initflag = False
-		super().__init__()
-		self.bind(size=self.onSize,pos=self.onSize)
-
-	def data2pie(self):
-		data = self.options.get('data',[])
-		kvs = [ [i[self.options['keyField']],i[self.options['valueField']]] for i in data ]
-		total = sum([i[1] for i in kvs ])
-		start_degree = 0
-		cnt = len(kvs)
-		color1='8833ee'
-		color2='ed8234'
-		colors = divideColor(color1,color2,cnt-1)
-		self.canvas.clear()
-		for i in range(cnt):
-			degree = start_degree + 360 * kvs[i][1] / total
-			with self.canvas:
-				Color(*colors[i])
-				Ellipse(pos=self.pos,
-					size=self.size,
-						angle_start=start_degree,
-						angle_end= degree)
-			start_degree = degree
-		
-	def onSize(self,o,v):
-		self.data2pie()
-
-class MyApp(App):
-	def build(self):
-		d = {
-			"keyField":"name",
-			"valueField":"value",
-			"data":[
-				{'name':'you','value':102.0},
-				{'name':'me','value':42.0},
-				{'name':'she','value':92.0},
-				{'name':'she','value':52.0},
-				{'name':'she','value':42.0},
-				{'name':'she','value':82.0},
-				{'name':'she','value':17.0},
-				{'name':'he','value':77.0}
-			]
-		}
-
-		return Pie(**d)
-
-if __name__ == '__main__':
-	MyApp().run()

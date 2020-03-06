@@ -54,6 +54,7 @@ from .widgetExt.jsoncodeinput import JsonCodeInput
 from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, AmountInput
 from .widgetExt.messager import Messager
+from .charts.bar import Bar
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
