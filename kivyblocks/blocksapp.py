@@ -28,6 +28,7 @@ from .utils import *
 from .pagescontainer import PageContainer
 from .widgetExt.messager import Messager
 from .blocks import Blocks
+from .theming import ThemeManager
 from appPublic.rsa import RSA
 
 class ServerInfo:
@@ -68,6 +69,7 @@ class BlocksApp(App):
 	def build(self):
 		config = getConfig()
 		self.config = config
+		self.theme_cls = ThemeManager()
 		self.serverinfo = ServerInfo()
 		self.title = 'Test Title'
 		self.blocks = Blocks()

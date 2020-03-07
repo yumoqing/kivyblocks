@@ -55,6 +55,7 @@ from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, AmountInput
 from .widgetExt.messager import Messager
 from .charts.bar import Bar
+from .tree import Tree, TextTree
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
@@ -62,7 +63,11 @@ if platform == 'android':
 
 class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):
-		print
+		pass
+
+class PressableLabel(ButtonBehavior, Label):
+	def on_press(self):
+		pass
 
 class Text(Label):
 	bgColor = ListProperty([0.5,0.5,0.5,1])

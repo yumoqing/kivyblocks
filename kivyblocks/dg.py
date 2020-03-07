@@ -119,7 +119,6 @@ class Row(GridLayout):
 		self.part.datagrid.select_rowid = self.row_id
 		self.part.datagrid.dispatch('on_selected',self)
 
-
 class Header(WidgetReady, ScrollWidget):
 	def __init__(self,part,**kw):
 		self.part = part
