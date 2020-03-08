@@ -69,7 +69,7 @@ class BlocksApp(App):
 	def build(self):
 		config = getConfig()
 		self.config = config
-		self.theme_cls = ThemeManager()
+		# self.theme_cls = ThemeManager()
 		self.serverinfo = ServerInfo()
 		self.title = 'Test Title'
 		self.blocks = Blocks()

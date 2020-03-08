@@ -25,7 +25,7 @@ class StyleBehavior(object):
 		c = self.bg_color
 		if self.selected_flag:
 			c = self.s_bg_color
-		logging.info('selected=%s,color=%s',str(self.selected_flag),str(c))
+		# logging.info('selected=%s,color=%s',str(self.selected_flag),str(c))
 		with self.canvas.before:
 			Color(*c)
 			Rectangle(pos=self.pos,size=self.size)

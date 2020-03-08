@@ -73,10 +73,10 @@ class TreeNode(BoxLayout):
 			if children miss, it is a leaf node,if children is a empty array, is mean need load at it is first expanded.
 			}
 		"""
-		super().__init__(orientation='vertical',size_hint=(None,None))
+		BoxLayout.__init__(self,orientation='vertical',size_hint=(None,None))
 		self.treeObj = tree
+		self.parentNode = parentNode
 		self.data = data
-		self.parentNonde = parentNode
 		self.content = None
 		self.children_open = False
 		self.subNodes = []
@@ -103,8 +103,13 @@ class TreeNode(BoxLayout):
 			self.height = self.node_box.height + self.node_box1.height
 		else:
 			self.height = self.node_box.height
-		self.width = self.trigger.width + \
-					max(self.node_box.width,self.node_box1.width)
+		self.width = self.node_box.width
+		self._trigger_layout()
+		if self.parentNode:
+			self.parentNode._trigger_layout()
+			self.parentNode._trigger_layout()
+		else:
+			self.treeObj._inner._trigger_layout()
 		
 	def buildChildrenContainer(self):
 		self.node_box1.add_widget(EmptyBox())
@@ -125,9 +130,9 @@ class TreeNode(BoxLayout):
 	def addContent(self):
 		self.buildContent()
 		self.node_box.add_widget(self.content)
-		self.node_box.height = self.content.height + CSize(1)
+		self.node_box.height = self.content.height
 		self.node_box.width = self.trigger.width + \
-						self.content.width + CSize(1)
+						self.content.width
 		logging.info('Tree : content=(%d,%d),box=(%d,%d)', \
 						self.content.width,self.content.height,
 						self.node_box.width,self.node_box.height)
@@ -178,7 +183,7 @@ class TreeNode(BoxLayout):
 			self.node_box1.width = self.trigger.width + self.children_box.width
 
 	def toggleChildren(self,o):
-		self.treeObj.unselected()
+		self.treeObj.unselect_row()
 		self.children_open = True if not self.children_open else False
 		if self.children_open:
 			self.buildChildren()
@@ -186,6 +191,10 @@ class TreeNode(BoxLayout):
 		else:
 			self.remove_widget(self.node_box1)
 		self.setSize()
+		# when a widget remove from its parent, the get_parent_window()
+		# will return a None
+		# w1 = self.children_box.get_parent_window()
+		# logging.info('Tree :get_parent_window() return=%s',str(type(w1)))
 	
 """
 tree options
@@ -201,11 +210,12 @@ tree options
 	"data" # array of {children:{},...}
 }
 """
-class Tree(StyleBehavior,ScrollWidget):
+# class Tree(StyleBehavior,ScrollWidget):
+class Tree(ScrollWidget):
 	def __init__(self,**options):
 		ScrollWidget.__init__(self)
 		level = options.get('level',0)
-		StyleBehavior.__init__(self,level=level)
+		# StyleBehavior.__init__(self,level=level)
 		self.options = DictObject(**options)
 		self.nodes = []
 		self.initflag = False
@@ -269,17 +279,15 @@ class Tree(StyleBehavior,ScrollWidget):
 			self.add_widget(w)
 			logging.info('Tree : node=%s',type(w))
 
-class TextContent(StyleBehavior, PressableLabel):
+class TextContent(PressableLabel):
 	def __init__(self,level=0,**options):
 		PressableLabel.__init__(self,**options)
-		StyleBehavior.__init__(self,level=level)
 		
 class TextTreeNode(TreeNode):
 	def buildContent(self):
 		txt = self.data.get(self.treeObj.options.textField,
 				self.data.get(self.treeObj.options.idField,'defaulttext'))
-		self.content = TextContent(level=self.treeObj.style_level,
-							text=txt,
+		self.content = TextContent( text=txt,
 							size_hint=(None,None),
 							font_size=CSize(1),
 							text_size=CSize(len(txt)-1,1),
