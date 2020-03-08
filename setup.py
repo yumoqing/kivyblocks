@@ -16,7 +16,14 @@ email = "yumoqing@icloud.com"
 
 packages=find_packages()
 package_data = {
-"kivyblocks":['imgs/*.png', 'imgs/*.gif','imgs/*.jpg','ttf/*.ttf', 'ui/*.uidesc' ],
+	"kivyblocks":[
+		'imgs/*.png', 
+		'imgs/*.atlas', 
+		'imgs/*.gif',
+		'imgs/*.jpg',
+		'ttf/*.ttf', 
+		'ui/*.uidesc' 
+	],
 }
 
 setup(

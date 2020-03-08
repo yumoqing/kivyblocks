@@ -1,3 +1,5 @@
+from kivy.logger import logging
+
 colors = {
     'Red': {
         '200': 'ef9a9a',
@@ -341,45 +343,6 @@ light_colors = {
     'Light': ['White', 'MainBackground', 'DialogBackground']
 }
 
-level_bg_colors = [
-	'50',
-	'100',
-	'200',
-	'300',
-]
-
-level_selected_bg_colors = [
-	'400',
-	'500',
-	'600',
-	'700'
-]
-
-def getColors(style,level):
-	i = level % len(level_bg_colors)
-	text_color = text_colors[style][ level_bg_colors[i]]
-	bg_color = colors[style][ level_bg_colors[i]]
-	return color
-
-def getSelectedColors(style,level):
-	i = level % len(level_selected_bg_colors)
-	text_color = text_colors[style][ level_bg_colors[i]]
-	bg_color = colors[style][ level_bg_colors[i]]
-	return text_color, bg_color
-
-error_color_id = '900',
-info_color_id = '800'
-def getErrorColor(style):
-	text_color = text_colors[style][ error_color_id ]
-	bg_color = colors[style][ error_color_id ]
-	return text_color, bg_color
-	
-def getInfoColor(style):
-	text_color = text_colors[style][ info_color_id ]
-	bg_color = colors[style][ info_color_id ]
-	return text_color, bg_color
-
-
 text_colors = {
     'Red': {
         '50': '000000',
@@ -674,3 +637,43 @@ text_colors = {
         '900': 'ffffff',
     },
 }
+
+level_bg_colors = [
+	'900',
+	'800',
+	'700',
+	'600',
+]
+
+level_selected_bg_colors = [
+	'500',
+	'400',
+	'300',
+	'200'
+]
+
+def getColors(style,level=0):
+	i = level % len(level_bg_colors)
+	logging.info('TEST : style=%s,level=%d', style, level)
+	text_color = text_colors[style][ level_bg_colors[i]]
+	bg_color = colors[style][ level_bg_colors[i]]
+	return text_color,bg_color
+
+def getSelectedColors(style,level=0):
+	i = level % len(level_selected_bg_colors)
+	text_color = text_colors[style][ level_selected_bg_colors[i]]
+	bg_color = colors[style][ level_selected_bg_colors[i]]
+	return text_color, bg_color
+
+error_color_id = '100',
+info_color_id = '50'
+def getErrorColors(style):
+	text_color = text_colors[style][ error_color_id ]
+	bg_color = colors[style][ error_color_id ]
+	return text_color, bg_color
+	
+def getInfoColors(style):
+	text_color = text_colors[style][ info_color_id ]
+	bg_color = colors[style][ info_color_id ]
+	return text_color, bg_color
+

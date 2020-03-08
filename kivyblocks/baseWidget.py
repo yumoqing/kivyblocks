@@ -55,7 +55,6 @@ from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, AmountInput
 from .widgetExt.messager import Messager
 from .charts.bar import Bar
-from .tree import Tree, TextTree
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton

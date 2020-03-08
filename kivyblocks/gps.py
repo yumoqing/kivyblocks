@@ -9,7 +9,7 @@ class GPS:
 		pass
 	
 	def on_status(self,**kw):
-		
+		pass
 	def __del__(self):
 		gps.stop()
 

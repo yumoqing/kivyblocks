@@ -1,60 +1,72 @@
 from kivy.app import App
-from kivy.graphics import Color, Triangle
+from kivy.logger import logging
+from kivy.graphics import Color, Rectangle, Triangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.uix.button import ButtonBehavior
-
 from kivyblocks.widgetExt import ScrollWidget
-from kivyblocks.blocksapp import BlocksApp
 from kivyblocks.utils import CSize
-from baseWidget import PressableLabel
-
 from appPublic.dictObject import DictObject
+from .baseWidget import PressableLabel
+from .stylebehavior import StyleBehavior
 
-class NodeTrigger(ButtonBehavior, Widget):
-	def __init__(self, open_status=False,color=[1,0,0,1]):
-		siz = CSize(1)
-		super().__init__(size_hint=(None,None),size=[siz,siz]) #CSize(1))
+class EmptyBox(Label):
+	def __init__(self,size_cnt=1):
+		self.size_cnt = size_cnt
+		siz=CSize(self.size_cnt)
+		super().__init__(text='  ',font_size=siz,
+				text_size=(siz,siz),
+				halign='center',
+				size_hint=[None,None],size=[siz,siz])
+
+	def onSize(self,o=None,v=None):
+		return
+
+class NodeTrigger(ButtonBehavior, EmptyBox):
+	def __init__(self, size_cnt=1,open_status=False,color=[1,0,0,1]):
+		super().__init__(size_cnt=size_cnt)
 		self.open_status = open_status
 		self.line_color = color
-		self.register_event_type('on_change')
-		self.open_points = [0,self.height, self.width,self.height,self.width/2,0]
-		self.close_points = [0,self.height, 0,0, self.width,self.height/2]
+		self.countPoints()
 		self.showOpenStatus()
-		self.bind(size=self.on_size)
+		self.bind(size=self.onSize,pos=self.onSize)
 
-	def on_change(self,status):
-		print('new_status=',status)
+	def countPoints(self):
+		self.open_points = [0,self.height, 
+				self.width,self.height,
+				self.width/2,0]
+		self.close_points = [0,self.height, 
+				0,0, self.width,
+				self.height/2]
+	def pointsShift(self,points):
+		x = [ p + self.pos[0] if i % 2 == 0 else p + self.pos[1] \
+				for i,p in enumerate(points) ]
+		return x
 
-	def on_size(self,o,v):
-		self.open_points = [0,self.height, self.width,self.height,self.width/2,0]
-		self.close_points = [0,self.height, 0,0, self.width,self.height/2]
+	def onSize(self,o=None,v=None):
+		self.countPoints()
+		self.showOpenStatus()
 	
 	def on_press(self):
 		self.open_status = False if self.open_status else True
 		self.showOpenStatus()
-		self.dispatch('on_change',self.open_status)
 
 	def showOpenStatus(self):
 		points = self.close_points
 		if self.open_status:
 			points = self.open_points
 		self.canvas.clear()
+		points = self.pointsShift(points)
 		with self.canvas:
 			Color(*self.line_color)
 			Triangle(points=points)
-
-class EmptyBox(Widget):
-	def __init__(self):
-		siz=CSize(1)
-		super().__init__(size_hint=[None,None],size=[siz,siz])
-
+		# print('pos=',self.pos,'size=',self.size)
 
 class TreeNode(BoxLayout):
-	def __init__(self,tree:Tree=None,
-						parentNode:TreeNode=None,
-						data:dict):
+	def __init__(self,data,tree=None,
+						parentNode=None,
+						):
 		"""
 		base TreeNode
 		data:{
@@ -74,17 +86,26 @@ class TreeNode(BoxLayout):
 		self.hasChildren_nodes = True if not n is None else False
 		self.children_nodes = n
 		self.children_loaded = False
-		self.hasChildren = data.get('hasChildren')
-		if hasChildren_nodes:
+		self.hasChildren_nodes = data.get('children')
+		if self.hasChildren_nodes:
 			self.trigger = NodeTrigger()
-			self.trigger.bind(on_change=self.toggleChildren)
+			self.trigger.bind(on_press=self.toggleChildren)
 			self.buildChildrenContainer()
 		else:
 			self.trigger = EmptyBox()
-		self.add_widget(self.node_box)
 		self.node_box.add_widget(self.trigger)
-		self.buildContent()
+		self.add_widget(self.node_box)
+		self.addContent()
+		self.setSize()
 
+	def setSize(self):
+		if self.children_open:
+			self.height = self.node_box.height + self.node_box1.height
+		else:
+			self.height = self.node_box.height
+		self.width = self.trigger.width + \
+					max(self.node_box.width,self.node_box1.width)
+		
 	def buildChildrenContainer(self):
 		self.node_box1.add_widget(EmptyBox())
 		self.children_box = BoxLayout(orientation='vertical')
@@ -105,43 +126,67 @@ class TreeNode(BoxLayout):
 		self.buildContent()
 		self.node_box.add_widget(self.content)
 		self.node_box.height = self.content.height + CSize(1)
-		self.node_box.width = self.trigger.width + self.content.width
+		self.node_box.width = self.trigger.width + \
+						self.content.width + CSize(1)
+		logging.info('Tree : content=(%d,%d),box=(%d,%d)', \
+						self.content.width,self.content.height,
+						self.node_box.width,self.node_box.height)
 
 	def buildChildren(self):
 		if self.data.children is None:
+			logging.info('Tree : is a leaf node')
 			return
 
 		if self.data.children == []:
 			self.treeObj.getUrlData(self.addChildren,self.data)
 			return
 		if len(self.subNodes) == 0:
+			logging.info('Tree : add subnodes')
 			self.addChildren(self.data.children)
+		else:
+			logging.info('Tree : not need add subnodes')
+
+	def childrenSizeChange(self,tn,v):
+		h = 0
+		w = 0
+		for n in self.subNodes:
+			h += n.height
+			w = max(w,n.width)
+
+		self.children_box.height = h
+		self.children_box.width = w
+		self.node_box1.height = self.children_box.height
+		self.node_box1.width = self.trigger.width + self.children_box.width
+		self.setSize()
 
 	def addChildren(self,children):
 		self.data.children = children
+		self.children_box.height = 0
+		self.children_box.width = 0
 		for c in children:
+			options = {}
 			options['tree'] = self.treeObj
 			options['parentNode'] = self
 			options['data'] = c
-			tn = self.teeeObj.NodeKlass(**options)
+			tn = self.treeObj.NodeKlass(**options)
+			tn.bind(size=self.childrenSizeChange)
 			self.subNodes.append(tn)
 			self.children_box.add_widget(tn)
+			self.children_box.height += tn.height
+			self.children_box.width = max(self.children_box.width,tn.width)
+			self.node_box1.height = self.children_box.height
+			self.node_box1.width = self.trigger.width + self.children_box.width
 
-	def toggleChildren(self,o,v):
-		if v:
+	def toggleChildren(self,o):
+		self.treeObj.unselected()
+		self.children_open = True if not self.children_open else False
+		if self.children_open:
 			self.buildChildren()
 			self.add_widget(self.node_box1)
-			self.children_open = True
-			self.height = self.node_box.height + self.node_box1.height
 		else:
 			self.remove_widget(self.node_box1)
-			self.height = self.node_box.height
-			self.children_open = False
+		self.setSize()
 	
-	def on_size(self,o,v):
-		print('************treenode on_size', o, v)
-		self.node_box1.height = self.children_box.height
-
 """
 tree options
 {
@@ -156,16 +201,31 @@ tree options
 	"data" # array of {children:{},...}
 }
 """
-class Tree(ScrollWidget):
+class Tree(StyleBehavior,ScrollWidget):
 	def __init__(self,**options):
-		super().__init__()		#orientation="vertical")
+		ScrollWidget.__init__(self)
+		level = options.get('level',0)
+		StyleBehavior.__init__(self,level=level)
 		self.options = DictObject(**options)
 		self.nodes = []
 		self.initflag = False
+		self.selected_node = None
 		self.bind(size=self.onSize,pos=self.onSize)
 
+	def select_row(self, node):
+		self.unselect_row()
+		self.selected_node = node
+		node.selected()
+
+	def unselect_row(self):
+		if self.selected_node:
+			logging.info('selected node unselected')
+			self.selected_node.unselected()
+			self.selected_node = None
+		
 	def onSize(self,o,v=None):
 		if not self.initflag:
+			self.initflag = True
 			self.buildTree(self)
 		for n in self.nodes:
 			n.setMinWidth(self.width)
@@ -190,7 +250,9 @@ class Tree(ScrollWidget):
 		if self.options.url:
 			return self.getUrlData(self.dataLoaded,kv)
 		data = self.options.data
+		logging.info("Tree : buildTree,data=%s",data)
 		self.dataLoaded(data)
+
 
 	def dataLoaded(self,d):
 		self.data = d
@@ -201,39 +263,57 @@ class Tree(ScrollWidget):
 			options = {}
 			options['tree'] = self
 			options['parentNode'] = None
-			options['data'] = DictObject(c)
-			self.nodes.append(self.NodeKlass(**options))
-		for w in self.nodes:
+			options['data'] = DictObject(**c)
+			w = self.NodeKlass(**options)
+			self.nodes.append(w)
 			self.add_widget(w)
+			logging.info('Tree : node=%s',type(w))
 
+class TextContent(StyleBehavior, PressableLabel):
+	def __init__(self,level=0,**options):
+		PressableLabel.__init__(self,**options)
+		StyleBehavior.__init__(self,level=level)
+		
 class TextTreeNode(TreeNode):
 	def buildContent(self):
 		txt = self.data.get(self.treeObj.options.textField,
 				self.data.get(self.treeObj.options.idField,'defaulttext'))
-		self.content = PressableLabel(text=txt,
+		self.content = TextContent(level=self.treeObj.style_level,
+							text=txt,
 							size_hint=(None,None),
 							font_size=CSize(1),
-							text_size=CSize(len(txt),1),
+							text_size=CSize(len(txt)-1,1),
 							halign='left',
-							height=CSize(2),width=CSize(len(txt)))
+							height=CSize(2),
+							width=CSize(len(txt)))
+		self.content.text_color = [0,0,0,1] #self.treeObj.text_color
 		self.content.bind(on_press=self.onPress)
 		return 
 	
 	def onPress(self,o,v=None):
+		if self.hasChildren_nodes:
+			v = True if not self.children_open else False
+			self.toggleChildren(self)
+			self.trigger.on_press()
+			return
+		logging.info('select the leaf node')
 		self.treeObj.select_row(self)
 
 	def selected(self):
-		pass
+		logging.info('content selected ........')
+		self.content.selected()
 
 	def unselected(self):
-		pass
+		logging.info('content unselected ........')
+		self.content.unselected()
 
 class TextTree(Tree):
 	def __init__(self,**options):
-		self.NodeKlass = TextTReeNode
+		self.NodeKlass = TextTreeNode
 		super().__init__(**options)
 		self.register_event_type('on_press')
 
+		
 	def onPress(self,o,v=None):
 		if self.selectNode:
 			self.selectNode.unselected()

@@ -30,6 +30,7 @@ from .serverImageViewer import ServerImageViewer
 from .vplayer import VPlayer
 from .form import InputBox, Form, StrSearchForm
 from .boxViewer import BoxViewer
+from .tree import Tree, TextTree
 
 def showError(e):
 	print('error',e)
