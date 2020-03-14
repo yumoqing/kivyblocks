@@ -14,9 +14,12 @@ from kivy.uix.filechooser import FileChooserListView
 from kivy.uix.label import Label
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.logger import Logger
+
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, \
     NumericProperty, DictProperty, OptionProperty
 from pythonosc import dispatcher, osc_server
+from ffpyplayer.tools import set_log_callback
 from .utils import *
 from .baseWidget import PressableImage
 
@@ -26,12 +29,18 @@ desktopOSs=[
 	"macosx"
 ]
 
+logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
+               'fatal': Logger.critical, 'error': Logger.error,
+               'warning': Logger.warning, 'info': Logger.info,
+               'verbose': Logger.debug, 'debug': Logger.debug}
+
 othersplatforms=['ios','android']
 
 class BaseVPlayer(FloatLayout):
 	fullscreen = BooleanProperty(False)
 	def __init__(self,vfile=None):
 		super().__init__()
+		self.register_event_type('on_source_error')
 		Window.allow_screensaver = False
 		self._video = Video(allow_stretch=True,pos_hint={'x': 0, 'y': 0},size_hint=(1,1))
 		self.add_widget(self._video)
@@ -44,7 +53,18 @@ class BaseVPlayer(FloatLayout):
 		self.play()
 		self._video.bind(eos=self.video_end)
 		self._video.bind(state=self.on_state)
-	
+		set_log_callback(self.ffplayerLog)
+
+	def on_source_error(self,o,v):
+		Logger.info('safecorner: {} error'.format(v))
+
+	def ffplayerLog(self, msg, level):
+		msg = msg.strip()
+		if msg:
+			logger_func[level]('yffpyplayer: {}'.format(msg))
+		if level == 'error' and self._video.source in msg:
+			self.dispatch('on_source_error',self,self._video.source)
+
 	def __del__(self):
 		if self._video is None:
 			return

@@ -64,60 +64,53 @@ def  signal_handler(signal, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
+def on_close(o,v=None):
+	"""
+	catch the "x" button's event of window
+	"""
+	app = App.get_running_app()
+	app.workers.running = False
 
+def getAuthHeader():
+	app = App.get_running_app()
+	if not hasattr(app,'serverinfo'):
+		print('app serverinfo not found')
+		return {}
+	serverinfo = app.serverinfo
+	if hasattr(serverinfo,'authCode'):
+		return {
+			'authorization':serverinfo.authCode
+		}
+	print('serverinfo authCode not found')
+	return {}
+
+def closeWorkers():
+	app = App.get_running_app()
+	app.workers.running = False
+
+def appBlocksHack(app):
+		config = getConfig()
+		app.on_close = on_close
+		app.getAuthHeader = getAuthHeader
+		app.__del__ = closeWorkers
+		Window.bind(on_request_close=app.on_close)
+		app.serverinfo = ServerInfo()
+		app.title = 'Test Title'
+		app.blocks = Blocks()
+		app.workers = Workers(maxworkers=config.maxworkers or 80)
+		app.workers.start()
+		app.hc = HttpClient()
+		WindowBase.softinput_mode='below_target'
+	
 class BlocksApp(App):
 	def build(self):
-		config = getConfig()
-		self.config = config
-		# self.theme_cls = ThemeManager()
-		self.serverinfo = ServerInfo()
-		self.title = 'Test Title'
-		self.blocks = Blocks()
-		self.workers = Workers(maxworkers=config.maxworkers or 80)
-		Window.bind(on_request_close=self.on_close)
-		self.workers.start()
-		self.hc = HttpClient()
-		WindowBase.softinput_mode='below_target'
-		x = PageContainer()
-		Clock.schedule_once(self.build1)
-		print('build() called......')
-		return x
-
-	def getAuthHeader(self):
-		if not hasattr(self,'serverinfo'):
-			print('app serverinfo not found')
-			return {}
-		serverinfo = self.serverinfo
-		if hasattr(serverinfo,'authCode'):
-			return {
-				'authorization':serverinfo.authCode
-			}
-		print('serverinfo authCode not found')
-		return {}
-
-	def on_start(self):
-		print('on_start() called ...')
-
-	def build1(self,t):
+		root = PageContainer()
 		x = None
-		x = self.blocks.widgetBuild(self.config.root)
+		config = getConfig()
+		x = self.blocks.widgetBuild(config.root)
 		if x is None:
 			alert(str(self.config.root)+': cannt build widget')
-			return
-		self.root.add_widget(x)
-		return
+			return root
+		root.add_widget(x)
+		return root
 			
-	def on_close(self,o,v=None):
-		"""
-		catch the "x" button's event of window
-		"""
-		self.workers.running = False
-		
-	def on_pause(self,o,v=None):
-		"""
-		to avoid app start from beginening when user exit and reenter this app
-		"""
-		return True
-
-	def __del__(self):
-		self.workers.running = False
