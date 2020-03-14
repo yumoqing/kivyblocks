@@ -7,7 +7,6 @@ from traceback import print_exc
 from functools import partial
 
 from appPublic.dictExt import dictExtend
-from appPublic.jsonConfig import getConfig
 from appPublic.folderUtils import ProgramPath
 from appPublic.dictObject import DictObject
 from appPublic.Singleton import SingletonDecorator
