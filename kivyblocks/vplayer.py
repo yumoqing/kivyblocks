@@ -85,6 +85,8 @@ class BaseVPlayer(FloatLayout):
 		self.playlist += lst
 
 	def video_end(self,t,v):
+		self._video.unload()
+		return
 		self.curplay += 1
 		self.curplay = self.curplay % len(self.playlist)
 		self._video.source = self.playlist[self.curplay]
@@ -259,6 +261,7 @@ class VPlayer(BaseVPlayer):
 
 
 	def video_end(self,t,v):
+		super().video_end(t,v)
 		self.curplay += 1
 		if not self.loop and self.curplay >= len(self.playlist):
 			self.dispatch('on_playend')
