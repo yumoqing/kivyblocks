@@ -29,6 +29,7 @@ class AWebView(Widget):
 		wvc = WebViewClient()
 		self.webview.setWebViewClient(wvc)
 		activity.setContentView(self.webview)
+		self.add_widget(self.webview)
 		if self.baseUrl is not None:
 			self.webview.loadUrl(self.baseUrl)
 			print('go to the url=',self.baseUrl)
