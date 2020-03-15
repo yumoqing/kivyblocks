@@ -50,10 +50,12 @@ class BaseVPlayer(FloatLayout):
 		else:
 			self.playlist = [vfile]
 		self.curplay = 0
-		self.play()
 		self._video.bind(eos=self.video_end)
 		self._video.bind(state=self.on_state)
 		set_log_callback(self.ffplayerLog)
+		self.play()
+		if hasattr(self._video._video, '_ffplayer'):
+			self.ffplayer = self._video._video._ffplayer
 
 	def on_source_error(self,o,v):
 		Logger.info('safecorner: {} error'.format(v))
@@ -64,14 +66,6 @@ class BaseVPlayer(FloatLayout):
 			logger_func[level]('yffpyplayer: {}'.format(msg))
 		if level == 'error' and self._video.source in msg:
 			self.dispatch('on_source_error',self,self._video.source)
-
-	def __del__(self):
-		if self._video is None:
-			return
-		self._video.state = 'pause'
-		Window.allow_screensaver = True
-		del self._video
-		self._video = None
 
 	def play(self,o=None,v=None):
 		if self.curplay >= 0:
@@ -85,12 +79,7 @@ class BaseVPlayer(FloatLayout):
 		self.playlist += lst
 
 	def video_end(self,t,v):
-		self._video.unload()
-		return
-		self.curplay += 1
-		self.curplay = self.curplay % len(self.playlist)
-		self._video.source = self.playlist[self.curplay]
-		self._video.state = 'play'
+		pass
 
 	def on_state(self,o,v):
 		if self._video.state == 'play':
@@ -182,10 +171,7 @@ class BaseVPlayer(FloatLayout):
 			self._video.volume = self.old_volume
 
 	def stop(self):
-		try:
-			self._video.state = 'stop'
-		except:
-			print_exc()
+		self._video.state = 'stop'
 
 	def pause(self,t=None):
 		if self._video.state == 'play':
@@ -193,6 +179,9 @@ class BaseVPlayer(FloatLayout):
 		else:
 			self._video.state = 'play'
 
+	def __del__(self):
+		pass
+	
 class OSCVPlayer(BaseVPlayer):
 	def __init__(self,ip,port,vfile=None):
 		self.ip = ip
@@ -220,7 +209,7 @@ class OSCVPlayer(BaseVPlayer):
 
 	def map(self,p,f):
 		self.dispatcher.map(p,f,None)
-	
+
 class VPlayer(BaseVPlayer):
 	def __init__(self,vfile=None,
 			playlist=None,
@@ -247,28 +236,15 @@ class VPlayer(BaseVPlayer):
 		self._video.bind(on_touch_down=self.show_hide_menu)
 		self.register_event_type('on_playend')
 	
-	def __del__(self):
-		print('********** delete VPlayer instance ********')
-		if self._video is None:
-			return
-		if self.update_task:
-			self.update_task.cancel()
-		self.update_task = None
-		self._video.state = 'pause'
-		Window.allow_screensaver = True
-		del self._video
-		self._video = None
-
-
 	def video_end(self,t,v):
-		super().video_end(t,v)
 		self.curplay += 1
 		if not self.loop and self.curplay >= len(self.playlist):
 			self.dispatch('on_playend')
+			print('*****EOS return *************')
+			self.beforeDestroy()
 			return
 		self.curplay = self.curplay % len(self.playlist)
 		self._video.source = self.playlist[self.curplay]
-		self._video.state = 'play'
 
 	def totime(self,dur):
 		h = dur / 3600
@@ -277,9 +253,6 @@ class VPlayer(BaseVPlayer):
 		return '%02d:%02d:%02d' % (h,m,s)
 		
 	def createProgressBar(self):
-		if hasattr(self._video._video, '_ffplayer'):
-			self.ffplayer = self._video._video._ffplayer
-
 		if self.pb is None:
 			self.pb = BoxLayout(orientation='horizontal',
 				size_hint = (0.99,None),height=CSize(1.4))
@@ -302,7 +275,6 @@ class VPlayer(BaseVPlayer):
 			self.pb.add_widget(self.slider)
 			self.pb.add_widget(self.maxposition)
 			self.menubar.add_widget(self.pb)
-			self.update_task = Clock.schedule_interval(self.update_slider,1)
 
 	def enterManualMode(self,obj,touch):
 		if not self.slider.collide_point(*touch.pos):
@@ -318,18 +290,20 @@ class VPlayer(BaseVPlayer):
 		self.manualMode = False
 
 	def update_slider(self,t):
+		if self.pb is None:
+			return
 		self.curposition.text = self.totime(self._video.position)
 		if not self.manualMode:
 			self.slider.value = self._video.position
 			self.slider.max = self._video.duration
 		self.maxposition.text = self.totime(self._video.duration)
 
-	def beforeDestroy(self):
-		try:
-			del self
+	def __del__(self):
+		self.beforeDestroy()
 
-		except Exception as e:
-			print_exc()
+	def beforeDestroy(self):
+		print('beforeDestroy() called')
+		self._video.state = 'stop'
 		return True
 
 	def show_hide_menu(self,obj,touch):
@@ -423,6 +397,15 @@ class VPlayer(BaseVPlayer):
 				self.btn_pause.source  = blockImage('play.jpg')
 			else:
 				self.btn_pause.source = blockImage('pause.jpg')
+
+	def on_state(self,o,v):
+		BaseVPlayer.on_state(self,o,v)
+		if self._video.state == 'play':
+			self.update_task = Clock.schedule_interval(self.update_slider,1)
+		else:
+			if self.update_task:
+				self.update_task.cancel()
+			self.update_task = None
 
 if __name__ == '__main__':
 	class MyApp(App):
