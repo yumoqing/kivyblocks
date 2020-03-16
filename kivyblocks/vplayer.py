@@ -169,8 +169,10 @@ class BaseVPlayer(FloatLayout):
 		if self._video.volume > 0.001:
 			self.old_volume = self._video.volume
 			self._video.volume = 0.0
+			print('********* set mute ***********',self._video.volume)
 		else:
 			self._video.volume = self.old_volume
+			print('********* unset mute ***********',self._video.volume)
 
 	def stop(self):
 		self._video.state = 'stop'
