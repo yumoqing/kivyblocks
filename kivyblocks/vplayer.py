@@ -157,7 +157,7 @@ class BaseVPlayer(FloatLayout):
 		self._video.seek(0.0,precise=True)
 
 	def audioswitch(self,btn):
-		print('*********AUDIOSwitch 1**************', self.ffplayer)
+		print('*********AUDIOSwitch 1**************', dir(self._video._video))
 		if self.ffplayer is not None:
 			x = self.ffplayer.request_channel('audio')
 			print('*********AUDIOSwitch 2**************',x)
