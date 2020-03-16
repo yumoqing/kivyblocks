@@ -85,6 +85,8 @@ class BaseVPlayer(FloatLayout):
 	def on_state(self,o,v):
 		if self._video.state == 'play':
 			Window.allow_screensaver = False
+			if hasattr(self._video._video, '_ffplayer'):
+				self.ffplayer = self._video._video._ffplayer
 		else:
 			Window.allow_screensaver = True
 		print('onstate()',o,v,self._video.state)
@@ -157,8 +159,8 @@ class BaseVPlayer(FloatLayout):
 	def audioswitch(self,btn):
 		print('*********AUDIOSwitch 1**************', self.ffplayer)
 		if self.ffplayer is not None:
-			print('*********AUDIOSwitch 2**************')
-			self.ffplayer.request_channel('audio')
+			x = self.ffplayer.request_channel('audio')
+			print('*********AUDIOSwitch 2**************',x)
 
 	def setVolume(self,obj,v):
 		self._video.volume = v
