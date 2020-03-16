@@ -50,6 +50,7 @@ class BaseVPlayer(FloatLayout):
 		else:
 			self.playlist = [vfile]
 		self.curplay = 0
+		self.old_volume = 0
 		self._video.bind(eos=self.video_end)
 		self._video.bind(state=self.on_state)
 		set_log_callback(self.ffplayerLog)
@@ -341,12 +342,14 @@ class VPlayer(BaseVPlayer):
 			self.btn_pause.source = blockImage('play.jpg')
 		self.btn_pause.bind(on_press=self.pause)
 		self.menubar.add_widget(self.btn_pause)
+		"""
 		self.btn_mute = PressableImage(source=blockImage('mute.jpg'),
 					size_hint=(None,None),
 					size=CSize(3,3)
 		)
 		self.btn_mute.bind(on_press=self.mute)
 		self.menubar.add_widget(self.btn_mute)
+		"""
 		btn_cut = PressableImage(source=blockImage('next.jpg'),
 				size_hint=(None,None),
 				size=CSize(3,3)
