@@ -10,6 +10,7 @@ from kivy.config import Config
 from kivy.metrics import sp,dp,mm
 from kivy.core.window import WindowBase, Window
 from kivy.clock import Clock
+from kivy.logger import Logger
 
 import kivy
 from kivy.resources import resource_add_path
@@ -19,11 +20,7 @@ Config.set('kivy', 'default_font', [
 	'DroidSansFallback.ttf'])
 
 from kivy.app import App
-# from .baseWidget import baseWidgets
-# from .widgetExt import Messager
-# from .externalwidgetmanager import ExternalWidgetManager
 from .threadcall import HttpClient,Workers
-# from .derivedWidget import buildWidget, loadUserDefinedWidget
 from .utils import *
 from .pagescontainer import PageContainer
 from .widgetExt.messager import Messager
@@ -64,12 +61,19 @@ def  signal_handler(signal, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
-def on_close(o,v=None):
+def on_close(*args,**kwargs):
 	"""
 	catch the "x" button's event of window
 	"""
+	Logger.info('kivyblocks: on_close(), args=%s, kwargs=%s',str(args),str(kwargs))
 	app = App.get_running_app()
-	app.workers.running = False
+	if len(app.root.pageWidgets) <= 1:
+		app.workers.running = False
+		Logger.info('kivyblocks: on_close(), return False')
+		return False
+	app.root.previous()
+	Logger.info('kivyblocks: on_close(), return True')
+	return True
 
 def getAuthHeader():
 	app = App.get_running_app()

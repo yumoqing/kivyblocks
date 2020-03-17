@@ -334,29 +334,29 @@ class VPlayer(BaseVPlayer):
 	def buildMenu(self):
 		self.menubar = BoxLayout(orientation='horizontal',
 			size_hint_y=None,height=CSize(1.4))
-		self.btn_pause = PressableImage(source=blockImage('pause.jpg'),
+		self.btn_pause = PressableImage(source=blockImage('pause.png'),
 					size_hint=(None,None),
 					size=CSize(3,3)
 		)
 		if self._video.state == 'pause':
-			self.btn_pause.source = blockImage('play.jpg')
+			self.btn_pause.source = blockImage('play.png')
 		self.btn_pause.bind(on_press=self.pause)
 		self.menubar.add_widget(self.btn_pause)
 		"""
-		self.btn_mute = PressableImage(source=blockImage('mute.jpg'),
+		self.btn_mute = PressableImage(source=blockImage('mute.png'),
 					size_hint=(None,None),
 					size=CSize(3,3)
 		)
 		self.btn_mute.bind(on_press=self.mute)
 		self.menubar.add_widget(self.btn_mute)
 		"""
-		btn_cut = PressableImage(source=blockImage('next.jpg'),
+		btn_cut = PressableImage(source=blockImage('next.png'),
 				size_hint=(None,None),
 				size=CSize(3,3)
 		)
 		btn_cut.bind(on_press=self.endplay)
 		self.menubar.add_widget(btn_cut)
-		btn_replay = PressableImage(source=blockImage('replay.jpg'),
+		btn_replay = PressableImage(source=blockImage('replay.png'),
 				size_hint=(None,None),
 				size=CSize(3,3)
 		)
@@ -364,7 +364,7 @@ class VPlayer(BaseVPlayer):
 		self.menubar.add_widget(btn_replay)
 
 		self.btn_audioswitch = PressableImage( \
-					source=blockImage('musictrack.jpg'),
+					source=blockImage('musictrack.png'),
 				size_hint=(None,None),
 				size=CSize(3,3)
 		)
@@ -393,17 +393,17 @@ class VPlayer(BaseVPlayer):
 		BaseVPlayer.mute(self,btn)
 		if self.menubar:
 			if self._video.volume < 0.001:
-				btn.source = blockImage('volume.jpg')
+				btn.source = blockImage('volume.png')
 			else:
-				btn.source = blockImage('mute.jpg')
+				btn.source = blockImage('mute.png')
 
 	def pause(self,t=None):
 		BaseVPlayer.pause(self,t)
 		if self.menubar:
 			if self._video.state == 'pause':
-				self.btn_pause.source  = blockImage('play.jpg')
+				self.btn_pause.source  = blockImage('play.png')
 			else:
-				self.btn_pause.source = blockImage('pause.jpg')
+				self.btn_pause.source = blockImage('pause.png')
 
 	def on_state(self,o,v):
 		BaseVPlayer.on_state(self,o,v)
