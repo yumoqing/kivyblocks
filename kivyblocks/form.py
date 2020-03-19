@@ -283,6 +283,12 @@ class StrSearchForm(BoxLayout):
 		self.search.bind(on_press=self.submit_input)
 		self.inputwidget.bind(on_text_validate=self.submit_input)
 
+	def getData(self):
+		d = {
+			self.name:self.inputwidget.text
+		}
+		return d
+
 	def submit_input(self,o,v=None):
 		text = self.inputwidget.text
 		if text != '':
