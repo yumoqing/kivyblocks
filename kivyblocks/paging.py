@@ -1,6 +1,7 @@
 import traceback
 import math
 
+from kivy.logger import Logger
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.clock import Clock
@@ -30,16 +31,19 @@ class PagingButton(Button):
 """
 
 class HttpLoader:
-	def __init__(self, url, method, params):
+	def __init__(self, url, method, params,page_rows=60):
 		self.page_rows = page_rows
 		self.url = url
-		self.method = method,
+		self.method = method
 		self.params = params
 	
-	def setParams(self,params):
+	def setParams(self,params, url=None, page_rows=60):
 		self.params = params
+		if url is not None:
+			self.url = url
+		self.page_rows = page_rows
 
-	def load(self, callback, errback):
+	def load(self, callback, errback=None):
 		hc = App.get_running_app().hc
 		x = hc(self.url,
 				method=self.method,
@@ -58,16 +62,18 @@ class PageLoader:
 		self.params = options.get('params',{})
 		self.method = options.get('method','GET')
 		self.url = options.get('dataurl')
+		self.page_rows = options.get('page_rows',60)
 		self.total_cnt = 0
 		self.total_page = 0
-		self.page_rows = options.get('page_rows',0)
 		self.curpage = 0
+		Logger.info('kivyblocks: method=%s,type=%s',str(self.method),type(self.method))
+		self.loader = HttpLoader(self.url, self.method, self.params )
 	
 	def do_search(self,o,params):
 		print('PageLoader().do_search(), on_submit handle....',params)
 		self.clearer()
 		self.params.update(params)
-		print('do_search():,params=',self.params)
+		self.loader.setParams(self.params)
 		self.loadPage(1)
 
 	def calculateTotalPage(self):
@@ -104,6 +110,10 @@ class PageLoader:
 			r['__posInSet__'] = p
 			p += 1
 
+	def httperror(self,o,e):
+		traceback.print_exc()
+		alert(str(e),title='alert')
+
 	def loadPage(self,p):
 		if not self.url:
 			raise Exception('dataurl must be present:options=%s' % str(options))
@@ -114,17 +124,10 @@ class PageLoader:
 			"page":self.curpage,
 			"rows":self.page_rows
 		})
-		hc = App.get_running_app().hc
 		url = absurl(self.url,self.target.parenturl)
-		# print('loadPage():url=',url,'params=',params)
-		x = hc(url,method=self.method,
-				params=params,callback=self.show_page,
-				errback=self.httperror)
+		self.loader.setParams(params,url=url)
+		self.loader.load(self.show_page,self.httperror)
 	
-	def httperror(self,o,e):
-		traceback.print_exc()
-		alert(str(e),title='alert')
-
 """
 {
 	adder,

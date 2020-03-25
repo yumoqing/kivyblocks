@@ -23,7 +23,6 @@ from kivy.app import App
 from .threadcall import HttpClient,Workers
 from .utils import *
 from .pagescontainer import PageContainer
-from .widgetExt.messager import Messager
 from .blocks import Blocks
 from .theming import ThemeManager
 from appPublic.rsa import RSA

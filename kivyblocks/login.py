@@ -56,7 +56,8 @@ class LoginForm(Popup):
 		if userinfo.get('passwd',False):
 			userinfo['authmethod'] = 'password'
 		authinfo = app.serverinfo.encode(userinfo)
-		login_url = '%s%s' % (app.config.uihome, app.config.login_url)
+		config = getConfig()
+		login_url = '%s%s' % (config.uihome, config.login_url)
 		x = app.hc.get(login_url)
 		print('login return=', x, login_url, authinfo)
 	

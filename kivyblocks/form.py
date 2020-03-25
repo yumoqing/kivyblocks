@@ -134,7 +134,7 @@ class InputBox(BoxLayout):
 			"otext":label,
 			"font_size":CSize(1),
 			"size_hint_y":None,
-			"height":CSize(2)
+			"height":CSize(3)
 		}
 		if self.labelwidth<=1:
 			kwargs['size_hint_x'] = self.labelwidth
@@ -147,6 +147,8 @@ class InputBox(BoxLayout):
 		options = self.uidef.get('options',{}).copy()
 		options.update(self.options.get('uiparams',{}))
 		options['allow_copy'] = True
+		options['size_hint_y'] = None
+		options['height'] = CSize(3)
 		if self.options.get('tip'):
 			options['hint_text'] = i18n(self.options.get('tip'))
 
@@ -269,6 +271,7 @@ class StrSearchForm(BoxLayout):
 		self.inputwidget = TextInput(
 				text='',
 				multiline=False,
+				allow_copy=True,
 				font_size=CSize(1),
 				size_hint_y=None,
 				height=CSize(3))

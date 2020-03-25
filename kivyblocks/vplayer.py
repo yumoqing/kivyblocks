@@ -21,6 +21,7 @@ from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, \
 from pythonosc import dispatcher, osc_server
 from ffpyplayer.tools import set_log_callback
 from .utils import *
+from .paging import PageLoader
 from .baseWidget import PressableImage
 
 desktopOSs=[
@@ -36,22 +37,33 @@ logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
 
 othersplatforms=['ios','android']
 
+class UrlPlayList(PageLoader):
+	def __init__(self, player, **options):
+		self.player = player
+		PageLoader.__init__(self,**options)
+
+	def show_page(self,o,d):
+		super().show_page(o,d)
+		id = d['rows'][0].id
+		self.player.play(id)
+
 class BaseVPlayer(FloatLayout):
 	fullscreen = BooleanProperty(False)
-	def __init__(self,vfile=None):
+	def __init__(self,vfile=None,playlist=[]):
 		super().__init__()
 		self.register_event_type('on_source_error')
+		self.register_event_type('on_next')
+		self.register_event_type('on_previous')
 		Window.allow_screensaver = False
 		self._video = Video(allow_stretch=True,pos_hint={'x': 0, 'y': 0},size_hint=(1,1))
 		self.add_widget(self._video)
-		self.ffplayer = None
 		if type(vfile) == type([]):
 			self.playlist = vfile
 		else:
 			self.playlist = [vfile]
 		self.curplay = 0
 		self.old_volume = 0
-		self._video.bind(eos=self.video_end)
+		self._video.bind(eos=self.next)
 		self._video.bind(state=self.on_state)
 		set_log_callback(self.ffplayerLog)
 		self.play()
@@ -61,6 +73,11 @@ class BaseVPlayer(FloatLayout):
 	def on_source_error(self,o,v):
 		Logger.info('safecorner: {} error'.format(v))
 
+	def on_next(self,o=None, v=None):
+		pass
+
+	def on_previous(self, o=None, v=None):
+		pass
 	def ffplayerLog(self, msg, level):
 		msg = msg.strip()
 		if msg:
@@ -73,23 +90,17 @@ class BaseVPlayer(FloatLayout):
 			self._video.source = self.playlist[self.curplay]
 			self._video.state = 'play'
 	
-	def on_playend(self,o=None,v=None):
-		pass
+	def next(self,o=None,v=None):
+		self.dispatch('on_next',self)
 
-	def addPlaylist(self,lst):
-		self.playlist += lst
+	def previous(self,o=None,v=None):
+		self.dispatch('on_previous',self)
 
-	def video_end(self,t,v):
-		pass
-
-	def on_state(self,o,v):
+	def on_state(self,o=None,v=None):
 		if self._video.state == 'play':
 			Window.allow_screensaver = False
-			if hasattr(self._video._video, '_ffplayer'):
-				self.ffplayer = self._video._video._ffplayer
 		else:
 			Window.allow_screensaver = True
-		print('onstate()',o,v,self._video.state)
 
 	def on_fullscreen(self, instance, value):
 		window = self.get_parent_window()
@@ -150,15 +161,14 @@ class BaseVPlayer(FloatLayout):
 			if platform in desktopOSs:
 				Window.restore()
 
-	def endplay(self,btn):
+	def endplay(self,btn=None):
 		self._video.seek(1.0,precise=True)
 
-	def replay(self,btn):
+	def replay(self,btn=None):
 		self._video.seek(0.0,precise=True)
 
-	def audioswitch(self,btn):
+	def audioswitch(self,btn=None):
 		x = self._video._video._ffplayer.request_channel('audio')
-		print('*********AUDIOSwitch 1**************',x)
 
 	def setVolume(self,obj,v):
 		self._video.volume = v
@@ -166,14 +176,12 @@ class BaseVPlayer(FloatLayout):
 	def setPosition(self,obj,v):
 		self._video.seek(v)
 
-	def mute(self,btn):
+	def mute(self,btn=None):
 		if self._video.volume > 0.001:
 			self.old_volume = self._video.volume
 			self._video.volume = 0.0
-			print('********* set mute ***********',self._video.volume)
 		else:
 			self._video.volume = self.old_volume
-			print('********* unset mute ***********',self._video.volume)
 
 	def stop(self):
 		self._video.state = 'stop'
@@ -187,7 +195,7 @@ class BaseVPlayer(FloatLayout):
 	def __del__(self):
 		pass
 	
-class OSCVPlayer(BaseVPlayer):
+class OSCController:
 	def __init__(self,ip,port,vfile=None):
 		self.ip = ip
 		self.port = port
@@ -199,27 +207,19 @@ class OSCVPlayer(BaseVPlayer):
 		self.map('/atrack',self.audioswitch)
 		self.map('/endplay',self.endplay)
 		self.map('/replay',self.replay)
-		self.map('/setvalume',self.setVolume)
-		self.map('/setposition',self.setPosition)
 		self.map('/next',self.next)
-	
+		self.map('/prevous',self.prevous)
 		self.server.serve_forever()
 		self.fullscreen = True
 		label = Label(text='%s %d' % (self.ip,self.port), font_size=CSize(2))
 		label.size = self.width - label.width, 0
 		self.add_widget(label)
 
-	def next(self,obj):
-		self.source = self.vfile + '?t=%f' % time.time()
-
 	def map(self,p,f):
 		self.dispatcher.map(p,f,None)
 
 class VPlayer(BaseVPlayer):
-	def __init__(self,vfile=None,
-			playlist=None,
-			loop=False
-		):
+	def __init__(self,vfile=None, loop=False):
 		super().__init__(vfile=vfile)
 		self.loop = loop
 		self.menubar = None
@@ -239,18 +239,7 @@ class VPlayer(BaseVPlayer):
 			self.playlist = []
 			self.curplay = -1
 		self._video.bind(on_touch_down=self.show_hide_menu)
-		self.register_event_type('on_playend')
 	
-	def video_end(self,t,v):
-		self.curplay += 1
-		if not self.loop and self.curplay >= len(self.playlist):
-			self.dispatch('on_playend')
-			print('*****EOS return *************')
-			self.beforeDestroy()
-			return
-		self.curplay = self.curplay % len(self.playlist)
-		self._video.source = self.playlist[self.curplay]
-
 	def totime(self,dur):
 		h = dur / 3600
 		m = dur % 3600 / 60
@@ -295,6 +284,8 @@ class VPlayer(BaseVPlayer):
 		self.manualMode = False
 
 	def update_slider(self,t):
+		if self._video.state != 'play':
+			return
 		if self.pb is None:
 			return
 		self.curposition.text = self.totime(self._video.position)
