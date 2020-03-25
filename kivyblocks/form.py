@@ -1,6 +1,7 @@
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
+from kivy.graphics import Color
 from kivycalendar import DatePicker
 from .responsivelayout import VResponsiveLayout
 from .widgetExt.inputext import FloatInput,IntegerInput, \
@@ -82,7 +83,7 @@ uitypes = {
 		"wclass":StrInput,
 		"options":{
 			"multiline":True,
-			"height":CSize(6),
+			"height":CSize(9),
 		}
 	},
 	"teleno":{
@@ -127,23 +128,35 @@ class InputBox(BoxLayout):
 		i18n = I18n()
 		if self.initflag:
 			return
-		label = self.options.get('label',self.options.get('name'))
-		if self.options.get('required'):
-			label = label + '*'
-		kwargs = {
-			"otext":label,
-			"font_size":CSize(1),
+		opts = {
+			"orientation":"vertical",
 			"size_hint_y":None,
 			"height":CSize(3)
 		}
 		if self.labelwidth<=1:
-			kwargs['size_hint_x'] = self.labelwidth
+			opts['size_hint_x'] = self.labelwidth
 		else:
-			kwargs['size_hint_x'] = None
-			kwargs['width'] = self.labelwidth
-
+			opts['size_hint_x'] = None
+			opts['width'] = self.labelwidth
+		bl = BoxLayout(**opts)
+		self.add_widget(bl)
+		label = self.options.get('label',self.options.get('name'))
+		kwargs = {
+			"otext":label,
+			"font_size":CSize(1),
+			"size_hint_x":None,
+			"width":CSize(len(label)),
+			"size_hint_y":None,
+			"height":CSize(3)
+		}
 		self.labeltext = I18nText(**kwargs)
-		self.add_widget(self.labeltext)
+		bl.add_widget(self.labeltext)
+		if self.options.get('required',False):
+			star = Label(text='*',
+						color=(1,0,0,1),
+						size_hint_x=None,
+						width=CSize(1))
+			bl.add_widget(star)
 		options = self.uidef.get('options',{}).copy()
 		options.update(self.options.get('uiparams',{}))
 		options['allow_copy'] = True
@@ -152,7 +165,6 @@ class InputBox(BoxLayout):
 		if self.options.get('tip'):
 			options['hint_text'] = i18n(self.options.get('tip'))
 
-		print('uitype=',self.options['uitype'], self.uitype, 'uidef=',self.uidef)
 		self.input_widget = self.uidef['wclass'](**options)
 		if self.options.get('readonly'):
 			self.input_widget.disabled = True
@@ -160,8 +172,7 @@ class InputBox(BoxLayout):
 		self.add_widget(self.input_widget)
 		self.initflag = True
 		self.input_widget.bind(on_focus=self.on_focus)
-		if self.options.get('default'):
-			self.input_widget.setValue(self.options.get('default'))
+		self.input_widget.setValue(self.options.get('default',''))
 			
 	def clear(self):
 		self.input_widget.setValue('')
@@ -228,9 +239,9 @@ class Form(BoxLayout):
 		self.add_widget(self.toolbar)
 		self.add_widget(self.fsc)
 		self.fieldWidgets=[]
+		previous_w = None
 		for f in self.options['fields']:
 			w = InputBox(self, **f)
-			# print('w size=',w.size)
 			self.fsc.add_widget(w)
 			self.fieldWidgets.append(w)
 		blocks = App.get_running_app().blocks

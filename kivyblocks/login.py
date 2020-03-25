@@ -16,6 +16,7 @@ logformdesc = {
 				"name":"userid",
 				"label":"user name",
 				"datatype":"str",
+				"required":True,
 				"uitype":"string"
 			},
 			{
