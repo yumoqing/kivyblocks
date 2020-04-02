@@ -1,8 +1,8 @@
 from kivy.utils import get_color_from_hex
-from kivy.app import App
-from kivy.uix.widget import Widget
-from kivy.graphics import Color, Rectangle, Ellipse
-from kivy.uix.boxlayout import BoxLayout
+#from kivy.app import App
+#from kivy.uix.widget import Widget
+#from kivy.graphics import Color, Rectangle, Ellipse
+#from kivy.uix.boxlayout import BoxLayout
 import math
 
 def toArrayColor(color):

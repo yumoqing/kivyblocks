@@ -55,6 +55,7 @@ from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, AmountInput
 from .widgetExt.messager import Messager
 from .charts.bar import Bar
+from .bgcolorbehavior import BGColorBehavior
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
@@ -64,28 +65,17 @@ class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):
 		pass
 
-class PressableLabel(ButtonBehavior, Label):
-	def on_press(self):
-		pass
-
-class Text(Label):
-	bgColor = ListProperty([0.5,0.5,0.5,1])
-	def __init__(self,**kw):
+class Text(BGColorBehavior, Label):
+	def __init__(self,bgcolor=[0,0,0,1],**kw):
 		self.options = DictObject(**kw)
 		kwargs = kw.copy()
-		self.bind(pos=self._update,size=self._update)
 		if kwargs.get('bgColor'):
 			self.bgColor = kwargs['bgColor']
 			del kwargs['bgColor']
-		super().__init__(**kwargs)
-		self.bind(pos=self.sizeChange,size=self.sizeChange)
+		Label.__init__(self,**kwargs)
+		BGColorBehavior.__init__(self,bgcolor=bgcolor)
 
-	def _update(self,t,v):
-		self.pos = t.pos
-		self.size = t.size
-	
-	def sizeChange(self,o,t=None):
-		self.canvas.before.clear()
-		with self.canvas.before:
-			Color(*self.bgColor)
-			Rectangle(pos=self.pos,size=self.size)
+class PressableLabel(ButtonBehavior, Text):
+	def on_press(self):
+		pass
+

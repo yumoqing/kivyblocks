@@ -1,3 +1,4 @@
+from kivy.logger import Logger
 from kivy.graphics import Color, Rectangle
 from kivy.uix.button import ButtonBehavior
 from kivy.uix.image import AsyncImage
@@ -11,14 +12,16 @@ from appPublic.dictObject import DictObject
 
 from .widgetExt.scrollwidget import ScrollWidget
 from .utils import *
-from .kivysize import KivySizes
 from .ready import WidgetReady
 from .i18n import I18nText 
+from .color_definitions import getColors
+from .bgcolorbehavior import BGColorBehavior
+
 """
 toobar={
 	"mode":"icon", "icontext","text"
-	img_size=1.5,	
-	text_size=0.7,
+	img_size=2,	
+	text_size=1,
 	"tools":[
 	]
 }
@@ -30,49 +33,62 @@ tool options
 	img=''
 }
 """
-class Tool(ButtonBehavior, WidgetReady,BoxLayout):
-	normal_bgColor=[0.1,0,0,1]
-	active_bgColor=[0.4,0.4,0.4,1]
+class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
 	def __init__(self,ancestor=None,**opts):
 		if ancestor is None:
 			ancestor = App.get_running_app().root
 		ancestor.widget_ids[opts['name']] = self
+		self.ancestor = ancestor
 		ButtonBehavior.__init__(self)
-		bc = opts.get('bg_color',self.normal_bgColor)
-		WidgetReady.__init__(self,bg_color=self.normal_bgColor)
 		BoxLayout.__init__(self,
-					orientation='vertical',size_hint=(None,None))
+					size_hint_y=None)
+		BGColorBehavior.__init__(self)
+		self.bl = BoxLayout(orientation='vertical',
+					size_hint_y=None)
+		self.add_widget(self.bl)
 		self.opts = DictObject(**opts)
 		if not self.opts.img_size:
 			self.opts.img_size = 2
 		if not self.opts.text_size:
-			self.opts.text_size = 0.7
+			self.opts.text_size = 1
 		app = App.get_running_app()
-		ks = KivySizes()
-		size = ks.unitedSize(self.opts.img_size or 2)
-		img = AsyncImage(source=self.opts.img_src,size_hint=(None,None),
-			size=(size,size))
-		tsize = ks.unitedSize(self.opts.text_size)
+		size = 0
+		if self.opts.img_src:
+			size = CSize(self.opts.img_size or 2)
+			img = AsyncImage(source=self.opts.img_src,
+				size_hint=(None,None),
+				size=(size,size))
+			self.bl.add_widget(img)
+
+		tsize = CSize(self.opts.text_size)
 		label = self.opts.label or self.opts.name
-		lbl = I18nText(otext=label,font_size=int(tsize))
-		lbl.text_size = (size, 1.3 * tsize)
-		self.add_widget(img)
-		self.add_widget(lbl)
-		self.size = (size * 1.1, (size + 2 * tsize)*1.1)
+		self.lbl = I18nText(otext=label,
+					font_size=int(tsize),
+					text_size=(CSize(len(label)), tsize),
+					height=tsize,
+					width=CSize(len(label)),
+					size_hint=(None,None),
+					)
+		self.bl.add_widget(self.lbl)
+		self.height = (size + tsize)*1.1
+		self.lbl.color, self.bgcolor = getColors(self.ancestor.color_level,
+							selected=False)
+		self.lbl.bgcolor = self.bgcolor
 		
 	def on_size(self,obj,size):
-		if self.parent:
-			print('********center*dd**********')
-			self.center = self.parent.center
+		Logger.info('toolbar: Tool() on_size fired') 
+		self.lbl.color, self.bgcolor = getColors(self.ancestor.color_level,
+							selected=False)
+		self.lbl.bgcolor = self.bgcolor
 
 	def on_press(self):
 		print('Tool(). pressed ...............')
 
 	def setActive(self,flag):
-		if flag:
-			self.setBackgroundColor(self.active_bgColor)
-		else:
-			self.setBackgroundColor(self.normal_bgColor)
+		text_color, self.bgcolor = getColors(self.ancestor.color_level,
+							selected=flag)
+		self.lbl.bgcolor = self.bgcolor
+		self.lbl.color = text_color
 
 
 """
@@ -100,10 +116,11 @@ class Toolbar(GridLayout):
 		for opt in self.opts.tools:
 			opt.img_size = self.opts.img_size
 			opt.text_size = self.opts.text_size
-			purl = None
-			if ancestor and hasattr(ancestor, 'parenturl'):
-				purl = ancestor.parenturl
-			opt.img_src = absurl(opt.img_src,purl)
+			if opt.img_src:
+				purl = None
+				if ancestor and hasattr(ancestor, 'parenturl'):
+					purl = ancestor.parenturl
+				opt.img_src = absurl(opt.img_src,purl)
 			tool = Tool(ancestor=ancestor, **opt)
 			if first:
 				first = False
@@ -119,12 +136,12 @@ class Toolbar(GridLayout):
 		self.height = tool.height * 1.1
 
 	def on_size(self,obj,size):
+		return
 		with self.canvas.before:
 			Color(0.3,0.3,0.3,1)
 			Rectangle(pos=self.pos,size=self.size)
 
 	def tool_press(self,o,v=None):
-		o.background_color = [0.3,1,1,0.5]
 		for n,w in self.tool_widgets.items():
 			active = False
 			if w == o:
@@ -137,6 +154,7 @@ Toolpage options
 	img_size=1.5,	
 	text_size=0.7,
 	tool_at:"left","right","top","bottom",
+	color_level=0,
 	tools:[
 		{
 			"name":"myid",
@@ -148,7 +166,7 @@ Toolpage options
 	]
 	
 """
-class ToolPage(BoxLayout):
+class ToolPage(BGColorBehavior, BoxLayout):
 	def __init__(self,**opts):
 		self.opts = DictObject(**opts)
 		self.parenturl = opts.get('parenturl',None)
@@ -158,7 +176,8 @@ class ToolPage(BoxLayout):
 		else:
 			orient = 'horizontal'
 
-		super().__init__(orientation=orient)
+		BoxLayout.__init__(self,orientation=orient)
+		BGColorBehavior.__init__(self)
 		self.content = None
 		self.toolbar = None
 		self.init()
@@ -171,6 +190,7 @@ class ToolPage(BoxLayout):
 		self.toolbar.width = x
 		self.content.width = x
 		self.content.height = y - self.toolbar.height
+		self.color, self.bgcolor = getColors(self.color_level)
 
 	def showPage(self,obj):
 		self._show_page(obj.opts)
@@ -191,6 +211,8 @@ class ToolPage(BoxLayout):
 			t.img_src = absurl(t.img_src,parenturl)
 
 		opts = self.opts
+		self.color_level = self.opts.color_level or 0
+		self.color, self.bgcolor = getColors(self.color_level)
 		self.toolbar = Toolbar(ancestor=self, **self.opts)
 		if self.opts.tool_at in ['top','left']:
 			self.add_widget(self.toolbar)
@@ -198,7 +220,7 @@ class ToolPage(BoxLayout):
 		else:
 			self.add_widget(self.content)
 			self.add_widget(self.toolbar)
-		Clock.schedule_once(self.show_firstpage,0.5)
+		# Clock.schedule_once(self.show_firstpage,0.5)
 
 if __name__ == '__main__':
 	from blocksapp import BlocksApp

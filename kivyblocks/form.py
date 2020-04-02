@@ -1,3 +1,4 @@
+from kivy.logger import Logger
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
@@ -10,6 +11,9 @@ from .baseWidget import *
 from .utils import *
 from .i18n import I18nText, I18n
 from .toolbar import Toolbar
+from .color_definitions import getColors
+from .bgcolorbehavior import BGColorBehavior
+
 """
 form options
 {
@@ -120,16 +124,17 @@ class InputBox(BoxLayout):
 		self.bind(on_size=self.setSize,
 					pos=self.setSize)
 		self.register_event_type("on_datainput")
+		self.register_event_type("on_ready")
 
 	def on_datainput(self,o,v=None):
 		print('on_datainput fired ...',o,v)
 
 	def init(self):
-		i18n = I18n()
 		if self.initflag:
 			return
+		i18n = I18n()
 		opts = {
-			"orientation":"vertical",
+			"orientation":"horizontal",
 			"size_hint_y":None,
 			"height":CSize(3)
 		}
@@ -139,6 +144,8 @@ class InputBox(BoxLayout):
 			opts['size_hint_x'] = None
 			opts['width'] = self.labelwidth
 		bl = BoxLayout(**opts)
+		Logger.info('kivyblock:labelwidth=%f,opts=%s', self.labelwidth,str(opts))
+		Logger.info('kivyblock:bl.widht=%f,bl.height=%f',bl.width,bl.height)
 		self.add_widget(bl)
 		label = self.options.get('label',self.options.get('name'))
 		kwargs = {
@@ -151,6 +158,8 @@ class InputBox(BoxLayout):
 		}
 		self.labeltext = I18nText(**kwargs)
 		bl.add_widget(self.labeltext)
+		Logger.info('kivyblock:label.widht=%f,label.height=%f',
+						self.labeltext.width,self.labeltext.height)
 		if self.options.get('required',False):
 			star = Label(text='*',
 						color=(1,0,0,1),
@@ -173,7 +182,22 @@ class InputBox(BoxLayout):
 		self.initflag = True
 		self.input_widget.bind(on_focus=self.on_focus)
 		self.input_widget.setValue(self.options.get('default',''))
+		self.dispatch('on_ready', self)
 			
+	def check(self):
+		d = self.getValue()
+		v = d.get(self.options.get('name'))
+		Logger.info('InputWidget() getValue=%s, name=%s',
+						v,self.options.get('name'))
+		if self.options.get('required',False) and \
+				(v == '' or v is None):
+			return False
+
+		return True
+
+	def on_ready(self, obj):
+		Logger.info('kivyblocks: Form input ready')
+
 	def clear(self):
 		self.input_widget.setValue('')
 
@@ -195,8 +219,8 @@ class InputBox(BoxLayout):
 	
 def defaultToolbar():
 	return {
-		"img_size":1.5,
-		"text_size":0.7,
+		"img_size":2,
+		"text_size":1,
 		"tools":[
 			{
 				"name":"__submit",
@@ -212,11 +236,15 @@ def defaultToolbar():
 
 	}
 
-class Form(BoxLayout):
+class Form(BGColorBehavior, BoxLayout):
 	def __init__(self, **options):
 		self.options = options
 		BoxLayout.__init__(self, orientation='vertical')
+		self.color_level = self.options.get('color_level', 0)
+		textcolor, bgcolor = getColors(self.color_level)
+		BGColorBehavior.__init__(self,bgcolor=bgcolor)
 		self.widget_ids = {}
+		self.readiedInput = 0
 		self.cols = self.options_cols = self.options.get('cols',1)
 		if isHandHold() and Window.width < Window.height:
 			self.cols = 1
@@ -239,11 +267,11 @@ class Form(BoxLayout):
 		self.add_widget(self.toolbar)
 		self.add_widget(self.fsc)
 		self.fieldWidgets=[]
-		previous_w = None
 		for f in self.options['fields']:
 			w = InputBox(self, **f)
 			self.fsc.add_widget(w)
 			self.fieldWidgets.append(w)
+			w.bind(on_ready=self.makeInputLink)
 		blocks = App.get_running_app().blocks
 		# wid = self.widget_ids['__submit']
 		wid = blocks.getWidgetByIdPath(self,'__submit')
@@ -253,6 +281,15 @@ class Form(BoxLayout):
 		wid.bind(on_press=self.on_clear_button)
 		self.initflag = True
 
+	def makeInputLink(self,o,v=None):
+		self.readiedInput += 1
+		if self.readiedInput >= len(self.options['fields']):
+			p = self.fieldWidgets[0]
+			for w in self.fieldWidgets[1:]:
+				p.input_widget.focus_next = w.input_widget
+				w.input_widget.focus_previous = p.input_widget
+				p = w
+
 	def getData(self):
 		d = {}
 		for f in self.fieldWidgets:
@@ -260,12 +297,26 @@ class Form(BoxLayout):
 			d.update(v)
 		return d
 
+	def checkData(self):
+		for w in self.fieldWidgets:
+			if not w.check():
+				w.input_widget.focus = True
+				Logger.info('kivyblcks: input check false')
+				return False
+		Logger.info('kivyblcks: input check success')
+		return True
+
 	def on_submit(self,v=None):
 		print('Form():on_submit fired ...',v)
 		return False
 
 	def on_submit_button(self,o,v=None):
+		Logger.info('kivyblcks: submit button press')
+		if not self.checkData():
+			Logger.info('kivyblocks: CheckData False')
+			return
 		d = self.getData()
+		Logger.info('kivyblocks: fire on_submit')
 		self.dispatch('on_submit',d)
 
 	def on_clear_button(self,o,v=None):
@@ -274,19 +325,20 @@ class Form(BoxLayout):
 
 	def on_size(self,o, v=None):
 		self.init()
+		textcolor, self.bgcolor = getColors(self.color_level)
 	
 class StrSearchForm(BoxLayout):
 	def __init__(self,img_url=None,**options):
 		self.name = options.get('name','search_string')
 		BoxLayout.__init__(self,orientation='horizontal',size_hint_y=None,height=CSize(3))
-		self.inputwidget = TextInput(
+		self.input_widget = TextInput(
 				text='',
 				multiline=False,
 				allow_copy=True,
 				font_size=CSize(1),
 				size_hint_y=None,
 				height=CSize(3))
-		self.add_widget(self.inputwidget)
+		self.add_widget(self.input_widget)
 		imgsrc = img_url if img_url else blockImage('search.png')
 		self.search = PressableImage(source=imgsrc,
 					size_hint=(None,None),
@@ -295,16 +347,16 @@ class StrSearchForm(BoxLayout):
 		self.add_widget(self.search)
 		self.register_event_type('on_submit')
 		self.search.bind(on_press=self.submit_input)
-		self.inputwidget.bind(on_text_validate=self.submit_input)
+		self.input_widget.bind(on_text_validate=self.submit_input)
 
 	def getData(self):
 		d = {
-			self.name:self.inputwidget.text
+			self.name:self.input_widget.text
 		}
 		return d
 
 	def submit_input(self,o,v=None):
-		text = self.inputwidget.text
+		text = self.input_widget.text
 		if text != '':
 			d = {
 				self.name:text

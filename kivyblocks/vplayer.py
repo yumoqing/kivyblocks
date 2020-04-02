@@ -70,6 +70,19 @@ class BaseVPlayer(FloatLayout):
 		if hasattr(self._video._video, '_ffplayer'):
 			self.ffplayer = self._video._video._ffplayer
 
+	def setSource(self,s):
+		self.stop()
+		self.curplay = 0
+		self.playlist = [s]
+		Logger.info('kivyblocks: Vplayer().setSource,s=%s',s)
+		self.play()
+
+	def setPlaylist(self,pl):
+		self.stop()
+		self.curplay = 0
+		self.playlist = pl
+		self.play()
+
 	def on_source_error(self,o,v):
 		Logger.info('safecorner: {} error'.format(v))
 

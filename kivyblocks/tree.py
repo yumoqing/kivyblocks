@@ -9,7 +9,8 @@ from kivyblocks.widgetExt import ScrollWidget
 from kivyblocks.utils import CSize
 from appPublic.dictObject import DictObject
 from .baseWidget import PressableLabel
-from .stylebehavior import StyleBehavior
+from .color_definitions import getColors
+from .bgcolorbehavior import BGColorBehavior
 
 class EmptyBox(Label):
 	def __init__(self,size_cnt=1):
@@ -202,6 +203,7 @@ tree options
 	"url":
 	"params",
 	"bg_color",
+	"color_level",
 	"color",
 	"checkbox",
 	"multplecheck",
@@ -210,12 +212,11 @@ tree options
 	"data" # array of {children:{},...}
 }
 """
-# class Tree(StyleBehavior,ScrollWidget):
-class Tree(ScrollWidget):
+class Tree(BGColorBehavior, ScrollWidget):
 	def __init__(self,**options):
+		self.color_level = options.get('color_level',0)
 		ScrollWidget.__init__(self)
-		level = options.get('level',0)
-		# StyleBehavior.__init__(self,level=level)
+		BGColorBehavior.__init__(self)
 		self.options = DictObject(**options)
 		self.nodes = []
 		self.initflag = False
@@ -262,7 +263,7 @@ class Tree(ScrollWidget):
 		data = self.options.data
 		logging.info("Tree : buildTree,data=%s",data)
 		self.dataLoaded(data)
-
+		self.color, self.bgcolor = getColors(self.color_level)
 
 	def dataLoaded(self,d):
 		self.data = d
@@ -283,6 +284,13 @@ class TextContent(PressableLabel):
 	def __init__(self,level=0,**options):
 		PressableLabel.__init__(self,**options)
 		
+	def selected(self):
+		pass
+
+	def unselected(self):
+		pass
+
+
 class TextTreeNode(TreeNode):
 	def buildContent(self):
 		txt = self.data.get(self.treeObj.options.textField,
@@ -294,7 +302,8 @@ class TextTreeNode(TreeNode):
 							halign='left',
 							height=CSize(2),
 							width=CSize(len(txt)))
-		self.content.text_color = [0,0,0,1] #self.treeObj.text_color
+		self.content.color, self.content.bgcolor = getColors(self.treeObj.color_level,
+					selected=False)
 		self.content.bind(on_press=self.onPress)
 		return 
 	
@@ -309,11 +318,17 @@ class TextTreeNode(TreeNode):
 
 	def selected(self):
 		logging.info('content selected ........')
-		self.content.selected()
+		color, bgcolor = getColors(self.treeObj.color_level,
+					selected=True)
+		self.content.bgcolor = bgcolor
+		self.content.color = color
 
 	def unselected(self):
 		logging.info('content unselected ........')
-		self.content.unselected()
+		color, bgcolor = getColors(self.treeObj.color_level,
+					selected=False)
+		self.content.bgcolor = bgcolor
+		self.content.color = color
 
 class TextTree(Tree):
 	def __init__(self,**options):

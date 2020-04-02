@@ -1,4 +1,6 @@
-from kivy.logger import logging
+from kivy.logger import Logger
+from .colorcalc import *
+from appPublic.jsonConfig import getConfig
 
 colors = {
     'Red': {
@@ -343,337 +345,64 @@ light_colors = {
     'Light': ['White', 'MainBackground', 'DialogBackground']
 }
 
-text_colors = {
-    'Red': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': 'ffffff',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': 'ffffff',
-        'A400': 'ffffff',
-        'A700': 'ffffff',
-    },
-    'Pink': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': 'ffffff',
-        '400': 'ffffff',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': 'ffffff',
-        'A400': 'ffffff',
-        'A700': 'ffffff',
-    },
-    'Purple': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': 'ffffff',
-        '400': 'ffffff',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': 'ffffff',
-        'A400': 'ffffff',
-        'A700': 'ffffff',
-    },
-    'DeepPurple': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': 'ffffff',
-        '400': 'ffffff',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': 'ffffff',
-        'A400': 'ffffff',
-        'A700': 'ffffff',
-    },
-    'Indigo': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': 'ffffff',
-        '400': 'ffffff',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': 'ffffff',
-        'A400': 'ffffff',
-        'A700': 'ffffff',
-    },
-    'Blue': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': 'ffffff',
-        'A400': 'ffffff',
-        'A700': 'ffffff',
-    },
-    'LightBlue': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': 'ffffff',
-    },
-    'Cyan': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': '000000',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': '000000',
-    },
-    'Teal': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': '000000',
-    },
-    'Green': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': '000000',
-    },
-    'LightGreen': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': '000000',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': '000000',
-    },
-    'Lime': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': '000000',
-        '700': '000000',
-        '800': '000000',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': '000000',
-    },
-    'Yellow': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': '000000',
-        '700': '000000',
-        '800': '000000',
-        '900': '000000',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': '000000',
-    },
-    'Amber': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': '000000',
-        '700': '000000',
-        '800': '000000',
-        '900': '000000',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': '000000',
-    },
-    'Orange': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': '000000',
-        '700': '000000',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': '000000',
-        'A700': '000000',
-    },
-    'DeepOrange': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-        'A100': '000000',
-        'A200': '000000',
-        'A400': 'ffffff',
-        'A700': 'ffffff',
-    },
-    'Brown': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': 'ffffff',
-        '400': 'ffffff',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-    },
-    'Grey': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': '000000',
-        '500': '000000',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-    },
-    'BlueGrey': {
-        '50': '000000',
-        '100': '000000',
-        '200': '000000',
-        '300': '000000',
-        '400': 'ffffff',
-        '500': 'ffffff',
-        '600': 'ffffff',
-        '700': 'ffffff',
-        '800': 'ffffff',
-        '900': 'ffffff',
-    },
-}
-
 level_bg_colors = [
 	'900',
 	'800',
 	'700',
 	'600',
-]
-
-level_selected_bg_colors = [
 	'500',
 	'400',
 	'300',
-	'200'
+	'200',
+	'100',
+	'50'
 ]
 
-def getColors(style,level=0):
-	i = level % len(level_bg_colors)
-	logging.info('TEST : style=%s,level=%d', style, level)
-	text_color = text_colors[style][ level_bg_colors[i]]
-	bg_color = colors[style][ level_bg_colors[i]]
-	return text_color,bg_color
+text_colors = {
+	'normal':['eeeeee','111111'], 
+	'highlight':['ffffff','000000']
+}
 
-def getSelectedColors(style,level=0):
-	i = level % len(level_selected_bg_colors)
-	text_color = text_colors[style][ level_selected_bg_colors[i]]
-	bg_color = colors[style][ level_selected_bg_colors[i]]
-	return text_color, bg_color
+def getConfigStyle():
+	config = getConfig()
+	stype = config.color_style or 'Blue'
+	return stype
+
+def getTextColor(bgcolor,type='normal'):
+	colors = text_colors.get(type,text_colors.get('normal'))
+	d = 0
+	tcolor = None
+	for c in colors:
+		d1 = distance(bgcolor,c)
+		if d1>d:
+			d = d1
+			tcolor = c
+	return tcolor
+
+def getColors(level=0,selected=False):
+	style = getConfigStyle()
+	i = level % 8
+	Logger.info('TEST : style=%s,level=%d', style, level)
+	bg_color = colors[style][ level_bg_colors[i]]
+	if selected:
+		k = level_bg_colors[i]
+		k1 = level_bg_colors[i+1]
+		colors1 = divideColor(colors[style][k],colors[style][k1],2)
+		bg_color = colors1[1]
+	text_color = getTextColor(bg_color)
+	return toArrayColor(text_color),toArrayColor(bg_color)
 
 error_color_id = '100',
 info_color_id = '50'
-def getErrorColors(style):
-	text_color = text_colors[style][ error_color_id ]
+def getErrorColors():
+	style = getConfigStyle()
 	bg_color = colors[style][ error_color_id ]
-	return text_color, bg_color
+	text_color = getTextColor(bg_color,type='highlight')
+	return toArrayColor(text_color),toArrayColor(bg_color)
 	
-def getInfoColors(style):
-	text_color = text_colors[style][ info_color_id ]
+def getInfoColors():
+	style = getConfigStyle()
 	bg_color = colors[style][ info_color_id ]
-	return text_color, bg_color
+	text_color = getTextColor(bg_color)
+	return toArrayColor(text_color),toArrayColor(bg_color)
 

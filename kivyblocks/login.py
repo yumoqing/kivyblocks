@@ -1,3 +1,4 @@
+from kivy.logger import Logger
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.popup import Popup
@@ -45,7 +46,10 @@ class LoginForm(Popup):
 		print('build Content ....... ....')
 		self.initflag = True
 		app = App.get_running_app()
-		self.content = app.blocks.widgetBuild(logformdesc)
+		try:
+			self.content = app.blocks.widgetBuild(logformdesc)
+		except Exception as e:
+			Logger.info('login: Error %s', e)
 		self.content.bind(on_submit=self.on_submit)
 		
 	def on_submit(self,o,userinfo):

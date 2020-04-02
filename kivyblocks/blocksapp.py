@@ -93,7 +93,7 @@ def closeWorkers():
 
 def appBlocksHack(app):
 		config = getConfig()
-		app.on_close = on_close
+		# app.on_close = on_close
 		app.getAuthHeader = getAuthHeader
 		app.__del__ = closeWorkers
 		Window.bind(on_request_close=app.on_close)
