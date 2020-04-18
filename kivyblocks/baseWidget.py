@@ -3,6 +3,7 @@ from kivy.utils import platform
 from kivy.uix.button import Button, ButtonBehavior
 from kivy.uix.accordion import Accordion,AccordionItem
 from kivy.uix.label import Label
+from kivy.event import EventDispatcher
 
 from kivy.uix.actionbar import ActionBar,ActionView,ActionPrevious,ActionItem,ActionButton
 from kivy.uix.actionbar import ActionToggleButton, ActionCheck,ActionSeparator,ActionGroup
@@ -78,4 +79,39 @@ class Text(BGColorBehavior, Label):
 class PressableLabel(ButtonBehavior, Text):
 	def on_press(self):
 		pass
+
+class HTTPDataHandler(EventDispatcher):
+	def __init__(self, url,method='GET',params={},headers={}):
+		EventDispatcher.__init__()
+		self.opts = opts
+		self.url = url
+		self.method = method
+		self.params = params
+		self.headers = headers
+		self.hc = App.get_running_app().hc
+		self.register_event_type('on_sucess')
+		self.register_event_type('on_error')
+
+	def on_success(self,o,v):
+		pass
+
+	def on_error(self,o,e):
+		pass
+
+	def onSuccess(self,o,v):
+		self.dispatch('on_sucess',v)
+
+	def onError(self,o,e):
+		self.dispatch('on_error',e)
+
+	def handle(self,params={},headers={}):
+		p = self.params
+		p.update(params)
+		h = self.headers
+		h.update(headers)
+		self.hc(self.url,method=self.method,
+						params=p,
+						headers=h,
+						callback=self.onSuccess,
+						errback=self.onError)
 

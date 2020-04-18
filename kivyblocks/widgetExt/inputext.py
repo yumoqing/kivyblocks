@@ -1,5 +1,6 @@
 import sys
 import re
+from kivy.logger import Logger
 from kivy.uix.image import Image
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
@@ -25,14 +26,14 @@ class BoolInput(Switch):
 			a.active = kw.get('value')
 
 		super().__init__(**a)
+		self.register_event_type('on_changed')
 		self.bind(active=on_active)
-		self.bind(change=self.on_change)
 
-	def on_change(self,t,v):
+	def on_changed(self,v=None):
 		pass
 
 	def on_active(self,t,v):
-		change = True
+		self.dispatch('on_changed',v)
 		
 	def getValue(self):
 		return self.active
@@ -41,43 +42,53 @@ class BoolInput(Switch):
 		self.active = v
 	
 class StrInput(TextInput):
-	change = BooleanProperty(False)
 	def __init__(self,**kv):
 		if kv is None:
 			kv = {}
 		a = {
-			# "allow_copy":True,
-			"font_size":CSize(1),
+			"allow_copy":True,
+			"font_size":1,
 			"multiline":False,
 			"halign":"left",
 			"hint_text":"",
 			"size_hint_y":None,
-			"height":CSize(2)
+			"width":20,
+			"height":2.5
 		}
 		if kv.get('tip'):
 			a['hint_text'] = kv['tip']
 		a.update(kv)
-		a['multiline'] = False
-		super(StrInput,self).__init__(**a)
-		self.bind(focus=self.on_focus)
-		self.bind(text=self.on_text)
-		self.bind(change=self.on_change)
+		a['width'] = CSize(kv.get('width',20))
+		a['height'] = CSize(kv.get('height',2.5))
+		a['font_size'] = CSize(kv.get('font_size',1))
 
-	def on_change(self,t,v):
-		if v:
-			pass
+		super(StrInput,self).__init__(**a)
+		self.old_value = None
+		self.register_event_type('on_changed')
+		self.bind(focus=self.on_focus)
+		self.bind(on_text_validate=self.checkChange)
+
+	def on_changed(self,v=None):
+		pass
 		
-	def on_text(self,t,v):
-		self.change = True
+	def checkChange(self,o,v=None):
+		v = self.getValue()
+		if v != self.old_value:
+			self.dispatch('on_changed',v)
 
 	def on_focus(self,t,v):
-		self.change = False
+		if v:
+			self.old_value = self.getValue()
+		else:
+			self.checkChange(None)
 
 	def getValue(self):
 		return self.text
 
 	def setValue(self,v):
-		self.text = v
+		if v is None:
+			v = ''
+		self.text = str(v)
 
 class Password(StrInput):
 	def __init__(self, **kw):
@@ -97,6 +108,10 @@ class IntegerInput(StrInput):
 		s = re.sub(pat, '', substring)
 		return StrInput.insert_text(self,s, from_undo=from_undo)
 	
+	def on_focus(self,t,v):
+		super().on_focus(t,v)
+		self.cursor = (0,len(self.text))
+
 class FloatInput(IntegerInput):
 	pat = re.compile('[^0-9]')
 	def filter(self,substring):
@@ -167,18 +182,17 @@ class MyDropDown(DropDown):
 		for d in data:
 			dd = (d[self.valueField],d[self.textField])
 			b = Button(text=d[self.textField],font_size=CSize(1),
-				size_hint_y=None, 
-				height=CSize(1.8))
+				size_hint=(None,None),
+				width=CSize(10),
+				height=CSize(2.5))
 			setattr(b,'kw_data',dd)
 			b.bind(on_release=lambda btn: self.select(btn.kw_data))
 			self.add_widget(b)
 			#print(dd)
 			
 	def setDataByUrl(self,url,params={}):
-		def x(obj,resp):
-			if resp.status_code == 200:
-				d = resp.json()
-				self.setData(d)
+		def x(obj,d):
+			self.setData(d)
 
 		app = App.get_running_app()
 		app.hc.get(url,params=params,callback=x)
@@ -191,8 +205,11 @@ class MyDropDown(DropDown):
 		
 class SelectInput(BoxLayout):
 	def __init__(self,**kw):
-		super(SelectInput,self).__init__(orientation='horizontal',						size_hint_y=None,height=CSize(1.8))
-		self.tinp = StrInput()
+		super(SelectInput,self).__init__(orientation='horizontal',\
+				size_hint=(None,None),
+				width=CSize(kw.get('width',10)),
+				height=CSize(kw.get('height',2.5)))
+		self.tinp = StrInput(size_hint_y=None,height=kw.get('height',2.5))
 		self.tinp.readonly = True
 		newkw = {}
 		newkw.update(kw)
@@ -205,17 +222,26 @@ class SelectInput(BoxLayout):
 			self.si_data = ''
 			self.text = ''
 		self.add_widget(self.tinp)
+		self.old_value = self.si_data
 		self.tinp.bind(focus=self.showDropdown)
+		self.register_event_type('on_changed')
 		
+	def on_changed(self,v=None):
+		pass
+
 	def showDropdown(self,instance,yn):
 		# if self.collide_point(*touch.pos):
 		if yn:
 			self.tinp.focus = False
 			self.dropdown.showme(self)
+			self.old_value = self.getValue()
 		
 	def setData(self,d):
 		self.tinp.si_data = d[0]
 		self.tinp.text = d[1]
+		v = self.getValue()
+		if v != self.old_value:
+			self.dispatch('on_changed',v)
 
 	def setValue(self,v):
 		self.tinp.si_value = v

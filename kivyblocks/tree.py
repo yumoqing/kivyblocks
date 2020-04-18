@@ -1,5 +1,8 @@
+import traceback
+
 from kivy.app import App
-from kivy.logger import logging
+from kivy.core.window import Window
+from kivy.logger import Logger
 from kivy.graphics import Color, Rectangle, Triangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
@@ -8,9 +11,11 @@ from kivy.uix.button import ButtonBehavior
 from kivyblocks.widgetExt import ScrollWidget
 from kivyblocks.utils import CSize
 from appPublic.dictObject import DictObject
+from appPublic.jsonConfig import getConfig
 from .baseWidget import PressableLabel
 from .color_definitions import getColors
 from .bgcolorbehavior import BGColorBehavior
+from .utils import alert,absurl
 
 class EmptyBox(Label):
 	def __init__(self,size_cnt=1):
@@ -80,8 +85,11 @@ class TreeNode(BoxLayout):
 		self.data = data
 		self.content = None
 		self.children_open = False
-		self.subNodes = []
-		self.node_box = BoxLayout(orientation='horizontal',size_hint_y=None)
+		self.nodes = []
+		self.initChildren = False
+		self.node_box = BoxLayout(orientation='horizontal',
+							spacing=CSize(0.5),
+							size_hint_y=None)
 		self.node_box1 = BoxLayout(orientation='horizontal')
 		n = data.get('children')
 		self.hasChildren_nodes = True if not n is None else False
@@ -122,7 +130,7 @@ class TreeNode(BoxLayout):
 			self.node_box.width = width
 		if self.node_box1.width < width:
 			self.node_box1.width = width
-		for n in self.subNodes:
+		for n in self.nodes:
 			n.setMinWidth(width)
 
 	def buildContent(self):
@@ -134,28 +142,32 @@ class TreeNode(BoxLayout):
 		self.node_box.height = self.content.height
 		self.node_box.width = self.trigger.width + \
 						self.content.width
-		logging.info('Tree : content=(%d,%d),box=(%d,%d)', \
+		Logger.info('Tree : content=(%d,%d),box=(%d,%d)', \
 						self.content.width,self.content.height,
 						self.node_box.width,self.node_box.height)
 
 	def buildChildren(self):
+		if self.initChildren == True:
+			return
+
 		if self.data.children is None:
-			logging.info('Tree : is a leaf node')
+			Logger.info('Tree : is a leaf node')
 			return
 
 		if self.data.children == []:
 			self.treeObj.getUrlData(self.addChildren,self.data)
 			return
-		if len(self.subNodes) == 0:
-			logging.info('Tree : add subnodes')
+		if len(self.nodes) == 0:
+			Logger.info('Tree : add subnodes')
 			self.addChildren(self.data.children)
 		else:
-			logging.info('Tree : not need add subnodes')
+			Logger.info('Tree : not need add subnodes')
+		self.initChildren = True
 
 	def childrenSizeChange(self,tn,v):
 		h = 0
 		w = 0
-		for n in self.subNodes:
+		for n in self.nodes:
 			h += n.height
 			w = max(w,n.width)
 
@@ -176,12 +188,71 @@ class TreeNode(BoxLayout):
 			options['data'] = c
 			tn = self.treeObj.NodeKlass(**options)
 			tn.bind(size=self.childrenSizeChange)
-			self.subNodes.append(tn)
+			self.nodes.append(tn)
 			self.children_box.add_widget(tn)
 			self.children_box.height += tn.height
 			self.children_box.width = max(self.children_box.width,tn.width)
 			self.node_box1.height = self.children_box.height
 			self.node_box1.width = self.trigger.width + self.children_box.width
+
+	def addNodeByData(self,data):
+		options = {}
+		options['tree'] = self.treeObj
+		options['parentNode'] = self
+		if isinstance(data,dict):
+			options['data'] = DictObject(**data)
+		else:
+			options['data'] = data
+		w = self.treeObj.NodeKlass(**options)
+		self.nodes.append(w)
+		self.children_box.add_widget(w)
+		self.childrenSizeChange(None,None)
+		
+	def addNode(self,node):
+		node.parentNode = self
+		self.nodes.append(node)
+		self.children_box.add_widget(node)
+		self.childrenSizeChange(None,None)
+
+	def deleteNode(self,node):
+		self.children_box.remove_widget(node)
+		self.nodes = [ i for i in self.nodes if i != node ]
+		self.childrenSizeChange(None,None)
+
+	def delete(self):
+		parentNode = self.parentNode if self.parentNode else self.treeObj
+		parentNode.deleteNode(self)
+
+	def expand(self):
+		if self.children_open:
+			return
+		self.toggleChildren(None)
+
+	def collapse(self):
+		if not self.children_open:
+			return
+		self.toggleChildren(None)
+
+	def expandall(self):
+		if not self.children_open:
+			self.toggleChildren(None)
+		for n in self.nodes:
+			n.expandall()
+
+	def collapseall(self):
+		if self.children_open:
+			self.toggleChildren(None)
+		for n in self.nodes:
+			n.collapseall(None)
+
+	def moveNode(self,node,newParent=None):
+		old_parent = node.parent
+		if old_parent == None:
+			old_parent = node.treeObj
+		old_parent.deleteNode(node)
+		if newParent == None:
+			newParent = node.treeObj
+		newParent.addNode(node)
 
 	def toggleChildren(self,o):
 		self.treeObj.unselect_row()
@@ -195,16 +266,14 @@ class TreeNode(BoxLayout):
 		# when a widget remove from its parent, the get_parent_window()
 		# will return a None
 		# w1 = self.children_box.get_parent_window()
-		# logging.info('Tree :get_parent_window() return=%s',str(type(w1)))
+		# Logger.info('Tree :get_parent_window() return=%s',str(type(w1)))
 	
 """
 tree options
 {
 	"url":
 	"params",
-	"bg_color",
 	"color_level",
-	"color",
 	"checkbox",
 	"multplecheck",
 	"idField",
@@ -230,14 +299,14 @@ class Tree(BGColorBehavior, ScrollWidget):
 
 	def unselect_row(self):
 		if self.selected_node:
-			logging.info('selected node unselected')
+			Logger.info('selected node unselected')
 			self.selected_node.unselected()
 			self.selected_node = None
 		
 	def onSize(self,o,v=None):
 		if not self.initflag:
 			self.initflag = True
-			self.buildTree(self)
+			self.buildTree()
 		for n in self.nodes:
 			n.setMinWidth(self.width)
 
@@ -246,13 +315,23 @@ class Tree(BGColorBehavior, ScrollWidget):
 
 	def getUrlData(self,callback,kv=None):
 		hc = App.get_running_app().hc
-		params = self.options.get(params,{}).copy()
-		if not data is None:
-			for k,v in kv:
+		params = self.options.get('params',{}).copy()
+		if not kv is None:
+			for k,v in kv.items():
 				if k in params.keys():	
 					params[k] = v
 			params['id'] = kv[self.options.idField]
-		hc.get(self.url,params=params,callback=callback)
+		config = getConfig()
+		url = absurl(self.options.url,None)
+		Logger.info('Tree: getUrlData(),url=%s',url)
+		hc.get(url,params=params,
+					callback=callback,
+					errback=self.showError)
+
+	def showError(self,o,e):
+		traceback.print_exc()
+		Logger.info('Tree: showError() o=%s,e=%s',o,e)
+		alert(e,title='error')
 
 	def buildTree(self,kv=None):
 		if not hasattr(self,'NodeKlass'):
@@ -260,16 +339,18 @@ class Tree(BGColorBehavior, ScrollWidget):
 
 		if self.options.url:
 			return self.getUrlData(self.dataLoaded,kv)
-		data = self.options.data
-		logging.info("Tree : buildTree,data=%s",data)
-		self.dataLoaded(data)
+		data = self.options.data or []
+		Logger.info("Tree : buildTree,data=%s",data)
+		self.dataLoaded(None,data)
 		self.color, self.bgcolor = getColors(self.color_level)
 
-	def dataLoaded(self,d):
+	def dataLoaded(self,o,d):
+		Logger.info("Tree: dataLoaded,d=%s",d)
 		self.data = d
 		self.addNodes()
 
 	def addNodes(self):
+		Logger.info("Tree: addNodes()")
 		for c in self.data:
 			options = {}
 			options['tree'] = self
@@ -278,7 +359,22 @@ class Tree(BGColorBehavior, ScrollWidget):
 			w = self.NodeKlass(**options)
 			self.nodes.append(w)
 			self.add_widget(w)
-			logging.info('Tree : node=%s',type(w))
+			Logger.info('Tree : node=%s',type(w))
+
+	def addNode(self,data,parentNode=None):
+		options = {}
+		options['tree'] = self
+		options['parentNode'] = None
+		options['data'] = DictObject(**data)
+		w = self.NodeKlass(**options)
+		self.nodes.append(w)
+		self.add_widget(w)
+		
+	def deleteNode(self,node):
+		if self.selected_node == node:
+			self.selected_node = None
+		self.remove_widget(node)
+		self.nodes = [ i for i in self.nodes if i != node ]
 
 class TextContent(PressableLabel):
 	def __init__(self,level=0,**options):
@@ -309,22 +405,21 @@ class TextTreeNode(TreeNode):
 	
 	def onPress(self,o,v=None):
 		if self.hasChildren_nodes:
-			v = True if not self.children_open else False
 			self.toggleChildren(self)
 			self.trigger.on_press()
 			return
-		logging.info('select the leaf node')
+		Logger.info('select the leaf node')
 		self.treeObj.select_row(self)
 
 	def selected(self):
-		logging.info('content selected ........')
+		Logger.info('content selected ........')
 		color, bgcolor = getColors(self.treeObj.color_level,
 					selected=True)
 		self.content.bgcolor = bgcolor
 		self.content.color = color
 
 	def unselected(self):
-		logging.info('content unselected ........')
+		Logger.info('content unselected ........')
 		color, bgcolor = getColors(self.treeObj.color_level,
 					selected=False)
 		self.content.bgcolor = bgcolor
@@ -336,13 +431,45 @@ class TextTree(Tree):
 		super().__init__(**options)
 		self.register_event_type('on_press')
 
-		
-	def onPress(self,o,v=None):
-		if self.selectNode:
-			self.selectNode.unselected()
-		self.selectNode = o
-		o.selected()
-		self.dispatch(on_press,o,o.data)
+	def select_row(self, node):
+		super().select_row(node)
+		self.dispatch('on_press',node.data)
 
-	def on_press(self,o,v):
+	def on_press(self,o,v=None):
 		print('TextTree():on_press(),o=',o,'v=',v)
+
+class PopupMenu(BoxLayout):
+	def __init__(self,target,menudesc,**opts):
+		self.target = target
+		self.menudesc = menudesc
+		BoxLayout.__init__(self, size_hint=(0.5,0.5))
+		self.menu_tree = TextTree(**menudesc)
+		self.add_widget(self.menu_tree)
+		self.menu_tree.bind(on_press=self.onMenuItemTouch)
+		self.register_event_type('on_press')
+
+	def on_press(self,o,v=None):
+		Logger.info('PopupMenu: on_press fired')
+
+	def onMenuItemTouch(self,o,d=None,v=None):
+		Logger.info('MenuTree: on_press fired,o=%s,d=%s,v=%s',o,d,v)
+		data = {
+			'target':self.target,
+			'menudata':d
+		}
+		self.dispatch('on_press',data)
+		self.dismiss()
+
+	def open(self):
+		Window.add_widget(self)
+		self.center = Window.center
+
+	def dismiss(self):
+		Window.remove_widget(self)
+
+	def on_touch_down(self,touch):
+		if not self.collide_point(*touch.pos):
+			self.dismiss()
+			return False
+		super().on_touch_down(touch)
+		return True
