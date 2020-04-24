@@ -1,4 +1,6 @@
+from traceback import print_exc
 from kivy.logger import Logger
+from kivy.factory import Factory
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.popup import Popup
@@ -35,21 +37,14 @@ class LoginForm(Popup):
 	def __init__(self):
 		super().__init__(size_hint=(0.8,0.8))
 		self.title = 'login'
-		self.initflag = False
-		self.bind(size=self.buildContent,
-					pos=self.buildContent)
+		self.buildContent(None,None)
+		self.register_event_type('on_setupuser')
 	
+	def on_setupuser(self,o=None):
+		return
+
 	def buildContent(self,o,size):
-		print('build Content. ....')
-		if self.initflag:
-			return
-		print('build Content ....... ....')
-		self.initflag = True
-		app = App.get_running_app()
-		try:
-			self.content = app.blocks.widgetBuild(logformdesc)
-		except Exception as e:
-			Logger.info('login: Error %s', e)
+		self.content = Factory.Form(**logformdesc['options'])
 		self.content.bind(on_submit=self.on_submit)
 		
 	def on_submit(self,o,userinfo):
@@ -61,10 +56,7 @@ class LoginForm(Popup):
 		if userinfo.get('passwd',False):
 			userinfo['authmethod'] = 'password'
 		authinfo = app.serverinfo.encode(userinfo)
-		config = getConfig()
-		login_url = '%s%s' % (config.uihome, config.login_url)
-		x = app.hc.get(login_url)
-		print('login return=', x, login_url, authinfo)
+		self.dispatch('on_setupuser')
 	
 	def on_cancel(self,o,v):
 		print('login() on_cancel fired .....')

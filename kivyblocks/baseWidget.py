@@ -1,4 +1,6 @@
 import sys
+from traceback import print_exc
+from kivy.app import App
 from kivy.utils import platform
 from kivy.uix.button import Button, ButtonBehavior
 from kivy.uix.accordion import Accordion,AccordionItem
@@ -46,6 +48,7 @@ from kivy.uix.codeinput import CodeInput
 from kivy.graphics import Color, Rectangle
 from kivy.properties import ListProperty
 from kivycalendar import DatePicker
+from kivy.factory import Factory
 
 from appPublic.dictObject import DictObject
 
@@ -57,52 +60,66 @@ from .widgetExt.inputext import FloatInput,IntegerInput, \
 from .widgetExt.messager import Messager
 from .charts.bar import Bar
 from .bgcolorbehavior import BGColorBehavior
-
+from .utils import NeedLogin, InsufficientPrivilege, HTTPError
+from .login import LoginForm
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
 	from .widgetExt.androidwebview import AWebView
 
+class Text(BGColorBehavior, Label):
+	def __init__(self,bgcolor=[],fgcolor=[],color_level=-1,**kw):
+		self.options = DictObject(**kw)
+		kwargs = kw.copy()
+		Label.__init__(self,**kwargs)
+		BGColorBehavior.__init__(self,bgcolor=bgcolor,
+					fgcolor=fgcolor,
+					color_level=color_level)
+
 class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):
 		pass
-
-class Text(BGColorBehavior, Label):
-	def __init__(self,bgcolor=[0,0,0,1],**kw):
-		self.options = DictObject(**kw)
-		kwargs = kw.copy()
-		if kwargs.get('bgColor'):
-			self.bgColor = kwargs['bgColor']
-			del kwargs['bgColor']
-		Label.__init__(self,**kwargs)
-		BGColorBehavior.__init__(self,bgcolor=bgcolor)
 
 class PressableLabel(ButtonBehavior, Text):
 	def on_press(self):
 		pass
 
 class HTTPDataHandler(EventDispatcher):
-	def __init__(self, url,method='GET',params={},headers={}):
-		EventDispatcher.__init__()
-		self.opts = opts
+	def __init__(self, url,method='GET',params={},
+				headers={},
+				files={}
+				):
+		EventDispatcher.__init__(self)
 		self.url = url
 		self.method = method
 		self.params = params
 		self.headers = headers
+		self.files=files
 		self.hc = App.get_running_app().hc
-		self.register_event_type('on_sucess')
+		self.register_event_type('on_success')
 		self.register_event_type('on_error')
 
-	def on_success(self,o,v):
+	def on_success(self,v):
 		pass
 
-	def on_error(self,o,e):
+	def on_error(self,e):
 		pass
 
 	def onSuccess(self,o,v):
-		self.dispatch('on_sucess',v)
+		print(__file__,'onSuccess():v=',v)
+		self.dispatch('on_success',v)
 
 	def onError(self,o,e):
+		if isinstance(e,NeedLogin):
+			lf = LoginForm()
+			lf.bind(on_setupuser=self.redo)
+			lf.open()
+			return
 		self.dispatch('on_error',e)
+		print_exc()
+		print('[****][*********] onError Called',e)
+
+	def redo(self,o,v=None):
+		self.handle()
 
 	def handle(self,params={},headers={}):
 		p = self.params

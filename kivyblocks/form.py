@@ -46,6 +46,10 @@ form options
 """
 
 uitypes = {
+	"str":{
+		"orientation":"horizontal",
+		"wclass":StrInput,
+	},
 	"string":{
 		"orientation":"horizontal",
 		"wclass":StrInput,
@@ -53,6 +57,10 @@ uitypes = {
 	"password":{
 		"orientation":"horizontal",
 		"wclass":Password,
+	},
+	"int":{
+		"orientation":"horizontal",
+		"wclass":IntegerInput,
 	},
 	"number":{
 		"orientation":"horizontal",
@@ -87,7 +95,7 @@ uitypes = {
 		"wclass":StrInput,
 		"options":{
 			"multiline":True,
-			"height":CSize(9),
+			"height":9,
 		}
 	},
 	"teleno":{
@@ -111,9 +119,12 @@ class InputBox(BoxLayout):
 		self.labelwidth = self.form.options['labelwidth']
 		kwargs = {
 			"orientation":orientation,
-			"size_hint_y":None,
-			"height":height
 		}
+		if height<=1:
+			kwargs['size_hint_y'] = height
+		else:
+			kwargs['size_hint_y'] = None
+			kwargs['height'] = CSize(height)
 		if width <= 1:
 			kwargs['size_hint_x'] = width
 		else:
@@ -121,7 +132,7 @@ class InputBox(BoxLayout):
 			kwargs['width'] = CSize(width)
 		super().__init__(**kwargs)
 		self.initflag = False
-		self.bind(on_size=self.setSize,
+		self.bind(size=self.setSize,
 					pos=self.setSize)
 		self.register_event_type("on_datainput")
 		self.register_event_type("on_ready")
@@ -169,8 +180,8 @@ class InputBox(BoxLayout):
 		options = self.uidef.get('options',{}).copy()
 		options.update(self.options.get('uiparams',{}))
 		options['allow_copy'] = True
-		options['size_hint_y'] = None
-		options['height'] = CSize(3)
+		options['width'] = 1
+		options['height'] = 2.5
 		if self.options.get('tip'):
 			options['hint_text'] = i18n(self.options.get('tip'))
 
@@ -217,6 +228,12 @@ class InputBox(BoxLayout):
 	def getValue(self):
 		return {self.options.get('name'):self.input_widget.getValue()}
 	
+	def disable(self,*args,**kwargs):
+		self.input_widget.disabled = True
+
+	def enable(self,*args,**kwargs):
+		self.input_widget.disabled = False
+
 def defaultToolbar():
 	return {
 		"img_size":2,
@@ -241,23 +258,18 @@ class Form(BGColorBehavior, BoxLayout):
 		self.options = options
 		BoxLayout.__init__(self, orientation='vertical')
 		self.color_level = self.options.get('color_level', 0)
-		textcolor, bgcolor = getColors(self.color_level)
-		BGColorBehavior.__init__(self,bgcolor=bgcolor)
+		BGColorBehavior.__init__(self,color_level=self.color_level)
 		self.widget_ids = {}
 		self.readiedInput = 0
 		self.cols = self.options_cols = self.options.get('cols',1)
 		if isHandHold() and Window.width < Window.height:
 			self.cols = 1
 		self.inputwidth = Window.width / self.cols
-		self.inputheight = CSize(self.options.get('inputheight',3))
-		self.initflag = False
+		self.inputheight = self.options.get('inputheight',3)
+		self.init()
 		self.register_event_type('on_submit')
-		self.bind(size=self.on_size,
-					pos=self.on_size)
 
 	def init(self):
-		if self.initflag:
-			return
 		self.toolbar = Toolbar(ancestor=self,**self.options.get('toolbar',defaultToolbar()))
 		self.fsc = VResponsiveLayout(
 						self.inputwidth,
@@ -279,7 +291,6 @@ class Form(BGColorBehavior, BoxLayout):
 		wid = blocks.getWidgetByIdPath(self,'__clear')
 		# wid = self.widget_ids['__clear']
 		wid.bind(on_press=self.on_clear_button)
-		self.initflag = True
 
 	def makeInputLink(self,o,v=None):
 		self.readiedInput += 1
@@ -323,10 +334,6 @@ class Form(BGColorBehavior, BoxLayout):
 		for fw in self.fieldWidgets:
 			fw.clear()
 
-	def on_size(self,o, v=None):
-		self.init()
-		textcolor, self.bgcolor = getColors(self.color_level)
-	
 class StrSearchForm(BoxLayout):
 	def __init__(self,img_url=None,**options):
 		self.name = options.get('name','search_string')

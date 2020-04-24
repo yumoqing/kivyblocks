@@ -285,7 +285,7 @@ class Tree(BGColorBehavior, ScrollWidget):
 	def __init__(self,**options):
 		self.color_level = options.get('color_level',0)
 		ScrollWidget.__init__(self)
-		BGColorBehavior.__init__(self)
+		BGColorBehavior.__init__(self,color_level=self.color_level)
 		self.options = DictObject(**options)
 		self.nodes = []
 		self.initflag = False
@@ -377,21 +377,16 @@ class Tree(BGColorBehavior, ScrollWidget):
 		self.nodes = [ i for i in self.nodes if i != node ]
 
 class TextContent(PressableLabel):
-	def __init__(self,level=0,**options):
-		PressableLabel.__init__(self,**options)
+	def __init__(self,color_level=0,**options):
+		PressableLabel.__init__(self,color_level=color_level,**options)
 		
-	def selected(self):
-		pass
-
-	def unselected(self):
-		pass
-
 
 class TextTreeNode(TreeNode):
 	def buildContent(self):
 		txt = self.data.get(self.treeObj.options.textField,
 				self.data.get(self.treeObj.options.idField,'defaulttext'))
-		self.content = TextContent( text=txt,
+		self.content = TextContent(color_level=self.treeObj.color_level,
+							text=txt,
 							size_hint=(None,None),
 							font_size=CSize(1),
 							text_size=CSize(len(txt)-1,1),
@@ -412,18 +407,12 @@ class TextTreeNode(TreeNode):
 		self.treeObj.select_row(self)
 
 	def selected(self):
-		Logger.info('content selected ........')
-		color, bgcolor = getColors(self.treeObj.color_level,
-					selected=True)
-		self.content.bgcolor = bgcolor
-		self.content.color = color
+		if hasattr(self.content,'selected'):
+			self.content.selected()
 
 	def unselected(self):
-		Logger.info('content unselected ........')
-		color, bgcolor = getColors(self.treeObj.color_level,
-					selected=False)
-		self.content.bgcolor = bgcolor
-		self.content.color = color
+		if hasattr(self.content,'unselected'):
+			self.content.unselected()
 
 class TextTree(Tree):
 	def __init__(self,**options):

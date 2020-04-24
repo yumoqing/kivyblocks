@@ -15,7 +15,10 @@ BoxViewer options:
 	}
 }
 """
+from traceback import print_exc
+from functools import partial
 from kivy.app import App
+from kivy.factory import Factory
 from kivy.utils import platform
 from kivy.uix.boxlayout import BoxLayout
 from .responsivelayout import VResponsiveLayout
@@ -38,16 +41,11 @@ class BoxViewer(BoxLayout):
 		if options.get('toolbar'):
 			self.toolbar = Toolbar(options['toolbar'])
 		lopts = options['dataloader'].copy()
-		lopts['options']['adder'] = self.showObject
-		lopts['options']['remover'] = self.viewContainer.remove_widget
-		lopts['options']['clearer'] = self.viewContainer.clear_widgets
-		lopts['options']['target'] = self
-		lopts['options']['locater'] = self.locater
-		LClass = RelatedLoader
-		if lopts['widgettype'] == 'paging':
-			LClass = Paging
-		
-		self.dataloader = LClass(**lopts['options'])
+		self.dataloader = RelatedLoader(target=self,**lopts['options'])
+		self.dataloader.bind(on_deletepage=self.deleteWidgets)
+		self.dataloader.bind(on_pageloaded=self.addPageWidgets)
+		self.dataloader.bind(on_newbegin=self.deleteAllWidgets)
+
 		if self.toolbar:
 			self.add_widget(self.toolbar)
 		if self.dataloader.widget:
@@ -57,6 +55,30 @@ class BoxViewer(BoxLayout):
 		self.viewContainer.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
+
+	def deleteAllWidgets(self,o):
+		self.viewContainer.clear_widgets()
+
+	def addPageWidgets(self,o,data):
+		widgets = []
+		recs = data['data']
+		dir = data['dir']
+		idx = 0
+		if dir == 'up':
+			recs.reverse()
+			idx = -1
+		print('addPageWidgets(),begin')
+		for r in recs:
+			self.showObject(widgets, r, index=idx)
+
+		print('addPageWidgets(),widgets=',len(widgets))
+		self.dataloader.bufferObjects(widgets)
+		x = self.dataloader.getLocater()
+		self.locater(x)
+
+	def deleteWidgets(self,o,data):
+		for w in data:
+			self.viewContainer.remove_widget(w)
 
 	def on_selected(self, o, v=None):
 		print('BoxViewer(): on_selected fired....')
@@ -77,20 +99,29 @@ class BoxViewer(BoxLayout):
 			self.dataloader.loadPage(1)
 			self.initflag = True
 
-	def showObject(self, rec,**kw):
-		blocks = App.get_running_app().blocks
+	def showObject(self, holders, rec,index=0):
+		def doit(self,holders,idx,o,w):
+			print('showObject()...doit(),w=',w,o)
+			w.bind(on_press=self.select_record)
+			self.viewContainer.add_widget(w,index=idx)
+			holders.append(w)
+
+		def doerr(o,e):
+			print_exc()
+			print('showObject(),error=',e)
+			raise e
 		options = self.options['viewer'].copy()
 		options['options']['record'] = rec
 		options['options']['ancestor'] = self
 		options['options']['size_hint'] = None,None
 		options['options']['width'] = self.box_width
 		options['options']['height'] = self.box_height
-		w = blocks.widgetBuild(options, ancestor=self)
-		if w is None:
-			return None
-		w.bind(on_press=self.select_record)
-		self.viewContainer.add_widget(w,**kw)
-		return w
+		blocks = Factory.Blocks()
+		blocks.bind(on_built=partial(doit,self,holders,index))
+		blocks.bind(on_failed=doerr)
+		print('showObject():********here***********')
+		blocks.widgetBuild(options, ancestor=self)
+		print('showObject():********end ***********')
 
 	def on_scroll_stop(self,o,v=None):
 		if o.scroll_y <= 0.001:

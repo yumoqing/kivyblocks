@@ -41,18 +41,15 @@ class KivySizes:
 		return self.unitedSize(x,y=y,name=name)
 
 	def getScreenSize(self):
-		#root = App.get_running_app().root
-		#return root.width, root.height
 		return Window.width, Window.height
 
-	def getWindowPhysicalSize(self,w):
-		h_phy = float(w.height) / mm(1)
-		w_phy = float(w.width) / mm(1)
+	def getWindowPhysicalSize(self):
+		h_phy = float(Window.height) / mm(1)
+		w_phy = float(Window.width) / mm(1)
 		return w_phy, h_phy
 	
 	def getScreenPhysicalSize(self):
-		return self.getWindowPhysicalSize(App.get_running_app().root)
-		return self.getWindowPhysicalSize(Window)
+		return self.getWindowPhysicalSize()
 
 	def isHandHold(self):
 		return min(self.getScreenPhysicalSize()) <= 75.0

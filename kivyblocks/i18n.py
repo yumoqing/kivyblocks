@@ -28,6 +28,8 @@ class I18n:
 		if lang is None:
 			lang = self.lang
 		d = self.kvlang.get(lang,{})
+		if d is None:
+			return msg
 		return d.get(msg,msg)
 	
 	def changeLang(self,lang):

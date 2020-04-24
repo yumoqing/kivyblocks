@@ -47,21 +47,31 @@ class StrInput(TextInput):
 			kv = {}
 		a = {
 			"allow_copy":True,
-			"font_size":1,
+			"password":False,
 			"multiline":False,
 			"halign":"left",
 			"hint_text":"",
-			"size_hint_y":None,
-			"width":20,
-			"height":2.5
 		}
 		if kv.get('tip'):
 			a['hint_text'] = kv['tip']
-		a.update(kv)
-		a['width'] = CSize(kv.get('width',20))
-		a['height'] = CSize(kv.get('height',2.5))
+		# a.update(kv)
+		w = kv.get('width',20)
+		h = kv.get('height',2.5)
+		if w <= 1:
+			a['size_hint_x'] = w
+		else:	
+			a['size_hint_x'] = None
+			a['width'] = CSize(w)
+		if h <= 1:
+			a['size_hint_y'] = h
+		else:
+			a['size_hint_y'] = None
+			a['height'] = CSize(h)
 		a['font_size'] = CSize(kv.get('font_size',1))
+		a['password'] = kv.get('password',False)
+		a['multiline'] = kv.get('multiline',False)
 
+		Logger.info('TextInput:a=%s,h=%d,w=%d,CSize(1)=%d',a,h,w,CSize(1))
 		super(StrInput,self).__init__(**a)
 		self.old_value = None
 		self.register_event_type('on_changed')
@@ -149,13 +159,16 @@ class MyDropDown(DropDown):
 	def __init__(self,**kw):
 		super(MyDropDown,self).__init__()
 		self.options = kw
-		self.textField = kw.get('textField',None)
-		self.valueField = kw.get('valueField',None)
-		if kw.get('url') is not None:
-			self.url = kw.get('url')
+		self.textField = kw.get('textField','text')
+		self.valueField = kw.get('valueField','value')
+		self.loadSelectItems()
+
+	def loadSelectItems(self):
+		if self.options.get('url') is not None:
+			self.url = self.options.get('url')
 			self.setDataByUrl(self.url)
 		else:
-			self.si_data = kw.get('data')
+			self.si_data = self.options.get('data')
 			self.setData(self.si_data)
 		self.bind(on_select=lambda instance, x: self.selectfunc(x))
 
@@ -179,12 +192,23 @@ class MyDropDown(DropDown):
 	def setData(self,data):
 		self.si_data = data
 		self.clear_widgets()
+		w = self.options.get('width',10)
+		h = self.options.get('height',2.5)
+		a = {}
+		if w <= 1:
+			a['size_hint_x'] = w
+		else:
+			a['size_hint_x'] = None
+			a['width'] = CSize(w)
+		if h <= 1:
+			a['size_hint_y'] = h
+		else:
+			a['size_hint_y'] = None
+			a['height'] = CSize(h)
+		a['font_size'] = CSize(self.options.get('font_size',1))
 		for d in data:
 			dd = (d[self.valueField],d[self.textField])
-			b = Button(text=d[self.textField],font_size=CSize(1),
-				size_hint=(None,None),
-				width=CSize(10),
-				height=CSize(2.5))
+			b = Button(text=d[self.textField],**a)
 			setattr(b,'kw_data',dd)
 			b.bind(on_release=lambda btn: self.select(btn.kw_data))
 			self.add_widget(b)
@@ -205,10 +229,22 @@ class MyDropDown(DropDown):
 		
 class SelectInput(BoxLayout):
 	def __init__(self,**kw):
+		a={}
+		w = kw.get('width',10)
+		h = kw.get('height',2.5)
+		if w <= 1:
+			a['size_hint_x'] = w
+		else:
+			a['size_hint_x'] = None
+			a['width'] = CSize(w)
+		if h <= 1:
+			a['size_hint_y'] = h
+		else:
+			a['size_hint_y'] = None
+			a['height'] = h
+
 		super(SelectInput,self).__init__(orientation='horizontal',\
-				size_hint=(None,None),
-				width=CSize(kw.get('width',10)),
-				height=CSize(kw.get('height',2.5)))
+				**a)
 		self.tinp = StrInput(size_hint_y=None,height=kw.get('height',2.5))
 		self.tinp.readonly = True
 		newkw = {}

@@ -1,4 +1,5 @@
 import os
+from traceback import print_exc
 from kivy.app import App
 from appPublic.jsonConfig import getConfig
 from kivy.uix.popup import Popup
@@ -10,6 +11,23 @@ from kivy.uix.image import Image
 from appPublic.dictObject import DictObject
 
 from .kivysize import KivySizes
+
+class NeedLogin(Exception):
+	pass
+
+class InsufficientPrivilege(Exception):
+	pass
+
+class HTTPError(Exception):
+	def __init__(self,resp_code):
+		self.resp_code = resp_code
+		Exception.__init__(self)
+
+	def __expr__(self):
+		return f'Exception:return code={self.resp_code}'
+
+	def __str__(self):
+		return f'Exception:return code={self.resp_code}'
 
 alert_widget= None
 
@@ -81,6 +99,9 @@ def alert(text,title='alert'):
 		x = x + ':hh'
 	alert_widget.title = str(title) + x
 	alert_widget.open()
+	print('************')
+	print_exc()
+	print('************')
 
 def StrConvert(s):
 	if not s.startswith('py::'):

@@ -10,6 +10,7 @@ from appPublic.dictExt import dictExtend
 from appPublic.folderUtils import ProgramPath
 from appPublic.dictObject import DictObject
 from appPublic.Singleton import SingletonDecorator
+from appPublic.datamapping import keyMapping
 
 from kivy.config import Config
 from kivy.metrics import sp,dp,mm
@@ -17,14 +18,11 @@ from kivy.core.window import WindowBase
 from kivy.properties import BooleanProperty
 from kivy.uix.widget import Widget
 from kivy.app import App
+from kivy.factory import Factory
 from .baseWidget import *
-from .widgetExt import Messager
-from .externalwidgetmanager import ExternalWidgetManager
-from .threadcall import HttpClient
 from .toolbar import *
 from .dg import DataGrid
 from .utils import *
-from .ready import WidgetReady
 from .serverImageViewer import ServerImageViewer
 from .vplayer import VPlayer
 from .form import InputBox, Form, StrSearchForm
@@ -113,10 +111,12 @@ def registerWidget(name,widget):
 	globals()[name] = widget
 
 
-class Blocks:
-	registedWidgets = {}
+class Blocks(EventDispatcher):
 	def __init__(self):
+		EventDispatcher.__init__(self)
 		self.action_id = 0
+		self.register_event_type('on_built')
+		self.register_event_type('on_failed')
 	
 	def register_widget(self,name,widget):
 		globals()[name] = widget
@@ -140,8 +140,6 @@ class Blocks:
 			raise Exception('None Function')
 		func =partial(f,widget)
 		return func
-		setattr(widget,fname,f)
-		return getattr(widget,fname)
 		
 	def eval(self,s,l):
 		g = {}
@@ -163,23 +161,22 @@ class Blocks:
 
 		return eval(s,g,l)
 
-	def getUrlData(self,kw,parenturl=None):
-		url = kw.get('url')
-		method = kw.get('method','GET')
-		params = kw.get('params',{})
-		if url is None:
-			print('kw=',kw)
-			raise ArgumentError('url','getUrlData() miss a url argument')
-		url = absurl(url,parenturl)
+	def getUrlData(self,url,method='GET',params={}, files={},
+					callback=None,
+					errback=None,**kw):
 		if url.startswith('file://'):
 			filename = url[7:]
 			print(filename)
 			with codecs.open(filename,'r','utf-8') as f:
 				b = f.read()
 				dic = json.loads(b)
+				callback(None,dic)
 		else:
-			dic = App.get_running_app().hc(url,method=method,params=params)
-		return dic, url
+			h = HTTPDataHandler(url,method=method,params=params,
+					files=files)
+			h.bind(on_success=callback)
+			h.bind(on_error=errback)
+			h.handle()
 
 	def strValueExpr(self,s:str,localnamespace:dict={}):
 		if not s.startswith('py::'):
@@ -239,7 +236,6 @@ class Blocks:
 
 	def __build(self,desc:dict,ancestor=None):
 		def checkReady(w,o):
-			print('checkReady():w=',w,'o=',o)
 			w.children_ready[o] = True
 			if all(w.children_ready.values()):
 				w.ready = True
@@ -250,8 +246,10 @@ class Blocks:
 
 		widgetClass = desc['widgettype']
 		opts = desc.get('options',{})
-		klass = globals().get(widgetClass)
-		if not klass:
+		try:
+			klass = Factory.get(widgetClass)
+		except Exception as e:
+			print('Error:',widgetClass,'not registered')
 			raise NotExistsObject(widgetClass)
 		widget = klass(**opts)
 		if desc.get('parenturl'):
@@ -270,23 +268,34 @@ class Blocks:
 		
 		widget.build_desc = desc
 		self.build_rest(widget,desc,ancestor)
-		# f = partial(self.build_rest,widget,desc,ancestor)
-		# event = Clock.schedule_once(f,0)
 		return widget
 		
 	def build_rest(self, widget,desc,ancestor,t=None):
-		for sw in desc.get('subwidgets',[]):
-			w = self.widgetBuild(sw, ancestor=ancestor)
-			if w is None:
-				continue
+		bcnt = 0
+		btotal = len(desc.get('subwidgets',[]))
+		def doit(self,widget,bcnt,btotal,desc,o,w):
+			bcnt += 1
 			w.parenturl = widget.parenturl
 			widget.add_widget(w)
 			if hasattr(widget,'addChild'):
 				widget.addChild(w)
-		for b in desc.get('binds',[]):
-			self.buildBind(widget,b)
-		if hasattr(widget, 'built'):
-			widget.built()
+			if bcnt >= btotal:
+				for b in desc.get('binds',[]):
+					self.buildBind(widget,b)
+
+		def doerr(o,e):
+			raise e
+
+		f = partial(doit,self,widget,bcnt,btotal,desc)
+		for sw in desc.get('subwidgets',[]):
+			b = Blocks()
+			b.bind(on_built=f)
+			b.bind(on_failed=doerr)
+			w = b.widgetBuild(sw, ancestor=ancestor)
+
+		if btotal == 0:
+			for b in desc.get('binds',[]):
+				self.buildBind(widget,b)
 
 	def buildBind(self,widget,desc):
 		wid = desc.get('wid','self')
@@ -309,7 +318,7 @@ class Blocks:
 			return self.scriptAction(widget, desc)
 		if acttype == 'method':
 			return self.methodAction(widget, desc)
-		alert(msg="actiontype invalid",title=acttype)
+		alert("actiontype(%s) invalid" % acttype,title='error')
 
 	def blocksAction(widget,desc):
 		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
@@ -319,13 +328,18 @@ class Blocks:
 		p = opts.get('options',{})
 		p.update(d)
 		opts['options'] = p
-		x = self.widgetBuild(opts,ancestor=widget)
-		if x is None:
-			alert(str(opts), title='widugetBuild error')
-			return 
-		if add_mode == 'replace':
-			target.clear_widgets()
-		target.add_widget(x)
+		def doit(target,add_mode,o,w):
+			if add_mode == 'replace':
+				target.clear_widgets()
+			target.add_widget(w)
+
+		def doerr(o,e):
+			raise e
+
+		b = Blocks()
+		b.bind(on_built=partial(doit,target,add_mode))
+		b.bind(on_failed=doerr)
+		b.widgetBuild(opts,ancestor=widget)
 		
 	def urlwidgetAction(self,widget,desc):
 		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
@@ -339,12 +353,19 @@ class Blocks:
 			'widgettype' : 'urlwidget'
 		}
 		d['options'] = opts
-		x = self.widgetBuild(d,ancestor=widget)
-		if x is None:
-			return 
-		if add_mode == 'replace':
-			target.clear_widgets()
-		target.add_widget(x)
+
+		def doit(target,add_mode,o,w):
+			if add_mode == 'replace':
+				target.clear_widgets()
+			target.add_widget(w)
+
+		def doerr(o,e):
+			raise e
+
+		b = Blocks()
+		b.bind(on_built=partial(doit,target,add_mode))
+		b.bind(on_failed=doerr)
+		b.widgetBuild(d,ancestor=widget)
 			
 	def getActionData(self,widget,desc):
 		data = {}
@@ -352,6 +373,8 @@ class Blocks:
 			dwidget = self.getWidgetByIdPath(widget,
 							desc.get('datawidget'))
 			data = dwidget.getData()
+			if desc.get('keymapping'):
+				data = keyMapping(data, desc.get('keymapping'))
 		return data
 
 	def registedfunctionAction(self, widget, desc):
@@ -361,7 +384,7 @@ class Blocks:
 		params = desc.get(params,{})
 		d = self.getActionData(widget,desc)
 		params.update(d)
-		func(params)
+		func(**params)
 
 	def scriptAction(self, widget, desc):
 		script = desc.get('script')
@@ -400,28 +423,44 @@ class Blocks:
 			]
 		}
 		"""
+		def doit(desc):
+			desc = self.valueExpr(desc)
+			try:
+				widget = self.__build(desc,ancestor=ancestor)
+				self.dispatch('on_built',widget)
+				print('widgetBuild():&&&&&&&&&&&&&&&&&',widget)
+			except Exception as e:
+				print('&&&&&&&&&&&&&&&&&',e)
+				doerr(None,e)
+				print('&&&&&&&&&&&&&&&&&',e)
+				return
+
+		def doerr(o,e):
+			self.dispatch('on_failed',e)
+
 		name = desc['widgettype']
 		if name == 'urlwidget':
 			opts = desc.get('options')
 			parenturl = None
+			url=''
 			if ancestor:
 				parenturl = ancestor.parenturl
-			desc, parenturl = self.getUrlData(opts,parenturl)
-			if not isinstance(desc,dict):
-				print("getUrlData() return error data",opts,parenturl)
-				# alert(str(desc) + 'format error',title='widgetBuild()')
-				return None
-			desc = self.valueExpr(desc)
-			desc['parenturl'] = parenturl
+			try:
+				url = absurl(opts.get('url'),parenturl)
+			except Exception as e:
+				self.dispatch('on_failed',e)
 			
-		try:
-			widget = self.__build(desc,ancestor=ancestor)
-			return widget
-		except:
-			print('widgetBuild() Error',desc)
-			print_exc()
-			alert(str(desc))
-			return None
+			def cb(o,d):
+				try:
+					d['parenturl'] = url
+					doit(d)
+				except Exception as e:
+					doerr(None,e)
+
+			del opts['url']
+			self.getUrlData(url,callback=cb,errback=doerr,**opts)
+			return
+		doit(desc)
 	
 	def getWidgetByIdPath(self,widget,path):
 		ids = path.split('/')
@@ -438,3 +477,10 @@ class Blocks:
 				raise WidgetNotFoundById(id)
 		return widget
 	
+	def on_built(self,v=None):
+		return
+
+	def on_failed(self,e=None):
+		return
+
+Factory.register('Blocks',Blocks)

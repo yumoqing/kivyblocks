@@ -42,7 +42,7 @@ class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
 		ButtonBehavior.__init__(self)
 		BoxLayout.__init__(self,
 					size_hint_y=None)
-		BGColorBehavior.__init__(self)
+		BGColorBehavior.__init__(self,color_level=ancestor.color_level)
 		self.bl = BoxLayout(orientation='vertical',
 					size_hint_y=None)
 		self.add_widget(self.bl)
@@ -62,7 +62,8 @@ class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
 
 		tsize = CSize(self.opts.text_size)
 		label = self.opts.label or self.opts.name
-		self.lbl = I18nText(otext=label,
+		self.lbl = I18nText(color_level=self.ancestor.color_level,
+					otext=label,
 					font_size=int(tsize),
 					text_size=(CSize(len(label)), tsize),
 					height=tsize,
@@ -71,24 +72,21 @@ class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
 					)
 		self.bl.add_widget(self.lbl)
 		self.height = (size + tsize)*1.1
-		self.lbl.color, self.bgcolor = getColors(self.ancestor.color_level,
-							selected=False)
-		self.lbl.bgcolor = self.bgcolor
 		
 	def on_size(self,obj,size):
 		Logger.info('toolbar: Tool() on_size fired') 
-		self.lbl.color, self.bgcolor = getColors(self.ancestor.color_level,
-							selected=False)
-		self.lbl.bgcolor = self.bgcolor
+		#self.lbl.color, self.bgcolor = getColors(self.ancestor.color_level,
+		#					selected=False)
+		#self.lbl.bgcolor = self.bgcolor
 
 	def on_press(self):
 		print('Tool(). pressed ...............')
 
 	def setActive(self,flag):
-		text_color, self.bgcolor = getColors(self.ancestor.color_level,
-							selected=flag)
-		self.lbl.bgcolor = self.bgcolor
-		self.lbl.color = text_color
+		if flag:
+			self.selected()
+		else:
+			self.unselected()
 
 
 """
@@ -106,11 +104,15 @@ toolbar options
 	]
 }
 """
-class Toolbar(GridLayout):
+class Toolbar(BGColorBehavior, GridLayout):
 	def __init__(self, ancestor=None,**opts):
 		self.opts = DictObject(**opts)
 		self.tool_widgets={}
-		super().__init__(cols = len(self.opts.tools))
+		GridLayout.__init__(self,cols = len(self.opts.tools))
+		color_level = 0
+		if isinstance(ancestor, BGColorBehavior):
+			color_level = ancestor.color_level + 1
+		BGColorBehavior.__init__(self,color_level=color_level)
 		self.size_hint = (1,None)
 		first = True
 		for opt in self.opts.tools:
@@ -175,9 +177,9 @@ class ToolPage(BGColorBehavior, BoxLayout):
 			orient = 'vertical'
 		else:
 			orient = 'horizontal'
-
+		color_level=self.opts.color_level or 0
 		BoxLayout.__init__(self,orientation=orient)
-		BGColorBehavior.__init__(self)
+		BGColorBehavior.__init__(self,color_level=color_level)
 		self.content = None
 		self.toolbar = None
 		self.init()
@@ -190,7 +192,6 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		self.toolbar.width = x
 		self.content.width = x
 		self.content.height = y - self.toolbar.height
-		self.color, self.bgcolor = getColors(self.color_level)
 
 	def showPage(self,obj):
 		self._show_page(obj.opts)
@@ -211,8 +212,6 @@ class ToolPage(BGColorBehavior, BoxLayout):
 			t.img_src = absurl(t.img_src,parenturl)
 
 		opts = self.opts
-		self.color_level = self.opts.color_level or 0
-		self.color, self.bgcolor = getColors(self.color_level)
 		self.toolbar = Toolbar(ancestor=self, **self.opts)
 		if self.opts.tool_at in ['top','left']:
 			self.add_widget(self.toolbar)

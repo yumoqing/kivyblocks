@@ -6,9 +6,7 @@ from kivy.event import EventDispatcher
 from kivy.clock import Clock
 from kivy.app import App
 from .login import LoginForm
-
-class NeedLogin(Exception):
-	pass
+from .utils import NeedLogin, InsufficientPrivilege, HTTPError
 
 class ThreadCall(Thread,EventDispatcher):
 	def __init__(self,target, args=(), kwargs={}):
@@ -95,7 +93,11 @@ class HttpClient:
 		app = App.get_running_app()
 		domain = self.url2domain(url)
 		sessionid = hostsessions.get(domain,None)
-		print('hostsessions=', hostsessions, 'sessionid=',sessionid, 'domain=',domain)
+		print('hostsessions=', hostsessions, 
+					'sessionid=',sessionid, 
+					'domain=',domain,
+					'url=',url
+					)
 		if sessionid:
 			headers.update({'session':sessionid})
 		elif app.getAuthHeader():
@@ -128,10 +130,16 @@ class HttpClient:
 			except:
 				return resp.text
 		if resp.status_code == 401:
+			print('NeedLogin:',url)
 			raise NeedLogin
 
-		print('Error', url, method, params, resp.status_code,type(resp.status_code))
-		raise Exception('error:%s' % url)
+		if resp.status_code == 403:
+			raise InsufficientPrivilege
+
+		print('Error', url, method, 
+				params, resp.status_code,
+				type(resp.status_code))
+		raise HTTPError(resp.status_code)
 		
 	def __call__(self,url,method="GET",params={},headers={},files={},callback=None,errback=None):
 		def cb(t,resp):
@@ -142,10 +150,8 @@ class HttpClient:
 				resp = self.webcall(url, method=method,
 						params=params, files=files, headers=headers)
 				return cb(None,resp)
-			except NeedLogin as e:
-				lf = LoginForm()
-				lf.open()
-				return None
+			except Exception as e:
+				raise e
 			except Exception as e:
 				if errback is not None:
 					errback(e)

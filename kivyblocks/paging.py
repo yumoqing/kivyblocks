@@ -2,6 +2,7 @@ import traceback
 import math
 
 from kivy.logger import Logger
+from kivy.event import EventDispatcher
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.clock import Clock
@@ -9,7 +10,7 @@ from kivy.app import App
 from functools import partial
 from appPublic.dictObject import DictObject
 from appPublic.jsonConfig import getConfig
-from .baseWidget import Text
+from .baseWidget import Text, HTTPDataHandler
 from .utils import CSize, absurl, alert
 from .form import StrSearchForm
 
@@ -28,37 +29,22 @@ class PagingButton(Button):
 	locater
 	filter
 }
+
+PageLoader load data in a page size once.
+it fires two type of event
+'on_newbegin':fire when start a new parameters loading series
+'on_pageloaded':fire when a page data loads success
 """
 
-class HttpLoader:
-	def __init__(self, url, method, params,page_rows=60):
-		self.page_rows = page_rows
-		self.url = url
-		self.method = method
-		self.params = params
-	
-	def setParams(self,params, url=None, page_rows=60):
-		self.params = params
-		if url is not None:
-			self.url = url
-		self.page_rows = page_rows
-
-	def load(self, callback, errback=None):
-		hc = App.get_running_app().hc
-		x = hc(self.url,
-				method=self.method,
-				params=self.params,
-				callback=callback,
-				errback=errback)
-		
-class PageLoader:
-	def __init__(self, **options):
+class PageLoader(EventDispatcher):
+	def __init__(self,target=None, **options):
 		self.loading = False
+		self.target = target
+		self.options = options
 		self.filter = None
 		if options.get('filter'):
 			self.filter = StrSearchForm(**options['filter'])
 			self.filter.bind(on_submit=self.do_search)
-
 		self.params = options.get('params',{})
 		self.method = options.get('method','GET')
 		self.url = options.get('dataurl')
@@ -66,14 +52,34 @@ class PageLoader:
 		self.total_cnt = 0
 		self.total_page = 0
 		self.curpage = 0
-		Logger.info('kivyblocks: method=%s,type=%s',str(self.method),type(self.method))
-		self.loader = HttpLoader(self.url, self.method, self.params )
+		self.dir = 'down'
+		self.register_event_type('on_newbegin')
+		self.register_event_type('on_pageloaded')
 	
+	def getLocater(self):
+		x = 1 / self.MaxbufferPage
+		if self.dir != 'down':
+			x = 1 - x
+		print('getLocater(),x=%f,dir=%s,self.curpage=%d' % (x,self.dir,self.curpage))
+		return x
+
+	def on_newbegin(self):
+		pass
+
+	def on_pageloaded(self,d):
+		"""
+		d={
+			page:
+			data:[]
+			dir:'up' or 'down'
+		}
+		"""
+		pass
+
 	def do_search(self,o,params):
 		print('PageLoader().do_search(), on_submit handle....',params)
-		self.clearer()
+		self.dispatch('on_newbegin')
 		self.params.update(params)
-		self.loader.setParams(self.params)
 		self.loadPage(1)
 
 	def calculateTotalPage(self):
@@ -94,22 +100,20 @@ class PageLoader:
 			self.curpage = 1
 		self.loadPage(self.curpage)
 	
-	def setDir(self):
-		pages = self.objectPages.keys()
-		if len(pages)==0:
-			self.dir = 'down'
-			return
-		if self.curpage >= max(self.objectPages.keys()):
-			self.dir = 'down'
-		else:
-			self.dir = 'up'
-
 	def show_page(self,o,d):
 		p = (self.curpage - 1) * self.page_rows + 1
 		for r in d['rows']:
 			r['__posInSet__'] = p
 			p += 1
-
+		self.total_cnt = d['total']
+		self.calculateTotalPage()
+		d = {
+			"page":self.curpage,
+			"dir":self.dir,
+			"data":d['rows']
+		}
+		self.dispatch('on_pageloaded',d)
+		
 	def httperror(self,o,e):
 		traceback.print_exc()
 		alert(str(e),title='alert')
@@ -117,6 +121,12 @@ class PageLoader:
 	def loadPage(self,p):
 		if not self.url:
 			raise Exception('dataurl must be present:options=%s' % str(options))
+		if self.curpage > p:
+			self.dir = 'up'
+		elif self.curpage == p:
+			self.dir = 'reload'
+		else:
+			self.dir = 'down'
 		self.curpage = p
 		self.loading = True
 		params = self.params.copy()
@@ -124,9 +134,11 @@ class PageLoader:
 			"page":self.curpage,
 			"rows":self.page_rows
 		})
-		url = absurl(self.url,self.target.parenturl)
-		self.loader.setParams(params,url=url)
-		self.loader.load(self.show_page,self.httperror)
+		realurl = absurl(self.url,self.target.parenturl)
+		loader = HTTPDataHandler(realurl,params=params)
+		loader.bind(on_success=self.show_page)
+		loader.bind(on_failed=self.httperror)
+		loader.handle()
 	
 """
 {
@@ -139,22 +151,25 @@ class PageLoader:
 	method,
 	filter
 }
+events:
+'on_bufferraise': erase
+
 """
 class RelatedLoader(PageLoader):
 	def __init__(self, **options):
 		super().__init__(**options)
-		self.adder = options.get('adder')
-		self.locater = options.get('locater',None)
-		self.remover = options.get('remover')
-		self.clearer = options.get('clearer')
-		self.target = options.get('target')
 		self.objectPages = {}
 		self.totalObj = 0
 		self.MaxbufferPage = 3
+		self.locater = 1/self.MaxbufferPage
 		if self.filter:
 			self.widget = self.filter
 		else:
 			self.widget = None
+		self.register_event_type('on_deletepage')
+
+	def on_deletepage(self,d):
+		pass
 
 	def setPageRows(self,row_cnt):
 		if self.total_cnt != 0:
@@ -171,42 +186,21 @@ class RelatedLoader(PageLoader):
 			self.deleteBuffer(p)
 
 	def deleteBuffer(self,page):
-		for w in self.objectPages[page]:
-			self.remover(w)
+		d = self.objectPages[page]
+		self.dispatch('on_deletepage',d)
 		self.totalObj -= len(self.objectPages[page])
 		del self.objectPages[page]
-			
+	
+	def bufferObjects(self,objects):
+		self.objectPages[self.curpage] = objects
+
 	def show_page(self,o,data):
-		super().show_page(o,data)
 		if self.objectPages.get(self.curpage):
 			self.deleteBuffer(self.curpage)
 		else:
-			self.setDir()
 			self.doBufferMaintain()
-		self.total_cnt = data['total']
-		self.calculateTotalPage()
-		widgets = []
-		rows = data['rows']
-		if self.dir == 'up':
-			rows.reverse()
-		for r in rows:
-			if self.dir == 'up':
-				w = self.adder(r,index=self.totalObj)
-			else:
-				w = self.adder(r)
-			widgets.append(w)
-			self.totalObj += 1
-		self.objectPages[self.curpage] = widgets
-		pages = len(self.objectPages.keys())
-		loc = 1.0 / float(pages)
-		if self.locater:
-			if pages == 1:
-				self.locater(1)
-			elif self.dir == 'up':
-				self.locater(1 - loc)
-			else:
-				self.locater(loc)
-
+		self.totalObj += len(data['rows'])
+		super().show_page(o,data)
 		self.loading = False
 		print('buffer pages=',len(self.objectPages.keys()),'pages=',self.objectPages.keys())
 	
@@ -218,12 +212,12 @@ class RelatedLoader(PageLoader):
 		if len(pages) < 1:
 			return
 
-		self.curpage = min(pages)
-		if self.curpage <= 1:
+		page = min(pages)
+		if page <= 1:
 			return
 
-		self.curpage -= 1
-		self.loadPage(self.curpage)
+		page -= 1
+		self.loadPage(page)
 	
 	def loadNextPage(self):
 		if self.loading:
@@ -231,11 +225,11 @@ class RelatedLoader(PageLoader):
 		pages = self.objectPages.keys()
 		if len(pages) == 0:
 			return
-		self.curpage = max(pages)
-		if self.curpage>=self.total_page:
+		page = max(pages)
+		if page>=self.total_page:
 			return
-		self.curpage += 1
-		self.loadPage(self.curpage)
+		page += 1
+		self.loadPage(page)
 
 """
 {
