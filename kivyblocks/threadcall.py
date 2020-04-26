@@ -92,7 +92,7 @@ class HttpClient:
 	def _webcall(self,url,method="GET",
 					params={},
 					files={},
-					headers={}
+					headers={},
 					stream=False):
 		app = App.get_running_app()
 		domain = self.url2domain(url)
