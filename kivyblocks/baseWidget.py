@@ -86,7 +86,8 @@ class PressableLabel(ButtonBehavior, Text):
 class HTTPDataHandler(EventDispatcher):
 	def __init__(self, url,method='GET',params={},
 				headers={},
-				files={}
+				files={},
+				stream=False
 				):
 		EventDispatcher.__init__(self)
 		self.url = url
@@ -94,6 +95,7 @@ class HTTPDataHandler(EventDispatcher):
 		self.params = params
 		self.headers = headers
 		self.files=files
+		self.stream=stream
 		self.hc = App.get_running_app().hc
 		self.register_event_type('on_success')
 		self.register_event_type('on_error')
@@ -129,6 +131,8 @@ class HTTPDataHandler(EventDispatcher):
 		self.hc(self.url,method=self.method,
 						params=p,
 						headers=h,
+						files=self.files,
+						stream=self.stream,
 						callback=self.onSuccess,
 						errback=self.onError)
 

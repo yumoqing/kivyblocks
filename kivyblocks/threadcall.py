@@ -89,15 +89,14 @@ class HttpClient:
 		pre = '/'.join(parts)
 		return pre
 
-	def webcall(self,url,method="GET",params={},files={},headers={}):
+	def _webcall(self,url,method="GET",
+					params={},
+					files={},
+					headers={}
+					stream=False):
 		app = App.get_running_app()
 		domain = self.url2domain(url)
 		sessionid = hostsessions.get(domain,None)
-		print('hostsessions=', hostsessions, 
-					'sessionid=',sessionid, 
-					'domain=',domain,
-					'url=',url
-					)
 		if sessionid:
 			headers.update({'session':sessionid})
 		elif app.getAuthHeader():
@@ -114,21 +113,8 @@ class HttpClient:
 		if resp.status_code == 200:
 			h = resp.headers.get('Set-Cookie',None)
 			if h:
-				print('*************set-Cookie=',h,'domain=',domain)
 				sessionid = h.split(';')[0]
 				hostsessions[domain] = sessionid
-			try:
-				data = resp.json()
-				if type(data) != type({}):
-					return data
-				status = data.get('status',None)
-				if status is None:
-					return data
-				if status == 'OK':
-					return data['data']
-				return data
-			except:
-				return resp.text
 		if resp.status_code == 401:
 			print('NeedLogin:',url)
 			raise NeedLogin
@@ -136,12 +122,46 @@ class HttpClient:
 		if resp.status_code == 403:
 			raise InsufficientPrivilege
 
-		print('Error', url, method, 
-				params, resp.status_code,
-				type(resp.status_code))
-		raise HTTPError(resp.status_code)
+		if resp.status_code != 200:
+			print('Error', url, method, 
+					params, resp.status_code,
+					type(resp.status_code))
+			raise HTTPError(resp.status_code)
+		return resp
 		
-	def __call__(self,url,method="GET",params={},headers={},files={},callback=None,errback=None):
+
+	def webcall(self,url,method="GET",
+				params={},
+				files={},
+				headers={},
+				stream=False):
+		resp = self._webcall(url,method=method,
+				params=params,
+				files=files,
+				headers=headers,
+				stream=stream)
+		if stream:
+			return resp
+		try:
+			data = resp.json()
+			if type(data) != type({}):
+				return data
+			status = data.get('status',None)
+			if status is None:
+				return data
+			if status == 'OK':
+				return data['data']
+			return data
+		except:
+			return resp.text
+		
+	def __call__(self,url,method="GET",
+				params={},
+				headers={},
+				files={},
+				stream=False,
+				callback=None,
+				errback=None):
 		def cb(t,resp):
 			return resp
 
@@ -161,6 +181,7 @@ class HttpClient:
 			"method":method,
 			"params":params,
 			"files":files,
+			"stream":stream,
 			"headers":headers
 		}
 		self.workers.add(self.webcall,callback,errback,kwargs=kwargs)

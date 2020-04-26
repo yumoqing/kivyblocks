@@ -152,7 +152,7 @@ class PageLoader(EventDispatcher):
 	filter
 }
 events:
-'on_bufferraise': erase
+'on_deletepage': erase
 
 """
 class RelatedLoader(PageLoader):
@@ -244,8 +244,6 @@ class RelatedLoader(PageLoader):
 class Paging(PageLoader):
 	def __init__(self,**options):
 		PageLoader.__init__(self,**options)
-		self.adder = options.get('adder')
-		self.clearer = options.get('clearer')
 		self.target = options.get('target')
 		self.init()
 
@@ -254,6 +252,7 @@ class Paging(PageLoader):
 		kwargs['size_hint_y'] = None
 		kwargs['height'] = CSize(2)
 		kwargs['orientation'] = 'horizontal'
+		kwargs['spacing'] = CSize(1)
 		self.widget = BoxLayout(**kwargs)
 		self.b_f = PagingButton(text="|<")
 		self.b_p = PagingButton(text="<")
@@ -269,16 +268,6 @@ class Paging(PageLoader):
 		self.widget.add_widget(self.b_l)
 		if self.filter:
 			self.widget.add_widget(self.filter)
-
-	def show_page(self,o,d):
-		super().show_page(o,data)
-		d = DictObject(**d)
-		self.total_cnt = d.total
-		self.calculateTotalPage()
-		self.clearer()
-		for r in d.rows:
-			self.adder(r)
-		self.loading = False
 
 	def loadFirstPage(self,o=None):
 		if self.curpage == 1:

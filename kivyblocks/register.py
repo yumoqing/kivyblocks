@@ -7,6 +7,7 @@ from .vplayer import VPlayer
 from .form import Form, StrSearchForm
 from .boxViewer import BoxViewer
 from .pagescontainer import PageContainer
+from .hostimage import HostImage
 
 r = Factory.register
 r('PageContainer', PageContainer)
@@ -36,6 +37,7 @@ r('PressableLabel', PressableLabel)
 r('Tree',Tree)
 r('TextTree',TextTree)
 r('PopupMenu',PopupMenu)
+r('HostImage',HostImage)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)
 	r('AWebView',AWebView)
