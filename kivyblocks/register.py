@@ -4,6 +4,7 @@ from .tree import Tree, TextTree, PopupMenu
 from .toolbar import ToolPage, Toolbar
 from .dg import DataGrid
 from .vplayer import VPlayer
+from .aplayer import APlayer
 from .form import Form, StrSearchForm
 from .boxViewer import BoxViewer
 from .pagescontainer import PageContainer
@@ -38,6 +39,8 @@ r('Tree',Tree)
 r('TextTree',TextTree)
 r('PopupMenu',PopupMenu)
 r('HostImage',HostImage)
+r('APlayer',APlayer)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)
 	r('AWebView',AWebView)
+	r('AndroidCamera',AndroidCamera)

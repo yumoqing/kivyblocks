@@ -78,10 +78,8 @@ class BGColorBehavior(object):
 
 	def selected(self):
 		self.bgcolor = self.selected_bgcolor
-		Logger.info('selected:color=%s',self.bgcolor)
 		self.on_bgcolor()
 
 	def unselected(self):
 		self.bgcolor = self.normal_bgcolor
-		Logger.info('unselected:color=%s',self.bgcolor)
 		self.on_bgcolor()

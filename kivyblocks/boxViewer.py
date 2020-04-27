@@ -119,9 +119,7 @@ class BoxViewer(BoxLayout):
 		blocks = Factory.Blocks()
 		blocks.bind(on_built=partial(doit,self,holders,index))
 		blocks.bind(on_failed=doerr)
-		print('showObject():********here***********')
 		blocks.widgetBuild(options, ancestor=self)
-		print('showObject():********end ***********')
 
 	def on_scroll_stop(self,o,v=None):
 		if o.scroll_y <= 0.001:

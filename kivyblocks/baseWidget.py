@@ -65,6 +65,7 @@ from .login import LoginForm
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
 	from .widgetExt.androidwebview import AWebView
+	from .widgetExt.camera import AndroidCamera
 
 class Text(BGColorBehavior, Label):
 	def __init__(self,bgcolor=[],fgcolor=[],color_level=-1,**kw):

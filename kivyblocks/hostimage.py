@@ -14,7 +14,7 @@ class HostImage(Image):
 		super().__init__(**kwargs)
 		self.downloadImage(url)
 
-	def downloadImage(url):
+	def downloadImage(self,url):
 		realurl = absurl(url,self.target.parenturl)
 		loader = HTTPDataHandler(url,stream=True)
 		loader.bind(on_success=self.createTmpfile)
@@ -25,9 +25,10 @@ class HostImage(Image):
 		self.source = blockImage('broken.png')
 		
 	def createTmpfile(self,o,resp):
-		fn = tempfile.NamedTemporaryFile(delete=True)
+		fn = tempfile.mkstemp()[1]
+		print('************fn=%s',fn)
 		with open(fn, 'wb') as f:
-			for chunk in r.iter_content(chunk_size=8192): 
+			for chunk in resp.iter_content(chunk_size=8192): 
 				if chunk: # filter out keep-alive new chunks
 					f.write(chunk)
 					# f.flush()

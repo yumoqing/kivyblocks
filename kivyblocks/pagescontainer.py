@@ -54,7 +54,8 @@ class PageContainer(FloatLayout):
 		w = self.pageWidgets[-1]
 		self.pageWidgets = self.pageWidgets[:-1]
 		self.showLastPage()
-		w.__del__()
+		if hasattr(w,'__del__'):
+			w.__del__()
 
 	def add_widget(self,widget):
 		self.pageWidgets.append(widget)

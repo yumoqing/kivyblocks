@@ -23,6 +23,7 @@ from ffpyplayer.tools import set_log_callback
 from .utils import *
 from .paging import PageLoader
 from .baseWidget import PressableImage
+from .swipebehavior import SwipeBehavior
 
 desktopOSs=[
 	"win",
@@ -47,10 +48,11 @@ class UrlPlayList(PageLoader):
 		id = d['rows'][0].id
 		self.player.play(id)
 
-class BaseVPlayer(FloatLayout):
+class BaseVPlayer(FloatLayout, SwipeBehavior):
 	fullscreen = BooleanProperty(False)
 	def __init__(self,vfile=None,playlist=[]):
-		super().__init__()
+		FloatLayout.__init__(self)
+		SwipeBehavior.__init__(self)
 		self.register_event_type('on_source_error')
 		self.register_event_type('on_next')
 		self.register_event_type('on_previous')
@@ -69,6 +71,18 @@ class BaseVPlayer(FloatLayout):
 		self.play()
 		if hasattr(self._video._video, '_ffplayer'):
 			self.ffplayer = self._video._video._ffplayer
+
+	def on_swipe_down(self):
+		self.stop()
+		self.dispatch('on_next')
+
+	on_swipe_right = on_swipe_down
+
+	def on_swipe_up(self):
+		self.stop()
+		self.dispatch('on_previous')
+
+	on_swipe_left = on_swipe_up
 
 	def setSource(self,s):
 		self.stop()
@@ -104,9 +118,11 @@ class BaseVPlayer(FloatLayout):
 			self._video.state = 'play'
 	
 	def next(self,o=None,v=None):
+		self.stop()
 		self.dispatch('on_next',self)
 
 	def previous(self,o=None,v=None):
+		self.stop()
 		self.dispatch('on_previous',self)
 
 	def on_state(self,o=None,v=None):
@@ -307,12 +323,18 @@ class VPlayer(BaseVPlayer):
 			self.slider.max = self._video.duration
 		self.maxposition.text = self.totime(self._video.duration)
 
+	def stop(self):
+		if self.update_task is not None:
+			self.update_task.cancel()
+			self.update_task = None
+		super().stop()
+
 	def __del__(self):
 		self.beforeDestroy()
 
 	def beforeDestroy(self):
 		print('beforeDestroy() called')
-		self._video.state = 'stop'
+		self.stop()
 		return True
 
 	def show_hide_menu(self,obj,touch):
