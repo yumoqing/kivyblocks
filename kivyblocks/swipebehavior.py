@@ -70,6 +70,12 @@ class SwipeBehavior(object):
 			self.dispatch('on_context_menu')
 
 	def check_swipe(self):
+		if not self.sb_end_point:
+			return
+
+		if not self.sb_start_point:
+			return
+
 		if abs(self.sb_end_point[0] - self.sb_start_point[0]) > \
 					abs(self.sb_end_point[1] - self.sb_start_point[1]):
 			Logger.info('SwipeBehavior:check_swipe x>y')

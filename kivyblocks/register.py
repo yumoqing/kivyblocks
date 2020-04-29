@@ -40,6 +40,7 @@ r('TextTree',TextTree)
 r('PopupMenu',PopupMenu)
 r('HostImage',HostImage)
 r('APlayer',APlayer)
+r('WrapText',WrapText)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)
 	r('AWebView',AWebView)

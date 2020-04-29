@@ -67,6 +67,13 @@ if platform == 'android':
 	from .widgetExt.androidwebview import AWebView
 	from .widgetExt.camera import AndroidCamera
 
+class WrapText(Label):
+	def __init__(self, **kw):
+		Label.__init__(self, **kw)
+		self.bind(width=lambda *x: self.setter('text_size')(self, (self.width, None)),
+				texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
+
+
 class Text(BGColorBehavior, Label):
 	def __init__(self,bgcolor=[],fgcolor=[],color_level=-1,**kw):
 		self.options = DictObject(**kw)
