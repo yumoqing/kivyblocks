@@ -1,9 +1,9 @@
 import time
 from kivy.logger import Logger
-from kivy.event import EventDispatcher
 
-class SwipeBehavior(EventDispatcher):
+class SwipeBehavior(object):
 	def __init__(self, **kwargs):
+		object.__init__(self)
 		self.register_event_type('on_context_menu')
 		self.register_event_type('on_swipe_left')
 		self.register_event_type('on_swipe_right')
@@ -15,42 +15,43 @@ class SwipeBehavior(EventDispatcher):
 		self.sb_end_time = None
 		self.threshold=20
 		self.threshold_time = 1.5
+		self.bind(on_touch_down=self.on_touchdown)
+		self.bind(on_touch_move=self.on_touchmove)
+		self.bind(on_touch_up=self.on_touchup)
 
 	def on_context_menu(self):
 		Logger.info('SwipeBehavior:on_context_menu fired')
 
 	def on_swipe_left(self):
 		Logger.info('SwipeBehavior:on_swipe_left fired')
-		pass
 
 	def on_swipe_right(self):
 		Logger.info('SwipeBehavior:on_swipe_right fired')
-		pass
 
 	def on_swipe_up(self):
 		Logger.info('SwipeBehavior:on_swipe_up fired')
-		pass
 
 	def on_swipe_down(self):
 		Logger.info('SwipeBehavior:on_swipe_down fired')
-		pass
 
-	def on_touch_down(self,touch):
+	def on_touchdown(self,o,touch):
+		Logger.info('SwipeBehavior:touch_down fired')
 		if self.collide_point(*touch.pos):
-			self.sb_start_point = pos
+			Logger.info('SwipeBehavior:touch_down fired')
+			self.sb_start_point = touch.pos
 			self.sb_start_time = time.time()
-		return super().on_touch_down(touch)
 
-	def on_touch_move(self,touch):
+	def on_touchmove(self,o,touch):
 		if self.collide_point(*touch.pos):
+			Logger.info('SwipeBehavior:touch_move fired')
 			if self.sb_start_point is None:
 				self.sb_start_point = touch.pos
 			else:
 				self.sb_end_point = touch.pos
-		return super().on_touch_move()
 
-	def on_touch_up(self,touch):
+	def on_touchup(self,o,touch):
 		if self.collide_point(*touch.pos):
+			Logger.info('SwipeBehavior:touch_up fired')
 			self.sb_end_point = touch.pos
 			self.sb_end_time = time.time()
 			self.check_context_menu()
@@ -59,7 +60,6 @@ class SwipeBehavior(EventDispatcher):
 		self.sb_end_point = None
 		self.sb_start_time = None
 		self.sb_end_time = None
-		super().on_touch_up()
 
 	def check_context_menu(self):
 		if not self.sb_start_time:
@@ -70,14 +70,20 @@ class SwipeBehavior(EventDispatcher):
 			self.dispatch('on_context_menu')
 
 	def check_swipe(self):
-		if abs(self.sb_end_point.x - self.sb_start_point.x) > \
-					abs(self.sb_end_point.y - self.sb_start_point.y):
-			if self.sb_end_point.x - self.sb_start_point.x > self.threshold:
+		if abs(self.sb_end_point[0] - self.sb_start_point[0]) > \
+					abs(self.sb_end_point[1] - self.sb_start_point[1]):
+			Logger.info('SwipeBehavior:check_swipe x>y')
+			if self.sb_end_point[0] - self.sb_start_point[0] >= \
+						self.threshold:
 				self.dispatch('on_swipe_right')
-			elif self.sb_start_point.x - self.sb_end_point.x > self.threshold:
+			elif self.sb_start_point[0] - self.sb_end_point[0] >= \
+						self.threshold:
 				self.dispatch('on_swipe_left')
 		else:
-			if self.sb_end_point.y - self.sb_start_point.y > self.threshold:
+			Logger.info('SwipeBehavior:check_swipe x<y')
+			if self.sb_end_point[1] - self.sb_start_point[1] >= \
+						self.threshold:
 				self.dispatch('on_swipe_up')
-			elif self.sb_start_point.y - self.sb_end_point.x > self.threshold:
+			elif self.sb_start_point[1] - self.sb_end_point[1] >= \
+						self.threshold:
 				self.dispatch('on_swipe_down')

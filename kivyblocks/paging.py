@@ -55,8 +55,13 @@ class PageLoader(EventDispatcher):
 		self.dir = 'down'
 		self.register_event_type('on_newbegin')
 		self.register_event_type('on_pageloaded')
+		self.newbegin = True
 	
 	def getLocater(self):
+		if self.newbegin:
+			self.newbegin = False
+			return 1
+
 		x = 1 / self.MaxbufferPage
 		if self.dir != 'down':
 			x = 1 - x
@@ -78,6 +83,7 @@ class PageLoader(EventDispatcher):
 
 	def do_search(self,o,params):
 		print('PageLoader().do_search(), on_submit handle....',params)
+		self.newbegin = True
 		self.dispatch('on_newbegin')
 		self.params.update(params)
 		self.loadPage(1)
@@ -117,6 +123,18 @@ class PageLoader(EventDispatcher):
 	def httperror(self,o,e):
 		traceback.print_exc()
 		alert(str(e),title='alert')
+
+	def loadNextPage(self):
+		if self.total_page > 0 and self.curpage >=self.total_page:
+			return
+		p = self.curpage + 1
+		self.loadPage(p)
+
+	def loadPreviousPage(self):
+		if self.curpage <= 1:
+			return
+		p = self.curpage - 1
+		self.loadPage(p)
 
 	def loadPage(self,p):
 		if not self.url:

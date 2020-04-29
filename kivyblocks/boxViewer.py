@@ -45,16 +45,21 @@ class BoxViewer(BoxLayout):
 		self.dataloader.bind(on_deletepage=self.deleteWidgets)
 		self.dataloader.bind(on_pageloaded=self.addPageWidgets)
 		self.dataloader.bind(on_newbegin=self.deleteAllWidgets)
+		self.params = self.options['dataloader']['options'].get('params',{})
 
 		if self.toolbar:
 			self.add_widget(self.toolbar)
 		if self.dataloader.widget:
 			self.add_widget(self.dataloader.widget)
+			self.dataloader.bind(on_submit=self.getParams)
 		self.add_widget(self.viewContainer)
 		self.register_event_type('on_selected')
 		self.viewContainer.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
+
+	def getParams(self,o,p):
+		self.params = p
 
 	def deleteAllWidgets(self,o):
 		self.viewContainer.clear_widgets()
@@ -129,8 +134,20 @@ class BoxViewer(BoxLayout):
 
 	def select_record(self,o,v=None):
 		self.selected_data = o.getRecord()
-		self.dispatch('on_selected',o.getRecord())
+		d = {
+			"page_rows":1,
+			"page":self.selected_data['__posInSet__'],
+			"dataurl":self.options['dataloader']['options']['dataurl'],
+			"params":self.params
+		}
+		self.dispatch('on_selected',d)
 
 	def getData(self):
-		self.selected_data['__dataloader__'] = self.dataloader
-		return self.selected_data
+		d = {
+			"caller":self,
+			"page_rows":1,
+			"page":self.selected_data['__posInSet__'],
+			"dataurl":self.options['dataloader']['options']['dataurl'],
+			"params":self.params
+		}
+		return d

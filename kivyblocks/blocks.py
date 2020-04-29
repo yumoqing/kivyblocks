@@ -320,7 +320,7 @@ class Blocks(EventDispatcher):
 			return self.methodAction(widget, desc)
 		alert("actiontype(%s) invalid" % acttype,title='error')
 
-	def blocksAction(widget,desc):
+	def blocksAction(self,widget,desc):
 		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options')

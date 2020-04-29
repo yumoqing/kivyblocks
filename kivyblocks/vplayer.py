@@ -38,16 +38,6 @@ logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
 
 othersplatforms=['ios','android']
 
-class UrlPlayList(PageLoader):
-	def __init__(self, player, **options):
-		self.player = player
-		PageLoader.__init__(self,**options)
-
-	def show_page(self,o,d):
-		super().show_page(o,d)
-		id = d['rows'][0].id
-		self.player.play(id)
-
 class BaseVPlayer(FloatLayout, SwipeBehavior):
 	fullscreen = BooleanProperty(False)
 	def __init__(self,vfile=None,playlist=[]):
@@ -67,22 +57,12 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 		self.old_volume = 0
 		self._video.bind(eos=self.next)
 		self._video.bind(state=self.on_state)
+		self.bind(on_swipe_down=self.previous)
+		self.bind( on_swipe_up=self.next)
 		set_log_callback(self.ffplayerLog)
 		self.play()
 		if hasattr(self._video._video, '_ffplayer'):
 			self.ffplayer = self._video._video._ffplayer
-
-	def on_swipe_down(self):
-		self.stop()
-		self.dispatch('on_next')
-
-	on_swipe_right = on_swipe_down
-
-	def on_swipe_up(self):
-		self.stop()
-		self.dispatch('on_previous')
-
-	on_swipe_left = on_swipe_up
 
 	def setSource(self,s):
 		self.stop()
@@ -213,7 +193,8 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 			self._video.volume = self.old_volume
 
 	def stop(self):
-		self._video.state = 'stop'
+		self._video.state = 'pause'
+		# self._video.state = 'stop'
 
 	def pause(self,t=None):
 		if self._video.state == 'play':
@@ -222,7 +203,7 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 			self._video.state = 'play'
 
 	def __del__(self):
-		pass
+		self.stop()
 	
 class OSCController:
 	def __init__(self,ip,port,vfile=None):
@@ -330,7 +311,7 @@ class VPlayer(BaseVPlayer):
 		super().stop()
 
 	def __del__(self):
-		self.beforeDestroy()
+		self.stop()
 
 	def beforeDestroy(self):
 		print('beforeDestroy() called')
