@@ -55,7 +55,7 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 			self.playlist = [vfile]
 		self.curplay = 0
 		self.old_volume = 0
-		self._video.bind(eos=self.next)
+		self._video.bind(eos=self.on_eos)
 		self._video.bind(state=self.on_state)
 		self.bind(on_swipe_down=self.previous)
 		self.bind( on_swipe_up=self.next)
@@ -97,6 +97,9 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 			self._video.source = self.playlist[self.curplay]
 			self._video.state = 'play'
 	
+	def on_eos(self,o=None,v=None):
+		self.next()
+
 	def next(self,o=None,v=None):
 		self.stop()
 		self.dispatch('on_next',self)
@@ -298,11 +301,20 @@ class VPlayer(BaseVPlayer):
 			return
 		if self.pb is None:
 			return
-		self.curposition.text = self.totime(self._video.position)
+		v = self._video.position
+		if v is None:
+			return
+		self.curposition.text = self.totime(v)
 		if not self.manualMode:
-			self.slider.value = self._video.position
+			self.slider.value = v
 			self.slider.max = self._video.duration
 		self.maxposition.text = self.totime(self._video.duration)
+
+	def on_eos(self,o=None,v=None):
+		if self.update_task is not None:
+			self.update_task.cancel()
+			self.update_tasl = None
+		super().on_eos()
 
 	def stop(self):
 		if self.update_task is not None:
