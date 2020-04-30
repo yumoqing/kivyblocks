@@ -26,11 +26,9 @@ class APlayer(BoxLayout):
 		self.ap = None
 		
 	def on_source(self,o,s):
-		Logger.info('APlayer:self.source=%s',self.source)
 		self.ap = SoundFFPy(source=self.source)
 		if not self.ap:
 			return
-
 		self.ap.bind(on_play=self.begin_play)
 		self.ap.bind(on_stop=self.end_play)
 		self.play()
@@ -42,6 +40,7 @@ class APlayer(BoxLayout):
 		if not self.ap:
 			return
 		self.ap.stop()
+		self.ap = None
 
 	def play(self):
 		if not self.ap:
@@ -52,33 +51,8 @@ class APlayer(BoxLayout):
 		pass
 
 	def end_play(self,obj):
-		del self.ap
 		self.ap = None
 		
-	def endplay(self,btn):
-		self.ap.seek(self.ap.length - 0.01 )
-
-	def replay(self,btn):
-		self.ap.seek(0)
-
-	def volumeinc(self,btn):
-		self.ap.volume += 0.05
-		if self.ap.volume > 1.0:
-			self.ap.volume = 1.0
-
-	def volumedec(self,btn):
-		self.ap.volume -= 0.05
-		if self.ap.volume < 0.0:
-			self.ap.volume = 0.0
-
-	def moveback(self,btn):
-		f = self.ap.get_pos()
-		self.ap.seek(f - 2)
-
-	def moveforward(self,btn):
-		f = self.ap.get_pos()
-		self.ap.seek(f + 2)
-
 if __name__ == '__main__':
 	class MyApp(App):
 		def build(self):
