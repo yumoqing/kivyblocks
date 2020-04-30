@@ -246,15 +246,17 @@ class Blocks(EventDispatcher):
 
 		widgetClass = desc['widgettype']
 		opts = desc.get('options',{})
+		widget = None
 		try:
 			klass = Factory.get(widgetClass)
+			widget = klass(**opts)
+			if desc.get('parenturl'):
+				widget.parenturl = desc.get('parenturl')
+				ancestor = widget
 		except Exception as e:
 			print('Error:',widgetClass,'not registered')
+			print_exc()
 			raise NotExistsObject(widgetClass)
-		widget = klass(**opts)
-		if desc.get('parenturl'):
-			widget.parenturl = desc.get('parenturl')
-			ancestor = widget
 
 		if desc.get('id'):
 			myid = desc.get('id')
