@@ -26,11 +26,11 @@ class APlayer(BoxLayout):
 		self.ap = None
 		
 	def on_source(self,o,s):
+		if self.ap:
+			self.ap.stop()
 		self.ap = SoundFFPy(source=self.source)
 		if not self.ap:
 			return
-		self.ap.bind(on_play=self.begin_play)
-		self.ap.bind(on_stop=self.end_play)
 		self.play()
 
 	def __del__(self):
@@ -45,11 +45,9 @@ class APlayer(BoxLayout):
 	def play(self):
 		if not self.ap:
 			return 
+		self.ap.bind(on_stop=self.end_play)
 		self.ap.play()
 		
-	def begin_play(self,obj):
-		pass
-
 	def end_play(self,obj):
 		self.ap = None
 		
