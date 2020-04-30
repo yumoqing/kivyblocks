@@ -24,6 +24,7 @@ class APlayer(BoxLayout):
 			can_move=False):
 		super().__init__(orientation='vertical')
 		self.ap = None
+		self.end_flag = False
 		
 	def on_source(self,o,s):
 		if self.ap:
@@ -34,6 +35,7 @@ class APlayer(BoxLayout):
 		self.play()
 
 	def __del__(self):
+		self.end_flag=True
 		self.stop()
 
 	def stop(self):
