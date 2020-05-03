@@ -51,6 +51,7 @@ from kivycalendar import DatePicker
 from kivy.factory import Factory
 
 from appPublic.dictObject import DictObject
+from appPublic.folderUtils import listFile
 
 from .widgetExt.scrollwidget import ScrollWidget
 from .widgetExt.binstateimage import BinStateImage
@@ -90,6 +91,44 @@ class PressableImage(ButtonBehavior,AsyncImage):
 class PressableLabel(ButtonBehavior, Text):
 	def on_press(self):
 		pass
+
+class FILEDataHandler(EventDispatcher):
+	def __init__(self, url, subfixes=[],params={}):
+		self.url = url
+		self.subfixes=subfixes
+		self.params = params
+		self.page_rows = self.params.get('page_rows',60)
+		self.page = self.params.get('page',1)
+		if not url.startswith('file://'):
+			raise Exception('%s is not a file url' % url)
+		self.files = [i for i in listFile(url[7:],suffixs=subfixes, \
+					rescursive=self.params.get('rescursive',False)) ]
+		self.total_files = len(self.files)
+		x = 0 if self.total_files % self.page_rows == 0 else 1
+		self.total_pages = self.total_files / self.page_rows + x
+		self.register_event_type('on_success')
+		self.register_event_type('on_error')
+
+	def on_success(self,d):
+		return
+
+	def on_error(self,e):
+		return
+
+	def handle(self,params={}):
+		d = {}
+		d['total'] = self.total_files
+		d['rows'] = []
+		p = self.params.copy()
+		p.update(params)
+		page = p.get('page')
+		for i in range(self.page_rows):
+			try:
+				r = self.files[page * self.page_rows + i]
+				d['rows'].append({'filename':r})
+			except:
+				break
+		self.dispatch('on_success',d)
 
 class HTTPDataHandler(EventDispatcher):
 	def __init__(self, url,method='GET',params={},
