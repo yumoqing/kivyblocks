@@ -430,9 +430,8 @@ class Blocks(EventDispatcher):
 			try:
 				widget = self.__build(desc,ancestor=ancestor)
 				self.dispatch('on_built',widget)
-				print('widgetBuild():&&&&&&&&&&&&&&&&&',widget)
 			except Exception as e:
-				print('&&&&&&&&&&&&&&&&&',e)
+				print_exc()
 				doerr(None,e)
 				print('&&&&&&&&&&&&&&&&&',e)
 				return

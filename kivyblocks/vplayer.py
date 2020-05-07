@@ -47,22 +47,26 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 		self.register_event_type('on_next')
 		self.register_event_type('on_previous')
 		Window.allow_screensaver = False
-		self._video = Video(allow_stretch=True,pos_hint={'x': 0, 'y': 0},size_hint=(1,1))
+		self._video = Video(allow_stretch=True)
 		self.add_widget(self._video)
+		self.nextdir = None
 		if type(vfile) == type([]):
 			self.playlist = vfile
 		else:
 			self.playlist = [vfile]
 		self.curplay = 0
 		self.old_volume = 0
-		self._video.bind(eos=self.on_eos)
 		self._video.bind(state=self.on_state)
+		self._video.bind(position=self.positionChanged)
 		self.bind(on_swipe_down=self.previous)
-		self.bind( on_swipe_up=self.next)
+		self.bind(on_swipe_up=self.next)
 		set_log_callback(self.ffplayerLog)
 		self.play()
 		if hasattr(self._video._video, '_ffplayer'):
 			self.ffplayer = self._video._video._ffplayer
+
+	def positionChanged(self,o,v):
+		pass
 
 	def setSource(self,s):
 		self.stop()
@@ -85,6 +89,7 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 
 	def on_previous(self, o=None, v=None):
 		pass
+
 	def ffplayerLog(self, msg, level):
 		msg = msg.strip()
 		if msg:
@@ -96,15 +101,16 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 		if self.curplay >= 0:
 			self._video.source = self.playlist[self.curplay]
 			self._video.state = 'play'
-	
-	def on_eos(self,o=None,v=None):
-		self.next()
-
+		else:
+			Logger.info('VPlaer: self.curpay < 0')
+			
 	def next(self,o=None,v=None):
+		self.nextdir = 'down'
 		self.stop()
 		self.dispatch('on_next',self)
 
 	def previous(self,o=None,v=None):
+		self.nextdir = 'up'
 		self.stop()
 		self.dispatch('on_previous',self)
 
@@ -113,6 +119,10 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 			Window.allow_screensaver = False
 		else:
 			Window.allow_screensaver = True
+		if self._video.state == 'stop':
+			if self.nextdir is None:
+				self.dispatch('on_next',self)
+			self.nextdir = None
 
 	def on_fullscreen(self, instance, value):
 		window = self.get_parent_window()
@@ -196,8 +206,7 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 			self._video.volume = self.old_volume
 
 	def stop(self):
-		self._video.state = 'pause'
-		# self._video.state = 'stop'
+		self._video.unload()
 
 	def pause(self,t=None):
 		if self._video.state == 'play':
@@ -239,7 +248,6 @@ class VPlayer(BaseVPlayer):
 		self._popup = None
 		self.menu_status = False
 		self.manualMode = False
-		self.update_task = None
 		self.pb = None
 		if vfile:
 			if type(vfile) == type([]):
@@ -296,6 +304,9 @@ class VPlayer(BaseVPlayer):
 		self._video.seek(self.slider.value/self._video.duration)
 		self.manualMode = False
 
+	def positionChanged(self,o,v):
+		self.update_slider(None)
+
 	def update_slider(self,t):
 		if self._video.state != 'play':
 			return
@@ -309,18 +320,6 @@ class VPlayer(BaseVPlayer):
 			self.slider.value = v
 			self.slider.max = self._video.duration
 		self.maxposition.text = self.totime(self._video.duration)
-
-	def on_eos(self,o=None,v=None):
-		if self.update_task is not None:
-			self.update_task.cancel()
-			self.update_tasl = None
-		super().on_eos()
-
-	def stop(self):
-		if self.update_task is not None:
-			self.update_task.cancel()
-			self.update_task = None
-		super().stop()
 
 	def __del__(self):
 		self.stop()
@@ -423,15 +422,6 @@ class VPlayer(BaseVPlayer):
 				self.btn_pause.source  = blockImage('play.png')
 			else:
 				self.btn_pause.source = blockImage('pause.png')
-
-	def on_state(self,o,v):
-		BaseVPlayer.on_state(self,o,v)
-		if self._video.state == 'play':
-			self.update_task = Clock.schedule_interval(self.update_slider,1)
-		else:
-			if self.update_task:
-				self.update_task.cancel()
-			self.update_task = None
 
 if __name__ == '__main__':
 	class MyApp(App):

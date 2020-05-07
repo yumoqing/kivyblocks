@@ -93,7 +93,7 @@ class PressableLabel(ButtonBehavior, Text):
 		pass
 
 class FILEDataHandler(EventDispatcher):
-	def __init__(self, url, subfixes=[],params={}):
+	def __init__(self, url, suffixs=[],params={}):
 		self.url = url
 		self.subfixes=subfixes
 		self.params = params
@@ -101,7 +101,7 @@ class FILEDataHandler(EventDispatcher):
 		self.page = self.params.get('page',1)
 		if not url.startswith('file://'):
 			raise Exception('%s is not a file url' % url)
-		self.files = [i for i in listFile(url[7:],suffixs=subfixes, \
+		self.files = [i for i in listFile(url[7:],suffixs=suffixs, \
 					rescursive=self.params.get('rescursive',False)) ]
 		self.total_files = len(self.files)
 		x = 0 if self.total_files % self.page_rows == 0 else 1
@@ -182,4 +182,10 @@ class HTTPDataHandler(EventDispatcher):
 						stream=self.stream,
 						callback=self.onSuccess,
 						errback=self.onError)
+
+
+def getDataHandler(url,**kwargs):
+	if url.startswith('file://'):
+		return FILEDataHandler(url,**kwargs)
+	return HTTPDataHandler(url, **kwaegs)
 
