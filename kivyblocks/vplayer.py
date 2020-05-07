@@ -40,9 +40,11 @@ othersplatforms=['ios','android']
 
 class BaseVPlayer(FloatLayout, SwipeBehavior):
 	fullscreen = BooleanProperty(False)
-	def __init__(self,vfile=None,playlist=[]):
+	def __init__(self,vfile=None,loop=None,mute=False):
 		FloatLayout.__init__(self)
 		SwipeBehavior.__init__(self)
+		self.loop = loop
+		self.muteFlg = mute
 		self.register_event_type('on_source_error')
 		self.register_event_type('on_next')
 		self.register_event_type('on_previous')
@@ -50,36 +52,40 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 		self._video = Video(allow_stretch=True)
 		self.add_widget(self._video)
 		self.nextdir = None
-		if type(vfile) == type([]):
-			self.playlist = vfile
-		else:
-			self.playlist = [vfile]
+		self.playlist = []
 		self.curplay = 0
 		self.old_volume = 0
 		self._video.bind(state=self.on_state)
+		# self._video.bind(loaded=self.playVideo) no effect
 		self._video.bind(position=self.positionChanged)
+		if loop:
+			self.eos = 'loop'
+		
 		self.bind(on_swipe_down=self.previous)
 		self.bind(on_swipe_up=self.next)
 		set_log_callback(self.ffplayerLog)
-		self.play()
 		if hasattr(self._video._video, '_ffplayer'):
 			self.ffplayer = self._video._video._ffplayer
+		if vfile is not None:
+			self.setSource(vfile)
 
 	def positionChanged(self,o,v):
 		pass
+
+	def playVideo(self,o=None,v=None):
+		# print('-------------VPlayer():playVideo()')
+		self._video.state = 'play'
+		self.nextdir = None
+		if self.muteFlg:
+			self.setVolume(None,0)
 
 	def setSource(self,s):
 		self.stop()
 		self.curplay = 0
 		self.playlist = [s]
+		self._video.source = self.playlist[self.curplay]
 		Logger.info('kivyblocks: Vplayer().setSource,s=%s',s)
-		self.play()
-
-	def setPlaylist(self,pl):
-		self.stop()
-		self.curplay = 0
-		self.playlist = pl
-		self.play()
+		self.playVideo()
 
 	def on_source_error(self,o,v):
 		Logger.info('safecorner: {} error'.format(v))
@@ -117,6 +123,8 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 	def on_state(self,o=None,v=None):
 		if self._video.state == 'play':
 			Window.allow_screensaver = False
+			if self.muteFlg:
+				self.setVolume(None,0)
 		else:
 			Window.allow_screensaver = True
 		if self._video.state == 'stop':
@@ -242,25 +250,17 @@ class OSCController:
 		self.dispatcher.map(p,f,None)
 
 class VPlayer(BaseVPlayer):
-	def __init__(self,vfile=None, loop=False):
-		super().__init__(vfile=vfile)
-		self.loop = loop
+	def __init__(self,vfile=None, loop=False,mute=False, opbar=True):
+		super().__init__(vfile=vfile,loop=loop,mute=mute)
+		self.opbar = opbar
 		self.menubar = None
 		self._popup = None
 		self.menu_status = False
 		self.manualMode = False
 		self.pb = None
-		if vfile:
-			if type(vfile) == type([]):
-				self.playlist = vfile
-			else:
-				self.playlist = [vfile]
-			self.curplay = 0
-			self.play()
-		else:
-			self.playlist = []
-			self.curplay = -1
 		self._video.bind(on_touch_down=self.show_hide_menu)
+		if self.loop:
+			self.eos = 'loop'
 	
 	def totime(self,dur):
 		h = dur / 3600
@@ -339,6 +339,9 @@ class VPlayer(BaseVPlayer):
 			self.fullscreen = False if self.fullscreen else True
 			print('doube_tap')
 			return 
+
+		if not self.opbar:
+			return
 
 		if not self.menubar:
 			self.buildMenu()
