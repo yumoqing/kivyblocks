@@ -120,6 +120,7 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 		else:
 			Window.allow_screensaver = True
 		if self._video.state == 'stop':
+			Logger.info('VPlayer: state==stop,nextdir=%s',self.nextdir)
 			if self.nextdir is None:
 				self.dispatch('on_next',self)
 			self.nextdir = None
