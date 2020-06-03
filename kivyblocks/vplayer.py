@@ -70,14 +70,13 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 			self.setSource(vfile)
 
 	def positionChanged(self,o,v):
-		pass
+		if self.muteFlg:
+			self._video.volume = 0
 
 	def playVideo(self,o=None,v=None):
 		# print('-------------VPlayer():playVideo()')
 		self._video.state = 'play'
 		self.nextdir = None
-		if self.muteFlg:
-			self.setVolume(None,0)
 
 	def setSource(self,s):
 		self.stop()
@@ -123,8 +122,6 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 	def on_state(self,o=None,v=None):
 		if self._video.state == 'play':
 			Window.allow_screensaver = False
-			if self.muteFlg:
-				self.setVolume(None,0)
 		else:
 			Window.allow_screensaver = True
 		if self._video.state == 'stop':
@@ -203,6 +200,10 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 
 	def setVolume(self,obj,v):
 		self._video.volume = v
+		if v >= 0.01:
+			self.muteFlg = False
+		else:
+			self.muteFlg = True
 
 	def setPosition(self,obj,v):
 		self._video.seek(v)
@@ -251,16 +252,14 @@ class OSCController:
 
 class VPlayer(BaseVPlayer):
 	def __init__(self,vfile=None, loop=False,mute=False, opbar=True):
-		super().__init__(vfile=vfile,loop=loop,mute=mute)
 		self.opbar = opbar
 		self.menubar = None
 		self._popup = None
 		self.menu_status = False
 		self.manualMode = False
 		self.pb = None
+		super().__init__(vfile=vfile,loop=loop,mute=mute)
 		self._video.bind(on_touch_down=self.show_hide_menu)
-		if self.loop:
-			self.eos = 'loop'
 	
 	def totime(self,dur):
 		h = dur / 3600

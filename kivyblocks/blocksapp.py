@@ -6,6 +6,7 @@ import signal
 from appPublic.jsonConfig import getConfig
 from appPublic.folderUtils import ProgramPath
 
+from kivy.factory import Factory
 from kivy.config import Config
 from kivy.metrics import sp,dp,mm
 from kivy.core.window import WindowBase, Window
@@ -107,13 +108,19 @@ def appBlocksHack(app):
 	
 class BlocksApp(App):
 	def build(self):
+		appBlocksHack(self)
 		root = PageContainer()
 		x = None
 		config = getConfig()
-		x = self.blocks.widgetBuild(config.root)
-		if x is None:
-			alert(str(self.config.root)+': cannt build widget')
-			return root
-		root.add_widget(x)
+		blocks = Factory.Blocks()
+		blocks.bind(on_built=self.addTopWidget)
+		blocks.bind(on_error=self.showError)
+		blocks.widgetBuild(config.root)
 		return root
-			
+	
+	def addTopWidget(self,o,w):
+		self.root.add_widget(w)
+	
+	def showError(self,o,e):
+		alert(str(self.config.root)+': cannt build widget')
+

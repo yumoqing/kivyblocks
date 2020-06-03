@@ -12,7 +12,7 @@ class PageContainer(FloatLayout):
 		self.pageWidgets = []
 		self.backButton = Button(text='<',size_hint=(None,None),
 							font_size=CSize(1),
-							height=CSize(1.8),width=CSize(1.8))
+							height=CSize(1.8),width=CSize(4))
 		self.backButton.bind(on_press=self.previous)
 		Window.bind(size=self.on_window_size)
 
@@ -36,6 +36,7 @@ class PageContainer(FloatLayout):
 		if self.show_back:
 			return
 		super(PageContainer,self).add_widget(self.backButton)
+		self.backButton.text = '<%d' % len(self.pageWidgets)
 		self.show_back = True
 
 	def showLastPage(self):

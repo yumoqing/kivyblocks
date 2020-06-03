@@ -1,6 +1,7 @@
 import time
 from threading import Thread, Lock, BoundedSemaphore
 import requests
+from functools import wraps
 
 from kivy.event import EventDispatcher
 from kivy.clock import Clock
@@ -101,13 +102,13 @@ class HttpClient:
 			headers.update({'session':sessionid})
 		elif app.getAuthHeader():
 			headers.update(app.getAuthHeader())
-		print('headers=',headers)
+		# print('headers=',headers)
 		if method in ['GET']:
 			req = requests.Request(method,url,
-					params=params,headers=headers)
+					params=params,headers=headers,verify=False)
 		else:
 			req = requests.Request(method,url,
-					data=params,files=files,headers=headers)
+					data=params,files=files,headers=headers,verify=False)
 		prepped = self.s.prepare_request(req)
 		resp = self.s.send(prepped)
 		if resp.status_code == 200:

@@ -125,7 +125,10 @@ class FILEDataHandler(EventDispatcher):
 		for i in range(self.page_rows):
 			try:
 				r = self.files[page * self.page_rows + i]
-				d['rows'].append({'filename':r})
+				d['rows'].append({'filename':r,
+					'id':r,
+					'url':r
+				})
 			except:
 				break
 		self.dispatch('on_success',d)
@@ -154,7 +157,7 @@ class HTTPDataHandler(EventDispatcher):
 		pass
 
 	def onSuccess(self,o,v):
-		print(__file__,'onSuccess():v=',v)
+		# print(__file__,'onSuccess():v=',v)
 		self.dispatch('on_success',v)
 
 	def onError(self,o,e):
