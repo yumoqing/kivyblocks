@@ -83,6 +83,7 @@ hostsessions = {}
 class HttpClient:
 	def __init__(self):
 		self.s = requests.Session()
+		self.s.verify = False
 		self.workers = App.get_running_app().workers
 		
 	def url2domain(self,url):
@@ -105,10 +106,10 @@ class HttpClient:
 		# print('headers=',headers)
 		if method in ['GET']:
 			req = requests.Request(method,url,
-					params=params,headers=headers,verify=False)
+					params=params,headers=headers)
 		else:
 			req = requests.Request(method,url,
-					data=params,files=files,headers=headers,verify=False)
+					data=params,files=files,headers=headers)
 		prepped = self.s.prepare_request(req)
 		resp = self.s.send(prepped)
 		if resp.status_code == 200:
