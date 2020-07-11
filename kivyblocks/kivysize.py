@@ -22,7 +22,10 @@ class KivySizes:
 		if config.font_sizes:
 			self.myFontSizes = config.font_sizes
 		if name is None:
-			name = getConfig().font_name
+			name = config.font_name
+		print('font_sizes=',config.font_sizes,
+				'font_name=',config.font_name,
+				'myFS=',self.myFontSizes)
 		x = self.myFontSizes.get(name,None)
 		if x == None:
 			x = self.myFontSizes.get('normal')

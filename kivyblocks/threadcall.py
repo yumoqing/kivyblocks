@@ -7,7 +7,8 @@ from kivy.event import EventDispatcher
 from kivy.clock import Clock
 from kivy.app import App
 from .login import LoginForm
-from .utils import NeedLogin, InsufficientPrivilege, HTTPError
+
+from appPublic.http_client import Http_Client
 
 class ThreadCall(Thread,EventDispatcher):
 	def __init__(self,target, args=(), kwargs={}):
@@ -78,84 +79,10 @@ class Workers(Thread):
 		with self.lock:
 			self.tasks.insert(0,[callee,callback,errback,kwargs])
 
-hostsessions = {}
-
-class HttpClient:
+class HttpClient(Http_Client):
 	def __init__(self):
-		self.s = requests.Session()
-		self.s.verify = False
+		super().__init__()
 		self.workers = App.get_running_app().workers
-		
-	def url2domain(self,url):
-		parts = url.split('/')[:3]
-		pre = '/'.join(parts)
-		return pre
-
-	def _webcall(self,url,method="GET",
-					params={},
-					files={},
-					headers={},
-					stream=False):
-		app = App.get_running_app()
-		domain = self.url2domain(url)
-		sessionid = hostsessions.get(domain,None)
-		if sessionid:
-			headers.update({'session':sessionid})
-		elif app.getAuthHeader():
-			headers.update(app.getAuthHeader())
-		# print('headers=',headers)
-		if method in ['GET']:
-			req = requests.Request(method,url,
-					params=params,headers=headers)
-		else:
-			req = requests.Request(method,url,
-					data=params,files=files,headers=headers)
-		prepped = self.s.prepare_request(req)
-		resp = self.s.send(prepped)
-		if resp.status_code == 200:
-			h = resp.headers.get('Set-Cookie',None)
-			if h:
-				sessionid = h.split(';')[0]
-				hostsessions[domain] = sessionid
-		if resp.status_code == 401:
-			print('NeedLogin:',url)
-			raise NeedLogin
-
-		if resp.status_code == 403:
-			raise InsufficientPrivilege
-
-		if resp.status_code != 200:
-			print('Error', url, method, 
-					params, resp.status_code,
-					type(resp.status_code))
-			raise HTTPError(resp.status_code)
-		return resp
-		
-
-	def webcall(self,url,method="GET",
-				params={},
-				files={},
-				headers={},
-				stream=False):
-		resp = self._webcall(url,method=method,
-				params=params,
-				files=files,
-				headers=headers,
-				stream=stream)
-		if stream:
-			return resp
-		try:
-			data = resp.json()
-			if type(data) != type({}):
-				return data
-			status = data.get('status',None)
-			if status is None:
-				return data
-			if status == 'OK':
-				return data['data']
-			return data
-		except:
-			return resp.text
 		
 	def __call__(self,url,method="GET",
 				params={},
@@ -174,10 +101,6 @@ class HttpClient:
 				return cb(None,resp)
 			except Exception as e:
 				raise e
-			except Exception as e:
-				if errback is not None:
-					errback(e)
-				return None
 		kwargs = {
 			"url":url,
 			"method":method,

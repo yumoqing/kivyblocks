@@ -277,7 +277,8 @@ class Blocks(EventDispatcher):
 		btotal = len(desc.get('subwidgets',[]))
 		def doit(self,widget,bcnt,btotal,desc,o,w):
 			bcnt += 1
-			w.parenturl = widget.parenturl
+			if hasattr(widget,'parenturl'):
+				w.parenturl = widget.parenturl
 			widget.add_widget(w)
 			if hasattr(widget,'addChild'):
 				widget.addChild(w)
@@ -433,7 +434,6 @@ class Blocks(EventDispatcher):
 			except Exception as e:
 				print_exc()
 				doerr(None,e)
-				print('&&&&&&&&&&&&&&&&&',e)
 				return
 
 		def doerr(o,e):
