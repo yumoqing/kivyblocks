@@ -29,7 +29,7 @@ class NewWidget(Widget):
 
 	def getParentColorLevel(self):
 		if not self.parent:
-			self.fcolor, self.bgcolor = getColors(self.color_level):
+			self.fcolor, self.bgcolor = getColors(self.color_level)
 			
 	def on_color_level(self,o,v=None):
 		if bgcolor != [] and fcolor != []:

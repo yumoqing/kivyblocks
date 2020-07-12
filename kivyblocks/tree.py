@@ -431,7 +431,7 @@ class PopupMenu(BoxLayout):
 	def __init__(self,target,menudesc,**opts):
 		self.target = target
 		self.menudesc = menudesc
-		BoxLayout.__init__(self, size_hint=(0.5,0.5))
+		BoxLayout.__init__(self, size_hint=(0.5,0.5), **opts)
 		self.menu_tree = TextTree(**menudesc)
 		self.add_widget(self.menu_tree)
 		self.menu_tree.bind(on_press=self.onMenuItemTouch)

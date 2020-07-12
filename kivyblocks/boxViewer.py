@@ -32,7 +32,14 @@ class BoxViewer(BoxLayout):
 		self.parenturl = None
 		self.dataloader = None
 		self.initflag = False
-		BoxLayout.__init__(self, orientation='vertical')
+		remind = ['toolbar',
+				'dataloader',
+				'orientation',
+				'viewer',
+				'boxwidth',
+				'boxheight']
+		kwargs = {k:v for k,v in options if k not in remind }
+		BoxLayout.__init__(self, orientation='vertical', **kwargs)
 		self.selected_data = None
 		self.options = options
 		self.box_width = CSize(options['boxwidth'])

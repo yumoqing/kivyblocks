@@ -1,6 +1,8 @@
 import os
 import sys
 import time
+
+from appPublic.sockPackage import get_free_local_addr
 from kivy.utils import platform
 from traceback import print_exc
 from kivy.core.window import Window
@@ -22,7 +24,7 @@ from pythonosc import dispatcher, osc_server
 from ffpyplayer.tools import set_log_callback
 from .utils import *
 from .paging import PageLoader
-from .baseWidget import PressableImage, get_local_addr
+from .baseWidget import PressableImage
 from .swipebehavior import SwipeBehavior
 
 desktopOSs=[
@@ -235,11 +237,9 @@ class Swipe_VPlayer(BaseVPlayer, SwipeBehavior):
 
 class OSC_VPlayer(BaseVPlayer):
 	def __init__(self,vfile=None, loop=False, mute=False):
-		self.ip = ip
-		self.port = port
 		self.dispatcher = dispatcher.Dispatcher()
 		addr = get_local_addr
-		self.ip,self.port = get_local_addr()
+		self.ip,self.port = get_free_local_addr()
 		self.server = osc_server.ThreadingOSCUDPServer( (self.ip,self.port), 
 									self.dispatcher)
 		BaseVPlayer.__init__(self,vfile=vfile, loop=loop, mute=mute)
