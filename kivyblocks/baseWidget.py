@@ -6,6 +6,8 @@ from kivy.uix.button import Button, ButtonBehavior
 from kivy.uix.accordion import Accordion,AccordionItem
 from kivy.uix.label import Label
 from kivy.event import EventDispatcher
+from kivy.metrics import dp
+from kivy.core.window import Window
 
 from kivy.uix.actionbar import ActionBar,ActionView,ActionPrevious,ActionItem,ActionButton
 from kivy.uix.actionbar import ActionToggleButton, ActionCheck,ActionSeparator,ActionGroup
@@ -191,4 +193,12 @@ def getDataHandler(url,**kwargs):
 	if url.startswith('file://'):
 		return FILEDataHandler(url,**kwargs)
 	return HTTPDataHandler(url, **kwaegs)
+
+def device_type():
+	if platform != "android" and platform != "ios":
+		return "desktop"
+	elif Window.width >= dp(600) and Window.height >= dp(600):
+		return "tablet"
+	else:
+		return "mobile"
 
