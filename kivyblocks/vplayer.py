@@ -22,7 +22,7 @@ from pythonosc import dispatcher, osc_server
 from ffpyplayer.tools import set_log_callback
 from .utils import *
 from .paging import PageLoader
-from .baseWidget import PressableImage
+from .baseWidget import PressableImage, get_local_addr
 from .swipebehavior import SwipeBehavior
 
 desktopOSs=[
@@ -234,12 +234,15 @@ class Swipe_VPlayer(BaseVPlayer, SwipeBehavior):
 		self.bind(on_swipe_up=self.next)
 
 class OSC_VPlayer(BaseVPlayer):
-	def __init__(self,ip,port,vfile=None):
+	def __init__(self,vfile=None, loop=False, mute=False):
 		self.ip = ip
 		self.port = port
 		self.dispatcher = dispatcher.Dispatcher()
-		self.server = osc_server.ThreadingOSCUDPServer( (self.ip, self.port), self.dispatcher)
-		BaseVPlayer.__init__(self,vfile=vfile)
+		addr = get_local_addr
+		self.ip,self.port = get_local_addr()
+		self.server = osc_server.ThreadingOSCUDPServer( (self.ip,self.port), 
+									self.dispatcher)
+		BaseVPlayer.__init__(self,vfile=vfile, loop=loop, mute=mute)
 		self.map('/mute',self.mute)
 		self.map('/pause',self.pause)
 		self.map('/atrack',self.audioswitch)
