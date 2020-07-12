@@ -38,11 +38,10 @@ logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
 
 othersplatforms=['ios','android']
 
-class BaseVPlayer(FloatLayout, SwipeBehavior):
+class BaseVPlayer(FloatLayout):
 	fullscreen = BooleanProperty(False)
 	def __init__(self,vfile=None,loop=None,mute=False):
 		FloatLayout.__init__(self)
-		SwipeBehavior.__init__(self)
 		self.loop = loop
 		self.muteFlg = mute
 		self.register_event_type('on_source_error')
@@ -61,8 +60,8 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 		if loop:
 			self.eos = 'loop'
 		
-		self.bind(on_swipe_down=self.previous)
-		self.bind(on_swipe_up=self.next)
+		# self.bind(on_swipe_down=self.previous)
+		# self.bind(on_swipe_up=self.next)
 		set_log_callback(self.ffplayerLog)
 		if hasattr(self._video._video, '_ffplayer'):
 			self.ffplayer = self._video._video._ffplayer
@@ -227,7 +226,14 @@ class BaseVPlayer(FloatLayout, SwipeBehavior):
 	def __del__(self):
 		self.stop()
 	
-class OSCController:
+class Swipe_VPlayer(BaseVPlayer, SwipeBehavior):
+	def __init__(self,vfile=None, loop=False, mute=False):
+		BaseVPlayer.__init__(self,vfile=vfile, loop=loop, mute=mute)
+		SwipeBehavior.__init__(self)
+		self.bind(on_swipe_down=self.previous)
+		self.bind(on_swipe_up=self.next)
+
+class OSC_VPlayer(BaseVPlayer):
 	def __init__(self,ip,port,vfile=None):
 		self.ip = ip
 		self.port = port
@@ -250,7 +256,7 @@ class OSCController:
 	def map(self,p,f):
 		self.dispatcher.map(p,f,None)
 
-class VPlayer(BaseVPlayer):
+class VPlayer(Swipe_VPlayer):
 	def __init__(self,vfile=None, loop=False,mute=False, opbar=True):
 		self.opbar = opbar
 		self.menubar = None

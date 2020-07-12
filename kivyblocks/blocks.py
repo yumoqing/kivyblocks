@@ -9,7 +9,7 @@ from functools import partial
 from appPublic.dictExt import dictExtend
 from appPublic.folderUtils import ProgramPath
 from appPublic.dictObject import DictObject
-from appPublic.Singleton import SingletonDecorator
+from appPublic.Singleton import SingletonDecorator, GlobalEnv
 from appPublic.datamapping import keyMapping
 
 from kivy.config import Config
@@ -117,6 +117,7 @@ class Blocks(EventDispatcher):
 		self.action_id = 0
 		self.register_event_type('on_built')
 		self.register_event_type('on_failed')
+		self.env = GlobalEnv()
 	
 	def register_widget(self,name,widget):
 		globals()[name] = widget
@@ -158,6 +159,7 @@ class Blocks(EventDispatcher):
 		g['__builtins__']['__import__'] = None
 		g['__builtins__']['__loader__'] = None
 		g['__builtins__']['open'] = None
+		g.update(self.env)
 
 		return eval(s,g,l)
 
@@ -180,14 +182,16 @@ class Blocks(EventDispatcher):
 
 	def strValueExpr(self,s:str,localnamespace:dict={}):
 		if not s.startswith('py::'):
+			print('normal value')
 			return s
+		s = s[4:]
 		try:
 			v = self.eval(s[4:],localnamespace)
+			print('return result')
 			return v
 		except Exception as e:
-			if s.startswith('CSize'):
-				print('Exception .... ',e,s)
-				print_exc()
+			print('Exception .... ',e,s)
+			print_exc()
 			return s
 
 	def arrayValueExpr(self,arr:list,localnamespace:dict={}):
@@ -227,11 +231,18 @@ class Blocks(EventDispatcher):
 		return d
 	def valueExpr(self,obj,localnamespace={}):
 		if type(obj) == type(''):
+			print('1')
 			return self.strValueExpr(obj,localnamespace)
 		if type(obj) == type([]):
+			print('2')
 			return self.arrayValueExpr(obj,localnamespace)
-		if type(obj) in [ type({}), type(DictObject) ]:
+		if type(obj) == type({}):
+			print('3')
 			return self.dictValueExpr(obj,localnamespace)
+		if isinstance(obj,DictObject):
+			print('4')
+			return self.dictValueExpr(obj,localnamespace)
+		print('5',type(obj))
 		return obj
 
 	def __build(self,desc:dict,ancestor=None):
@@ -427,7 +438,9 @@ class Blocks(EventDispatcher):
 		}
 		"""
 		def doit(desc):
+			Logger.info("blocks:%s",str(desc))
 			desc = self.valueExpr(desc)
+			Logger.info("blocks:%s",str(desc))
 			try:
 				widget = self.__build(desc,ancestor=ancestor)
 				self.dispatch('on_built',widget)
