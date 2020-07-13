@@ -27,36 +27,41 @@ class SwipeBehavior(object):
 		self.swipeenable = True
 
 	def on_context_menu(self):
-		Logger.info('SwipeBehavior:on_context_menu fired')
+		pass
+		# Logger.info('SwipeBehavior:on_context_menu fired')
 
 	def on_swipe_left(self):
-		Logger.info('SwipeBehavior:on_swipe_left fired')
+		pass
+		# Logger.info('SwipeBehavior:on_swipe_left fired')
 
 	def on_swipe_right(self):
-		Logger.info('SwipeBehavior:on_swipe_right fired')
+		pass
+		# Logger.info('SwipeBehavior:on_swipe_right fired')
 
 	def on_swipe_up(self):
-		Logger.info('SwipeBehavior:on_swipe_up fired')
+		pass
+		# Logger.info('SwipeBehavior:on_swipe_up fired')
 
 	def on_swipe_down(self):
-		Logger.info('SwipeBehavior:on_swipe_down fired')
+		pass
+		# Logger.info('SwipeBehavior:on_swipe_down fired')
 
 	def on_touchdown(self,o, touch):
 		if touch.is_mouse_scrolling:
-			Logger.info('SwipeBehavior:is_mouse_scrolling')
+			# Logger.info('SwipeBehavior:is_mouse_scrolling')
 			return False
 		if not self.collide_point(touch.x, touch.y):
 			return False
 
-		Logger.info('SwipeBehavior:touch_down fired')
+		# Logger.info('SwipeBehavior:touch_down fired')
 		if self.swipeenable:
-			Logger.info('SwipeBehavior:touch_down fired')
+			# Logger.info('SwipeBehavior:touch_down fired')
 			self.sb_start_point = touch.pos
 			self.sb_start_time = time.time()
 
 	def on_touchmove(self,o,touch):
 		if self.collide_point(*touch.pos) and self.swipeenable:
-			Logger.info('SwipeBehavior:touch_move fired')
+			# Logger.info('SwipeBehavior:touch_move fired')
 			if self.sb_start_point is None:
 				self.sb_start_point = touch.pos
 			else:
@@ -64,7 +69,7 @@ class SwipeBehavior(object):
 
 	def on_touchup(self,o,touch):
 		if self.collide_point(*touch.pos) and self.swipeenable:
-			Logger.info('SwipeBehavior:touch_up fired')
+			# Logger.info('SwipeBehavior:touch_up fired')
 			self.sb_end_point = touch.pos
 			self.sb_end_time = time.time()
 			self.check_context_menu()
@@ -80,8 +85,8 @@ class SwipeBehavior(object):
 		if not self.sb_end_time:
 			return
 		period_time = self.sb_end_time - self.sb_start_time
-		Logger.info('SwipeBehavior:period_time=%f,threshold_time=%f',
-						period_time, self.threshold_time)
+		# Logger.info('SwipeBehavior:period_time=%f,threshold_time=%f',
+		#				period_time, self.threshold_time)
 		if period_time >= self.threshold_time:
 			self.dispatch('on_context_menu')
 
@@ -102,7 +107,7 @@ class SwipeBehavior(object):
 						self.threshold:
 				self.dispatch('on_swipe_left')
 		else:
-			Logger.info('SwipeBehavior:check_swipe x<y')
+			# Logger.info('SwipeBehavior:check_swipe x<y')
 			if self.sb_end_point[1] - self.sb_start_point[1] >= \
 						self.threshold:
 				self.dispatch('on_swipe_up')

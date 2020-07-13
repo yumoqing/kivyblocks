@@ -38,7 +38,7 @@ class BoxViewer(BoxLayout):
 				'viewer',
 				'boxwidth',
 				'boxheight']
-		kwargs = {k:v for k,v in options if k not in remind }
+		kwargs = {k:v for k,v in options.items() if k not in remind }
 		BoxLayout.__init__(self, orientation='vertical', **kwargs)
 		self.selected_data = None
 		self.options = options
