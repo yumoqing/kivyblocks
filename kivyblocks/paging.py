@@ -65,7 +65,6 @@ class PageLoader(EventDispatcher):
 		x = 1 / self.MaxbufferPage
 		if self.dir != 'down':
 			x = 1 - x
-		print('getLocater(),x=%f,dir=%s,self.curpage=%d' % (x,self.dir,self.curpage))
 		return x
 
 	def on_newbegin(self):
@@ -82,7 +81,6 @@ class PageLoader(EventDispatcher):
 		pass
 
 	def do_search(self,o,params):
-		print('PageLoader().do_search(), on_submit handle....',params)
 		self.newbegin = True
 		self.dispatch('on_newbegin')
 		self.params.update(params)
@@ -220,7 +218,6 @@ class RelatedLoader(PageLoader):
 		self.totalObj += len(data['rows'])
 		super().show_page(o,data)
 		self.loading = False
-		print('buffer pages=',len(self.objectPages.keys()),'pages=',self.objectPages.keys())
 	
 	def loadPreviousPage(self):
 		if self.loading:
@@ -289,25 +286,21 @@ class Paging(PageLoader):
 
 	def loadFirstPage(self,o=None):
 		if self.curpage == 1:
-			print('return not loading')
 			return
 		self.loadPage(1)
 	
 	def loadPreviousPage(self,o=None):
 		if self.curpage < 2:
-			print('return not loading')
 			return
 		self.loadPage(self.curpage-1)
 	
 	def loadNextPage(self,o=None):
 		if self.curpage >= self.total_page:
-			print('return not loading')
 			return
 		self.loadPage(self.curpage+1)
 	
 	def loadLastPage(self,o=None):
 		if self.curpage >= self.total_page:
-			print('return not loading')
 			return
 		self.loadPage(self.total_page)
 

@@ -129,11 +129,9 @@ class Blocks(EventDispatcher):
 		}
 		body="""def %s(widget,obj=None, v=None):
 	jsonstr='''%s'''
-	print(type(widget), type(obj),v,'action():desc=',jsonstr)
 	desc = json.loads(jsonstr)
 	app = App.get_running_app()
 	app.blocks.uniaction(widget, desc)
-	print('finished')
 """ % (fname, json.dumps(desc))
 		exec(body,globals(),l)
 		f = l.get(fname,None)
@@ -168,7 +166,6 @@ class Blocks(EventDispatcher):
 					errback=None,**kw):
 		if url.startswith('file://'):
 			filename = url[7:]
-			print(filename)
 			with codecs.open(filename,'r','utf-8') as f:
 				b = f.read()
 				dic = json.loads(b)
@@ -182,12 +179,10 @@ class Blocks(EventDispatcher):
 
 	def strValueExpr(self,s:str,localnamespace:dict={}):
 		if not s.startswith('py::'):
-			print('normal value')
 			return s
 		s = s[4:]
 		try:
 			v = self.eval(s[4:],localnamespace)
-			print('return result')
 			return v
 		except Exception as e:
 			print('Exception .... ',e,s)
@@ -231,18 +226,13 @@ class Blocks(EventDispatcher):
 		return d
 	def valueExpr(self,obj,localnamespace={}):
 		if type(obj) == type(''):
-			print('1')
 			return self.strValueExpr(obj,localnamespace)
 		if type(obj) == type([]):
-			print('2')
 			return self.arrayValueExpr(obj,localnamespace)
 		if type(obj) == type({}):
-			print('3')
 			return self.dictValueExpr(obj,localnamespace)
 		if isinstance(obj,DictObject):
-			print('4')
 			return self.dictValueExpr(obj,localnamespace)
-		print('5',type(obj))
 		return obj
 
 	def __build(self,desc:dict,ancestor=None):
@@ -438,9 +428,9 @@ class Blocks(EventDispatcher):
 		}
 		"""
 		def doit(desc):
-			Logger.info("blocks:%s",str(desc))
+			# Logger.info("blocks:%s",str(desc))
 			desc = self.valueExpr(desc)
-			Logger.info("blocks:%s",str(desc))
+			# Logger.info("blocks:%s",str(desc))
 			try:
 				widget = self.__build(desc,ancestor=ancestor)
 				self.dispatch('on_built',widget)
