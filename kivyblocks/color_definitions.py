@@ -382,7 +382,7 @@ def getTextColor(bgcolor,type='normal'):
 def getColors(level=0,selected=False):
 	style = getConfigStyle()
 	i = level % 8
-	Logger.info('TEST : style=%s,level=%d', style, level)
+	# Logger.info('TEST : style=%s,level=%d', style, level)
 	bg_color = colors[style][ level_bg_colors[i]]
 	if selected:
 		k = level_bg_colors[i]

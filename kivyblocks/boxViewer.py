@@ -79,11 +79,9 @@ class BoxViewer(BoxLayout):
 		if dir == 'up':
 			recs.reverse()
 			idx = -1
-		print('addPageWidgets(),begin')
 		for r in recs:
 			self.showObject(widgets, r, index=idx)
 
-		print('addPageWidgets(),widgets=',len(widgets))
 		self.dataloader.bufferObjects(widgets)
 		x = self.dataloader.getLocater()
 		self.locater(x)
@@ -93,7 +91,7 @@ class BoxViewer(BoxLayout):
 			self.viewContainer.remove_widget(w)
 
 	def on_selected(self, o, v=None):
-		print('BoxViewer(): on_selected fired....')
+		pass
 
 	def locater(self, pos):
 		self.viewContainer.scroll_y = pos
@@ -113,7 +111,6 @@ class BoxViewer(BoxLayout):
 
 	def showObject(self, holders, rec,index=0):
 		def doit(self,holders,idx,o,w):
-			print('showObject()...doit(),w=',w,o)
 			w.bind(on_press=self.select_record)
 			self.viewContainer.add_widget(w,index=idx)
 			holders.append(w)
