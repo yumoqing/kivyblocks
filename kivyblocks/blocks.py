@@ -295,7 +295,7 @@ class Blocks(EventDispatcher):
 			b = Blocks()
 			b.bind(on_built=f)
 			b.bind(on_failed=doerr)
-			w = b.widgetBuild(sw, ancestor=ancestor)
+			b.widgetBuild(sw, ancestor=ancestor)
 
 		if btotal == 0:
 			for b in desc.get('binds',[]):
