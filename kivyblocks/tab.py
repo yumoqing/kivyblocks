@@ -21,6 +21,8 @@
 """
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.clock import Clock
+from kivy.factory import Factory
+
 from kivyblocks.blocks import Blocks
 
 class TabsPanel(BGColorBehavior, TabbedPanel):
@@ -45,17 +47,8 @@ class TabsPanel(BGColorBehavior, TabbedPanel):
 			desc = d['content']
 			self.add_tab(text,desc)
 
-		w = block.widgetBuild((
-class BLKTabItem(BGColorBehavior, TabbedPanelItem):
-	def __init__(self,parent,color_level=0,text="",content={}):
-		self.parent=parent
-		self.color_level = color_level
+Factory.register('TabsPanel',TabsPanel)
 
-class BLKTabedPanel(BGColorBehavior, TabbedPanel):
-	def __init__(self,color_level=0, tabs=[], **kwargs):
-		self.tabs_desc = tabs
-		self.color_level = color_level
-		TabbedPanel.__init__(**kwargs)
-		BGColorBehavior.__init__(self)
-
-class 
+if __name__ == '__main__':
+	from kivy.app import App
+	pass
