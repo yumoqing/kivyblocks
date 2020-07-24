@@ -67,6 +67,7 @@ from .charts.bar import Bar
 from .bgcolorbehavior import BGColorBehavior
 from .utils import NeedLogin, InsufficientPrivilege, HTTPError
 from .login import LoginForm
+from .tab import TabsPanel
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
 	from .widgetExt.androidwebview import AWebView

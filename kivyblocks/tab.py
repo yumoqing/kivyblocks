@@ -1,29 +1,29 @@
 """
 {
-	"widgettype":"BLKTabbedPanel",
+	"widgettype":"TabsPanel",
 	"options":{
 		"tab_pos":"top_left"
-	},
-	"tabs":[
-		{
-			"text":"tab1",
-			"icon":"/img/hhhh.png",
-			"refresh_press":Fasle,
-			"content":{
-				"widgettype":"urlwidegt",
-				"url":"reggtY",
+		"tabs":[
+			{
+				"text":"tab1",
+				"icon":"/img/hhhh.png",
+				"refresh_press":Fasle,
+				"content":{
+					"widgettype":"urlwidegt",
+					"url":"reggtY",
+				}
+			},
+			{
 			}
-		},
-		{
-		}
-	]
+		]
+	},
 }
 """
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.clock import Clock
 from kivy.factory import Factory
 
-from kivyblocks.blocks import Blocks
+from .bgcolorbehavior import BGColorBehavior
 
 class TabsPanel(BGColorBehavior, TabbedPanel):
 	def __init__(self,**options):
@@ -37,7 +37,7 @@ class TabsPanel(BGColorBehavior, TabbedPanel):
 	def add_tab(self,text,desc):
 		def add(o,w):
 			self.add_widget(TabbedPanelItem(text=text,content=w))
-		blocks = Blocks()
+		blocks = Factory.Blocks()
 		blocks.bind(on_built=add)
 		blocks.widgetBuild(desc,ancestor=self)
 
