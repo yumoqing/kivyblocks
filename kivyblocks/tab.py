@@ -19,7 +19,7 @@
 	},
 }
 """
-from kivy.uix.tabbedpanel import TabbedPanel
+from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivy.clock import Clock
 from kivy.factory import Factory
 
@@ -32,7 +32,7 @@ class TabsPanel(BGColorBehavior, TabbedPanel):
 		opts = {k:v for k,v in options.items() if k not in ['tabs','color_level']}
 		TabbedPanel.__init__(self,**opts)
 		BGColorBehavior.__init__(self)
-		Clock.schedule_once(self.addTabs,0)
+		Clock.schedule_once(self.add_tabs,0)
 
 	def add_tab(self,text,desc):
 		def add(o,w):
