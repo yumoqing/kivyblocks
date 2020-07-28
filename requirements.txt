@@ -1,6 +1,7 @@
 jinja2
 kivy
 ffpyplayer
+qrcode
 pillow
 requests
 git+https://github.com/yumoqing/kivycalendar
