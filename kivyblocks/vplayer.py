@@ -258,6 +258,13 @@ class OSC_VPlayer(BaseVPlayer):
 	def map(self,p,f):
 		self.dispatcher.map(p,f,None)
 
+	def get_osc_info(self):
+		return {
+			"host":self.ip,
+			"port":self.port
+		}
+
+
 class VPlayer(Swipe_VPlayer):
 	def __init__(self,vfile=None, loop=False,mute=False, opbar=True):
 		self.opbar = opbar
