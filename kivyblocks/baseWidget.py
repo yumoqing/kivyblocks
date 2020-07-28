@@ -68,6 +68,8 @@ from .bgcolorbehavior import BGColorBehavior
 from .utils import NeedLogin, InsufficientPrivilege, HTTPError
 from .login import LoginForm
 from .tab import TabsPanel
+from .qrdata import QRCodeWidget
+
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
 	from .widgetExt.androidwebview import AWebView
