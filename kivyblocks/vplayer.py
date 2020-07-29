@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import threading
 
 from appPublic.sockPackage import get_free_local_addr
 from kivy.utils import platform
@@ -248,11 +249,16 @@ class OSC_VPlayer(BaseVPlayer):
 		self.map('/replay',self.replay)
 		self.map('/next',self.next)
 		self.map('/previous',self.previous)
-		self.server.serve_forever()
+		t = threading.Thread(target=self.server.serve_forever())
+		t.start()
 		self.fullscreen = True
 		label = Label(text='%s %d' % (self.ip,self.port), font_size=CSize(2))
-		label.size = self.width - label.width, 0
+		label.x = self.width - label.width, 0
+		label.y = 0
 		self.add_widget(label)
+
+	def __del__(self):
+		self.server.stop()
 
 	def map(self,p,f):
 		self.dispatcher.map(p,f,None)
