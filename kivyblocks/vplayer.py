@@ -249,7 +249,7 @@ class OSC_VPlayer(BaseVPlayer):
 		self.map('/replay',self.replay)
 		self.map('/next',self.next)
 		self.map('/previous',self.previous)
-		t = threading.Thread(target=self.server.serve_forever())
+		t = threading.Thread(target=self.server.serve_forever)
 		t.start()
 		self.fullscreen = True
 		label = Label(text='%s %d' % (self.ip,self.port), font_size=CSize(2))
@@ -258,7 +258,7 @@ class OSC_VPlayer(BaseVPlayer):
 		self.add_widget(label)
 
 	def __del__(self):
-		self.server.stop()
+		self.server.server_close()
 
 	def map(self,p,f):
 		self.dispatcher.map(p,f,None)
