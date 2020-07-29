@@ -247,7 +247,7 @@ class OSC_VPlayer(BaseVPlayer):
 		self.map('/endplay',self.endplay)
 		self.map('/replay',self.replay)
 		self.map('/next',self.next)
-		self.map('/prevous',self.prevous)
+		self.map('/previous',self.previous)
 		self.server.serve_forever()
 		self.fullscreen = True
 		label = Label(text='%s %d' % (self.ip,self.port), font_size=CSize(2))
