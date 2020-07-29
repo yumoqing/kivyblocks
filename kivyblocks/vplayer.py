@@ -237,7 +237,6 @@ class Swipe_VPlayer(BaseVPlayer, SwipeBehavior):
 class OSC_VPlayer(BaseVPlayer):
 	def __init__(self,vfile=None, loop=False, mute=False):
 		self.dispatcher = dispatcher.Dispatcher()
-		addr = get_local_addr
 		self.ip,self.port = get_free_local_addr()
 		self.server = osc_server.ThreadingOSCUDPServer( (self.ip,self.port), 
 									self.dispatcher)
