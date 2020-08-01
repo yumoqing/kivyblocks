@@ -250,15 +250,16 @@ class OSC_VPlayer(BaseVPlayer):
 		self.map('/next',self.next)
 		self.map('/previous',self.previous)
 		t = threading.Thread(target=self.server.serve_forever)
+		t.daemon_threads = True
 		t.start()
-		self.fullscreen = True
-		label = Label(text='%s %d' % (self.ip,self.port), font_size=CSize(2))
-		label.x = self.width - label.width, 0
-		label.y = 0
-		self.add_widget(label)
+
+	def osc_server_quit(self):
+		self.server.shutdown()
+		self.server.server_close()
 
 	def __del__(self):
-		self.server.server_close()
+		print("*******************VPlayer deleted**********")
+		self.quit()
 
 	def map(self,p,f):
 		self.dispatcher.map(p,f,None)
