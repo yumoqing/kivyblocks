@@ -105,7 +105,6 @@ class QRCodeWidget(FloatLayout):
 		self._create_texture(k)
 		
 		
-		cr, cg, cb, ca = self.background_color[:]
 		cr, cg, cb = 255, 255, 255
 		###used bytearray for python 3.5 eliminates need for btext
 		buff = bytearray()
