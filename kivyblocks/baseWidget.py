@@ -82,14 +82,8 @@ class WrapText(Label):
 				texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
 
-class Text(BGColorBehavior, Label):
-	def __init__(self,bgcolor=[],fgcolor=[],color_level=-1,**kw):
-		self.options = DictObject(**kw)
-		kwargs = kw.copy()
-		Label.__init__(self,**kwargs)
-		BGColorBehavior.__init__(self,bgcolor=bgcolor,
-					fgcolor=fgcolor,
-					color_level=color_level)
+class Text(Label):
+	pass
 
 class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):

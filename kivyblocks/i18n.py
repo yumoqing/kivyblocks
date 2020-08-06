@@ -4,6 +4,7 @@ from kivy.properties import StringProperty
 from appPublic.Singleton import SingletonDecorator
 from appPublic.jsonConfig import getConfig
 from .baseWidget import Text
+from .threadcall import HttpClient
 
 @SingletonDecorator
 class I18n:
@@ -20,7 +21,8 @@ class I18n:
 		app = App.get_running_app()
 		config = getConfig()
 		url = '%s%s/%s' % (config.uihome, config.i18n_url, lang)
-		d = app.hc.get(url)
+		hc = HttpClient()
+		d = hc.get(url)
 		print('i18n() %s get data=' % url, d, type(d))
 		self.kvlang[lang] = d
 		

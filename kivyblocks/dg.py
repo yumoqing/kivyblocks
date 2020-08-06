@@ -9,6 +9,7 @@ from kivy.properties import BooleanProperty
 from kivy.properties import ListProperty
 from kivy.graphics import Color, Rectangle
 from kivy.app import App
+from kivy.factory import Factory
 
 from appPublic.dictObject import DictObject
 from appPublic.timecost import TimeCost
@@ -46,7 +47,7 @@ class Cell(BoxLayout):
 		)
 		if not self.row.header and self.desc.get('viewer'):
 			viewer = self.desc.get('viewer')
-			blocks = App.get_running_app().blocks
+			blocks = Factory.Blocks()
 			if isinstance(viewer,str):
 				l = self.desc.copy()
 				l['row'] = self.row
@@ -59,14 +60,12 @@ class Cell(BoxLayout):
 		if desc['header']:
 			bl = I18nText(otext=str(desc['value']),
 				font_size=CSize(1),
-				halign='left',
-				bgColor=self.row.part.datagrid.header_bgcolor
+				halign='left'
 			)
 		else:
 			bl = BLabel(text = str(desc['value']), 
 					font_size=CSize(1),
-					halign='left',
-					bgColor=self.row.part.datagrid.body_bgcolor
+					halign='left'
 			)
 		self.add_widget(bl)
 		bl.bind(on_press=self.cell_press)
@@ -375,6 +374,10 @@ class DataGrid(WidgetReady, BoxLayout):
 			self.freeze_part.body.addRow(id, data, **kw)
 		self.normal_part.body.addRow(id, data, **kw)
 		return id
+
+	def setData(self,data):
+		for d in data:
+			self.addRow(d)
 
 	def delRow(self,id,**kw):
 		if self.freeze_part:

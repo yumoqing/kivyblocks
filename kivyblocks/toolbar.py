@@ -62,8 +62,7 @@ class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
 
 		tsize = CSize(self.opts.text_size)
 		label = self.opts.label or self.opts.name
-		self.lbl = I18nText(color_level=self.ancestor.color_level,
-					otext=label,
+		self.lbl = I18nText( otext=label,
 					font_size=int(tsize),
 					text_size=(CSize(len(label)), tsize),
 					height=tsize,

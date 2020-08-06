@@ -7,7 +7,7 @@ from kivy.clock import Clock
 from appPublic.folderUtils import ProgramPath
 from appPublic.jsonConfig import getConfig
 from appPublic.timecost import TimeCost
-from kivyblocks.blocksapp import BlocksApp
+from kivyblocks.blocksapp import appBlocksHack
 
 if __name__ == '__main__':
 	pp = ProgramPath()
@@ -378,7 +378,12 @@ name293	subject293	34	1	1	1992"""
 				r[f['name']] = d[i]
 			return r
 
-	MyApp().run()
+		def on_close(self,*args,**kwargs):
+			return True
+
+	myapp = MyApp()
+	appBlocksHack(myapp)
+	myapp.run()
 	tc = TimeCost('show')
 	tc.show()
 
