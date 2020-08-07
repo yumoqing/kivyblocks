@@ -346,14 +346,7 @@ class StrSearchForm(BoxLayout):
 				size_hint_y=None,
 				height=CSize(3))
 		self.add_widget(self.input_widget)
-		imgsrc = img_url if img_url else blockImage('search.png')
-		self.search = PressableImage(source=imgsrc,
-					size_hint=(None,None),
-					size=CSize(3,3)
-		)
-		self.add_widget(self.search)
 		self.register_event_type('on_submit')
-		self.search.bind(on_press=self.submit_input)
 		self.input_widget.bind(on_text_validate=self.submit_input)
 
 	def getData(self):
