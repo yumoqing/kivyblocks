@@ -262,11 +262,18 @@ class Blocks(EventDispatcher):
 		if desc.get('id'):
 			myid = desc.get('id')
 			holder = ancestor
+			if myid[0] == '/':
+				myid = myid[1:]
+				app = App.get_running_app()
+				holder = app.root
+
 			if ancestor == widget:
 				app = App.get_running_app()
 				holder = app.root
+
 			if not hasattr(holder,'widget_ids'):
 				setattr(holder,'widget_ids',{})
+
 			holder.widget_ids[myid] = widget
 		
 		widget.build_desc = desc
@@ -475,6 +482,10 @@ class Blocks(EventDispatcher):
 		for id in ids:
 			if id == 'self':
 				return widget
+			if not hasattr(widget, 'widget_ids'):
+				print('widget not found,path=',path,'id=',id,'ids=',ids)
+				raise WidgetNotFoundById(id)
+				
 			widget = widget.widget_ids.get(id,None)
 			if widget is None:
 				print('widget not found,path=',path,'id=',id,'ids=',ids)
