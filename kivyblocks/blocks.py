@@ -19,6 +19,7 @@ from kivy.properties import BooleanProperty
 from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.factory import Factory
+from kivy.uix.video import Video
 from .baseWidget import *
 from .toolbar import *
 from .dg import DataGrid
@@ -499,3 +500,4 @@ class Blocks(EventDispatcher):
 		return
 
 Factory.register('Blocks',Blocks)
+Factory.register('Video',Video)

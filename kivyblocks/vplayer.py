@@ -73,7 +73,7 @@ class BaseVPlayer(FloatLayout):
 
 	def on_size(self,*args):
 		self._video.size = self.size
-		print('*********************on_size()**************')
+		print('****on_size()****',self.pos,self.size,self._video.pos,self._video.size)
 	
 	def positionChanged(self,o,v):
 		if self.muteFlg:
