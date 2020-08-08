@@ -34,6 +34,7 @@ class NewVideo(Video):
 		Window.bind(on_rotate=self.ctrl_fullscreen)
 
 	def ctrl_fullscreen(self,*args):
+		print('newvideo(),crtl_fullscreen',args)
 		if Window.width > Window.height:
 			self.fullscreen = True
 		else:
@@ -48,6 +49,7 @@ class NewVideo(Video):
 		x = self._video._ffplayer.request_channel('audio')
 
 	def on_fullscreen(self, instance, value):
+		print('NewVideo::on_fullscreen(),value=', value)
 		window = self.get_parent_window()
 		if not window:
 			Logger.warning('VideoPlayer: Cannot switch to fullscreen, '
