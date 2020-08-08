@@ -31,10 +31,10 @@ class NewVideo(Video):
 		if hasattr(self._video, '_ffplayer'):
 			self.ffplayer = self._video._ffplayer
 
-		Window.bind(on_size=self.ctrl_fullscreen)
+		Window.bind(size=self.ctrl_fullscreen)
 
 	def ctrl_fullscreen(self,*args):
-		print('newvideo(),crtl_fullscreen',args)
+		print('NewVideo(),crtl_fullscreen',args)
 		if Window.width > Window.height:
 			self.fullscreen = True
 		else:
