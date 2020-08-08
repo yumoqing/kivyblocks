@@ -71,6 +71,10 @@ class BaseVPlayer(FloatLayout):
 		if vfile is not None:
 			self.setSource(vfile)
 
+	def on_size(self,*args):
+		self._video.size = self.size
+		print('*********************on_size()**************')
+	
 	def positionChanged(self,o,v):
 		if self.muteFlg:
 			self._video.volume = 0
@@ -352,7 +356,7 @@ class VPlayer(Swipe_VPlayer):
 
 	def show_hide_menu(self,obj,touch):
 		if not self.collide_point(*touch.pos):
-			print('not inside the player')
+			print('not inside the player',touch.pos,self.pos,self.size)
 			return 
 
 		if touch.is_double_tap:
