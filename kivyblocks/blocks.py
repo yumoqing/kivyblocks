@@ -29,6 +29,7 @@ from .vplayer import VPlayer
 from .form import InputBox, Form, StrSearchForm
 from .boxViewer import BoxViewer
 from .tree import Tree, TextTree
+from .newvideo import Video
 
 def showError(e):
 	print('error',e)

@@ -1,7 +1,10 @@
 from kivy.uix.video import Video
 from kivy.logger import Logger
-from kivy.core.window improt Window
+from kivy.core.window import Window
 from kivy.utils import platform
+from kivy.factory import Factory
+from kivy.properties import BooleanProperty
+
 from ffpyplayer.tools import set_log_callback
 desktopOSs=[
 	"win",
@@ -22,17 +25,24 @@ class NewVideo(Video):
 	_fullscreen_state = False
 
 	def __init__(self,**kw):
+		super(NewVideo, self).__init__(**kw)
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
 		if hasattr(self._video, '_ffplayer'):
 			self.ffplayer = self._video._ffplayer
 
+		Window.bind(on_rotate=self.ctrl_fullscreen)
+
+	def ctrl_fullscreen(self,*args):
+		if Window.width > Window.height:
+			self.fullscreen = True
+		else:
+			self.fullscreen = False
+
 	def ffplayerLog(self, msg, level):
 		msg = msg.strip()
 		if msg:
 			logger_func[level]('yffpyplayer: {}'.format(msg))
-		if level == 'error' and self.source in msg:
-			self.dispatch('on_source_error',self,self.source)
 
 	def audioswitch(self,btn=None):
 		x = self._video._ffplayer.request_channel('audio')
