@@ -121,6 +121,9 @@ class Blocks(EventDispatcher):
 		self.register_event_type('on_built')
 		self.register_event_type('on_failed')
 		self.env = GlobalEnv()
+
+	def set(self,k,v):
+		self.env[k] = v
 	
 	def register_widget(self,name,widget):
 		globals()[name] = widget
