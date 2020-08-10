@@ -11,6 +11,7 @@ from appPublic.folderUtils import ProgramPath
 from appPublic.dictObject import DictObject
 from appPublic.Singleton import SingletonDecorator, GlobalEnv
 from appPublic.datamapping import keyMapping
+from appPublic.registerfunction import RegisterFunction
 
 from kivy.config import Config
 from kivy.metrics import sp,dp,mm
@@ -98,17 +99,6 @@ class NotRegistedWidget(Exception):
 	
 	def __expr__(self):
 		return self.__str__()
-
-@SingletonDecorator
-class RegistedFunction:
-	def __init__(self):
-		self.rf_list = {}
-	
-	def register(self,name,func):
-		self.rf_list[name] = func
-
-	def get(self,name):
-		return self.rf_list.get(name)
 
 def registerWidget(name,widget):
 	globals()[name] = widget
@@ -399,7 +389,7 @@ class Blocks(EventDispatcher):
 		return data
 
 	def registedfunctionAction(self, widget, desc):
-		rf = RegistedFunction()
+		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
 		if func is None:
