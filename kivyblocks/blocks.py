@@ -402,6 +402,10 @@ class Blocks(EventDispatcher):
 		rf = RegistedFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
+		if func is None:
+			print('rfname(%s) not found' % name,rf.registKW)
+			raise Exception('rfname(%s) not found' % name)
+
 		params = desc.get('params',{})
 		d = self.getActionData(widget,desc)
 		params.update(d)
