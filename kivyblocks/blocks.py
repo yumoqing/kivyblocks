@@ -164,7 +164,11 @@ class Blocks(EventDispatcher):
 		g['__builtins__']['__loader__'] = None
 		g['__builtins__']['open'] = None
 		g.update(self.env)
-
+		for  k,v in g.items():
+			if isinstance(k,str):
+				print('k=',k)
+				if k=='get_playerid':
+					print('s=',s)
 		return eval(s,g,l)
 
 	def getUrlData(self,url,method='GET',params={}, files={},
@@ -188,10 +192,10 @@ class Blocks(EventDispatcher):
 			return s
 		s = s[4:]
 		try:
-			v = self.eval(s[4:],localnamespace)
+			v = self.eval(s,localnamespace)
 			return v
 		except Exception as e:
-			print('Exception .... ',e,s)
+			print('Exception .... ',e,'script=',s)
 			print_exc()
 			return s
 
@@ -398,7 +402,7 @@ class Blocks(EventDispatcher):
 		rf = RegistedFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
-		params = desc.get(params,{})
+		params = desc.get('params',{})
 		d = self.getActionData(widget,desc)
 		params.update(d)
 		func(**params)
