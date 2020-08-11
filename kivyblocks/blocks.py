@@ -123,11 +123,11 @@ class Blocks(EventDispatcher):
 		fname = 'action%d' % self.action_id
 		l = {
 		}
-		body="""def %s(widget,obj=None, v=None):
+		body="""def %s(widget,obj=None, *args):
 	jsonstr='''%s'''
 	desc = json.loads(jsonstr)
-	app = App.get_running_app()
-	app.blocks.uniaction(widget, desc)
+	blocks = Blocks()
+	blocks.uniaction(widget, desc,*args)
 """ % (fname, json.dumps(desc))
 		exec(body,globals(),l)
 		f = l.get(fname,None)
@@ -312,21 +312,21 @@ class Blocks(EventDispatcher):
 		f = self.buildAction(widget,desc)
 		w.bind(**{event:f})
 	
-	def uniaction(self,widget,desc):
+	def uniaction(self,widget,desc, *args):
 		acttype = desc.get('actiontype')
 		if acttype=='blocks':
-			return self.blocksAction(widget,desc)
+			return self.blocksAction(widget,desc, *args)
 		if acttype=='urlwidget':
-			return self.urlwidgetAction(widget,desc)
+			return self.urlwidgetAction(widget,desc, *args)
 		if acttype == 'registedfunction':
-			return self.registedfunctionAction(widget,desc)
+			return self.registedfunctionAction(widget,desc, *args)
 		if acttype == 'script':
-			return self.scriptAction(widget, desc)
+			return self.scriptAction(widget, desc, *args)
 		if acttype == 'method':
-			return self.methodAction(widget, desc)
+			return self.methodAction(widget, desc, *args)
 		alert("actiontype(%s) invalid" % acttype,title='error')
 
-	def blocksAction(self,widget,desc):
+	def blocksAction(self,widget,desc, *args):
 		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options')
@@ -347,7 +347,7 @@ class Blocks(EventDispatcher):
 		b.bind(on_failed=doerr)
 		b.widgetBuild(opts,ancestor=widget)
 		
-	def urlwidgetAction(self,widget,desc):
+	def urlwidgetAction(self,widget,desc, *args):
 		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options')
@@ -373,7 +373,7 @@ class Blocks(EventDispatcher):
 		b.bind(on_failed=doerr)
 		b.widgetBuild(d,ancestor=widget)
 			
-	def getActionData(self,widget,desc):
+	def getActionData(self,widget,desc, *args):
 		data = {}
 		if desc.get('datawidget',False):
 			dwidget = self.getWidgetByIdPath(widget,
@@ -383,7 +383,7 @@ class Blocks(EventDispatcher):
 				data = keyMapping(data, desc.get('keymapping'))
 		return data
 
-	def registedfunctionAction(self, widget, desc):
+	def registedfunctionAction(self, widget, desc, *args):
 		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
@@ -395,21 +395,22 @@ class Blocks(EventDispatcher):
 		d = self.getActionData(widget,desc)
 		params.update(d)
 		print('registedfunctionAction(),params=',params)
-		func(**params)
+		func(*args, **params)
 
-	def scriptAction(self, widget, desc):
+	def scriptAction(self, widget, desc, *args):
 		script = desc.get('script')
 		if not script:
 			return 
 		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
 		d = self.getActionData(widget,desc)
 		ns = {
-			"self":target
+			"self":target,
+			"args":args
 		}
 		ns.update(d)	
 		self.eval(script, ns)
 	
-	def methodAction(self, widget, desc):
+	def methodAction(self, widget, desc, *args):
 		method = desc.get('method')
 		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
 		if hasattr(target,method):
@@ -417,7 +418,7 @@ class Blocks(EventDispatcher):
 			kwargs = desc.get('options',{})
 			d = self.getActionData(widget,desc)
 			kwargs.update(d)
-			f(**kwargs)
+			f(*args, **kwargs)
 		else:
 			alert('%s method not found' % method)
 
