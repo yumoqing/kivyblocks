@@ -394,6 +394,7 @@ class Blocks(EventDispatcher):
 		params = desc.get('params',{})
 		d = self.getActionData(widget,desc)
 		params.update(d)
+		print('registedfunctionAction(),params=',params)
 		func(**params)
 
 	def scriptAction(self, widget, desc):
