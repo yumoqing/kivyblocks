@@ -154,11 +154,6 @@ class Blocks(EventDispatcher):
 		g['__builtins__']['__loader__'] = None
 		g['__builtins__']['open'] = None
 		g.update(self.env)
-		for  k,v in g.items():
-			if isinstance(k,str):
-				print('k=',k)
-				if k=='get_playerid':
-					print('s=',s)
 		return eval(s,g,l)
 
 	def getUrlData(self,url,method='GET',params={}, files={},
