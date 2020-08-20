@@ -5,17 +5,10 @@ from .color_definitions import getColors
 
 _logcnt = 0
 class BGColorBehavior(object):
-	def __init__(self, bgcolor=[],fgcolor=[], color_level=-1,**kwargs):
+	def __init__(self, color_level=-1,**kwargs):
 		self.color_level = color_level
-		self.bgcolor = bgcolor
-		self.fgcolor = fgcolor
-		self.normal_bgcolor = bgcolor
-		self.normal_fgcolor = fgcolor
-		self.selected_bgcolor = bgcolor
-		self.selected_fgcolor = fgcolor
-		self.useOwnColor = False
-		self.useOwnBG = False
-		self.useOwnFG = False
+		self.bgcolor = []
+		self.fgcolor = []
 		if color_level != -1:
 			fg,bg= getColors(color_level)
 			self.fgcolor = fg
@@ -26,39 +19,32 @@ class BGColorBehavior(object):
 			self.selected_bgcolor = bg
 			self.selected_fgcolor = fg
 			self.useOwnColor = True
-		else:
-			if bgcolor != [] and fgcolor != []:
-				self.useOwnColor = True
-			elif bgcolor != []:
-				self.useOwnBG = True
-			elif fgcolor != []:
-				self.useOwnFG = True
-		if self.fgcolor!=[]:
-			self.color = self.fgcolor
+			self.on_bgcolor()
+
 		self.bind(size=self.onSize_bgcolor_behavior,
 					pos=self.onSize_bgcolor_behavior)
-		self.bind(parent=self.useAcestorColor)
-		self.on_bgcolor()
 
-	def useAcestorColor(self,o,v=None):
-		if self.useOwnColor:
-			return
-		
+	def useAcestorColor(self,selected=False):
 		p = self.parent
 		cnt = 0
 		while p:
-			if isinstance(p,BGColorBehavior):
-				break
+			if isinstance(p,BGColorBehavior) and p.useOwnColor:
+				if selected:
+					self.bgcolor = p.selected_bgcolor
+					self.color = self.fgcolor = p.selected_fgcolor
+				else:
+					self.bgcolor = p.normal_bgcolor
+					self.color = self.fgcolor = p.normal_fgcolor
+				self.on_bgcolor()
+				return
 			p = p.parent
 			cnt += 1
 			if cnt > 100:
-				return
-		if not self.useOwnBG and p:
-			self.bgcolor = p.bgcolor
-			self.on_bgcolor()
-		if not self.useOwnFG and p:
-			self.fgcolor = p.bgcolor
-			self.color = self.fgcolor
+				break
+		fg,bg= getColors(0,selected=selected)
+		self.bgcolor = bg
+		self.color = self.fgcolor = fg
+		self.on_bgcolor()
 
 	def onSize_bgcolor_behavior(self,o,v=None):
 		if not hasattr(self,'rect'):
@@ -77,9 +63,17 @@ class BGColorBehavior(object):
 								size=self.size)
 
 	def selected(self):
-		self.bgcolor = self.selected_bgcolor
-		self.on_bgcolor()
+		if self.useOwnColor:
+			self.bgcolor = self.selected_bgcolor
+			self.color = self.fgcolor = self.selected_fgcolor
+			self.on_bgcolor()
+		else:
+			self.useAcestorColor(selected=True)
 
 	def unselected(self):
-		self.bgcolor = self.normal_bgcolor
-		self.on_bgcolor()
+		if self.useOwnColor:
+			self.bgcolor = self.normal_bgcolor
+			self.color = self.fgcolor = self.normal_fgcolor
+			self.on_bgcolor()
+		else:
+			self.useAcestorColor(selected=False)

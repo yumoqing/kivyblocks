@@ -32,9 +32,36 @@ from .boxViewer import BoxViewer
 from .tree import Tree, TextTree
 from .newvideo import Video
 from .qrcodereader import QRCodeReader
+from .ready import WidgetReady
+from .bgcolorbehavior import BGColorBehavior
 
 def showError(e):
 	print('error',e)
+
+
+def wrap_ready(klass):
+	try:
+		w = Factory.get(klass)
+		if hasattr(w,'ready'):
+			return w
+		Factory.unregister(klass)
+		globals()[klass] = w
+	except:
+		w = globals().get(klass)
+		if w is None:
+			return None
+		if hasattr(w,'ready'):
+			return w
+		
+	script = f"""class R_{klass}(WidgetReady, {klass}):
+	def __init__(self, **kw):
+		{klass}.__init__(self, **kw)
+		WidgetReady.__init__(self)
+""" 
+	exec(script,globals(),globals())
+	newWidget = globals().get(f'R_{klass}')
+	Factory.register(klass,newWidget)
+	return newWidget
 
 class WidgetNotFoundById(Exception):
 	def __init__(self, id):
@@ -244,7 +271,7 @@ class Blocks(EventDispatcher):
 		opts = desc.get('options',{})
 		widget = None
 		try:
-			klass = Factory.get(widgetClass)
+			klass = wrap_ready(widgetClass)
 			widget = klass(**opts)
 			if desc.get('parenturl'):
 				widget.parenturl = desc.get('parenturl')
@@ -283,8 +310,6 @@ class Blocks(EventDispatcher):
 			if hasattr(widget,'parenturl'):
 				w.parenturl = widget.parenturl
 			widget.add_widget(w)
-			if hasattr(widget,'addChild'):
-				widget.addChild(w)
 			if bcnt >= btotal:
 				for b in desc.get('binds',[]):
 					self.buildBind(widget,b)
@@ -442,6 +467,8 @@ class Blocks(EventDispatcher):
 			try:
 				widget = self.__build(desc,ancestor=ancestor)
 				self.dispatch('on_built',widget)
+				if hasattr(widget,'ready'):
+					widget.ready()
 			except Exception as e:
 				print_exc()
 				doerr(None,e)
