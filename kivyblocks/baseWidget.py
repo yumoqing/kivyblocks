@@ -46,7 +46,6 @@ from kivy.uix.filechooser import FileChooser
 from kivy.uix.effectwidget import EffectWidget
 from kivy.uix.colorpicker import ColorPicker
 from kivy.uix.carousel import Carousel
-from kivy.uix.camera import Camera
 from kivy.uix.bubble import Bubble
 from kivy.uix.codeinput import CodeInput
 from kivy.graphics import Color, Rectangle
@@ -73,7 +72,6 @@ from .qrdata import QRCodeWidget
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
 	from .widgetExt.androidwebview import AWebView
-	from .widgetExt.camera import AndroidCamera
 
 class WrapText(Label):
 	def __init__(self, **kw):
