@@ -20,7 +20,7 @@ class PhoneButton(Button):
 			self.disabled = True
 			Intent = autoclass('android.content.Intent') 
 			Uri = autoclass('android.net.Uri')
-			PythonActivity = autoclass('org.renpy.android.PythonActivity')
+			PythonActivity = autoclass('org.kivy.android.PythonActivity')
 			intent = Intent(Intent.ACTION_CALL)
 			intent.setData(Uri.parse("tel:" + self.phone_number))
 			currentActivity = cast('android.app.Activity',
