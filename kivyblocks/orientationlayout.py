@@ -88,6 +88,7 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		if self.second_flg:
 			self.add_widget(self.widget_second)
 
+
 	def vertical_layout(self):
 		self.widget_main.width = self.width
 		self.widget_main.height = self.width / 16 * 10
