@@ -21,6 +21,8 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		SwipeBehavior.__init__(self)
 		WidgetReady.__init__(self)
 		Clock.schedule_once(self.build_children,0)
+		self.bind(on_swipe_left=self.toggle_second)
+		self.bind(on_swipe_right=self.toggle_second)
 	
 	def build_children(self, *args):
 		if isinstance(self.main_widget, dict):
@@ -33,8 +35,6 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 			blocks.bind(on_built=self.second_widget_built)
 			blocks.bind(on_failed=self.widget_build_failed)
 			blocks.widgetBuild(self.second_widget, ancestor=self)
-		self.bind(on_swipe_left=self.toggle_second)
-		self.bind(on_swipe_right=self.toggle_second)
 
 	def isLandscape(self):
 		return self.width > self.height
@@ -42,11 +42,16 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 	def toggle_second(self,*args):
 		print('toggle_second() called ..')
 		if self.isLandscape():
-			if self.widget_second in self.children:
+			if self.second_flg:
+				print('remove second widget ..')
 				self.remove_widget(self.widget_second)
+				self.second_flg = False
 			else:
+				print('add second widget ..')
 				self.add_widget(self.widget_second)
+				self.second_flg = True
 				self.on_size(self.size)
+
 
 	def on_ready(self,*args):
 		self.two_widget_layout()
@@ -80,6 +85,8 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 			self.remove_widget(self.widget_second)
 		print('main_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_main.width,self.widget_main.height,*self.widget_main.pos))
 		print('second_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_second.width,self.widget_second.height,*self.widget_second.pos))
+		if self.second_flg:
+			self.add_widget(self.widget_second)
 
 	def vertical_layout(self):
 		self.widget_main.width = self.width
