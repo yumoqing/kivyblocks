@@ -107,7 +107,9 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 	def main_widget_built(self,o,w):
 		print('main_widget_built() called ...')
 		self.widget_main = w
+		self.add_widget(self.widget_main)
 		if isinstance(self.widget_main, Widget) and isinstance(self.widget_second, Widget):
+			print('ready() called ..')
 			self.reready()
 
 
