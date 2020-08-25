@@ -258,10 +258,6 @@ class Blocks(EventDispatcher):
 		return obj
 
 	def __build(self,desc:dict,ancestor=None):
-		def checkReady(w,o):
-			w.children_ready[o] = True
-			if all(w.children_ready.values()):
-				w.ready = True
 		widgetClass = desc.get('widgettype',None)
 		if not widgetClass:
 			print("__build(), desc invalid", desc)
