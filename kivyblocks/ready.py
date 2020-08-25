@@ -13,3 +13,7 @@ class WidgetReady(EventDispatcher):
 			return
 		self.dispatch('on_ready')
 		self._ready = True
+
+	def reready(self):
+		self._ready = False
+		self.ready()

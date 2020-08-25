@@ -34,6 +34,7 @@ from .newvideo import Video
 from .qrcodereader import QRCodeReader
 from .ready import WidgetReady
 from .bgcolorbehavior import BGColorBehavior
+from .orientationlayout import OrientationLayout
 
 def showError(e):
 	print('error',e)
@@ -492,7 +493,8 @@ class Blocks(EventDispatcher):
 				except Exception as e:
 					doerr(None,e)
 
-			del opts['url']
+			if opts.get('url'):
+				del opts['url']
 			self.getUrlData(url,callback=cb,errback=doerr,**opts)
 			return
 		doit(desc)
@@ -524,3 +526,4 @@ class Blocks(EventDispatcher):
 
 Factory.register('Blocks',Blocks)
 Factory.register('Video',Video)
+Factory.register('OrientationLayout', OrientationLayout)
