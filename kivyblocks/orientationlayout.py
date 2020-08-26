@@ -73,9 +73,13 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 			self.vertical_layout()
 
 	def horizontal_layout(self):
+		self.widget_main.size_hint_x = 1
+		self.widget_main.size_hint_y = 1
 		self.widget_main.size = self.size
 		self.widget_main.pos = self.pos
 		self.widget_second.height = self.height
+		self.widget_second.size_hint_x = None
+		self.widget_second.size_hint_y = 1
 		self.widget_second.width = self.width * self.height / self.width
 		self.widget_second.pos = (0,0)
 		self.widget_second.opacity = 0.6
@@ -90,10 +94,14 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 
 
 	def vertical_layout(self):
+		self.widget_main.size_hint_x = 1
+		self.widget_main.size_hint_y = None
 		self.widget_main.width = self.width
 		self.widget_main.height = self.width / 16 * 10
 		self.widget_main.pos = (0, self.height - self.widget_main.height)
 		self.widget_second.width = self.width
+		self.widget_second.size_hint_x = 1
+		self.widget_second.size_hint_y = None
 		self.widget_second.height = self.height - self.widget_main.height
 		self.widget_second.pos = (0,0)
 		self.widget_second.opacity = 1
