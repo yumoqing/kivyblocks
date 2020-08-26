@@ -15,6 +15,7 @@ logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
 class NewVideo(Video):
 	def __init__(self,**kw):
 		super(NewVideo, self).__init__(**kw)
+		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
 		if hasattr(self._video, '_ffplayer'):
 			self.ffplayer = self._video._ffplayer
