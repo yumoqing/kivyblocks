@@ -406,6 +406,7 @@ class Blocks(EventDispatcher):
 		return data
 
 	def registedfunctionAction(self, widget, desc, *args):
+		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
 		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
@@ -417,7 +418,7 @@ class Blocks(EventDispatcher):
 		d = self.getActionData(widget,desc)
 		params.update(d)
 		print('registedfunctionAction(),params=',params)
-		func(*args, **params)
+		func(target, *args, **params)
 
 	def scriptAction(self, widget, desc, *args):
 		script = desc.get('script')
