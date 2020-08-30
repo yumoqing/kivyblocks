@@ -57,8 +57,8 @@ class WidgetReady(EventDispatcher):
 				'window_children': window.children[:]}
 
 			print('on_fullscreen()*******1******')
-			if platform in desktopOSs:
-				Window.maximize()
+			# if platform in desktopOSs:
+			# 	Window.maximize()
 			print('on_fullscreen()*******2******')
 			# remove all window children
 			for child in window.children[:]:
