@@ -31,7 +31,7 @@ from .form import InputBox, Form, StrSearchForm
 from .boxViewer import BoxViewer
 from .tree import Tree, TextTree
 from .newvideo import Video
-from .qrcodereader import QRCodeReader
+# from .qrcodereader import QRCodeReader
 from .ready import WidgetReady
 from .bgcolorbehavior import BGColorBehavior
 from .orientationlayout import OrientationLayout
