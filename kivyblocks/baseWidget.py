@@ -1,7 +1,6 @@
 import sys
 from traceback import print_exc
 
-from kivy import platform
 from kivy.app import App
 from kivy.utils import platform
 from kivy.uix.button import Button, ButtonBehavior
