@@ -4,6 +4,14 @@ import codecs
 import json
 from traceback import print_exc
 
+import kivy
+from kivy.config import Config
+from kivy.resources import resource_add_path
+resource_add_path(os.path.join(os.path.dirname(__file__),'./ttf'))
+Config.set('kivy', 'default_font', [
+	'msgothic',
+	'DroidSansFallback.ttf'])
+
 from functools import partial
 
 from appPublic.dictExt import dictExtend
