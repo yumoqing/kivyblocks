@@ -54,13 +54,13 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 
 
 	def on_ready(self,*args):
-		self.two_widget_layout()
+		Clock.schedule_once(self.two_widget_layout,0)
 
 	def on_size(self,*args):
-		self.two_widget_layout()
+		Clock.schedule_once(self.two_widget_layout,0)
 
 	def on_pos(self,*args):
-		self.two_widget_layout()
+		Clock.schedule_once(self.two_widget_layout,0)
 
 	def two_widget_layout(self, *args):
 		if not isinstance(self.widget_main, Widget) or not isinstance(self.widget_second, Widget):
