@@ -38,7 +38,6 @@ class WidgetReady(EventDispatcher):
 			if value:
 				self.fullscreen = False
 			return
-		print('NewVideo::on_fullscreen(),value=', value, window.size)
 		if not self.parent:
 			Logger.warning('VideoPlayer: Cannot switch to fullscreen, '
 						   'no parent.')
@@ -56,21 +55,16 @@ class WidgetReady(EventDispatcher):
 				'size_hint': self.size_hint,
 				'window_children': window.children[:]}
 
-			print('on_fullscreen()*******1******')
 			# if platform in desktopOSs:
 			# 	Window.maximize()
-			print('on_fullscreen()*******2******')
 			# remove all window children
 			for child in window.children[:]:
 				window.remove_widget(child)
-			print('on_fullscreen()*******3******')
 
 			# put the video in fullscreen
 			if state['parent'] is not window:
 				state['parent'].remove_widget(self)
-			print('on_fullscreen()*******4******')
 			window.add_widget(self)
-			print('on_fullscreen()*******5******')
 
 			# ensure the video widget is in 0, 0, and the size will be
 			# readjusted
