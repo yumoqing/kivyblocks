@@ -35,14 +35,10 @@ class WidgetReady(EventDispatcher):
 		if not window:
 			Logger.warning('VideoPlayer: Cannot switch to fullscreen, '
 						   'window not found.')
-			if value:
-				self.fullscreen = False
 			return
 		if not self.parent:
 			Logger.warning('VideoPlayer: Cannot switch to fullscreen, '
 						   'no parent.')
-			if value:
-				self.fullscreen = False
 			return
 
 		if value:
@@ -73,8 +69,8 @@ class WidgetReady(EventDispatcher):
 			self.size_hint = (1, 1)
 		else:
 			Window.fullscreen = False
-			if platform in desktopOSs:
-				Window.restore()
+			#if platform in desktopOSs:
+			#	Window.restore()
 			state = self._fullscreen_state
 			window.remove_widget(self)
 			for child in state['window_children']:
