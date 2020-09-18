@@ -36,6 +36,22 @@ it fires two type of event
 'on_pageloaded':fire when a page data loads success
 """
 
+class BaseLoader:
+	def loadPage(self,p):
+		pass
+
+	def loadNextPage(self):
+		if self.total_page > 0 and self.curpage >=self.total_page:
+			return
+		p = self.curpage + 1
+		self.loadPage(p)
+
+	def loadPreviousPage(self):
+		if self.curpage <= 1:
+			return
+		p = self.curpage - 1
+		self.loadPage(p)
+
 class PageLoader(EventDispatcher):
 	def __init__(self,target=None, **options):
 		self.loading = False
@@ -57,16 +73,6 @@ class PageLoader(EventDispatcher):
 		self.register_event_type('on_pageloaded')
 		self.newbegin = True
 	
-	def getLocater(self):
-		if self.newbegin:
-			self.newbegin = False
-			return 1
-
-		x = 1 / self.MaxbufferPage
-		if self.dir != 'down':
-			x = 1 - x
-		return x
-
 	def on_newbegin(self):
 		pass
 
@@ -183,6 +189,16 @@ class RelatedLoader(PageLoader):
 		else:
 			self.widget = None
 		self.register_event_type('on_deletepage')
+
+	def getLocater(self):
+		if self.newbegin:
+			self.newbegin = False
+			return 1
+
+		x = 1 / self.MaxbufferPage
+		if self.dir != 'down':
+			x = 1 - x
+		return x
 
 	def on_deletepage(self,d):
 		pass
@@ -303,6 +319,28 @@ class Paging(PageLoader):
 		if self.curpage >= self.total_page:
 			return
 		self.loadPage(self.total_page)
+
+class ListLoader(PageLoader):
+	def __init__(self, data_list=[],**options):
+		self._data_list = data_list
+		PageLoader.__init__(self,**options)
+		self.total_cnt = len(self._data_list)
+		t = 0 if self.total_cnt % self.page_rows == 0 else 1
+		self.total_page = self.total_cnt / self.page_rows + t
+
+	def loadPage(self,p):
+		if p < 1:
+			p = 1
+		if p > self.total_page:
+			d = []
+		else :
+			a = (p - 1) * self.page_rows
+			b = p * self.page_rows
+			d = self.d[a:b]
+		return {
+			"total":self.total_cnt,
+			"rows":d
+		}
 
 class OneRecordLoader(PageLoader):
 	def __init__(self,**options):
