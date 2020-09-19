@@ -32,6 +32,7 @@ class BoxViewer(BoxLayout):
 		self.parenturl = None
 		self.dataloader = None
 		self.initflag = False
+		self.selected_box = None
 		remind = ['toolbar',
 				'dataloader',
 				'orientation',
@@ -137,8 +138,14 @@ class BoxViewer(BoxLayout):
 			self.dataloader.loadPreviousPage()
 
 	def select_record(self,o,v=None):
+		if self.selected_box:
+			self.selected_box.unselected()
+		o.selected()
+		self.selected_box = o
+
 		self.selected_data = o.getRecord()
 		d = {
+			"target":self.selected_box,
 			"page_rows":1,
 			"page":self.selected_data['__posInSet__'],
 			"dataurl":self.options['dataloader']['options']['dataurl'],
