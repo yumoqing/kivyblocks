@@ -1,6 +1,7 @@
 
 from kivy.event import EventDispatcher
 from .threadcall import HttpClient
+from .utils import absurl
 from appPublic.registerfunction import RegisterFunction
 
 class DataLoader(EventDispatcher):
@@ -28,7 +29,6 @@ class DataLoader(EventDispatcher):
 class HttpDataLoader(DataLoader):
 	def load(self):
 		url = absurl(self.data_user.url,self.data_user.target.parenturl)
-		self.data_user.curpage = p
 		method = self.data_user.method
 		params = self.data_user.params.copy()
 		params.update({
@@ -36,10 +36,10 @@ class HttpDataLoader(DataLoader):
 			"rows":self.data_user.page_rows
 		})
 		hc = HttpClient()
-		hc(self.url,
+		hc(url,
 				method=method,
 				params=params,
-				callback=self.on_success,
+				callback=self.success,
 				errback=self.error)
 
 class ListDataLoader(DataLoader):

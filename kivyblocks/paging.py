@@ -13,6 +13,9 @@ from appPublic.jsonConfig import getConfig
 from .baseWidget import Text, HTTPDataHandler
 from .utils import CSize, absurl, alert
 from .form import StrSearchForm
+from .dataloader import HttpDataLoader
+from .dataloader import ListDataLoader
+from .dataloader import RegisterFunctionDataLoader
 
 class PagingButton(Button):
 	def __init__(self, **kw):
@@ -36,22 +39,6 @@ it fires two type of event
 'on_pageloaded':fire when a page data loads success
 """
 
-class BaseLoader:
-	def loadPage(self,p):
-		pass
-
-	def loadNextPage(self):
-		if self.total_page > 0 and self.curpage >=self.total_page:
-			return
-		p = self.curpage + 1
-		self.loadPage(p)
-
-	def loadPreviousPage(self):
-		if self.curpage <= 1:
-			return
-		p = self.curpage - 1
-		self.loadPage(p)
-
 class PageLoader(EventDispatcher):
 	def __init__(self,target=None, **options):
 		self.loading = False
@@ -64,6 +51,8 @@ class PageLoader(EventDispatcher):
 		self.params = options.get('params',{})
 		self.method = options.get('method','GET')
 		self.url = options.get('dataurl')
+		self.rfname = options.get('rfname')
+		self.data = options.get('data')
 		self.page_rows = options.get('page_rows',60)
 		self.total_cnt = 0
 		self.total_page = 0
@@ -72,6 +61,16 @@ class PageLoader(EventDispatcher):
 		self.register_event_type('on_newbegin')
 		self.register_event_type('on_pageloaded')
 		self.newbegin = True
+		if self.url:
+			self.loader = HttpDataLoader(self)
+		elif self.rfname:
+			self.loader = RegisterFunctionDataLoader(self)
+		elif self.data:
+			self.loader = ListDataLoader(self)
+		else:
+			raise Exception('need a url or rfname or data')
+		self.loader.bind(on_success=self.show_page)
+		self.loader.bind(on_error=self.onerror)
 	
 	def on_newbegin(self):
 		pass
@@ -124,7 +123,7 @@ class PageLoader(EventDispatcher):
 		}
 		self.dispatch('on_pageloaded',d)
 		
-	def httperror(self,o,e):
+	def onerror(self,o,e):
 		traceback.print_exc()
 		alert(str(e),title='alert')
 
@@ -141,8 +140,6 @@ class PageLoader(EventDispatcher):
 		self.loadPage(p)
 
 	def loadPage(self,p):
-		if not self.url:
-			raise Exception('dataurl must be present:options=%s' % str(options))
 		if self.curpage > p:
 			self.dir = 'up'
 		elif self.curpage == p:
@@ -151,6 +148,8 @@ class PageLoader(EventDispatcher):
 			self.dir = 'down'
 		self.curpage = p
 		self.loading = True
+		self.loader.load()
+		"""
 		params = self.params.copy()
 		params.update({
 			"page":self.curpage,
@@ -161,6 +160,7 @@ class PageLoader(EventDispatcher):
 		loader.bind(on_success=self.show_page)
 		loader.bind(on_failed=self.httperror)
 		loader.handle()
+		"""
 	
 """
 {
@@ -319,38 +319,4 @@ class Paging(PageLoader):
 		if self.curpage >= self.total_page:
 			return
 		self.loadPage(self.total_page)
-
-class ListLoader(PageLoader):
-	def __init__(self, data_list=[],**options):
-		self._data_list = data_list
-		PageLoader.__init__(self,**options)
-		self.total_cnt = len(self._data_list)
-		t = 0 if self.total_cnt % self.page_rows == 0 else 1
-		self.total_page = self.total_cnt / self.page_rows + t
-
-	def loadPage(self,p):
-		if p < 1:
-			p = 1
-		if p > self.total_page:
-			d = []
-		else :
-			a = (p - 1) * self.page_rows
-			b = p * self.page_rows
-			d = self.d[a:b]
-		return {
-			"total":self.total_cnt,
-			"rows":d
-		}
-
-class OneRecordLoader(PageLoader):
-	def __init__(self,**options):
-		PageLoader.__init__(self,**options)
-		self.adder = options.get('adder')
-		self.page_rows = 1
-
-	def calculateTotalPage(self):
-		self.total_page = self.total_cnt
-
-	def show_page(self,o,d):
-		self.adder(d['rows'][0])
 
