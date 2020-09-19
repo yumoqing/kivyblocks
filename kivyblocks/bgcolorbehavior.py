@@ -68,6 +68,7 @@ class BGColorBehavior(object):
 			self.color = self.fgcolor = self.selected_fgcolor
 			self.on_bgcolor()
 		else:
+			print('BGColorBehavior():selected(),useAcestorColor()')
 			self.useAcestorColor(selected=True)
 
 	def unselected(self):
@@ -76,4 +77,5 @@ class BGColorBehavior(object):
 			self.color = self.fgcolor = self.normal_fgcolor
 			self.on_bgcolor()
 		else:
+			print('BGColorBehavior():unselected(),useAcestorColor()')
 			self.useAcestorColor(selected=False)
