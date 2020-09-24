@@ -68,6 +68,9 @@ class KivyCamera(Image):
 			image_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
 			# display image from the texture
 			self.texture = image_texture
+		else:
+			self.update_task.cancel()
+			print('failed to read from capture')
 
 	def __del__(self):
 		if self.update_task:
