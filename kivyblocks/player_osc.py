@@ -2,7 +2,7 @@
 import json
 from pythonosc import dispatcher, osc_server, udp_client
 from appPublic.sockPackage import get_free_local_addr
-from background import Background
+from appPublic.background import Background
 from kivy.event import EventDispatcher
 
 
