@@ -1,4 +1,6 @@
 from kivy.uix.floatlayout import FloatLayout
+from kivy.event import EventDispatcher
+from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
@@ -21,12 +23,15 @@ class FileLoaderBrowser(Popup):
 		Popup.__init__(self, content = self.content, 
 					title=i18n(title), 
 					size_hint=(0.9,0.9))
+		self.register_event_type('on_selected')
 		self.choose_dir = choose_dir
 
 		self.list_widget = FileChooserListView(rootpath=rootpath)
 		self.icon_widget = FileChooserIconView(rootpath=rootpath)
-		self.list_widget.bind(on_selection=self.set_txt_input)
-		self.icon_widget.bind(on_selection=self.set_txt_input)
+		self.list_widget.bind(on_touch_up=self.on_release)
+		self.icon_widget.bind(on_touch_up=self.on_release)
+		self.list_widget.bind(on_submit=self.do_submit)
+		self.icon_widget.bind(on_submit=self.do_submit)
 		self.btn_load = Button(text=i18n('load'),size_hint=(None,None),
 						size=CSize(8,2))
 		self.btn_list_view = PressableImage(	\
@@ -48,19 +53,44 @@ class FileLoaderBrowser(Popup):
 		self.view_mode = 'list_view'
 		self.show_list_view()
 
-	def set_txt_input(self,o,v=None):
-		print('on_selection fired',o.selection)
-		self.txt_input.text = o.path
+	def on_selected(self,fn):
+		print(fn,'selected')
+
+	def on_release(self,o,v=None):
+		Clock.schedule_once(self.set_txt_input,0.4)
+
+	def set_txt_input(self,t=None):
+		self.txt_input.text = self.cur_widget.path
+
+	def target_selected(self):
+		fn = self.txt_input.text
+		if not self.choose_dir and os.path.isdir(fn):
+			return 
+		if self.choose_dir and os.path.isfile(fn):
+			fn = os.path.dirname(fn)
+		self.dispatch('on_selected',fn)
+		self.dismiss()
+
+	def do_submit(self,o,a,b):
+		if not self.cur_widget.selection:
+			return
+		self.txt_input.text = self.cur_widget.selection[0]
+		self.target_selected()
 
 	def do_load(self,o,d=None):
-		print(o,d)
-		print(self.cur_widget.selection and self.cur_widget.selection[0] or '', 'selected ')
+		if self.cur_widget.selection:
+			self.txt_input.text = self.cur_widget.selection[0]
+		if self.txt_input.text == '':
+			return
+		self.target_selected()
+
 	def change_view_mode(self,o,v=None):
 		self.content.clear_widgets()
 		if self.view_mode == 'list_view':
 			self.show_icon_view()
 		else:
 			self.show_list_view()
+
 	def show_list_view(self):
 		self.cur_widget = self.list_widget
 		self.view_mode = 'list_view'
