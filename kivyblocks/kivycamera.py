@@ -21,8 +21,10 @@ class KivyCamera(Image):
 		self.camera_id = camera_id
 		self.faceCascade = None
 		if face_detect:
-			# self.faceCascade = cv2.CascadeClassifier("Resources/haarcascades/haarcascade_frontalface_default.xml")  # added
 			self.faceCascade = cv2.CascadeClassifier('data/haarcascade/haarcascade_frontalface_default.xml')
+			if not self.faceCascade:
+				print('self.faceCascade is None')
+
 		self.update_task = Clock.schedule_interval(self.update, 1.0 / fps)
 
 	def on_size(self,o,size):
