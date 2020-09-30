@@ -5,6 +5,9 @@ from kivy.graphics.texture import Texture
 from kivy.factory import Factory
 import cv2
 
+facefilepath=os.path.dirname(cv2.__file__)
+facepattern = '%s/%s' % (facefilepath, \
+			'data/haarcascade/haarcascade_frontalface_default.xml')
 def set_res(cap, x,y):
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, int(x))
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, int(y))
@@ -21,7 +24,7 @@ class KivyCamera(Image):
 		self.camera_id = camera_id
 		self.faceCascade = None
 		if face_detect:
-			self.faceCascade = cv2.CascadeClassifier('data/haarcascade/haarcascade_frontalface_default.xml')
+			self.faceCascade = cv2.CascadeClassifier(facepattern)
 			if not self.faceCascade:
 				print('self.faceCascade is None')
 
