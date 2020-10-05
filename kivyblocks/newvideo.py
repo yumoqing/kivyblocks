@@ -21,6 +21,7 @@ class NewVideo(Video):
 			self.ffplayer = self._video._ffplayer
 
 	def on_state(self,*args):
+		print('new state = ',self.state)
 		if self.state == 'play':
 			Window.allow_screensaver = False
 		else:

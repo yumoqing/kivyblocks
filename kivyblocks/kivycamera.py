@@ -38,13 +38,13 @@ class KivyCamera(Image):
 		size = set_res(self.capture,self.width,self.height)
 		print(size)
 
-	def add_face_detech(self,frame):
+	def add_face_detect(self,frame):
 		frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 		faces = self.faceCascade.detectMultiScale(frameGray, 
 							scaleFactor = 1.2, minNeighbors = 5)
+		print('add_face_detect(): faces=',faces)
 		# THIS LINE RAISE ERROR 
 		# faces = self.faceCascade.detectMultiScale(frameGray, 1.1, 4)
- 		# cv2.error: OpenCV(4.2.0) C:\projects\opencv-python\opencv\modules\objdetect\src\cascadedetect.cpp:1689: error: (-215:Assertion failed) !empty() in function 'cv::CascadeClassifier::detectMultiScale'
 		for (x, y, w, h) in faces:  # added
 			cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 		return frame
@@ -63,8 +63,9 @@ class KivyCamera(Image):
 					interpolation=cv2.INTER_LINEAR)
 			if self.faceCascade:
 				try:
-					frame = self.add_face_detech(frame)
-				except:
+					frame = self.add_face_detect(frame)
+				except Exception as e:
+					print('Error, e=',e)
 					pass
 			# convert it to texture
 			buf1 = cv2.flip(frame, 0)
