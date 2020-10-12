@@ -6,15 +6,17 @@ from kivy.properties import BooleanProperty
 
 from ffpyplayer.tools import set_log_callback
 
+from kivyblocks.bgcolorbehavior import BGColorBehavior
 logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
                'fatal': Logger.critical, 'error': Logger.error,
                'warning': Logger.warning, 'info': Logger.info,
                'verbose': Logger.debug, 'debug': Logger.debug}
 
 
-class NewVideo(Video):
+class NewVideo(BGColorBehavior, Video):
 	def __init__(self,**kw):
-		super(NewVideo, self).__init__(**kw)
+		Video.__init__(self, **kw)
+		BGColorBehavior.__init__(self)
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
 		if hasattr(self._video, '_ffplayer'):
