@@ -8,7 +8,8 @@ import cv2
 
 facefilepath=os.path.dirname(cv2.__file__)
 facepattern = '%s/%s' % (facefilepath, \
-			'data/haarcascade/haarcascade_frontalface_default.xml')
+			'data/haarcascade_frontalface_default.xml')
+
 def set_res(cap, x,y):
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, int(x))
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, int(y))
