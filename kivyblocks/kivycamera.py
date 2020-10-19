@@ -15,14 +15,14 @@ def set_res(cap, x,y):
     return cap.get(cv2.CAP_PROP_FRAME_WIDTH),cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
 class KivyCamera(Image):
-	def __init__(self, camera_id=0, fps=25.0, face_detect=False, **kwargs):
+	def __init__(self, device=0, fps=25.0, face_detect=False, **kwargs):
 		print('KivyCamera inited')
 		self.update_task = None
 		self.capture = None
 		super(KivyCamera, self).__init__(**kwargs)
-		self.capture = cv2.VideoCapture(camera_id)
+		self.capture = cv2.VideoCapture(device)
 		self.face_detect = face_detect
-		self.camera_id = camera_id
+		self.device = device
 		self.faceCascade = None
 		if face_detect:
 			self.faceCascade = cv2.CascadeClassifier(facepattern)
@@ -34,7 +34,7 @@ class KivyCamera(Image):
 	def on_size(self,o,size):
 		if self.capture:
 			self.capture.release()
-		self.capture = cv2.VideoCapture(self.camera_id)
+		self.capture = cv2.VideoCapture(self.device)
 		size = set_res(self.capture,self.width,self.height)
 		print(size)
 
@@ -83,6 +83,6 @@ class KivyCamera(Image):
 		if self.update_task:
 			self.update_task.cancel()
 			self.update_task = None
-		self.cupture.close()
+		# self.cupture.close()
 
 Factory.register('KivyCamera',KivyCamera)
