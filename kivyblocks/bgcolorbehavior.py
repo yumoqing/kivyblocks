@@ -61,6 +61,8 @@ class BGColorBehavior(object):
 				Color(*self.bgcolor)
 				self.rect = Rectangle(pos=self.pos, 
 								size=self.size)
+		else:
+			print('on_bgcolor():self.canvas is None')
 
 	def selected(self):
 		if self.useOwnColor:
@@ -68,7 +70,6 @@ class BGColorBehavior(object):
 			self.color = self.fgcolor = self.selected_fgcolor
 			self.on_bgcolor()
 		else:
-			print('BGColorBehavior():selected(),useAcestorColor()')
 			self.useAcestorColor(selected=True)
 
 	def unselected(self):
@@ -77,5 +78,4 @@ class BGColorBehavior(object):
 			self.color = self.fgcolor = self.normal_fgcolor
 			self.on_bgcolor()
 		else:
-			print('BGColorBehavior():unselected(),useAcestorColor()')
 			self.useAcestorColor(selected=False)

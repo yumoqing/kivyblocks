@@ -35,5 +35,5 @@ class NewVideo(BGColorBehavior, Video):
 			logger_func[level]('yffpyplayer: {}'.format(msg))
 
 	def audioswitch(self,btn=None):
-		x = self._video._ffplayer.request_channel('audio')
+		x = self._ffplayer.request_channel('audio')
 
