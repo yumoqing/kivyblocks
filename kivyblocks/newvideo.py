@@ -19,8 +19,6 @@ class NewVideo(BGColorBehavior, Video):
 		BGColorBehavior.__init__(self)
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
-		if hasattr(self._video, '_ffplayer'):
-			self.ffplayer = self._video._ffplayer
 
 	def on_state(self,*args):
 		print('new state = ',self.state)
@@ -35,5 +33,8 @@ class NewVideo(BGColorBehavior, Video):
 			logger_func[level]('yffpyplayer: {}'.format(msg))
 
 	def audioswitch(self,btn=None):
-		x = self._ffplayer.request_channel('audio')
+		if hasattr(self._video,'_ffplayer'):
+			x = self._video._ffplayer.request_channel('audio')
+		else:
+			print('NewVideo _video has not _ffplayer, do nothong')
 

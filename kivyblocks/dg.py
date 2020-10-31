@@ -131,9 +131,7 @@ class Header(WidgetReady, ScrollWidget):
 		[ f.update({'value':self.part.fields[i]['label']}) for i,f in enumerate(rd) ]
 		self.header = Row(self.part,rd,header=True)
 		self.add_widget(self.header)
-		self.addChild(self.header)
 		self.height = self.header.height
-		self.built()
 
 class Body(ScrollWidget):
 	def __init__(self,part,**kw):
@@ -209,14 +207,11 @@ class DataGridPart(WidgetReady, BoxLayout):
 		if not self.datagrid.noheader:
 			self.header = Header(self,**kw)
 			self.add_widget(self.header)
-			self.addChild(self.header)
 		self.body = Body(self)
 		self.add_widget(self.body)
-		self.addChild(self.body)
 		if not self.freeze_flag:
 			self.body.bind(pos=self.datagrid.bodyOnSize,
 							size=self.datagrid.bodyOnSize)
-		self.built()
 		
 	def clearRows(self):
 		return self.body.clearRows()
@@ -258,15 +253,12 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.createToolbar()
 		if self.toolbar:
 			self.add_widget(self.toolbar)
-			self.addChild(self.toolbar)
 		
 		b = BoxLayout(orientation='horizontal')
 		if self.freeze_part:
 			b.add_widget(self.freeze_part)
-			self.addChild(self.freeze_part)
 		if self.normal_part:
 			b.add_widget(self.normal_part)
-			self.addChild(self.normal_part)
 		self.add_widget(b)
 		if self.options.get('paging',False):
 			self.loader  = Paging(adder=self.addRow,
@@ -290,7 +282,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.on_sizeTask = None
 		self.register_event_type('on_selected')
 		self.register_event_type('on_scrollstop')
-		self.built()
 	
 	def setScrollPosition(self,pos):
 		self.normal_part.body.scroll_y = pos
