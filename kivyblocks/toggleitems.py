@@ -5,6 +5,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
 
 from kivyblocks.ready import WidgetReady
+from kivyblocks.bgcolorbehavior import BGColorBehavior
 
 class PressableBox(ButtonBehavior, BoxLayout):
 	def __init__(self,border_width=1,
@@ -56,20 +57,23 @@ class PressableBox(ButtonBehavior, BoxLayout):
 			Color(*self.b_bgcolor)
 			Rectangle(pos=self.pos,size=self.size)
 
-class ToggleItems(BoxLayout):
+class ToggleItems(BGColorBehavior, BoxLayout):
 	def __init__(self,
+				color_level=1,
 				items_desc=[],
 				border_width=1,
-				bgcolor=[1,0,0,1],
-				selected_color=[1,0,0,1],
 				**kw):
 		BoxLayout.__init__(self, **kw)
+		BGColorBehavior.__init__(self,color_level=color_level)
 		self.item_widgets = []
 		for desc in items_desc:
 			c = PressableBox(border_width=border_width,
-					bgcolor=bgcolor,
-					selected_color=selected_color
+					bgcolor=self.normal_bgcolor,
+					selected_color=self.selected_bgcolor
 				)
+			d = desc.get('data')
+			if d:
+				c.set_data(d)
 			self.item_widgets.append(c)
 			self.add_widget(c)
 			c.bind(on_press=self.select_item)
@@ -81,19 +85,32 @@ class ToggleItems(BoxLayout):
 			b.bind(on_built=partial(cb,c))
 			b.bind(on_failed=partial(eb,desc))
 			b.widgetBuild(desc,ancestor=self)
-			if desc.get('data'):
-				c.set_data(desc.get('data'))
 
-		self.selected = None
+		if len(self.item_widgets) > 0:
+			self.item_widgets[0].selected()
+		else:
+			print('items_desc=',items_desc,'error')
+		self.register_event_type('on_changed')
 	
+	def on_changed(self,v=None):
+		pass
+
 	def select_item(self,o=None):
 		[i.unselected() for i in self.item_widgets if i != o]
+		self.dispatch('on_changed',o.get_data())
 
 	def getValue(self):
 		for i in self.item_widgets:
 			if i.is_selected():
-				return i.getValue()
+				return i.get_data()
 		return None
+
+	def setValue(self,v):
+		for i in self.item_widgets:
+			if i.get_data() == v:
+				i.selected()
+				self.select_iten(i)
+				return
 
 Factory.register('PressableBox',PressableBox)
 Factory.register('ToggleItems',ToggleItems)
