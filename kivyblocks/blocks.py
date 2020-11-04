@@ -36,6 +36,7 @@ from .newvideo import Video
 from .ready import WidgetReady
 from .bgcolorbehavior import BGColorBehavior
 from .orientationlayout import OrientationLayout
+from kivyblocks import doubleface
 
 def showError(e):
 	print('error',e)

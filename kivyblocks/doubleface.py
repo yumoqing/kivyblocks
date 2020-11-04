@@ -1,9 +1,13 @@
+from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
 
-class DoubleFace(BoxLayout):
+from kivyblocks.ready import WidgetReady
+
+class DoubleFace(WidgetReady, BoxLayout):
 	def __init__(self,landscape={},portrait={},**kw):
 		BoxLayout.__init__(self,**kw)
+		WidgetReady.__init__(self)
 		self.landscape_built = False
 		self.portrait_built = False
 		self.landscape_widget = None
@@ -15,6 +19,18 @@ class DoubleFace(BoxLayout):
 		blocks.bind(on_built=self.portrait_built)
 		blocks.widgetBuild(portrait,ancestor=self)
 		self.on_size_task = None
+		self.ready_task = None
+
+	def ready(self):
+		if self._ready:
+			return
+		if not self.landscape_built or not self.portrait_built:
+			if not self.ready_task is None:
+				self.ready_task.cancel()
+			self.ready_task = Clock.schedule_once(self.ready,0.2)
+			return 
+		self.dispatch('on_ready')
+		self._ready = True
 
 	def landscape_built(self,o,w):
 		self.landscape_widget = w
@@ -39,3 +55,5 @@ class DoubleFace(BoxLayout):
 				self.clear_widget()
 				self.add_widget(self.portrait_widget)
 
+
+Factory.register('DoubleFace',DoubleFace)
