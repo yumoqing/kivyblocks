@@ -17,44 +17,12 @@ class PlayerOSCServer(EventDispatcher):
 		self.osc_dispatch = dispatch
 		self.commands = []
 		self.register_event_type('on_osc_event')
-		self.map('/mute',self.mute)
-		self.map('/pause',self.pause)
-		self.map('/menu',self.menu)
-		self.map('/up',self.up)
-		self.map('/down',self.down)
-		self.map('/left',self.left)
-		self.map('/right',self.right)
-		self.map('/play',self.play)
-		self.start()
 		
 	def on_osc_event(self,*args):
 		print('PlayerOSCServer():on_osc_event():args=',args)
 
-	def menu(self,*args):
-		self.dispatch('on_osc_event','menu',*args)
-
-	def mute(self,*args):
-		self.dispatch('on_osc_event','mute',*args)
-
-	def pause(self,*args):
-		self.dispatch('on_osc_event','pouse',*args)
-
-	def up(self,*args):
-		self.dispatch('on_osc_event','up',*args)
-
-	def down(self,*args):
-		self.dispatch('on_osc_event','down',*args)
-
-	def left(self,*args):
-		self.dispatch('on_osc_event','left',*args)
-
-	def right(self,*args):
-		self.dispatch('on_osc_event','right',*args)
-
-	def play(self,*args):
-		print('play():args=',args)
-		d = json.loads(args[1])
-		self.dispatch('on_osc_event','play',d)
+	def action_event(self,*args):
+		self.dispatch('on_osc_event',*args)
 
 	def start(self):
 		self.thread = Background(self.server.serve_forever)
@@ -69,9 +37,9 @@ class PlayerOSCServer(EventDispatcher):
 			"commands": self.commands
 		}
 
-	def map(self,cmd,func):
+	def map(self,cmd):
 		self.commands.append(cmd)
-		self.osc_dispatch.map(cmd,func)
+		self.osc_dispatch.map(cmd,self.action_event)
 			
 	def stop(self):
 		self.server.shutdown()
