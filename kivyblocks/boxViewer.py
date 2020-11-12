@@ -49,7 +49,9 @@ class BoxViewer(BoxLayout):
 		if options.get('toolbar'):
 			self.toolbar = Toolbar(options['toolbar'])
 		lopts = options['dataloader'].copy()
-		self.dataloader = RelatedLoader(target=self,**lopts['options'])
+		if lopts.get('options'):
+			lopts = lopts.get('options')
+		self.dataloader = RelatedLoader(target=self,**lopts)
 		self.dataloader.bind(on_deletepage=self.deleteWidgets)
 		self.dataloader.bind(on_pageloaded=self.addPageWidgets)
 		self.dataloader.bind(on_newbegin=self.deleteAllWidgets)
@@ -75,6 +77,7 @@ class BoxViewer(BoxLayout):
 	def addPageWidgets(self,o,data):
 		widgets = []
 		recs = data['data']
+		page = data['page']
 		dir = data['dir']
 		idx = 0
 		if dir == 'up':
@@ -83,7 +86,7 @@ class BoxViewer(BoxLayout):
 		for r in recs:
 			self.showObject(widgets, r, index=idx)
 
-		self.dataloader.bufferObjects(widgets)
+		self.dataloader.bufferObjects(page, widgets)
 		x = self.dataloader.getLocater()
 		self.locater(x)
 
