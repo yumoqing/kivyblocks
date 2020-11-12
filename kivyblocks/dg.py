@@ -147,6 +147,7 @@ class Body(ScrollWidget):
 		row.row_id = id
 		self.add_widget(row,index=index)
 		self.idRow[id] = row
+		return row
 	
 	def clearRows(self):
 		self.idRow = {}
@@ -217,7 +218,7 @@ class DataGridPart(WidgetReady, BoxLayout):
 		return self.body.clearRows()
 
 	def addRow(self,id, data):
-		self.body.addRow(id, data)
+		return self.body.addRow(id, data)
 
 class DataGrid(WidgetReady, BoxLayout):
 	row_selected = BooleanProperty(False)
@@ -260,30 +261,18 @@ class DataGrid(WidgetReady, BoxLayout):
 		if self.normal_part:
 			b.add_widget(self.normal_part)
 		self.add_widget(b)
-		if self.options.get('paging',False):
-			self.loader  = Paging(adder=self.addRow,
-							clearer=self.clearRows,
-							dataurl=self.dataUrl,
-							target=self,
-							params=self.params,
-							method=self.options.get('method','GET')
-			)
-			self.add_widget(self.loader.widget)
-		else:
-			self.loader = RelatedLoader(adder=self.addRow,
-							remover=self.delRow,
-							locater=self.setScrollPosition,
-							page_rows=self.page_rows,
-							dataurl=self.dataUrl,
-							target=self,
-							params=self.params,
-							method=self.options.get('method','GET')
-			)
+		ldr_desc = options.get('dataloader')
+		if not ldr_desc:
+			raise Exception('DataGrid need a DataLoader')
+		self.dataloader = RelatedLoader(target=self, **ldr_desc)
+		self.dataloader.bind(on_deletepage=self.delete_page)
+		self.dataloader.bind(on_pageloaded=self.add_page)
+		self.dataloader.bind(on_newbegin=self.clearRows)
 		self.on_sizeTask = None
 		self.register_event_type('on_selected')
 		self.register_event_type('on_scrollstop')
 	
-	def setScrollPosition(self,pos):
+	def locater(self,pos):
 		self.normal_part.body.scroll_y = pos
 		if self.freeze_part:
 			self.freeze_part.body.scroll_y = pos
@@ -300,8 +289,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		if self.freeze_part and o == self.freeze_part.body:
 			self.normal_part.body.scroll_y = o.scroll_y
 
-		if self.options.get('paging'):
-			return
 		if o.scroll_y <= 0.001:
 			self.loader.loadNextPage()
 		if o.scroll_y >= 0.999:
@@ -343,32 +330,37 @@ class DataGrid(WidgetReady, BoxLayout):
 			return 60
 		return self.show_rows
 
-	def init(self,t):
-		if self.options.get('dataurl'):
-			self.loader.loadPage(1)
-		else:
-			data = self.options.get('data',[])
-			if len(data) > 0:
-				loading(self)
-				for d in data:
-					self.addRow()
-				loaded(self)
-	
 	def clearRows(self):
 		if self.freeze_part:
 			self.freeze_part.body.clearRows()
 		self.normal_part.body.clearRows()
 
+	def add_page(self,o,data):
+		ids = []
+		recs = data['data']
+		page = data['page']
+		dir = data['dir']
+		idx = 0
+		if dir == 'up':
+			recs.reverse()
+			idx = -1
+		for r in recs:
+			ids.append(self.addRow(r,index=idx))
+		self.dataloader.bufferObjects(page,ids)
+		x = self.dataloader.getLocater()
+		self.locater(x)
+
+	def delete_page(self,o,data):
+		for id in data:
+			self.delRow(id)
+
 	def addRow(self,data, **kw):
 		id = getID()
+		f_row = None
 		if self.freeze_part:
 			self.freeze_part.body.addRow(id, data, **kw)
 		self.normal_part.body.addRow(id, data, **kw)
 		return id
-
-	def setData(self,data):
-		for d in data:
-			self.addRow(d)
 
 	def delRow(self,id,**kw):
 		if self.freeze_part:
@@ -405,3 +397,4 @@ class DataGrid(WidgetReady, BoxLayout):
 	def on_ready(self,o,v=None):
 		print('***********onRadey*************')
 
+Factory.register('DataGrid',DataGrid)

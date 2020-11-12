@@ -223,8 +223,8 @@ class RelatedLoader(PageLoader):
 		self.totalObj -= len(self.objectPages[page])
 		del self.objectPages[page]
 	
-	def bufferObjects(self,objects):
-		self.objectPages[self.curpage] = objects
+	def bufferObjects(self,page,objects):
+		self.objectPages[page] = objects
 
 	def show_page(self,o,data):
 		if self.objectPages.get(self.curpage):
