@@ -36,7 +36,7 @@ class DoubleFace(WidgetReady, BoxLayout):
 		self.landscape_widget = w
 		self.landscape_built = True
 
-	def partrait_build(self,o,w):
+	def portrait_build(self,o,w):
 		self.portrait_widget = w
 		self.portrait_built = True
 
