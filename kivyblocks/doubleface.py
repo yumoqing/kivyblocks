@@ -45,7 +45,7 @@ class DoubleFace(WidgetReady, BoxLayout):
 		if not self.landscape_built or not self.portrait_built:
 			if not self.on_size_task is None:
 				self.on_size_task.cancel()
-			self.on_size_task.schedule_once(self.on_size,0.2)
+			self.on_size_task = Clock.schedule_once(self.on_size,0.2)
 			return
 		if self.width >= self.height:
 			if not self.landscape_widget in self.children:
