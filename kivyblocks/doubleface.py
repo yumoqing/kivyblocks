@@ -22,7 +22,7 @@ class DoubleFace(WidgetReady, BoxLayout):
 		self.on_size_task = None
 		self.ready_task = None
 
-	def ready(self):
+	def ready(self, *args):
 		if self._ready:
 			return
 		if not self.landscape_built or not self.portrait_built:
