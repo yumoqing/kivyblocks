@@ -8,6 +8,7 @@ class DoubleFace(WidgetReady, BoxLayout):
 	def __init__(self,landscape={},portrait={},**kw):
 		BoxLayout.__init__(self,**kw)
 		WidgetReady.__init__(self)
+		self.parenturl = kw.get('parenturl')
 		self.landscape_built = False
 		self.portrait_built = False
 		self.landscape_widget = None
