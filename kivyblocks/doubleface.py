@@ -14,7 +14,7 @@ class DoubleFace(WidgetReady, BoxLayout):
 		self.portrait_widget = None
 		blocks = Factory.Blocks()
 		blocks.bind(on_built=self.landscape_build)
-		blocks.widgetBuilt(landscape,ancestor=self)
+		blocks.widgetBuild(landscape,ancestor=self)
 		blocks = Factory.Blocks()
 		blocks.bind(on_built=self.portrait_build)
 		blocks.widgetBuild(portrait,ancestor=self)
