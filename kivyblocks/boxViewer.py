@@ -69,7 +69,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 		self.viewContainer.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
-		self.use_keyboard()
+		# self.use_keyboard()
 
 	def getParams(self,o,p):
 		self.params = p
