@@ -70,21 +70,12 @@ class WidgetReady(EventDispatcher):
 			return False
 		# Keycode is composed of an integer + a string
 		# If we hit escape, release the keyboard
-		if keycode[1] == 'escape':
-			keyboard.release()
-
-		for ki in self.keyinfos:
-			if ki['keyname'] == keycode[1] and listequal(ki['modifiers'],modifiers):
-				keyinfo = {
-					"keyname":keycode[1],
-					"modifiers":modifiers
-				}
-				self.dispatch('on_key_down',keyinfo)
-				return True
-
-		# Return True to accept the key. Otherwise, it will be used by
-		# the system.
-		return False
+		keyinfo = {
+			"keyname":keycode[1],
+			"modifiers":modifiers
+		}
+		self.dispatch('on_key_down',keyinfo)
+		return True
 
 	def on_fullscreen(self, instance, value):
 		window = self.get_parent_window()

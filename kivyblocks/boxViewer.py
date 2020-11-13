@@ -43,21 +43,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 		kwargs = {k:v for k,v in options.items() if k not in remind }
 		BoxLayout.__init__(self, orientation='vertical', **kwargs)
 		WidgetReady.__init__(self)
-		self.used_keys = [
-			{
-				"keyname":"enter",
-				"modifiers":[]
-			},
-			{
-				"keyname":"up",
-				"modifiers":[]
-			},
-			{
-				"keyname":"down",
-				"modifiers":[]
-			},
-		]
-		self.use_keyboard(self.used_keys)
+		self.use_keyboard()
 		self.selected_data = None
 		self.options = options
 		self.box_width = CSize(options['boxwidth'])
