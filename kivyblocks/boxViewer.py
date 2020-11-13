@@ -57,7 +57,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 				"modifiers":[]
 			},
 		]
-		# self.use_keyboard(self.used_keys)
+		self.use_keyboard(self.used_keys)
 		self.selected_data = None
 		self.options = options
 		self.box_width = CSize(options['boxwidth'])

@@ -49,7 +49,7 @@ class WidgetReady(EventDispatcher):
 		self.my_kb = Window.request_keyboard(self.unuse_keyboard, self, "text")
 		self.my_kb.bind(on_key_down=self._on_keyboard_down)
 		if self.my_kb.widget:
-			self.my_kb.set_mode_free()
+			pass #self.my_kb.set_mode_free()
 		self.keyinfos = keyinfos
 
 	def unuse_keyboard(self):
