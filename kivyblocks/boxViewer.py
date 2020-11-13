@@ -25,8 +25,9 @@ from .responsivelayout import VResponsiveLayout
 from .toolbar import Toolbar
 from .paging import Paging, RelatedLoader
 from .utils import CSize
+from .ready import WidgetReady
 
-class BoxViewer(BoxLayout):
+class BoxViewer(WidgetReady, BoxLayout):
 	def __init__(self, **options):
 		self.toolbar = None
 		self.parenturl = None
@@ -41,6 +42,22 @@ class BoxViewer(BoxLayout):
 				'boxheight']
 		kwargs = {k:v for k,v in options.items() if k not in remind }
 		BoxLayout.__init__(self, orientation='vertical', **kwargs)
+		WidgetReady.__init__(self)
+		self.used_keys = [
+			{
+				"keyname":"enter",
+				"modifiers":[]
+			},
+			{
+				"keyname":"up",
+				"modifiers":[]
+			},
+			{
+				"keyname":"down",
+				"modifiers":[]
+			},
+		]
+		self.use_keyboard(self.used_keys)
 		self.selected_data = None
 		self.options = options
 		self.box_width = CSize(options['boxwidth'])
@@ -112,6 +129,14 @@ class BoxViewer(BoxLayout):
 		if not self.initflag:
 			self.dataloader.loadPage(1)
 			self.initflag = True
+
+	def on_key_down(self,keyinfo):
+		if keyinfo['keyname'] == 'enter':
+			self.selected_box.on_press()
+		if keyinfo['keyname'] == 'down':
+			print('down key entried')
+		if keyinfo['keyname'] == 'up':
+			print('up key entried')
 
 	def showObject(self, holders, rec,index=0):
 		def doit(self,holders,idx,o,w):

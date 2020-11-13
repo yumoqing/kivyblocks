@@ -15,10 +15,19 @@ class WidgetReady(EventDispatcher):
 
 	def __init__(self):
 		self.register_event_type('on_ready')
+		self.register_event_type('on_key_down')
 		self._ready = False
 
 	def on_ready(self):
 		pass
+	def on_key_down(self,keyinfo):
+		"""
+		keyinfo is a dict with:
+			keyname
+			modifiers
+		keys
+		"""
+		print(kinfo)
 
 	def ready(self):
 		if self._ready:
@@ -29,6 +38,53 @@ class WidgetReady(EventDispatcher):
 	def reready(self):
 		self._ready = False
 		self.ready()
+
+	def use_keyboard(self, keyinfos=[]):
+		"""
+		keyinfos is a list of aceepted keys keyinfo 
+		if the on_key_down's key is one of the keyinfos, 
+		fire a event, and return True, 
+		else just return False
+		"""
+		self.my_kb = Window.request_keyboard(self.unuse_keyboard, self, "text")
+		self.my_kb.bind(on_key_down=self._on_keyboard_down)
+		if self.my_kb.widget:
+			self.my_kb.set_mode_free()
+		self.keyinfos = keyinfos
+
+	def unuse_keyboard(self):
+		print('My keyboard have been closed!')
+		self.my_kb.unbind(on_key_down=self._on_keyboard_down)
+		self.my_kb = None
+
+	def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
+		print('The key', keycode, 'have been pressed')
+		print(' - text is %r' % text)
+		print(' - modifiers are %r' % modifiers)
+
+		def listqual(l1,l2):
+			a = [i for i in l1 if i not in l2]
+			b = [i for i in l2 if i not in l1]
+			if len(a) == 0 and len(b) == 0:
+				return True
+			return False
+		# Keycode is composed of an integer + a string
+		# If we hit escape, release the keyboard
+		if keycode[1] == 'escape':
+			keyboard.release()
+
+		for ki in self.keyinfos:
+			if ki['keyname'] == keycode[1] and listequal(ki['modifiers'],modifiers):
+				keyinfo = {
+					"keyname":keycode[1],
+					"modifiers":modifiers
+				}
+				self.dispatch('on_key_down',keyinfo)
+				return True
+
+		# Return True to accept the key. Otherwise, it will be used by
+		# the system.
+		return False
 
 	def on_fullscreen(self, instance, value):
 		window = self.get_parent_window()
