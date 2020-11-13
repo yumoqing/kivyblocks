@@ -226,6 +226,7 @@ class RelatedLoader(PageLoader):
 	def bufferObjects(self,page,objects):
 		self.objectPages[page] = objects
 
+
 	def show_page(self,o,data):
 		if self.objectPages.get(self.curpage):
 			self.deleteBuffer(self.curpage)
