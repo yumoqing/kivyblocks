@@ -49,11 +49,11 @@ class DoubleFace(WidgetReady, BoxLayout):
 			return
 		if self.width >= self.height:
 			if not self.landscape_widget in self.children:
-				self.clear_widget()
+				self.clear_widgets()
 				self.add_widget(self.landscape_widget)
 		else:
 			if not self.portrait_widget in self.children:
-				self.clear_widget()
+				self.clear_widgets()
 				self.add_widget(self.portrait_widget)
 
 
