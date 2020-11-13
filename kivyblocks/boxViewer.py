@@ -69,7 +69,9 @@ class BoxViewer(WidgetReady, BoxLayout):
 		self.viewContainer.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
-		self.use_keyboard()
+		# use_keyboard() will block the python
+		# no reason !!!!
+		# self.use_keyboard()
 
 	def key_handle(self,keyinfo):
 		print('keyinfo=',keyinfo,'...................')
