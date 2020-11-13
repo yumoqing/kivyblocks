@@ -43,7 +43,6 @@ class BoxViewer(WidgetReady, BoxLayout):
 		kwargs = {k:v for k,v in options.items() if k not in remind }
 		BoxLayout.__init__(self, orientation='vertical', **kwargs)
 		WidgetReady.__init__(self)
-		self.use_keyboard()
 		self.selected_data = None
 		self.options = options
 		self.box_width = CSize(options['boxwidth'])
@@ -70,6 +69,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 		self.viewContainer.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
+		self.use_keyboard()
 
 	def getParams(self,o,p):
 		self.params = p

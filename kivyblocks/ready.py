@@ -39,37 +39,25 @@ class WidgetReady(EventDispatcher):
 		self._ready = False
 		self.ready()
 
-	def use_keyboard(self, keyinfos=[]):
+	def use_keyboard(self):
 		"""
 		keyinfos is a list of aceepted keys keyinfo 
 		if the on_key_down's key is one of the keyinfos, 
 		fire a event, and return True, 
 		else just return False
 		"""
-		self.my_kb = Window.request_keyboard(self.unuse_keyboard, self, "text")
+		self.my_kb = Window.request_keyboard(None, self)
+		if not self.my_kb:
+			print('my_kb is None........')
+			return 
 		self.my_kb.bind(on_key_down=self._on_keyboard_down)
 		if self.my_kb.widget:
-			pass #self.my_kb.set_mode_free()
-		self.keyinfos = keyinfos
-
-	def unuse_keyboard(self):
-		print('My keyboard have been closed!')
-		self.my_kb.unbind(on_key_down=self._on_keyboard_down)
-		self.my_kb = None
+			self.my_kb.set_mode_free()
 
 	def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
 		print('The key', keycode, 'have been pressed')
 		print(' - text is %r' % text)
 		print(' - modifiers are %r' % modifiers)
-
-		def listqual(l1,l2):
-			a = [i for i in l1 if i not in l2]
-			b = [i for i in l2 if i not in l1]
-			if len(a) == 0 and len(b) == 0:
-				return True
-			return False
-		# Keycode is composed of an integer + a string
-		# If we hit escape, release the keyboard
 		keyinfo = {
 			"keyname":keycode[1],
 			"modifiers":modifiers
