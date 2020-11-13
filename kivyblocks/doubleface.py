@@ -13,10 +13,10 @@ class DoubleFace(WidgetReady, BoxLayout):
 		self.landscape_widget = None
 		self.portrait_widget = None
 		blocks = Factory.Blocks()
-		blocks.bind(on_built=self.landscape_built)
+		blocks.bind(on_built=self.landscape_build)
 		blocks.widgetBuilt(landscape,ancestor=self)
 		blocks = Factory.Blocks()
-		blocks.bind(on_built=self.portrait_built)
+		blocks.bind(on_built=self.portrait_build)
 		blocks.widgetBuild(portrait,ancestor=self)
 		self.on_size_task = None
 		self.ready_task = None
@@ -32,11 +32,11 @@ class DoubleFace(WidgetReady, BoxLayout):
 		self.dispatch('on_ready')
 		self._ready = True
 
-	def landscape_built(self,o,w):
+	def landscape_build(self,o,w):
 		self.landscape_widget = w
 		self.landscape_built = True
 
-	def partrait_built(self,o,w):
+	def partrait_build(self,o,w):
 		self.portrait_widget = w
 		self.portrait_built = True
 
