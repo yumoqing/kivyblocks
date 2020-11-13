@@ -69,7 +69,10 @@ class BoxViewer(WidgetReady, BoxLayout):
 		self.viewContainer.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
-		# self.use_keyboard()
+		self.use_keyboard()
+
+	def key_handle(self,keyinfo):
+		print('keyinfo=',keyinfo,'...................')
 
 	def getParams(self,o,p):
 		self.params = p
@@ -115,14 +118,6 @@ class BoxViewer(WidgetReady, BoxLayout):
 		if not self.initflag:
 			self.dataloader.loadPage(1)
 			self.initflag = True
-
-	def on_key_down(self,keyinfo):
-		if keyinfo['keyname'] == 'enter':
-			self.selected_box.on_press()
-		if keyinfo['keyname'] == 'down':
-			print('down key entried')
-		if keyinfo['keyname'] == 'up':
-			print('up key entried')
 
 	def showObject(self, holders, rec,index=0):
 		def doit(self,holders,idx,o,w):

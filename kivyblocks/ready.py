@@ -15,19 +15,10 @@ class WidgetReady(EventDispatcher):
 
 	def __init__(self):
 		self.register_event_type('on_ready')
-		self.register_event_type('on_key_down')
 		self._ready = False
 
 	def on_ready(self):
 		pass
-	def on_key_down(self,keyinfo):
-		"""
-		keyinfo is a dict with:
-			keyname
-			modifiers
-		keys
-		"""
-		print(kinfo)
 
 	def ready(self):
 		if self._ready:
@@ -40,12 +31,6 @@ class WidgetReady(EventDispatcher):
 		self.ready()
 
 	def use_keyboard(self):
-		"""
-		keyinfos is a list of aceepted keys keyinfo 
-		if the on_key_down's key is one of the keyinfos, 
-		fire a event, and return True, 
-		else just return False
-		"""
 		self.my_kb = Window.request_keyboard(None, self)
 		if not self.my_kb:
 			print('my_kb is None........')
@@ -53,6 +38,9 @@ class WidgetReady(EventDispatcher):
 		self.my_kb.bind(on_key_down=self._on_keyboard_down)
 		if self.my_kb.widget:
 			self.my_kb.set_mode_free()
+
+	def key_handle(self,keyinfo):
+		pass
 
 	def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
 		print('The key', keycode, 'have been pressed')
@@ -62,7 +50,7 @@ class WidgetReady(EventDispatcher):
 			"keyname":keycode[1],
 			"modifiers":modifiers
 		}
-		self.dispatch('on_key_down',keyinfo)
+		self.key_handle(keyinfo)
 		return True
 
 	def on_fullscreen(self, instance, value):
