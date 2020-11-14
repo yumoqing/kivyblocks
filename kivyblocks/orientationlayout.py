@@ -84,11 +84,11 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		self.widget_second.pos = (0,0)
 		self.widget_second.opacity = 0.6
 		if not self.widget_main in self.children:
+			print('horizontal:main_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_main.width,self.widget_main.height,*self.widget_main.pos))
 			self.add_widget(self.widget_main)
 		if self.widget_second in self.children:
 			self.remove_widget(self.widget_second)
-		print('main_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_main.width,self.widget_main.height,*self.widget_main.pos))
-		print('second_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_second.width,self.widget_second.height,*self.widget_second.pos))
+			print('horizontal:second_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_second.width,self.widget_second.height,*self.widget_second.pos))
 		if self.second_flg:
 			self.add_widget(self.widget_second)
 
@@ -107,10 +107,10 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		self.widget_second.opacity = 1
 		if not self.widget_main in self.children:
 			self.add_widget(self.widget_main)
+			print('vertical:main_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_main.width,self.widget_main.height,*self.widget_main.pos))
 		if not self.widget_second in self.children:
 			self.add_widget(self.widget_second)
-		print('main_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_main.width,self.widget_main.height,*self.widget_main.pos))
-		print('second_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_second.width,self.widget_second.height,*self.widget_second.pos))
+			print('vertical:second_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_second.width,self.widget_second.height,*self.widget_second.pos))
 
 	def main_widget_built(self,o,w):
 		print('main_widget_built() called ...')
