@@ -290,9 +290,9 @@ class DataGrid(WidgetReady, BoxLayout):
 			self.normal_part.body.scroll_y = o.scroll_y
 
 		if o.scroll_y <= 0.001:
-			self.loader.loadNextPage()
+			self.dataloader.loadNextPage()
 		if o.scroll_y >= 0.999:
-			self.loader.loadPreviousPage()
+			self.dataloader.loadPreviousPage()
 
 	def getData(self):
 		if not self.row_selected:
@@ -323,7 +323,7 @@ class DataGrid(WidgetReady, BoxLayout):
 					,'row_height=',self.rowHeight()
 		)
 		self.show_rows = int(self.normal_part.body.height/self.rowHeight())
-		self.loader.setPageRows(self.show_rows)
+		self.dataloader.setPageRows(self.show_rows)
 
 	def getShowRows(self):
 		if self.show_rows == 0:
