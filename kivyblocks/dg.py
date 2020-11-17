@@ -236,6 +236,7 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.color = options.get('color',[0.91,0.91,0.91,1])
 		self.widget_ids = {}
 		self.row_height = None
+		self.on_sizeTask = None
 		self.selected_rowid = None
 		self.dataUrl = self.options.get('dataurl')
 		self.show_rows = 0
@@ -268,7 +269,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.dataloader.bind(on_deletepage=self.delete_page)
 		self.dataloader.bind(on_pageloaded=self.add_page)
 		self.dataloader.bind(on_newbegin=self.clearRows)
-		self.on_sizeTask = None
 		self.register_event_type('on_selected')
 		self.register_event_type('on_scrollstop')
 	
