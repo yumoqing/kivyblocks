@@ -251,6 +251,15 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.loading = False
 		self.freeze_fields = self.getPartFields(freeze_flag=True)
 		self.normal_fields = self.getPartFields(freeze_flag=False)
+		ldr_desc = options.get('dataloader')
+		if not ldr_desc:
+			raise Exception('DataGrid need a DataLoader')
+		self.dataloader = RelatedLoader(target=self, **ldr_desc)
+		self.dataloader.bind(on_deletepage=self.delete_page)
+		self.dataloader.bind(on_pageloaded=self.add_page)
+		self.dataloader.bind(on_newbegin=self.clearRows)
+		self.register_event_type('on_selected')
+		self.register_event_type('on_scrollstop')
 		self.createDataGridPart()
 		self.createToolbar()
 		if self.toolbar:
@@ -262,15 +271,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		if self.normal_part:
 			b.add_widget(self.normal_part)
 		self.add_widget(b)
-		ldr_desc = options.get('dataloader')
-		if not ldr_desc:
-			raise Exception('DataGrid need a DataLoader')
-		self.dataloader = RelatedLoader(target=self, **ldr_desc)
-		self.dataloader.bind(on_deletepage=self.delete_page)
-		self.dataloader.bind(on_pageloaded=self.add_page)
-		self.dataloader.bind(on_newbegin=self.clearRows)
-		self.register_event_type('on_selected')
-		self.register_event_type('on_scrollstop')
 	
 	def locater(self,pos):
 		self.normal_part.body.scroll_y = pos
