@@ -261,6 +261,7 @@ class Blocks(EventDispatcher):
 		return obj
 
 	def __build(self,desc:dict,ancestor=None):
+		print('__build(),desc=',desc)
 		widgetClass = desc.get('widgettype',None)
 		if not widgetClass:
 			print("__build(), desc invalid", desc)
@@ -304,19 +305,33 @@ class Blocks(EventDispatcher):
 	def build_rest(self, widget,desc,ancestor,t=None):
 		bcnt = 0
 		btotal = len(desc.get('subwidgets',[]))
-		def doit(self,widget,bcnt,btotal,desc,o,w):
-			bcnt += 1
+		params={
+			'blocks':self,
+			'bcnt':bcnt,
+			'btotal':btotal,
+			'desc':desc,
+			'widget':widget
+		}
+		def doit(params,o,w):
+			params['bcnt'] += 1
+			bcnt = params['bcnt']
+			btotal = params['btotal']
+			blocks = params['blocks']
+			desc = params['desc']
+			widget = params['widget']
 			if hasattr(widget,'parenturl'):
 				w.parenturl = widget.parenturl
 			widget.add_widget(w)
+			print('bcnt=',bcnt,'btotal=',btotal,'desc=',desc)
 			if bcnt >= btotal:
 				for b in desc.get('binds',[]):
-					self.buildBind(widget,b)
+					print('buildBind() called',b)
+					blocks.buildBind(widget,b)
 
 		def doerr(o,e):
 			raise e
 
-		f = partial(doit,self,widget,bcnt,btotal,desc)
+		f = partial(doit,params)
 		for sw in desc.get('subwidgets',[]):
 			b = Blocks()
 			b.bind(on_built=f)
@@ -335,6 +350,7 @@ class Blocks(EventDispatcher):
 			return
 		f = self.buildAction(widget,desc)
 		w.bind(**{event:f})
+		print('w=',w,event,desc)
 	
 	def uniaction(self,widget,desc, *args):
 		acttype = desc.get('actiontype')
@@ -475,6 +491,7 @@ class Blocks(EventDispatcher):
 				return
 
 		def doerr(o,e):
+			print('blocks.py:wigetBuild() failed,desc=',desc)
 			self.dispatch('on_failed',e)
 
 		name = desc['widgettype']

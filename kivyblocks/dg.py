@@ -394,7 +394,4 @@ class DataGrid(WidgetReady, BoxLayout):
 					fs.append(f)
 		return fs
 	
-	def on_ready(self,o,v=None):
-		print('***********onRadey*************')
-
 Factory.register('DataGrid',DataGrid)

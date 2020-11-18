@@ -1,5 +1,5 @@
 from functools import partial
-from kivy.uix.button import Button, ButtonBehavior
+from kivy.uix.behaviors import TouchRippleButtonBehavior
 from kivy.graphics import Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
@@ -7,7 +7,7 @@ from kivy.factory import Factory
 from kivyblocks.ready import WidgetReady
 from kivyblocks.bgcolorbehavior import BGColorBehavior
 
-class PressableBox(ButtonBehavior, BoxLayout):
+class PressableBox(TouchRippleButtonBehavior, BoxLayout):
 	def __init__(self,border_width=1,
 				bgcolor=[0,1,0,1],
 				selected_color=[1,0,0,1],
@@ -17,7 +17,7 @@ class PressableBox(ButtonBehavior, BoxLayout):
 			border_width,
 			border_width],
 			**kw)
-		ButtonBehavior.__init__(self)
+		TouchRippleButtonBehavior.__init__(self)
 		self.b_bgcolor = bgcolor
 		self.border_width = border_width
 		self.b_selected_color = selected_color
@@ -93,6 +93,7 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 		self.register_event_type('on_changed')
 	
 	def on_changed(self,v=None):
+		print('Toggle on_changed fired')
 		pass
 
 	def select_item(self,o=None):
