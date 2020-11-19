@@ -124,6 +124,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 	def showObject(self, holders, rec,index=0):
 		def doit(self,holders,idx,o,w):
 			w.bind(on_press=self.select_record)
+			w.boxviewer = self
 			self.viewContainer.add_widget(w,index=idx)
 			holders.append(w)
 
