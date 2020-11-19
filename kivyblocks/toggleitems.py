@@ -84,7 +84,7 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 				print(desc,'error',e)
 			b.bind(on_built=partial(cb,c))
 			b.bind(on_failed=partial(eb,desc))
-			b.widgetBuild(desc,ancestor=self)
+			b.widgetBuild(desc)
 
 		if len(self.item_widgets) > 0:
 			self.item_widgets[0].selected()

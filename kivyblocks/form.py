@@ -188,7 +188,7 @@ class InputBox(BoxLayout):
 		self.input_widget = self.uidef['wclass'](**options)
 		if self.options.get('readonly'):
 			self.input_widget.disabled = True
-		self.form.widget_ids[self.options['name']] = self.input_widget
+		self.input_widget.widget_id = self.options['name']
 		self.add_widget(self.input_widget)
 		self.initflag = True
 		self.input_widget.bind(on_focus=self.on_focus)
@@ -259,7 +259,6 @@ class Form(BGColorBehavior, BoxLayout):
 		BoxLayout.__init__(self, orientation='vertical')
 		self.color_level = self.options.get('color_level', 0)
 		BGColorBehavior.__init__(self,color_level=self.color_level)
-		self.widget_ids = {}
 		self.readiedInput = 0
 		self.cols = self.options_cols = self.options.get('cols',1)
 		if isHandHold() and Window.width < Window.height:
@@ -284,12 +283,9 @@ class Form(BGColorBehavior, BoxLayout):
 			self.fsc.add_widget(w)
 			self.fieldWidgets.append(w)
 			w.bind(on_ready=self.makeInputLink)
-		blocks = App.get_running_app().blocks
-		# wid = self.widget_ids['__submit']
-		wid = blocks.getWidgetByIdPath(self,'__submit')
+		wid = Blocks.getWidgetById('__submit',from_widget=self)
 		wid.bind(on_press=self.on_submit_button)
-		wid = blocks.getWidgetByIdPath(self,'__clear')
-		# wid = self.widget_ids['__clear']
+		wid = Blocks.getWidgetById('__clear',from_widget=self)
 		wid.bind(on_press=self.on_clear_button)
 
 	def makeInputLink(self,o,v=None):

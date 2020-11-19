@@ -189,18 +189,27 @@ class Blocks(EventDispatcher):
 	def getUrlData(self,url,method='GET',params={}, files={},
 					callback=None,
 					errback=None,**kw):
+
 		if url.startswith('file://'):
 			filename = url[7:]
 			with codecs.open(filename,'r','utf-8') as f:
 				b = f.read()
 				dic = json.loads(b)
 				callback(None,dic)
-		else:
+		elif url.startswith('http://') or url.startswith('https://'):
 			h = HTTPDataHandler(url,method=method,params=params,
 					files=files)
 			h.bind(on_success=callback)
 			h.bind(on_error=errback)
 			h.handle()
+		else:
+			config = getConfig()
+			url = config.uihome + url
+			return self.getUrlData(url,method=method,
+					params=params,
+					files=files,
+					callback=callback,
+					errback=errback, **kw)
 
 	def strValueExpr(self,s:str,localnamespace:dict={}):
 		if not s.startswith('py::'):
@@ -260,8 +269,8 @@ class Blocks(EventDispatcher):
 			return self.dictValueExpr(obj,localnamespace)
 		return obj
 
-	def __build(self,desc:dict,ancestor=None):
-		print('__build(),desc=',desc)
+	def __build(self,desc:dict):
+		# print('__build(),desc=',desc)
 		widgetClass = desc.get('widgettype',None)
 		if not widgetClass:
 			print("__build(), desc invalid", desc)
@@ -275,34 +284,19 @@ class Blocks(EventDispatcher):
 			widget = klass(**opts)
 			if desc.get('parenturl'):
 				widget.parenturl = desc.get('parenturl')
-				ancestor = widget
 		except Exception as e:
 			print('Error:',widgetClass,'not registered')
 			print_exc()
 			raise NotExistsObject(widgetClass)
 
 		if desc.get('id'):
-			myid = desc.get('id')
-			holder = ancestor
-			if myid[0] == '/':
-				myid = myid[1:]
-				app = App.get_running_app()
-				holder = app.root
-
-			if ancestor == widget:
-				app = App.get_running_app()
-				holder = app.root
-
-			if not hasattr(holder,'widget_ids'):
-				setattr(holder,'widget_ids',{})
-
-			holder.widget_ids[myid] = widget
+			widget.widget_id = desc.get('id')
 		
 		widget.build_desc = desc
-		self.build_rest(widget,desc,ancestor)
+		self.build_rest(widget,desc)
 		return widget
 		
-	def build_rest(self, widget,desc,ancestor,t=None):
+	def build_rest(self, widget,desc,t=None):
 		bcnt = 0
 		btotal = len(desc.get('subwidgets',[]))
 		params={
@@ -322,10 +316,10 @@ class Blocks(EventDispatcher):
 			if hasattr(widget,'parenturl'):
 				w.parenturl = widget.parenturl
 			widget.add_widget(w)
-			print('bcnt=',bcnt,'btotal=',btotal,'desc=',desc)
+			# print('bcnt=',bcnt,'btotal=',btotal,'desc=',desc)
 			if bcnt >= btotal:
 				for b in desc.get('binds',[]):
-					print('buildBind() called',b)
+					# print('buildBind() called',b)
 					blocks.buildBind(widget,b)
 
 		def doerr(o,e):
@@ -336,7 +330,7 @@ class Blocks(EventDispatcher):
 			b = Blocks()
 			b.bind(on_built=f)
 			b.bind(on_failed=doerr)
-			b.widgetBuild(sw, ancestor=ancestor)
+			b.widgetBuild(sw)
 
 		if btotal == 0:
 			for b in desc.get('binds',[]):
@@ -344,13 +338,13 @@ class Blocks(EventDispatcher):
 
 	def buildBind(self,widget,desc):
 		wid = desc.get('wid','self')
-		w = self.getWidgetByIdPath(widget,wid)
+		w = Blocks.getWidgetById(desc.get('wid','self'),from_widget=widget)
 		event = desc.get('event')
 		if event is None:
 			return
 		f = self.buildAction(widget,desc)
 		w.bind(**{event:f})
-		print('w=',w,event,desc)
+		# print('w=',w,event,desc)
 	
 	def uniaction(self,widget,desc, *args):
 		acttype = desc.get('actiontype')
@@ -367,7 +361,7 @@ class Blocks(EventDispatcher):
 		alert("actiontype(%s) invalid" % acttype,title='error')
 
 	def blocksAction(self,widget,desc, *args):
-		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
+		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options')
 		d = self.getActionData(widget,desc)
@@ -385,10 +379,10 @@ class Blocks(EventDispatcher):
 		b = Blocks()
 		b.bind(on_built=partial(doit,target,add_mode))
 		b.bind(on_failed=doerr)
-		b.widgetBuild(opts,ancestor=widget)
+		b.widgetBuild(opts)
 		
 	def urlwidgetAction(self,widget,desc, *args):
-		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
+		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options')
 		d = self.getActionData(widget,desc)
@@ -411,20 +405,20 @@ class Blocks(EventDispatcher):
 		b = Blocks()
 		b.bind(on_built=partial(doit,target,add_mode))
 		b.bind(on_failed=doerr)
-		b.widgetBuild(d,ancestor=widget)
+		b.widgetBuild(d)
 			
-	def getActionData(self,widget,desc, *args):
+	def getActionData(self,widget,desc,*args):
 		data = {}
 		if desc.get('datawidget',False):
-			dwidget = self.getWidgetByIdPath(widget,
-							desc.get('datawidget'))
-			data = dwidget.getData()
-			if desc.get('keymapping'):
-				data = keyMapping(data, desc.get('keymapping'))
+			dwidget = Blocks.getWidgetById(desc.get('datawidget','self'),widget)
+			if dwidget and hasattr(dwidget,'getData'):
+				data = dwidget.getData()
+				if desc.get('keymapping'):
+					data = keyMapping(data, desc.get('keymapping'))
 		return data
 
 	def registedfunctionAction(self, widget, desc, *args):
-		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
+		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
@@ -435,14 +429,14 @@ class Blocks(EventDispatcher):
 		params = desc.get('params',{})
 		d = self.getActionData(widget,desc)
 		params.update(d)
-		print('registedfunctionAction(),params=',params)
+		# print('registedfunctionAction(),params=',params)
 		func(target, *args, **params)
 
 	def scriptAction(self, widget, desc, *args):
 		script = desc.get('script')
 		if not script:
 			return 
-		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
+		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		d = self.getActionData(widget,desc)
 		ns = {
 			"self":target,
@@ -453,7 +447,7 @@ class Blocks(EventDispatcher):
 	
 	def methodAction(self, widget, desc, *args):
 		method = desc.get('method')
-		target = self.getWidgetByIdPath(widget, desc.get('target','self'))
+		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		if hasattr(target,method):
 			f = getattr(target, method)
 			kwargs = desc.get('options',{})
@@ -463,7 +457,7 @@ class Blocks(EventDispatcher):
 		else:
 			alert('%s method not found' % method)
 
-	def widgetBuild(self,desc,ancestor=None):
+	def widgetBuild(self,desc):
 		"""
 		desc format:
 		{
@@ -481,7 +475,7 @@ class Blocks(EventDispatcher):
 			desc = self.valueExpr(desc)
 			# Logger.info("blocks:%s",str(desc))
 			try:
-				widget = self.__build(desc,ancestor=ancestor)
+				widget = self.__build(desc)
 				self.dispatch('on_built',widget)
 				if hasattr(widget,'ready'):
 					widget.ready()
@@ -497,18 +491,12 @@ class Blocks(EventDispatcher):
 		name = desc['widgettype']
 		if name == 'urlwidget':
 			opts = desc.get('options')
-			parenturl = None
-			url=''
-			if ancestor:
-				parenturl = ancestor.parenturl
-			try:
-				url = absurl(opts.get('url'),parenturl)
-			except Exception as e:
-				self.dispatch('on_failed',e)
+			url = opts.get('url')
+			if url is None:
+				self.dispatch('on_failed',Exception('miss url'))
 			
 			def cb(o,d):
 				try:
-					d['parenturl'] = url
 					doit(d)
 				except Exception as e:
 					doerr(None,e)
@@ -519,25 +507,26 @@ class Blocks(EventDispatcher):
 			return
 		doit(desc)
 	
-	def getWidgetByIdPath(self,widget,path):
-		ids = path.split('/')
-		if ids[0] == '':
-			app = App.get_running_app()
-			widget = app.root
-			ids = ids[1:]
-		for id in ids:
-			if id == 'self':
-				return widget
-			if not hasattr(widget, 'widget_ids'):
-				print('widget not found,path=',path,'id=',id,'ids=',ids)
-				raise WidgetNotFoundById(id)
-				
-			widget = widget.widget_ids.get(id,None)
-			if widget is None:
-				print('widget not found,path=',path,'id=',id,'ids=',ids)
-				raise WidgetNotFoundById(id)
-		return widget
-	
+	@classmethod
+	def getWidgetById(self,id,from_widget=None):
+		app = App.get_running_app()
+		if id in ['root','/self']:
+			return app.root
+		if id=='self':
+			return from_widget
+		if from_widget is None:
+			from_widget = app.root
+		if hasattr(from_widget,'widget_id'):
+			print('Blocks.getWidgetById():widget_id=',
+						from_widget.widget_id,'id=',id)
+			if from_widget.widget_id == id:
+				return from_widget
+		for c in from_widget.children:
+			ret = Blocks.getWidgetById(id,from_widget=c)
+			if ret:
+				return ret
+		return None
+
 	def on_built(self,v=None):
 		return
 

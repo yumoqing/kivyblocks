@@ -37,8 +37,7 @@ class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
 	def __init__(self,ancestor=None,**opts):
 		if ancestor is None:
 			ancestor = App.get_running_app().root
-		ancestor.widget_ids[opts['name']] = self
-		self.ancestor = ancestor
+		self.widget_id = opts['name']
 		ButtonBehavior.__init__(self)
 		BoxLayout.__init__(self,
 					size_hint_y=None)
@@ -128,7 +127,6 @@ class Toolbar(BGColorBehavior, GridLayout):
 				h = ancestor
 				if not ancestor:
 					h = App.get_runnung_app().root
-				h.widget_ids['_home_'] = tool
 			self.tool_widgets[opt.name] = tool
 			box = BoxLayout()
 			box.add_widget(tool)
@@ -171,7 +169,6 @@ class ToolPage(BGColorBehavior, BoxLayout):
 	def __init__(self,**opts):
 		self.opts = DictObject(**opts)
 		self.parenturl = opts.get('parenturl',None)
-		self.widget_ids = {}
 		if self.opts.tool_at in [ 'top','bottom']:
 			orient = 'vertical'
 		else:
@@ -196,14 +193,15 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		self._show_page(obj.opts)
 
 	def show_firstpage(self,t=None):
-		d = self.widget_ids['_home_']
+		return
+		d = self.children[0]
 		d.dispatch('on_press')
 
 	def init(self):
 		self.initFlag = True
 		self.mywidgets = {}
 		self.content = BoxLayout()
-		self.widget_ids['content'] = self.content
+		self.content.widget_id = 'content'
 		for t in self.opts.tools:	
 			parenturl = None
 			if hasattr(self,'parenturl'):
@@ -218,7 +216,6 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		else:
 			self.add_widget(self.content)
 			self.add_widget(self.toolbar)
-		# Clock.schedule_once(self.show_firstpage,0.5)
 
 if __name__ == '__main__':
 	from blocksapp import BlocksApp

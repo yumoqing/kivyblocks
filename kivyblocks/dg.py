@@ -54,7 +54,7 @@ class Cell(BoxLayout):
 				viewer = blocks.eval(viewer,l)
 			if isinstance(viewer,dict):
 				print('viewer = ', viewer)
-				w = blocks.widgetBuild(viewer,ancestor=self.row.part.datagrid)
+				w = blocks.widgetBuild(viewer)
 				self.add_widget(w)
 				return
 		if desc['header']:
@@ -234,7 +234,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.header_bgcolor = options.get('header_bgcolor',[0.29,0.29,0.29,1])
 		self.body_bgcolor = options.get('body_bgcolor',[0.25,0.25,0.25,1])
 		self.color = options.get('color',[0.91,0.91,0.91,1])
-		self.widget_ids = {}
 		self.row_height = None
 		self.on_sizeTask = None
 		self.selected_rowid = None

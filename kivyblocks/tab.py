@@ -39,7 +39,7 @@ class TabsPanel(BGColorBehavior, TabbedPanel):
 			self.add_widget(TabbedPanelItem(text=text,content=w))
 		blocks = Factory.Blocks()
 		blocks.bind(on_built=add)
-		blocks.widgetBuild(desc,ancestor=self)
+		blocks.widgetBuild(desc)
 
 	def add_tabs(self,*args):
 		for d in self.tabs_list:

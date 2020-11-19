@@ -17,7 +17,7 @@ class ServerImageViewer(ObjectViewer):
 			"keep_ratio":True,
 			"source":url
 		})
-		w = blocks.widgetBuild(desc,ancestor=self)
+		w = blocks.widgetBuild(desc)
 		if w is None:
 			print('Error desc=',desc)
 			return

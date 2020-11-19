@@ -133,14 +133,13 @@ class BoxViewer(WidgetReady, BoxLayout):
 			raise e
 		options = self.options['viewer'].copy()
 		options['options']['record'] = rec
-		options['options']['ancestor'] = self
 		options['options']['size_hint'] = None,None
 		options['options']['width'] = self.box_width
 		options['options']['height'] = self.box_height
 		blocks = Factory.Blocks()
 		blocks.bind(on_built=partial(doit,self,holders,index))
 		blocks.bind(on_failed=doerr)
-		blocks.widgetBuild(options, ancestor=self)
+		blocks.widgetBuild(options)
 
 	def on_scroll_stop(self,o,v=None):
 		if o.scroll_y <= 0.001:

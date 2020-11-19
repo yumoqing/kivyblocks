@@ -29,12 +29,12 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 			blocks = Factory.Blocks()
 			blocks.bind(on_built=self.main_widget_built)
 			blocks.bind(on_failed=self.widget_build_failed)
-			blocks.widgetBuild(self.main_widget, ancestor=self)
+			blocks.widgetBuild(self.main_widget)
 		if isinstance(self.second_widget, dict):
 			blocks = Factory.Blocks()
 			blocks.bind(on_built=self.second_widget_built)
 			blocks.bind(on_failed=self.widget_build_failed)
-			blocks.widgetBuild(self.second_widget, ancestor=self)
+			blocks.widgetBuild(self.second_widget)
 
 	def isLandscape(self):
 		return self.width > self.height
@@ -47,7 +47,7 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 				self.remove_widget(self.widget_second)
 				self.second_flg = False
 			else:
-				print('add second widget ..')
+				print('add second widget ..',self.widget_second)
 				self.add_widget(self.widget_second)
 				self.second_flg = True
 				self.on_size(self.size)
