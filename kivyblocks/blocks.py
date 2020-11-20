@@ -305,12 +305,11 @@ class Blocks(EventDispatcher):
 		
 	def build_rest(self, widget,desc,t=None):
 		self.subwidget_total = len(desc.get('subwidgets',[]))
-		self.subwidgets = None * self.subwidget_total
+		self.subwidgets = [ None for i in range(self.subwidget_total)]
 		def doit(params,o,w):
 			desc = params['desc']
 			widget = params['widget']
 			self.subwidgets[params['pos']] = w
-			self.subwidget_cnt += 1
 			if None not in self.subwidgets:
 				for w in self.subwidgets:
 					widget.add_widget(w)
@@ -319,8 +318,6 @@ class Blocks(EventDispatcher):
 					self.buildBind(widget,kw)
 
 		def doerr(o,e):
-			print('doerr() called' ,self.subwidget_cnt,'-----')
-			self.subwidget_cnt += 1
 			raise e
 
 		pos = 0
