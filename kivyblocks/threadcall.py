@@ -1,3 +1,5 @@
+# -*- coding=utf-8 -*-
+
 import time
 from threading import Thread, Lock, BoundedSemaphore
 import requests
@@ -29,14 +31,17 @@ class ThreadCall(Thread,EventDispatcher):
 
 	def run(self):
 		try:
+			# print('ThreadCall()',self.args,'start...')
 			self.rez = self.target(*self.args,**self.kwargs)
 			self.dispatch('on_result',self.rez)
+			# print('ThreadCall()',*self.args,'finished...')
 
 		except Exception as e:
+			# print('ThreadCall()',*self.args,'Error...')
 			self.dispatch('on_error',e)
 
 	def on_result(self, v):
-		pass
+		pass # print('ThreadCall():on_result() called,v=',v)
 
 	def on_error(self,e):
 		pass
@@ -71,8 +76,11 @@ class Workers(Thread):
 				callee,callback,errback,kwargs = task
 				x = ThreadCall(callee,kwargs=kwargs)
 				x.bind(on_result=callback)
+				"""
+				并发的时候，只有一个callback会被调用
+				"""
 				if errback:
-				    x.bind(on_error=errback)
+					x.bind(on_error=errback)
 				x.start()
 
 	def add(self,callee,callback,errback=None,kwargs={}):
@@ -109,6 +117,7 @@ class HttpClient(Http_Client):
 			"stream":stream,
 			"headers":headers
 		}
+
 		self.workers.add(self.webcall,callback,errback,kwargs=kwargs)
 
 	def get(self, url, params={}, headers={}, callback=None, errback=None):

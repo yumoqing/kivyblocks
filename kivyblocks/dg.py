@@ -374,6 +374,10 @@ class DataGrid(WidgetReady, BoxLayout):
 	def on_selected(self,row):
 		self.selected_row = row
 
+	def loadData(self,**kwargs):
+		page = kwargs.get('page',1)
+		self.dataloader.do_search(None,{})
+
 	def createDataGridPart(self):
 		self.freeze_part = None
 		self.normal_part = None

@@ -37,6 +37,7 @@ from .ready import WidgetReady
 from .bgcolorbehavior import BGColorBehavior
 from .orientationlayout import OrientationLayout
 from kivyblocks import doubleface
+from .threadcall import HttpClient
 
 def showError(e):
 	print('error',e)
@@ -197,11 +198,19 @@ class Blocks(EventDispatcher):
 				dic = json.loads(b)
 				callback(None,dic)
 		elif url.startswith('http://') or url.startswith('https://'):
+			"""
 			h = HTTPDataHandler(url,method=method,params=params,
 					files=files)
 			h.bind(on_success=callback)
 			h.bind(on_error=errback)
 			h.handle()
+			"""
+			try:
+				hc = HttpClient()
+				resp=hc(url,method=method,params=params,files=files)
+				callback(None,resp)
+			except Exception as e:
+				errback(None,e)
 		else:
 			config = getConfig()
 			url = config.uihome + url
@@ -277,13 +286,11 @@ class Blocks(EventDispatcher):
 			raise Exception(desc)
 
 		widgetClass = desc['widgettype']
-		opts = desc.get('options',{})
+		opts = desc.get('options',{}).copy()
 		widget = None
 		try:
 			klass = wrap_ready(widgetClass)
 			widget = klass(**opts)
-			if desc.get('parenturl'):
-				widget.parenturl = desc.get('parenturl')
 		except Exception as e:
 			print('Error:',widgetClass,'not registered')
 			print_exc()
@@ -297,48 +304,49 @@ class Blocks(EventDispatcher):
 		return widget
 		
 	def build_rest(self, widget,desc,t=None):
-		bcnt = 0
-		btotal = len(desc.get('subwidgets',[]))
-		params={
-			'blocks':self,
-			'bcnt':bcnt,
-			'btotal':btotal,
-			'desc':desc,
-			'widget':widget
-		}
+		self.subwidget_total = len(desc.get('subwidgets',[]))
+		self.subwidgets = None * self.subwidget_total
 		def doit(params,o,w):
-			params['bcnt'] += 1
-			bcnt = params['bcnt']
-			btotal = params['btotal']
-			blocks = params['blocks']
 			desc = params['desc']
 			widget = params['widget']
-			if hasattr(widget,'parenturl'):
-				w.parenturl = widget.parenturl
-			widget.add_widget(w)
-			# print('bcnt=',bcnt,'btotal=',btotal,'desc=',desc)
-			if bcnt >= btotal:
+			self.subwidgets[params['pos']] = w
+			self.subwidget_cnt += 1
+			if None not in self.subwidgets:
+				for w in self.subwidgets:
+					widget.add_widget(w)
 				for b in desc.get('binds',[]):
-					# print('buildBind() called',b)
-					blocks.buildBind(widget,b)
+					kw = b.copy()
+					self.buildBind(widget,kw)
 
 		def doerr(o,e):
+			print('doerr() called' ,self.subwidget_cnt,'-----')
+			self.subwidget_cnt += 1
 			raise e
 
-		f = partial(doit,params)
+		pos = 0
 		for sw in desc.get('subwidgets',[]):
+			params={
+				'desc':desc,
+				'widget':widget,
+				'pos':pos
+			}
+			f = partial(doit,params)
 			b = Blocks()
 			b.bind(on_built=f)
 			b.bind(on_failed=doerr)
-			b.widgetBuild(sw)
+			kw = sw.copy()
+			b.widgetBuild(kw)
 
-		if btotal == 0:
+		if self.subwidget_total == 0:
 			for b in desc.get('binds',[]):
+				kw = b.copy()
 				self.buildBind(widget,b)
 
 	def buildBind(self,widget,desc):
 		wid = desc.get('wid','self')
 		w = Blocks.getWidgetById(desc.get('wid','self'),from_widget=widget)
+		if not w:
+			print(desc.get('wid','self'),'not found via Blocks.getWidgetById()')
 		event = desc.get('event')
 		if event is None:
 			return
@@ -363,9 +371,9 @@ class Blocks(EventDispatcher):
 	def blocksAction(self,widget,desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		add_mode = desc.get('mode','replace')
-		opts = desc.get('options')
+		opts = desc.get('options').copy()
 		d = self.getActionData(widget,desc)
-		p = opts.get('options',{})
+		p = opts.get('options',{}).copy()
 		p.update(d)
 		opts['options'] = p
 		def doit(target,add_mode,o,w):
@@ -384,9 +392,9 @@ class Blocks(EventDispatcher):
 	def urlwidgetAction(self,widget,desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		add_mode = desc.get('mode','replace')
-		opts = desc.get('options')
+		opts = desc.get('options').copy()
 		d = self.getActionData(widget,desc)
-		p = opts.get('params',{})
+		p = opts.get('params',{}).copy()
 		p.update(d)
 		opts['params'] = p
 		d = {
@@ -423,10 +431,10 @@ class Blocks(EventDispatcher):
 		name = desc.get('rfname')
 		func = rf.get(name)
 		if func is None:
-			print('rfname(%s) not found' % name,rf.registKW)
+			print('rfname(%s) not found' % name)
 			raise Exception('rfname(%s) not found' % name)
 
-		params = desc.get('params',{})
+		params = desc.get('params',{}).copy()
 		d = self.getActionData(widget,desc)
 		params.update(d)
 		# print('registedfunctionAction(),params=',params)
@@ -442,7 +450,7 @@ class Blocks(EventDispatcher):
 			"self":target,
 			"args":args
 		}
-		ns.update(d)	
+		ns.update(d)
 		self.eval(script, ns)
 	
 	def methodAction(self, widget, desc, *args):
@@ -450,7 +458,7 @@ class Blocks(EventDispatcher):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		if hasattr(target,method):
 			f = getattr(target, method)
-			kwargs = desc.get('options',{})
+			kwargs = desc.get('options',{}).copy()
 			d = self.getActionData(widget,desc)
 			kwargs.update(d)
 			f(*args, **kwargs)
@@ -463,43 +471,36 @@ class Blocks(EventDispatcher):
 		{
 			widgettype:<registered widget>,
 			id:widget id,
-			options:
+			options:{}
 			subwidgets:[
 			]
 			binds:[
 			]
 		}
 		"""
+		name = desc['widgettype']
+
 		def doit(desc):
-			# Logger.info("blocks:%s",str(desc))
 			desc = self.valueExpr(desc)
-			# Logger.info("blocks:%s",str(desc))
-			try:
-				widget = self.__build(desc)
-				self.dispatch('on_built',widget)
-				if hasattr(widget,'ready'):
-					widget.ready()
-			except Exception as e:
-				print_exc()
-				doerr(None,e)
-				return
+			widget = self.__build(desc)
+			self.dispatch('on_built',widget)
+			if hasattr(widget,'ready'):
+				widget.ready()
 
 		def doerr(o,e):
-			print('blocks.py:wigetBuild() failed,desc=',desc)
+			print('***blocks.py:wigetBuild() failed,desc=',desc)
 			self.dispatch('on_failed',e)
+			print_exc()
+			print(e)
 
-		name = desc['widgettype']
 		if name == 'urlwidget':
-			opts = desc.get('options')
+			opts = desc.get('options').copy()
 			url = opts.get('url')
 			if url is None:
 				self.dispatch('on_failed',Exception('miss url'))
 			
 			def cb(o,d):
-				try:
-					doit(d)
-				except Exception as e:
-					doerr(None,e)
+				doit(d)
 
 			if opts.get('url'):
 				del opts['url']
@@ -517,8 +518,6 @@ class Blocks(EventDispatcher):
 		if from_widget is None:
 			from_widget = app.root
 		if hasattr(from_widget,'widget_id'):
-			print('Blocks.getWidgetById():widget_id=',
-						from_widget.widget_id,'id=',id)
 			if from_widget.widget_id == id:
 				return from_widget
 		for c in from_widget.children:

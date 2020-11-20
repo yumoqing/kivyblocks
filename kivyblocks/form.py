@@ -1,3 +1,4 @@
+from kivy.factory import Factory
 from kivy.logger import Logger
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
@@ -283,9 +284,9 @@ class Form(BGColorBehavior, BoxLayout):
 			self.fsc.add_widget(w)
 			self.fieldWidgets.append(w)
 			w.bind(on_ready=self.makeInputLink)
-		wid = Blocks.getWidgetById('__submit',from_widget=self)
+		wid = Factory.Blocks.getWidgetById('__submit',from_widget=self)
 		wid.bind(on_press=self.on_submit_button)
-		wid = Blocks.getWidgetById('__clear',from_widget=self)
+		wid = Factory.Blocks.getWidgetById('__clear',from_widget=self)
 		wid.bind(on_press=self.on_clear_button)
 
 	def makeInputLink(self,o,v=None):

@@ -67,6 +67,7 @@ from .utils import NeedLogin, InsufficientPrivilege, HTTPError
 from .login import LoginForm
 from .tab import TabsPanel
 from .qrdata import QRCodeWidget
+from .threadcall import HttpClient
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
@@ -144,26 +145,22 @@ class HTTPDataHandler(EventDispatcher):
 		self.headers = headers
 		self.files=files
 		self.stream=stream
-		self.hc = App.get_running_app().hc
 		self.register_event_type('on_success')
 		self.register_event_type('on_error')
 
 	def on_success(self,v):
+		print('HTTPDataHandler():',self.url,'finished...')
 		pass
 
 	def on_error(self,e):
 		pass
 
 	def onSuccess(self,o,v):
-		# print(__file__,'onSuccess():v=',v)
+		print(self.url,'onSuccess() called')
 		self.dispatch('on_success',v)
 
 	def onError(self,o,e):
-		if isinstance(e,NeedLogin):
-			lf = LoginForm()
-			lf.bind(on_setupuser=self.redo)
-			lf.open()
-			return
+		print(self.url,'onError():v=',e)
 		self.dispatch('on_error',e)
 		print_exc()
 		print('[****][*********] onError Called',e)
@@ -176,7 +173,9 @@ class HTTPDataHandler(EventDispatcher):
 		p.update(params)
 		h = self.headers
 		h.update(headers)
-		self.hc(self.url,method=self.method,
+		hc = HttpClient()
+		print('HTTPDataHandler():',self.url,'handling....')
+		hc(self.url,method=self.method,
 						params=p,
 						headers=h,
 						files=self.files,

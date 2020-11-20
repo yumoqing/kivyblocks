@@ -20,13 +20,6 @@ class NewVideo(BGColorBehavior, Video):
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
 
-	def on_state(self,*args):
-		print('new state = ',self.state)
-		if self.state == 'play':
-			Window.allow_screensaver = False
-		else:
-			Window.allow_screensaver = True
-			
 	def ffplayerLog(self, msg, level):
 		msg = msg.strip()
 		if msg:
