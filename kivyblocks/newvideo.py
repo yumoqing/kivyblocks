@@ -40,7 +40,6 @@ class NewVideo(BGColorBehavior, Video):
 
 	# fix bug for android
 	# ValueError: None is not allowed for NewVideo.duration 
-	"""
 	def _on_video_frame(self, *largs):
 		video = self._video
 		if not video:
@@ -49,7 +48,4 @@ class NewVideo(BGColorBehavior, Video):
 			return
 		if not video.position:
 			return
-		if not video.texture:
-			return
 		super()._on_video_frame(*largs)
-	"""
