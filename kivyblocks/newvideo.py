@@ -31,3 +31,22 @@ class NewVideo(BGColorBehavior, Video):
 		else:
 			print('NewVideo _video has not _ffplayer, do nothong')
 
+	def on_state(self,*args):
+		super().on_state(*args)
+		if self.state == 'play':
+			Window.allow_screensaver = False
+		else:
+			Window.allow_screensaver = True
+
+	# fix bug
+	def _on_video_frame(self, *largs):
+		video = self._video
+		if not video:
+			return
+		if not video.duration:
+			return
+		if not video.position:
+			return
+		if not video.texture:
+			return
+		super()._on_video_frame(*largs)
