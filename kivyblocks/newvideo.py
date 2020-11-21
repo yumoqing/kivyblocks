@@ -38,7 +38,9 @@ class NewVideo(BGColorBehavior, Video):
 		else:
 			Window.allow_screensaver = True
 
-	# fix bug
+	# fix bug for android
+	# ValueError: None is not allowed for NewVideo.duration 
+	"""
 	def _on_video_frame(self, *largs):
 		video = self._video
 		if not video:
@@ -50,3 +52,4 @@ class NewVideo(BGColorBehavior, Video):
 		if not video.texture:
 			return
 		super()._on_video_frame(*largs)
+	"""
