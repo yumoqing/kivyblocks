@@ -44,8 +44,8 @@ class NewVideo(BGColorBehavior, Video):
 		video = self._video
 		if not video:
 			return
-		if not video.duration:
+		if video.duration is None:
 			return
-		if not video.position:
+		if video.position is None:
 			return
 		super()._on_video_frame(*largs)
