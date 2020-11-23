@@ -23,6 +23,8 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		Clock.schedule_once(self.build_children,0)
 		self.bind(on_swipe_left=self.toggle_second)
 		self.bind(on_swipe_right=self.toggle_second)
+		self.bind(size=self.on_size_changed)
+		self.bind(pos=self.on_size_changed)
 	
 	def build_children(self, *args):
 		if isinstance(self.main_widget, dict):
@@ -40,26 +42,16 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		return self.width > self.height
 
 	def toggle_second(self,*args):
-		print('toggle_second() called ..')
 		if self.isLandscape():
 			if self.second_flg:
-				print('remove second widget ..')
 				self.remove_widget(self.widget_second)
 				self.second_flg = False
 			else:
-				print('add second widget ..',self.widget_second)
 				self.add_widget(self.widget_second)
 				self.second_flg = True
-				self.on_size(self.size)
+				self.on_size_changed(self.size)
 
-
-	def on_ready(self,*args):
-		Clock.schedule_once(self.two_widget_layout,0)
-
-	def on_size(self,*args):
-		Clock.schedule_once(self.two_widget_layout,0)
-
-	def on_pos(self,*args):
+	def on_size_changed(self,*args):
 		Clock.schedule_once(self.two_widget_layout,0)
 
 	def two_widget_layout(self, *args):
@@ -71,46 +63,35 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 			self.horizontal_layout()
 		else:
 			self.vertical_layout()
+		self.do_layout()
 
 	def horizontal_layout(self):
-		self.widget_main.size_hint_x = 1
-		self.widget_main.size_hint_y = 1
+		self.widget_main.size_hint = (None,None)
 		self.widget_main.size = self.size
 		self.widget_main.pos = self.pos
 		self.widget_second.height = self.height
-		self.widget_second.size_hint_x = None
-		self.widget_second.size_hint_y = 1
+		self.widget_second.size_hint = (None,None)
 		self.widget_second.width = self.width * self.height / self.width
 		self.widget_second.pos = (0,0)
 		self.widget_second.opacity = 0.6
-		if not self.widget_main in self.children:
-			print('horizontal:main_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_main.width,self.widget_main.height,*self.widget_main.pos))
-			self.add_widget(self.widget_main)
-		if self.widget_second in self.children:
-			self.remove_widget(self.widget_second)
-			print('horizontal:second_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_second.width,self.widget_second.height,*self.widget_second.pos))
+		self.clear_widgets()
+		self.add_widget(self.widget_main)
 		if self.second_flg:
 			self.add_widget(self.widget_second)
 
-
 	def vertical_layout(self):
-		self.widget_main.size_hint_x = 1
-		self.widget_main.size_hint_y = None
-		self.widget_main.width = self.width
-		self.widget_main.height = self.width / 16 * 10
+		self.widget_main.size_hint = (None,None)
+		self.widget_main.size = (self.width, \
+										self.width / 16 * 10)
 		self.widget_main.pos = (0, self.height - self.widget_main.height)
-		self.widget_second.width = self.width
-		self.widget_second.size_hint_x = 1
-		self.widget_second.size_hint_y = None
-		self.widget_second.height = self.height - self.widget_main.height
+		self.widget_second.size_hint = (None, None)
+		self.widget_second.size = (self.width, \
+							self.height - self.widget_main.height)
 		self.widget_second.pos = (0,0)
-		self.widget_second.opacity = 1
-		if not self.widget_main in self.children:
-			self.add_widget(self.widget_main)
-			print('vertical:main_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_main.width,self.widget_main.height,*self.widget_main.pos))
-		if not self.widget_second in self.children:
-			self.add_widget(self.widget_second)
-			print('vertical:second_widget:width=%.02f,height=%.02f,pos=(%.02f,%.02f)' % (self.widget_second.width,self.widget_second.height,*self.widget_second.pos))
+		self.widget_second.opacity = 0.6
+		self.clear_widgets()
+		self.add_widget(self.widget_main)
+		self.add_widget(self.widget_second)
 
 	def main_widget_built(self,o,w):
 		print('main_widget_built() called ...')
