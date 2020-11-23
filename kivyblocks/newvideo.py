@@ -66,4 +66,4 @@ class NewVideo(BGColorBehavior, Video):
 				print('video.unload() tried 3 time,still error....',e)
 				raise e
 			time.sleep(0.1)
-			return unload(try_cnt+1)
+			return self.unload(try_cnt+1)
