@@ -94,14 +94,8 @@ def alert(text,title='alert'):
 		alert_widget = Popup(content=bl, size_hint=(0.9,0.6))
 		alert_widget.msg_widget = msg
 	alert_widget.msg_widget.text = str(text)
-	x='(%d,%d)mm' % screenPhysicalSize()
-	if isHandHold():
-		x = x + ':hh'
-	alert_widget.title = str(title) + x
+	alert_widget.title = str(title)
 	alert_widget.open()
-	print('************')
-	print_exc()
-	print('************')
 
 def StrConvert(s):
 	if not s.startswith('py::'):
