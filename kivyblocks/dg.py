@@ -329,12 +329,14 @@ class DataGrid(WidgetReady, BoxLayout):
 			return 60
 		return self.show_rows
 
-	def clearRows(self):
+	def clearRows(self, *args):
+		print('dg.py:clearRows() called')
 		if self.freeze_part:
 			self.freeze_part.body.clearRows()
 		self.normal_part.body.clearRows()
 
 	def add_page(self,o,data):
+		print('dg.py:add_page() called',data)
 		ids = []
 		recs = data['data']
 		page = data['page']
@@ -344,12 +346,15 @@ class DataGrid(WidgetReady, BoxLayout):
 			recs.reverse()
 			idx = -1
 		for r in recs:
-			ids.append(self.addRow(r,index=idx))
+			id = self.addRow(r,index=idx)
+			ids.append(id)
+			print('rec added',r,id)
 		self.dataloader.bufferObjects(page,ids)
 		x = self.dataloader.getLocater()
 		self.locater(x)
 
 	def delete_page(self,o,data):
+		print('dg.py:delete_page() called')
 		for id in data:
 			self.delRow(id)
 
