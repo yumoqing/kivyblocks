@@ -217,7 +217,3 @@ class ToolPage(BGColorBehavior, BoxLayout):
 			self.add_widget(self.content)
 			self.add_widget(self.toolbar)
 
-if __name__ == '__main__':
-	from blocksapp import BlocksApp
-	app = BlocksApp()
-	app.run()

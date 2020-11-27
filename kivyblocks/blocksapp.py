@@ -93,19 +93,19 @@ def closeWorkers():
 	app.workers.running = False
 
 def appBlocksHack(app):
-		config = getConfig()
-		# app.on_close = on_close
-		app.getAuthHeader = getAuthHeader
-		app.__del__ = closeWorkers
-		Window.bind(on_request_close=app.on_close)
-		app.serverinfo = ServerInfo()
-		app.title = 'Test Title'
-		app.blocks = Blocks()
-		app.workers = Workers(maxworkers=config.maxworkers or 80)
-		app.workers.start()
-		app.hc = HttpClient()
-		WindowBase.softinput_mode='below_target'
-	
+	config = getConfig()
+	# app.on_close = on_close
+	app.getAuthHeader = getAuthHeader
+	app.__del__ = closeWorkers
+	Window.bind(on_request_close=app.on_close)
+	app.serverinfo = ServerInfo()
+	app.title = 'Test Title'
+	app.blocks = Blocks()
+	app.workers = Workers(maxworkers=config.maxworkers or 80)
+	app.workers.start()
+	app.hc = HttpClient()
+	WindowBase.softinput_mode='below_target'
+
 class BlocksApp(App):
 	def build(self):
 		appBlocksHack(self)

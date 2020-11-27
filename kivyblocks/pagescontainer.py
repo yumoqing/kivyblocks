@@ -6,31 +6,6 @@ from kivy.uix.label import Label
 from kivy.app import App
 from .utils import CSize
 
-class TwinShapeMenuBar(BoxLayout):
-	def __init__(self,**kw):
-		pass
-
-class MultiPanel(BoxLayout):
-	def __init__(self,bar_width=CSize(2),**kw):
-		BoxLayout.__init__(self,**kw)
-		self.panels = []
-		self.bar_width = bar_width
-		self.menubar = TwinShapeMenuBar(self,bar_width=bar_width)
-		self.cur_panel = None
-		self.bind(on_size=self.sizeChanged)
-
-	def sizeChanged(self,*args):
-		if len(self.panels) == 0:
-			return 
-		if len(self.panels) == 1:
-			self.cur_panel.height = self.height - self.menubar.height
-			self.cur_panel.width = self.height - self.menubar.width
-			return 
-
-		self.menubar.sizeChanged(self)
-		self.cur_panel.height = self.height - self.menubar.height
-		self.cur_panel.width = self.height - self.menubar.width
-
 class PageContainer(FloatLayout):
 	def __init__(self,**kw):
 		super().__init__(**kw)
