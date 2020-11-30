@@ -478,6 +478,10 @@ class Blocks(EventDispatcher):
 		name = desc['widgettype']
 
 		def doit(desc):
+			if not isinstance(desc,dict):
+				print('desc must be a dict object',desc,type(desc))
+				raise Exception('desc must be a dict')
+
 			desc = self.valueExpr(desc)
 			widget = self.__build(desc)
 			self.dispatch('on_built',widget)
@@ -509,6 +513,7 @@ class Blocks(EventDispatcher):
 	def getWidgetById(self,id,from_widget=None):
 		app = App.get_running_app()
 		if id in ['root','/self']:
+			print('return app.root',app.root)
 			return app.root
 		if id=='self':
 			return from_widget
