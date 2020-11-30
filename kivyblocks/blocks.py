@@ -321,7 +321,7 @@ class Blocks(EventDispatcher):
 			raise e
 
 		pos = 0
-		for sw in desc.get('subwidgets',[]):
+		for pos,sw in enumerate(desc.get('subwidgets',[])):
 			params={
 				'desc':desc,
 				'widget':widget,
