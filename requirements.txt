@@ -4,3 +4,5 @@ ffpyplayer
 qrcode
 pillow
 requests
+plyer
+python-osc
