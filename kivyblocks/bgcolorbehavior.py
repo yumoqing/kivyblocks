@@ -62,7 +62,7 @@ class BGColorBehavior(object):
 			with self.canvas.before:
 				Color(*self.bgcolor)
 				if self.radius != []:
-					self.rect = RoundedRectangel(pos=self.pos,
+					self.rect = RoundedRectangle(pos=self.pos,
 								size=self.size,
 								radius=self.radius)
 				else:
