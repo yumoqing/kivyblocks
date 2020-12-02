@@ -165,6 +165,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 		self.dispatch('on_selected',d)
 
 	def getData(self):
+		return self.selected_data
 		d = {
 			"caller":self,
 			"page_rows":1,
