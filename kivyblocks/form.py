@@ -259,7 +259,9 @@ class Form(BGColorBehavior, BoxLayout):
 		self.options = options
 		BoxLayout.__init__(self, orientation='vertical')
 		self.color_level = self.options.get('color_level', 0)
-		BGColorBehavior.__init__(self,color_level=self.color_level)
+		BGColorBehavior.__init__(self,
+			color_level=self.options.get('color_level',-1),
+			radius=self.options.get('radius',[]))
 		self.readiedInput = 0
 		self.cols = self.options_cols = self.options.get('cols',1)
 		if isHandHold() and Window.width < Window.height:

@@ -69,8 +69,10 @@ class NodeTrigger(ButtonBehavior, EmptyBox):
 			Triangle(points=points)
 		# print('pos=',self.pos,'size=',self.size)
 
-class TreeNode(BoxLayout):
+class TreeNode(BGColorBehavior,BoxLayout):
 	def __init__(self,data,tree=None,
+						color_level=-1,
+						radius=[],
 						parentNode=None,
 						):
 		"""
@@ -79,7 +81,11 @@ class TreeNode(BoxLayout):
 			if children miss, it is a leaf node,if children is a empty array, is mean need load at it is first expanded.
 			}
 		"""
+		self.color_level = color_level if color_level != -1 else tree.color_level + 1
+		self.radius = radius if radius!=[] else tree.audius
 		BoxLayout.__init__(self,orientation='vertical',size_hint=(None,None))
+		BGColorBehavior.__init__(self,color=self.color_level,
+							radius=self.radius)
 		self.treeObj = tree
 		self.parentNode = parentNode
 		self.data = data
@@ -282,10 +288,13 @@ tree options
 }
 """
 class Tree(BGColorBehavior, ScrollWidget):
-	def __init__(self,**options):
-		self.color_level = options.get('color_level',0)
+	def __init__(self,color_level=-1,radius=[],**options):
+		self.color_level = color_level
+		self.radius = radius
 		ScrollWidget.__init__(self)
-		BGColorBehavior.__init__(self,color_level=self.color_level)
+		BGColorBehavior.__init__(self,
+						color_level=self.color_level,
+						radius = self.radius)
 		self.options = DictObject(**options)
 		self.nodes = []
 		self.initflag = False

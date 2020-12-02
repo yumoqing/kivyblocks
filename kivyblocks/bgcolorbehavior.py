@@ -1,14 +1,16 @@
 from kivy.logger import Logger
-from kivy.graphics import Color, Rectangle
+from kivy.graphics import Color, Rectangle, RoundedRectangle
 from kivy.properties import ListProperty
 from .color_definitions import getColors
 
 _logcnt = 0
 class BGColorBehavior(object):
-	def __init__(self, color_level=-1,**kwargs):
+	def __init__(self, color_level=-1,radius=[],**kwargs):
 		self.color_level = color_level
+		self.radius = radius
 		self.bgcolor = []
 		self.fgcolor = []
+		self.useOwnColor = False
 		if color_level != -1:
 			fg,bg= getColors(color_level)
 			self.fgcolor = fg
@@ -59,7 +61,12 @@ class BGColorBehavior(object):
 		if self.canvas:
 			with self.canvas.before:
 				Color(*self.bgcolor)
-				self.rect = Rectangle(pos=self.pos, 
+				if self.radius != []:
+					self.rect = RoundedRectangel(pos=self.pos,
+								size=self.size,
+								radius=self.radius)
+				else:
+					self.rect = Rectangle(pos=self.pos, 
 								size=self.size)
 		else:
 			print('on_bgcolor():self.canvas is None')

@@ -15,9 +15,11 @@ logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
 
 
 class NewVideo(BGColorBehavior, Video):
-	def __init__(self,**kw):
+	def __init__(self,color_level=-1,radius=[],**kw):
 		Video.__init__(self, **kw)
-		BGColorBehavior.__init__(self)
+		BGColorBehavior.__init__(self,
+			color_level=color_level,
+			radius=radius)
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
 

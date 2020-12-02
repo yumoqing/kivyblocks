@@ -22,6 +22,7 @@ from .paging import Paging, RelatedLoader
 from .ready import WidgetReady
 from .toolbar import Toolbar
 from .i18n import I18nText
+from .bgcolorbehavior import BGColorBehavior
 
 class BLabel(ButtonBehavior, Text):
 	def __init__(self, **kw):
@@ -118,11 +119,12 @@ class Row(GridLayout):
 		self.part.datagrid.select_rowid = self.row_id
 		self.part.datagrid.dispatch('on_selected',self)
 
-class Header(WidgetReady, ScrollWidget):
-	def __init__(self,part,**kw):
+class Header(WidgetReady, BGColorBehavior, ScrollWidget):
+	def __init__(self,part,color_level=-1,**kw):
 		self.part = part
 		ScrollWidget.__init__(self,**kw)
 		WidgetReady.__init__(self)
+		BGColorBehavior.__init__(self,color_level=color_level)
 		self.init(1)
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
 
@@ -220,14 +222,18 @@ class DataGridPart(WidgetReady, BoxLayout):
 	def addRow(self,id, data):
 		return self.body.addRow(id, data)
 
-class DataGrid(WidgetReady, BoxLayout):
+class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 	row_selected = BooleanProperty(False)
-	def __init__(self,**options):
+	def __init__(self,color_level=-1,radius=[],**options):
 		kw = DictObject()
 		kw = setSizeOptions(options,kw)
 		kw.orientation = 'vertical'
+		self.color_level = color_level
+		self.radius = radius
 		WidgetReady.__init__(self)
 		BoxLayout.__init__(self,**kw)
+		BGColorBehavior.__init__(self,color_level=color_level,
+							radius=radius)
 		self.parenturl = options.get('parenturl',None)
 		self.options = options
 		self.noheader = options.get('noheader',False)

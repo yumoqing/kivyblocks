@@ -60,11 +60,14 @@ class PressableBox(TouchRippleButtonBehavior, BoxLayout):
 class ToggleItems(BGColorBehavior, BoxLayout):
 	def __init__(self,
 				color_level=1,
+				radius=[],
 				items_desc=[],
 				border_width=1,
 				**kw):
 		BoxLayout.__init__(self, **kw)
-		BGColorBehavior.__init__(self,color_level=color_level)
+		BGColorBehavior.__init__(self,
+					color_level=color_level,
+					radius=radius)
 		self.item_widgets = []
 		for desc in items_desc:
 			c = PressableBox(border_width=border_width,

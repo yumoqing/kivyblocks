@@ -26,12 +26,13 @@ from kivy.factory import Factory
 from .bgcolorbehavior import BGColorBehavior
 
 class TabsPanel(BGColorBehavior, TabbedPanel):
-	def __init__(self,**options):
+	def __init__(self,color_level=-1,
+					radius=[],
+					**options):
 		self.tabs_list = options.get('tabs')
-		self.color_level = options.get('color_level',0)
-		opts = {k:v for k,v in options.items() if k not in ['tabs','color_level']}
-		TabbedPanel.__init__(self,**opts)
-		BGColorBehavior.__init__(self)
+		TabbedPanel.__init__(self,**options)
+		BGColorBehavior.__init__(self,color_level=color_level,
+						radius=radius)
 		Clock.schedule_once(self.add_tabs,0)
 
 	def add_tab(self,text,desc):

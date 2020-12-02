@@ -41,7 +41,8 @@ class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
 		ButtonBehavior.__init__(self)
 		BoxLayout.__init__(self,
 					size_hint_y=None)
-		BGColorBehavior.__init__(self,color_level=ancestor.color_level)
+		BGColorBehavior.__init__(self,color_level=ancestor.color_level,
+				radius=ancestor.radius)
 		self.bl = BoxLayout(orientation='vertical',
 					size_hint_y=None)
 		self.add_widget(self.bl)
@@ -134,12 +135,6 @@ class Toolbar(BGColorBehavior, GridLayout):
 			tool.bind(on_press=self.tool_press)
 		self.height = tool.height * 1.1
 
-	def on_size(self,obj,size):
-		return
-		with self.canvas.before:
-			Color(0.3,0.3,0.3,1)
-			Rectangle(pos=self.pos,size=self.size)
-
 	def tool_press(self,o,v=None):
 		for n,w in self.tool_widgets.items():
 			active = False
@@ -166,16 +161,18 @@ Toolpage options
 	
 """
 class ToolPage(BGColorBehavior, BoxLayout):
-	def __init__(self,**opts):
+	def __init__(self,color_level=-1,radius=[],**opts):
 		self.opts = DictObject(**opts)
-		self.parenturl = opts.get('parenturl',None)
 		if self.opts.tool_at in [ 'top','bottom']:
 			orient = 'vertical'
 		else:
 			orient = 'horizontal'
-		color_level=self.opts.color_level or 0
+		self.color_level=self.opts.color_level or 0
+		self.radius = self.opts.radius
 		BoxLayout.__init__(self,orientation=orient)
-		BGColorBehavior.__init__(self,color_level=color_level)
+		BGColorBehavior.__init__(self,
+							color_level=color_level,
+							radius=radius)
 		self.content = None
 		self.toolbar = None
 		self.init()
