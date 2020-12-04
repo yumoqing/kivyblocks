@@ -73,6 +73,8 @@ class BGColorBehavior(object):
 
 	def selected(self):
 		if self.useOwnColor:
+			if self.bgcolor == self.selected_bgcolor:
+				return
 			self.bgcolor = self.selected_bgcolor
 			self.color = self.fgcolor = self.selected_fgcolor
 			self.on_bgcolor()
@@ -81,6 +83,8 @@ class BGColorBehavior(object):
 
 	def unselected(self):
 		if self.useOwnColor:
+			if self.bgcolor == self.normal_bgcolor:
+				return
 			self.bgcolor = self.normal_bgcolor
 			self.color = self.fgcolor = self.normal_fgcolor
 			self.on_bgcolor()
