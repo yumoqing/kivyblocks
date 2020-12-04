@@ -181,8 +181,8 @@ class InputBox(BoxLayout):
 		options = self.uidef.get('options',{}).copy()
 		options.update(self.options.get('uiparams',{}))
 		options['allow_copy'] = True
-		options['width'] = 1
-		options['height'] = 2.5
+		options['width'] = options.get('width',20)
+		options['height'] = options.get('height',1)
 		if self.options.get('tip'):
 			options['hint_text'] = i18n(self.options.get('tip'))
 

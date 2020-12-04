@@ -71,7 +71,7 @@ class StrInput(TextInput):
 		a['password'] = kv.get('password',False)
 		a['multiline'] = kv.get('multiline',False)
 
-		Logger.info('TextInput:a=%s,h=%d,w=%d,CSize(1)=%d',a,h,w,CSize(1))
+		Logger.info('TextInput:a=%s,kv=%s',a,kv)
 		super(StrInput,self).__init__(**a)
 		self.old_value = None
 		self.register_event_type('on_changed')

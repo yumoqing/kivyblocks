@@ -19,6 +19,8 @@
 	},
 }
 """
+from appPublic.uniqueID import getID
+
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivy.clock import Clock
 from kivy.factory import Factory
@@ -28,15 +30,21 @@ from .bgcolorbehavior import BGColorBehavior
 class TabsPanel(BGColorBehavior, TabbedPanel):
 	def __init__(self,color_level=-1,
 					radius=[],
+					tabs=[],
 					**options):
-		self.tabs_list = options.get('tabs')
+		self.tabs_list = tabs
 		TabbedPanel.__init__(self,**options)
 		BGColorBehavior.__init__(self,color_level=color_level,
 						radius=radius)
 		Clock.schedule_once(self.add_tabs,0)
 
-	def add_tab(self,text,desc):
+	def newname(self):
+		return getID()
+
+	def add_tab(self,name,text,desc):
 		def add(o,w):
+			if not hasattr(w,'widget_id'):
+				w.widget_id = name
 			self.add_widget(TabbedPanelItem(text=text,content=w))
 		blocks = Factory.Blocks()
 		blocks.bind(on_built=add)
@@ -44,9 +52,10 @@ class TabsPanel(BGColorBehavior, TabbedPanel):
 
 	def add_tabs(self,*args):
 		for d in self.tabs_list:
+			name = d.get('name',self.newname())
 			text = d['text']
 			desc = d['content']
-			self.add_tab(text,desc)
+			self.add_tab(name,text,desc)
 
 Factory.register('TabsPanel',TabsPanel)
 
