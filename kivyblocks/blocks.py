@@ -496,16 +496,20 @@ class Blocks(EventDispatcher):
 
 		if name == 'urlwidget':
 			opts = desc.get('options').copy()
+			addon = desc.get('extend')
 			url = opts.get('url')
 			if url is None:
 				self.dispatch('on_failed',Exception('miss url'))
 			
-			def cb(o,d):
+			def cb(addon,o,d):
+				if addon is not None:
+					d = dictExtend(d,addon)
 				doit(d)
 
 			if opts.get('url'):
 				del opts['url']
-			self.getUrlData(url,callback=cb,errback=doerr,**opts)
+			self.getUrlData(url,callback=partial(cb,addon),
+						errback=doerr,**opts)
 			return
 		doit(desc)
 	
