@@ -57,8 +57,6 @@ class TabsPanel(BGColorBehavior, TabbedPanel):
 			desc = d['content']
 			self.add_tab(name,text,desc)
 
-Factory.register('TabsPanel',TabsPanel)
-
 if __name__ == '__main__':
 	from kivy.app import App
 	pass

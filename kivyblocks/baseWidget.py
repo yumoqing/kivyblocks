@@ -1,6 +1,7 @@
 import sys
 from traceback import print_exc
 
+from kivy.properties import ObjectProperty, StringProperty
 from kivy.app import App
 from kivy.utils import platform
 from kivy.uix.button import Button, ButtonBehavior
@@ -53,6 +54,7 @@ from kivycalendar import DatePicker
 from kivy.factory import Factory
 
 from appPublic.dictObject import DictObject
+from appPublic.jsonConfig import getConfig
 from appPublic.folderUtils import listFile
 
 from .widgetExt.scrollwidget import ScrollWidget
@@ -68,6 +70,7 @@ from .login import LoginForm
 from .tab import TabsPanel
 from .qrdata import QRCodeWidget
 from .threadcall import HttpClient
+from .i18n import I18n
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
@@ -79,9 +82,33 @@ class WrapText(Label):
 		self.bind(width=lambda *x: self.setter('text_size')(self, (self.width, None)),
 				texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
-
 class Text(Label):
-	pass
+	lang=StringProperty('')
+	otext = StringProperty('')
+	def __init__(self,i18n=False, textype='text', **kw):
+		self._i18n = i18n
+		kwargs = kw.copy()
+		config = getConfig()
+		if config.texttypes:
+			attrs = config.texttypes.get('texttype',{})
+			kwargs.update(attrs)
+		super().__init__(**kwargs)
+		if self._i18n:
+			self.i18n = I18n()
+			self.i18n.addI18nWidget(self)
+			self.otext = kw.get('text','')
+	
+	def on_otext(self,o,v=None):
+		if self._i18n:
+			self.text = self.i18n(v)
+		else:
+			self.text = v
+	
+	def changeLang(self,lang):
+		self.lang = lang
+
+	def on_lang(self,o,lang):
+		self.text = self.i18n(self.otext)
 
 class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):

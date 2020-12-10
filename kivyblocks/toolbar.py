@@ -13,9 +13,9 @@ from appPublic.dictObject import DictObject
 from .widgetExt.scrollwidget import ScrollWidget
 from .utils import *
 from .ready import WidgetReady
-from .i18n import I18nText 
 from .color_definitions import getColors
 from .bgcolorbehavior import BGColorBehavior
+from .baseWidget import Text
 
 """
 toobar={
@@ -62,7 +62,8 @@ class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
 
 		tsize = CSize(self.opts.text_size)
 		label = self.opts.label or self.opts.name
-		self.lbl = I18nText( otext=label,
+		self.lbl = Text(i18n=True,
+					text=label,
 					font_size=int(tsize),
 					text_size=(CSize(len(label)), tsize),
 					height=tsize,

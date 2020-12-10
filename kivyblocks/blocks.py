@@ -32,12 +32,11 @@ from .form import InputBox, Form, StrSearchForm
 from .boxViewer import BoxViewer
 from .tree import Tree, TextTree
 from .newvideo import Video
-# from .qrcodereader import QRCodeReader
 from .ready import WidgetReady
 from .bgcolorbehavior import BGColorBehavior
 from .orientationlayout import OrientationLayout
 from .threadcall import HttpClient
-from .twosides import TwoSides
+from .register import *
 
 def showError(e):
 	print('error',e)
@@ -278,11 +277,11 @@ class Blocks(EventDispatcher):
 			return self.dictValueExpr(obj,localnamespace)
 		return obj
 
-	def __build(self,desc:dict):
-		# print('__build(),desc=',desc)
+	def w_build(self,desc:dict):
+		# print('w_build(),desc=',desc)
 		widgetClass = desc.get('widgettype',None)
 		if not widgetClass:
-			print("__build(), desc invalid", desc)
+			print("w_build(), desc invalid", desc)
 			raise Exception(desc)
 
 		widgetClass = desc['widgettype']
@@ -387,11 +386,14 @@ class Blocks(EventDispatcher):
 		b.widgetBuild(opts)
 		
 	def urlwidgetAction(self,widget,desc, *args):
+		print('urlwidgetAction():args=',args)
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		d = self.getActionData(widget,desc)
 		p = opts.get('params',{}).copy()
+		if len(args) >= 1 and isinstance(args[0],dict):
+			p.update(p)
 		p.update(d)
 		opts['params'] = p
 		d = {
@@ -416,8 +418,8 @@ class Blocks(EventDispatcher):
 		data = {}
 		if desc.get('datawidget',False):
 			dwidget = Blocks.getWidgetById(desc.get('datawidget','self'),widget)
-			if dwidget and hasattr(dwidget,'getData'):
-				data = dwidget.getData()
+			if dwidget and hasattr(dwidget,'getValue'):
+				data = dwidget.getValue()
 				if desc.get('keymapping'):
 					data = keyMapping(data, desc.get('keymapping'))
 		return data
@@ -476,6 +478,7 @@ class Blocks(EventDispatcher):
 		}
 		"""
 		name = desc['widgettype']
+		print('desc=',desc,'type=',type(desc))
 
 		def doit(desc):
 			if not isinstance(desc,dict):
@@ -483,7 +486,7 @@ class Blocks(EventDispatcher):
 				raise Exception('desc must be a dict')
 
 			desc = self.valueExpr(desc)
-			widget = self.__build(desc)
+			widget = self.w_build(desc)
 			self.dispatch('on_built',widget)
 			if hasattr(widget,'ready'):
 				widget.ready()

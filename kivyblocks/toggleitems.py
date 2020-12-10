@@ -28,10 +28,10 @@ class PressableBox(BGColorBehavior, TouchRippleButtonBehavior, BoxLayout):
 	def on_press(self,o=None):
 		self.selected()
 
-	def set_data(self,d):
+	def setValue(self,d):
 		self.user_data = d
 
-	def get_data(self):
+	def getValue(self):
 		return self.user_data
 
 class ToggleItems(BGColorBehavior, BoxLayout):
@@ -73,7 +73,7 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 			c = PressableBox(**kw)
 			d = desc.get('data')
 			if d:
-				c.set_data(d)
+				c.setValue(d)
 			self.item_widgets.append(c)
 			self.add_widget(c)
 			c.bind(on_press=self.select_item)
@@ -98,20 +98,18 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 
 	def select_item(self,o=None):
 		[i.unselected() for i in self.item_widgets if i != o]
-		self.dispatch('on_press',o.get_data())
+		self.dispatch('on_press',o.getValue())
 
 	def getValue(self):
 		for i in self.item_widgets:
 			if i.is_selected():
-				return i.get_data()
+				return i.getValue()
 		return None
 
 	def setValue(self,v):
 		for i in self.item_widgets:
-			if i.get_data() == v:
+			if i.getValue() == v:
 				i.selected()
 				self.select_iten(i)
 				return
 
-Factory.register('PressableBox',PressableBox)
-Factory.register('ToggleItems',ToggleItems)

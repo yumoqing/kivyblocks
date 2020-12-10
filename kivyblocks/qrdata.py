@@ -132,8 +132,6 @@ class QRCodeWidget(FloatLayout):
 		img.texture = texture
 		img.canvas.ask_update()
 
-Factory.register('QRCodeWidget',QRCodeWidget)
-
 if __name__ == '__main__':
 	from kivy.app import runTouchApp
 	import sys

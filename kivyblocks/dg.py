@@ -21,7 +21,6 @@ from .widgetExt import ScrollWidget
 from .paging import Paging, RelatedLoader
 from .ready import WidgetReady
 from .toolbar import Toolbar
-from .i18n import I18nText
 from .bgcolorbehavior import BGColorBehavior
 
 class BLabel(ButtonBehavior, Text):
@@ -59,7 +58,7 @@ class Cell(BoxLayout):
 				self.add_widget(w)
 				return
 		if desc['header']:
-			bl = I18nText(otext=str(desc['value']),
+			bl = Text(i18n=True, text=str(desc['value']),
 				font_size=CSize(1),
 				halign='left'
 			)
@@ -230,6 +229,7 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 		kw.orientation = 'vertical'
 		self.color_level = color_level
 		self.radius = radius
+		self.select_rowid = None
 		WidgetReady.__init__(self)
 		BoxLayout.__init__(self,**kw)
 		BGColorBehavior.__init__(self,color_level=color_level,
@@ -299,8 +299,8 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 		if o.scroll_y >= 0.999:
 			self.dataloader.loadPreviousPage()
 
-	def getData(self):
-		if not self.row_selected:
+	def getValue(self):
+		if not self.select_rowid:
 			return None
 		return self._getRowData(self.select_rowid)
 	
@@ -309,7 +309,7 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 		if self.freeze_part:
 			d.update(self.freeze_part.body.getRowData(rowid))
 		d.update(self.normal_part.body.getRowData(rowid))
-		print('getData() return=',d)
+		print('getValue() return=',d)
 		return DictObject(**d)
 
 	def bodyOnSize(self,o,s):
@@ -408,4 +408,3 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 					fs.append(f)
 		return fs
 	
-Factory.register('DataGrid',DataGrid)

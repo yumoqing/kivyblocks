@@ -9,8 +9,20 @@ from .form import Form, StrSearchForm
 from .boxViewer import BoxViewer
 from .pagescontainer import PageContainer
 from .hostimage import HostImage
+from .toggleitems import PressableBox, ToggleItems
+from .twosides import TwoSides
+from .tab import TabsPanel
+from .qrdata import QRCodeWidget
+from .kivycamera import KivyCamera
+from .filebrowser import FileLoaderBrowser
 
 r = Factory.register
+r('DataGrid',DataGrid)
+r('FileLoaderBrowser',FileLoaderBrowser)
+r('KivyCamera',KivyCamera)
+r('QRCodeWidget',QRCodeWidget)
+r('TabsPanel',TabsPanel)
+r('TwoSides',TwoSides)
 r('PageContainer', PageContainer)
 r('BoxViewer', BoxViewer)
 r('Form', Form)
@@ -41,6 +53,8 @@ r('PopupMenu',PopupMenu)
 r('HostImage',HostImage)
 r('APlayer',APlayer)
 r('WrapText',WrapText)
+r('PressableBox',PressableBox)
+r('ToggleItems',ToggleItems)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)
 	r('AWebView',AWebView)

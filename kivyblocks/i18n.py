@@ -1,9 +1,9 @@
 import locale
 from kivy.app import App
 from kivy.properties import StringProperty
+from kivy.uix.label import Label
 from appPublic.Singleton import SingletonDecorator
 from appPublic.jsonConfig import getConfig
-from .baseWidget import Text
 from .threadcall import HttpClient
 
 @SingletonDecorator
@@ -42,26 +42,3 @@ class I18n:
 		for w in self.i18nWidgets:
 			w.changeLang(lang)
 	
-class I18nText(Text):
-	lang=StringProperty('')
-	otext=StringProperty('')
-
-	def __init__(self,**kw):
-		self.options = kw.copy()
-		otext = kw.get('otext',kw.get('text'))
-		if kw.get('otext'):
-			del kw['otext']
-		super().__init__(**kw)
-		self.i18n = I18n()
-		self.i18n.addI18nWidget(self)
-		self.otext = otext
-
-	def on_otext(self,o,v=None):
-		self.text = self.i18n(self.otext)
-	
-	def changeLang(self,lang):
-		self.lang = lang
-
-	def on_lang(self,o,lang):
-		self.text = self.i18n(self.otext)
-

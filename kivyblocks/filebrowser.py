@@ -113,8 +113,6 @@ class FileLoaderBrowser(Popup):
 		self.control_box.add_widget(self.btn_load)
 		self.control_box.add_widget(self.btn_icon_view)
 
-Factory.register('FileLoaderBrowser',FileLoaderBrowser)
-
 if __name__ == '__main__':
 	from kivy.app import App
 	class Test(App):

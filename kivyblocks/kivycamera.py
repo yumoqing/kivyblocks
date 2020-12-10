@@ -86,4 +86,3 @@ class KivyCamera(Image):
 			self.update_task = None
 		# self.cupture.close()
 
-Factory.register('KivyCamera',KivyCamera)

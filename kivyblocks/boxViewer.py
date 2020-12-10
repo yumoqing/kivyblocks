@@ -17,6 +17,7 @@ BoxViewer options:
 """
 from traceback import print_exc
 from functools import partial
+from appPublic.dictExt import dictExtend
 from kivy.app import App
 from kivy.factory import Factory
 from kivy.utils import platform
@@ -27,24 +28,32 @@ from .paging import Paging, RelatedLoader
 from .utils import CSize
 from .ready import WidgetReady
 
+
 class BoxViewer(WidgetReady, BoxLayout):
 	def __init__(self, **options):
+		self.options = options
+		self.subwidgets = []
 		self.toolbar = None
 		self.parenturl = None
 		self.dataloader = None
 		self.initflag = False
-		self.selected_box = None
 		remind = ['toolbar',
 				'dataloader',
 				'orientation',
 				'viewer',
 				'boxwidth',
-				'boxheight']
+				'boxheight',
+				'color_level',
+				'radius',
+				'viewer_url'
+				'viewer'
+				]
 		kwargs = {k:v for k,v in options.items() if k not in remind }
 		BoxLayout.__init__(self, orientation='vertical', **kwargs)
 		WidgetReady.__init__(self)
 		self.selected_data = None
-		self.options = options
+		self.color_level = self.options.get('color_level',-1)
+		self.radius = self.options.get('radius',[])
 		self.box_width = CSize(options['boxwidth'])
 		self.box_height = CSize(options['boxheight'])
 		self.viewContainer = VResponsiveLayout(cols=2,box_width=self.box_width)
@@ -81,6 +90,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 
 	def deleteAllWidgets(self,o):
 		self.viewContainer.clear_widgets()
+		self.subwidgets = []
 
 	def addPageWidgets(self,o,data):
 		widgets = []
@@ -94,6 +104,8 @@ class BoxViewer(WidgetReady, BoxLayout):
 		for r in recs:
 			self.showObject(widgets, r, index=idx)
 
+		self.subwidgets += widgets
+
 		self.dataloader.bufferObjects(page, widgets)
 		x = self.dataloader.getLocater()
 		self.locater(x)
@@ -101,8 +113,9 @@ class BoxViewer(WidgetReady, BoxLayout):
 	def deleteWidgets(self,o,data):
 		for w in data:
 			self.viewContainer.remove_widget(w)
+		self.subwidget = [i for i in self.subwidgets if i in data]
 
-	def on_selected(self, o, v=None):
+	def on_selected(self, data=None):
 		pass
 
 	def locater(self, pos):
@@ -122,25 +135,46 @@ class BoxViewer(WidgetReady, BoxLayout):
 			self.initflag = True
 
 	def showObject(self, holders, rec,index=0):
-		def doit(self,holders,idx,o,w):
-			w.bind(on_press=self.select_record)
-			w.boxviewer = self
-			self.viewContainer.add_widget(w,index=idx)
-			holders.append(w)
-
-		def doerr(o,e):
-			print_exc()
-			print('showObject(),error=',e)
-			raise e
-		options = self.options['viewer'].copy()
-		options['options']['record'] = rec
-		options['options']['size_hint'] = None,None
-		options['options']['width'] = self.box_width
-		options['options']['height'] = self.box_height
+		opts = {
+			"size_hint":[None,None],
+			"height":self.box_height,
+			"width":self.box_width,
+			"color_level":self.color_level,
+			"radius":self.radius
+		}
+		desc = {
+			"widgettype":"PressableBox",
+			"options":opts
+		}
 		blocks = Factory.Blocks()
-		blocks.bind(on_built=partial(doit,self,holders,index))
-		blocks.bind(on_failed=doerr)
-		blocks.widgetBuild(options)
+		box = blocks.w_build(desc)
+		box.setValue(rec)
+		box.bind(on_press=self.select_record)
+		self.viewContainer.add_widget(box,index=index)
+		self.subwidgets.append(box)
+		holders.append(box)
+		desc = {}
+		if self.options.get('viewer_url'):
+			desc = {
+				"widgettype":"urlwidget",
+				"optons":{
+					"params":rec,
+					"method":"GET",
+					"url":self.options.get('viewer_url')
+				}
+			}
+		else:
+			desc = self.options.get('viewer').copy()
+			if desc['widgettype'] == 'urlwidget':
+				desc = dictExtend(desc,{'options':{'params':rec}})
+			else:
+				desc = dictExtend(desc,{'options':{'record':rec}})
+		def add2box(p,o,w):
+			p.add_widget(w)
+
+		blocks = Factory.Blocks()
+		blocks.bind(on_built=partial(add2box,box))
+		blocks.widgetBuild(desc)
 
 	def on_scroll_stop(self,o,v=None):
 		if o.scroll_y <= 0.001:
@@ -149,22 +183,19 @@ class BoxViewer(WidgetReady, BoxLayout):
 			self.dataloader.loadPreviousPage()
 
 	def select_record(self,o,v=None):
-		if self.selected_box:
-			self.selected_box.unselected()
+		print('BoxViewer(),on_selected() called\n',
+				'normal_bgcolor=',o.normal_bgcolor,'\n',
+				'selected_bgcolor=',o.selected_bgcolor,'\n',
+				'bg_color=',o.bgcolor,'\n',
+				'color_level=',self.color_level)
+
+		for w in self.subwidgets:
+			w.unselected()
 		o.selected()
-		self.selected_box = o
+		self.selected_data = o.getValue()
+		self.dispatch('on_selected',self.selected_data)
 
-		self.selected_data = o.getRecord()
-		d = {
-			"target":self.selected_box,
-			"page_rows":1,
-			"page":self.selected_data['__posInSet__'],
-			"dataurl":self.options['dataloader']['options']['dataurl'],
-			"params":self.params
-		}
-		self.dispatch('on_selected',d)
-
-	def getData(self):
+	def getValue(self):
 		return self.selected_data
 		d = {
 			"caller":self,

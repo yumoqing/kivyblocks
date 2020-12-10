@@ -56,5 +56,3 @@ class TwoSides(WidgetReady, BoxLayout):
 				self.clear_widgets()
 				self.add_widget(self.portrait_widget)
 
-
-Factory.register('TwoSides',TwoSides)

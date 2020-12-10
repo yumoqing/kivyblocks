@@ -10,7 +10,7 @@ from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, AmountInput, Password
 from .baseWidget import *
 from .utils import *
-from .i18n import I18nText, I18n
+from .i18n import I18n
 from .toolbar import Toolbar
 from .color_definitions import getColors
 from .bgcolorbehavior import BGColorBehavior
@@ -161,14 +161,15 @@ class InputBox(BoxLayout):
 		self.add_widget(bl)
 		label = self.options.get('label',self.options.get('name'))
 		kwargs = {
-			"otext":label,
+			"i18n":True,
+			"text":label,
 			"font_size":CSize(1),
 			"size_hint_x":None,
 			"width":CSize(len(label)),
 			"size_hint_y":None,
 			"height":CSize(3)
 		}
-		self.labeltext = I18nText(**kwargs)
+		self.labeltext = Text(**kwargs)
 		bl.add_widget(self.labeltext)
 		Logger.info('kivyblock:label.widht=%f,label.height=%f',
 						self.labeltext.width,self.labeltext.height)
@@ -300,7 +301,7 @@ class Form(BGColorBehavior, BoxLayout):
 				w.input_widget.focus_previous = p.input_widget
 				p = w
 
-	def getData(self):
+	def getValue(self):
 		d = {}
 		for f in self.fieldWidgets:
 			v = f.getValue()
@@ -325,7 +326,7 @@ class Form(BGColorBehavior, BoxLayout):
 		if not self.checkData():
 			Logger.info('kivyblocks: CheckData False')
 			return
-		d = self.getData()
+		d = self.getValue()
 		Logger.info('kivyblocks: fire on_submit')
 		self.dispatch('on_submit',d)
 
@@ -348,7 +349,7 @@ class StrSearchForm(BoxLayout):
 		self.register_event_type('on_submit')
 		self.input_widget.bind(on_text_validate=self.submit_input)
 
-	def getData(self):
+	def getValue(self):
 		d = {
 			self.name:self.input_widget.text
 		}
