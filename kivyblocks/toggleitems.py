@@ -11,6 +11,7 @@ from kivyblocks.utils import CSize
 class PressableBox(BGColorBehavior, TouchRippleButtonBehavior, BoxLayout):
 	def __init__(self,border_width=1,
 				color_level=-1,
+				user_data=None,
 				radius=[],
 				**kw):
 		BoxLayout.__init__(self, padding=[border_width,
@@ -22,7 +23,7 @@ class PressableBox(BGColorBehavior, TouchRippleButtonBehavior, BoxLayout):
 		BGColorBehavior.__init__(self,color_level=color_level,
 							radius=radius)
 		self.border_width = border_width
-		self.user_data = None
+		self.user_data = user_data
 		self.unselected()
 
 	def on_press(self,o=None):

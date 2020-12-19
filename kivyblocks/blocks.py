@@ -190,6 +190,9 @@ class Blocks(EventDispatcher):
 					callback=None,
 					errback=None,**kw):
 
+		if url is None:
+			errback(None,Exception('url is None'))
+
 		if url.startswith('file://'):
 			filename = url[7:]
 			with codecs.open(filename,'r','utf-8') as f:
@@ -299,9 +302,25 @@ class Blocks(EventDispatcher):
 			widget.widget_id = desc.get('id')
 		
 		widget.build_desc = desc
+		self.build_attributes(widget,desc)
 		self.build_rest(widget,desc)
 		return widget
 		
+	def build_attributes(self,widget,desc,t=None):
+		excludes = ['widgettype','options','subwidgets','binds']
+		for k,v in [(k,v) for k,v in desc.items() if k not in excludes]:
+			if isinstance(v,dict) and v.get('widgettype'):
+				b = Blocks()
+				w = b.w_build(v)
+				if hasattr(widgets,k):
+					aw = getattr(widget,k)
+					if isinstance(aw,Layout):
+						aw.add_widget(w)
+						continue
+				setattr(widget,k,w)
+				continue
+			setattr(widget,k,v)
+
 	def build_rest(self, widget,desc,t=None):
 		self.subwidget_total = len(desc.get('subwidgets',[]))
 		self.subwidgets = [ None for i in range(self.subwidget_total)]
@@ -478,7 +497,6 @@ class Blocks(EventDispatcher):
 		}
 		"""
 		name = desc['widgettype']
-		print('desc=',desc,'type=',type(desc))
 
 		def doit(desc):
 			if not isinstance(desc,dict):
@@ -498,7 +516,7 @@ class Blocks(EventDispatcher):
 			print(e)
 
 		if name == 'urlwidget':
-			opts = desc.get('options').copy()
+			opts = desc.get('options',{}).copy()
 			addon = desc.get('extend')
 			url = opts.get('url')
 			if url is None:

@@ -40,15 +40,15 @@ class BoxViewer(WidgetReady, BoxLayout):
 		remind = ['toolbar',
 				'dataloader',
 				'orientation',
-				'viewer',
 				'boxwidth',
 				'boxheight',
 				'color_level',
 				'radius',
-				'viewer_url'
+				'viewer_url',
 				'viewer'
 				]
 		kwargs = {k:v for k,v in options.items() if k not in remind }
+		print('BoxViewer():kwargs=',kwargs)
 		BoxLayout.__init__(self, orientation='vertical', **kwargs)
 		WidgetReady.__init__(self)
 		self.selected_data = None
@@ -157,7 +157,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 		if self.options.get('viewer_url'):
 			desc = {
 				"widgettype":"urlwidget",
-				"optons":{
+				"options":{
 					"params":rec,
 					"method":"GET",
 					"url":self.options.get('viewer_url')
