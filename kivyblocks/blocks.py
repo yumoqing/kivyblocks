@@ -198,7 +198,7 @@ class Blocks(EventDispatcher):
 			with codecs.open(filename,'r','utf-8') as f:
 				b = f.read()
 				dic = json.loads(b)
-				callback(None,dic)
+				return dic
 		elif url.startswith('http://') or url.startswith('https://'):
 			"""
 			h = HTTPDataHandler(url,method=method,params=params,
@@ -210,7 +210,7 @@ class Blocks(EventDispatcher):
 			try:
 				hc = HttpClient()
 				resp=hc(url,method=method,params=params,files=files)
-				callback(None,resp)
+				return resp
 			except Exception as e:
 				errback(None,e)
 		else:
@@ -219,8 +219,7 @@ class Blocks(EventDispatcher):
 			return self.getUrlData(url,method=method,
 					params=params,
 					files=files,
-					callback=callback,
-					errback=errback, **kw)
+					**kw)
 
 	def strValueExpr(self,s:str,localnamespace:dict={}):
 		if not s.startswith('py::'):
@@ -409,16 +408,19 @@ class Blocks(EventDispatcher):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
-		d = self.getActionData(widget,desc)
 		p = opts.get('params',{}).copy()
 		if len(args) >= 1 and isinstance(args[0],dict):
-			p.update(p)
-		p.update(d)
+			p.update(args[0])
+		d = self.getActionData(widget,desc)
+		if d:
+			p.update(d)
+		print('p=',p,'d=',d)
 		opts['params'] = p
 		d = {
-			'widgettype' : 'urlwidget'
+			'widgettype' : 'urlwidget',
+			'options': opts
 		}
-		d['options'] = opts
+		print('desc=',d)
 
 		def doit(target,add_mode,o,w):
 			if add_mode == 'replace':
@@ -436,7 +438,8 @@ class Blocks(EventDispatcher):
 	def getActionData(self,widget,desc,*args):
 		data = {}
 		if desc.get('datawidget',False):
-			dwidget = Blocks.getWidgetById(desc.get('datawidget','self'),widget)
+			dwidget = Blocks.getWidgetById(desc.get('datawidget','self'),
+							from_widget=widget)
 			if dwidget and hasattr(dwidget,'getValue'):
 				data = dwidget.getValue()
 				if desc.get('keymapping'):
@@ -444,7 +447,8 @@ class Blocks(EventDispatcher):
 		return data
 
 	def registedfunctionAction(self, widget, desc, *args):
-		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		target = Blocks.getWidgetById(desc.get('target','self'),
+							from_widget=widget)
 		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
@@ -462,7 +466,8 @@ class Blocks(EventDispatcher):
 		script = desc.get('script')
 		if not script:
 			return 
-		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		target = Blocks.getWidgetById(desc.get('target','self'),
+						from_widget=widget)
 		d = self.getActionData(widget,desc)
 		ns = {
 			"self":target,
@@ -509,29 +514,22 @@ class Blocks(EventDispatcher):
 			if hasattr(widget,'ready'):
 				widget.ready()
 
-		def doerr(o,e):
-			print('***blocks.py:wigetBuild() failed,desc=',desc)
-			self.dispatch('on_failed',e)
-			print_exc()
-			print(e)
-
-		if name == 'urlwidget':
+		while desc['widgettype'] == "urlwidget":
 			opts = desc.get('options',{}).copy()
-			addon = desc.get('extend')
+			extend = desc.get('extend')
+			addon = None
+			if desc.get('extend'):
+				addon = desc.get('extend').copy()
 			url = opts.get('url')
 			if url is None:
 				self.dispatch('on_failed',Exception('miss url'))
+				return
 			
-			def cb(addon,o,d):
-				if addon is not None:
-					d = dictExtend(d,addon)
-				doit(d)
-
 			if opts.get('url'):
 				del opts['url']
-			self.getUrlData(url,callback=partial(cb,addon),
-						errback=doerr,**opts)
-			return
+			desc = self.getUrlData(url,**opts)
+			if addon:
+				desc = dictExtend(desc,addon)
 		doit(desc)
 	
 	@classmethod

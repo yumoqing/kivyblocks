@@ -85,10 +85,11 @@ class WrapText(Label):
 class Text(Label):
 	lang=StringProperty('')
 	otext = StringProperty('')
-	def __init__(self,i18n=False, textype='text', **kw):
+	def __init__(self,i18n=False, textype='text', wrap=False, **kw):
 		self._i18n = i18n
 		kwargs = kw.copy()
 		config = getConfig()
+		self.wrap = wrap
 		if config.texttypes:
 			attrs = config.texttypes.get('texttype',{})
 			kwargs.update(attrs)
@@ -97,7 +98,16 @@ class Text(Label):
 			self.i18n = I18n()
 			self.i18n.addI18nWidget(self)
 			self.otext = kw.get('text','')
+		if self.wrap:
+			font_size = self.font_size
+			self.text_size = self.width, None
 	
+	def on_size(self,o,size):
+		# super().on_size(o,size)
+		if self.wrap:
+			font_size = self.font_size
+			self.text_size = self.width, None
+
 	def on_otext(self,o,v=None):
 		if self._i18n:
 			self.text = self.i18n(v)
