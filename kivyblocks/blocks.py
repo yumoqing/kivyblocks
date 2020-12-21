@@ -414,13 +414,11 @@ class Blocks(EventDispatcher):
 		d = self.getActionData(widget,desc)
 		if d:
 			p.update(d)
-		print('p=',p,'d=',d)
 		opts['params'] = p
 		d = {
 			'widgettype' : 'urlwidget',
 			'options': opts
 		}
-		print('desc=',d)
 
 		def doit(target,add_mode,o,w):
 			if add_mode == 'replace':
