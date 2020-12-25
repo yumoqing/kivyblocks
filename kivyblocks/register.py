@@ -13,7 +13,7 @@ from .toggleitems import PressableBox, ToggleItems
 from .twosides import TwoSides
 from .tab import TabsPanel
 from .qrdata import QRCodeWidget
-from .kivycamera import KivyCamera
+# from .kivycamera import KivyCamera
 from .filebrowser import FileLoaderBrowser
 
 r = Factory.register
