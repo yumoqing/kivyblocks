@@ -19,7 +19,7 @@ from .filebrowser import FileLoaderBrowser
 r = Factory.register
 r('DataGrid',DataGrid)
 r('FileLoaderBrowser',FileLoaderBrowser)
-r('KivyCamera',KivyCamera)
+# r('KivyCamera',KivyCamera)
 r('QRCodeWidget',QRCodeWidget)
 r('TabsPanel',TabsPanel)
 r('TwoSides',TwoSides)
