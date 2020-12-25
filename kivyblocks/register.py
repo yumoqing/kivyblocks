@@ -68,4 +68,3 @@ r('ToggleItems',ToggleItems)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)
 	r('AWebView',AWebView)
-	r('AndroidCamera',AndroidCamera)
