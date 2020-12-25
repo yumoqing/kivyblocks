@@ -359,8 +359,7 @@ level_bg_colors = [
 ]
 
 text_colors = {
-	'normal':['eeeeee','111111'], 
-	'highlight':['ffffff','000000']
+	'normal':['ffff99','8b210c'], 
 }
 
 def getConfigStyle():

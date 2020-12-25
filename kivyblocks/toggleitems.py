@@ -7,21 +7,22 @@ from kivy.factory import Factory
 from kivyblocks.ready import WidgetReady
 from kivyblocks.bgcolorbehavior import BGColorBehavior
 from kivyblocks.utils import CSize
+from kivyblocks.baseWidget import Box
 
-class PressableBox(BGColorBehavior, TouchRippleButtonBehavior, BoxLayout):
+class PressableBox(TouchRippleButtonBehavior, Box):
 	def __init__(self,border_width=1,
 				color_level=-1,
 				user_data=None,
 				radius=[],
 				**kw):
-		BoxLayout.__init__(self, padding=[border_width,
+		Box.__init__(self, padding=[border_width,
 			border_width,
 			border_width,
 			border_width],
+			color_level=color_level,
+			radius=radius,
 			**kw)
 		TouchRippleButtonBehavior.__init__(self)
-		BGColorBehavior.__init__(self,color_level=color_level,
-							radius=radius)
 		self.border_width = border_width
 		self.user_data = user_data
 		self.unselected()

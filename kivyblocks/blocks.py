@@ -361,6 +361,7 @@ class Blocks(EventDispatcher):
 		w = Blocks.getWidgetById(desc.get('wid','self'),from_widget=widget)
 		if not w:
 			print(desc.get('wid','self'),'not found via Blocks.getWidgetById()')
+			return
 		event = desc.get('event')
 		if event is None:
 			return
@@ -532,22 +533,34 @@ class Blocks(EventDispatcher):
 	
 	@classmethod
 	def getWidgetById(self,id,from_widget=None):
+		def find_widget_by_id(id, from_widget=None):
+			if id=='self':
+				return from_widget
+			if hasattr(from_widget,'widget_id'):
+				if from_widget.widget_id == id:
+					return from_widget
+			if hasattr(from_widget, id):
+				w = getattr(from_widget,id)
+				if isinstance(w,Widget):
+					return w
+			for c in from_widget.children:
+				ret = find_widget_by_id(id,from_widget=c)
+				if ret:
+					return ret
+			return None
+		ids = id.split('.')
 		app = App.get_running_app()
-		if id in ['root','/self']:
-			print('return app.root',app.root)
-			return app.root
-		if id=='self':
-			return from_widget
+		if id.startswith('/self') or id.startswith('root'):
+			from_widget = app.root
+			ids[0] = 'self'
 		if from_widget is None:
 			from_widget = app.root
-		if hasattr(from_widget,'widget_id'):
-			if from_widget.widget_id == id:
-				return from_widget
-		for c in from_widget.children:
-			ret = Blocks.getWidgetById(id,from_widget=c)
-			if ret:
-				return ret
-		return None
+		for id in ids:
+			w = find_widget_by_id(id,from_widget=from_widget)
+			if w is None:
+				return None
+			from_widget = w
+		return w
 
 	def on_built(self,v=None):
 		return

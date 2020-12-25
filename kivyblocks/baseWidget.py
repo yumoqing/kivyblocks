@@ -71,6 +71,7 @@ from .tab import TabsPanel
 from .qrdata import QRCodeWidget
 from .threadcall import HttpClient
 from .i18n import I18n
+from .utils import CSize
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
@@ -82,17 +83,75 @@ class WrapText(Label):
 		self.bind(width=lambda *x: self.setter('text_size')(self, (self.width, None)),
 				texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
+class Box(BGColorBehavior, BoxLayout):
+	def __init__(self,color_level=-1,radius=[],**kw):
+		BoxLayout.__init__(self, **kw)
+		BGColorBehavior.__init__(self, color_level=color_level,
+					radius=radius)
+
+	def add_widget(self, w, *args, **kw):
+		super().add_widget(w, *args, **kw)
+		self.setWidgetTextColor(w)
+		
+	def setWidgetTextColor(self,w):
+		if isinstance(w,Box):
+			return
+
+		if isinstance(w,Text):
+			if not w.bgcolor:
+				w.color = self.fgcolor
+			return
+		for c in w.children:
+			self.setWidgetTextColor(c)
+
+	def selected(self):
+		super().selected()
+		if self.fgcolor == self.selected_fgcolor:
+			return
+		for c in self.children:
+			self.setWidgetTextColor(c)
+
+	def unselected(self):
+		super().unselected()
+		if self.fgcolor == self.normal_fgcolor:
+			return
+		for c in self.children:
+			self.setWidgetTextColor(c)
+
+class HBox(Box):
+	def __init__(self,**kw):
+		kw.update({'orientation':'horizontal'})
+		Box.__init__(self, **kw)
+
+
+class VBox(Box):
+	def __init__(self,color_level=-1,radius=[],**kw):
+		kw.update({'orientation':'vertical'})
+		Box.__init__(self, **kw)
+
 class Text(Label):
 	lang=StringProperty('')
 	otext = StringProperty('')
-	def __init__(self,i18n=False, textype='text', wrap=False, **kw):
+	def __init__(self,i18n=False, texttype='text', wrap=False,
+					fgcolor=None, **kw):
+		
+		fontsize={'font_size':CSize(1)}
+		offset={
+			'text':0,
+			'title1':CSize(0.6),
+			'title2':CSize(0.5),
+			'title3':CSize(0.4),
+			'title4':CSize(0.3),
+			'title5':CSize(0.2),
+			'title6':CSize(0.1),
+		}
+		fontsize = {'font_size': CSize(1) + offset.get(texttype,0)}
 		self._i18n = i18n
+		self.bgcolor = fgcolor
 		kwargs = kw.copy()
 		config = getConfig()
 		self.wrap = wrap
-		if config.texttypes:
-			attrs = config.texttypes.get('texttype',{})
-			kwargs.update(attrs)
+		kwargs.update(fontsize)
 		super().__init__(**kwargs)
 		if self._i18n:
 			self.i18n = I18n()
@@ -101,7 +160,9 @@ class Text(Label):
 		if self.wrap:
 			font_size = self.font_size
 			self.text_size = self.width, None
-	
+		if self.bgcolor:
+			self.color = self.bgcolor
+
 	def on_size(self,o,size):
 		# super().on_size(o,size)
 		if self.wrap:
@@ -119,6 +180,62 @@ class Text(Label):
 
 	def on_lang(self,o,lang):
 		self.text = self.i18n(self.otext)
+
+class Title1(Text):
+	def __init__(self, **kw):
+		kw.update({'texttype':'title1','bold':True})
+		Text.__init__(self, **kw)
+
+class Title2(Text):
+	def __init__(self, **kw):
+		kw.update({'texttype':'title2','bold':True})
+		Text.__init__(self, **kw)
+
+class Title3(Text):
+	def __init__(self, **kw):
+		kw.update({'texttype':'title3','bold':True})
+		Text.__init__(self, **kw)
+
+class Title4(Text):
+	def __init__(self, **kw):
+		kw.update({'texttype':'title4','bold':True})
+		Text.__init__(self, **kw)
+
+class Title5(Text):
+	def __init__(self, **kw):
+		kw.update({'texttype':'title5','bold':True})
+		Text.__init__(self, **kw)
+
+class Title6(Text):
+	def __init__(self, **kw):
+		kw.update({'texttype':'title6','bold':True})
+		Text.__init__(self, **kw)
+
+class Modal(BGColorBehavior, ModalView):
+	def __init__(self, auto_open=False, color_level=-1, radius=[], **kw):
+		kw.update({'auto_dismiss':False})
+		ModalView.__init__(self, **kw)
+		BGColorBehavior.__init__(self, color_level=color_level,
+					radius=radius)
+		self.auto_open = auto_open
+		if self.auto_open:
+			self.open()
+
+class TimedModal(Modal):
+	def __init__(self, show_time=5, **kw):
+		self.show_time = show_time
+		self.time_task = None
+		Modal.__init__(self, **kw)
+
+	def open(self, *args, **kw):
+		self.time_task = Clock.schedule_once(self.dismiss, self.show_time)
+		super().open(*args, **kw)
+
+	def dismiss(self, *args, **kw):
+		if self.time_task:
+			self.time_task.cancel()
+			self.time_task = None
+		super().dismiss(*args, **kw)
 
 class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):

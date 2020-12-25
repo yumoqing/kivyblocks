@@ -5,10 +5,12 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.app import App
 from .utils import CSize
+from .bgcolorbehavior import BGColorBehavior
 
-class PageContainer(FloatLayout):
+class PageContainer(BGColorBehavior, FloatLayout):
 	def __init__(self,**kw):
-		super().__init__(**kw)
+		FloatLayout.__init__(self, **kw)
+		BGColorBehavior.__init__(self)
 		self.show_back = True
 		self.pageWidgets = []
 		self.backButton = Button(text='<',size_hint=(None,None),
