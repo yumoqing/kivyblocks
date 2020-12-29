@@ -1,3 +1,6 @@
+import os
+import codecs
+
 import locale
 from kivy.app import App
 from kivy.properties import StringProperty
@@ -17,9 +20,28 @@ class I18n:
 	def addI18nWidget(self,w):
 		self.i18nWidgets.append(w)
 	
+	def loadI18nFromI18nFolder(self, lang):
+		config = gtConfig()
+		fpath =  os.path.join(config.i18n_folder,lang,'msg.txt')
+		with codecs.open(fpath,'r','utf-8') as f:
+			line = f.readline()
+			d = {}
+			while line:
+				if line.startswith('#'):
+					line = readline()
+					continue
+				k,v = line.split(':',1)
+				d.update({k:v})
+				line = readline()
+			return d
+
 	def loadI18n(self,lang):
 		app = App.get_running_app()
 		config = getConfig()
+		if config.i18n_folder:
+			self.kvlang[lang] = self.loadI18nFromFolder(lang)
+			return
+
 		url = '%s%s/%s' % (config.uihome, config.i18n_url, lang)
 		hc = HttpClient()
 		d = hc.get(url)

@@ -15,8 +15,10 @@ from .tab import TabsPanel
 from .qrdata import QRCodeWidget
 # from .kivycamera import KivyCamera
 from .filebrowser import FileLoaderBrowser
+from .osc_server import OSCServer
 
 r = Factory.register
+r('OSCServer',OSCServer)
 r('DataGrid',DataGrid)
 r('FileLoaderBrowser',FileLoaderBrowser)
 # r('KivyCamera',KivyCamera)
