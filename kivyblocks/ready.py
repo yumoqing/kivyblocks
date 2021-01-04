@@ -1,6 +1,7 @@
 from kivy.event import EventDispatcher
 from kivy.core.window import Window
 from kivy.utils import platform
+from kivy.app import App
 from kivy.properties import BooleanProperty
 
 desktopOSs=[
@@ -64,8 +65,10 @@ class WidgetReady(EventDispatcher):
 						   'no parent.')
 			return
 
+		app = App.get_running_app()
 		if value:
 			Window.fullscreen = True
+			app.fs_widget = self
 			self._fullscreen_state = state = {
 				'parent': self.parent,
 				'pos': self.pos,
@@ -91,6 +94,7 @@ class WidgetReady(EventDispatcher):
 			self.pos_hint = {}
 			self.size_hint = (1, 1)
 		else:
+			app.fs_widget = None
 			Window.fullscreen = False
 			#if platform in desktopOSs:
 			#	Window.restore()

@@ -533,7 +533,7 @@ class Blocks(EventDispatcher):
 	
 	@classmethod
 	def getWidgetById(self,id,from_widget=None):
-		def find_widget_by_id(id, from_widget=None):
+		def find_widget_by_id(id, from_widget):
 			if id=='self':
 				return from_widget
 			if hasattr(from_widget,'widget_id'):
@@ -547,6 +547,12 @@ class Blocks(EventDispatcher):
 				ret = find_widget_by_id(id,from_widget=c)
 				if ret:
 					return ret
+			app = App.get_running_app()
+			if from_widget == app.root:
+				w = getattr(app,'fs_widget',None)
+				if w:
+					print('full screen ...............................')
+					return find_widget_by_id(id, w)
 			return None
 		ids = id.split('.')
 		app = App.get_running_app()
