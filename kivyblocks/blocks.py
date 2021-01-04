@@ -16,7 +16,7 @@ from appPublic.registerfunction import RegisterFunction
 
 from kivy.config import Config
 from kivy.metrics import sp,dp,mm
-from kivy.core.window import WindowBase
+from kivy.core.window import WindowBase, Window
 from kivy.properties import BooleanProperty
 from kivy.uix.widget import Widget
 from kivy.app import App
@@ -549,7 +549,8 @@ class Blocks(EventDispatcher):
 					return ret
 			app = App.get_running_app()
 			if from_widget == app.root:
-				w = getattr(app,'fs_widget',None)
+				if Window.fullscreen == True:
+				w = app.fs_widget
 				if w:
 					print('full screen ...............................')
 					return find_widget_by_id(id, w)
