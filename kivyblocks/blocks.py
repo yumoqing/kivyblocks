@@ -14,6 +14,7 @@ from appPublic.Singleton import SingletonDecorator, GlobalEnv
 from appPublic.datamapping import keyMapping
 from appPublic.registerfunction import RegisterFunction
 
+from kivy.logger import Logger
 from kivy.config import Config
 from kivy.metrics import sp,dp,mm
 from kivy.core.window import WindowBase, Window
@@ -153,11 +154,11 @@ class Blocks(EventDispatcher):
 		fname = 'action%d' % self.action_id
 		l = {
 		}
-		body="""def %s(widget,obj=None, *args):
+		body="""def %s(widget,obj=None, *args, **kw):
 	jsonstr='''%s'''
 	desc = json.loads(jsonstr)
 	blocks = Blocks()
-	blocks.uniaction(widget, desc,*args)
+	blocks.uniaction(widget, desc,*args, **kw)
 """ % (fname, json.dumps(desc))
 		exec(body,globals(),l)
 		f = l.get(fname,None)
@@ -283,7 +284,7 @@ class Blocks(EventDispatcher):
 		# print('w_build(),desc=',desc)
 		widgetClass = desc.get('widgettype',None)
 		if not widgetClass:
-			print("w_build(), desc invalid", desc)
+			Logger.info("Block: w_build(), desc invalid", desc)
 			raise Exception(desc)
 
 		widgetClass = desc['widgettype']
@@ -360,16 +361,21 @@ class Blocks(EventDispatcher):
 		wid = desc.get('wid','self')
 		w = Blocks.getWidgetById(desc.get('wid','self'),from_widget=widget)
 		if not w:
-			print(desc.get('wid','self'),'not found via Blocks.getWidgetById()')
+			Logger.info('Block: %s %s',desc.get('wid','self'),
+							'not found via Blocks.getWidgetById()')
 			return
 		event = desc.get('event')
 		if event is None:
+			Logger.info('Block: binds desc miss event, desc=%s',str(desc))
 			return
 		f = self.buildAction(widget,desc)
+		if f is None:
+			Logger.Info('Block: get a null function,%s',str(desc))
+			return
 		w.bind(**{event:f})
-		# print('w=',w,event,desc)
 	
 	def uniaction(self,widget,desc, *args):
+		Logger.info('Block: uniaction() called, desc=%s', str(desc))
 		acttype = desc.get('actiontype')
 		if acttype=='blocks':
 			return self.blocksAction(widget,desc, *args)
@@ -385,6 +391,9 @@ class Blocks(EventDispatcher):
 
 	def blocksAction(self,widget,desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		if target is None:
+			Logger.Info('Block: blocksAction():desc(%s) target not found',
+							str(desc))
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		d = self.getActionData(widget,desc)
@@ -397,6 +406,8 @@ class Blocks(EventDispatcher):
 			target.add_widget(w)
 
 		def doerr(o,e):
+			Logger.info('Block: blocksAction(): desc=%s widgetBuild error'
+								,str(desc))
 			raise e
 
 		b = Blocks()
@@ -405,8 +416,10 @@ class Blocks(EventDispatcher):
 		b.widgetBuild(opts)
 		
 	def urlwidgetAction(self,widget,desc, *args):
-		print('urlwidgetAction():args=',args)
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		if target is None:
+			Logger.Info('Block: urlwidgetAction():desc(%s) target not found',
+							str(desc))
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		p = opts.get('params',{}).copy()
@@ -427,6 +440,8 @@ class Blocks(EventDispatcher):
 			target.add_widget(w)
 
 		def doerr(o,e):
+			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error'
+								,str(desc))
 			raise e
 
 		b = Blocks()
@@ -439,45 +454,66 @@ class Blocks(EventDispatcher):
 		if desc.get('datawidget',False):
 			dwidget = Blocks.getWidgetById(desc.get('datawidget','self'),
 							from_widget=widget)
-			if dwidget and hasattr(dwidget,'getValue'):
+			if dwidget is None:
+				Logger.info('Block: desc(%s) datawidget not defined',
+							str(desc))
+			if hasattr(dwidget,'getValue'):
 				data = dwidget.getValue()
 				if desc.get('keymapping'):
 					data = keyMapping(data, desc.get('keymapping'))
+			else:
+				Logger.info('Block: desc(%s) datawidget has not getValue',
+							str(desc))
 		return data
 
 	def registedfunctionAction(self, widget, desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),
 							from_widget=widget)
+		if target is None:
+			Logger.Info('Block: registedfunctionAction():desc(%s) target not found',
+							str(desc))
 		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
 		if func is None:
-			print('rfname(%s) not found' % name)
+			Logger.Info('Block: desc=%s rfname(%s) not found', 
+						str(desc), name)
 			raise Exception('rfname(%s) not found' % name)
 
 		params = desc.get('params',{}).copy()
 		d = self.getActionData(widget,desc)
 		params.update(d)
-		# print('registedfunctionAction(),params=',params)
 		func(target, *args, **params)
 
 	def scriptAction(self, widget, desc, *args):
 		script = desc.get('script')
 		if not script:
+			Logger.Info('Block: scriptAction():desc(%s) target not found',
+							str(desc))
 			return 
 		target = Blocks.getWidgetById(desc.get('target','self'),
 						from_widget=widget)
+		if target is None:
+			Logger.Info('Block: scriptAction():desc(%s) target not found',
+							str(desc))
 		d = self.getActionData(widget,desc)
 		ns = {
 			"self":target,
 			"args":args
 		}
 		ns.update(d)
-		self.eval(script, ns)
+		try:
+			self.eval(script, ns)
+		except Exception as e:
+			print_exc()
+			print(e)
 	
 	def methodAction(self, widget, desc, *args):
 		method = desc.get('method')
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		if target is None:
+			Logger.Info('Block: methodAction():desc(%s) target not found',
+							str(desc))
 		if hasattr(target,method):
 			f = getattr(target, method)
 			kwargs = desc.get('options',{}).copy()
@@ -504,7 +540,8 @@ class Blocks(EventDispatcher):
 
 		def doit(desc):
 			if not isinstance(desc,dict):
-				print('desc must be a dict object',desc,type(desc))
+				Logger.info('Block: desc must be a dict object',
+							desc,type(desc))
 				raise Exception('desc must be a dict')
 
 			desc = self.valueExpr(desc)
@@ -550,10 +587,10 @@ class Blocks(EventDispatcher):
 			app = App.get_running_app()
 			if from_widget == app.root:
 				if Window.fullscreen == True:
-				w = app.fs_widget
-				if w:
-					print('full screen ...............................')
-					return find_widget_by_id(id, w)
+					w = app.fs_widget
+					if w:
+						print('full screen ...............................')
+						return find_widget_by_id(id, w)
 			return None
 		ids = id.split('.')
 		app = App.get_running_app()
