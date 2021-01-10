@@ -16,6 +16,9 @@ from .qrdata import QRCodeWidget
 # from .kivycamera import KivyCamera
 from .filebrowser import FileLoaderBrowser
 from .osc_server import OSCServer
+from graph import Graph, MeshLinePlot, MeshStemPlot, LinePlot, \
+	SmoothLinePlot, ContourPlot, BarPlot, HBar, VBar, ScatterPlot, \
+	PointPlot
 
 r = Factory.register
 r('OSCServer',OSCServer)

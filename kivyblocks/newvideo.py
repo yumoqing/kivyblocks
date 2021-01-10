@@ -22,8 +22,23 @@ class NewVideo(BGColorBehavior, Video):
 			radius=radius)
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
+		self.register_event_type('on_open_failed')
+
+	def on_open_failed(self, o, source):
+		print('source=',source, 'open failed')
 
 	def ffplayerLog(self, msg, level):
+		if 'Connection to tcp' in msg and 'failed' in msg:
+			self.dispatch('on_open_failed', self.source)
+		if 'Invalid data found when processing input' in msg:
+			self.dispatch('on_open_failed', self.source)
+		if 'End of file' in msg:
+			self.dispatch('on_open_failed', self.source)
+		if 'Server returned 404 Not Found' in msg:
+			self.dispatch('on_open_failed', self.source)
+		if 'Server returned 403 Forbidden' in msg:
+			self.dispatch('on_open_failed', self.source)
+			
 		msg = msg.strip()
 		if msg:
 			logger_func[level]('yffpyplayer: {}'.format(msg))
