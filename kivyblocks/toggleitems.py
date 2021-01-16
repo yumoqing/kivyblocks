@@ -28,6 +28,7 @@ class PressableBox(TouchRippleButtonBehavior, Box):
 		self.unselected()
 
 	def on_press(self,o=None):
+		print('on_press fired')
 		self.selected()
 
 	def setValue(self,d):
