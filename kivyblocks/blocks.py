@@ -192,7 +192,10 @@ class Blocks(EventDispatcher):
 					errback=None,**kw):
 
 		if url is None:
-			errback(None,Exception('url is None'))
+			if errback:
+				errback(None,Exception('url is None'))
+			else:
+				return None
 
 		if url.startswith('file://'):
 			filename = url[7:]
@@ -201,19 +204,14 @@ class Blocks(EventDispatcher):
 				dic = json.loads(b)
 				return dic
 		elif url.startswith('http://') or url.startswith('https://'):
-			"""
-			h = HTTPDataHandler(url,method=method,params=params,
-					files=files)
-			h.bind(on_success=callback)
-			h.bind(on_error=errback)
-			h.handle()
-			"""
 			try:
 				hc = HttpClient()
 				resp=hc(url,method=method,params=params,files=files)
 				return resp
 			except Exception as e:
-				errback(None,e)
+				if errback:
+					return errback(None,e)
+				return None
 		else:
 			config = getConfig()
 			url = config.uihome + url
@@ -312,7 +310,7 @@ class Blocks(EventDispatcher):
 			if isinstance(v,dict) and v.get('widgettype'):
 				b = Blocks()
 				w = b.w_build(v)
-				if hasattr(widgets,k):
+				if hasattr(widget,k):
 					aw = getattr(widget,k)
 					if isinstance(aw,Layout):
 						aw.add_widget(w)
@@ -370,7 +368,7 @@ class Blocks(EventDispatcher):
 			return
 		f = self.buildAction(widget,desc)
 		if f is None:
-			Logger.Info('Block: get a null function,%s',str(desc))
+			Logger.info('Block: get a null function,%s',str(desc))
 			return
 		w.bind(**{event:f})
 	
@@ -392,8 +390,9 @@ class Blocks(EventDispatcher):
 	def blocksAction(self,widget,desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		if target is None:
-			Logger.Info('Block: blocksAction():desc(%s) target not found',
+			Logger.info('Block: blocksAction():desc(%s) target not found',
 							str(desc))
+			return
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		d = self.getActionData(widget,desc)
@@ -418,8 +417,9 @@ class Blocks(EventDispatcher):
 	def urlwidgetAction(self,widget,desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		if target is None:
-			Logger.Info('Block: urlwidgetAction():desc(%s) target not found',
+			Logger.info('Block: urlwidgetAction():desc(%s) target not found',
 							str(desc))
+			return
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		p = opts.get('params',{}).copy()
@@ -470,13 +470,14 @@ class Blocks(EventDispatcher):
 		target = Blocks.getWidgetById(desc.get('target','self'),
 							from_widget=widget)
 		if target is None:
-			Logger.Info('Block: registedfunctionAction():desc(%s) target not found',
+			Logger.info('Block: registedfunctionAction():desc(%s) target not found',
 							str(desc))
+			return
 		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
 		if func is None:
-			Logger.Info('Block: desc=%s rfname(%s) not found', 
+			Logger.info('Block: desc=%s rfname(%s) not found', 
 						str(desc), name)
 			raise Exception('rfname(%s) not found' % name)
 
@@ -488,13 +489,13 @@ class Blocks(EventDispatcher):
 	def scriptAction(self, widget, desc, *args):
 		script = desc.get('script')
 		if not script:
-			Logger.Info('Block: scriptAction():desc(%s) target not found',
+			Logger.info('Block: scriptAction():desc(%s) target not found',
 							str(desc))
 			return 
 		target = Blocks.getWidgetById(desc.get('target','self'),
 						from_widget=widget)
 		if target is None:
-			Logger.Info('Block: scriptAction():desc(%s) target not found',
+			Logger.info('Block: scriptAction():desc(%s) target not found',
 							str(desc))
 		d = self.getActionData(widget,desc)
 		ns = {
@@ -512,8 +513,9 @@ class Blocks(EventDispatcher):
 		method = desc.get('method')
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		if target is None:
-			Logger.Info('Block: methodAction():desc(%s) target not found',
+			Logger.info('Block: methodAction():desc(%s) target not found',
 							str(desc))
+			return
 		if hasattr(target,method):
 			f = getattr(target, method)
 			kwargs = desc.get('options',{}).copy()
@@ -536,8 +538,6 @@ class Blocks(EventDispatcher):
 			]
 		}
 		"""
-		name = desc['widgettype']
-
 		def doit(desc):
 			if not isinstance(desc,dict):
 				Logger.info('Block: desc must be a dict object',
@@ -549,6 +549,12 @@ class Blocks(EventDispatcher):
 			self.dispatch('on_built',widget)
 			if hasattr(widget,'ready'):
 				widget.ready()
+
+		if not (isinstance(desc, DictObject) or isinstance(desc, dict)):
+			print('Block: desc must be a dict object',
+						desc,type(desc))
+			self.dispatch('on_failed',Exception('miss url'))
+			return
 
 		while desc['widgettype'] == "urlwidget":
 			opts = desc.get('options',{}).copy()
@@ -564,6 +570,13 @@ class Blocks(EventDispatcher):
 			if opts.get('url'):
 				del opts['url']
 			desc = self.getUrlData(url,**opts)
+			if not (isinstance(desc, DictObject) or \
+							isinstance(desc, dict)):
+				print('Block: desc must be a dict object',
+								desc,type(desc))
+				self.dispatch('on_failed',Exception('miss url'))
+				return
+
 			if addon:
 				desc = dictExtend(desc,addon)
 		doit(desc)

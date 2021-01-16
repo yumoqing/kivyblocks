@@ -75,7 +75,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 			self.dataloader.bind(on_submit=self.getParams)
 		self.add_widget(self.viewContainer)
 		self.register_event_type('on_selected')
-		self.viewContainer.bind(size=self.resetCols,
+		self.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
 		# use_keyboard() will block the python

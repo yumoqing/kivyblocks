@@ -36,6 +36,17 @@ class PressableBox(TouchRippleButtonBehavior, Box):
 	def getValue(self):
 		return self.user_data
 
+"""
+ToggleItems format:
+{
+	color_level:
+	radius:
+	unit_size:
+	items_desc:
+	border_width:
+	orientation:
+}
+"""
 class ToggleItems(BGColorBehavior, BoxLayout):
 	def __init__(self,
 				color_level=1,
@@ -112,6 +123,6 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 		for i in self.item_widgets:
 			if i.getValue() == v:
 				i.selected()
-				self.select_iten(i)
+				self.select_item(i)
 				return
 

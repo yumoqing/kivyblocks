@@ -16,84 +16,16 @@ from .ready import WidgetReady
 from .color_definitions import getColors
 from .bgcolorbehavior import BGColorBehavior
 from .baseWidget import Text
-
-"""
-toobar={
-	"mode":"icon", "icontext","text"
-	img_size=2,	
-	text_size=1,
-	"tools":[
-	]
-}
-
-tool options
-{
-	name:'',
-	label:''
-	img=''
-}
-"""
-class Tool(ButtonBehavior, BGColorBehavior, BoxLayout):
-	def __init__(self,ancestor=None,**opts):
-		if ancestor is None:
-			ancestor = App.get_running_app().root
-		self.widget_id = opts['name']
-		ButtonBehavior.__init__(self)
-		BoxLayout.__init__(self,
-					size_hint_y=None)
-		BGColorBehavior.__init__(self,color_level=ancestor.color_level,
-				radius=ancestor.radius)
-		self.bl = BoxLayout(orientation='vertical',
-					size_hint_y=None)
-		self.add_widget(self.bl)
-		self.opts = DictObject(**opts)
-		if not self.opts.img_size:
-			self.opts.img_size = 2
-		if not self.opts.text_size:
-			self.opts.text_size = 1
-		app = App.get_running_app()
-		size = 0
-		if self.opts.img_src:
-			size = CSize(self.opts.img_size or 2)
-			img = AsyncImage(source=self.opts.img_src,
-				size_hint=(None,None),
-				size=(size,size))
-			self.bl.add_widget(img)
-
-		tsize = CSize(self.opts.text_size)
-		label = self.opts.label or self.opts.name
-		self.lbl = Text(i18n=True,
-					text=label,
-					font_size=int(tsize),
-					text_size=(CSize(len(label)), tsize),
-					height=tsize,
-					width=CSize(len(label)),
-					size_hint=(None,None),
-					)
-		self.bl.add_widget(self.lbl)
-		self.height = (size + tsize)*1.1
-		
-	def on_size(self,obj,size):
-		Logger.info('toolbar: Tool() on_size fired') 
-		#self.lbl.color, self.bgcolor = getColors(self.ancestor.color_level,
-		#					selected=False)
-		#self.lbl.bgcolor = self.bgcolor
-
-	def on_press(self):
-		print('Tool(). pressed ...............')
-
-	def setActive(self,flag):
-		if flag:
-			self.selected()
-		else:
-			self.unselected()
-
+from .toggleitems import PressableBox, ToggleItems
 
 """
 toolbar options
 {
+	color_level:
+	radius:
+	"mode":"icon", "icontext","text"
 	img_size=1.5,	
-	text_size=0.7,
+	text_size=0.5,
 	tools:[
 		{
 			"name":"myid",
@@ -104,44 +36,73 @@ toolbar options
 	]
 }
 """
-class Toolbar(BGColorBehavior, GridLayout):
-	def __init__(self, ancestor=None,**opts):
-		self.opts = DictObject(**opts)
+class Toolbar(BoxLayout):
+	def __init__(self, color_level=-1,
+				radius=[],
+				img_size=1.5,
+				text_size=0.5,
+				tools=[], **opts):
+		self.color_level = color_level
+		self.radius = radius
+		self.img_size = img_size
+		self.text_size = text_size
+		self.tools = tools
 		self.tool_widgets={}
-		GridLayout.__init__(self,cols = len(self.opts.tools))
-		color_level = 0
-		if isinstance(ancestor, BGColorBehavior):
-			color_level = ancestor.color_level + 1
-		BGColorBehavior.__init__(self,color_level=color_level)
+		BoxLayout.__init__(self, **opts)
+		self.register_event_type('on_press')
 		self.size_hint = (1,None)
 		first = True
-		for opt in self.opts.tools:
-			opt.img_size = self.opts.img_size
-			opt.text_size = self.opts.text_size
-			if opt.img_src:
-				purl = None
-				if ancestor and hasattr(ancestor, 'parenturl'):
-					purl = ancestor.parenturl
-				opt.img_src = absurl(opt.img_src,purl)
-			tool = Tool(ancestor=ancestor, **opt)
-			if first:
-				first = False
-				h = ancestor
-				if not ancestor:
-					h = App.get_runnung_app().root
-			self.tool_widgets[opt.name] = tool
-			box = BoxLayout()
-			box.add_widget(tool)
-			self.add_widget(box)
-			tool.bind(on_press=self.tool_press)
-		self.height = tool.height * 1.1
+		subs_desc = []
+		for opt in self.tools:
+			subwidgets = []
+			img_src = opt.get('img_src',None)
+			if img_src:
+				subwidgets.append({
+					"widgettype":"AsyncImage",
+					"options":{
+						"size_hint_y":None,
+						"height":CSize(self.img_size),
+						"source":img_src
+					}
+				})
+			text = opt.get('label', None)
+			if text:
+				subwidgets.append({
+					"widgettype":"Text",
+					"options":{
+						"size_hint_y":None,
+						"i18n":True,
+						"height":CSize(self.text_size),
+						"font_size":CSize(self.text_size),
+						"text":text
+					}
+				})
+			desc = {
+				"widgettype":"VBox",
+				"options":{
+				},
+				"subwidgets":subwidgets,
+				"data":opt.get('name')
+			}
+			subs_desc.append(desc)
+
+		self.toggle_items = ToggleItems(
+				color_level=self.color_level,
+				radius=self.radius,
+				unit_size=self.img_size + self.text_size,
+				items_desc=subs_desc)
+		for ti in self.toggle_items.children:
+			ti.widget_id = ti.user_data
+		self.height = CSize(self.img_size + self.text_size) + 10
+		self.size_hint_y = None
+		self.toggle_items.bind(on_press=self.tool_press)
+		self.add_widget(self.toggle_items)
+
+	def on_press(self, o):
+		print('on_press(),', o)
 
 	def tool_press(self,o,v=None):
-		for n,w in self.tool_widgets.items():
-			active = False
-			if w == o:
-				active = True
-			w.setActive(active)
+		self.dispatch('on_press',self.toggle_items.getValue())
 
 """
 Toolpage options
@@ -162,53 +123,63 @@ Toolpage options
 	
 """
 class ToolPage(BGColorBehavior, BoxLayout):
-	def __init__(self,color_level=-1,radius=[],**opts):
+	def __init__(self,color_level=-1,radius=[],tool_at='top', **opts):
 		self.opts = DictObject(**opts)
-		if self.opts.tool_at in [ 'top','bottom']:
+		if tool_at in [ 'top','bottom']:
 			orient = 'vertical'
 		else:
 			orient = 'horizontal'
 		self.color_level=self.opts.color_level or 0
-		self.radius = self.opts.radius
+		self.sub_radius = self.opts.radius
+		self.tool_at = tool_at
 		BoxLayout.__init__(self,orientation=orient)
 		BGColorBehavior.__init__(self,
 							color_level=color_level,
-							radius=radius)
+							radius=[])
 		self.content = None
 		self.toolbar = None
 		self.init()
-		self.show_firstpage()
+		# self.show_firstpage()
 	
 	def on_size(self,obj,size):
 		if self.content is None:
 			return
-		x,y = size
-		self.toolbar.width = x
-		self.content.width = x
-		self.content.height = y - self.toolbar.height
+		if self.tool_at in ['top','bottom']:
+			self.toolbar.width = self.width
+			self.content.width = self.width
+			self.content.height = self.height - self.toolbar.height
+		else:
+			self.toolbar.height = self.height
+			self.content.height = self.height
+			self.content.width = self.width - self.toolbar.width
 
 	def showPage(self,obj):
 		self._show_page(obj.opts)
 
 	def show_firstpage(self,t=None):
-		return
 		d = self.children[0]
-		d.dispatch('on_press')
+		d.dispatch('on_press', d)
 
 	def init(self):
 		self.initFlag = True
 		self.mywidgets = {}
 		self.content = BoxLayout()
 		self.content.widget_id = 'content'
-		for t in self.opts.tools:	
-			parenturl = None
-			if hasattr(self,'parenturl'):
-				parenturl = self.parenturl
-			t.img_src = absurl(t.img_src,parenturl)
-
-		opts = self.opts
-		self.toolbar = Toolbar(ancestor=self, **self.opts)
-		if self.opts.tool_at in ['top','left']:
+		opts = self.opts.copy()
+		if self.tool_at in ['top','bottom']:
+			opts['size_hint_x'] = 1 
+			opts['size_hint_y'] = None
+			opts['height'] = CSize(self.opts.img_size + \
+							self.opts.text_size) + 10
+		else:
+			opts['size_hint_y'] = 1
+			opts['size_hint_x'] = None
+			opts['width'] = CSize(self.opts.img_size + \
+							self.opts.text_size) + 10
+		self.toolbar = Toolbar(color_level=self.color_level,
+						radius=self.sub_radius,
+						**opts)
+		if self.tool_at in ['top','left']:
 			self.add_widget(self.toolbar)
 			self.add_widget(self.content)
 		else:

@@ -14,23 +14,14 @@ class VResponsiveLayout(ScrollView):
 		self.box_cols = cols
 		super(VResponsiveLayout, self).__init__(**kw)
 		self.options = kw
-		print('VResponsiveLayout():cols=',self.org_cols,'box_width=',self.box_width)
 		self._inner = GridLayout(cols=self.org_cols, padding=2, 
 						spacing=2,size_hint=(1,None))
 		super(VResponsiveLayout,self).add_widget(self._inner)
 		self._inner.bind(
 				minimum_height=self._inner.setter('height'))
 		self.sizeChangedTask = None
-		self.bind(pos=self.sizeChanged,size=self.sizeChanged)
+		self.bind(pos=self.setCols,size=self.setCols)
 	
-	def sizeChanged(self,o,v=None):
-		if self.sizeChangedTask:
-			self.sizeChangedTask.cancel()
-		self.sizeChangedTask = Clock.schedule_once(self.sizeChangedWork,0.1)
-	
-	def sizeChangedWork(self,t=None):
-		self.setCols()
-
 	def on_orientation(self,o):
 		self.setCols()
 
@@ -49,19 +40,14 @@ class VResponsiveLayout(ScrollView):
 		a = self._inner.remove_widget(widget,**kw)
 		return a
 
-	def setCols(self,t=None):
-		self.box_width = self.org_box_width
-		if self.width < self.box_width:
-			self.cols = self.org_cols
-		else:
-			self.cols = int(self.width / self.box_width)
-		print('VResponsiveLayout()::setCols():self.cols=',self.cols, 'self.box_width=',self.box_width,'self.org_cols=',self.org_cols)
-		if isHandHold():
-			w,h = self.size
-			if w < h:
-				self.box_width = w / self.org_cols - 2
-				self.cols = self.org_cols
-		self._inner.cols = self.cols
+	def setCols(self,*args):
+		cols = round(self.width / self.org_box_width)
+		if cols < 1:
+			return
+		if isHandHold() and self.width < self.height:
+			cols = self.org_cols
+		box_width = self.width / cols - 2
+		self._inner.cols = cols
 		for w in self._inner.children:
-			w.width = self.box_width
+			w.width = box_width
 

@@ -16,11 +16,25 @@ from .qrdata import QRCodeWidget
 # from .kivycamera import KivyCamera
 from .filebrowser import FileLoaderBrowser
 from .osc_server import OSCServer
-from graph import Graph, MeshLinePlot, MeshStemPlot, LinePlot, \
+from .graph import Graph, MeshLinePlot, MeshStemPlot, LinePlot, \
 	SmoothLinePlot, ContourPlot, BarPlot, HBar, VBar, ScatterPlot, \
 	PointPlot
+from .mapview import MapView
 
 r = Factory.register
+r('Popup', Popup)
+r('Graph', Graph)
+r('MeshLinePlot', MeshLinePlot)
+r('MeshStemPlot', MeshStemPlot)
+r('LinePlot', LinePlot)
+r('SmoothLinePlot', SmoothLinePlot)
+r('ContourPlot', ContourPlot)
+r('BarPlot', BarPlot)
+r('HBar', HBar)
+r('VBar', VBar)
+r('ScatterPlot', ScatterPlot)
+r('PointPlot', PointPlot)
+r('MapView', MapView)
 r('OSCServer',OSCServer)
 r('DataGrid',DataGrid)
 r('FileLoaderBrowser',FileLoaderBrowser)

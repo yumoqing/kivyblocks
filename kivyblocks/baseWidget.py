@@ -10,6 +10,7 @@ from kivy.uix.label import Label
 from kivy.event import EventDispatcher
 from kivy.metrics import dp
 from kivy.core.window import Window
+from kivy.clock import Clock
 
 from kivy.uix.actionbar import ActionBar,ActionView,ActionPrevious,ActionItem,ActionButton
 from kivy.uix.actionbar import ActionToggleButton, ActionCheck,ActionSeparator,ActionGroup
@@ -213,7 +214,6 @@ class Title6(Text):
 
 class Modal(BGColorBehavior, ModalView):
 	def __init__(self, auto_open=False, color_level=-1, radius=[], **kw):
-		kw.update({'auto_dismiss':False})
 		ModalView.__init__(self, **kw)
 		BGColorBehavior.__init__(self, color_level=color_level,
 					radius=radius)

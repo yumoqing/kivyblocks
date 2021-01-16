@@ -48,6 +48,9 @@ class BGColorBehavior(object):
 		else:
 			print('on_bgcolor():self.canvas is None')
 
+	def is_selected(self):
+		return self.bgcolor == self.selected_bgcolor
+
 	def selected(self):
 		if self.bgcolor == self.selected_bgcolor:
 			return
