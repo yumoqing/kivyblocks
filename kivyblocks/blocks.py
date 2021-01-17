@@ -397,7 +397,8 @@ class Blocks(EventDispatcher):
 		opts = desc.get('options').copy()
 		d = self.getActionData(widget,desc)
 		p = opts.get('options',{}).copy()
-		p.update(d)
+		if d:
+			p.update(d)
 		opts['options'] = p
 		def doit(target,add_mode,o,w):
 			if add_mode == 'replace':
@@ -483,7 +484,8 @@ class Blocks(EventDispatcher):
 
 		params = desc.get('params',{}).copy()
 		d = self.getActionData(widget,desc)
-		params.update(d)
+		if d:
+			params.update(d)
 		func(target, *args, **params)
 
 	def scriptAction(self, widget, desc, *args):
@@ -502,7 +504,8 @@ class Blocks(EventDispatcher):
 			"self":target,
 			"args":args
 		}
-		ns.update(d)
+		if d:
+			ns.update(d)
 		try:
 			self.eval(script, ns)
 		except Exception as e:
@@ -520,7 +523,8 @@ class Blocks(EventDispatcher):
 			f = getattr(target, method)
 			kwargs = desc.get('options',{}).copy()
 			d = self.getActionData(widget,desc)
-			kwargs.update(d)
+			if d:
+				kwargs.update(d)
 			f(*args, **kwargs)
 		else:
 			alert('%s method not found' % method)
