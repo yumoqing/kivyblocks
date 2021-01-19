@@ -443,7 +443,6 @@ class Blocks(EventDispatcher):
 		def doerr(o,e):
 			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error'
 								,str(desc))
-			raise e
 
 		b = Blocks()
 		b.bind(on_built=partial(doit,target,add_mode))
