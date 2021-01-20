@@ -545,13 +545,14 @@ class Blocks(EventDispatcher):
 			if not isinstance(desc,dict):
 				Logger.info('Block: desc must be a dict object',
 							desc,type(desc))
-				raise Exception('desc must be a dict')
+				return None
 
 			desc = self.valueExpr(desc)
 			widget = self.w_build(desc)
 			self.dispatch('on_built',widget)
 			if hasattr(widget,'ready'):
 				widget.ready()
+			return widget
 
 		if not (isinstance(desc, DictObject) or isinstance(desc, dict)):
 			print('Block: desc must be a dict object',
@@ -582,7 +583,7 @@ class Blocks(EventDispatcher):
 
 			if addon:
 				desc = dictExtend(desc,addon)
-		doit(desc)
+		return doit(desc)
 	
 	@classmethod
 	def getWidgetById(self,id,from_widget=None):

@@ -21,6 +21,7 @@ Config.set('kivy', 'default_font', [
 	'DroidSansFallback.ttf'])
 
 from kivy.app import App
+from kivy.utils import platform
 from .threadcall import HttpClient,Workers
 from .utils import *
 from .pagescontainer import PageContainer
@@ -61,20 +62,6 @@ def  signal_handler(signal, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
-def on_close(*args,**kwargs):
-	"""
-	catch the "x" button's event of window
-	"""
-	Logger.info('kivyblocks: on_close(), args=%s, kwargs=%s',str(args),str(kwargs))
-	app = App.get_running_app()
-	if len(app.root.pageWidgets) <= 1:
-		app.workers.running = False
-		Logger.info('kivyblocks: on_close(), return False')
-		return False
-	app.root.previous()
-	Logger.info('kivyblocks: on_close(), return True')
-	return True
-
 def getAuthHeader():
 	app = App.get_running_app()
 	if not hasattr(app,'serverinfo'):
@@ -88,39 +75,35 @@ def getAuthHeader():
 	print('serverinfo authCode not found')
 	return {}
 
-def closeWorkers():
-	app = App.get_running_app()
-	app.workers.running = False
-
-def appBlocksHack(app):
-	config = getConfig()
-	# app.on_close = on_close
-	app.getAuthHeader = getAuthHeader
-	app.__del__ = closeWorkers
-	Window.bind(on_request_close=app.on_close)
-	app.serverinfo = ServerInfo()
-	app.title = 'Test Title'
-	app.blocks = Blocks()
-	app.workers = Workers(maxworkers=config.maxworkers or 80)
-	app.workers.start()
-	app.hc = HttpClient()
-	WindowBase.softinput_mode='below_target'
-
 class BlocksApp(App):
 	def build(self):
-		appBlocksHack(self)
-		root = PageContainer()
-		x = None
 		config = getConfig()
-		blocks = Factory.Blocks()
-		blocks.bind(on_built=self.addTopWidget)
-		blocks.bind(on_error=self.showError)
-		blocks.widgetBuild(config.root)
-		return root
-	
-	def addTopWidget(self,o,w):
-		self.root.add_widget(w)
-	
-	def showError(self,o,e):
-		alert(str(self.config.root)+': cannt build widget')
+		self.public_headers = {}
+		Window.bind(on_request_close=self.on_close)
+		Window.bind(size=self.device_info)
+		self.workers = Workers(maxworkers=config.maxworkers or 80)
+		self.workers.start()
+		self.running = True
+		blocks = Blocks()
+		print(config.root)
+		x = blocks.widgetBuild(config.root)
+		if x is None:
+			alert('buildError,Exit', title='Error')
+			self.on_close()
+		return x
+
+	def device_info(self, *args):
+		d = {
+				"platform":platform,
+				"width":Window.width,
+				"height":Window.height
+			}
+		device = {
+			"device_info":";".join([f'{k}={v}' for k,v in d.items()])
+		}
+		self.public_headers.update(device)
+
+	def on_close(self, *args):
+		self.workers.running = False
+		return False
 
