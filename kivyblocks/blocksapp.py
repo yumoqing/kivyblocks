@@ -102,13 +102,13 @@ class BlocksApp(App):
 	def get_user_data_path(self):
 		if platform == 'android':
 			Environment = autoclass('android.os.Environment')
-			sdpath = Environment.get_running_app().getExternalStorageDirectory()
+			sdpath = Environment.getExternalStorageDirectory()
 			return str(sdpath)
 		sdpath = App.get_running_app().user_data_dir
 		return str(sdpath)
 
 	def get_profile_name(self):
-		fname = os.path.join(self.get_user_data_path(),'.profile.json')
+		fname = os.path.join(self.user_data_dir,'.profile.json')
 		print('profile_path=', fname)
 		return fname
 
