@@ -1,3 +1,4 @@
+import math
 from kivyblocks.graph import *
 from kivy.utils import get_color_from_hex as rgb
 from .threadcall import HttpClient
@@ -42,7 +43,24 @@ class Chart2d(Graph):
 		"line":LinePlot,
 		"hbar":BarPlot
 	}
-	graph_theme = {
+	default_options = {
+		"x_grid_label":True,
+		"y_grid_label":True,
+		"xlabel":"Xlabel",
+		"ylabel":"Ylabel",
+		"xmin":0,
+		"xmax":100,
+		"ymax":100,
+		"ymin":1,
+		"x_grid":True,
+		"y_grid":True,
+		"padding":5,
+		"xlog":False,
+		"ylog":False,
+		'x_ticks_minor':1,
+		'x_ticks_major':5,
+		"y_ticks_minor":1,
+		"y_ticks_major":5,
 		'label_options': {
 			'color': rgb('444444'),  # color of tick labels and titles
 		'bold': True},
@@ -65,33 +83,46 @@ class Chart2d(Graph):
 		self._data = data
 		if not self._data:
 			self._data = self.get_data()
-		xmax = len(data)
+		print('_data=',self._data, 'url=', self._dataurl)
+		xmax = len(self._data)
 		ymax = 0
-		xvalues = [ self._data[i][self.x_field] for i in range(xmax) ]
+		xvalue = [ self._data[i][self.x_field] for i in range(xmax) ]
 		self._charts = charts
+		print('charts=', charts)
 		plots = []
 		for c in charts:
-			plotKlass = self.plotmappings.get('charttype')
-			if not plot:
+			plotKlass = self.plotmappings.get(c['charttype'])
+			if not plotKlass:
+				print('charttype not defined', c)
 				continue
 			yvalue = [self._data[i][c['y_field']] for i in range(xmax)]
+			print('yvalue=', yvalue)
 			color = rgb(c.get('color','d8d8d8'))
 			plot = plotKlass(color=color)
-			plot.points = [(xvalue[i],yvalue[i]) for i in range(xmax)] 
+			plot.points = [(i,yvalue[i]) for i in range(xmax)] 
 			plots.append(plot)
 			maxv = max(yvalue)
 			if ymax < maxv:
 				ymax = maxv
 
-		gkw = kw.copy()
-		gkw['ymax'] = ymax
+		gkw = self.default_options.copy()
+		gkw.update(kw)
+		gkw['ymax'] = math.ceil(ymax)
+		gkw['y_ticks_minor'] = gkw['ymax'] / 10
+		gkw['y_ticks_major'] = gkw['ymax'] / 2
+		gkw['x_ticks_minor'] = 1
+		if gkw['x_ticks_major'] > xmax:
+			gkw['x_ticks_major'] = xmax
 		gkw['xmax'] = xmax
-		Graph.__init__(self, **kw)
-		self.ymax = ymax
+		print('gkw=', gkw)
+		Graph.__init__(self, **gkw)
 
+		print('plots=', plots)
 		for p in plots:
+			print('points=', p.points)
 			self.add_plot(p)
-			p.bind_to_graph(self)
+			if hasattr(p,'bind_to_graph'):
+				p.bind_to_graph(self)
 
 	def get_data(self):
 		hc = HttpClient()

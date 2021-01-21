@@ -116,6 +116,7 @@ class Row(GridLayout):
 
 		self.part.datagrid.row_selected = True
 		self.part.datagrid.select_rowid = self.row_id
+		self.part.datagrid.select_row = self
 		self.part.datagrid.dispatch('on_selected',self)
 
 class Header(WidgetReady, BGColorBehavior, ScrollWidget):
@@ -342,7 +343,6 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 		self.normal_part.body.clearRows()
 
 	def add_page(self,o,data):
-		print('dg.py:add_page() called',data)
 		ids = []
 		recs = data['data']
 		page = data['page']
@@ -354,7 +354,6 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 		for r in recs:
 			id = self.addRow(r,index=idx)
 			ids.append(id)
-			print('rec added',r,id)
 		self.dataloader.bufferObjects(page,ids)
 		x = self.dataloader.getLocater()
 		self.locater(x)
@@ -383,7 +382,7 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 			self.toolbar = Toolbar(ancestor=self,**tb)
 
 	def on_selected(self,row):
-		self.selected_row = row
+		print("DataGrid():on_selected fire", self.widget_id or 'not widget_id seted')
 
 	def loadData(self,**kwargs):
 		page = kwargs.get('page',1)

@@ -14,31 +14,26 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 	def __init__(self,	main_widget=None, second_widget=None, **kw):
 		self.main_widget = main_widget
 		self.second_widget = second_widget
-		self.widget_main = main_widget
-		self.widget_second = second_widget
+		self.widget_main = None
+		self.widget_second = None
 		self.second_flg = False
 		FloatLayout.__init__(self, **kw)
 		SwipeBehavior.__init__(self)
 		WidgetReady.__init__(self)
-		Clock.schedule_once(self.build_children,0)
+		self.build_children()
 		self.bind(on_swipe_left=self.toggle_second)
 		self.bind(on_swipe_right=self.toggle_second)
 		self.bind(size=self.on_size_changed)
 		self.bind(pos=self.on_size_changed)
 		self.current_orient = None
 		self.register_event_type('on_orientation_changed')
+		self.reready()
 	
 	def build_children(self, *args):
-		if isinstance(self.main_widget, dict):
-			blocks = Factory.Blocks()
-			blocks.bind(on_built=self.main_widget_built)
-			blocks.bind(on_failed=self.widget_build_failed)
-			blocks.widgetBuild(self.main_widget)
-		if isinstance(self.second_widget, dict):
-			blocks = Factory.Blocks()
-			blocks.bind(on_built=self.second_widget_built)
-			blocks.bind(on_failed=self.widget_build_failed)
-			blocks.widgetBuild(self.second_widget)
+		blocks = Factory.Blocks()
+		self.widget_main = blocks.widgetBuild(self.main_widget)
+		blocks = Factory.Blocks()
+		self.widget_second = blocks.widgetBuild(self.second_widget)
 
 	def isLandscape(self):
 		return self.width > self.height
@@ -106,22 +101,6 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		self.add_widget(self.widget_main)
 		self.add_widget(self.widget_second)
 
-	def main_widget_built(self,o,w):
-		print('main_widget_built() called ...')
-		self.widget_main = w
-		self.add_widget(self.widget_main)
-		if isinstance(self.widget_main, Widget) and isinstance(self.widget_second, Widget):
-			print('ready() called ..')
-			self.reready()
-
-
-	def second_widget_built(self,o,w):
-		print('second_widget_built() called ...')
-		self.widget_second = w
-		if isinstance(self.widget_main, Widget) and isinstance(self.widget_second, Widget):
-			print('ready() called ..')
-			self.reready()
-	
 	def widget_build_failed(self, o, e):
 		pass
 

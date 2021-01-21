@@ -311,6 +311,12 @@ class Graph(Widget):
 				k2 = 0  # position in points minor
 				for m in range(0, n_ticks):
 					if minor and m % minor:
+						if k2 >= len(points_minor):
+							continue
+						print('len(points_minor)=', len(points_minor), \
+								'len(points_major)=',len(points_major), \
+								'major=', major, 'minor=', minor or 1, \
+								'k2=',k2, 'n_ticks=', n_ticks)
 						points_minor[k2] = m * tick_dist + s_min
 						k2 += 1
 					else:

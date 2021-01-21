@@ -322,20 +322,6 @@ class Blocks(EventDispatcher):
 	def build_rest(self, widget,desc,t=None):
 		self.subwidget_total = len(desc.get('subwidgets',[]))
 		self.subwidgets = [ None for i in range(self.subwidget_total)]
-		def doit(params,o,w):
-			desc = params['desc']
-			widget = params['widget']
-			self.subwidgets[params['pos']] = w
-			if None not in self.subwidgets:
-				for w in self.subwidgets:
-					widget.add_widget(w)
-				for b in desc.get('binds',[]):
-					kw = b.copy()
-					self.buildBind(widget,kw)
-
-		def doerr(o,e):
-			raise e
-
 		pos = 0
 		for pos,sw in enumerate(desc.get('subwidgets',[])):
 			params={
@@ -343,17 +329,14 @@ class Blocks(EventDispatcher):
 				'widget':widget,
 				'pos':pos
 			}
-			f = partial(doit,params)
 			b = Blocks()
-			b.bind(on_built=f)
-			b.bind(on_failed=doerr)
 			kw = sw.copy()
-			b.widgetBuild(kw)
+			w = b.widgetBuild(kw)
+			widget.add_widget(w)
 
-		if self.subwidget_total == 0:
-			for b in desc.get('binds',[]):
-				kw = b.copy()
-				self.buildBind(widget,b)
+		for b in desc.get('binds',[]):
+			kw = b.copy()
+			self.buildBind(widget,b)
 
 	def buildBind(self,widget,desc):
 		wid = desc.get('wid','self')
@@ -371,6 +354,7 @@ class Blocks(EventDispatcher):
 			Logger.info('Block: get a null function,%s',str(desc))
 			return
 		w.bind(**{event:f})
+		# Logger.info('Block: %s bind built', str(desc))
 	
 	def uniaction(self,widget,desc, *args):
 		Logger.info('Block: uniaction() called, desc=%s', str(desc))

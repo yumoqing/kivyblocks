@@ -2,9 +2,12 @@
 import os
 import sys
 import signal
+import codecs
+import json
 
 from appPublic.jsonConfig import getConfig
 from appPublic.folderUtils import ProgramPath
+from appPublic.uniqueID import getID
 
 from kivy.factory import Factory
 from kivy.config import Config
@@ -14,6 +17,8 @@ from kivy.clock import Clock
 from kivy.logger import Logger
 
 import kivy
+import plyer
+
 from kivy.resources import resource_add_path
 resource_add_path(os.path.join(os.path.dirname(__file__),'./ttf'))
 Config.set('kivy', 'default_font', [
@@ -28,6 +33,8 @@ from .pagescontainer import PageContainer
 from .blocks import Blocks
 from .theming import ThemeManager
 from appPublic.rsa import RSA
+if platform == 'android':
+	from jnius import autoclass
 
 class ServerInfo:
 	def __init__(self):
@@ -91,6 +98,44 @@ class BlocksApp(App):
 			alert('buildError,Exit', title='Error')
 			self.on_close()
 		return x
+
+	def get_user_data_path(self):
+		if platform == 'android':
+			Environment = autoclass('android.os.Environment')
+			sdpath = Environment.get_running_app().getExternalStorageDirectory()
+			return str(sdpath)
+		sdpath = App.get_running_app().user_data_dir
+		return str(sdpath)
+
+	def get_profile_name(self):
+		fname = os.path.join(self.get_user_data_path(),'.profile.json')
+		print('profile_path=', fname)
+		return fname
+
+	def write_profile(self, dic):
+		fname = self.get_profile_name()
+		with codecs.open(fname,'w','utf-8') as f:
+			json.dump(dic,f)
+
+	def write_default_profile(self):
+		device_id = getID()
+		try:
+			device_id = plyer.uniqueid.id
+		except:
+			pass
+
+		d = {
+			'device_id': device_id
+		}
+		self.write_profile(d)
+
+	def read_profile(self):
+		fname = self.get_profile_name()
+		if not os.path.isfile(fname):
+			self.write_default_profile()
+		with codecs.open(fname, 'r', 'utf-8') as f:
+			d = json.load(f)
+			return d
 
 	def device_info(self, *args):
 		d = {
