@@ -24,7 +24,7 @@ class NewVideo(BGColorBehavior, Video):
 		set_log_callback(self.ffplayerLog)
 		self.register_event_type('on_open_failed')
 
-	def on_open_failed(self, o, source):
+	def on_open_failed(self, source, x=None):
 		print('source=',source, 'open failed')
 
 	def ffplayerLog(self, msg, level):

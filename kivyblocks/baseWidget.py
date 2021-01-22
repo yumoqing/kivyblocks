@@ -148,6 +148,7 @@ class Text(Label):
 		}
 		fontsize = {'font_size': CSize(1) + offset.get(texttype,0)}
 		self._i18n = i18n
+		self.i18n = I18n()
 		self.bgcolor = fgcolor
 		kwargs = kw.copy()
 		config = getConfig()
@@ -218,6 +219,9 @@ class Modal(BGColorBehavior, ModalView):
 		BGColorBehavior.__init__(self, color_level=color_level,
 					radius=radius)
 		self.auto_open = auto_open
+
+	def add_widget(self,w, *args, **kw):
+		super().add_widget(w, *args, **kw)
 		if self.auto_open:
 			self.open()
 
