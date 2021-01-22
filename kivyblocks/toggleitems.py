@@ -85,12 +85,12 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 
 		for desc in items_desc:
 			c = PressableBox(**kw)
-			d = desc.get('data')
-			if d:
-				c.setValue(d)
 			self.item_widgets.append(c)
 			self.add_widget(c)
 			c.bind(on_press=self.select_item)
+			if desc.get('data'):
+				c.setValue(desc['data'])
+
 			b = Factory.Blocks()
 			def cb(c,o,w):
 				c.add_widget(w)
@@ -107,7 +107,7 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 		self.register_event_type('on_press')
 	
 	def on_press(self,v=None):
-		print('Toggle on_changed fired')
+		print('Toggle on_press fired')
 		pass
 
 	def select_item(self,o=None):

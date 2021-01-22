@@ -21,8 +21,10 @@ from .graph import Graph, MeshLinePlot, MeshStemPlot, LinePlot, \
 	PointPlot
 from .mapview import MapView
 from .chart2d import Chart2d
+from .message import Conform
 
 r = Factory.register
+r('Conform', Conform)
 r('Chart2d', Chart2d)
 r('Popup', Popup)
 r('Graph', Graph)

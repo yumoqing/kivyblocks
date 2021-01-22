@@ -150,18 +150,30 @@ class Blocks(EventDispatcher):
 		globals()[name] = widget
 
 	def buildAction(self,widget,desc):
-		self.action_id += 1
-		fname = 'action%d' % self.action_id
+		conform_desc = desc.get('conform')
+		blocks = Blocks()
+		if not conform_desc:
+			return partial(blocks.uniaction, widget, desc)
 		l = {
 		}
-		body="""def %s(widget,obj=None, *args, **kw):
+		body="""def action(widget, *args, **kw):
 	jsonstr='''%s'''
 	desc = json.loads(jsonstr)
+	conform_desc = desc.get('conform')
 	blocks = Blocks()
-	blocks.uniaction(widget, desc,*args, **kw)
-""" % (fname, json.dumps(desc))
+	if not conform_desc:
+		blocks.uniaction(widget, desc,*args, **kw)
+		return
+	w = blocks.widgetBuild({
+		"widgettype":"Conform",
+		"options":conform_desc
+	})
+	w.bind(on_conform=partial(blocks.uniaction, widget, desc))
+	w.open()
+	print('Conform show.....')
+""" % (json.dumps(desc))
 		exec(body,globals(),l)
-		f = l.get(fname,None)
+		f = l.get('action',None)
 		if f is None:
 			raise Exception('None Function')
 		func =partial(f,widget)
@@ -358,6 +370,8 @@ class Blocks(EventDispatcher):
 	
 	def uniaction(self,widget,desc, *args):
 		Logger.info('Block: uniaction() called, desc=%s', str(desc))
+			
+			
 		acttype = desc.get('actiontype')
 		if acttype=='blocks':
 			return self.blocksAction(widget,desc, *args)
