@@ -273,7 +273,7 @@ class Form(BGColorBehavior, BoxLayout):
 		self.register_event_type('on_submit')
 
 	def init(self):
-		self.toolbar = Toolbar(ancestor=self,**self.options.get('toolbar',defaultToolbar()))
+		self.toolbar = Toolbar(**self.options.get('toolbar',defaultToolbar()))
 		self.fsc = VResponsiveLayout(
 						self.inputwidth,
 						self.cols 

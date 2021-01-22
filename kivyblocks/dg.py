@@ -379,7 +379,7 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 	def createToolbar(self):
 		if 'toolbar' in self.options.keys():
 			tb = self.options['toolbar']
-			self.toolbar = Toolbar(ancestor=self,**tb)
+			self.toolbar = Toolbar(**tb)
 
 	def on_selected(self,row):
 		print("DataGrid():on_selected fire", self.widget_id or 'not widget_id seted')
