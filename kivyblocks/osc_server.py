@@ -26,8 +26,10 @@ class OSCServer(EventDispatcher):
 			self.osc_server.bind(bstr, api_f)
 
 	def info(self):
+		ip,port = self.osc_server.getaddress()
 		return {
-			"address":self.osc_server.getaddress()
+			"ip":ip,
+			"port":port
 		}
 
 	def stop(self):
