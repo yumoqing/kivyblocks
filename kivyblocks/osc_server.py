@@ -40,7 +40,8 @@ class OSCServer(EventDispatcher):
 		print(api, *args)
 		
 	def apihandle(self, api, *args):
-		data = json.loads(args[0])
+		data = args[0].decode('utf-8')
+		data = json.loads(data)
 		sock, ip_address, response_port = self.osc_server.get_sender()
 		self.dispatch('on_%s' % api, api, data)
 		if api == 'broadcast':
@@ -50,6 +51,7 @@ class OSCServer(EventDispatcher):
 
 	def send_message(self,api, data, addr, port):
 		data = json.dumps(data)
+		data = data.encode('utf-8')
 		bstr = '/%s' % api
 		bstr = bstr.encode('utf-8')
 		self.osc_server.send_message(b'/broadcast', [data], addr, port)
