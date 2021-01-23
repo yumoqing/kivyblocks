@@ -298,7 +298,7 @@ class Blocks(EventDispatcher):
 			raise Exception(desc)
 
 		widgetClass = desc['widgettype']
-		opts = desc.get('options',{}).copy()
+		opts = self.valueExpr(desc.get('options',{}).copy())
 		widget = None
 		try:
 			klass = wrap_ready(widgetClass)
@@ -329,26 +329,23 @@ class Blocks(EventDispatcher):
 						continue
 				setattr(widget,k,w)
 				continue
-			setattr(widget,k,v)
+			setattr(widget,k,self.valueExpr(v,\
+						localnamespace={'self':widget}))
 
 	def build_rest(self, widget,desc,t=None):
 		self.subwidget_total = len(desc.get('subwidgets',[]))
 		self.subwidgets = [ None for i in range(self.subwidget_total)]
 		pos = 0
 		for pos,sw in enumerate(desc.get('subwidgets',[])):
-			params={
-				'desc':desc,
-				'widget':widget,
-				'pos':pos
-			}
 			b = Blocks()
 			kw = sw.copy()
 			w = b.widgetBuild(kw)
 			widget.add_widget(w)
 
 		for b in desc.get('binds',[]):
-			kw = b.copy()
-			self.buildBind(widget,b)
+			kw = self.valueExpr(b.copy(), \
+						localnamespace={'self':widget})
+			self.buildBind(widget,kw)
 
 	def buildBind(self,widget,desc):
 		wid = desc.get('wid','self')
@@ -545,7 +542,7 @@ class Blocks(EventDispatcher):
 							desc,type(desc))
 				return None
 
-			desc = self.valueExpr(desc)
+			# desc = self.valueExpr(desc)
 			widget = self.w_build(desc)
 			self.dispatch('on_built',widget)
 			if hasattr(widget,'ready'):
