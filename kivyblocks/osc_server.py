@@ -54,7 +54,7 @@ class OSCServer(EventDispatcher):
 		data = data.encode('utf-8')
 		bstr = '/%s' % api
 		bstr = bstr.encode('utf-8')
-		self.osc_server.send_message(b'/broadcast', [data], addr, port)
+		self.osc_server.send_message(bstr, [data], addr, port)
 	
 	def broadcast(self, data):
 		for address in self.clients:
