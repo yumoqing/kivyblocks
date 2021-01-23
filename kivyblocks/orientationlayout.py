@@ -25,9 +25,9 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		self.bind(on_swipe_right=self.toggle_second)
 		self.bind(size=self.on_size_changed)
 		self.bind(pos=self.on_size_changed)
-		self.current_orient = None
-		self.register_event_type('on_orientation_changed')
+		self.second_showed = None
 		self.reready()
+		self.register_event_type('on_interactive')
 	
 	def build_children(self, *args):
 		blocks = Factory.Blocks()
@@ -43,27 +43,22 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 			if self.second_flg:
 				self.remove_widget(self.widget_second)
 				self.second_flg = False
+				self.dispatch('on_interactive')
 			else:
 				self.add_widget(self.widget_second)
 				self.second_flg = True
 				self.on_size_changed(self.size)
+				self.dispatch('on_interactive')
 
 	def on_size_changed(self,*args):
-		old_orient = self.current_orient
-		if self.isLandscape():
-			self.current_orient = 'landscape'
-		else:
-			self.current_orient = 'portrait'
-		if old_orient and old_orient != self.current_orient:
-			self.dispatch('on_orientation_changed')
-			
 		Clock.schedule_once(self.two_widget_layout,0)
 
-	def on_orientation_changed(self, *args):
+	def on_interactive(self, *args):
 		print('on_orientation_changed fired')
 
 	def two_widget_layout(self, *args):
-		if not isinstance(self.widget_main, Widget) or not isinstance(self.widget_second, Widget):
+		if not isinstance(self.widget_main, Widget) or \
+				not isinstance(self.widget_second, Widget):
 			# Clock.schedule_once(self.two_widget_layout,0)
 			return
 
