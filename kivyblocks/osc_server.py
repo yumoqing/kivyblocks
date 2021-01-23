@@ -41,10 +41,7 @@ class OSCServer(EventDispatcher):
 	def apihandle(self, api, *args):
 		data = json.loads(args[0])
 		sock, ip_address, response_port = self.osc_server.get_sender()
-		self.dispatch(api,
-			{'address':address,
-				'data':data
-			})
+		self.dispatch('on_%s' % api, api, data)
 		if api == 'broadcast':
 			return
 		if not address in self.clients:
