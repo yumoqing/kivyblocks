@@ -30,10 +30,8 @@ class OSCServer(EventDispatcher):
 			"address":self.osc_server.getaddress()
 		}
 
-	def quit(self):
-		self.osc_server.stop_all()
-		self.osc_server.terminate_server()
-		self.osc_server.join_server()
+	def stop(self):
+		self.osc_server.stop()
 
 	def handle(self,api,o,*args):
 		print(api, *args)
