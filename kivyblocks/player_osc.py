@@ -23,7 +23,7 @@ class PlayerOSCServer(EventDispatcher):
 		print('PlayerOSCServer():on_osc_event():cmd=', cmd, 'args=',args)
 
 	def action_event(self,cmd,*args):
-		self.dispatch('on_%s' % cmd, *args)
+		self.dispatch('on_%s' % cmd, cmd, *args)
 
 	def start(self):
 		self.thread = Background(self.server.serve_forever)
