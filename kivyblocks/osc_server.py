@@ -3,7 +3,7 @@ from functools import partial
 from kivy.event import EventDispatcher
 from kivy.clock import Clock
 from oscpy.server import OSCThreadServer
-from oscpy.client import OSCClient
+from oscpy.client import send_message, OSCClient
 
 class OSCServer(EventDispatcher):
 	def __init__(self,addr='0.0.0.0', 
@@ -13,7 +13,7 @@ class OSCServer(EventDispatcher):
 		self.addr = addr
 		self.clients = []
 		self.osc_server = OSCThreadServer()
-		self.osc_server.listen(self.addr,port=self.port,default=True)
+		sock = self.osc_server.listen(self.addr,port=self.port,default=True)
 		EventDispatcher.__init__(self)
 		apis.append('broadcast')
 		for api in apis:
@@ -24,7 +24,7 @@ class OSCServer(EventDispatcher):
 			api_f = partial(self.apihandle,api)
 			bstr = '/%s' % api
 			bstr.encode('utf-8')
-			self.osc_server.bind(bstr, api_f)
+			self.osc_server.bind(bstr, api_f, sock)
 
 	def info(self):
 		ip,port = self.osc_server.getaddress()
@@ -59,7 +59,7 @@ class OSCServer(EventDispatcher):
 					'data=', data,
 					'addr=', addr, 
 					'port=',port)
-		self.osc_server.send_message(bstr, [data], addr, port)
+		send_message(bstr, [data], addr, port)
 	
 	def broadcast(self, data):
 		for address in self.clients:
