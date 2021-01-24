@@ -40,6 +40,7 @@ class OSCServer(EventDispatcher):
 		print(api, *args)
 		
 	def apihandle(self, api, *args):
+		print('OSCServer():apihandle():api=', api, 'args=',args)
 		data = args[0].decode('utf-8')
 		data = json.loads(data)
 		sock, ip_address, response_port = self.osc_server.get_sender()
