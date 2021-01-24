@@ -1,4 +1,5 @@
 
+from functools import partial
 import json
 from pythonosc import dispatcher, osc_server, udp_client
 from appPublic.sockPackage import get_free_local_addr
@@ -7,22 +8,22 @@ from kivy.event import EventDispatcher
 
 
 class PlayerOSCServer(EventDispatcher):
-	def __init__(self,playerid):
+	def __init__(self,playerid, cmds=[]):
 		EventDispatcher.__init__(self)
 		self.playerid = playerid
 		dispatch = dispatcher.Dispatcher()
 		self.ip,self.port = get_free_local_addr()
-		# self.server = osc_server.ThreadingOSCUDPServer( (self.ip, self.port), dispatch)
 		self.server = osc_server.BlockingOSCUDPServer( (self.ip, self.port), dispatch)
 		self.osc_dispatch = dispatch
-		self.commands = []
-		self.register_event_type('on_osc_event')
+		self.commands = cmds
+		for cmd in self.commands:
+			self.map(cmd)
 		
-	def on_osc_event(self,*args):
-		print('PlayerOSCServer():on_osc_event():args=',args)
+	def on_osc_event(self, cmd, *args):
+		print('PlayerOSCServer():on_osc_event():cmd=', cmd, 'args=',args)
 
-	def action_event(self,*args):
-		self.dispatch('on_osc_event',*args)
+	def action_event(self,cmd,*args):
+		self.dispatch('on_%s' % cmd, *args)
 
 	def start(self):
 		self.thread = Background(self.server.serve_forever)
@@ -38,13 +39,22 @@ class PlayerOSCServer(EventDispatcher):
 		}
 
 	def map(self,cmd):
-		self.commands.append(cmd)
-		self.osc_dispatch.map(cmd,self.action_event)
+		event_name = 'on_%s' % cmd
+		on_f = partial(self.on_osc_event, cmd)
+		setattr(self,event_name, on_f)
+		self.register_event_type(event_name)
+		self.osc_dispatch.map( '/%s' % cmd,partial(self.action_event, cmd))
 			
 	def stop(self):
 		self.server.shutdown()
 		self.server.server_close()
 		self.thread.join(5)
+
+	def send_message(self, api, data, ip, port):
+		client = udp_client.SimpleUDPClient(ip, port)  # Create client
+		t = json.dumps(data)
+		client.send_message('/%s' % api, t)
+		
 
 class PlayerOSCClient:
 	def __init__(self, ip,port):
