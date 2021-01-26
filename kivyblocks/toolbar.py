@@ -7,6 +7,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.factory import Factory
 
 from appPublic.dictObject import DictObject
 
@@ -107,15 +108,17 @@ class Toolbar(BoxLayout):
 """
 Toolpage options
 {
-	img_size=1.5,	
-	text_size=0.7,
+	img_size:1.5,	
+	text_size:0.7,
 	tool_at:"left","right","top","bottom",
-	color_level=0,
+	color_level:0,
+	show_name:
 	tools:[
 		{
 			"name":"myid",
 			"img_src":"gggggg",
 			"text":"gggggg"
+			"flush":true
 			"url":"ggggggggg"
 		},
 		...
@@ -123,12 +126,21 @@ Toolpage options
 	
 """
 class ToolPage(BGColorBehavior, BoxLayout):
-	def __init__(self,color_level=-1,radius=[],tool_at='top', **opts):
+	def __init__(self,color_level=-1,radius=[],
+					show_name=None, tool_at='top', **opts):
 		self.opts = DictObject(**opts)
 		if tool_at in [ 'top','bottom']:
 			orient = 'vertical'
 		else:
 			orient = 'horizontal'
+		names = [i.name for i in self.opts.tools]
+
+		if not show_name or \
+			not show_name not in names:
+			show_name = self.opts.tools[0].name
+			
+		self.content_widgets = {}
+		self.show_name = show_name
 		self.color_level=self.opts.color_level or 0
 		self.sub_radius = self.opts.radius
 		self.tool_at = tool_at
@@ -139,8 +151,15 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		self.content = None
 		self.toolbar = None
 		self.init()
-		# self.show_firstpage()
+		Clock.schedule_once(self.show_page, 0.5)
 	
+	def show_page(self, *args):
+		toggle_items = self.toolbar.toggle_items
+		for c in toggle_items.children:
+			cvalue = c.getValue()
+			if cvalue == self.show_name:
+				c.dispatch('on_press')
+
 	def on_size(self,obj,size):
 		if self.content is None:
 			return
@@ -152,13 +171,6 @@ class ToolPage(BGColorBehavior, BoxLayout):
 			self.toolbar.height = self.height
 			self.content.height = self.height
 			self.content.width = self.width - self.toolbar.width
-
-	def showPage(self,obj):
-		self._show_page(obj.opts)
-
-	def show_firstpage(self,t=None):
-		d = self.children[0]
-		d.dispatch('on_press', d)
 
 	def init(self):
 		self.initFlag = True
@@ -185,4 +197,34 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		else:
 			self.add_widget(self.content)
 			self.add_widget(self.toolbar)
+		toggle_items = self.toolbar.toggle_items
+		for t in toggle_items.children:	
+			t.bind(on_press=self.on_press_handle)
+
+	def get_tool_by_name(self,name):
+		for t in self.opts.tools:
+			if t.name == name:
+				return t
+		return None
+
+	def build_widget(self, url):
+		desc = {
+			"widgettype":"urlwidget",
+			"options":{
+				"url":url
+			}
+		}
+		b = Factory.Blocks()
+		return b.widgetBuild(desc)
+
+	def on_press_handle(self, o):
+		name = o.getValue()
+		t = self.get_tool_by_name(name)
+		w = self.content_widgets.get(name)
+		if w is None or t.fresh:
+			w = self.build_widget(t.url)
+			self.content_widgets[name] = w
+		if w:
+			self.content.clear_widgets()
+			self.content.add_widget(w)
 

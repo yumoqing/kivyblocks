@@ -543,11 +543,15 @@ class Blocks(EventDispatcher):
 				return None
 
 			# desc = self.valueExpr(desc)
-			widget = self.w_build(desc)
-			self.dispatch('on_built',widget)
-			if hasattr(widget,'ready'):
-				widget.ready()
-			return widget
+			try:
+				widget = self.w_build(desc)
+				self.dispatch('on_built',widget)
+				if hasattr(widget,'ready'):
+					widget.ready()
+				return widget
+			except Exception as e:
+				self.dispatch('on_failed',e)
+				return None
 
 		if not (isinstance(desc, DictObject) or isinstance(desc, dict)):
 			print('Block: desc must be a dict object',
@@ -555,7 +559,8 @@ class Blocks(EventDispatcher):
 			self.dispatch('on_failed',Exception('miss url'))
 			return
 
-		while desc['widgettype'] == "urlwidget":
+		widgettype = desc.get('widgettype')
+		while widgettype == "urlwidget":
 			opts = desc.get('options',{}).copy()
 			extend = desc.get('extend')
 			addon = None
@@ -578,6 +583,11 @@ class Blocks(EventDispatcher):
 
 			if addon:
 				desc = dictExtend(desc,addon)
+			widgettype = desc.get('widgettype')
+		if widgettype is None:
+			print('Block: desc must be a dict object',
+						desc,type(desc))
+			return None
 		return doit(desc)
 	
 	@classmethod

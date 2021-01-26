@@ -22,8 +22,10 @@ from .graph import Graph, MeshLinePlot, MeshStemPlot, LinePlot, \
 from .mapview import MapView
 from .chart2d import Chart2d
 from .message import Conform
+from .pagepanel import PagePanel
 
 r = Factory.register
+r('PagePanel', PagePanel)
 r('Conform', Conform)
 r('Chart2d', Chart2d)
 r('Popup', Popup)

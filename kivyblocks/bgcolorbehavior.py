@@ -20,10 +20,11 @@ class BGColorBehavior(object):
 		fg,bg= getColors(color_level,selected=True)
 		self.selected_bgcolor = bg
 		self.selected_fgcolor = fg
-		self.on_bgcolor()
+		# self.on_bgcolor()
 
 		self.bind(size=self.onSize_bgcolor_behavior,
 				pos=self.onSize_bgcolor_behavior)
+		self.bind(children=self.on_bgcolor)
 
 	def onSize_bgcolor_behavior(self,o,v=None):
 		if not hasattr(self,'rect'):
