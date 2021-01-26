@@ -68,11 +68,13 @@ class SwipeBehavior(object):
 				self.sb_end_point = touch.pos
 
 	def on_touchup(self,o,touch):
+		ret = False
 		if self.collide_point(*touch.pos) and self.swipeenable:
 			# Logger.info('SwipeBehavior:touch_up fired')
 			self.sb_end_point = touch.pos
 			self.sb_end_time = time.time()
 			self.check_context_menu()
+			ret = True
 		self.check_swipe()
 		self.sb_start_point = None
 		self.sb_end_point = None

@@ -6,11 +6,21 @@ from kivy.factory import Factory
 from .baseWidget import VBox, HBox
 from .toggleitems import PressableBox
 from .utils import *
+from .swipebehavior import SwipeBehavior
+
+class PageContent(SwipeBehavior, VBox):
+	def __init__(self, **kw):
+		VBox.__init__(self, **kw)
+		SwipeBehavior.__init__(self)
 
 class MenuContainer(VBox):
 	def __init__(self, **kw):
 		VBox.__init__(self, **kw)
 		self.bind(on_touch_down=self.check_press)
+		self.register_event_type('on_dismiss')
+
+	def on_dismiss(self, *args):
+		print('on_dismiss fire')
 
 	def open(self):
 		if self in Window.children:
@@ -20,6 +30,7 @@ class MenuContainer(VBox):
 	def dismiss(self, *args):
 		self.clear_widgets()
 		Window.remove_widget(self)
+		self.dispatch('on_dismiss')
 
 	def check_press(self, o, touch):
 		if touch.is_mouse_scrolling:
@@ -27,14 +38,103 @@ class MenuContainer(VBox):
 		if not self.collide_point(touch.x, touch.y):
 			self.dismiss()
 			return True
-		return False
+		return True
 
 class PagePanel(VBox):
+	"""
+# PagePanel widget
+PagePanel widget provide a control bar and a subwidget container, control bar and content layout using vertical layout.
+
+in control bar, there is a optional left menu icon, page title, right menu icon, and if there is more than one subwidgets add in the PagePanel, it will show the sub-widget last added. and a backward icon will show in the leftest control bar.
+
+* backward icon uses to show the previous page in the PagePanel.
+* left menu icon uses to show the system wide's menu
+* right menu icon uses to show the current page's menu, the widget is identified by "menu_widget" in sub-widget description file
+* title to show current page title, the widget is identified by "title_widget" in sub-widget description file.
+
+## Description file format
+PagePanel description file format
+```
+	{
+		"bar_size": bar size in CSize unit
+		"bar_at": "top" or "bottom"
+		"left_menu": if defined, it must be a widget instance or a dict 
+					recognized by Blocks
+		other VBox initial options
+	}
+	usage examples:
+	{
+		"widgettype":"PagePanel",
+		"options":{
+			"bar_size":2,
+			"enable_on_close":true,
+			"left_menu":{
+				"widgettype":"Text",
+				"options":{
+					"text":"Text"
+				}
+			},
+			"radius":[10,10,10,10]
+		},
+		"subwidgets":[
+			{
+				"widgettype":"urlwidget",
+				"options":{
+					"url":"{{entire_url('page.ui')}}"
+				}
+			}
+		]
+	}
+```
+
+sub-widget's description file format
+```
+	and page.ui is:
+	{
+		"widgettype":"Button",
+		"options":{
+			"text":"button {{cnt or 0}}"
+		},
+
+		"title_widget":{
+			"widgettype":"Text",
+			"options":{
+				"text":"test title"
+			}
+		},
+		"menu_widget":{
+			"widgettype":"Text",
+			"options":{
+				"text":"TTTT"
+			}
+		},
+		"binds":[
+			{
+				"wid":"self",
+				"target":"root",
+				"actiontype":"urlwidget",
+				"event":"on_press",
+				"options":{
+					"params":{
+						"cnt":{{int(cnt or 0) + 1}}
+					},
+					"url":"{{entire_url('page.ui')}}"
+				}
+			}
+		]
+	}
+```
+
+## 
+
+	"""
 	def __init__(self, bar_size=2, bar_at='top', enable_on_close=False, 
-					left_menu=False, **kw):
+					left_menu=None, **kw):
 		print('PagePanel().__init__():', bar_size, bar_at, left_menu)
 		self.bar_size = bar_size
 		self.bar_at = bar_at
+		self.swipe_buffer = []
+		self.swipe_right = False
 		
 		self.enable_on_close = enable_on_close
 		if self.enable_on_close:
@@ -46,7 +146,6 @@ class PagePanel(VBox):
 		elif isinstance(left_menu, Widget):
 			self.left_menu = left_menu
 		else:
-			print('left_menu=', left_menu, type(left_menu))
 			self.left_menu = Factory.Blocks().widgetBuild(left_menu)
 		self.sub_widgets = []
 		VBox.__init__(self, **kw)
@@ -54,7 +153,9 @@ class PagePanel(VBox):
 						spacing=CSize(bar_size/6),
 						height=CSize(bar_size))
 		bcsize = bar_size * 0.85
-		self.content = VBox()
+		self.content = PageContent()
+		self.content.bind(on_swipe_left=self.on_swipe_next_page)
+		self.content.bind(on_swipe_right=self.pop)
 		self.bar_back = VBox(size_hint=(None,None),size=CSize(bcsize,bcsize))
 		self.bar_back_w = Factory.Blocks().widgetBuild({
 			"widgettype":"PressableBox",
@@ -118,7 +219,8 @@ class PagePanel(VBox):
 		else:
 			super().add_widget(self.content)
 			super().add_widget(self.bar)
-		self.menu_container = MenuContainer()
+		self.left_menu_showed = False
+		self.right_menu_showed = False
 
 	def on_close_handle(self, o, *args):
 		print('app.on_close fired, ...')
@@ -130,13 +232,11 @@ class PagePanel(VBox):
 		return True
 
 	def pop(self, o, *args):
-		self.bar_back.clear_widgets()
-		self.content.clear_widgets()
-		self.bar_title.clear_widgets()
-		self.bar_right_menu.clear_widgets()
 		if len(self.sub_widgets) < 1:
 			return
+		self.clear_widgets()
 		diss_w = self.sub_widgets[-1]
+		self.swipe_buffer.insert(0,diss_w)
 		self.sub_widgets = self.sub_widgets[:-1]
 		self.show_currentpage()
 
@@ -150,42 +250,73 @@ class PagePanel(VBox):
 		if hasattr(w, 'menu_widget'):
 			self.bar_right_menu.add_widget(self.bar_right_menu_w)
 
+	def on_swipe_next_page(self, o, *args):
+		if len(self.swipe_buffer) < 1:
+			return
+		self.swipe_right = True
+		w = self.swipe_buffer[0]
+		del self.swipe_buffer[0]
+		self.add_widget(w)
+
 	def clear_widgets(self):
 		self.bar_back.clear_widgets()
 		self.content.clear_widgets()
 		self.bar_title.clear_widgets()
 		self.bar_right_menu.clear_widgets()
 
-	def add_widget(self, w,*args):
+	def add_widget(self, w, *args):
+		if not self.swipe_right:
+			self.swipe_buffer = []
+		self.swipe_right = False
+		self.clear_widgets()
 		if len(self.sub_widgets) > 0:
 			pass
 		self.sub_widgets.append(w)
 		self.show_currentpage()
 
 	def show_left_menu(self, o):
+		def x(*args):
+			self.left_menu_showed = False
+			print('dismiss fired, left_menu_showed=',self.left_menu_showed)
+
 		print('left_menu fired')
 		if len(self.sub_widgets) < 1:
 			return
+		if self.left_menu_showed:
+			return
 		mc = MenuContainer()
 		mc.add_widget(self.left_menu)
-		mc.size_hint_x = 0.4
-		mc.size_hint_y = 1
+		mc.size_hint = (None, None)
+		mc.width = self.width * 0.4
+		mc.height = self.content.height
 		mc.x = self.x
-		mc.y = self.y
+		mc.y = self.y if self.bar_at=='top' else self.content.y
+		self.left_menu_showed = True
+		mc.bind(on_dismiss=x)
 		mc.open()
 
 	def show_right_menu(self, o):
+		def x(*args):
+			self.right_menu_showed = False
+			print('dismiss fired, right_menu_showed=',self.right_menu_showed)
+
 		print('right fired')
 		if len(self.sub_widgets) < 1:
 			return
+		if self.right_menu_showed:
+			return
+
 		w = self.sub_widgets[-1]
 		if not hasattr(w, 'menu_widget'):
 			return True
 		mc = MenuContainer()
 		mc.add_widget(w.menu_widget)
-		mc.size_hint_x = 0.4
-		mc.size_hint_y = 1
+		mc.size_hint = (None,None)
+		mc.height = self.content.height
+		mc.width = self.width * 0.4
 		mc.x = self.x + self.width * 0.6
-		mc.y = self.y
+		mc.y = self.y if self.bar_at == 'top' else self.content.y
+		self.right_menu_showed = True
+		mc.bind(on_dismiss=x)
 		mc.open()
 		
