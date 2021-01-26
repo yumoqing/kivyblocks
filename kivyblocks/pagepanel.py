@@ -30,7 +30,7 @@ class MenuContainer(VBox):
 		return False
 
 class PagePanel(VBox):
-	def __init__(self, bar_size=3, bar_at='top', enable_on_close=False, 
+	def __init__(self, bar_size=2, bar_at='top', enable_on_close=False, 
 					left_menu=False, **kw):
 		print('PagePanel().__init__():', bar_size, bar_at, left_menu)
 		self.bar_size = bar_size
@@ -51,7 +51,7 @@ class PagePanel(VBox):
 		self.sub_widgets = []
 		VBox.__init__(self, **kw)
 		self.bar = HBox(size_hint_y=None,
-						spacing=15,
+						spacing=CSize(bar_size/6),
 						height=CSize(bar_size))
 		bcsize = bar_size * 0.85
 		self.content = VBox()
