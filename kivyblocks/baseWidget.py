@@ -165,6 +165,12 @@ class Text(Label):
 		if self.bgcolor:
 			self.color = self.bgcolor
 
+	def get_wraped_size(self):
+		if self.text:
+			self._label.refresh()
+			return self._label.size
+		return (None,None)
+
 	def on_size(self,o,size):
 		# super().on_size(o,size)
 		if self.wrap:
@@ -345,7 +351,7 @@ class HTTPDataHandler(EventDispatcher):
 def getDataHandler(url,**kwargs):
 	if url.startswith('file://'):
 		return FILEDataHandler(url,**kwargs)
-	return HTTPDataHandler(url, **kwaegs)
+	return HTTPDataHandler(url, **kwargs)
 
 def device_type():
 	if platform != "android" and platform != "ios":

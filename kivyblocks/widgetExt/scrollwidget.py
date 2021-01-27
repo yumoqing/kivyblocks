@@ -5,9 +5,9 @@ from kivy.graphics import Color, Ellipse,Rectangle
 
 class ScrollWidget(ScrollView):
 	def __init__(self,**kw):
-		self._inner = BoxLayout(orientation='vertical',padding=2, 
-						spacing=2,size_hint=(None,None))
 		super(ScrollWidget,self).__init__(**kw)
+		self._inner = BoxLayout(orientation='vertical',padding=5, 
+						spacing=8,size_hint=(None,None))
 		self._inner.bind(
 				minimum_height=self._inner.setter('height'))
 		self._inner.bind(

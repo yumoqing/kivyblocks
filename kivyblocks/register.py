@@ -23,8 +23,10 @@ from .mapview import MapView
 from .chart2d import Chart2d
 from .message import Conform
 from .pagepanel import PagePanel
+from .markdown import Markdown
 
 r = Factory.register
+r('Markdown', Markdown)
 r('PagePanel', PagePanel)
 r('Conform', Conform)
 r('Chart2d', Chart2d)

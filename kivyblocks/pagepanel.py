@@ -232,7 +232,7 @@ sub-widget's description file format
 		return True
 
 	def pop(self, o, *args):
-		if len(self.sub_widgets) < 1:
+		if len(self.sub_widgets) < 2:
 			return
 		self.clear_widgets()
 		diss_w = self.sub_widgets[-1]
