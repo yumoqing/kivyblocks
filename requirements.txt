@@ -6,4 +6,3 @@ pillow
 requests
 plyer
 python-osc
-oscpy
