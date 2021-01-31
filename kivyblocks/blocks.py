@@ -219,7 +219,7 @@ class Blocks(EventDispatcher):
 			try:
 				hc = HttpClient()
 				resp=hc(url,method=method,params=params,files=files)
-				print('Blocks.py :resp=',resp)
+				# print('Blocks.py :resp=',resp)
 				return resp
 			except Exception as e:
 				if errback:
@@ -612,7 +612,6 @@ class Blocks(EventDispatcher):
 				if Window.fullscreen == True:
 					w = app.fs_widget
 					if w:
-						print('full screen ...............................')
 						return find_widget_by_id(id, w)
 			return None
 		ids = id.split('.')
