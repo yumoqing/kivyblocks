@@ -6,3 +6,5 @@ pillow
 requests
 plyer
 python-osc
+bs4
+lxml
