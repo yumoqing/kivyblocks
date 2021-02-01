@@ -23,8 +23,11 @@ from .chart2d import Chart2d
 from .message import Conform
 from .pagepanel import PagePanel
 from .markdown import Markdown
+from .custom_camera import CustomCamera, QrReader
 
 r = Factory.register
+r('CustomCamera', CustomCamera)
+r('QrReader', QrReader)
 r('Markdown', Markdown)
 r('PagePanel', PagePanel)
 r('Conform', Conform)

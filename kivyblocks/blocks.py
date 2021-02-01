@@ -366,9 +366,18 @@ class Blocks(EventDispatcher):
 		w.bind(**{event:f})
 		# Logger.info('Block: %s bind built', str(desc))
 	
+	def multipleAction(self, widget, desc, *args):
+		mydesc = {
+			'wid':desc['wid'],
+			'event':desc['event']
+		}
+		for a in desc['actions']:
+			new_desc = mydesc.copy()
+			new_desc.update(a)
+			self.unication(widget,new_desc, **args)
+
 	def uniaction(self,widget,desc, *args):
 		Logger.info('Block: uniaction() called, desc=%s', str(desc))
-			
 			
 		acttype = desc.get('actiontype')
 		if acttype=='blocks':
@@ -381,8 +390,30 @@ class Blocks(EventDispatcher):
 			return self.scriptAction(widget, desc, *args)
 		if acttype == 'method':
 			return self.methodAction(widget, desc, *args)
+		if acttype == 'event':
+			return self.eventAction(widget, desc, *args)
+		if acttype == 'multiple':
+			return self.MultipleAction(widget, desc, *args)
+
 		alert("actiontype(%s) invalid" % acttype,title='error')
 
+	def eventAction(self, widget, desc, *args):
+		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		event = desc.get('dispatch_event')
+		if not event:
+			Logger.info('Block: eventAction():desc(%s) miss dispatch_event',
+							str(desc))
+			return
+		params = desc.get('params',{})
+		d = self.getActionData(widget,desc)
+		if d:
+			params.update(d)
+		try:
+			target.dispatch(event, **params)
+		except Exception as e:
+			Logger.info(f'Block: eventAction():dispatch {event} error')
+			return
+			
 	def blocksAction(self,widget,desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
 		if target is None:
