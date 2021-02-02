@@ -371,6 +371,9 @@ class Blocks(EventDispatcher):
 			'wid':desc['wid'],
 			'event':desc['event']
 		}
+		if desc.get('conform'):
+			mydesc['conform'] = desc.get('conform')
+
 		for a in desc['actions']:
 			new_desc = mydesc.copy()
 			new_desc.update(a)
