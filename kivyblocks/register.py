@@ -1,3 +1,4 @@
+import kivy
 from kivy.utils import platform
 from .baseWidget import *
 from .tree import Tree, TextTree, PopupMenu
@@ -24,10 +25,13 @@ from .message import Conform
 from .pagepanel import PagePanel
 from .markdown import Markdown
 from .custom_camera import CustomCamera, QrReader
-from .camerawithmic import CameraWithMic, ScreenWithMic
+from .camerawithmic import CameraWithMic
+if kivy.platform in ['win','linux', 'macosx']:
+	from .camerawithmic import ScreenWithMic
 
 r = Factory.register
-r('ScreenWithMic', ScreenWithMic)
+if kivy.platform in ['win','linux', 'macosx']:
+	r('ScreenWithMic', ScreenWithMic)
 r('CameraWithMic', CameraWithMic)
 r('CustomCamera', CustomCamera)
 r('QrReader', QrReader)

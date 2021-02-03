@@ -190,11 +190,15 @@ class InputBox(BoxLayout):
 		self.input_widget = self.uidef['wclass'](**options)
 		if self.options.get('readonly'):
 			self.input_widget.disabled = True
+		if self.options.get('value'):
+			self.input_widget.setValue(self.options.get('value'))
+		elif self.options.get('default_value'):
+			self.input_widget.setValue(self.options.get('default_value'))
+
 		self.input_widget.widget_id = self.options['name']
 		self.add_widget(self.input_widget)
 		self.initflag = True
 		self.input_widget.bind(on_focus=self.on_focus)
-		self.input_widget.setValue(self.options.get('default',''))
 		self.dispatch('on_ready', self)
 			
 	def check(self):
@@ -338,15 +342,19 @@ class StrSearchForm(BoxLayout):
 	def __init__(self,img_url=None,**options):
 		self.name = options.get('name','search_string')
 		BoxLayout.__init__(self,orientation='horizontal',size_hint_y=None,height=CSize(3))
-		self.input_widget = TextInput(
+		self.input_widget = StrInput(
 				text='',
 				multiline=False,
 				allow_copy=True,
-				font_size=CSize(1),
+				halign='middle',
+				font_size=1,
 				size_hint_y=None,
-				height=CSize(3))
+				size_hint_x=1,
+				height=2)
 		self.add_widget(self.input_widget)
 		self.register_event_type('on_submit')
+		v = options.get('value',options.get('default_value',''))
+		self.input_widget.setValue(v)
 		self.input_widget.bind(on_text_validate=self.submit_input)
 
 	def getValue(self):
