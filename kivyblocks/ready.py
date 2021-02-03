@@ -10,12 +10,12 @@ desktopOSs=[
 	"macosx"
 ]
 
-class WidgetReady(EventDispatcher):
+class WidgetReady(object):
 	fullscreen = BooleanProperty(False)
-	_fullscreen_state = False
 
-	def __init__(self):
+	def __init__(self, **kw):
 		self.register_event_type('on_ready')
+		self._fullscreen_state = False
 		self._ready = False
 
 	def on_ready(self):

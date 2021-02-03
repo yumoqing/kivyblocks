@@ -648,11 +648,19 @@ class Blocks(EventDispatcher):
 					if w:
 						return find_widget_by_id(id, w)
 			return None
+
 		ids = id.split('.')
 		app = App.get_running_app()
-		if id.startswith('/self') or id.startswith('root'):
+		fid = ids[0]
+		if fid == '/self' or fid == 'root':
 			from_widget = app.root
 			ids[0] = 'self'
+		if fid == 'Window':
+			from_widget == Window
+			ids[0] = 'self'
+		if fid == 'app':
+			return app
+
 		if from_widget is None:
 			from_widget = app.root
 		for id in ids:

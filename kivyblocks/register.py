@@ -24,8 +24,11 @@ from .message import Conform
 from .pagepanel import PagePanel
 from .markdown import Markdown
 from .custom_camera import CustomCamera, QrReader
+from .camerawithmic import CameraWithMic, ScreenWithMic
 
 r = Factory.register
+r('ScreenWithMic', ScreenWithMic)
+r('CameraWithMic', CameraWithMic)
 r('CustomCamera', CustomCamera)
 r('QrReader', QrReader)
 r('Markdown', Markdown)
