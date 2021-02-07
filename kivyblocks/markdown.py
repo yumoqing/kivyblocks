@@ -25,6 +25,12 @@ description file format
 		self.bind(source=self.load_text)
 		if self.source:
 			Clock.schedule_once(self.load_text, 0.3)
+		self.bind(size=self.setChildMinWidth)
+
+	def setChildMinWidth(self, *args):
+		print('size changed')
+		for c in self._inner.children:
+			c.width = self.width
 
 	def load_text(self, *args):
 		print('source fired, hahaha', *args)
@@ -52,6 +58,7 @@ description file format
 				"text":txt,
 				"size_hint_x":None,
 				"width":self.width,
+				"minimum_width":self.width,
 				"size_hint_y":None,
 				"markup":True,
 				"wrap":True,
@@ -95,6 +102,7 @@ description file format
 				"wrap":True,
 				"size_hint_x":None,
 				"width":self.width,
+				"minimum_width":self.width,
 				"markup":True,
 				"valign":"middle",
 				"halign":"left"

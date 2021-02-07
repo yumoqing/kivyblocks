@@ -627,6 +627,7 @@ class Blocks(EventDispatcher):
 	
 	@classmethod
 	def getWidgetById(self,id,from_widget=None):
+		print('getWidgetById(%s,%s) ...' % (id, from_widget))
 		def find_widget_by_id(id, from_widget):
 			if id=='self':
 				return from_widget
@@ -641,12 +642,6 @@ class Blocks(EventDispatcher):
 				ret = find_widget_by_id(id,from_widget=c)
 				if ret:
 					return ret
-			app = App.get_running_app()
-			if from_widget == app.root:
-				if Window.fullscreen == True:
-					w = app.fs_widget
-					if w:
-						return find_widget_by_id(id, w)
 			return None
 
 		ids = id.split('.')
@@ -654,18 +649,29 @@ class Blocks(EventDispatcher):
 		fid = ids[0]
 		if fid == '/self' or fid == 'root':
 			from_widget = app.root
-			ids[0] = 'self'
+			if len(ids) == 1:
+				return from_widget
+			ids = ids[1:]
 		if fid == 'Window':
 			from_widget == Window
-			ids[0] = 'self'
+			if len(ids) == 1:
+				return from_widget
+			ids = ids[1:]
 		if fid == 'app':
 			return app
 
 		if from_widget is None:
 			from_widget = app.root
 		for id in ids:
+			print('finding', id)
 			w = find_widget_by_id(id,from_widget=from_widget)
+			if w is None \
+					and id == ids[0] \
+					and Window.fullscreen == True \
+					and app.root != app.fs_widget:
+				w = find_widget_by_id(id, app.fs_widget)
 			if w is None:
+				print(id, 'not found ....')
 				return None
 			from_widget = w
 		return w
