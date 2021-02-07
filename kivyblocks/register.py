@@ -27,12 +27,12 @@ from .markdown import Markdown
 from .custom_camera import CustomCamera, QrReader
 if kivy.platform in ['win','linux', 'macosx']:
 	from .camerawithmic import ScreenWithMic
-	from .camerawithmic import CameraWithMic
+from .camerawithmic import CameraWithMic
 
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:
 	r('ScreenWithMic', ScreenWithMic)
-	r('CameraWithMic', CameraWithMic)
+r('CameraWithMic', CameraWithMic)
 r('CustomCamera', CustomCamera)
 r('QrReader', QrReader)
 r('Markdown', Markdown)
