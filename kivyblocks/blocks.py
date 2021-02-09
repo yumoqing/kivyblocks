@@ -572,8 +572,10 @@ class Blocks(EventDispatcher):
 		}
 		"""
 		def doit(desc):
+			if isinstance(desc,DictObject):
+				desc = desc.to_dict()
 			if not isinstance(desc,dict):
-				Logger.info('Block: desc must be a dict object',
+				Logger.info('Block: desc(%s) must be a dict object(%s)',
 							desc,type(desc))
 				return None
 

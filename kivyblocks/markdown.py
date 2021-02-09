@@ -31,6 +31,14 @@ description file format
 		print('size changed')
 		for c in self._inner.children:
 			c.width = self.width
+			if isinstance(c, Factory.Text):
+				_, h = c.get_wraped_size()
+				clen = CSize(1)
+				if not h or h < clen:
+					c.height = clen
+				else:
+					c.height = h
+		self._inner.do_layout()
 
 	def load_text(self, *args):
 		print('source fired, hahaha', *args)
@@ -51,14 +59,13 @@ description file format
 			l = ''.join([i for i in l if i != '\r'])
 			self.parse_line(l)
 
-	def parse_title(self,txt, level):
+	def parse_title(self, txt, level):
 		w = Factory.Blocks().widgetBuild({
 			"widgettype":f"Title{level}",
 			"options":{
 				"text":txt,
 				"size_hint_x":None,
 				"width":self.width,
-				"minimum_width":self.width,
 				"size_hint_y":None,
 				"markup":True,
 				"wrap":True,
@@ -66,12 +73,14 @@ description file format
 				"valign":"middle"
 			}
 		})
-		_,h = w.get_wraped_size()
+		if not w:
+			return
+		w1,h1 = w.get_wraped_size()
 		clen = CSize(1)
-		if h is None or h < clen:
-			h = clen
-		w.height = h
-		print(w,h,w.height)
+		if h1 is None or h1 < clen:
+			h1 = clen
+		w.height = h1
+		print(w, w1, h1, w.height)
 		w.bind(on_ref_press=self.open_new_md)
 		self.add_widget(w)
 		
@@ -102,12 +111,13 @@ description file format
 				"wrap":True,
 				"size_hint_x":None,
 				"width":self.width,
-				"minimum_width":self.width,
 				"markup":True,
 				"valign":"middle",
 				"halign":"left"
 			}
 		})
+		if not w:
+			return
 		_,h = w.get_wraped_size()
 		clen = CSize(1)
 		if h is None or h < clen:

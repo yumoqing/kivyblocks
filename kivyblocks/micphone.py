@@ -6,13 +6,14 @@ import wave
 CHUNK = 1024
 CHANNELS = 2
 FORMAT = pyaudio.paInt16
-rate = 48000
+samplerate = 48000
 
-class Micphone:
+class Micphone(EventDispatcher):
 	channels = NumericProperty(2)
-	rate = NumericProperty(48000)
+	samplerate = NumericProperty(48000)
 	fps = NumericProperty(1/60)
 	def __init__(self, **kw):
+		super(Micphone, self).__init__(**kw)
 		self.chunk = CHUNK
 		self.format = pyaudio.Int16
 		self.chunk_buffer = []
@@ -21,21 +22,29 @@ class Micphone:
 		self._audio = puaudio.PyAudio()
 		self._mic = p.open(format=self.format,
 					channels=self.channels,
-					rate=self.rate,
+					rate=self.samplerate,
 					input=True,
 					frames_per_buffer=self.chunk)
 		self.sampe_size = self.audio.get_sample_size(self.format)
 		self.register_event_type('on_fps')
+		self.register_event_type('on_start')
+		self.register_event_type('on_end')
 		self.fps_task = None
 
 	def on_fps(self, d):
 		print('on_fps fired')
 
+	def on_start(self):
+		print('on_start fired')
+
+	def on_end(self):
+		print('on_end fired')
+
 	def audio_profile(self):	
 		return {
 			'channels':self.channels,
 			'sample_size':self.sample_size,
-			'rate':self.rate
+			'sample_rate':self.samplerate
 		}
 
 	def get_frames(self, *args):
@@ -52,6 +61,7 @@ class Micphone:
 	def start(self, *args):
 		self.recording = True
 		Background(self._record)
+		self.dispatch('on_start')
 		self.fps_task = Clock.schedule_interval(self.get_frames, self.fps)
 
 	def _record(self):
@@ -65,6 +75,7 @@ class Micphone:
 	def stop(self, *args):
 		self.recording = False
 		self.fps_task.cancel()
+		self.dispatch('on_end')
 
 	def close(self):
 		self._mic.stop_stream()

@@ -16,6 +16,7 @@ from .baseWidget import PressableLabel
 from .color_definitions import getColors
 from .bgcolorbehavior import BGColorBehavior
 from .utils import alert,absurl
+from .threadcall import HttpClient
 
 class EmptyBox(Label):
 	def __init__(self,size_cnt=1):
@@ -323,7 +324,7 @@ class Tree(BGColorBehavior, ScrollWidget):
 		self.NodeKlass = klass
 
 	def getUrlData(self,callback,kv=None):
-		hc = App.get_running_app().hc
+		hc = HttpClient()
 		params = self.options.get('params',{}).copy()
 		if not kv is None:
 			for k,v in kv.items():
