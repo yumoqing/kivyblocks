@@ -1,5 +1,6 @@
 from threading import Thread, Lock
 import pyaudio
+from kivy.event import EventDispatcher
 from kivy.properties import NumericProperty, ObjectProperty
 from kivy.clock import Clock
 import wave
