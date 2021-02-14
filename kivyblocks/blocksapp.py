@@ -123,6 +123,8 @@ class BlocksApp(App):
 			device_id = plyer.uniqueid.id
 		except:
 			pass
+		if isinstance(device,bytes):
+			device_id = device.decode('utf-8')
 
 		d = {
 			'device_id': device_id
