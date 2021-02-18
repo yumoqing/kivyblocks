@@ -1,5 +1,8 @@
 import kivy
 from kivy.utils import platform
+
+from appPublic.registerfunction import RegisterFunction
+
 from .baseWidget import *
 from .tree import Tree, TextTree, PopupMenu
 from .toolbar import ToolPage, Toolbar
@@ -103,3 +106,27 @@ r('ToggleItems',ToggleItems)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)
 	r('AWebView',AWebView)
+
+
+def register_widget(name, klass):
+	try:
+		Factory.regiter(name, klass)
+	except:
+		Logger.info(f'Plugin : register_widget():{name} register error')
+
+def register_registerfunction(name, func):
+	rf = RegisterFunction()
+	try:
+		rf.register(name, func)
+	except Exception as e:
+		Logger.info(f'Plugin : register_registerfunction():{name} register error({e})')
+		print_exc()
+
+def register_blocks(name, value):
+	b = Factory.Blocks()
+	try:
+		b.register_widget(name, value)
+	except:
+		Logger.info(f'plugin : register_blocks():{name} register error')
+
+

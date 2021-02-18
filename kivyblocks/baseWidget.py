@@ -153,7 +153,10 @@ class Text(Label):
 		kwargs = kw.copy()
 		config = getConfig()
 		self.wrap = wrap
-		kwargs.update(fontsize)
+		if kwargs.get('font_size') and texttype=='text':
+			pass
+		else:
+			kwargs.update(fontsize)
 		super().__init__(**kwargs)
 		if self._i18n:
 			self.i18n = I18n()

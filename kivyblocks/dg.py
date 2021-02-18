@@ -23,6 +23,29 @@ from .ready import WidgetReady
 from .toolbar import Toolbar
 from .bgcolorbehavior import BGColorBehavior
 
+def field_widget(desc, rec):
+	uitype = desc.get('uitype', 'str')
+	if uitype in [ 'str' 'date', 'time', 'timestamp' ]:
+		return BLabel(text = str(desc['value']), 
+					font_size=CSize(1),wrap=True,
+					halign='left', valign='middle'
+			)
+	if uitype in [ 'long', 'int','integer' ]:
+		return BLabel(text=str(desc['value']),
+					font_size=CSize(1), wrap=True,
+					halign='right', valign='middle'
+			)
+	if uitype == 'float':
+		f = '%%.0%df' % desc.get('dec',2)
+		return BLabel(text=f % float(desc['value']),
+					font_size=CSize(1), wrap=True,
+					halign='right', valign='middle'
+			)
+	return BLabel(text = str(desc['value']), 
+				font_size=CSize(1),wrap=True,
+				halign='left', valign='middle'
+		)
+
 class BLabel(ButtonBehavior, Text):
 	def __init__(self, **kw):
 		ButtonBehavior.__init__(self)
@@ -59,14 +82,11 @@ class Cell(BoxLayout):
 				return
 		if desc['header']:
 			bl = Text(i18n=True, text=str(desc['value']),
-				font_size=CSize(1),
-				halign='left'
+				font_size=CSize(1),wrap=True,
+				halign='left', valign='middle'
 			)
 		else:
-			bl = BLabel(text = str(desc['value']), 
-					font_size=CSize(1),
-					halign='left'
-			)
+			bl = field_widget(desc,self.row.row_data) 
 		self.add_widget(bl)
 		bl.bind(on_press=self.cell_press)
 
@@ -156,9 +176,11 @@ class Body(ScrollWidget):
 		self.clear_widgets()
 
 	def delRowById(self,id):
-		row = self.idRow[id]
-		self.remove_widget(row)
-		del self.idRow[id]
+		row = self.idRow.get(id)
+		if row:
+			self.remove_widget(row)
+		if self.idRow.get(id):
+			del self.idRow[id]
 
 	def getRowData(self,rowid):
 		return self.idRow[rowid].row_data
@@ -382,11 +404,12 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 			self.toolbar = Toolbar(**tb)
 
 	def on_selected(self,row):
-		print("DataGrid():on_selected fire", self.widget_id or 'not widget_id seted')
+		print("DataGrid():on_selected fire")
 
-	def loadData(self,**kwargs):
-		page = kwargs.get('page',1)
-		self.dataloader.do_search(None,{})
+	def loadData(self,*args, **kwargs):
+		print('args=', args, 'kwargs=',kwargs)
+		kwargs['page'] = 1
+		self.dataloader.do_search(None,kwargs)
 
 	def createDataGridPart(self):
 		self.freeze_part = None

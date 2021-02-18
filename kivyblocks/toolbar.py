@@ -10,6 +10,7 @@ from kivy.clock import Clock
 from kivy.factory import Factory
 
 from appPublic.dictObject import DictObject
+from appPublic.registerfunction import RegisterFunction
 
 from .widgetExt.scrollwidget import ScrollWidget
 from .utils import *
@@ -222,9 +223,18 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		t = self.get_tool_by_name(name)
 		w = self.content_widgets.get(name)
 		if w is None or t.fresh:
-			w = self.build_widget(t.url)
-			self.content_widgets[name] = w
+			if t.url:
+				w = self.build_widget(t.url)
+				self.content_widgets[name] = w
+				return
+			if t.rfname:
+				rf = RegisterFunction()
+				f = rf.get(t.rfname)
+				if f:
+					return f()
+			return
 		if w:
+			print('toolbar.py: Use old widget')
 			self.content.clear_widgets()
 			self.content.add_widget(w)
 

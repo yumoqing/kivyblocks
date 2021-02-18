@@ -310,7 +310,20 @@ class Blocks(EventDispatcher):
 			raise NotExistsObject(widgetClass)
 
 		if desc.get('id'):
-			widget.widget_id = desc.get('id')
+			id = desc.get('id')
+			if id.startswith('app.'):
+				app = App.get_running_app()
+				id = id[4:]
+				setattr(app, id, widget)
+			if id.startswith('root.'):
+				app = App.get_running_app()
+				id = id[5:]
+				setattr(app.root, id, widget)
+				
+			if '.' in id:
+				Logger.info('widget id(%s) can not contain "."', id)
+			else:
+				widget.widget_id = id
 		
 		widget.build_desc = desc
 		self.build_attributes(widget,desc)
@@ -377,7 +390,7 @@ class Blocks(EventDispatcher):
 		for a in desc['actions']:
 			new_desc = mydesc.copy()
 			new_desc.update(a)
-			self.unication(widget,new_desc, **args)
+			self.uniaction(widget,new_desc, *args)
 
 	def uniaction(self,widget,desc, *args):
 		Logger.info('Block: uniaction() called, desc=%s', str(desc))
@@ -396,7 +409,7 @@ class Blocks(EventDispatcher):
 		if acttype == 'event':
 			return self.eventAction(widget, desc, *args)
 		if acttype == 'multiple':
-			return self.MultipleAction(widget, desc, *args)
+			return self.multipleAction(widget, desc, *args)
 
 		alert("actiontype(%s) invalid" % acttype,title='error')
 
