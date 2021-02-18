@@ -1,4 +1,5 @@
 import time
+import ujson as json
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
@@ -14,6 +15,7 @@ from kivy.factory import Factory
 from appPublic.dictObject import DictObject
 from appPublic.timecost import TimeCost
 from appPublic.uniqueID import getID
+from appPublic.myTE import string_template_render
 
 from .utils import CSize, setSizeOptions, loading, loaded, absurl, alert
 from .baseWidget import Text
@@ -24,7 +26,20 @@ from .toolbar import Toolbar
 from .bgcolorbehavior import BGColorBehavior
 
 def field_widget(desc, rec):
+	viewer = desc.get('viewer')
+	if viewer:
+		if not isinstance(viewer,'str'):
+			viewer = json.dumps(viewer)
+		rendered = string_template_render(desc.get('viewer'), rec)
+		dic = json.loads(rendered)
+		print('field_widget(), dic=', dic)
+		if dic is None:
+			return None
+		return Factory.Blocks(dic)
+
 	uitype = desc.get('uitype', 'str')
+	if uitype is None:
+		uitype = desc.get('datatype')
 	if uitype in [ 'str' 'date', 'time', 'timestamp' ]:
 		return BLabel(text = str(desc['value']), 
 					font_size=CSize(1),wrap=True,
@@ -41,10 +56,12 @@ def field_widget(desc, rec):
 					font_size=CSize(1), wrap=True,
 					halign='right', valign='middle'
 			)
+	
 	return BLabel(text = str(desc['value']), 
 				font_size=CSize(1),wrap=True,
 				halign='left', valign='middle'
 		)
+
 
 class BLabel(ButtonBehavior, Text):
 	def __init__(self, **kw):
@@ -87,8 +104,9 @@ class Cell(BoxLayout):
 			)
 		else:
 			bl = field_widget(desc,self.row.row_data) 
-		self.add_widget(bl)
-		bl.bind(on_press=self.cell_press)
+		if bl:
+			self.add_widget(bl)
+			bl.bind(on_press=self.cell_press)
 
 	def cell_press(self,obj):
 		self.row.selected()
@@ -150,7 +168,9 @@ class Header(WidgetReady, BGColorBehavior, ScrollWidget):
 
 	def init(self,t):
 		rd = [ f.copy() for f in self.part.rowdesc ]
-		[ f.update({'value':self.part.fields[i]['label']}) for i,f in enumerate(rd) ]
+		[ f.update({'value':self.part.fields[i].get('label', \
+							self.part.fields[i].get('name'))}) \
+							for i,f in enumerate(rd) ]
 		self.header = Row(self.part,rd,header=True)
 		self.add_widget(self.header)
 		self.height = self.header.height

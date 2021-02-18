@@ -53,10 +53,29 @@ description file format
 
 	def update(self, o, text):
 		print('text=',text, type(text))
+		text = ''.join(text.split('\r'))
+		"""
+		org_boxs = re.findall(r"\n```\n(.*)\n```\n", text)
+		org_boxs_widget = [ \
+				Factory.Blocks().widgetBuild({ \
+						"widgettype":f"Title{level}", \
+						"options":{ \
+							"text":txt, \
+							"size_hint_x":None, \
+							"width":self.width, \
+							"size_hint_y":None, \
+							"markup":True, \
+							"bgcolor":self.options.source_bgcolor, \
+							"wrap":True, \
+							"halign":"left", \
+							"valign":"middle" \
+						} \
+					}) for t in org_boxs ]
+		other_texts = re.split(r"\n```\n(.*)\n```\n", text)
+		"""
 		if not text:
 			return
 		for l in text.split('\n'):
-			l = ''.join([i for i in l if i != '\r'])
 			self.parse_line(l)
 
 	def parse_title(self, txt, level):
