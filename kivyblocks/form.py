@@ -260,6 +260,29 @@ def defaultToolbar():
 	}
 
 class Form(BGColorBehavior, BoxLayout):
+	"""
+	Form format
+	{
+		"widgettype":"Form",
+		"options":{
+			"params":{parameters will using when using data_url and data_rfname}
+			"data_url":"get data from, if null, not data show at beginning",
+			"data_rfname":"get data from a register function",
+			"data_target":"a  widget_id name to get data from",
+			"submit_url":"url where the submit data go to",
+			"submit_rfname":"register function to received the submited data"
+			"submit_target":"a widget to accepted the submited data"
+			"input_width":"width include label and input"
+			"label_width":"label width of the input"
+			"fields":[
+				{
+					"name":"field name,match the data record's field name",
+					"label":"data label",
+					"datatype":"data type, see data type list",
+					"uitype":"data show type, see uitype list"
+				}
+			]
+
 	def __init__(self, **options):
 		self.options = options
 		BoxLayout.__init__(self, orientation='vertical')
@@ -276,13 +299,15 @@ class Form(BGColorBehavior, BoxLayout):
 		self.init()
 		self.register_event_type('on_submit')
 
+	def on_size(self, *args):
+		pass
+
 	def init(self):
 		self.toolbar = Toolbar(**self.options.get('toolbar',defaultToolbar()))
 		self.fsc = VResponsiveLayout(
 						self.inputwidth,
 						self.cols 
 		)
-		print('box_width=%d,cols=%d' % (self.inputwidth, self.cols))
 		self.add_widget(self.toolbar)
 		self.add_widget(self.fsc)
 		self.fieldWidgets=[]
