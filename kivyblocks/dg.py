@@ -1,5 +1,5 @@
 import time
-import ujson as json
+import json
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
@@ -264,11 +264,45 @@ class DataGridPart(WidgetReady, BoxLayout):
 	def addRow(self,id, data):
 		return self.body.addRow(id, data)
 
+
 class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
+	"""
+	DataGrid data format:
+	{
+		"widgettype":"DataGrid",
+		"dataloader":{
+			"page":1,
+			"rows":60,
+			"dataurl":"eeee",
+			"params":{
+			}
+		},
+		"fields":[
+			{
+				"name":"field1",
+				"label":"Field1",
+				"datatype":"str",
+				"uitype":"code",
+				"value_field":,
+				"text_field":
+			},
+			{
+				"name":"field2",
+				"label":"Field2",
+				"viewer":{
+					block dic
+				}
+			}
+			...
+		]
+		"binds":[
+		]
+	}
+	"""
 	row_selected = BooleanProperty(False)
 	def __init__(self,color_level=-1,radius=[],**options):
 		kw = DictObject()
-		kw = setSizeOptions(options,kw)
+		kw = setSizeOptions(options, kw)
 		kw.orientation = 'vertical'
 		self.color_level = color_level
 		self.radius = radius
