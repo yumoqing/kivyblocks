@@ -20,7 +20,9 @@ form options
 {
 	"toolbar":
 	"dataloader":{
-		"dataurl":
+		"dataurl":"first"
+		"datatarget":"second",
+		"datarfname":"third"
 		"params":
 		"method"
 	}
@@ -260,29 +262,6 @@ def defaultToolbar():
 	}
 
 class Form(BGColorBehavior, BoxLayout):
-	"""
-	Form format
-	{
-		"widgettype":"Form",
-		"options":{
-			"params":{parameters will using when using data_url and data_rfname}
-			"data_url":"get data from, if null, not data show at beginning",
-			"data_rfname":"get data from a register function",
-			"data_target":"a  widget_id name to get data from",
-			"submit_url":"url where the submit data go to",
-			"submit_rfname":"register function to received the submited data"
-			"submit_target":"a widget to accepted the submited data"
-			"input_width":"width include label and input"
-			"label_width":"label width of the input"
-			"fields":[
-				{
-					"name":"field name,match the data record's field name",
-					"label":"data label",
-					"datatype":"data type, see data type list",
-					"uitype":"data show type, see uitype list"
-				}
-			]
-
 	def __init__(self, **options):
 		self.options = options
 		BoxLayout.__init__(self, orientation='vertical')
