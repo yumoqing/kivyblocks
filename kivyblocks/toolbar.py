@@ -222,19 +222,22 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		name = o.getValue()
 		t = self.get_tool_by_name(name)
 		w = self.content_widgets.get(name)
+		self.content.clear_widgets()
 		if w is None or t.fresh:
 			if t.url:
 				w = self.build_widget(t.url)
 				self.content_widgets[name] = w
+				self.content.add_widget(w)
 				return
 			if t.rfname:
 				rf = RegisterFunction()
 				f = rf.get(t.rfname)
 				if f:
-					return f()
+					r = f()
+					if isinstance(r,Widget):
+						self.content.add_widget(r)
 			return
 		if w:
 			print('toolbar.py: Use old widget')
-			self.content.clear_widgets()
 			self.content.add_widget(w)
 

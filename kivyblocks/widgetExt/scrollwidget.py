@@ -6,6 +6,7 @@ from kivy.graphics import Color, Ellipse,Rectangle
 class ScrollWidget(ScrollView):
 	def __init__(self,**kw):
 		super(ScrollWidget,self).__init__(**kw)
+		self.sized_widgets = []
 		self._inner = BoxLayout(orientation='vertical',padding=5, 
 						spacing=8,size_hint=(None,None))
 		self._inner.bind(
@@ -13,15 +14,30 @@ class ScrollWidget(ScrollView):
 		self._inner.bind(
 				minimum_width=self._inner.setter('width'))
 		super(ScrollWidget,self).add_widget(self._inner)
-	
+		self.bind(size=self.change_all_sized_widgets)
+
+	def change_all_sized_widgets(self, *args):
+		for w in self.sized_widgets:
+			self.change_widget_width(w)
+
+	def change_widget_width(self, w):
+		w.size_hint_x = None
+		w.width = self.width * w.org_size_hint_x
+
 	def add_widget(self,widget,**kw):
+		if widget.size_hint_x:
+			widget.org_size_hint_x = widget.size_hint_x
+			self.change_widget_width(widget)
+			self.sized_widgets.append(widget)
 		a = self._inner.add_widget(widget,**kw)
 		return a
 
 	def clear_widgets(self,**kw):
+		self.sized_widgets = []
 		a = self._inner.clear_widgets(**kw)
 
 	def remove_widget(self,widget,**kw):
+		self.sized_widgets = [i for i in self.sized_widgets if i != widget]
 		a = self._inner.remove_widget(widget,**kw)
 		return a
 
