@@ -93,7 +93,6 @@ class Cell(BoxLayout):
 				l['row'] = self.row
 				viewer = blocks.eval(viewer,l)
 			if isinstance(viewer,dict):
-				print('viewer = ', viewer)
 				w = blocks.widgetBuild(viewer)
 				self.add_widget(w)
 				return

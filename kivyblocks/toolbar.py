@@ -5,6 +5,7 @@ from kivy.uix.image import AsyncImage
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
+from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.factory import Factory
@@ -52,7 +53,6 @@ class Toolbar(BoxLayout):
 		self.tool_widgets={}
 		BoxLayout.__init__(self, **opts)
 		self.register_event_type('on_press')
-		self.size_hint = (1,None)
 		first = True
 		subs_desc = []
 		for opt in self.tools:
@@ -92,11 +92,11 @@ class Toolbar(BoxLayout):
 				color_level=self.color_level,
 				radius=self.radius,
 				unit_size=self.img_size + self.text_size,
-				items_desc=subs_desc)
+				items_desc=subs_desc,
+				orientation=opts.get('orientation','horizontal')
+				)
 		for ti in self.toggle_items.children:
 			ti.widget_id = ti.user_data
-		self.height = CSize(self.img_size + self.text_size) + 10
-		self.size_hint_y = None
 		self.toggle_items.bind(on_press=self.tool_press)
 		self.add_widget(self.toggle_items)
 
@@ -113,14 +113,16 @@ Toolpage options
 	text_size:0.7,
 	tool_at:"left","right","top","bottom",
 	color_level:0,
-	show_name:
+	radius:
+	"show_name":"default open tool's name"
 	tools:[
 		{
 			"name":"myid",
 			"img_src":"gggggg",
-			"text":"gggggg"
-			"flush":true
+			"label":"gggggg"
+			"fresh":true
 			"url":"ggggggggg"
+			"rfname":"register_function_name"
 		},
 		...
 	]
@@ -128,16 +130,23 @@ Toolpage options
 """
 class ToolPage(BGColorBehavior, BoxLayout):
 	def __init__(self,color_level=-1,radius=[],
+					toolbar_size=None,
+					img_size=1.5,
+					text_size=0.7,
 					show_name=None, tool_at='top', **opts):
 		self.opts = DictObject(**opts)
 		if tool_at in [ 'top','bottom']:
 			orient = 'vertical'
 		else:
 			orient = 'horizontal'
+		if not toolbar_size:
+			toolbar_size = img_size + text_size + 0.3
+		self.toolbar_size = toolbar_size
+		self.img_size = img_size
+		self.text_size = text_size
 		names = [i.name for i in self.opts.tools]
-
 		if not show_name or \
-			not show_name not in names:
+			not show_name in names:
 			show_name = self.opts.tools[0].name
 			
 		self.content_widgets = {}
@@ -152,9 +161,13 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		self.content = None
 		self.toolbar = None
 		self.init()
+		print('Toolpage():self.show_name=', self.show_name)
 		Clock.schedule_once(self.show_page, 0.5)
 	
 	def show_page(self, *args):
+		print('toolbar=',self.toolbar.width,self.toolbar.height, \
+				'toggleitems=',self.toolbar.toggle_items.width, \
+					self.toolbar.toggle_items.height)
 		toggle_items = self.toolbar.toggle_items
 		for c in toggle_items.children:
 			cvalue = c.getValue()
@@ -182,15 +195,17 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		if self.tool_at in ['top','bottom']:
 			opts['size_hint_x'] = 1 
 			opts['size_hint_y'] = None
-			opts['height'] = CSize(self.opts.img_size + \
-							self.opts.text_size) + 10
+			opts['height'] = CSize(self.toolbar_size)
+			opts['orientation'] = 'horizontal'
 		else:
 			opts['size_hint_y'] = 1
 			opts['size_hint_x'] = None
-			opts['width'] = CSize(self.opts.img_size + \
-							self.opts.text_size) + 10
+			opts['width'] = CSize(self.toolbar_size)
+			opts['orientation'] = 'vertical'
 		self.toolbar = Toolbar(color_level=self.color_level,
 						radius=self.sub_radius,
+						img_size=self.img_size,
+						text_size=self.text_size,
 						**opts)
 		if self.tool_at in ['top','left']:
 			self.add_widget(self.toolbar)
