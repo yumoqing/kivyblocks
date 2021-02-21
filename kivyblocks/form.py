@@ -382,7 +382,6 @@ class StrSearchForm(BoxLayout):
 				text='',
 				multiline=False,
 				allow_copy=True,
-				halign='middle',
 				font_size=1,
 				size_hint_y=None,
 				size_hint_x=1,
