@@ -14,6 +14,8 @@ from .i18n import I18n
 from .toolbar import Toolbar
 from .color_definitions import getColors
 from .bgcolorbehavior import BGColorBehavior
+from .dataloader import DataGraber
+from .ready import WidgetReady
 
 """
 form options
@@ -94,11 +96,11 @@ uitypes = {
 		"wclass":SelectInput,
 	},
 	"text":{
-		"orientation":"vertical",
+		"orientation":"horizontal",
 		"wclass":StrInput,
 		"options":{
 			"multiline":True,
-			"height":9,
+			"height":4,
 		}
 	},
 	"teleno":{
@@ -114,11 +116,16 @@ class InputBox(BoxLayout):
 	def __init__(self, form, **options):
 		self.form = form
 		self.options = options
-		self.uitype = options.get('uitype','string')
+		self.uitype = options.get('uitype',options.get('datatype','string'))
 		self.uidef = uitypes[self.uitype]
 		orientation = self.uidef['orientation']
 		width = self.form.inputwidth
 		height = self.form.inputheight
+		if self.uitype == 'text':
+			if not options.get('height'):
+				self.options['height'] = 4
+			height = self.options.get('height',4)
+
 		self.labelwidth = self.form.options['labelwidth']
 		kwargs = {
 			"orientation":orientation,
@@ -138,7 +145,6 @@ class InputBox(BoxLayout):
 		self.bind(size=self.setSize,
 					pos=self.setSize)
 		self.register_event_type("on_datainput")
-		self.register_event_type("on_ready")
 
 	def on_datainput(self,o,v=None):
 		print('on_datainput fired ...',o,v)
@@ -150,7 +156,7 @@ class InputBox(BoxLayout):
 		opts = {
 			"orientation":"horizontal",
 			"size_hint_y":None,
-			"height":CSize(3)
+			"height":CSize(2)
 		}
 		if self.labelwidth<=1:
 			opts['size_hint_x'] = self.labelwidth
@@ -166,10 +172,6 @@ class InputBox(BoxLayout):
 			"i18n":True,
 			"text":label,
 			"font_size":CSize(1),
-			"size_hint_x":None,
-			"width":CSize(len(label)),
-			"size_hint_y":None,
-			"height":CSize(3)
 		}
 		self.labeltext = Text(**kwargs)
 		bl.add_widget(self.labeltext)
@@ -184,11 +186,12 @@ class InputBox(BoxLayout):
 		options = self.uidef.get('options',{}).copy()
 		options.update(self.options.get('uiparams',{}))
 		options['allow_copy'] = True
-		options['width'] = options.get('width',20)
+		options['width'] = options.get('width',1)
 		options['height'] = options.get('height',1)
-		if self.options.get('tip'):
-			options['hint_text'] = i18n(self.options.get('tip'))
+		if self.options.get('hint_text'):
+			options['hint_text'] = i18n(self.options.get('hint_text'))
 
+		Logger.info('Form: uitype=%s', self.uitype)
 		self.input_widget = self.uidef['wclass'](**options)
 		if self.options.get('readonly'):
 			self.input_widget.disabled = True
@@ -201,8 +204,7 @@ class InputBox(BoxLayout):
 		self.add_widget(self.input_widget)
 		self.initflag = True
 		self.input_widget.bind(on_focus=self.on_focus)
-		self.dispatch('on_ready', self)
-			
+
 	def check(self):
 		d = self.getValue()
 		v = d.get(self.options.get('name'))
@@ -213,9 +215,6 @@ class InputBox(BoxLayout):
 			return False
 
 		return True
-
-	def on_ready(self, obj):
-		Logger.info('kivyblocks: Form input ready')
 
 	def clear(self):
 		self.input_widget.setValue('')
@@ -244,8 +243,8 @@ class InputBox(BoxLayout):
 
 def defaultToolbar():
 	return {
-		"img_size":2,
-		"text_size":1,
+		"img_size":1.5,
+		"text_size":0.7,
 		"tools":[
 			{
 				"name":"__submit",
@@ -261,7 +260,7 @@ def defaultToolbar():
 
 	}
 
-class Form(BGColorBehavior, BoxLayout):
+class Form(BGColorBehavior, WidgetReady, BoxLayout):
 	def __init__(self, **options):
 		self.options = options
 		BoxLayout.__init__(self, orientation='vertical')
@@ -269,6 +268,7 @@ class Form(BGColorBehavior, BoxLayout):
 		BGColorBehavior.__init__(self,
 			color_level=self.options.get('color_level',-1),
 			radius=self.options.get('radius',[]))
+		WidgetReady.__init__(self)
 		self.readiedInput = 0
 		self.cols = self.options_cols = self.options.get('cols',1)
 		if isHandHold() and Window.width < Window.height:
@@ -282,7 +282,28 @@ class Form(BGColorBehavior, BoxLayout):
 		pass
 
 	def init(self):
-		self.toolbar = Toolbar(**self.options.get('toolbar',defaultToolbar()))
+		desc = defaultToolbar()
+		desc1 = self.options.get('toolbar')
+		if desc1:
+			tools = desc['tools'] + desc1['tools']
+			desc1['tools'] = tools
+			desc = desc1
+		if self.options.get('submit'):
+			kw = self.options.get('submit').copy()
+			if kw.get('name'):
+				del kw['name']
+			for t in desc['tools']:
+				if t['name'] == '__submit':
+					t.update(kw)
+		if self.options.get('clear'):
+			kw = self.options.get('clear').copy()
+			if kw.get('name'):
+				del kw['name']
+			for t in desc['tools']:
+				if t['name'] == '__clear':
+					t.update(kw)
+			
+		self.toolbar = Toolbar(**desc)
 		self.fsc = VResponsiveLayout(
 						self.inputwidth,
 						self.cols 
@@ -299,7 +320,12 @@ class Form(BGColorBehavior, BoxLayout):
 		wid.bind(on_press=self.on_submit_button)
 		wid = Factory.Blocks.getWidgetById('__clear',from_widget=self)
 		wid.bind(on_press=self.on_clear_button)
-
+		if self.options.get('dataloader'):
+			self.dataloader = DataGraber(**self.options['dataloader'])
+			d = self.dataloader.load()
+			if d:
+				self.setValue(d)
+			
 	def makeInputLink(self,o,v=None):
 		self.readiedInput += 1
 		if self.readiedInput >= len(self.options['fields']):
@@ -308,6 +334,12 @@ class Form(BGColorBehavior, BoxLayout):
 				p.input_widget.focus_next = w.input_widget
 				w.input_widget.focus_previous = p.input_widget
 				p = w
+
+	def setValue(self,d):
+		for f in self.fieldWidgets:
+			v = f.getValue()
+			for k in v.keys():
+				f.setValue({k:d[k]})
 
 	def getValue(self):
 		d = {}
@@ -366,6 +398,12 @@ class StrSearchForm(BoxLayout):
 			self.name:self.input_widget.text
 		}
 		return d
+
+	def setValue(self, d):
+		if isinstance(d,str):
+			self.input_widget.text = d
+		if isinstance(d,{}):
+			self.input_widget.text = d.get(self.name,'')
 
 	def submit_input(self,o,v=None):
 		text = self.input_widget.text

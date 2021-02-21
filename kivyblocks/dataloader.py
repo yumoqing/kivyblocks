@@ -4,18 +4,104 @@ from .threadcall import HttpClient
 from .utils import absurl
 from appPublic.registerfunction import RegisterFunction
 
+class DataGraber(EventDispatcher):
+	"""
+	Graber format
+	{
+		"widgettype":"DataGraber",
+		"options":{
+			"dataurl":"first",
+			"datarfname":"second",
+			"target":"third",
+			"params":
+			"method":
+			"pagging":"default false"
+		}
+	}
+	if dataurl present, the DataGraber using this dataurl to get and 
+		return data
+	else if datarfname present, it find a registered function named 
+		by 'datarfname' to return data
+	else if datatarget present, it find the widget and uses target
+		method(default is 'getValue') to return data
+	else it return None
+	"""
+	def __init__(self, **kw):
+		super().__init__()
+		self.options = kw
+		self.register_event_type('on_success')
+		self.register_event_type('on_error')
+
+	def load(self, *args, **kw):
+		dataurl = self.options.get('dataurl')
+		if dataurl:
+			return self.loadUrlData(*args, **kw)
+
+		rfname = self.options.get('datarfname')
+		if rfname:
+			return self.loadRFData(*args, **kw)
+
+		target = self.options.get('datatarget')
+		if target:
+			return self.loadTargetData(*args, **kw)
+		return None
+
+	def loadUrlData(self, *args, **kw):
+		dataurl = self.options.get('dataurl')
+		hc = HttpClient()
+		params = self.options.get('params',{}).copy()
+		params.update(kw)
+		method = self.options.get('method','GET')
+		d = hc.get(dataurl, params=params,method=method)
+		return d
+
+	def loadRFData(self, *args, **kw):
+		rfname = self.options.get('datarfname')
+		rf = RegisterFunction()
+		f = rf.get(rfname)
+		if not f:
+			return None
+		params = self.options.get('params',{}).copy()
+		params.update(kw)
+		try:
+			d = f(**params)
+			return d
+		except Exception as e:
+			Logger.info('blocks : Exception:%s',e)
+			print_exc()
+		return None
+
+	def loadTargetData(self, *args, **kw):
+		target = self.options.get('datatarget')
+		w = Factory.Blocks.getWidgetById(target)
+		if not w:
+			return None
+		params = self.options.get('params',{}).copy()
+		params.update(kw)
+		method = params.get('method', 'getValue')
+		if not has(w, method):
+			return None
+		try:
+			f = getattr(w, method)
+			d = f()
+			return d
+		except Exception as e:
+			Logger.info('blocks : Exception %s', e)
+			print_exc()
+		return None
+
+	def on_success(self,d):
+		pass
+
+	def on_error(self,e):
+		pass
+	
 class DataLoader(EventDispatcher):
 	def __init__(self,data_user):
 		self.data_user = data_user
 		EventDispatcher.__init__(self)
 		self.register_event_type('on_success')
 		self.register_event_type('on_error')
-
-	def success(self,o,d):
-		self.dispatch('on_success',d)
-	
-	def error(self,o,e):
-		self.dispatch('on_error',e)
 
 	def on_success(self,d):
 		pass
@@ -27,7 +113,7 @@ class DataLoader(EventDispatcher):
 		pass
 
 class HttpDataLoader(DataLoader):
-	def load(self):
+	def load(self, *args, **kw):
 		url = absurl(self.data_user.url,self.data_user.target.parenturl)
 		method = self.data_user.method
 		params = self.data_user.params.copy()
@@ -36,14 +122,16 @@ class HttpDataLoader(DataLoader):
 			"rows":self.data_user.page_rows
 		})
 		hc = HttpClient()
-		hc(url,
-				method=method,
-				params=params,
-				callback=self.success,
-				errback=self.error)
+		try:
+			r = hc(url, method=method, params=params)
+			self.dispatch('on_success', r)
+			return r
+		except Exception as e:
+			self.dispatch('on_error', e)
+
 
 class ListDataLoader(DataLoader):
-	def load(self):
+	def load(self, *args, **kw):
 		p = self.data_user.curpage
 		r = self.data_user.page_rows
 		try:
@@ -52,12 +140,13 @@ class ListDataLoader(DataLoader):
 				"total":len(self.data_user.data),
 				"rows":s
 			}
-			self.success(self,d)
+			self.dispatch('on_success', d)
+			return d
 		except Exception as e:
-			self.error(self,e)
+			self.dispatch('on_error', e)
 
 class RegisterFunctionDataLoader(DataLoader):
-	def load(self):
+	def load(self, *args, **kw):
 		rf = RegisterFunction()
 		try:
 			rfname = self.data_user.rfname
@@ -70,7 +159,9 @@ class RegisterFunctionDataLoader(DataLoader):
 				"rows":self.data_user.page_rows
 			})
 			s = func(**params)
-			self.success(self,s)
+			self.dispatch('on_success', s)
+			return s
 		except Exception as e:
-			self.error(self,e)
+			self.dispatch('on_error', e)
+
 

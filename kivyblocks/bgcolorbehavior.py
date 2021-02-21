@@ -9,6 +9,7 @@ class BGColorBehavior(object):
 		if color_level==-1:
 			color_level = 0
 		self.color_level = color_level
+		self.bg_ready = False
 		self.radius = radius
 		self.bgcolor = []
 		self.fgcolor = []
@@ -36,6 +37,7 @@ class BGColorBehavior(object):
 	def on_bgcolor(self,o=None,v=None):
 		if self.bgcolor == []:
 			return
+
 		if self.canvas:
 			with self.canvas.before:
 				Color(*self.bgcolor)

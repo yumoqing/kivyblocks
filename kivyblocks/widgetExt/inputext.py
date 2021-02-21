@@ -15,7 +15,6 @@ from ..threadcall import HttpClient
 from ..utils import CSize
 
 class BoolInput(Switch):
-	change = BooleanProperty(False)
 	def __init__(self,**kw):
 		a = DictObject()
 		if kw.get('defaultvalue',None) is None:
@@ -25,7 +24,7 @@ class BoolInput(Switch):
 		if kw.get('value',None) is not None:
 			a.active = kw.get('value')
 
-		super().__init__(**a)
+		super().__init__(**a.to_dict())
 		self.register_event_type('on_changed')
 		self.bind(active=on_active)
 
@@ -52,11 +51,9 @@ class StrInput(TextInput):
 			"halign":"left",
 			"hint_text":"",
 		}
-		if kv.get('tip'):
-			a['hint_text'] = kv['tip']
-		# a.update(kv)
-		w = kv.get('width',20)
-		h = kv.get('height',2.5)
+		a.update(kv)
+		w = kv.get('width',1)
+		h = kv.get('height',1)
 		if w <= 1:
 			a['size_hint_x'] = w
 		else:	
@@ -67,9 +64,7 @@ class StrInput(TextInput):
 		else:
 			a['size_hint_y'] = None
 			a['height'] = CSize(h)
-		a['font_size'] = CSize(kv.get('font_size',1))
-		a['password'] = kv.get('password',False)
-		a['multiline'] = kv.get('multiline',False)
+		a['font_size'] = CSize(kv.get('font_size',0.9))
 
 		Logger.info('TextInput:a=%s,kv=%s',a,kv)
 		super(StrInput,self).__init__(**a)
@@ -107,6 +102,7 @@ class Password(StrInput):
 
 class IntegerInput(StrInput):
 	def __init__(self,**kw):
+		print("IntegerInput(), __init__()....")
 		a = {}
 		a.update(kw)
 		a['halign'] = 'right'
@@ -114,6 +110,7 @@ class IntegerInput(StrInput):
 
 	pat = re.compile('[^0-9]')
 	def insert_text(self, substring, from_undo=False):
+		print('TTTTTTTTTTTTTTTTTTTTTTttt')
 		pat = self.pat
 		s = re.sub(pat, '', substring)
 		return StrInput.insert_text(self,s, from_undo=from_undo)
@@ -125,6 +122,7 @@ class IntegerInput(StrInput):
 class FloatInput(IntegerInput):
 	pat = re.compile('[^0-9]')
 	def filter(self,substring):
+		print('FloatInput(), filter():..........')
 		pat = self.pat
 		if '.' in self.text:
 			s = re.sub(pat, '', substring)
@@ -169,7 +167,8 @@ class MyDropDown(DropDown):
 			self.setDataByUrl(self.url)
 		else:
 			self.si_data = self.options.get('data')
-			self.setData(self.si_data)
+			if self.si_data:
+				self.setData(self.si_data)
 		self.bind(on_select=lambda instance, x: self.selectfunc(x))
 
 	def selectfunc(self,v):
@@ -192,38 +191,29 @@ class MyDropDown(DropDown):
 	def setData(self,data):
 		self.si_data = data
 		self.clear_widgets()
-		w = self.options.get('width',10)
 		h = self.options.get('height',2.5)
 		a = {}
-		if w <= 1:
-			a['size_hint_x'] = w
-		else:
-			a['size_hint_x'] = None
-			a['width'] = CSize(w)
-		if h <= 1:
-			a['size_hint_y'] = h
-		else:
-			a['size_hint_y'] = None
-			a['height'] = CSize(h)
+		a['size_hint_y'] = None
+		a['height'] = CSize(h)
 		a['font_size'] = CSize(self.options.get('font_size',1))
+		print('data=',data)
 		for d in data:
 			dd = (d[self.valueField],d[self.textField])
 			b = Button(text=d[self.textField],**a)
 			setattr(b,'kw_data',dd)
 			b.bind(on_release=lambda btn: self.select(btn.kw_data))
 			self.add_widget(b)
-			#print(dd)
+			print('setData():',dd)
 			
-	def setDataByUrl(self,url,params={}):
-		def x(obj,d):
-			self.setData(d)
-
-		app = App.get_running_app()
-		app.hc.get(url,params=params,callback=x)
-		
+	def setDataByUrl(self,url,kw={}):
+		hc = HttpClient()
+		params = self.options.get('params', {}).copy()
+		params.update(kw)
+		d = hc.get(url,params=params)
+		self.setData(d)
 			
 	def showme(self,w):
-		#print('show it ',w)
+		print('show it ',w)
 		self.target = w
 		self.open(w)
 		
@@ -231,7 +221,7 @@ class SelectInput(BoxLayout):
 	def __init__(self,**kw):
 		a={}
 		w = kw.get('width',10)
-		h = kw.get('height',2.5)
+		h = kw.get('height',1.5)
 		if w <= 1:
 			a['size_hint_x'] = w
 		else:
@@ -245,11 +235,13 @@ class SelectInput(BoxLayout):
 
 		super(SelectInput,self).__init__(orientation='horizontal',\
 				**a)
-		self.tinp = StrInput(size_hint_y=None,height=kw.get('height',2.5))
+		self.si_value = ''
+		self.tinp = StrInput()
 		self.tinp.readonly = True
 		newkw = {}
 		newkw.update(kw)
 		newkw.update({'on_select':self.setData})
+		print('selectinput:kw=', newkw)
 		self.dropdown = MyDropDown(**newkw)
 		if kw.get('value'):
 			self.si_data = kw.get('value')
@@ -273,18 +265,18 @@ class SelectInput(BoxLayout):
 			self.old_value = self.getValue()
 		
 	def setData(self,d):
-		self.tinp.si_data = d[0]
+		self.si_value = d[0]
 		self.tinp.text = d[1]
 		v = self.getValue()
 		if v != self.old_value:
 			self.dispatch('on_changed',v)
 
 	def setValue(self,v):
-		self.tinp.si_value = v
+		self.si_value = v
 		self.tinp.text = self.dropdown.getTextByValue(v)
 		
 	def getValue(self):
-		return self.tinp.si_value
+		return self.si_value
 		
 if __name__ == '__main__':
 	from kivy.app import App
