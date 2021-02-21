@@ -19,6 +19,7 @@ class ScrollWidget(ScrollView):
 	def change_all_sized_widgets(self, *args):
 		for w in self.sized_widgets:
 			self.change_widget_width(w)
+		self._inner.do_layout()
 
 	def change_widget_width(self, w):
 		w.size_hint_x = None
