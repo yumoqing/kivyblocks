@@ -1,4 +1,5 @@
 import sys
+import math
 from traceback import print_exc
 
 from kivy.properties import ObjectProperty, StringProperty
@@ -163,10 +164,17 @@ class Text(Label):
 			self.i18n.addI18nWidget(self)
 			self.otext = kw.get('text','')
 		if self.wrap:
-			font_size = self.font_size
+			self.size_hint_y = None
 			self.text_size = self.width, None
+			self.bind(width=self.set_widget_height)
 		if self.bgcolor:
 			self.color = self.bgcolor
+
+	def set_widget_height(self, *args):
+		self.text_size = self.width, None
+		rows = len(self.text) * (self.font_size * 0.621) / self.width
+		rows = math.ceil(rows)
+		self.height = rows * self.font_size * 1.5
 
 	def get_wraped_size(self):
 		if self.text:

@@ -29,16 +29,8 @@ description file format
 
 	def setChildMinWidth(self, *args):
 		print('size changed')
-		for c in self._inner.children:
+		for i,c in enumerate(self._inner.children):
 			c.width = self.width
-			if isinstance(c, Factory.Text):
-				_, h = c.get_wraped_size()
-				clen = CSize(1)
-				if not h or h < clen:
-					c.height = clen
-				else:
-					c.height = h
-		self._inner.do_layout()
 
 	def load_text(self, *args):
 		print('source fired, hahaha', *args)

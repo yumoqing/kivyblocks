@@ -50,6 +50,8 @@ class StrInput(TextInput):
 			"multiline":False,
 			"halign":"left",
 			"hint_text":"",
+			"text_language":"zh_CN",
+			"write_tab":False
 		}
 		a.update(kv)
 		w = kv.get('width',1)
