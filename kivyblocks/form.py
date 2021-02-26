@@ -126,7 +126,7 @@ class InputBox(BoxLayout):
 				self.options['height'] = 4
 			height = self.options.get('height',4)
 
-		self.labelwidth = self.form.options['labelwidth']
+		self.labelwidth = self.form.labelwidth
 		kwargs = {
 			"orientation":orientation,
 		}
@@ -261,74 +261,146 @@ def defaultToolbar():
 	}
 
 class Form(BGColorBehavior, WidgetReady, BoxLayout):
-	def __init__(self, **options):
-		self.options = options
-		BoxLayout.__init__(self, orientation='vertical')
-		self.color_level = self.options.get('color_level', 0)
-		BGColorBehavior.__init__(self,
-			color_level=self.options.get('color_level',-1),
-			radius=self.options.get('radius',[]))
-		WidgetReady.__init__(self)
+	def __init__(self,
+					color_level=1,
+					radius=[],
+					cols=2,
+					inputwidth=0,
+					inputheight=3,
+					labelwidth=0.3,
+					notoolbar=False,
+					toolbar_at='top', #'top', 'bottom', 'left', 'right'
+					dataloader={},
+					fields=[],
+					submit={},
+					clear={},
+					toolbar={},
+					**options):
+		self.inputwidth = 1
+		self.inputheight = inputheight
+		self.labelwidth= labelwidth
+		self.fields = fields
+		self.notoolbar = notoolbar
+		self.submit = submit
+		self.clear = clear
+		self.toolbar = toolbar
+		self.toolbar_at=toolbar_at
+		self.dataloader = dataloader
 		self.readiedInput = 0
-		self.cols = self.options_cols = self.options.get('cols',1)
+		if self.toolbar_at in ['top','bottom']:
+			options['orientation'] = 'vertical'
+		else:
+			options['orientation'] = 'horizontal'
+		BoxLayout.__init__(self, **options)
+		self.color_level = color_level
+		BGColorBehavior.__init__(self,
+			color_level=color_level,
+			radius=radius)
+		WidgetReady.__init__(self)
+		self.cols = self.options_cols = cols
 		if isHandHold() and Window.width < Window.height:
 			self.cols = 1
-		self.inputwidth = Window.width / self.cols
-		self.inputheight = self.options.get('inputheight',3)
+		self.options = options
 		self.init()
 		self.register_event_type('on_submit')
 
 	def on_size(self, *args):
-		pass
+		if not hasattr(self,'fsc'):
+			return
+
+		if not self.notoolbar:
+			if self.toolbar_at in ['top', 'bottom']:
+				self.fsc.height = self.height - self.toolbar.height
+			else:
+				self.fsc.width = self.width - self.toolbar.width
+		else:
+			if self.toolbar_at in ['top', 'bottom']:
+				self.fsc.height = self.height
+			else:
+				self.fsc.width = self.width
+		self.fsc.org_box_width = self.width / self.options_cols
+		if self.notoolbar:
+			return
+		if self.toolbar_at in [ 'top', 'bottom' ]:
+			Logger.info('Form: height:tb:%d,ti:%d,fsc:%d, fm:%d',
+						self.toolbar.height, 
+						self.toolbar.toggle_items.height,
+						self.fsc.height, self.height
+						)
+		else:
+			Logger.info('Form: width:tb:%d,ti:%d,fsc:%d, fm:%d',
+						self.toolbar.width, 
+						self.toolbar.toggle_items.width,
+						self.fsc.width, self.width
+						)
 
 	def init(self):
-		desc = defaultToolbar()
-		desc1 = self.options.get('toolbar')
-		if desc1:
-			tools = desc['tools'] + desc1['tools']
-			desc1['tools'] = tools
-			desc = desc1
-		if self.options.get('submit'):
-			kw = self.options.get('submit').copy()
-			if kw.get('name'):
-				del kw['name']
-			for t in desc['tools']:
-				if t['name'] == '__submit':
-					t.update(kw)
-		if self.options.get('clear'):
-			kw = self.options.get('clear').copy()
-			if kw.get('name'):
-				del kw['name']
-			for t in desc['tools']:
-				if t['name'] == '__clear':
-					t.update(kw)
-			
-		self.toolbar = Toolbar(**desc)
+		if not self.notoolbar:
+			desc = defaultToolbar()
+			desc1 = self.toolbar
+			if desc1:
+				tools = desc['tools'] + desc1['tools']
+				desc1['tools'] = tools
+				desc = desc1
+			if self.submit:
+				kw = self.submit.copy()
+				if kw.get('name'):
+					del kw['name']
+				for t in desc['tools']:
+					if t['name'] == '__submit':
+						t.update(kw)
+			if self.clear:
+				kw = self.clear.copy()
+				if kw.get('name'):
+					del kw['name']
+				for t in desc['tools']:
+					if t['name'] == '__clear':
+						t.update(kw)
+				
+			if self.toolbar_at in ['top', 'bottom']:
+				desc['orientation'] = 'horizontal'
+				desc['size_hint_y'] = None
+				desc['height'] = CSize(desc['img_size'] + desc['text_size'])
+			else:
+				desc['orientation'] = 'vertical'
+				desc['size_hint_x'] = None
+				desc['width'] = CSize(desc['img_size'] + desc['text_size'])
+
+			self.toolbar = Toolbar(**desc)
 		self.fsc = VResponsiveLayout(
 						self.inputwidth,
-						self.cols 
+						self.cols,
+						size_hint=(1,1)
 		)
-		self.add_widget(self.toolbar)
+
+		if self.toolbar_at in ['top', 'left'] and not self.notoolbar:
+			self.add_widget(self.toolbar)
 		self.add_widget(self.fsc)
+		if self.toolbar_at in ['bottom', 'right'] and not self.notoolbar:
+			self.add_widget(self.toolbar)
+		
 		self.fieldWidgets=[]
-		for f in self.options['fields']:
+		for f in self.fields:
 			w = InputBox(self, **f)
 			self.fsc.add_widget(w)
 			self.fieldWidgets.append(w)
 			w.bind(on_ready=self.makeInputLink)
 		wid = Factory.Blocks.getWidgetById('__submit',from_widget=self)
-		wid.bind(on_press=self.on_submit_button)
+		if wid:
+			wid.bind(on_press=self.on_submit_button)
 		wid = Factory.Blocks.getWidgetById('__clear',from_widget=self)
-		wid.bind(on_press=self.on_clear_button)
-		if self.options.get('dataloader'):
-			self.dataloader = DataGraber(**self.options['dataloader'])
-			d = self.dataloader.load()
+		if wid:
+			wid.bind(on_press=self.on_clear_button)
+		if self.dataloader:
+			self.loader = DataGraber(**self.dataloader)
+			d = self.loader.load()
 			if d:
 				self.setValue(d)
+		self.on_size()
 			
 	def makeInputLink(self,o,v=None):
 		self.readiedInput += 1
-		if self.readiedInput >= len(self.options['fields']):
+		if self.readiedInput >= len(self.fields):
 			p = self.fieldWidgets[0]
 			for w in self.fieldWidgets[1:]:
 				p.input_widget.focus_next = w.input_widget

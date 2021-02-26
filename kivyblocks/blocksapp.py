@@ -96,7 +96,7 @@ class BlocksApp(App):
 		x = blocks.widgetBuild(config.root)
 		if x is None:
 			alert('buildError,Exit', title='Error')
-			self.on_close()
+			return Label(text='error')
 		return x
 
 	def get_user_data_path(self):

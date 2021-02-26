@@ -164,6 +164,8 @@ class Header(WidgetReady, BGColorBehavior, ScrollWidget):
 		BGColorBehavior.__init__(self,color_level=color_level)
 		self.init(1)
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
+		if self.part.freeze_flag:
+			self.bar_width = 0
 
 	def init(self,t):
 		rd = [ f.copy() for f in self.part.rowdesc ]
@@ -180,6 +182,8 @@ class Body(ScrollWidget):
 		ScrollWidget.__init__(self,**kw)
 		self.idRow = {}
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
+		if self.part.freeze_flag:
+			self.bar_width = 0
 
 	def addRow(self,id, data,index=0):
 		rd = [ f.copy() for f in self.part.rowdesc ]

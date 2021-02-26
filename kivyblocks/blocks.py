@@ -425,9 +425,10 @@ class Blocks(EventDispatcher):
 		if d:
 			params.update(d)
 		try:
-			target.dispatch(event, **params)
+			target.dispatch(event, params)
 		except Exception as e:
 			Logger.info(f'Block: eventAction():dispatch {event} error')
+			print_exc()
 			return
 			
 	def blocksAction(self,widget,desc, *args):

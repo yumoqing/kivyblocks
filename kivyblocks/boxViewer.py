@@ -110,6 +110,12 @@ class BoxViewer(WidgetReady, BoxLayout):
 		x = self.dataloader.getLocater()
 		self.locater(x)
 
+	def loadData(self, **kw):
+		self.params = kw
+		self.deleteAllWidgets(None)
+		self.dataloader.loadPage(1)
+		self.initflag = True
+
 	def deleteWidgets(self,o,data):
 		for w in data:
 			self.viewContainer.remove_widget(w)

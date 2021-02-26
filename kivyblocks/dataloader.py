@@ -33,18 +33,29 @@ class DataGraber(EventDispatcher):
 		self.register_event_type('on_error')
 
 	def load(self, *args, **kw):
-		dataurl = self.options.get('dataurl')
-		if dataurl:
-			return self.loadUrlData(*args, **kw)
+		ret = None
+		while True:
+			try:
+				dataurl = self.options.get('dataurl')
+				if dataurl:
+					ret = self.loadUrlData(*args, **kw)
+					break
 
-		rfname = self.options.get('datarfname')
-		if rfname:
-			return self.loadRFData(*args, **kw)
-
-		target = self.options.get('datatarget')
-		if target:
-			return self.loadTargetData(*args, **kw)
-		return None
+				rfname = self.options.get('datarfname')
+				if rfname:
+					ret = self.loadRFData(*args, **kw)
+					break
+				target = self.options.get('datatarget')
+				ret = self.loadTargetData(*args, **kw)
+				break
+			except Exception as e:
+				self.dispatch('on_error', e)
+				return
+		if ret:
+			self.dispatch('on_success',ret)
+		else:
+			e = Exception('Not method to do load')
+			self.dispatch('on_error', e)
 
 	def loadUrlData(self, *args, **kw):
 		dataurl = self.options.get('dataurl')
@@ -52,7 +63,7 @@ class DataGraber(EventDispatcher):
 		params = self.options.get('params',{}).copy()
 		params.update(kw)
 		method = self.options.get('method','GET')
-		d = hc.get(dataurl, params=params,method=method)
+		d = hc(dataurl, params=params,method=method)
 		return d
 
 	def loadRFData(self, *args, **kw):

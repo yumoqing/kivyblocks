@@ -95,7 +95,7 @@ class Toolbar(BoxLayout):
 				items_desc=subs_desc,
 				orientation=opts.get('orientation','horizontal')
 				)
-		for ti in self.toggle_items.children:
+		for ti in self.toggle_items.item_widgets:
 			ti.widget_id = ti.user_data
 		self.toggle_items.bind(on_press=self.tool_press)
 		self.add_widget(self.toggle_items)
@@ -169,7 +169,7 @@ class ToolPage(BGColorBehavior, BoxLayout):
 				'toggleitems=',self.toolbar.toggle_items.width, \
 					self.toolbar.toggle_items.height)
 		toggle_items = self.toolbar.toggle_items
-		for c in toggle_items.children:
+		for c in toggle_items.item_widgets:
 			cvalue = c.getValue()
 			if cvalue == self.show_name:
 				c.dispatch('on_press')
@@ -214,7 +214,7 @@ class ToolPage(BGColorBehavior, BoxLayout):
 			self.add_widget(self.content)
 			self.add_widget(self.toolbar)
 		toggle_items = self.toolbar.toggle_items
-		for t in toggle_items.children:	
+		for t in toggle_items.item_widgets:	
 			t.bind(on_press=self.on_press_handle)
 
 	def get_tool_by_name(self,name):
@@ -241,8 +241,9 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		if w is None or t.fresh:
 			if t.url:
 				w = self.build_widget(t.url)
-				self.content_widgets[name] = w
-				self.content.add_widget(w)
+				if w:
+					self.content_widgets[name] = w
+					self.content.add_widget(w)
 				return
 			if t.rfname:
 				rf = RegisterFunction()

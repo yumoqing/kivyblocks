@@ -1,4 +1,5 @@
 from kivy.uix.scrollview import ScrollView
+from kivy.effects.scroll import ScrollEffect
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import Color, Ellipse,Rectangle
@@ -6,6 +7,7 @@ from kivy.graphics import Color, Ellipse,Rectangle
 class ScrollWidget(ScrollView):
 	def __init__(self,**kw):
 		super(ScrollWidget,self).__init__(**kw)
+		self.effect_cls = ScrollEffect
 		self.sized_widgets = []
 		self._inner = BoxLayout(orientation='vertical',padding=5, 
 						spacing=8,size_hint=(None,None))
