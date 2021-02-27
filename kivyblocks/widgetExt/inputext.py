@@ -104,7 +104,6 @@ class Password(StrInput):
 
 class IntegerInput(StrInput):
 	def __init__(self,**kw):
-		print("IntegerInput(), __init__()....")
 		a = {}
 		a.update(kw)
 		a['halign'] = 'right'
@@ -112,7 +111,6 @@ class IntegerInput(StrInput):
 
 	pat = re.compile('[^0-9]')
 	def insert_text(self, substring, from_undo=False):
-		print('TTTTTTTTTTTTTTTTTTTTTTttt')
 		pat = self.pat
 		s = re.sub(pat, '', substring)
 		return StrInput.insert_text(self,s, from_undo=from_undo)
@@ -124,7 +122,6 @@ class IntegerInput(StrInput):
 class FloatInput(IntegerInput):
 	pat = re.compile('[^0-9]')
 	def filter(self,substring):
-		print('FloatInput(), filter():..........')
 		pat = self.pat
 		if '.' in self.text:
 			s = re.sub(pat, '', substring)
@@ -198,14 +195,12 @@ class MyDropDown(DropDown):
 		a['size_hint_y'] = None
 		a['height'] = CSize(h)
 		a['font_size'] = CSize(self.options.get('font_size',1))
-		print('data=',data)
 		for d in data:
 			dd = (d[self.valueField],d[self.textField])
 			b = Button(text=d[self.textField],**a)
 			setattr(b,'kw_data',dd)
 			b.bind(on_release=lambda btn: self.select(btn.kw_data))
 			self.add_widget(b)
-			print('setData():',dd)
 			
 	def setDataByUrl(self,url,kw={}):
 		hc = HttpClient()
@@ -262,6 +257,7 @@ class SelectInput(BoxLayout):
 	def showDropdown(self,instance,yn):
 		# if self.collide_point(*touch.pos):
 		if yn:
+			print('focus(): .....')
 			self.tinp.focus = False
 			self.dropdown.showme(self)
 			self.old_value = self.getValue()
