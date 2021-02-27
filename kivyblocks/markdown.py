@@ -6,6 +6,131 @@ from .baseWidget import ScrollWidget,  getDataHandler
 from .utils import CSize
 import re
 
+SOURCE_DELIMITER = "\n```\n"
+VIDEO_LEAD = "![@"
+AUDIO_LEAD = "![#"
+IMAGE_LEAD = "!["
+LINK_LEAD = "["
+REFER_SPLIT = "]("
+REFER_END = ")"
+
+class MarkDownParser(object):
+	mdkeys = [
+		SOURCE_DELIMITER,
+		VIDEO_LEAD,
+		AUDIO_LEAD,
+		IMAGE_LEAD
+	]
+	def __init__(self, mdtext):
+		self.mdtext = mdtext
+		self.result = []
+		self.text = ""
+		self.mdkey_handler = {
+			SOURCE_DELIMITER:self.handle_source_delimiter,
+			VIDEO_LEAD:self.lead_video,
+			AUDIO_LEAD:self.lead_audio,
+			IMAGE_LEAD:self.lead_image,
+		}
+
+	def handle_source_delimiter(self,mdtext):
+		x = self.mdtext.split(SOURCE_DELIMITER,1)
+		mk_p = MarkDownParser(x[0])
+		self.result += mk_p.parse()
+		if len(x) > 1:
+			self.mdtext = x[1]
+
+	def lead_video(self):
+		print('lead_video() ..., mdtext=', self.mdtext)
+		x = self.mdtext.split(REFER_SPLIT,1)
+		if len(x)<2:
+			print('lead_video() return here', REFER_SPLIT, '---', self.mdtext)
+			self.text = f'{VIDEO_LEAD}'
+			return
+		title = x[0]
+		y = x[1].split(REFER_END,1)
+		if len(y) < 2:
+			print('lead_video() return here', REFER_END)
+			self.text = f'{VIDEO_LEAD}'
+			return
+		url = y[0]
+		self.mdtext = y[1]
+		d = {
+			"video":{
+				"title":title,
+				"url":url
+			}
+		}
+		self.result.append(d)
+
+	def lead_audio(self):
+		x = self.mdtext.split(REFER_SPLIT,1)
+		if len(x)<2:
+			self.text = f'{VIDEO_LEAD}'
+			return
+		title = x[0]
+		y = x[0].split(REFER_END,1)
+		if len(y) < 2:
+			self.text = f'{VIDEO_LEAD}'
+			return
+		url = y[0]
+		d = {
+			"audio":{
+				"title":"title",
+				"url":url
+			}
+		}
+		self.result.append(d)
+		l = len(title) + 2 + len(url)
+		self.mdtext = self.mdtext[l:]
+
+	def lead_image(self):
+		x = self.mdtext.split(REFER_SPLIT,1)
+		if len(x)<2:
+			self.text = f'{VIDEO_LEAD}'
+			return
+		title = x[0]
+		y = x[0].split(REFER_END,1)
+		if len(y) < 2:
+			self.text = f'{VIDEO_LEAD}'
+			return
+		url = y[0]
+		d = {
+			"image":{
+				"title":"title",
+				"url":url
+			}
+		}
+		self.result.append(d)
+		l = len(title) + 2 + len(url)
+		self.mdtext = self.mdtext[l:]
+
+	def check_key(self,t):
+		for k in self.mdkeys:
+			if t.startswith(k):
+				return k
+		return None
+
+	def parse(self):
+		"""
+		parser parse mdtext, recognize bbtext, source, img, audio, video
+		part text
+		"""
+		while len(self.mdtext) > 0:
+			k = self.check_key(self.mdtext)
+			if k is None:
+				self.text = f'{self.text}{self.mdtext[0]}'
+				self.mdtext = self.mdtext[1:]
+			else:
+				if len(self.text) > 0:
+					self.result.append({'pure_md':self.text})
+					self.text = ""
+				self.mdtext = self.mdtext[len(k):]
+				self.mdkey_handler[k]()
+		if len(self.text) > 0:
+			self.result.append({'pure_md':self.text})
+			self.text = ''
+		return self.result	
+
 class Markdown(ScrollWidget):
 	"""
 # Markdown
@@ -21,16 +146,55 @@ description file format
 	"""
 	source = StringProperty(None)
 	def __init__(self, **kw):
+		self.part_handlers = {
+			"pure_md":self.build_pure_md,
+			"source":self.build_source,
+			"image":self.build_image,
+			"video":self.build_video,
+			"audio":self.build_audio
+		}
 		ScrollWidget.__init__(self, **kw)
 		self.bind(source=self.load_text)
 		if self.source:
 			Clock.schedule_once(self.load_text, 0.3)
 		self.bind(size=self.setChildMinWidth)
 
+	def build_source(self,source_desc):
+		pass
+
+	def build_pure_md(self, mdtext):
+		for l in mdtext.split('\n'):
+			self.parse_line(l)
+
+	def build_image(self,img_desc):
+		w = Factory.AsyncImage(soure=img_desc['url'],
+					keep_ratio=True,
+					size_hint_y=None
+			)
+		w.bind(minimum_height=w.setter('height'))
+		self.add_widget(w)
+
+	def build_video(self, video_desc):
+		w = Factory.NewVideo(source=video_desc['url'],
+				keep_ratio=True,
+				play=True,
+				allow_stretch = True,
+				size_hint_y=None
+		)
+		w.height=self.width * 10 / 16
+		self.add_widget(w)
+		
+	def build_audio(self, audio_desc):
+		w = Factory.APlayer(source=audio_desc.url)
+		w.bind(minimum_height=w.setter('height'))
+		self.add_widget(w)
+
 	def setChildMinWidth(self, *args):
 		print('size changed')
 		for i,c in enumerate(self._inner.children):
 			c.width = self.width
+			if hasattr(c, 'resize'):
+				c.resize(self.size)
 
 	def load_text(self, *args):
 		print('source fired, hahaha', *args)
@@ -45,30 +209,17 @@ description file format
 
 	def update(self, o, text):
 		print('text=',text, type(text))
-		text = ''.join(text.split('\r'))
-		"""
-		org_boxs = re.findall(r"\n```\n(.*)\n```\n", text)
-		org_boxs_widget = [ \
-				Factory.Blocks().widgetBuild({ \
-						"widgettype":f"Title{level}", \
-						"options":{ \
-							"text":txt, \
-							"size_hint_x":None, \
-							"width":self.width, \
-							"size_hint_y":None, \
-							"markup":True, \
-							"bgcolor":self.options.source_bgcolor, \
-							"wrap":True, \
-							"halign":"left", \
-							"valign":"middle" \
-						} \
-					}) for t in org_boxs ]
-		other_texts = re.split(r"\n```\n(.*)\n```\n", text)
-		"""
 		if not text:
 			return
-		for l in text.split('\n'):
-			self.parse_line(l)
+		text = ''.join(text.split('\r'))
+		mdp = MarkDownParser(text)
+		parts = mdp.parse()
+		for p in parts:
+			for k,v in p.items():
+				print('part=', k, v)
+				f = self.part_handlers.get(k)
+				f(v)
+
 
 	def parse_title(self, txt, level):
 		w = Factory.Blocks().widgetBuild({
@@ -91,8 +242,8 @@ description file format
 		if h1 is None or h1 < clen:
 			h1 = clen
 		w.height = h1
-		print(w, w1, h1, w.height)
 		w.bind(on_ref_press=self.open_new_md)
+		# w.bind(minimum_height=w.setter('height'))
 		self.add_widget(w)
 		
 	def parse_line(self, l):
@@ -135,6 +286,7 @@ description file format
 			h = clen
 		w.height = h
 		w.bind(on_ref_press=self.open_new_md)
+		# w.bind(minimum_height=w.setter('height'))
 		self.add_widget(w)
 
 	def open_new_md(self, o, value):

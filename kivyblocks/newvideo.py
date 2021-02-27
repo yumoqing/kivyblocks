@@ -27,6 +27,11 @@ class NewVideo(BGColorBehavior, Video):
 		self.bind(source=self.record_start_time)
 		self.load_status = None
 
+	def resize(self, size):
+		v_size = self.get_video_size()
+		if v_size:
+			self.height = self.width * v_size[1] / v_size[0]
+
 	def on_load_success(self, *args):
 		pass
 
@@ -60,11 +65,17 @@ class NewVideo(BGColorBehavior, Video):
 		if msg:
 			logger_func[level]('yffpyplayer: {}'.format(msg))
 
+	def get_video_size(self):
+		if hasattr(self._video,'_ffplayer'):
+			return self._video._ffplayer.get_frame()[0][0].get_size()
+		else:
+			Logger.error('NewVideo: _video has not _ffplayer, do nothong')
+		
 	def audioswitch(self,btn=None):
 		if hasattr(self._video,'_ffplayer'):
 			x = self._video._ffplayer.request_channel('audio')
 		else:
-			print('NewVideo _video has not _ffplayer, do nothong')
+			Logger.error('NewVideo: _video has not _ffplayer, do nothong')
 
 	def on_state(self,*args):
 		super().on_state(*args)

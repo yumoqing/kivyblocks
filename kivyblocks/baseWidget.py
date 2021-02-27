@@ -170,6 +170,11 @@ class Text(Label):
 		if self.bgcolor:
 			self.color = self.bgcolor
 
+	def resize(self, size):
+		if not self.size_hint_y:
+			self.width = size[0]
+			self.set_widget_height()
+
 	def set_widget_height(self, *args):
 		self.text_size = self.width, None
 		rows = len(self.text) * (self.font_size * 0.621) / self.width
