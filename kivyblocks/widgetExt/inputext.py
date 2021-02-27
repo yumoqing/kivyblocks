@@ -234,7 +234,7 @@ class SelectInput(BoxLayout):
 				**a)
 		self.si_value = ''
 		self.tinp = StrInput()
-		self.tinp.readonly = True
+		# self.tinp.readonly = True
 		newkw = {}
 		newkw.update(kw)
 		newkw.update({'on_select':self.setData})
