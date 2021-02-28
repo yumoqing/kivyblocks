@@ -4,6 +4,7 @@ from kivy.logger import Logger
 from kivy.core.window import Window
 from kivy.factory import Factory
 from kivy.properties import BooleanProperty
+from kivy.clock import Clock
 
 from ffpyplayer.tools import set_log_callback
 
@@ -15,6 +16,7 @@ logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
 
 
 class NewVideo(BGColorBehavior, Video):
+	center_screen = BooleanProperty(False)
 	def __init__(self,color_level=-1,radius=[],**kw):
 		Video.__init__(self, **kw)
 		BGColorBehavior.__init__(self,
@@ -23,9 +25,34 @@ class NewVideo(BGColorBehavior, Video):
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
 		self.register_event_type('on_open_failed')
+		self.register_event_type('on_leave_focus')
+		self.register_event_type('on_enter_focus')
 		self.register_event_type('on_load_success')
 		self.bind(source=self.record_start_time)
 		self.load_status = None
+		Clock.schedule_interval(self.check_focus,0.2)
+
+	def on_enter_focus(self, v=None):
+		Logger.info('NewView: enter focus')
+
+	def on_leave_focus(self, v=None):
+		Logger.info('NewView: leave focus')
+
+	def check_focus(self,*args):
+		if not self.parent:
+			return
+		w = self.parent
+		pos = w.to_widget(*Window.center)
+		if self.collide_point(*pos):
+			self.center_screen = True
+		else:
+			self.center_screen = False
+
+	def on_center_screen(self,o, v):
+		if v:
+			self.dispatch('on_enter_focus')
+		else:
+			self.dispatch('on_leave_focus')
 
 	def resize(self, size):
 		v_size = self.get_video_size()
@@ -67,9 +94,13 @@ class NewVideo(BGColorBehavior, Video):
 
 	def get_video_size(self):
 		if hasattr(self._video,'_ffplayer'):
-			return self._video._ffplayer.get_frame()[0][0].get_size()
+			try:
+				return self._video._ffplayer.get_frame()[0][0].get_size()
+			except:
+				return None
 		else:
 			Logger.error('NewVideo: _video has not _ffplayer, do nothong')
+		return None
 		
 	def audioswitch(self,btn=None):
 		if hasattr(self._video,'_ffplayer'):

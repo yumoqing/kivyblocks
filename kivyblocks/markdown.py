@@ -1,8 +1,10 @@
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty, ListProperty
 from kivy.factory import Factory
 from kivy.clock import Clock
+from kivy.logger import Logger
+from kivy.uix.image import AsyncImage
 
-from .baseWidget import ScrollWidget,  getDataHandler
+from .baseWidget import ScrollWidget,  getDataHandler, CSize
 from .utils import CSize
 import re
 
@@ -68,7 +70,7 @@ class MarkDownParser(object):
 			self.text = f'{VIDEO_LEAD}'
 			return
 		title = x[0]
-		y = x[0].split(REFER_END,1)
+		y = x[1].split(REFER_END,1)
 		if len(y) < 2:
 			self.text = f'{VIDEO_LEAD}'
 			return
@@ -89,7 +91,7 @@ class MarkDownParser(object):
 			self.text = f'{VIDEO_LEAD}'
 			return
 		title = x[0]
-		y = x[0].split(REFER_END,1)
+		y = x[1].split(REFER_END,1)
 		if len(y) < 2:
 			self.text = f'{VIDEO_LEAD}'
 			return
@@ -101,8 +103,7 @@ class MarkDownParser(object):
 			}
 		}
 		self.result.append(d)
-		l = len(title) + 2 + len(url)
-		self.mdtext = self.mdtext[l:]
+		self.mdtext = y[1]
 
 	def check_key(self,t):
 		for k in self.mdkeys:
@@ -131,6 +132,36 @@ class MarkDownParser(object):
 			self.text = ''
 		return self.result	
 
+class MDImage(AsyncImage):
+	parent_width=NumericProperty(None)
+	image_size = ListProperty(None)	
+	def __init__(self, **kw):
+		super().__init__(**kw)
+		self.image_size = None
+		self.parent_width = None
+		self.bind(texture=self.image_loaded)
+
+	def image_loaded(self,o, *args):
+		self.image_size = self.texture.size
+
+	def resize(self, size):
+		self.parent_width = size[0]
+		Logger.info('MDImage: resize called, size=%s', size)
+
+	def on_image_size(self, *args):
+		if self.parent_width:
+			self.set_new_height()
+
+	def on_parent_width(self, *args):
+		if self.image_size:
+			self.set_new_height()
+
+	def set_new_height(self):
+		self.height = self.parent_width * self.image_size[1] \
+							/ self.image_size[0]
+		Logger.info('MDImage: set_new_height called, size=%s', self.size)
+
+	
 class Markdown(ScrollWidget):
 	"""
 # Markdown
@@ -167,22 +198,34 @@ description file format
 			self.parse_line(l)
 
 	def build_image(self,img_desc):
-		w = Factory.AsyncImage(soure=img_desc['url'],
-					keep_ratio=True,
-					size_hint_y=None
+		w = MDImage(source=img_desc['url'],
+					allow_stretch=True,
+					size_hint_y=None,
+					height=CSize(10),
+					keep_ratio=True
 			)
-		w.bind(minimum_height=w.setter('height'))
+		
 		self.add_widget(w)
+		w.resize(self.size)
 
 	def build_video(self, video_desc):
 		w = Factory.NewVideo(source=video_desc['url'],
 				keep_ratio=True,
-				play=True,
+				play=False,
 				allow_stretch = True,
 				size_hint_y=None
 		)
 		w.height=self.width * 10 / 16
+		w.state = 'pause'
+		def f1(x):
+			x.state = 'play'
+		def f2(x):
+			x.state = 'stop'
+
+		w.bind(on_enter_focus=f1)
+		w.bind(on_leave_focus=f2)
 		self.add_widget(w)
+		w.resize(self.size)
 		
 	def build_audio(self, audio_desc):
 		w = Factory.APlayer(source=audio_desc.url)
