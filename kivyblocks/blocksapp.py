@@ -42,12 +42,6 @@ class ServerInfo:
 		self.publickey = None
 		self.authCode = None
 	
-	def realurl(url):
-		if url.startswith('https://') or url.startswith('http://'):
-			return url
-		config = getConfig()
-		return '%s%s' % (config.uihome, url)
-
 	def getServerPK(self):
 		config = getConfig()
 		url = '%s%s' % (config.uihome, config.publickey_url)
@@ -104,6 +98,12 @@ class BlocksApp(App):
 			alert('buildError,Exit', title='Error')
 			return Label(text='error')
 		return x
+
+	def realurl(self, url):
+		if url.startswith('https://') or url.startswith('http://'):
+			return url
+		config = getConfig()
+		return '%s%s' % (config.uihome, url)
 
 	def get_user_data_path(self):
 		if platform == 'android':
