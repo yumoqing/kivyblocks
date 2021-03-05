@@ -1,31 +1,29 @@
 from kivy.logger import Logger
 from kivy.graphics import Color, Rectangle, RoundedRectangle
-from kivy.properties import ListProperty
+from kivy.properties import ListProperty, NumericProperty
 from .color_definitions import getColors
 
 _logcnt = 0
 class BGColorBehavior(object):
-	def __init__(self, color_level=-1,radius=[],**kwargs):
-		if color_level==-1:
-			color_level = 0
-		self.color_level = color_level
+	color_level=NumericProperty(0)
+	radius = ListProperty([])
+	def __init__(self, **kwargs):
 		self.bg_ready = False
-		self.radius = radius
 		self.bgcolor = []
 		self.fgcolor = []
-		fg,bg= getColors(color_level)
+		fg,bg= getColors(self.color_level)
 		self.fgcolor = fg
 		self.bgcolor = bg
 		self.normal_bgcolor = bg
 		self.normal_fgcolor = fg
-		fg,bg= getColors(color_level,selected=True)
+		fg,bg= getColors(self.color_level,selected=True)
 		self.selected_bgcolor = bg
 		self.selected_fgcolor = fg
 		# self.on_bgcolor()
 
 		self.bind(size=self.onSize_bgcolor_behavior,
 				pos=self.onSize_bgcolor_behavior)
-		self.bind(children=self.on_bgcolor)
+		# self.bind(children=self.on_bgcolor)
 
 	def onSize_bgcolor_behavior(self,o,v=None):
 		if not hasattr(self,'rect'):

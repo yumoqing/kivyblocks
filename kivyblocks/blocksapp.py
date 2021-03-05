@@ -42,6 +42,12 @@ class ServerInfo:
 		self.publickey = None
 		self.authCode = None
 	
+	def realurl(url):
+		if url.startswith('https://') or url.startswith('http://'):
+			return url
+		config = getConfig()
+		return '%s%s' % (config.uihome, url)
+
 	def getServerPK(self):
 		config = getConfig()
 		url = '%s%s' % (config.uihome, config.publickey_url)

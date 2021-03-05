@@ -2,9 +2,11 @@ from kivy.properties import StringProperty, NumericProperty, ListProperty
 from kivy.factory import Factory
 from kivy.clock import Clock
 from kivy.logger import Logger
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.label import Label
 from kivy.uix.image import AsyncImage
 
-from .baseWidget import ScrollWidget,  getDataHandler, CSize
+from .baseWidget import ScrollWidget,  getDataHandler, VBox
 from .utils import CSize
 import re
 
@@ -16,7 +18,7 @@ LINK_LEAD = "["
 REFER_SPLIT = "]("
 REFER_END = ")"
 
-class MarkDownParser(object):
+class MarkdownParser(object):
 	mdkeys = [
 		SOURCE_DELIMITER,
 		VIDEO_LEAD,
@@ -34,10 +36,13 @@ class MarkDownParser(object):
 			IMAGE_LEAD:self.lead_image,
 		}
 
-	def handle_source_delimiter(self,mdtext):
+	def handle_source_delimiter(self):
 		x = self.mdtext.split(SOURCE_DELIMITER,1)
-		mk_p = MarkDownParser(x[0])
-		self.result += mk_p.parse()
+		mk_p = MarkdownParser(x[0])
+		d = {
+			'source':x[0]
+		}
+		self.result.append(d) 
 		if len(x) > 1:
 			self.mdtext = x[1]
 
@@ -67,12 +72,12 @@ class MarkDownParser(object):
 	def lead_audio(self):
 		x = self.mdtext.split(REFER_SPLIT,1)
 		if len(x)<2:
-			self.text = f'{VIDEO_LEAD}'
+			self.text = f'{AUDIO_LEAD}'
 			return
 		title = x[0]
 		y = x[1].split(REFER_END,1)
 		if len(y) < 2:
-			self.text = f'{VIDEO_LEAD}'
+			self.text = f'{AUDIO_LEAD}'
 			return
 		url = y[0]
 		d = {
@@ -88,12 +93,12 @@ class MarkDownParser(object):
 	def lead_image(self):
 		x = self.mdtext.split(REFER_SPLIT,1)
 		if len(x)<2:
-			self.text = f'{VIDEO_LEAD}'
+			self.text = f'{IMAGE_LEAD}'
 			return
 		title = x[0]
 		y = x[1].split(REFER_END,1)
 		if len(y) < 2:
-			self.text = f'{VIDEO_LEAD}'
+			self.text = f'{IMAGE_LEAD}'
 			return
 		url = y[0]
 		d = {
@@ -144,39 +149,37 @@ class MDImage(AsyncImage):
 	def image_loaded(self,o, *args):
 		self.image_size = self.texture.size
 
-	def resize(self, size):
-		self.parent_width = size[0]
-		Logger.info('MDImage: resize called, size=%s', size)
+	def resize(self, *args):
+		ps = [0,0,0,0]
+		if hasattr(self.parent, 'padding'):
+			ps = self.parent.padding
+		self.parent_width = self.parent.width - ps[0] - ps[2]
+		if self.texture:
+			if self.texture.size:
+				self.image_size = self.texture.size
+		Logger.info('MDImage:resize called, %d', self.parent_width)
 
 	def on_image_size(self, *args):
 		if self.parent_width:
-			self.set_new_height()
+			Logger.info('MDImage:on_iage_size %d, %s', self.parent_width,
+						self.image_size)
+			self.set_image_size()
 
 	def on_parent_width(self, *args):
 		if self.image_size:
-			self.set_new_height()
+			Logger.info('MDImage:on_oarent_width %d, %s', self.parent_width,
+						self.image_size)
+			self.set_image_size()
 
-	def set_new_height(self):
+	def set_image_size(self):
+		self.width = self.parent_width
 		self.height = self.parent_width * self.image_size[1] \
 							/ self.image_size[0]
-		Logger.info('MDImage: set_new_height called, size=%s', self.size)
-
+		Logger.info('MDImage:set_image_size %d, %d', self.width,
+					self.height)
 	
-class Markdown(ScrollWidget):
-	"""
-# Markdown
-MArkdown widget using to render a markdown file and show it
-description file format
-{
-	"widgettype":"Markdown",
-	"options":{
-		"source": the markdown file
-		other options
-	}
-}
-	"""
-	source = StringProperty(None)
-	def __init__(self, **kw):
+class MarkdownBody(VBox):
+	def __init__(self, md_obj=None, padding=[10,10,10,10], **kw):
 		self.part_handlers = {
 			"pure_md":self.build_pure_md,
 			"source":self.build_source,
@@ -184,14 +187,45 @@ description file format
 			"video":self.build_video,
 			"audio":self.build_audio
 		}
-		ScrollWidget.__init__(self, **kw)
-		self.bind(source=self.load_text)
-		if self.source:
-			Clock.schedule_once(self.load_text, 0.3)
-		self.bind(size=self.setChildMinWidth)
+		self.md_obj = md_obj
+		super().__init__(**kw)
+		self.padding=padding
+		self.size_hint = None,None
+		self.bind(parent=self.resize)
+		self.resize()
+	
+	def show_mdtext(self, mdtext):
+		mdp = MarkdownParser(mdtext)
+		parts = mdp.parse()
+		self.clear_widgets()
+		for p in parts:
+			for k,v in p.items():
+				f = self.part_handlers.get(k)
+				f(v)
+
+	def resize(self, *args):
+		Logger.info('MDBody:resize called')
+		if self.parent:
+			ps = [0,0,0,0]
+			if hasattr(self.parent, 'padding'):
+				ps = self.parent.padding
+			h = 0
+			for c in self.children:
+				if hasattr(c, 'resize'):
+					c.resize()
+				h += c.height
+			self.width = self.parent.width - ps[0] - ps[2]
+			self.height = h
+		else:
+			Logger.info('resize:parent is null')
 
 	def build_source(self,source_desc):
-		pass
+		color_level = self.color_level+1
+		w = MarkdownBody(md_obj=self.md_obj,
+				color_level=color_level,size_hint_y=None)
+		w.show_mdtext(source_desc)
+		self.add_widget(w)
+		w.resize()
 
 	def build_pure_md(self, mdtext):
 		for l in mdtext.split('\n'):
@@ -206,7 +240,7 @@ description file format
 			)
 		
 		self.add_widget(w)
-		w.resize(self.size)
+		w.resize()
 
 	def build_video(self, video_desc):
 		w = Factory.NewVideo(source=video_desc['url'],
@@ -225,44 +259,12 @@ description file format
 		w.bind(on_enter_focus=f1)
 		w.bind(on_leave_focus=f2)
 		self.add_widget(w)
-		w.resize(self.size)
+		w.resize()
 		
 	def build_audio(self, audio_desc):
 		w = Factory.APlayer(source=audio_desc.url)
 		w.bind(minimum_height=w.setter('height'))
 		self.add_widget(w)
-
-	def setChildMinWidth(self, *args):
-		print('size changed')
-		for i,c in enumerate(self._inner.children):
-			c.width = self.width
-			if hasattr(c, 'resize'):
-				c.resize(self.size)
-
-	def load_text(self, *args):
-		print('source fired, hahaha', *args)
-		self.clear_widgets()
-		h =  getDataHandler(self.source)
-		h.bind(on_success=self.update)
-		h.bind(on_error=self.show_error)
-		h.handle()
-
-	def show_error(self, o, e):
-		print('load_text(), error=',e)
-
-	def update(self, o, text):
-		print('text=',text, type(text))
-		if not text:
-			return
-		text = ''.join(text.split('\r'))
-		mdp = MarkDownParser(text)
-		parts = mdp.parse()
-		for p in parts:
-			for k,v in p.items():
-				print('part=', k, v)
-				f = self.part_handlers.get(k)
-				f(v)
-
 
 	def parse_title(self, txt, level):
 		w = Factory.Blocks().widgetBuild({
@@ -285,8 +287,7 @@ description file format
 		if h1 is None or h1 < clen:
 			h1 = clen
 		w.height = h1
-		w.bind(on_ref_press=self.open_new_md)
-		# w.bind(minimum_height=w.setter('height'))
+		w.bind(on_ref_press=self.md_obj.open_new_md)
 		self.add_widget(w)
 		
 	def parse_line(self, l):
@@ -328,13 +329,8 @@ description file format
 		if h is None or h < clen:
 			h = clen
 		w.height = h
-		w.bind(on_ref_press=self.open_new_md)
-		# w.bind(minimum_height=w.setter('height'))
+		w.bind(on_ref_press=self.md_obj.open_new_md)
 		self.add_widget(w)
-
-	def open_new_md(self, o, value):
-		print(value,'is it a link')
-		self.source = value
 
 	def mktext2bbtext(self,mdtext):
 		"""
@@ -379,3 +375,63 @@ description file format
 					mdtext)
 
 		return mdtext
+
+
+class Markdown(ScrollView):
+	"""
+# Markdown
+MArkdown widget using to render a markdown file and show it
+description file format
+{
+	"widgettype":"Markdown",
+	"options":{
+		"source": the markdown file
+		other options
+	}
+}
+	"""
+	source = StringProperty(None)
+	
+	def __init__(self, color_level=0, **kw):
+		self.color_level = color_level
+		ScrollView.__init__(self, **kw)
+		self.root_body = MarkdownBody(md_obj=self,
+					color_level=color_level,
+					size_hint_y=None
+		)
+		self.root_body.bind(minimum_height=self.root_body.setter('height'))
+		self.add_widget(self.root_body)
+		if self.source:
+			self.load_text()
+		self.bind(size=self.root_body.resize)
+		self.bind(source=self.load_text)
+		# Clock.schedule_interval(self.check_parent_window, 1)
+
+	def check_parent_window(self, *args):
+		pw = self.get_parent_window()
+		rw = self.get_root_window()
+		print('MD: pw=%s,rw=%s', pw,rw)
+
+	def stop_media(self, *args):
+		self.root_body.stp_video()
+
+	def load_text(self, *args):
+		h =  getDataHandler(self.source)
+		h.bind(on_success=self.update)
+		h.bind(on_error=self.show_error)
+		h.handle()
+
+	def show_error(self, o, e):
+		print('load_text(), error=',e)
+
+	def update(self, o, text):
+		print('text=',text, type(text))
+		if not text:
+			return
+		text = ''.join(text.split('\r'))
+		self.root_body.show_mdtext(text)
+		self.scroll_y = 1
+
+	def open_new_md(self, o, value):
+		print(value,'is it a link')
+		self.source = value

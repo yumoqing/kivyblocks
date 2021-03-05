@@ -29,18 +29,23 @@ class NewVideo(BGColorBehavior, Video):
 		self.register_event_type('on_enter_focus')
 		self.register_event_type('on_load_success')
 		self.bind(source=self.record_start_time)
+		self.bind(loaded=self.on_video_loaded)
 		self.load_status = None
 		Clock.schedule_interval(self.check_focus,0.2)
 
 	def on_enter_focus(self, v=None):
-		Logger.info('NewView: enter focus')
+		Logger.info('NewVideo: enter focus')
 
 	def on_leave_focus(self, v=None):
-		Logger.info('NewView: leave focus')
+		Logger.info('NewVideo: leave focus')
 
 	def check_focus(self,*args):
 		if not self.parent:
+			self.center_screen = False
 			return
+		if not self.get_root_window():
+			self.center_screen = False
+
 		w = self.parent
 		pos = w.to_widget(*Window.center)
 		if self.collide_point(*pos):
@@ -54,39 +59,39 @@ class NewVideo(BGColorBehavior, Video):
 		else:
 			self.dispatch('on_leave_focus')
 
-	def resize(self, size):
+	def resize(self, *args):
 		v_size = self.get_video_size()
 		if v_size:
 			self.height = self.width * v_size[1] / v_size[0]
 
 	def on_load_success(self, *args):
+		Logger.info('NewVideo: pn_load_success fired, %s', args)
 		pass
 
 	def record_start_time(self, *args):
 		self.start_time = time.time()
 		self.load_status = 'start'
+		Logger.info('NewVideo: record_start_time() called %s',self.load_status)
 
 	def on_open_failed(self, source, x=None):
 		Logger.error(f'NewVideo: source={self.source} open failed')
 		self.load_status = 'failed'
 
 	def ffplayerLog(self, msg, level):
-		"""
 		if 'Connection to tcp' in msg and 'failed' in msg:
-			self.dispatch('on_open_failed', self.source)
+			self.dispatch('on_open_failed', msg)
 		if 'Invalid data found when processing input' in msg:
-			self.dispatch('on_open_failed', self.source)
+			self.dispatch('on_open_failed', msg)
+		if 'Http error 403' in msg:
+			self.dispatch('on_open_failed', msg)
 		if 'End of file' in msg:
-			self.dispatch('on_open_failed', self.source)
+			self.dispatch('on_open_failed', msg)
 		if 'I/O error' in msg:
-			self.dispatch('on_open_failed', self.source)
-		if 'Server returned 404 Not Found' in msg:
-			self.dispatch('on_open_failed', self.source)
-		"""
+			self.dispatch('on_open_failed', msg)
 		if 'Server returned 4' in msg:
-			self.dispatch('on_open_failed', self.source)
+			self.dispatch('on_open_failed', msg)
 		if 'Server returned 5' in msg:
-			self.dispatch('on_open_failed', self.source)
+			self.dispatch('on_open_failed', msg)
 			
 		msg = msg.strip()
 		if msg:
@@ -108,18 +113,22 @@ class NewVideo(BGColorBehavior, Video):
 		else:
 			Logger.error('NewVideo: _video has not _ffplayer, do nothong')
 
+	def on_video_loaded(self, *args):
+		Logger.info('NewVideo: status=%s, load_status=%s', self.state,
+						self.load_status)
+		if self.load_status == 'start':
+			self.load_status = 'success'
+			t = time.time()
+			self.dispatch('on_load_success',
+							{
+								'source':self.source,
+								'time':int((t - self.start_time)*100)
+							})
+
+
 	def on_state(self,*args):
 		super().on_state(*args)
 		if self.state == 'play':
-			if self.load_status == 'start':
-				self.load_status = 'success'
-				t = time.time()
-				self.dispatch('on_load_success',
-								{
-									'source':self.source,
-									'time':int((t - self.start_time)*100)
-								})
-
 			Window.allow_screensaver = False
 		else:
 			Window.allow_screensaver = True

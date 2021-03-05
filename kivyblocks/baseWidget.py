@@ -170,9 +170,13 @@ class Text(Label):
 		if self.bgcolor:
 			self.color = self.bgcolor
 
-	def resize(self, size):
+	def resize(self, *args):
 		if not self.size_hint_y:
-			self.width = size[0]
+			ps = [0,0,0,0]
+			if hasattr(self.parent,'padding'):
+				ps = self.parent.padding
+
+			self.width = self.parent.width - ps[0] - ps[2]
 			self.set_widget_height()
 
 	def set_widget_height(self, *args):
