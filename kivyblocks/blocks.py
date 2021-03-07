@@ -650,14 +650,29 @@ class Blocks(EventDispatcher):
 			if hasattr(from_widget,'widget_id'):
 				if from_widget.widget_id == id:
 					return from_widget
+				if id[0] == '-' and from_widget.widget_id == id[1:]:
+					return from_widget
 			if hasattr(from_widget, id):
 				w = getattr(from_widget,id)
 				if isinstance(w,Widget):
 					return w
-			for c in from_widget.children:
-				ret = find_widget_by_id(id,from_widget=c)
-				if ret:
-					return ret
+				if id[0] == '-':
+					w = getattr(from_widget,id[1:])
+					if isinstance(w,Widget):
+						return w
+
+			if id[0] == '-':
+				print('find_widget_by_id(), id=', id, 
+							'widget=', from_widget)
+				if isinstance(from_widget, WindowBase):
+					return None
+				return find_widget_by_id(id, 
+						from_widget=from_widget.parent)
+			else:
+				for c in from_widget.children:
+					ret = find_widget_by_id(id,from_widget=c)
+					if ret:
+						return ret
 			return None
 
 		ids = id.split('.')
