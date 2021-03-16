@@ -9,7 +9,7 @@ kivyblocks base on the python package 'kivy', which is a cross platform GUI pack
 [kivycalendar](https://github.com/yumoqing/kivycalendar)
 [kivy](https://github.com/kivy/kivy)
 ...
-see the [requirements.txt]('./requirements.txt')
+see the [requirements.txt](./requirements.txt)
 
 ## Principle
 
