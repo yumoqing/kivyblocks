@@ -4,6 +4,36 @@ from appPublic.folderUtils import ProgramPath
 from appPublic.jsonConfig import getConfig
 
 from kivyblocks.blocksapp import BlocksApp
+from kivyblocks.blocks import Blocks
+
+class TestApp(BlocksApp):
+	def build(self):
+		b = super(TestApp, self).build()
+		widget_desc = {
+			"widgettype":"VBox",
+			"options":{},
+			"subwidgets":[
+				{
+					"widgettype":"Title1",
+					"options":{
+						"text":"Say Hello",
+						"i18n":True,
+						"size_hint_y":None,
+						"height":"py::CSize(2)"
+					}
+				},
+				{
+					"widgettype":"Text",
+					"options":{
+						"text":"Hello KivyBlocks"
+					}
+				}
+			]
+		}
+		blocks = Blocks()
+		x = blocks.widgetBuild(widget_desc)
+		return x
+
 
 if __name__ == '__main__':
 	pp = ProgramPath()
@@ -13,7 +43,6 @@ if __name__ == '__main__':
 	print('ProgramPath=',pp,'workdir=',workdir)
 
 	config = getConfig(workdir,NS={'workdir':workdir,'ProgramPath':pp})
-	myapp = BlocksApp()
+	myapp = TestApp()
 	myapp.run()
-	myapp.workers.running = False
 	

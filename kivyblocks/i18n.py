@@ -38,15 +38,17 @@ class I18n:
 	def loadI18n(self,lang):
 		app = App.get_running_app()
 		config = getConfig()
+		self.kvlang[lang] = {}
 		if config.i18n_folder:
 			self.kvlang[lang] = self.loadI18nFromFolder(lang)
 			return
 
-		url = '%s%s/%s' % (config.uihome, config.i18n_url, lang)
-		hc = HttpClient()
-		d = hc.get(url)
-		print('i18n() %s get data=' % url, d, type(d))
-		self.kvlang[lang] = d
+		if config.i18n_url:
+			url = '%s%s/%s' % (config.uihome, config.i18n_url, lang)
+			hc = HttpClient()
+			d = hc.get(url)
+			print('i18n() %s get data=' % url, d, type(d))
+			self.kvlang[lang] = d
 		
 	def __call__(self,msg,lang=None):
 		if lang is None:

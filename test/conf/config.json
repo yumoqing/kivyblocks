@@ -7,18 +7,5 @@
 		"huge":5.5,
 		"hugest":6.5
 	},
-	"font_name":"normal",
-	"uihome":"http://www.bsppo.com:10080",
-	"i18n_url":"/public/i18n",
-	"publickey_url":"/public/publickey",
-	"login_url":"/public/publickey",
-	"udws":[
-		"/udw/udws.uidesc"
-	],
-	"root":{
-		"widgettype":"urlwidget",
-		"options":{
-			"url":"/test/loginform.ui"
-		}
-	}
+	"font_name":"normal"
 }

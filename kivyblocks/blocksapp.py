@@ -91,13 +91,14 @@ class BlocksApp(App):
 		self.workers = Workers(maxworkers=config.maxworkers or 80)
 		self.workers.start()
 		self.running = True
-		blocks = Blocks()
-		print(config.root)
-		x = blocks.widgetBuild(config.root)
-		if x is None:
-			alert('buildError,Exit', title='Error')
-			return Label(text='error')
-		return x
+		if config.root:
+			blocks = Blocks()
+			x = blocks.widgetBuild(config.root)
+			if x is None:
+				alert('buildError,Exit', title='Error')
+				return Label(text='error')
+			return x
+		return None
 
 	def realurl(self, url):
 		if url.startswith('https://') or url.startswith('http://'):
