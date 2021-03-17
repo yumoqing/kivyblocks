@@ -21,7 +21,6 @@ The Customized json data has it own format to descript the UI and it's interacti
 pip install git+https://github.com/yumoqing/kivy-blocks
 ```
 Use above command to install the newest version of kivyblocks
-the widget specification file  
 ## How to use
 see the simple example below:
 ```
@@ -75,4 +74,14 @@ if __name__ == '__main__':
 ```
 if you running it on window, it will show the following:
 ![hello](./docs/imgs/hello_window.png)
+
+## Documents
+[中文文档](./docs/cn/index.md)
+[English](./docs/en/index.md)
+
+## references
+
+Build app for android please see [Buildozer](https://github.com/kivy/buildozer)
+kivy introduct and API please see [kivy](https://kivy.org)
+
 
