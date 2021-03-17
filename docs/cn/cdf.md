@@ -20,4 +20,47 @@
 ## 其他属性
 	非上述属性的其他的字典属性，blocks会试图用此属性值来创建构件，如果成功，则将此构件在当前构件中保存为此属性名称，并可用使用属性名称当变量来调用 Blocks.getWidgetById()函数来获取
 	
+## 例子
 
+### HELLO
+```
+		{
+			"widgettype":"VBox",
+			"options":{},
+			"subwidgets":[
+				{
+					"widgettype":"Title1",
+					"options":{
+						"text":"Say Hello",
+						"i18n":True,
+						"size_hint_y":None,
+						"height":"py::CSize(2)"
+					}
+				},
+				{
+					"widgettype":"Text",
+					"options":{
+						"text":"Hello KivyBlocks"
+					}
+				}
+			]
+		}
+```
+##### 说明
+创建一个VBox类型的构件，VBox创建一个子构件垂直排列的容器，子构件按照顺序从上而下排列，在这个例子中，本VBox容器中放了两个子构件，一个是“title1”的标题1构件，另一个是Text构件，VBox不带参数是表示占满父构件的全部空间。
+
+##### 显示效果
+[Hello](../imgs/hello_window.png)
+
+### 服务器来的构件字典数据
+```
+		{
+            "widgettype":"urlwidget",
+            "options":{
+				"params":{},
+                "url":"{{entire_url('ctrl.ui')}}"
+            }
+		}
+```
+#### 说明
+urlwidget的一个特殊的构件类型
