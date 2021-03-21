@@ -9,7 +9,7 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.switch import Switch
 from kivy.metrics import sp,dp
 from kivy.app import App
-from kivy.properties import BooleanProperty
+from kivy.properties import BooleanProperty, ListProperty
 
 from ..threadcall import HttpClient
 from ..utils import CSize
@@ -41,6 +41,15 @@ class BoolInput(Switch):
 		self.active = v
 	
 class StrInput(TextInput):
+	bgcolor = ListProperty(None)
+	fgcolor = ListProperty(None)
+
+	def on_bgcolor(self, o, bgcolor):
+		self.background_color = bgcolor
+
+	def on_fgcolor(self, o, fgcolor):
+		self.foreground_color = fgcolor
+
 	def __init__(self,**kv):
 		if kv is None:
 			kv = {}
