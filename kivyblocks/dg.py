@@ -24,6 +24,7 @@ from .paging import Paging, RelatedLoader
 from .ready import WidgetReady
 from .toolbar import Toolbar
 from .bgcolorbehavior import BGColorBehavior
+from .widget_css import WidgetCSS
 
 def field_widget(desc, rec):
 	viewer = desc.get('viewer')
@@ -67,6 +68,7 @@ class BLabel(ButtonBehavior, Text):
 	def __init__(self, **kw):
 		ButtonBehavior.__init__(self)
 		Text.__init__(self,**kw)
+		self.csscls = 'dummy'
 		
 class Cell(BoxLayout):
 	def __init__(self,row,desc):
@@ -129,6 +131,7 @@ class Row(GridLayout):
 		self.linewidth = 1
 		self.rowdesc = rowdesc
 		super().__init__(cols=len(self.rowdesc),spacing=self.linewidth)
+		self.spacing = 2
 		# Clock.schedule_once(self.init,0)
 		self.init(0)
 
@@ -156,12 +159,10 @@ class Row(GridLayout):
 		self.part.datagrid.select_row = self
 		self.part.datagrid.dispatch('on_selected',self)
 
-class Header(WidgetReady, BGColorBehavior, ScrollWidget):
+class Header(ScrollWidget, WidgetReady, WidgetCSS):
 	def __init__(self,part,color_level=-1,**kw):
 		self.part = part
-		ScrollWidget.__init__(self,**kw)
-		WidgetReady.__init__(self)
-		BGColorBehavior.__init__(self,color_level=color_level)
+		super(Header, self).__init__(**kw)
 		self.init(1)
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
 		if self.part.freeze_flag:
@@ -176,10 +177,10 @@ class Header(WidgetReady, BGColorBehavior, ScrollWidget):
 		self.add_widget(self.header)
 		self.height = self.header.height
 
-class Body(ScrollWidget):
+class Body(ScrollWidget, WidgetReady, WidgetCSS):
 	def __init__(self,part,**kw):
 		self.part = part
-		ScrollWidget.__init__(self,**kw)
+		super(Body, self).__init__(**kw)
 		self.idRow = {}
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
 		if self.part.freeze_flag:

@@ -4,24 +4,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivyblocks.utils import CSize
-
-kivyblocks_css_keys = [
-	"height_nm",
-	"width_nm",
-	"height_cm",
-	"width_cm",
-	"bgcolor",
-	"fgcolor",
-	"radius",
-	"spacing",
-	"padding",
-	"border"
-]
-
-kivyblocks_csses = {
-	"default":{
-	},
-}
+from kivy.app import App
 
 class WidgetCSS(object):
 	height_nm = NumericProperty(None)
@@ -32,6 +15,8 @@ class WidgetCSS(object):
 	fgcolor = ListProperty(None)
 	csscls = StringProperty(None)
 	radius = ListProperty(None)
+	background_rec = None
+	bg_func = Rectangle
 
 	def on_height_nm(self, o, v):	
 		if not self.height_nm:
@@ -53,16 +38,13 @@ class WidgetCSS(object):
 
 	def on_csscls(self, o, csscls):
 		if isinstance(self.csscls, str):
-			self.set_css(sef.csscls)
-
-	def _get_css_dict_by_name(self, css_name):
-		dic = kivyblocks_csses.get(css_name,{})
-		return dic
+			self.set_css(self.csscls)
 
 	def set_css(self, css_str):
 		css = {}
+		app = App.get_running_app()
 		for css_name in css_str.split(' '):
-			css.update(self._get_css_dict_by_name(css_name))
+			css.update(app.get_css(css_name))
 		for k,v in css.items():
 			setattr(self,k,v)
 
@@ -82,9 +64,9 @@ class WidgetCSS(object):
 		if not self.fgcolor:
 			return
 		if isinstance(self, TextInput):
-			self.foreground_color = fgcolor
+			self.foreground_color = self.fgcolor
 		if isinstance(self, Label):
-			self.color = fgcolor
+			self.color = self.fgcolor
 			return
 		return
 
@@ -92,17 +74,19 @@ class WidgetCSS(object):
 		if not self.bgcolor:
 			return
 		if isinstance(self, TextInput):
-			self.background_color = bgcolor
+			self.background_color = self.bgcolor
 			return
 		if isinstance(self, Button):
-			self.background_color = bgcolor
+			self.background_color = self.bgcolor
 			return
 		self.set_background_color()
 
 	def on_radius(self, o, r):
 		if not radius:
+			self.bg_func = Rectangle
 			return
-		self.set_background_color()
+		self.bg_func = RoundedRectangle
+		# self.set_background_color()
 
 	def set_background_color(self, *args):
 		if not self.bgcolor:
@@ -112,11 +96,11 @@ class WidgetCSS(object):
 
 		with self.canvas.before:
 			Color(*self.bgcolor)
-			if self.radius and len(self.radius) == 4:
-				self.background_rect = RoundedRectangle(pos=self.pos,
+			if self.radius:
+				self.background_rect = self.bg_func(pos=self.pos,
 							size=self.size,
 							radius=self.radius)
 			else:
-				self.background_rect = Rectangle(pos=self.pos, 
+				self.background_rect = self.bg_func(pos=self.pos, 
 							size=self.size)
 

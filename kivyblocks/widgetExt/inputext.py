@@ -13,6 +13,7 @@ from kivy.properties import BooleanProperty, ListProperty
 
 from ..threadcall import HttpClient
 from ..utils import CSize
+from ..widget_css import WidgetCSS
 
 class BoolInput(Switch):
 	def __init__(self,**kw):
@@ -40,16 +41,7 @@ class BoolInput(Switch):
 	def setValue(self,v):
 		self.active = v
 	
-class StrInput(TextInput):
-	bgcolor = ListProperty(None)
-	fgcolor = ListProperty(None)
-
-	def on_bgcolor(self, o, bgcolor):
-		self.background_color = bgcolor
-
-	def on_fgcolor(self, o, fgcolor):
-		self.foreground_color = fgcolor
-
+class StrInput(WidgetCSS, TextInput):
 	def __init__(self,**kv):
 		if kv is None:
 			kv = {}
@@ -78,7 +70,7 @@ class StrInput(TextInput):
 		a['font_size'] = CSize(kv.get('font_size',0.9))
 
 		Logger.info('TextInput:a=%s,kv=%s',a,kv)
-		super(StrInput,self).__init__(**a)
+		super(StrInput, self).__init__(**a)
 		self.old_value = None
 		self.register_event_type('on_changed')
 		self.bind(focus=self.on_focus)
@@ -95,8 +87,10 @@ class StrInput(TextInput):
 	def on_focus(self,t,v):
 		if v:
 			self.old_value = self.getValue()
+			self.csscls = 'input_focus'
 		else:
 			self.checkChange(None)
+			self.csscls = 'input'
 
 	def getValue(self):
 		return self.text

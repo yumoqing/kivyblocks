@@ -82,14 +82,68 @@ def getAuthHeader():
 	print('serverinfo authCode not found')
 	return {}
 
+kivyblocks_css_keys = [
+	"height_nm",
+	"width_nm",
+	"height_cm",
+	"width_cm",
+	"bgcolor",
+	"fgcolor",
+	"radius",
+	"spacing",
+	"padding",
+	"border"
+]
+
 class BlocksApp(App):
+	def load_csses(self):
+		config = getConfig()
+		if not config.css:
+			return
+
+		if config.css.css_filename:
+			with codecs.open(config.css.css_filename, 'r', 'utf-8') as f:
+				d = json.load(f)
+				self.buildCsses(d)
+		if config.css.css_url:
+			hc = HttpClient()
+			d = hc.get(self.realurl(config.css.css_url))
+			self.buildCsses(d)
+
+	def buildCsses(self, dic):
+		for k,v in dic.items():
+			if isinstance(v,dict):
+				self.csses[k] = \
+					{x:y for x,y in v.items() if x in kivyblocks_css_keys}
+
+	def get_csses(self):
+		return self.csses
+
+	def get_css(self, name):
+		return self.csses.get(name,self.csses.get('default',{}))
+
 	def build(self):
 		config = getConfig()
+		self.csses = {
+			"default":{
+				"bgcolor":[0.35,0.35,0.35,1],
+				"fgcolor":[0.85,0.85,0.85,1]
+			},
+			"input":{
+				"bgcolor":[0.35,0.35,0.35,1],
+				"fgcolor":[0.85,0.85,0.85,1]
+			},
+			"input_focus":{
+				"bgcolor":[1,0.35,0.35,1],
+				"fgcolor":[1,0.85,0.85,1]
+			}
+		}
 		self.public_headers = {}
 		Window.bind(on_request_close=self.on_close)
 		Window.bind(size=self.device_info)
 		self.workers = Workers(maxworkers=config.maxworkers or 80)
 		self.workers.start()
+		self.load_csses()
 		self.running = True
 		if config.root:
 			blocks = Blocks()
