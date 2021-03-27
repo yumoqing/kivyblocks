@@ -305,8 +305,8 @@ class DataGrid(WidgetReady, BoxLayout):
 		]
 	}
 	"""
-	header_css = StringProperty(None)
-	body_css = StringProperty(None)
+	header_css = StringProperty("default")
+	body_css = StringProperty("default")
 	noheader = BooleanProperty(False)
 	row_selected = BooleanProperty(False)
 	def __init__(self,**options):
