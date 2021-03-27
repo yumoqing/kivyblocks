@@ -189,15 +189,9 @@ class BoxViewer(WidgetReady, BoxLayout):
 			self.dataloader.loadPreviousPage()
 
 	def select_record(self,o,v=None):
-		print('BoxViewer(),on_selected() called\n',
-				'normal_bgcolor=',o.normal_bgcolor,'\n',
-				'selected_bgcolor=',o.selected_bgcolor,'\n',
-				'bg_color=',o.bgcolor,'\n',
-				'color_level=',self.color_level)
-
 		for w in self.subwidgets:
-			w.unselected()
-		o.selected()
+			w.box_actived = False
+		o.box_actived = True
 		self.selected_data = o.getValue()
 		self.dispatch('on_selected',self.selected_data)
 
