@@ -7,6 +7,7 @@ from kivy.uix.label import Label
 from kivy.uix.image import AsyncImage
 
 from .baseWidget import ScrollWidget,  getDataHandler, VBox
+
 from .utils import CSize
 import re
 
@@ -220,9 +221,8 @@ class MarkdownBody(VBox):
 			Logger.info('resize:parent is null')
 
 	def build_source(self,source_desc):
-		color_level = self.color_level+1
 		w = MarkdownBody(md_obj=self.md_obj,
-				color_level=color_level,size_hint_y=None)
+				csscls=md_obj.second_css, size_hint_y=None)
 		w.show_mdtext(source_desc)
 		self.add_widget(w)
 		w.resize()
@@ -386,17 +386,19 @@ description file format
 	"widgettype":"Markdown",
 	"options":{
 		"source": the markdown file
+		"first_css":,
+		"second_css":
 		other options
 	}
 }
 	"""
 	source = StringProperty(None)
-	
-	def __init__(self, color_level=0, **kw):
-		self.color_level = color_level
-		ScrollView.__init__(self, **kw)
+	first_css = StringProperty("default")
+	second_css = StringProperty("default")
+	def __init__(self, **kw):
+		ScrollView.__init__(self)
 		self.root_body = MarkdownBody(md_obj=self,
-					color_level=color_level,
+					csscls=self.first_css,
 					size_hint_y=None
 		)
 		self.root_body.bind(minimum_height=self.root_body.setter('height'))

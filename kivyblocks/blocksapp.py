@@ -109,6 +109,7 @@ class BlocksApp(App):
 			hc = HttpClient()
 			d = hc.get(self.realurl(config.css.css_url))
 			self.buildCsses(d)
+		Logger.info('blocksapp: csses=%s', self.csses)
 
 	def buildCsses(self, dic):
 		for k,v in dic.items():

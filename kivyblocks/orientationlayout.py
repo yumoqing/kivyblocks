@@ -6,7 +6,7 @@ from kivy.clock import Clock
 from kivyblocks.swipebehavior import SwipeBehavior
 from kivyblocks.ready import WidgetReady
 
-class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
+class OrientationLayout(FloatLayout, WidgetReady, SwipeBehavior):
 	"""
 	TwinStyleLayout layout two widget verical when parital orientation
 	and second widget hide when it is in landscape
@@ -17,9 +17,7 @@ class OrientationLayout(WidgetReady, SwipeBehavior, FloatLayout):
 		self.widget_main = None
 		self.widget_second = None
 		self.second_flg = False
-		FloatLayout.__init__(self, **kw)
-		SwipeBehavior.__init__(self)
-		WidgetReady.__init__(self)
+		super(OrientationLayout, self).__init__(**kw)
 		self.build_children()
 		self.bind(on_swipe_left=self.toggle_second)
 		self.bind(on_swipe_right=self.toggle_second)

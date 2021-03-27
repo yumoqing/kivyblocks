@@ -1,4 +1,5 @@
 from kivy.core.window import Window
+from kivy.clock import Clock
 from kivy.utils import platform
 from kivy.app import App
 from kivy.properties import BooleanProperty
@@ -11,24 +12,18 @@ desktopOSs=[
 
 class WidgetReady(object):
 	fullscreen = BooleanProperty(False)
+	ready = BooleanProperty(False)
+	_fullscreen = False
 
-	def __init__(self, **kw):
-		self.register_event_type('on_ready')
-		self._fullscreen_state = False
-		self._ready = False
-
-	def on_ready(self):
+	def on_ready(self, *args):
 		pass
 
-	def ready(self):
-		if self._ready:
-			return
-		self.dispatch('on_ready')
-		self._ready = True
+	def set_ready(self, *args):
+		self.ready = True
 
 	def reready(self):
-		self._ready = False
-		self.ready()
+		self.ready = False
+		Clock.schedule_once(self.set_ready, 0.1)
 
 	def use_keyboard(self):
 		self.my_kb = Window.request_keyboard(None, self)

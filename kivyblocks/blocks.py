@@ -51,6 +51,7 @@ def wrap_ready(klass):
 		Factory.unregister(klass)
 		globals()[klass] = w
 	except:
+		print_exc()
 		w = globals().get(klass)
 		if w is None:
 			return None
@@ -222,6 +223,7 @@ class Blocks(EventDispatcher):
 				# print('Blocks.py :resp=',resp)
 				return resp
 			except Exception as e:
+				print_exc()
 				if errback:
 					return errback(None,e)
 				return None
@@ -598,9 +600,10 @@ class Blocks(EventDispatcher):
 				widget = self.w_build(desc)
 				self.dispatch('on_built',widget)
 				if hasattr(widget,'ready'):
-					widget.ready()
+					widget.ready = True
 				return widget
 			except Exception as e:
+				print_exc()
 				self.dispatch('on_failed',e)
 				return None
 
@@ -643,7 +646,6 @@ class Blocks(EventDispatcher):
 	
 	@classmethod
 	def getWidgetById(self,id,from_widget=None):
-		print('getWidgetById(%s,%s) ...' % (id, from_widget))
 		def find_widget_by_id(id, from_widget):
 			if id=='self':
 				return from_widget
@@ -694,7 +696,6 @@ class Blocks(EventDispatcher):
 		if from_widget is None:
 			from_widget = app.root
 		for id in ids:
-			print('finding', id)
 			w = find_widget_by_id(id,from_widget=from_widget)
 			if w is None \
 					and id == ids[0] \

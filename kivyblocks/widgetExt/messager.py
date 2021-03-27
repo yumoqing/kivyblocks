@@ -2,15 +2,20 @@ from kivy.uix.popup import Popup
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
+from ..widget_css import WidgetCSS
+class MyPopup(WidgetCSS, Popup):
+	def __init__(self,content=None, title='', **kw):
+		super(MyPopup, self).__init__(content=content,
+					title=title, **kw)
 
 class Messager:
-	def __init__(self, show_time=0, title=None):
+	def __init__(self, show_time=0, title=None, **kw):
 		self.show_time = show_time
 		self.title = title if title else 'Message'
 		self.time_task = None
 		self.w = Popup(content=BoxLayout(orientation='vertical'),      
 						title=self.title,
-						size_hint=(0.8,0.8))
+						size_hint=(0.8,0.8), **kw)
 		self.messager = TextInput(size=self.w.content.size,
 				multiline=True,readonly=True)
 		self.w.content.add_widget(self.messager)

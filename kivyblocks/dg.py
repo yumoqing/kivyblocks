@@ -6,7 +6,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
 from kivy.uix.button import ButtonBehavior
 from kivy.clock import Clock
-from kivy.properties import BooleanProperty
+from kivy.properties import BooleanProperty, StringProperty
 from kivy.properties import ListProperty
 from kivy.graphics import Color, Rectangle
 from kivy.app import App
@@ -112,8 +112,8 @@ class Cell(BoxLayout):
 	def cell_press(self,obj):
 		self.row.selected()
 
-class Row(GridLayout):
-	def __init__(self,part, rowdesc,header=False,data=None):
+class Row(WidgetCSS, GridLayout):
+	def __init__(self,part, rowdesc,header=False,data=None, **kw):
 		"""
 		rowdesc=[
 			{
@@ -130,8 +130,12 @@ class Row(GridLayout):
 		self.row_id = None
 		self.linewidth = 1
 		self.rowdesc = rowdesc
-		super().__init__(cols=len(self.rowdesc),spacing=self.linewidth)
-		self.spacing = 2
+		opts = kw.copy()
+		opts.update({
+			"cols":len(self.rowdesc),
+			"spacing":2
+		})
+		super(Row, self).__init__(**opts)
 		# Clock.schedule_once(self.init,0)
 		self.init(0)
 
@@ -159,10 +163,10 @@ class Row(GridLayout):
 		self.part.datagrid.select_row = self
 		self.part.datagrid.dispatch('on_selected',self)
 
-class Header(ScrollWidget, WidgetReady, WidgetCSS):
-	def __init__(self,part,color_level=-1,**kw):
-		self.part = part
+class Header(WidgetReady, ScrollWidget):
+	def __init__(self,part,**kw):
 		super(Header, self).__init__(**kw)
+		self.part = part
 		self.init(1)
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
 		if self.part.freeze_flag:
@@ -173,11 +177,11 @@ class Header(ScrollWidget, WidgetReady, WidgetCSS):
 		[ f.update({'value':self.part.fields[i].get('label', \
 							self.part.fields[i].get('name'))}) \
 							for i,f in enumerate(rd) ]
-		self.header = Row(self.part,rd,header=True)
+		self.header = Row(self.part,rd,header=True, csscls=self.part.datagrid.header_css)
 		self.add_widget(self.header)
 		self.height = self.header.height
 
-class Body(ScrollWidget, WidgetReady, WidgetCSS):
+class Body(WidgetReady, ScrollWidget):
 	def __init__(self,part,**kw):
 		self.part = part
 		super(Body, self).__init__(**kw)
@@ -189,7 +193,7 @@ class Body(ScrollWidget, WidgetReady, WidgetCSS):
 	def addRow(self,id, data,index=0):
 		rd = [ f.copy() for f in self.part.rowdesc ]
 		[ f.update({'value':data.get(f['name'])}) for f in rd ]
-		row = Row(self.part,rd,data=data)
+		row = Row(self.part,rd,data=data, csscls=self.part.datagrid.body_css)
 		row.row_id = id
 		self.add_widget(row,index=index)
 		self.idRow[id] = row
@@ -220,7 +224,6 @@ class DataGridPart(WidgetReady, BoxLayout):
 		self.fields_width = None
 		BoxLayout.__init__(self, orientation='vertical')
 		WidgetReady.__init__(self)
-		# Clock.schedule_once(self.init,0.1)
 		self.init(0)
 
 	def setWidth(self):
@@ -250,7 +253,6 @@ class DataGridPart(WidgetReady, BoxLayout):
 			kw['size_hint'] = (None,None)
 		else:
 			kw['size_hint'] = (1,None)
-
 		kw['height'] = self.datagrid.rowHeight()
 			
 		if not self.datagrid.noheader:
@@ -269,7 +271,7 @@ class DataGridPart(WidgetReady, BoxLayout):
 		return self.body.addRow(id, data)
 
 
-class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
+class DataGrid(WidgetReady, BoxLayout):
 	"""
 	DataGrid data format:
 	{
@@ -303,28 +305,19 @@ class DataGrid(WidgetReady, BGColorBehavior, BoxLayout):
 		]
 	}
 	"""
+	header_css = StringProperty(None)
+	body_css = StringProperty(None)
+	noheader = BooleanProperty(False)
 	row_selected = BooleanProperty(False)
-	def __init__(self,color_level=-1,radius=[],**options):
-		kw = DictObject()
-		kw = setSizeOptions(options, kw)
-		kw.orientation = 'vertical'
-		self.color_level = color_level
-		self.radius = radius
-		self.select_rowid = None
+	def __init__(self,**options):
+		options['orientation'] = 'vertical'
+		BoxLayout.__init__(self)
 		WidgetReady.__init__(self)
-		BoxLayout.__init__(self,**kw)
-		BGColorBehavior.__init__(self,color_level=color_level,
-							radius=radius)
-		self.parenturl = options.get('parenturl',None)
+		self.select_rowid = None
 		self.options = options
-		self.noheader = options.get('noheader',False)
-		self.header_bgcolor = options.get('header_bgcolor',[0.29,0.29,0.29,1])
-		self.body_bgcolor = options.get('body_bgcolor',[0.25,0.25,0.25,1])
-		self.color = options.get('color',[0.91,0.91,0.91,1])
 		self.row_height = None
 		self.on_sizeTask = None
 		self.selected_rowid = None
-		self.dataUrl = self.options.get('dataurl')
 		self.show_rows = 0
 		self.toolbar = None
 		self.freeze_part = None

@@ -1,5 +1,6 @@
 
 from kivy.event import EventDispatcher
+from kivy.app import App
 from .threadcall import HttpClient
 from .utils import absurl
 from appPublic.registerfunction import RegisterFunction
@@ -125,7 +126,8 @@ class DataLoader(EventDispatcher):
 
 class HttpDataLoader(DataLoader):
 	def load(self, *args, **kw):
-		url = absurl(self.data_user.url,self.data_user.target.parenturl)
+		app = App.get_running_app()
+		url = app.realurl(self.data_user.url)
 		method = self.data_user.method
 		params = self.data_user.params.copy()
 		params.update({

@@ -9,6 +9,7 @@ from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.factory import Factory
+from kivy.properties import StringProperty
 
 from appPublic.dictObject import DictObject
 from appPublic.registerfunction import RegisterFunction
@@ -17,14 +18,12 @@ from .widgetExt.scrollwidget import ScrollWidget
 from .utils import *
 from .ready import WidgetReady
 from .color_definitions import getColors
-from .bgcolorbehavior import BGColorBehavior
-from .baseWidget import Text
-from .toggleitems import PressableBox, ToggleItems
+from .baseWidget import Text, Box
+from .toggleitems import ToggleItems
 
 """
 toolbar options
 {
-	color_level:
 	radius:
 	"mode":"icon", "icontext","text"
 	img_size=1.5,	
@@ -39,19 +38,21 @@ toolbar options
 	]
 }
 """
-class Toolbar(BoxLayout):
-	def __init__(self, color_level=-1,
+class Toolbar(Box):
+	def __init__(self, 
 				radius=[],
 				img_size=1.5,
 				text_size=0.5,
-				tools=[], **opts):
-		self.color_level = color_level
+				tools=[], 
+				normal_css="default",
+				actived_css="default",
+				**opts):
 		self.radius = radius
 		self.img_size = img_size
 		self.text_size = text_size
 		self.tools = tools
 		self.tool_widgets={}
-		BoxLayout.__init__(self, **opts)
+		Box.__init__(self, **opts)
 		self.register_event_type('on_press')
 		first = True
 		subs_desc = []
@@ -89,11 +90,12 @@ class Toolbar(BoxLayout):
 			subs_desc.append(desc)
 
 		self.toggle_items = ToggleItems(
-				color_level=self.color_level,
 				radius=self.radius,
 				unit_size=self.img_size + self.text_size,
 				items_desc=subs_desc,
-				orientation=opts.get('orientation','horizontal')
+				normal_css=normal_css,
+				actived_css=actived_css,
+				**opts
 				)
 		for ti in self.toggle_items.item_widgets:
 			ti.widget_id = ti.user_data
@@ -112,7 +114,6 @@ Toolpage options
 	img_size:1.5,	
 	text_size:0.7,
 	tool_at:"left","right","top","bottom",
-	color_level:0,
 	radius:
 	"show_name":"default open tool's name"
 	tools:[
@@ -128,8 +129,10 @@ Toolpage options
 	]
 	
 """
-class ToolPage(BGColorBehavior, BoxLayout):
-	def __init__(self,color_level=-1,radius=[],
+class ToolPage(BoxLayout):
+	normal_css=StringProperty(None)
+	actived_css=StringProperty(None)
+	def __init__(self,radius=[],
 					toolbar_size=None,
 					img_size=1.5,
 					text_size=0.7,
@@ -151,13 +154,9 @@ class ToolPage(BGColorBehavior, BoxLayout):
 			
 		self.content_widgets = {}
 		self.show_name = show_name
-		self.color_level=self.opts.color_level or 0
 		self.sub_radius = self.opts.radius
 		self.tool_at = tool_at
 		BoxLayout.__init__(self,orientation=orient)
-		BGColorBehavior.__init__(self,
-							color_level=color_level,
-							radius=[])
 		self.content = None
 		self.toolbar = None
 		self.init()
@@ -165,9 +164,6 @@ class ToolPage(BGColorBehavior, BoxLayout):
 		Clock.schedule_once(self.show_page, 0.5)
 	
 	def show_page(self, *args):
-		print('toolbar=',self.toolbar.width,self.toolbar.height, \
-				'toggleitems=',self.toolbar.toggle_items.width, \
-					self.toolbar.toggle_items.height)
 		toggle_items = self.toolbar.toggle_items
 		for c in toggle_items.item_widgets:
 			cvalue = c.getValue()
@@ -202,7 +198,7 @@ class ToolPage(BGColorBehavior, BoxLayout):
 			opts['size_hint_x'] = None
 			opts['width'] = CSize(self.toolbar_size)
 			opts['orientation'] = 'vertical'
-		self.toolbar = Toolbar(color_level=self.color_level,
+		self.toolbar = Toolbar(
 						radius=self.sub_radius,
 						img_size=self.img_size,
 						text_size=self.text_size,

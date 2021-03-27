@@ -1,3 +1,4 @@
+from kivy.logger import Logger
 from kivy.properties import NumericProperty, ListProperty, StringProperty
 from kivy.graphics import Color, Rectangle, RoundedRectangle
 from kivy.uix.textinput import TextInput
@@ -13,10 +14,16 @@ class WidgetCSS(object):
 	width_cm = NumericProperty(None)
 	bgcolor = ListProperty(None)
 	fgcolor = ListProperty(None)
-	csscls = StringProperty(None)
+	csscls = StringProperty("default")
 	radius = ListProperty(None)
 	background_rec = None
 	bg_func = Rectangle
+
+	def on_size(self, o, s):
+		self.set_background_color()
+
+	def on_pos(self, o, p):
+		self.set_background_color()
 
 	def on_height_nm(self, o, v):	
 		if not self.height_nm:
@@ -60,6 +67,24 @@ class WidgetCSS(object):
 		self.size_hint_x = None
 		self.width = CSize(self.width_cm)
 
+	def set_child_fgcolor(self, c):
+		if not hasattr(c,'fgcolor'):
+			return 
+		if c.fgcolor:
+			return
+		if isinstance(c, TextInput):
+			c.foreground_color = self.fgcolor
+			return
+		if isinstance(c, Label):
+			c.color = self.fgcolor
+			return
+		for x in c.children:
+			self.set_child_fgcolor(x)
+
+	def on_children(self, o, c):
+		for c in self.children:
+			self.set_child_fgcolor(c)
+			
 	def on_fgcolor(self, o, c):
 		if not self.fgcolor:
 			return
@@ -68,6 +93,8 @@ class WidgetCSS(object):
 		if isinstance(self, Label):
 			self.color = self.fgcolor
 			return
+		for c in self.children:
+			self.set_child_fgcolor(c)
 		return
 
 	def on_bgcolor(self, o, c):
@@ -82,7 +109,7 @@ class WidgetCSS(object):
 		self.set_background_color()
 
 	def on_radius(self, o, r):
-		if not radius:
+		if not self.radius:
 			self.bg_func = Rectangle
 			return
 		self.bg_func = RoundedRectangle
@@ -90,8 +117,12 @@ class WidgetCSS(object):
 
 	def set_background_color(self, *args):
 		if not self.bgcolor:
+			Logger.info('WidgetCSS: set_bg_color(), bgcolor is null, (%s)',
+					self.__class__.__name__)
 			return
 		if not self.canvas:
+			Logger.info('WidgetCSS: set_bg_color(), canvas is null(%s)',
+					self.__class__.__name__)
 			return
 
 		with self.canvas.before:

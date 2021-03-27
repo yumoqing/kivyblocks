@@ -1,35 +1,47 @@
 from functools import partial
+from kivy.logger import Logger
 from kivy.uix.behaviors import TouchRippleButtonBehavior
 from kivy.graphics import Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
+from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 
 from kivyblocks.ready import WidgetReady
 from kivyblocks.bgcolorbehavior import BGColorBehavior
 from kivyblocks.utils import CSize
 from kivyblocks.baseWidget import Box
+from kivyblocks.widget_css import WidgetCSS
 
 class PressableBox(TouchRippleButtonBehavior, Box):
+	normal_css = StringProperty("default")
+	actived_css = StringProperty("default")
+	box_actived = BooleanProperty(False)
 	def __init__(self,border_width=1,
 				color_level=-1,
 				user_data=None,
 				radius=[],
 				**kw):
-		Box.__init__(self, padding=[border_width,
+		super(PressableBox, self).__init__(
+			padding=[border_width,
 			border_width,
 			border_width,
 			border_width],
-			color_level=color_level,
 			radius=radius,
 			**kw)
-		TouchRippleButtonBehavior.__init__(self)
 		self.border_width = border_width
 		self.user_data = user_data
-		self.unselected()
+		self.actived = False
+		self.csscls = self.normal_css
+
+	def on_box_actived(self, o, v):
+		if self.box_actived:
+			self.csscls = self.actived_css
+		else:
+			self.csscls = self.normal_css
 
 	def on_press(self,o=None):
-		print('on_press fired')
-		self.selected()
+		self.box_actived = True
+
 
 	def setValue(self,d):
 		self.user_data = d
@@ -48,7 +60,7 @@ ToggleItems format:
 	orientation:
 }
 """
-class ToggleItems(BGColorBehavior, BoxLayout):
+class ToggleItems(BoxLayout, WidgetCSS):
 	def __init__(self,
 				color_level=1,
 				radius=[],
@@ -56,6 +68,8 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 				unit_size=3,
 				items_desc=[],
 				border_width=1,
+				normal_css="default",
+				actived_css="default",
 				**kw):
 		self.unit_size_pix = CSize(unit_size) 
 		kw1 = {
@@ -72,13 +86,11 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 			kw1['size_hint_min_y'] = self.unit_size_pix
 		
 		BoxLayout.__init__(self, **kw1)
-		BGColorBehavior.__init__(self,
-					color_level=color_level,
-					radius=radius)
 		self.item_widgets = []
 		kw = {
 			"border_width":border_width,
-			"color_level":color_level,
+			"normal_css":normal_css,
+			"actived_css":actived_css,
 			"radius":radius
 		}
 		kw.update(kw1)
@@ -101,7 +113,7 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 			b.widgetBuild(desc)
 
 		if len(self.item_widgets) > 0:
-			self.item_widgets[0].selected()
+			self.item_widgets[0].actived = True
 		else:
 			print('items_desc=',items_desc,'error')
 		self.register_event_type('on_press')
@@ -111,19 +123,23 @@ class ToggleItems(BGColorBehavior, BoxLayout):
 		pass
 
 	def select_item(self,o=None):
-		[i.unselected() for i in self.item_widgets if i != o]
+		for i in self.item_widgets:
+			if i!=o:
+				i.box_actived = False
+
 		self.dispatch('on_press',o.getValue())
 
 	def getValue(self):
 		for i in self.item_widgets:
-			if i.is_selected():
+			if i.actived:
 				return i.getValue()
 		return None
 
 	def setValue(self,v):
 		for i in self.item_widgets:
 			if i.getValue() == v:
-				i.selected()
+				i.actived = True
 				self.select_item(i)
-				return
+			else:
+				i.actived = False
 

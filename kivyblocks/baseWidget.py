@@ -73,6 +73,8 @@ from .tab import TabsPanel
 from .qrdata import QRCodeWidget
 from .threadcall import HttpClient
 from .i18n import I18n
+from .widget_css import WidgetCSS
+from .ready import WidgetReady
 from .utils import CSize
 
 if platform == 'android':
@@ -85,40 +87,9 @@ class WrapText(Label):
 		self.bind(width=lambda *x: self.setter('text_size')(self, (self.width, None)),
 				texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
-class Box(BGColorBehavior, BoxLayout):
-	def __init__(self,color_level=-1,radius=[],**kw):
-		BoxLayout.__init__(self, **kw)
-		BGColorBehavior.__init__(self, color_level=color_level,
-					radius=radius)
-
-	def add_widget(self, w, *args, **kw):
-		super().add_widget(w, *args, **kw)
-		self.setWidgetTextColor(w)
-		
-	def setWidgetTextColor(self,w):
-		if isinstance(w,Box):
-			return
-
-		if isinstance(w,Text):
-			if not w.bgcolor:
-				w.color = self.fgcolor
-			return
-		for c in w.children:
-			self.setWidgetTextColor(c)
-
-	def selected(self):
-		super().selected()
-		if self.fgcolor == self.selected_fgcolor:
-			return
-		for c in self.children:
-			self.setWidgetTextColor(c)
-
-	def unselected(self):
-		super().unselected()
-		if self.fgcolor == self.normal_fgcolor:
-			return
-		for c in self.children:
-			self.setWidgetTextColor(c)
+class Box(WidgetCSS, WidgetReady, BoxLayout):
+	def __init__(self, **kw):
+		super(Box, self).__init__(**kw)
 
 class HBox(Box):
 	def __init__(self,**kw):
@@ -239,11 +210,9 @@ class Title6(Text):
 		kw.update({'texttype':'title6','bold':True})
 		Text.__init__(self, **kw)
 
-class Modal(BGColorBehavior, ModalView):
-	def __init__(self, auto_open=False, color_level=-1, radius=[], **kw):
+class Modal(ModalView):
+	def __init__(self, auto_open=False, **kw):
 		ModalView.__init__(self, **kw)
-		BGColorBehavior.__init__(self, color_level=color_level,
-					radius=radius)
 		self.auto_open = auto_open
 
 	def add_widget(self,w, *args, **kw):
