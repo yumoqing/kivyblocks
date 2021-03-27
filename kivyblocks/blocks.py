@@ -668,8 +668,10 @@ class Blocks(EventDispatcher):
 							'widget=', from_widget)
 				if isinstance(from_widget, WindowBase):
 					return None
-				return find_widget_by_id(id, 
-						from_widget=from_widget.parent)
+				if from_widget.parent:
+					return find_widget_by_id(id, 
+							from_widget=from_widget.parent)
+				return None
 			else:
 				for c in from_widget.children:
 					ret = find_widget_by_id(id,from_widget=c)
