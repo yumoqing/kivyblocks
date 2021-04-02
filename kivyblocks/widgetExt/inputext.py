@@ -191,6 +191,7 @@ class MyDropDown(DropDown):
 		return ''
 		
 	def setData(self,data):
+		Logger.info('TextInput: setData data=%s', data)
 		self.si_data = data
 		self.clear_widgets()
 		h = self.options.get('height',2.5)
@@ -199,8 +200,10 @@ class MyDropDown(DropDown):
 		a['height'] = CSize(h)
 		a['font_size'] = CSize(self.options.get('font_size',1))
 		for d in data:
-			dd = (d[self.valueField],d[self.textField])
-			b = Button(text=d[self.textField],**a)
+			v = d.get(self.valueField, None)
+			t = d.get(self.textField, None)
+			dd = (v,t or v)
+			b = Button(text=dd[1],**a)
 			setattr(b,'kw_data',dd)
 			b.bind(on_release=lambda btn: self.select(btn.kw_data))
 			self.add_widget(b)
