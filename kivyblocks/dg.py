@@ -188,7 +188,9 @@ class Header(WidgetReady, ScrollWidget):
 class Body(WidgetReady, ScrollWidget):
 	def __init__(self,part,**kw):
 		self.part = part
+		kw.update({'spacing':self.part.datagrid.linewidth})
 		super(Body, self).__init__(**kw)
+		self.size_hint=(1,1)
 		self.idRow = {}
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
 		if self.part.freeze_flag:
@@ -259,6 +261,7 @@ class DataGridPart(WidgetReady, BoxLayout):
 			kw['size_hint'] = (1,None)
 		kw['height'] = self.datagrid.rowHeight()
 			
+		self.header = None
 		if not self.datagrid.noheader:
 			self.header = Header(self,**kw)
 			self.add_widget(self.header)
@@ -273,6 +276,15 @@ class DataGridPart(WidgetReady, BoxLayout):
 
 	def addRow(self,id, data):
 		return self.body.addRow(id, data)
+
+	def on_size(self, o, s=None):
+		if not hasattr(self, 'body'):
+			return
+		self.body.size_hint_y = None
+		if self.header:
+			self.body.height = self.height - self.header.height
+		else:
+			self.body.height = self.height
 
 
 class DataGrid(WidgetReady, BoxLayout):
@@ -408,9 +420,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		return self.row_height
 	
 	def calculateShowRows(self,t):
-		print('body height=',self.normal_part.body.height
-					,'row_height=',self.rowHeight()
-		)
 		self.show_rows = int(self.normal_part.body.height/self.rowHeight())
 		self.dataloader.setPageRows(self.show_rows)
 

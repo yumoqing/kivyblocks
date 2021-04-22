@@ -69,10 +69,10 @@ class WidgetCSS(object):
 		self.width = CSize(self.width_cm)
 
 	def set_child_fgcolor(self, c):
-		if not hasattr(c,'fgcolor'):
-			return 
-		if c.fgcolor:
+		if not self.fgcolor:
 			return
+		if isinstance(c, WidgetCSS):
+			return 
 		if isinstance(c, TextInput):
 			c.foreground_color = self.fgcolor
 			return
