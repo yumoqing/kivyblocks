@@ -1,5 +1,6 @@
 import time
 import ujson as json
+from kivy.logger import Logger
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
@@ -18,7 +19,7 @@ from appPublic.uniqueID import getID
 from appPublic.myTE import string_template_render
 
 from .utils import CSize, setSizeOptions, loading, loaded, absurl, alert
-from .baseWidget import Text
+from .baseWidget import Text, HBox, VBox
 from .widgetExt import ScrollWidget
 from .paging import Paging, RelatedLoader
 from .ready import WidgetReady
@@ -33,7 +34,6 @@ def field_widget(desc, rec):
 			viewer = json.dumps(viewer)
 		rendered = string_template_render(desc.get('viewer'), rec)
 		dic = json.loads(rendered)
-		print('field_widget(), dic=', dic)
 		if dic is None:
 			return None
 		return Factory.Blocks(dic)
@@ -42,23 +42,23 @@ def field_widget(desc, rec):
 	if uitype is None:
 		uitype = desc.get('datatype')
 	if uitype in [ 'str' 'date', 'time', 'timestamp' ]:
-		return BLabel(text = str(desc['value']), 
+		return Text(text = str(desc['value']), 
 					font_size=CSize(1),wrap=True,
 					halign='left', valign='middle'
 			)
 	if uitype in [ 'long', 'int','integer' ]:
-		return BLabel(text=str(desc['value']),
+		return Text(text=str(desc['value']),
 					font_size=CSize(1), wrap=True,
 					halign='right', valign='middle'
 			)
 	if uitype == 'float':
 		f = '%%.0%df' % desc.get('dec',2)
-		return BLabel(text=f % float(desc['value']),
+		return Text(text=f % float(desc['value']),
 					font_size=CSize(1), wrap=True,
 					halign='right', valign='middle'
 			)
 	
-	return BLabel(text = str(desc['value']), 
+	return Text(text = str(desc['value']), 
 				font_size=CSize(1),wrap=True,
 				halign='left', valign='middle'
 		)
@@ -70,8 +70,8 @@ class BLabel(ButtonBehavior, Text):
 		Text.__init__(self,**kw)
 		self.csscls = 'dummy'
 		
-class Cell(BoxLayout):
-	def __init__(self,row,desc):
+class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
+	def __init__(self,row,desc, **kw):
 		"""
 		desc:{
 			width,
@@ -83,9 +83,13 @@ class Cell(BoxLayout):
 		"""
 		self.desc = desc
 		self.row = row
+		csscls=self.row.part.datagrid.body_css
+		if self.row.header:
+			csscls=self.row.part.datagrid.header_css
 		super().__init__(size_hint=(None,None),
 							width = self.desc['width'],
-							height = self.row.part.datagrid.rowHeight()
+							height = self.row.part.datagrid.rowHeight(),
+							csscls=csscls
 		)
 		if not self.row.header and self.desc.get('viewer'):
 			viewer = self.desc.get('viewer')
@@ -107,12 +111,12 @@ class Cell(BoxLayout):
 			bl = field_widget(desc,self.row.row_data) 
 		if bl:
 			self.add_widget(bl)
-			bl.bind(on_press=self.cell_press)
 
-	def cell_press(self,obj):
-		self.row.selected()
+	def on_press(self,o=None):
+		if not self.row.header:
+			self.row.selected()
 
-class Row(WidgetCSS, GridLayout):
+class Row(BoxLayout):
 	def __init__(self,part, rowdesc,header=False,data=None, **kw):
 		"""
 		rowdesc=[
@@ -128,16 +132,16 @@ class Row(WidgetCSS, GridLayout):
 		self.header = header
 		self.row_data = data
 		self.row_id = None
-		self.linewidth = 1
+		self.linewidth = self.part.datagrid.linewidth
 		self.rowdesc = rowdesc
 		opts = kw.copy()
 		opts.update({
-			"cols":len(self.rowdesc),
-			"spacing":2
+			"spacing":self.linewidth,
+			"orientation":"horizontal"
 		})
 		super(Row, self).__init__(**opts)
-		# Clock.schedule_once(self.init,0)
 		self.init(0)
+
 
 	def init(self,t):
 		w = 0
@@ -150,7 +154,7 @@ class Row(WidgetCSS, GridLayout):
 			if cell.height > h:
 				h = cell.height
 		self.size_hint = None,None
-		self.width = w + self.linewidth * 2 * len(self.rowdesc)
+		self.width = w + self.linewidth * (len(self.rowdesc)+1)
 		self.height = h		#self.part.datagrid.rowHeight()
 
 	def selected(self):
@@ -177,7 +181,7 @@ class Header(WidgetReady, ScrollWidget):
 		[ f.update({'value':self.part.fields[i].get('label', \
 							self.part.fields[i].get('name'))}) \
 							for i,f in enumerate(rd) ]
-		self.header = Row(self.part,rd,header=True, csscls=self.part.datagrid.header_css)
+		self.header = Row(self.part,rd,header=True)
 		self.add_widget(self.header)
 		self.height = self.header.height
 
@@ -193,7 +197,7 @@ class Body(WidgetReady, ScrollWidget):
 	def addRow(self,id, data,index=0):
 		rd = [ f.copy() for f in self.part.rowdesc ]
 		[ f.update({'value':data.get(f['name'])}) for f in rd ]
-		row = Row(self.part,rd,data=data, csscls=self.part.datagrid.body_css)
+		row = Row(self.part,rd,data=data)
 		row.row_id = id
 		self.add_widget(row,index=index)
 		self.idRow[id] = row
@@ -283,6 +287,9 @@ class DataGrid(WidgetReady, BoxLayout):
 			"params":{
 			}
 		},
+		"header_css":"default",
+		"body_css":"default",
+		"spacing":1,
 		"fields":[
 			{
 				"name":"field1",
@@ -326,6 +333,9 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.params = self.options.get('params',{})
 		self.total_cnt = 0
 		self.max_row = 0
+		self.header_css = self.options.get('header_css','default')
+		self.body_css = self.options.get('body_css', 'default')
+		self.linewidth = self.options.get('linewidth',1)
 		self.curpage = 0
 		self.loading = False
 		self.freeze_fields = self.getPartFields(freeze_flag=True)

@@ -52,6 +52,7 @@ class WidgetCSS(object):
 		app = App.get_running_app()
 		for css_name in css_str.split(' '):
 			css.update(app.get_css(css_name))
+		Logger.info('WidgetCSS:set_css():%s',css.keys())
 		for k,v in css.items():
 			setattr(self,k,v)
 
@@ -86,6 +87,8 @@ class WidgetCSS(object):
 			self.set_child_fgcolor(c)
 			
 	def on_fgcolor(self, o, c):
+		Logger.info('WidgetCSS:on_fgcolor:%s fgcolor=%s', self.__class__.__name__,
+						self.fgcolor)
 		if not self.fgcolor:
 			return
 		if isinstance(self, TextInput):
@@ -98,6 +101,8 @@ class WidgetCSS(object):
 		return
 
 	def on_bgcolor(self, o, c):
+		Logger.info('WidgetCSS:on_bgcolor:%s fgcolor=%s', self.__class__.__name__,
+						self.bgcolor)
 		if not self.bgcolor:
 			return
 		if isinstance(self, TextInput):
