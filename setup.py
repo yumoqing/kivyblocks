@@ -22,7 +22,9 @@ package_data = {
 		'imgs/*.gif',
 		'imgs/*.jpg',
 		'ttf/*.ttf', 
-		'ui/*.uidesc' 
+		'ui/*.uidesc',
+		'xcamera/xcamera.kv',
+		'xcamera/data/*'
 	],
 }
 

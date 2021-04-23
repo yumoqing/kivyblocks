@@ -8,6 +8,7 @@ import numpy as np
 import cv2
 from kivy.base import Builder
 from .image_processing.image_processing import face_detection
+from .xcamera.xcamera import XCamera
 
 btxt = """<CustomCamera>:
 	resolution: (1920,1050)
@@ -24,7 +25,7 @@ btxt = """<CustomCamera>:
 		PopMatrix
 """
 
-class CustomCamera(Camera):
+class CustomCamera(XCamera):
 	detectFaces = BooleanProperty(False)
 	angle = NumericProperty(0)
 	def __init__(self, **kwargs):
@@ -60,9 +61,8 @@ class CustomCamera(Camera):
 			cameras = self._camera.get_camera_count()
 		return cameras
 
-class QrReader(Camera):
+class QrReader(XCamera):
 	def __init__(self, **kw):
-		Logger.info('QrReader:Initialed...........')
 		super(QrReader, self).__init__(**kw)
 		self.qr_reader = cv2.QRCodeDetector()
 		self.register_event_type('on_data')
