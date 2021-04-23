@@ -222,7 +222,7 @@ class MarkdownBody(VBox):
 
 	def build_source(self,source_desc):
 		w = MarkdownBody(md_obj=self.md_obj,
-				csscls=md_obj.second_css, size_hint_y=None)
+				csscls=self.md_obj.second_css, size_hint_y=None)
 		w.show_mdtext(source_desc)
 		self.add_widget(w)
 		w.resize()
@@ -396,18 +396,18 @@ description file format
 	first_css = StringProperty("default")
 	second_css = StringProperty("default")
 	def __init__(self, **kw):
-		ScrollView.__init__(self)
+		super(Markdown, self).__init__(**kw)
 		self.root_body = MarkdownBody(md_obj=self,
 					csscls=self.first_css,
 					size_hint_y=None
 		)
 		self.root_body.bind(minimum_height=self.root_body.setter('height'))
 		self.add_widget(self.root_body)
+		self.source = kw.get('source')
 		if self.source:
 			self.load_text()
 		self.bind(size=self.root_body.resize)
 		self.bind(source=self.load_text)
-		# Clock.schedule_interval(self.check_parent_window, 1)
 
 	def check_parent_window(self, *args):
 		pw = self.get_parent_window()
@@ -418,7 +418,7 @@ description file format
 		self.root_body.stp_video()
 
 	def load_text(self, *args):
-		h =  getDataHandler(self.source)
+		h = getDataHandler(self.source)
 		h.bind(on_success=self.update)
 		h.bind(on_error=self.show_error)
 		h.handle()

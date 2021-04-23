@@ -1,3 +1,4 @@
+from kivy.logger import Logger
 from kivy.uix.camera import Camera
 from kivy.properties import BooleanProperty, NumericProperty
 from kivy.uix.button import Button
@@ -61,10 +62,12 @@ class CustomCamera(Camera):
 
 class QrReader(Camera):
 	def __init__(self, **kw):
+		Logger.info('QrReader:Initialed...........')
 		super(QrReader, self).__init__(**kw)
 		self.qr_reader = cv2.QRCodeDetector()
 		self.register_event_type('on_data')
 		self.qr_result = None
+		Logger.info('QrReader:Initialed')
 
 	def getValue(self):
 		return {

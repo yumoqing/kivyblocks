@@ -300,14 +300,17 @@ sub-widget's description file format
 			self.right_menu_showed = False
 			print('dismiss fired, right_menu_showed=',self.right_menu_showed)
 
-		print('right fired')
+		print('right menu fired')
 		if len(self.sub_widgets) < 1:
+			print('no sub_widgets')
 			return
 		if self.right_menu_showed:
+			print('right menu showed, not thing done')
 			return
 
 		w = self.sub_widgets[-1]
 		if not hasattr(w, 'menu_widget'):
+			print('this sub widget has not menu_widget')
 			return True
 		mc = MenuContainer()
 		mc.add_widget(w.menu_widget)

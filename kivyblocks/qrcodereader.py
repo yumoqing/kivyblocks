@@ -1,17 +1,20 @@
 import numpy as np
 import cv2
 from kivy.app import App
+from kivy.properties import BooleanProperty
 from kivy.core.window import Window
 from kivy.graphics.texture import Texture
 from kivy.uix.image import Image
 from kivy.clock import Clock
 
 class QRCodeReader(Image):
+	opened = BooleanProperty(False)
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
 		self.register_event_type('on_data')
-		self.opened = False
 		self.task = None
+		if self.opened:
+			self.open()
 
 	def open(self):
 		self.opened = True
