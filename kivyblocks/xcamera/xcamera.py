@@ -65,7 +65,7 @@ class XCamera(Camera):
     __events__ = ('on_picture_taken', 'on_camera_ready')
 
     def __init__(self, **kwargs):
-        Builder.load_file(os.path.join(ROOT, "xcamera.kv"))
+        # Builder.load_file(os.path.join(ROOT, "xcamera.kv"))
         super().__init__(**kwargs)
 
     def _on_index(self, *largs):

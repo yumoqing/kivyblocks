@@ -111,6 +111,11 @@ class BlocksApp(App):
 			self.buildCsses(d)
 		Logger.info('blocksapp: csses=%s', self.csses)
 
+	def on_rotate(self,*largs):
+		self.current_rotation = Window.rotation
+		Logger.info('BlocksApp:on_rotate(), largs=%s', 
+						self.current_rotation)
+
 	def buildCsses(self, dic):
 		for k,v in dic.items():
 			if isinstance(v,dict):
@@ -141,6 +146,7 @@ class BlocksApp(App):
 		}
 		self.public_headers = {}
 		Window.bind(on_request_close=self.on_close)
+		Window.bind(on_rotate=self.rotate)
 		Window.bind(size=self.device_info)
 		self.workers = Workers(maxworkers=config.maxworkers or 80)
 		self.workers.start()
