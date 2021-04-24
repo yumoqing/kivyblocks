@@ -146,7 +146,7 @@ class BlocksApp(App):
 		}
 		self.public_headers = {}
 		Window.bind(on_request_close=self.on_close)
-		Window.bind(on_rotate=self.rotate)
+		Window.bind(on_rotate=self.on_rotate)
 		Window.bind(size=self.device_info)
 		self.workers = Workers(maxworkers=config.maxworkers or 80)
 		self.workers.start()
