@@ -1,6 +1,7 @@
 import traceback
 
 from kivy.app import App
+from kivy.factory import Factory
 from kivy.properties import ListProperty, BooleanProperty
 from kivy.core.window import Window
 from kivy.logger import Logger
@@ -482,7 +483,11 @@ class TextTree(Tree):
 
 class MenuTreeNode(TextTreeNode):
 	def on_size(self, *args):
-		Logger.info('Tree:%s:on_size() called', self.__class__.__name__)
+		Logger.info('%s:on_size(),bgcolor=%s, fgcolor=%s,css=%s', 
+					self.__class__.__name__,
+					self.content.bgcolor,
+					self.content.fgcolor,
+					self.content.csscls)
 		self.node_box.width = self.width
 		self.content.width = self.node_box.width - self.trigger.width
 		self.text_widget.width = self.content.width - CSize(1)
@@ -491,7 +496,8 @@ class MenuTreeNode(TextTreeNode):
 		txt = self.data.get(self.treeObj.textField,
 				self.data.get(self.treeObj.idField,'defaulttext'))
 		icon = self.data.get('icon')
-		self.content = PressableBox(csscls=self.treeObj.normal_css,
+		self.content = PressableBox(normal_css=self.treeObj.normal_css,
+				actived_css=self.treeObj.selected_css,
 				size_hint_y=None,
 				height=self.treeObj.rowheight
 		)
@@ -551,8 +557,10 @@ class MenuTree(TextTree):
 		url = node.data.get('url')
 		if url:
 			params = node.data.get('params',{})
-			target = Blocks.getWidgetById(self.target,self)
-			blocks = Blocks()
+			target = Factory.Blocks.getWidgetById(self.target,self)
+			if not target:
+				return
+			blocks = Factory.Blocks()
 			desc = {
 				"widgettype":"urlwidget",
 				"options":{
@@ -561,7 +569,8 @@ class MenuTree(TextTree):
 				}
 			}
 			w = blocks.widgetBuild(desc)
-			target.add_widget(w)
+			if w:
+				target.add_widget(w)
 			return 
 
 		rfname = node.data.get('rfname')

@@ -38,7 +38,7 @@ class MenuContainer(VBox):
 		if not self.collide_point(touch.x, touch.y):
 			self.dismiss()
 			return True
-		return True
+		return False
 
 class PagePanel(VBox):
 	"""

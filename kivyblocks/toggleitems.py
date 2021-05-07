@@ -16,7 +16,8 @@ class PressableBox(TouchRippleButtonBehavior, Box):
 	normal_css = StringProperty("default")
 	actived_css = StringProperty("default")
 	box_actived = BooleanProperty(False)
-	def __init__(self,border_width=1,
+	def __init__(self,
+				border_width=1,
 				color_level=-1,
 				user_data=None,
 				radius=[],
