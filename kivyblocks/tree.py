@@ -1,6 +1,7 @@
 import traceback
 
 from kivy.app import App
+from kivy.properties import ListProperty, BooleanProperty
 from kivy.core.window import Window
 from kivy.logger import Logger
 from kivy.graphics import Color, Rectangle, Triangle
@@ -12,10 +13,11 @@ from kivyblocks.widgetExt import ScrollWidget
 from kivyblocks.utils import CSize
 from appPublic.dictObject import DictObject
 from appPublic.jsonConfig import getConfig
-from .baseWidget import PressableLabel
+from .baseWidget import PressableLabel, Text, HBox, VBox
 from .color_definitions import getColors
-from .bgcolorbehavior import BGColorBehavior
+from .widget_css import WidgetCSS
 from .utils import alert,absurl
+from .toggleitems import PressableBox
 from .threadcall import HttpClient
 
 class EmptyBox(Label):
@@ -31,12 +33,14 @@ class EmptyBox(Label):
 		return
 
 class NodeTrigger(ButtonBehavior, EmptyBox):
-	def __init__(self, size_cnt=1,open_status=False,color=[1,0,0,1]):
-		super().__init__(size_cnt=size_cnt)
-		self.open_status = open_status
-		self.line_color = color
+	open_status = BooleanProperty(False)
+	color = ListProperty([1,0,0,1])
+	def __init__(self, color=[1,0,0,1],**kw):
+		# super(NodeTrigger, self).__init__(**kw)
+		EmptyBox.__init__(self, **kw)
+		ButtonBehavior.__init__(self)
 		self.countPoints()
-		self.showOpenStatus()
+		self.color = color
 		self.bind(size=self.onSize,pos=self.onSize)
 
 	def countPoints(self):
@@ -45,6 +49,7 @@ class NodeTrigger(ButtonBehavior, EmptyBox):
 				self.width/2,0]
 		self.close_points = [0,self.height, 
 				0,0, self.width,
+
 				self.height/2]
 	def pointsShift(self,points):
 		x = [ p + self.pos[0] if i % 2 == 0 else p + self.pos[1] \
@@ -55,26 +60,33 @@ class NodeTrigger(ButtonBehavior, EmptyBox):
 		self.countPoints()
 		self.showOpenStatus()
 	
-	def on_press(self):
+	def on_press(self, *args):
+		Logger.info('NodeTrigger:on_press() called, open_status=%s',
+			self.open_status
+		)
 		self.open_status = False if self.open_status else True
+		# self.showOpenStatus()
+
+	def on_open_status(self, *largs):
+		self.showOpenStatus()
+
+	def on_color(self, *largs):
 		self.showOpenStatus()
 
 	def showOpenStatus(self):
+		Logger.info('NodeTrigger:showOpenStatus() called')
 		points = self.close_points
 		if self.open_status:
 			points = self.open_points
 		self.canvas.clear()
 		points = self.pointsShift(points)
 		with self.canvas:
-			Color(*self.line_color)
+			Color(*self.color)
 			Triangle(points=points)
-		# print('pos=',self.pos,'size=',self.size)
 
-class TreeNode(BGColorBehavior,BoxLayout):
+class TreeNode(BoxLayout):
 	def __init__(self,data,tree=None,
-						color_level=-1,
-						radius=[],
-						parentNode=None,
+						parentNode=None
 						):
 		"""
 		base TreeNode
@@ -82,20 +94,19 @@ class TreeNode(BGColorBehavior,BoxLayout):
 			if children miss, it is a leaf node,if children is a empty array, is mean need load at it is first expanded.
 			}
 		"""
-		self.color_level = color_level if color_level != -1 else tree.color_level + 1
-		self.radius = radius if radius!=[] else tree.audius
-		BoxLayout.__init__(self,orientation='vertical',size_hint=(None,None))
-		BGColorBehavior.__init__(self,color=self.color_level,
-							radius=self.radius)
+		super(TreeNode, self).__init__(orientation='vertical',size_hint_y=None)
 		self.treeObj = tree
 		self.parentNode = parentNode
+		self.node_level = 0
+		if self.parentNode:
+			self.node_level = self.parentNode.node_level + 1
 		self.data = data
 		self.content = None
 		self.children_open = False
 		self.nodes = []
 		self.initChildren = False
-		self.node_box = BoxLayout(orientation='horizontal',
-							spacing=CSize(0.5),
+		self.node_box = HBox(spacing=CSize(0.5),
+							csscls=self.treeObj.normal_css,
 							size_hint_y=None)
 		self.node_box1 = BoxLayout(orientation='horizontal')
 		n = data.get('children')
@@ -104,7 +115,7 @@ class TreeNode(BGColorBehavior,BoxLayout):
 		self.children_loaded = False
 		self.hasChildren_nodes = data.get('children')
 		if self.hasChildren_nodes:
-			self.trigger = NodeTrigger()
+			self.trigger = NodeTrigger(color=self.node_box.fgcolor)
 			self.trigger.bind(on_press=self.toggleChildren)
 			self.buildChildrenContainer()
 		else:
@@ -114,15 +125,19 @@ class TreeNode(BGColorBehavior,BoxLayout):
 		self.addContent()
 		self.setSize()
 
+	def selected(self):
+		self.content.selected()
+
+	def unselected(self):
+		self.content.unselected()
+
 	def setSize(self):
 		if self.children_open:
 			self.height = self.node_box.height + self.node_box1.height
 		else:
 			self.height = self.node_box.height
-		self.width = self.node_box.width
 		self._trigger_layout()
 		if self.parentNode:
-			self.parentNode._trigger_layout()
 			self.parentNode._trigger_layout()
 		else:
 			self.treeObj._inner._trigger_layout()
@@ -146,7 +161,7 @@ class TreeNode(BGColorBehavior,BoxLayout):
 	def addContent(self):
 		self.buildContent()
 		self.node_box.add_widget(self.content)
-		self.node_box.height = self.content.height
+		self.node_box.height = self.treeObj.rowheight
 		self.node_box.width = self.trigger.width + \
 						self.content.width
 		Logger.info('Tree : content=(%d,%d),box=(%d,%d)', \
@@ -231,6 +246,11 @@ class TreeNode(BGColorBehavior,BoxLayout):
 		parentNode.deleteNode(self)
 
 	def expand(self):
+		if self.treeObj.single_expand:
+			if self.parentNode:
+				self.parentNode.collapseall()
+			else:
+				self.treeObj.collapseall()
 		if self.children_open:
 			return
 		self.toggleChildren(None)
@@ -262,7 +282,7 @@ class TreeNode(BGColorBehavior,BoxLayout):
 		newParent.addNode(node)
 
 	def toggleChildren(self,o):
-		self.treeObj.unselect_row()
+		# self.treeObj.unselect_row()
 		self.children_open = True if not self.children_open else False
 		if self.children_open:
 			self.buildChildren()
@@ -280,32 +300,64 @@ tree options
 {
 	"url":
 	"params",
-	"color_level",
+	"normal_css",
+	"selected_css",
+	"bgcolor",
 	"checkbox",
+	"single_expand"
 	"multplecheck",
 	"idField",
 	"textFiled",
 	"data" # array of {children:{},...}
 }
 """
-class Tree(BGColorBehavior, ScrollWidget):
-	def __init__(self,color_level=-1,radius=[],**options):
-		self.color_level = color_level
-		self.radius = radius
-		ScrollWidget.__init__(self)
-		BGColorBehavior.__init__(self,
-						color_level=self.color_level,
-						radius = self.radius)
+class Tree(WidgetCSS, ScrollWidget):
+	data = ListProperty([])
+	def __init__(self,
+			url=None,
+			params={},
+			single_expand=False,
+			bgcolor=[0.2,0.2,0.2,1],
+			normal_css="default",
+			row_height=2,
+			selected_css="selected",
+			checkbox=False,
+			multiplecheck=False,
+			idField='id',
+			textField='text',
+			data=None,
+			**options):
+		self.url = url
+		self.params = params
+		self.data = data
+		self.single_expand=single_expand
+		self.row_height=row_height
+		self.rowheight = CSize(self.row_height)
+		self.bgcolor = bgcolor
+		self.normal_css = normal_css
+		self.selected_css = selected_css
+		self.checkbox = checkbox
+		self.multiplecheck = multiplecheck
+		self.idField = idField
+		self.textField = textField
+		print('options=',options)
+		super(Tree, self).__init__(**options)
 		self.options = DictObject(**options)
 		self.nodes = []
 		self.initflag = False
 		self.selected_node = None
+		self.buildTree()
 		self.bind(size=self.onSize,pos=self.onSize)
+		self.register_event_type('on_press')
+
+	def on_press(self,*larg):
+		pass
 
 	def select_row(self, node):
 		self.unselect_row()
 		self.selected_node = node
 		node.selected()
+		self.dispatch('on_press', node)
 
 	def unselect_row(self):
 		if self.selected_node:
@@ -314,28 +366,26 @@ class Tree(BGColorBehavior, ScrollWidget):
 			self.selected_node = None
 		
 	def onSize(self,o,v=None):
-		if not self.initflag:
-			self.initflag = True
-			self.buildTree()
 		for n in self.nodes:
 			n.setMinWidth(self.width)
 
 	def setNodeKlass(self,klass):
 		self.NodeKlass = klass
 
-	def getUrlData(self,callback,kv=None):
+	def getUrlData(self,kv=None):
 		hc = HttpClient()
-		params = self.options.get('params',{}).copy()
-		if not kv is None:
+		params = self.params.copy()
+		if kv:
 			for k,v in kv.items():
 				if k in params.keys():	
 					params[k] = v
-			params['id'] = kv[self.options.idField]
+			params['id'] = kv[self.idField]
 		config = getConfig()
-		url = absurl(self.options.url,None)
+		app = App.get_running_app()
+		url = app.absurl(self.url)
 		Logger.info('Tree: getUrlData(),url=%s',url)
 		hc.get(url,params=params,
-					callback=callback,
+					callback=self.dataLoaded,
 					errback=self.showError)
 
 	def showError(self,o,e):
@@ -343,33 +393,25 @@ class Tree(BGColorBehavior, ScrollWidget):
 		Logger.info('Tree: showError() o=%s,e=%s',o,e)
 		alert(e,title='error')
 
+	def on_data(self, *largs):
+		self.addNodes()
+
 	def buildTree(self,kv=None):
 		if not hasattr(self,'NodeKlass'):
 			self.NodeKlass = TreeNode
 
-		if self.options.url:
-			return self.getUrlData(self.dataLoaded,kv)
-		data = self.options.data or []
-		Logger.info("Tree : buildTree,data=%s",data)
-		self.dataLoaded(None,data)
-		self.color, self.bgcolor = getColors(self.color_level)
+		if self.url:
+			return self.getUrlData(kv)
+		if len(self.data) > 0:
+			self.addNodes()
 
-	def dataLoaded(self,o,d):
-		Logger.info("Tree: dataLoaded,d=%s",d)
+	def dataLoaded(self, o, d):
 		self.data = d
-		self.addNodes()
 
 	def addNodes(self):
 		Logger.info("Tree: addNodes()")
 		for c in self.data:
-			options = {}
-			options['tree'] = self
-			options['parentNode'] = None
-			options['data'] = DictObject(**c)
-			w = self.NodeKlass(**options)
-			self.nodes.append(w)
-			self.add_widget(w)
-			Logger.info('Tree : node=%s',type(w))
+			self.addNode(c)
 
 	def addNode(self,data,parentNode=None):
 		options = {}
@@ -386,30 +428,35 @@ class Tree(BGColorBehavior, ScrollWidget):
 		self.remove_widget(node)
 		self.nodes = [ i for i in self.nodes if i != node ]
 
+	def collapseall(self):
+		for n in self.nodes:
+			n.collapse()
+
+	def expandall(self):
+		for n in self.nodes:
+			n.expand()
+
 class TextContent(PressableLabel):
-	def __init__(self,color_level=0,**options):
-		PressableLabel.__init__(self,color_level=color_level,**options)
-		
+	def __init__(self,**options):
+		PressableLabel.__init__(self,**options)
 
 class TextTreeNode(TreeNode):
 	def buildContent(self):
-		txt = self.data.get(self.treeObj.options.textField,
-				self.data.get(self.treeObj.options.idField,'defaulttext'))
-		self.content = TextContent(color_level=self.treeObj.color_level,
+		txt = self.data.get(self.treeObj.textField,
+				self.data.get(self.treeObj.idField,'defaulttext'))
+		self.content = TextContent(csscls=self.treeObj.normal_css,
 							text=txt,
-							size_hint=(None,None),
+							size_hint_y=None,
 							font_size=CSize(1),
 							text_size=CSize(len(txt)-1,1),
 							halign='left',
-							height=CSize(2),
-							width=CSize(len(txt)))
-		self.content.color, self.content.bgcolor = getColors(self.treeObj.color_level,
-					selected=False)
+							height=CSize(2))
 		self.content.bind(on_press=self.onPress)
 		return 
 	
 	def onPress(self,o,v=None):
 		if self.hasChildren_nodes:
+			Logger.info('select the non-leaf node')
 			self.toggleChildren(self)
 			self.trigger.on_press()
 			return
@@ -425,17 +472,104 @@ class TextTreeNode(TreeNode):
 			self.content.unselected()
 
 class TextTree(Tree):
-	def __init__(self,**options):
-		self.NodeKlass = TextTreeNode
+	def __init__(self,nodeklass=TextTreeNode,**options):
+		self.NodeKlass = nodeklass
 		super().__init__(**options)
-		self.register_event_type('on_press')
 
 	def select_row(self, node):
 		super().select_row(node)
 		self.dispatch('on_press',node.data)
 
-	def on_press(self,o,v=None):
-		print('TextTree():on_press(),o=',o,'v=',v)
+class MenuTreeNode(TextTreeNode):
+	def on_size(self, *args):
+		Logger.info('Tree:%s:on_size() called', self.__class__.__name__)
+		self.node_box.width = self.width
+		self.content.width = self.node_box.width - self.trigger.width
+		self.text_widget.width = self.content.width - CSize(1)
+
+	def buildContent(self):
+		txt = self.data.get(self.treeObj.textField,
+				self.data.get(self.treeObj.idField,'defaulttext'))
+		icon = self.data.get('icon')
+		self.content = PressableBox(csscls=self.treeObj.normal_css,
+				size_hint_y=None,
+				height=self.treeObj.rowheight
+		)
+		self.content.orientation = 'horizontal'
+		if icon:
+			img = AsyncImage(source=icon,
+							size_hint=(None,None),
+							height=CSize(1),
+							width=CSize(1))
+		else:
+			img = EmptyBox()
+		
+		self.content.add_widget(img)
+		textw = Text( text=txt,
+							size_hint=(None,None),
+							font_size=CSize(1),
+							text_size=CSize(len(txt)-1,1),
+							halign='left',
+							wrap=True,
+							height=CSize(2),
+							width=self.width)
+		self.content.add_widget(textw)
+		self.text_widget = textw
+		self.content.bind(on_press=self.onPress)
+		print('****',self.content,'w,y=',self.content.width, 
+					self.content.height, 'tree width=', self.treeObj.width)
+		return 
+	
+
+"""
+{
+	...
+	target:kkk,
+	data:[
+		{
+			id:
+			text:
+			icon:
+			url:
+			rfname
+			children
+		}
+	]
+}
+"""
+class MenuTree(TextTree):
+	def __init__(self, target=None, **kw):
+		self.target = target
+		super().__init__(nodeklass=MenuTreeNode, **kw)
+
+	def select_row(self, node):
+		super().select_row(node)
+		self.dispatch('on_press',node.data)
+		self.menucall(node)
+		
+	def menucall(self, node):
+		url = node.data.get('url')
+		if url:
+			params = node.data.get('params',{})
+			target = Blocks.getWidgetById(self.target,self)
+			blocks = Blocks()
+			desc = {
+				"widgettype":"urlwidget",
+				"options":{
+					"url":url,
+					"params":params
+				}
+			}
+			w = blocks.widgetBuild(desc)
+			target.add_widget(w)
+			return 
+
+		rfname = node.data.get('rfname')
+		if rfname:
+			f = getRegisterFunctionByName(rfname)
+			if f:
+				f(self,node.data)
+
 
 class PopupMenu(BoxLayout):
 	def __init__(self,target,menudesc,**opts):
@@ -453,7 +587,7 @@ class PopupMenu(BoxLayout):
 	def onMenuItemTouch(self,o,d=None,v=None):
 		Logger.info('MenuTree: on_press fired,o=%s,d=%s,v=%s',o,d,v)
 		data = {
-			'target':self.target,
+			'target':self.treeObj.target,
 			'menudata':d
 		}
 		self.dispatch('on_press',data)

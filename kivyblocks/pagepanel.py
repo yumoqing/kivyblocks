@@ -58,8 +58,11 @@ PagePanel description file format
 	{
 		"bar_size": bar size in CSize unit
 		"bar_at": "top" or "bottom"
+		"bar_css":
+		"panel_css":
 		"left_menu": if defined, it must be a widget instance or a dict 
 					recognized by Blocks
+
 		other VBox initial options
 	}
 	usage examples:
@@ -128,7 +131,8 @@ sub-widget's description file format
 ## 
 
 	"""
-	def __init__(self, bar_size=2, bar_at='top', enable_on_close=False, 
+	def __init__(self, bar_size=2, bar_css='default',csscls='default',
+					bar_at='top', enable_on_close=False, 
 					left_menu=None, **kw):
 		print('PagePanel().__init__():', bar_size, bar_at, left_menu)
 		self.bar_size = bar_size
@@ -150,6 +154,7 @@ sub-widget's description file format
 		self.sub_widgets = []
 		VBox.__init__(self, **kw)
 		self.bar = HBox(size_hint_y=None,
+						csscls=bar_css,
 						spacing=CSize(bar_size/6),
 						height=CSize(bar_size))
 		bcsize = bar_size * 0.85
@@ -192,7 +197,7 @@ sub-widget's description file format
 			})
 			self.bar.add_widget(self.bar_left_menu)
 			self.bar_left_menu.bind(on_press=self.show_left_menu)
-		self.bar_title = HBox()
+		self.bar_title = HBox(csscls=bar_css)
 		self.bar.add_widget(self.bar_title)
 		self.bar_right_menu = VBox(size_hint=(None,None),size=CSize(bcsize,bcsize))
 		self.bar_right_menu_w = Factory.Blocks().widgetBuild({
@@ -286,6 +291,7 @@ sub-widget's description file format
 			return
 		mc = MenuContainer()
 		mc.add_widget(self.left_menu)
+		self.left_menu.bind(on_press=mc.dismiss)
 		mc.size_hint = (None, None)
 		mc.width = self.width * 0.4
 		mc.height = self.content.height

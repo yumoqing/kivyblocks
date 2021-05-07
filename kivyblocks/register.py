@@ -4,7 +4,7 @@ from kivy.utils import platform
 from appPublic.registerfunction import RegisterFunction
 
 from .baseWidget import *
-from .tree import Tree, TextTree, PopupMenu
+from .tree import Tree, TextTree, MenuTree, PopupMenu
 from .toolbar import ToolPage, Toolbar
 from .dg import DataGrid
 from .vplayer import VPlayer
@@ -87,6 +87,7 @@ r('PressableImage', PressableImage)
 r('PressableLabel', PressableLabel)
 r('Tree',Tree)
 r('TextTree',TextTree)
+r('MenuTree',MenuTree)
 r('PopupMenu',PopupMenu)
 r('HostImage',HostImage)
 r('APlayer',APlayer)

@@ -19,6 +19,10 @@ class WidgetCSS(object):
 	background_rec = None
 	bg_func = Rectangle
 
+	def on_canvas(self, o, s):
+		Logger.info('WidgetCSS:on_canvas():%s',self.__class__.__name__)
+		self.set_background_color()
+
 	def on_size(self, o, s):
 		self.set_background_color()
 
@@ -101,7 +105,7 @@ class WidgetCSS(object):
 		return
 
 	def on_bgcolor(self, o, c):
-		Logger.info('WidgetCSS:on_bgcolor:%s fgcolor=%s', self.__class__.__name__,
+		Logger.info('WidgetCSS:on_bgcolor:%s bgcolor=%s', self.__class__.__name__,
 						self.bgcolor)
 		if not self.bgcolor:
 			return

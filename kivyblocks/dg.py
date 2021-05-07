@@ -324,9 +324,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		]
 	}
 	"""
-	header_css = StringProperty("default")
-	body_css = StringProperty("default")
-	noheader = BooleanProperty(False)
 	row_selected = BooleanProperty(False)
 	def __init__(self,**options):
 		options['orientation'] = 'vertical'
@@ -334,7 +331,7 @@ class DataGrid(WidgetReady, BoxLayout):
 		WidgetReady.__init__(self)
 		self.select_rowid = None
 		self.options = options
-		self.row_height = None
+		self.rowheight = None
 		self.on_sizeTask = None
 		self.selected_rowid = None
 		self.show_rows = 0
@@ -345,7 +342,9 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.params = self.options.get('params',{})
 		self.total_cnt = 0
 		self.max_row = 0
+		self.row_height = self.options.get('row_height',2)
 		self.header_css = self.options.get('header_css','default')
+		self.noheader = self.options.get('noheader',False)
 		self.body_css = self.options.get('body_css', 'default')
 		self.linewidth = self.options.get('linewidth',1)
 		self.curpage = 0
@@ -414,10 +413,9 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.on_sizeTask = Clock.schedule_once(self.calculateShowRows,0.3)
 
 	def rowHeight(self):
-		if not self.row_height:
-			self.row_height = CSize(self.options.get('row_height',1.8))
-
-		return self.row_height
+		if not self.rowheight:
+			self.rowheight = CSize(self.row_height)
+		return self.rowheight
 	
 	def calculateShowRows(self,t):
 		self.show_rows = int(self.normal_part.body.height/self.rowHeight())
