@@ -131,12 +131,17 @@ sub-widget's description file format
 ## 
 
 	"""
-	def __init__(self, bar_size=2, bar_css='default',csscls='default',
-					bar_at='top', enable_on_close=False, 
+	def __init__(self, bar_size=2, 
+					bar_css='default',
+					csscls='default',
+					singlepage=False,
+					bar_at='top', 
+					enable_on_close=False, 
 					left_menu=None, **kw):
 		print('PagePanel().__init__():', bar_size, bar_at, left_menu)
 		self.bar_size = bar_size
 		self.bar_at = bar_at
+		self.singlepage = singlepage
 		self.swipe_buffer = []
 		self.swipe_right = False
 		
@@ -276,6 +281,8 @@ sub-widget's description file format
 		self.clear_widgets()
 		if len(self.sub_widgets) > 0:
 			pass
+		if self.singlepage:
+			self.sub_widgets = []
 		self.sub_widgets.append(w)
 		self.show_currentpage()
 

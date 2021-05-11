@@ -8,12 +8,14 @@ from kivy.logger import Logger
 from kivy.graphics import Color, Rectangle, Triangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
+from kivy.uix.image import AsyncImage
 from kivy.uix.widget import Widget
 from kivy.uix.button import ButtonBehavior
 from kivyblocks.widgetExt import ScrollWidget
 from kivyblocks.utils import CSize
 from appPublic.dictObject import DictObject
 from appPublic.jsonConfig import getConfig
+from appPublic.registerfunction import getRegisterFunctionByName
 from .baseWidget import PressableLabel, Text, HBox, VBox
 from .color_definitions import getColors
 from .widget_css import WidgetCSS

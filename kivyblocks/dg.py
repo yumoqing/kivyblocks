@@ -30,13 +30,14 @@ from .widget_css import WidgetCSS
 def field_widget(desc, rec):
 	viewer = desc.get('viewer')
 	if viewer:
-		if not isinstance(viewer,'str'):
+		if not isinstance(viewer,str):
 			viewer = json.dumps(viewer)
-		rendered = string_template_render(desc.get('viewer'), rec)
+		rendered = string_template_render(viewer, rec)
 		dic = json.loads(rendered)
 		if dic is None:
 			return None
-		return Factory.Blocks(dic)
+		blocks = Factory.Blocks()
+		return blocks.widgetBuild(dic)
 
 	uitype = desc.get('uitype', 'str')
 	if uitype is None:
@@ -91,17 +92,6 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 							height = self.row.part.datagrid.rowHeight(),
 							csscls=csscls
 		)
-		if not self.row.header and self.desc.get('viewer'):
-			viewer = self.desc.get('viewer')
-			blocks = Factory.Blocks()
-			if isinstance(viewer,str):
-				l = self.desc.copy()
-				l['row'] = self.row
-				viewer = blocks.eval(viewer,l)
-			if isinstance(viewer,dict):
-				w = blocks.widgetBuild(viewer)
-				self.add_widget(w)
-				return
 		if desc['header']:
 			bl = Text(i18n=True, text=str(desc['value']),
 				font_size=CSize(1),wrap=True,
