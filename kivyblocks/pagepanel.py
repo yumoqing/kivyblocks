@@ -250,15 +250,23 @@ sub-widget's description file format
 		self.sub_widgets = self.sub_widgets[:-1]
 		self.show_currentpage()
 
+	def set_title(self, w):
+		self.bar_title.clear_widgets()
+		self.bar_title.add_widget(w)
+
+	def set_right_menu(self, w):
+		self.bar_right_menu.clear_widget()
+		self.bar_right_menu.add_widget(w)
+
 	def show_currentpage(self):
 		w = self.sub_widgets[-1]
 		if len(self.sub_widgets) > 1:
 			self.bar_back.add_widget(self.bar_back_w)
 		self.content.add_widget(w)
 		if hasattr(w, 'title_widget'):
-			self.bar_title.add_widget(w.title_widget)
+			self.set_title(w.title_widget)
 		if hasattr(w, 'menu_widget'):
-			self.bar_right_menu.add_widget(self.bar_right_menu_w)
+			self.set_right_menu(self.bar_right_menu_w)
 
 	def on_swipe_next_page(self, o, *args):
 		if len(self.swipe_buffer) < 1:
