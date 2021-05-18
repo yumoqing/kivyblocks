@@ -279,7 +279,6 @@ sub-widget's description file format
 	def clear_widgets(self):
 		self.bar_back.clear_widgets()
 		self.content.clear_widgets()
-		self.bar_title.clear_widgets()
 		self.bar_right_menu.clear_widgets()
 
 	def add_widget(self, w, *args):
