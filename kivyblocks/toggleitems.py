@@ -34,6 +34,9 @@ class PressableBox(TouchRippleButtonBehavior, Box):
 		self.actived = False
 		self.csscls = self.normal_css
 
+	def active(self, flag):
+		self.box_actived = flag
+
 	def on_box_actived(self, o, v):
 		if self.box_actived:
 			self.csscls = self.actived_css

@@ -128,6 +128,11 @@ class TreeNode(BoxLayout):
 		self.addContent()
 		self.setSize()
 
+	def sibling(self):
+		if self.parentNode is None:
+			return [ i for i in self.treeObj.nodes if i != self ]
+		return [ i for i in self.parentNode.nodes if i != self ]
+
 	def selected(self):
 		self.content.selected()
 
@@ -305,9 +310,10 @@ tree options
 	"params",
 	"normal_css",
 	"selected_css",
+	"single_expand",
+	"select_leaf_only",
 	"bgcolor",
 	"checkbox",
-	"single_expand"
 	"multplecheck",
 	"idField",
 	"textFiled",
@@ -320,6 +326,7 @@ class Tree(WidgetCSS, ScrollWidget):
 			url=None,
 			params={},
 			single_expand=False,
+			select_leaf_only=True,
 			bgcolor=[0.2,0.2,0.2,1],
 			normal_css="default",
 			row_height=2,
@@ -334,6 +341,7 @@ class Tree(WidgetCSS, ScrollWidget):
 		self.params = params
 		self.data = data
 		self.single_expand=single_expand
+		self.select_leaf_only=select_leaf_only
 		self.row_height=row_height
 		self.rowheight = CSize(self.row_height)
 		self.bgcolor = bgcolor
@@ -360,7 +368,15 @@ class Tree(WidgetCSS, ScrollWidget):
 		self.unselect_row()
 		self.selected_node = node
 		node.selected()
-		self.dispatch('on_press', node)
+		if not self.select_leaf_only or not node.hasChildren_nodes:
+			self.dispatch('on_press', node)
+		if node.hasChildren_nodes:
+			node.toggleChildren(node)
+			node.trigger.on_press()
+			if node.children_open and self.single_expand:
+				for n in node.sibling():
+					if n.hasChildren_nodes and n.children_open:
+						n.collapse()
 
 	def unselect_row(self):
 		if self.selected_node:
@@ -458,11 +474,6 @@ class TextTreeNode(TreeNode):
 		return 
 	
 	def onPress(self,o,v=None):
-		if self.hasChildren_nodes:
-			Logger.info('select the non-leaf node')
-			self.toggleChildren(self)
-			self.trigger.on_press()
-			return
 		Logger.info('select the leaf node')
 		self.treeObj.select_row(self)
 
@@ -479,10 +490,6 @@ class TextTree(Tree):
 		self.NodeKlass = nodeklass
 		super().__init__(**options)
 
-	def select_row(self, node):
-		super().select_row(node)
-		self.dispatch('on_press',node.data)
-
 class MenuTreeNode(TextTreeNode):
 	def on_size(self, *args):
 		Logger.info('%s:on_size(),bgcolor=%s, fgcolor=%s,css=%s', 
@@ -493,6 +500,12 @@ class MenuTreeNode(TextTreeNode):
 		self.node_box.width = self.width
 		self.content.width = self.node_box.width - self.trigger.width
 		self.text_widget.width = self.content.width - CSize(1)
+
+	def selected(self):
+		self.content.active(True)
+
+	def unselected(self):
+		self.content.active(False)
 
 	def buildContent(self):
 		txt = self.data.get(self.treeObj.textField,
@@ -552,8 +565,8 @@ class MenuTree(TextTree):
 
 	def select_row(self, node):
 		super().select_row(node)
-		self.dispatch('on_press',node.data)
-		self.menucall(node)
+		if not node.hasChildren_nodes:
+			self.menucall(node)
 		
 	def menucall(self, node):
 		url = node.data.get('url')
