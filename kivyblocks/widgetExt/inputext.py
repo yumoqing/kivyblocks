@@ -1,5 +1,6 @@
 import sys
 import re
+from kivy.app import App
 from kivy.logger import Logger
 from kivy.uix.image import Image
 from kivy.uix.boxlayout import BoxLayout
@@ -16,7 +17,7 @@ from ..utils import CSize
 from ..widget_css import WidgetCSS
 
 class BoolInput(Switch):
-	def __init__(self,**kw):
+	def __init__(self,csscls='input', **kw):
 		a = DictObject()
 		if kw.get('defaultvalue',None) is None:
 			a.active = False
@@ -41,20 +42,26 @@ class BoolInput(Switch):
 	def setValue(self,v):
 		self.active = v
 	
-class StrInput(WidgetCSS, TextInput):
-	def __init__(self,**kv):
+class StrInput(TextInput):
+	def __init__(self,csscls='default',
+				**kv):
 		if kv is None:
 			kv = {}
+		app = App.get_running_app()
+		css = app.get_css(csscls)
 		a = {
 			"allow_copy":True,
 			"password":False,
 			"multiline":False,
 			"halign":"left",
-			"hint_text":"",
+			"hint_text":"test",
 			"text_language":"zh_CN",
+			"font_size":CSize(1),
 			"write_tab":False
 		}
 		a.update(kv)
+		a['background_color'] = css['bgcolor']
+		a['foreground_color'] = css['fgcolor']
 		w = kv.get('width',1)
 		h = kv.get('height',1)
 		if w <= 1:
@@ -67,13 +74,11 @@ class StrInput(WidgetCSS, TextInput):
 		else:
 			a['size_hint_y'] = None
 			a['height'] = CSize(h)
-		a['font_size'] = CSize(kv.get('font_size',0.9))
 
-		Logger.info('TextInput:a=%s,kv=%s',a,kv)
+		Logger.info('StrInput:a=%s,kv=%s',a,kv)
 		super(StrInput, self).__init__(**a)
 		self.old_value = None
 		self.register_event_type('on_changed')
-		self.bind(focus=self.on_focus)
 		self.bind(on_text_validate=self.checkChange)
 
 	def on_changed(self,v=None):
@@ -83,14 +88,6 @@ class StrInput(WidgetCSS, TextInput):
 		v = self.getValue()
 		if v != self.old_value:
 			self.dispatch('on_changed',v)
-
-	def on_focus(self,t,v):
-		if v:
-			self.old_value = self.getValue()
-			self.csscls = 'input_focus'
-		else:
-			self.checkChange(None)
-			self.csscls = 'input'
 
 	def getValue(self):
 		return self.text
@@ -156,7 +153,7 @@ class AmountInput(FloatInput):
 		return StrInput.insert_text(self,s, from_undo=from_undo)
 			
 class MyDropDown(DropDown):
-	def __init__(self,**kw):
+	def __init__(self,csscls='input', **kw):
 		super(MyDropDown,self).__init__()
 		self.options = kw
 		self.textField = kw.get('textField','text')
@@ -221,7 +218,7 @@ class MyDropDown(DropDown):
 		self.open(w)
 		
 class SelectInput(BoxLayout):
-	def __init__(self,**kw):
+	def __init__(self,csscls='input', **kw):
 		a={}
 		w = kw.get('width',10)
 		h = kw.get('height',1.5)

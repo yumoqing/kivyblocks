@@ -111,6 +111,9 @@ class BlocksApp(App):
 			self.buildCsses(d)
 		Logger.info('blocksapp: csses=%s', self.csses)
 
+	def get_css(self, cssname):
+		return self.csses.get(cssname, 'default')
+
 	def on_rotate(self,*largs):
 		self.current_rotation = Window.rotation
 		Logger.info('BlocksApp:on_rotate(), largs=%s', 
@@ -140,8 +143,8 @@ class BlocksApp(App):
 				"fgcolor":[0.85,0.85,0.85,1]
 			},
 			"input_focus":{
-				"bgcolor":[1,0.35,0.35,1],
-				"fgcolor":[1,0.85,0.85,1]
+				"bgcolor":[0.25,0.25,0.25,1],
+				"fgcolor":[0.8,0.8,0.8,1]
 			}
 		}
 		self.public_headers = {}

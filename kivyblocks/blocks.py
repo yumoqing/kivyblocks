@@ -33,7 +33,6 @@ from .form import InputBox, Form, StrSearchForm
 from .boxViewer import BoxViewer
 from .tree import Tree, TextTree
 from .newvideo import Video
-from .ready import WidgetReady
 from .bgcolorbehavior import BGColorBehavior
 from .orientationlayout import OrientationLayout
 from .threadcall import HttpClient
@@ -41,32 +40,6 @@ from .register import *
 
 def showError(e):
 	print('error',e)
-
-
-def wrap_ready(klass):
-	try:
-		w = Factory.get(klass)
-		if hasattr(w,'ready'):
-			return w
-		Factory.unregister(klass)
-		globals()[klass] = w
-	except:
-		print_exc()
-		w = globals().get(klass)
-		if w is None:
-			return None
-		if hasattr(w,'ready'):
-			return w
-		
-	script = f"""class R_{klass}(WidgetReady, {klass}):
-	def __init__(self, **kw):
-		{klass}.__init__(self, **kw)
-		WidgetReady.__init__(self)
-""" 
-	exec(script,globals(),globals())
-	newWidget = globals().get(f'R_{klass}')
-	Factory.register(klass,newWidget)
-	return newWidget
 
 class WidgetNotFoundById(Exception):
 	def __init__(self, id):
@@ -304,10 +277,10 @@ class Blocks(EventDispatcher):
 		opts = self.valueExpr(desc.get('options',{}).copy())
 		widget = None
 		try:
-			klass = wrap_ready(widgetClass)
+			klass = Factory.get(widgetClass)
 			widget = klass(**opts)
 		except Exception as e:
-			print('Error:',widgetClass,'not registered')
+			print('Error:',widgetClass,'contructon error')
 			print_exc()
 			raise NotExistsObject(widgetClass)
 
@@ -599,16 +572,16 @@ class Blocks(EventDispatcher):
 			try:
 				widget = self.w_build(desc)
 				self.dispatch('on_built',widget)
-				if hasattr(widget,'ready'):
-					widget.ready = True
 				return widget
 			except Exception as e:
 				print_exc()
 				self.dispatch('on_failed',e)
 				return None
 
-		if not (isinstance(desc, DictObject) or isinstance(desc, dict)):
-			print('Block: desc must be a dict object',
+		if isinstance(desc,DictObject):
+			desc = desc.to_dict()
+		if not isinstance(desc, dict):
+			print('widgetBuild1: desc must be a dict object',
 						desc,type(desc))
 			self.dispatch('on_failed',Exception('miss url'))
 			return
@@ -630,7 +603,7 @@ class Blocks(EventDispatcher):
 			desc = self.getUrlData(url,**opts)
 			if not (isinstance(desc, DictObject) or \
 							isinstance(desc, dict)):
-				print('Block: desc must be a dict object',
+				print('Block2: desc must be a dict object',
 								desc,type(desc))
 				self.dispatch('on_failed',Exception('miss url'))
 				return
@@ -639,8 +612,7 @@ class Blocks(EventDispatcher):
 				desc = dictExtend(desc,addon)
 			widgettype = desc.get('widgettype')
 		if widgettype is None:
-			print('Block: desc must be a dict object',
-						desc,type(desc))
+			print('Block3: desc must be a dict object not None')
 			return None
 		return doit(desc)
 	

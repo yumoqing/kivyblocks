@@ -1,6 +1,7 @@
 
 from kivy.event import EventDispatcher
 from kivy.app import App
+from kivy.factory import Factory
 from .threadcall import HttpClient
 from .utils import absurl
 from appPublic.registerfunction import RegisterFunction
@@ -47,8 +48,9 @@ class DataGraber(EventDispatcher):
 					ret = self.loadRFData(*args, **kw)
 					break
 				target = self.options.get('datatarget')
-				ret = self.loadTargetData(*args, **kw)
-				break
+				if target:
+					ret = self.loadTargetData(*args, **kw)
+					break
 			except Exception as e:
 				self.dispatch('on_error', e)
 				return

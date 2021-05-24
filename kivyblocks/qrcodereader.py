@@ -32,7 +32,7 @@ class QRCodeReader(Image):
 			self.dismiss()
 		super().on_touch_down(touch)
 
-	def dismiss(self):
+	def dismiss(self, *args, **kw):
 		if not self.opened:
 			return
 		self.opened = False
@@ -54,7 +54,10 @@ class QRCodeReader(Image):
 		self.showImage(img)
 		data,bbox,_ = self.detector.detectAndDecode(img)
 		if data:
-			self.dispatch('on_data',data)
+			d = {
+				'data':data
+			}
+			self.dispatch('on_data',d)
 
 if __name__ == '__main__':
 	class MyApp(App):

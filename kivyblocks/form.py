@@ -13,9 +13,9 @@ from .utils import *
 from .i18n import I18n
 from .toolbar import Toolbar
 from .color_definitions import getColors
-from .bgcolorbehavior import BGColorBehavior
 from .dataloader import DataGraber
 from .ready import WidgetReady
+from .widget_css import WidgetCSS
 
 """
 form options
@@ -164,8 +164,6 @@ class InputBox(BoxLayout):
 			opts['size_hint_x'] = None
 			opts['width'] = self.labelwidth
 		bl = BoxLayout(**opts)
-		Logger.info('kivyblock:labelwidth=%f,opts=%s', self.labelwidth,str(opts))
-		Logger.info('kivyblock:bl.widht=%f,bl.height=%f',bl.width,bl.height)
 		self.add_widget(bl)
 		label = self.options.get('label',self.options.get('name'))
 		kwargs = {
@@ -175,8 +173,6 @@ class InputBox(BoxLayout):
 		}
 		self.labeltext = Text(**kwargs)
 		bl.add_widget(self.labeltext)
-		Logger.info('kivyblock:label.widht=%f,label.height=%f',
-						self.labeltext.width,self.labeltext.height)
 		if self.options.get('required',False):
 			star = Label(text='*',
 						color=(1,0,0,1),
@@ -188,6 +184,7 @@ class InputBox(BoxLayout):
 		options['allow_copy'] = True
 		options['width'] = options.get('width',1)
 		options['height'] = options.get('height',1)
+		options['csscls'] = self.form.input_css
 		if self.options.get('hint_text'):
 			options['hint_text'] = i18n(self.options.get('hint_text'))
 
@@ -260,11 +257,11 @@ def defaultToolbar():
 
 	}
 
-class Form(BGColorBehavior, WidgetReady, BoxLayout):
+class Form(WidgetCSS, WidgetReady, BoxLayout):
 	def __init__(self,
-					color_level=1,
-					radius=[],
-					cols=2,
+					cols=1,
+					csscls='default',
+					input_css='input',
 					inputwidth=0,
 					inputheight=3,
 					labelwidth=0.3,
@@ -277,6 +274,7 @@ class Form(BGColorBehavior, WidgetReady, BoxLayout):
 					toolbar={},
 					**options):
 		self.inputwidth = 1
+		self.input_css = input_css
 		self.inputheight = inputheight
 		self.labelwidth= labelwidth
 		self.fields = fields
@@ -291,12 +289,12 @@ class Form(BGColorBehavior, WidgetReady, BoxLayout):
 			options['orientation'] = 'vertical'
 		else:
 			options['orientation'] = 'horizontal'
-		BoxLayout.__init__(self, **options)
-		self.color_level = color_level
-		BGColorBehavior.__init__(self,
-			color_level=color_level,
-			radius=radius)
-		WidgetReady.__init__(self)
+		print('options=', options)
+		super(Form, self).__init__(**options)
+		#BoxLayout.__init__(self, **options)
+		#WidgetReady.__init__(self)
+		#WidgetCSS.__init__(self)
+		self.csscls = csscls
 		self.cols = self.options_cols = cols
 		if isHandHold() and Window.width < Window.height:
 			self.cols = 1
@@ -450,14 +448,18 @@ class StrSearchForm(BoxLayout):
 	def __init__(self,img_url=None,**options):
 		self.name = options.get('name','search_string')
 		BoxLayout.__init__(self,orientation='horizontal',size_hint_y=None,height=CSize(3))
+		self.input_css = options.get('input_css', 'input')
+		i18n = I18n()
 		self.input_widget = StrInput(
 				text='',
 				multiline=False,
+				csscls=self.input_css,
+				hint_text=i18n(options.get('tip',options.get('hint_text',''))),
 				allow_copy=True,
-				font_size=1,
+				font_size=CSize(1),
 				size_hint_y=None,
 				size_hint_x=1,
-				height=2)
+				height=3)
 		self.add_widget(self.input_widget)
 		self.register_event_type('on_submit')
 		v = options.get('value',options.get('default_value',''))

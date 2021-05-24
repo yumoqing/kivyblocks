@@ -87,4 +87,8 @@ class QrReader(XCamera):
 			self.dispatch('on_data',self.qr_result)
 		super(QrReader, self).on_tex(self.texture)
 
+	def dismiss(self, *args, **kw):
+		self.release()
+		cv2.destroyAllWindows()
+
 Builder.load_string(btxt)

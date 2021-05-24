@@ -120,9 +120,9 @@ class WidgetCSS(object):
 	def on_radius(self, o, r):
 		if not self.radius:
 			self.bg_func = Rectangle
-			return
-		self.bg_func = RoundedRectangle
-		# self.set_background_color()
+		else:
+			self.bg_func = RoundedRectangle
+		self.set_background_color()
 
 	def set_background_color(self, *args):
 		if not self.bgcolor:

@@ -8,20 +8,16 @@ from kivy.clock import Clock
 
 from ffpyplayer.tools import set_log_callback
 
-from kivyblocks.bgcolorbehavior import BGColorBehavior
 logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
                'fatal': Logger.critical, 'error': Logger.error,
                'warning': Logger.warning, 'info': Logger.info,
                'verbose': Logger.debug, 'debug': Logger.debug}
 
 
-class NewVideo(BGColorBehavior, Video):
+class NewVideo(Video):
 	center_screen = BooleanProperty(False)
-	def __init__(self,color_level=-1,radius=[],**kw):
+	def __init__(self, **kw):
 		Video.__init__(self, **kw)
-		BGColorBehavior.__init__(self,
-			color_level=color_level,
-			radius=radius)
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
 		self.register_event_type('on_open_failed')

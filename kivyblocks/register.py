@@ -1,5 +1,6 @@
 import kivy
 from kivy.utils import platform
+from kivy.uix.textinput import TextInput
 
 from appPublic.registerfunction import RegisterFunction
 
@@ -35,6 +36,7 @@ from .camerawithmic import CameraWithMic
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:
 	r('ScreenWithMic', ScreenWithMic)
+r('TextInput', TextInput)
 r('CameraWithMic', CameraWithMic)
 r('CustomCamera', CustomCamera)
 r('QrReader', QrReader)

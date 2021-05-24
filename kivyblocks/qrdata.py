@@ -13,9 +13,11 @@ from kivy.properties import ObjectProperty, StringProperty, ListProperty,\
 	BooleanProperty
 from kivy.lang import Builder
 from kivy.clock import Clock
+
+from .baseWidget import VBox
 import qrcode
 
-class QRCodeWidget(FloatLayout):
+class QRCodeWidget(VBox):
 	data = StringProperty(None, allow_none=True)
 	''' Data using which the qrcode is generated.
 
@@ -31,13 +33,12 @@ class QRCodeWidget(FloatLayout):
 	'''
 
 	def __init__(self, **kwargs):
-		self.qrimage = Image(allow_stretch=True)
+		self.qrimage = Image(allow_stretch=True, keep_ratio=True)
 		self.addr = None
 		super(QRCodeWidget, self).__init__(**kwargs)
 		self.background_color = [1,1,1,1]
 		self.qr = None
 		self._qrtexture = None
-		self.qrimage.pos_hint = {'center_x':0.5, 'center_y':0.5}
 		self.add_widget(self.qrimage)
 	
 	def on_size(self,o,s):
@@ -60,7 +61,7 @@ class QRCodeWidget(FloatLayout):
 	def set_addr(self, addr):
 		if self.addr == addr:
 			return
-		MinSize = 210 if len(addr) < 128 else 500
+		MinSize = 500 #210 if len(addr) < 128 else 500
 		self.setMinimumSize((MinSize, MinSize))
 		self.addr = addr
 		self.qr = None
@@ -76,7 +77,7 @@ class QRCodeWidget(FloatLayout):
 				version=None,
 				error_correction=L,
 				box_size=10,
-				border=0,
+				border=4,
 				)
 			qr.add_data(addr)
 			qr.make(fit=True)

@@ -70,7 +70,6 @@ from .bgcolorbehavior import BGColorBehavior
 from .utils import NeedLogin, InsufficientPrivilege, HTTPError
 from .login import LoginForm
 from .tab import TabsPanel
-from .qrdata import QRCodeWidget
 from .threadcall import HttpClient
 from .i18n import I18n
 from .widget_css import WidgetCSS
@@ -211,11 +210,21 @@ class Title6(Text):
 		Text.__init__(self, **kw)
 
 class Modal(ModalView):
-	def __init__(self, auto_open=False, **kw):
+	def __init__(self, auto_open=False, 
+				content=None,
+				**kw):
 		ModalView.__init__(self, **kw)
 		self.auto_open = auto_open
+		if content:
+			blocks = Factory.Blocks()
+			self.content = blocks.widgetBuild(content)
+			if self.content:
+				self.add_widget(self.content)
+			else:
+				print(content,':cannot build widget')
+			
 
-	def add_widget(self,w, *args, **kw):
+	def add_widget(self, w, *args, **kw):
 		super().add_widget(w, *args, **kw)
 		if self.auto_open:
 			self.open()

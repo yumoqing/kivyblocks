@@ -3,10 +3,6 @@ from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from ..widget_css import WidgetCSS
-class MyPopup(WidgetCSS, Popup):
-	def __init__(self,content=None, title='', **kw):
-		super(MyPopup, self).__init__(content=content,
-					title=title, **kw)
 
 class Messager:
 	def __init__(self, show_time=0, title=None, **kw):
@@ -17,6 +13,8 @@ class Messager:
 						title=self.title,
 						size_hint=(0.8,0.8), **kw)
 		self.messager = TextInput(size=self.w.content.size,
+				background_color=[0.9,0.9,0.9,1],
+				foreground_color=[0.3,0.3,0.3,1],
 				multiline=True,readonly=True)
 		self.w.content.add_widget(self.messager)
 
