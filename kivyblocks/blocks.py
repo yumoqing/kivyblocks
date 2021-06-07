@@ -482,10 +482,6 @@ class Blocks(EventDispatcher):
 	def registedfunctionAction(self, widget, desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),
 							from_widget=widget)
-		if target is None:
-			Logger.info('Block: registedfunctionAction():desc(%s) target not found',
-							str(desc))
-			return
 		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
@@ -508,9 +504,6 @@ class Blocks(EventDispatcher):
 			return 
 		target = Blocks.getWidgetById(desc.get('target','self'),
 						from_widget=widget)
-		if target is None:
-			Logger.info('Block: scriptAction():desc(%s) target not found',
-							str(desc))
 		d = self.getActionData(widget,desc)
 		ns = {
 			"self":target,
