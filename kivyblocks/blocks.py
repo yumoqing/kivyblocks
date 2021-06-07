@@ -408,10 +408,6 @@ class Blocks(EventDispatcher):
 			
 	def blocksAction(self,widget,desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
-		if target is None:
-			Logger.info('Block: blocksAction():desc(%s) target not found',
-							str(desc))
-			return
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		d = self.getActionData(widget,desc)
@@ -420,9 +416,10 @@ class Blocks(EventDispatcher):
 			p.update(d)
 		opts['options'] = p
 		def doit(target,add_mode,o,w):
-			if add_mode == 'replace':
-				target.clear_widgets()
-			target.add_widget(w)
+			if target:
+				if add_mode == 'replace':
+					target.clear_widgets()
+				target.add_widget(w)
 
 		def doerr(o,e):
 			Logger.info('Block: blocksAction(): desc=%s widgetBuild error'
@@ -436,10 +433,6 @@ class Blocks(EventDispatcher):
 		
 	def urlwidgetAction(self,widget,desc, *args):
 		target = Blocks.getWidgetById(desc.get('target','self'),widget)
-		if target is None:
-			Logger.info('Block: urlwidgetAction():desc(%s) target not found',
-							str(desc))
-			return
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		p = opts.get('params',{}).copy()
@@ -455,9 +448,10 @@ class Blocks(EventDispatcher):
 		}
 
 		def doit(target,add_mode,o,w):
-			if add_mode == 'replace':
-				target.clear_widgets()
-			target.add_widget(w)
+			if target:
+				if add_mode == 'replace':
+					target.clear_widgets()
+				target.add_widget(w)
 
 		def doerr(o,e):
 			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error'
