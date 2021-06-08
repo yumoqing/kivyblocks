@@ -30,10 +30,10 @@ class NewVideo(Video):
 		Clock.schedule_interval(self.check_focus,0.2)
 
 	def on_enter_focus(self, v=None):
-		Logger.info('NewVideo: enter focus')
+		pass
 
 	def on_leave_focus(self, v=None):
-		Logger.info('NewVideo: leave focus')
+		pass
 
 	def check_focus(self,*args):
 		if not self.parent:
