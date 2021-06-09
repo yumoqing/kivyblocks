@@ -18,15 +18,9 @@ from ..widget_css import WidgetCSS
 
 class BoolInput(Switch):
 	def __init__(self,csscls='input', **kw):
-		a = DictObject()
-		if kw.get('defaultvalue',None) is None:
-			a.active = False
-		else:
-			a.active = kw.get('defaultvalue')
-		if kw.get('value',None) is not None:
-			a.active = kw.get('value')
-
-		super().__init__(**a.to_dict())
+		a = {}
+		a['active'] = kw.get('value', kw.get('defaultvalue',False))
+		super().__init__(**a)
 		self.register_event_type('on_changed')
 		self.bind(active=on_active)
 
