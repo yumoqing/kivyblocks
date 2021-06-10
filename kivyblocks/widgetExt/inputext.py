@@ -243,6 +243,7 @@ class SelectInput(BoxLayout):
 		else:
 			self.si_data = ''
 			self.text = ''
+		self.tinp.text = self.text
 		self.add_widget(self.tinp)
 		self.old_value = self.si_data
 		self.tinp.bind(focus=self.showDropdown)
