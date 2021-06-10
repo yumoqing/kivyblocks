@@ -310,6 +310,7 @@ class Blocks(EventDispatcher):
 		for k,v in [(k,v) for k,v in desc.items() if k not in excludes]:
 			if isinstance(v,dict) and v.get('widgettype'):
 				b = Blocks()
+				v = self.valueExpr(v, localnamespace={'self':widget})
 				w = b.w_build(v)
 				if hasattr(widget,k):
 					aw = getattr(widget,k)
@@ -327,7 +328,8 @@ class Blocks(EventDispatcher):
 		pos = 0
 		for pos,sw in enumerate(desc.get('subwidgets',[])):
 			b = Blocks()
-			kw = sw.copy()
+			kw = self.valueExpr(sw.copy(), 
+						localnamespace={'self':widget})
 			w = b.widgetBuild(kw)
 			widget.add_widget(w)
 
