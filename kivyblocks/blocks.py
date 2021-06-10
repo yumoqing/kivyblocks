@@ -389,7 +389,7 @@ class Blocks(EventDispatcher):
 		alert("actiontype(%s) invalid" % acttype,title='error')
 
 	def eventAction(self, widget, desc, *args):
-		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		target = self.get_target(widget, desc)
 		event = desc.get('dispatch_event')
 		if not event:
 			Logger.info('Block: eventAction():desc(%s) miss dispatch_event',
@@ -405,9 +405,14 @@ class Blocks(EventDispatcher):
 			Logger.info(f'Block: eventAction():dispatch {event} error')
 			print_exc()
 			return
-			
+		
+	def get_target(self, widget, desc):
+		if not desc.get('target'):
+			return None
+		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
+
 	def blocksAction(self,widget,desc, *args):
-		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		target = self.get_target(widget, desc)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		d = self.getActionData(widget,desc)
@@ -432,7 +437,7 @@ class Blocks(EventDispatcher):
 		b.widgetBuild(opts)
 		
 	def urlwidgetAction(self,widget,desc, *args):
-		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		target = self.get_target(widget, desc)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
 		p = opts.get('params',{}).copy()
@@ -480,8 +485,7 @@ class Blocks(EventDispatcher):
 		return data
 
 	def registedfunctionAction(self, widget, desc, *args):
-		target = Blocks.getWidgetById(desc.get('target','self'),
-							from_widget=widget)
+		target = self.get_target(widget, desc)
 		rf = RegisterFunction()
 		name = desc.get('rfname')
 		func = rf.get(name)
@@ -502,8 +506,7 @@ class Blocks(EventDispatcher):
 			Logger.info('Block: scriptAction():desc(%s) target not found',
 							str(desc))
 			return 
-		target = Blocks.getWidgetById(desc.get('target','self'),
-						from_widget=widget)
+		target = self.get_target(widget, desc)
 		d = self.getActionData(widget,desc)
 		ns = {
 			"self":target,
@@ -519,7 +522,7 @@ class Blocks(EventDispatcher):
 	
 	def methodAction(self, widget, desc, *args):
 		method = desc.get('method')
-		target = Blocks.getWidgetById(desc.get('target','self'),widget)
+		target = self.get_target(widget, desc)
 		if target is None:
 			Logger.info('Block: methodAction():desc(%s) target not found',
 							str(desc))
