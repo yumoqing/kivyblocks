@@ -130,6 +130,7 @@ class Row(BoxLayout):
 			"orientation":"horizontal"
 		})
 		super(Row, self).__init__(**opts)
+		self.height = self.part.datagrid.rowHeight()
 		self.init(0)
 
 
@@ -141,11 +142,8 @@ class Row(BoxLayout):
 			cell = Cell(self,c)
 			self.add_widget(cell)
 			w += cell.width
-			if cell.height > h:
-				h = cell.height
 		self.size_hint = None,None
 		self.width = w + self.linewidth * (len(self.rowdesc)+1)
-		self.height = h		#self.part.datagrid.rowHeight()
 
 	def selected(self):
 		if not hasattr(self,'row_data'):
