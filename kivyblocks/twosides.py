@@ -14,6 +14,7 @@ class TwoSides(WidgetReady, BoxLayout):
 		self.portrait_widget = blocks.widgetBuild(portrait)
 		self.on_size_task = None
 		self.ready_task = None
+		self.register_event_type('on_interactive')
 
 	def on_size(self,*args):
 		if self.width >= self.height:
@@ -24,4 +25,9 @@ class TwoSides(WidgetReady, BoxLayout):
 			if not self.portrait_widget in self.children:
 				self.clear_widgets()
 				self.add_widget(self.portrait_widget)
+				self.dispatch('on_interactive')
+
+	def on_interactive(self, *args):
+		pass
+
 
