@@ -135,6 +135,8 @@ sub-widget's description file format
 					bar_css='default',
 					csscls='default',
 					singlepage=False,
+					fixed_before=None,
+					fixed_after=None,
 					bar_at='top', 
 					enable_on_close=False, 
 					left_menu=None, **kw):
@@ -144,6 +146,12 @@ sub-widget's description file format
 		self.singlepage = singlepage
 		self.swipe_buffer = []
 		self.swipe_right = False
+		self.fixed_before = None
+		if fixed_before:
+			self.fixed_before = Factory.Blocks().widgetBuild(fixed_before)
+		self.fixed_after = None
+		if fixed_after:
+			self.fixed_after = Factory.Blocks().widgetBuild(fixed_after)
 		
 		self.enable_on_close = enable_on_close
 		if self.enable_on_close:
@@ -225,9 +233,12 @@ sub-widget's description file format
 
 		if bar_at == 'top':
 			super().add_widget(self.bar)
-			super().add_widget(self.content)
-		else:
-			super().add_widget(self.content)
+		if self.fixed_before:
+			super().add_widget(self.fixed_before)
+		super().add_widget(self.content)
+		if self.fixed_after:
+			super().add_widget(self.fixed_after)
+		if bar_at != 'top':
 			super().add_widget(self.bar)
 		self.left_menu_showed = False
 		self.right_menu_showed = False
