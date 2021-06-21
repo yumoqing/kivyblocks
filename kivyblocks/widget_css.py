@@ -56,7 +56,7 @@ class WidgetCSS(object):
 		app = App.get_running_app()
 		for css_name in css_str.split(' '):
 			css.update(app.get_css(css_name))
-		Logger.info('WidgetCSS:set_css():%s',css.keys())
+		# Logger.info('WidgetCSS:set_css():%s',css.keys())
 		for k,v in css.items():
 			setattr(self,k,v)
 
@@ -130,8 +130,8 @@ class WidgetCSS(object):
 			#		self.__class__.__name__)
 			return
 		if not self.canvas:
-			Logger.info('WidgetCSS: set_bg_color(), canvas is null(%s)',
-					self.__class__.__name__)
+			#Logger.info('WidgetCSS: set_bg_color(), canvas is null(%s)',
+			#		self.__class__.__name__)
 			return
 
 		with self.canvas.before:
