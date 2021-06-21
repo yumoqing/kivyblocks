@@ -171,15 +171,15 @@ class MyDropDown(DropDown):
 			
 	def getTextByValue(self,v):
 		for d in self.si_data:
-			if d[self.valueField] == v:
-				r = d[self.textField]
+			if d.get(self.valueField) == v:
+				r = d.get(self.textField)
 				return r if r else v
 		return str(v)
 		
 	def getValueByText(self,v):
 		for d in self.si_data:
-			if d[self.textField] == v:
-				r = d[self.valueField]
+			if d.get(self.textField) == v:
+				r = d.get(self.valueField)
 				return r
 		return ''
 		
