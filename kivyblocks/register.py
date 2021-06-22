@@ -32,10 +32,12 @@ from .custom_camera import CustomCamera, QrReader
 if kivy.platform in ['win','linux', 'macosx']:
 	from .camerawithmic import ScreenWithMic
 from .camerawithmic import CameraWithMic
+from .scrollpanel import ScrollPanel
 
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:
 	r('ScreenWithMic', ScreenWithMic)
+r('ScrollPanel', ScrollPanel)
 r('TextInput', TextInput)
 r('CameraWithMic', CameraWithMic)
 r('CustomCamera', CustomCamera)

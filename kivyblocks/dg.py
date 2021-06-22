@@ -20,7 +20,7 @@ from appPublic.myTE import string_template_render
 
 from .utils import CSize, setSizeOptions, loading, loaded, absurl, alert
 from .baseWidget import Text, HBox, VBox
-from .widgetExt import ScrollWidget
+from .scrollpanel import ScrollPanel
 from .paging import Paging, RelatedLoader
 from .ready import WidgetReady
 from .toolbar import Toolbar
@@ -155,7 +155,7 @@ class Row(BoxLayout):
 		self.part.datagrid.select_row = self
 		self.part.datagrid.dispatch('on_selected',self)
 
-class Header(WidgetReady, ScrollWidget):
+class Header(WidgetReady, ScrollPanel):
 	def __init__(self,part,**kw):
 		super(Header, self).__init__(**kw)
 		self.part = part
@@ -173,7 +173,7 @@ class Header(WidgetReady, ScrollWidget):
 		self.add_widget(self.header)
 		self.height = self.header.height
 
-class Body(WidgetReady, ScrollWidget):
+class Body(WidgetReady, ScrollPanel):
 	def __init__(self,part,**kw):
 		self.part = part
 		kw.update({'spacing':self.part.datagrid.linewidth})
