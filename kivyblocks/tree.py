@@ -593,6 +593,16 @@ class MenuTree(TextTree):
 			f = getRegisterFunctionByName(rfname)
 			if f:
 				f(self,node.data)
+			return
+		
+		script = node.data.get('script')
+		if script:
+			target_name = node.data.get('target', self.target)
+			target =  Factory.Blocks.getWidgetById(target_name, self)
+			if target:
+				eval(script,{'self':target})
+			return
+		
 
 
 class PopupMenu(BoxLayout):
