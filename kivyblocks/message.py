@@ -31,11 +31,15 @@ class Conform(Modal):
 									valign='center',
 									))
 		b.add_widget(b1)
-		b.add_widget(Text(text=message or 'Please conform',
+		b2 = HBox()
+		
+		b2.add_widget(Text(text=message or 'Please conform',
 									wrap=True,
 									halign='left',
+									size_hint=(1,1),
 									font_size=CSize(1)))
-		b1 = HBox(size_hint_y=None, height=CSize(1.2))
+		b.add_widget(b2)
+		b3 = HBox(size_hint_y=None, height=CSize(2))
 		w_cancel = PressableBox()
 		blocks = Factory.Blocks()
 		w_cancel.add_widget(blocks.widgetBuild({
@@ -72,7 +76,7 @@ class Conform(Modal):
 				{
 					"widgettype":"AsyncImage",
 					"options":{
-						"source":cancel_icon or blockImage('conform.png'),
+						"source":conform_icon or blockImage('conform.png'),
 									"size_hint":[None,None],
 									"height":CSize(1),
 									"width":CSize(1)
@@ -94,9 +98,9 @@ class Conform(Modal):
 		w_cancel.bind(on_press=self.cancel_press)
 		w_conform.bind(on_press=self.conform_press)
 
-		b1.add_widget(w_cancel)
-		b1.add_widget(w_conform)
-		b.add_widget(b1)
+		b3.add_widget(w_cancel)
+		b3.add_widget(w_conform)
+		b.add_widget(b3)
 		self.add_widget(b)
 
 	def cancel_press(self,o, v=None):

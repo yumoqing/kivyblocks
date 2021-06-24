@@ -310,6 +310,7 @@ class MarkdownBody(VBox):
 			t = self.mktext2bbtext(l[2:])
 			return self.parse_title(t,1)
 		t = self.mktext2bbtext(l)
+		print('markdown.py, t=', t, 'len(t)=', len(t), 'type(t)=', type(t))
 		w = Factory.Blocks().widgetBuild({
 			"widgettype":"Text",
 			"options":{
