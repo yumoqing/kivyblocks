@@ -569,12 +569,23 @@ class MenuTree(TextTree):
 			self.menucall(node)
 		
 	def menucall(self, node):
+		data = {}
+		dw = node.data.get('datawidget')
+		if dw:
+			data_widget = Factory.Blocks.getWidgetById(dw)
+			if data_widget:
+				vn = node.data.get('datamethod', 'getValue')
+				if hasattr(data_widget, vn):
+					f = getattr(data_widget, vn)
+					data = f()
+					if not isinstance(data, dict):
+						data = {}
+
 		url = node.data.get('url')
+		target = Factory.Blocks.getWidgetById(node.data.get('target',self.target),self)
 		if url:
 			params = node.data.get('params',{})
-			target = Factory.Blocks.getWidgetById(self.target,self)
-			if not target:
-				return
+			params.update(data)
 			blocks = Factory.Blocks()
 			desc = {
 				"widgettype":"urlwidget",
@@ -583,8 +594,9 @@ class MenuTree(TextTree):
 					"params":params
 				}
 			}
+			print('menucall(), params=', params)
 			w = blocks.widgetBuild(desc)
-			if w:
+			if w and target:
 				target.add_widget(w)
 			return 
 
@@ -592,15 +604,16 @@ class MenuTree(TextTree):
 		if rfname:
 			f = getRegisterFunctionByName(rfname)
 			if f:
-				f(self,node.data)
+				f(self, **data)
 			return
 		
 		script = node.data.get('script')
 		if script:
 			target_name = node.data.get('target', self.target)
 			target =  Factory.Blocks.getWidgetById(target_name, self)
+			data.update({'self':target})
 			if target:
-				eval(script,{'self':target})
+				eval(script,data)
 			return
 		
 
