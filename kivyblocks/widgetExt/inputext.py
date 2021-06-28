@@ -190,8 +190,8 @@ class MyDropDown(DropDown):
 		h = self.options.get('height',2.5)
 		a = {}
 		a['size_hint_y'] = None
-		a['height'] = CSize(h)
-		a['font_size'] = CSize(self.options.get('font_size',1))
+		a['height'] = CSize(2)
+		a['font_size'] = CSize(1)
 		for d in data:
 			v = d.get(self.valueField, None)
 			t = d.get(self.textField, None)

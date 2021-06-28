@@ -44,7 +44,7 @@ class VResponsiveLayout(ScrollView):
 		cols = round(self.width / self.org_box_width)
 		if cols < 1:
 			cols = 1
-		if isHandHold() and self.width < self.height:
+		if isHandHold() and self.width < self.height and self.org_cols >= 2:
 			cols = 2
 		box_width = self.width / cols - 2
 		self._inner.cols = cols
