@@ -1,6 +1,7 @@
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
+from kivy.core.window import Window
 
 from kivyblocks.ready import WidgetReady
 
@@ -18,10 +19,14 @@ class TwoSides(WidgetReady, BoxLayout):
 
 	def on_size(self,*args):
 		if self.width >= self.height:
+			print('twosides.py:Window.rotation=', Window.rotation,
+				Window.size)
 			if not self.landscape_widget in self.children:
 				self.clear_widgets()
 				self.add_widget(self.landscape_widget)
 		else:
+			print('twosides.py:Window.rotation=', Window.rotation,
+				Window.size)
 			if not self.portrait_widget in self.children:
 				self.clear_widgets()
 				self.add_widget(self.portrait_widget)
