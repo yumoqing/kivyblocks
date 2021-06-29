@@ -24,6 +24,8 @@ class TwoSides(WidgetReady, BoxLayout):
 		self.landscape_widget = blocks.widgetBuild(landscape)
 		blocks = Factory.Blocks()
 		self.portrait_widget = blocks.widgetBuild(portrait)
+		self.switch_button = None
+		self.switch_button_showed = False
 		if self.switch_image:
 			self.build_switch_image()
 		self.on_size_task = None
@@ -39,9 +41,11 @@ class TwoSides(WidgetReady, BoxLayout):
 		def show(*args):
 			if self.switch_image and self.width > self.height:
 				Window.add_widget(self.switch_button)
+				self.switch_button_showed = True
 
 		print('show switch_buuton ....')
-		Clock.schedule_once(show, 2)
+		if self.fullscreen:
+			Clock.schedule_once(show, 2)
 
 	def build_switch_image(self):
 		button = Factory.Blocks().widgetBuild({
@@ -94,8 +98,13 @@ class TwoSides(WidgetReady, BoxLayout):
 				self.dispatch('on_beforeswitch_landscape')
 				self.clear_widgets()
 				self.add_widget(self.landscape_widget)
-				self.panel_shape = 'landscape'
+				if self.switch_button_showed:
+					self.switch_button.y = self.height - \
+									self.switch_button.height
+					self.switch_button.x = 0
+					Window.add_widget(self.switch_button)
 				self.dispatch('on_afterswitch_landscape')
+				self.panel_shape = 'landscape'
 		else:
 			print('twosides.py:Window.rotation=', Window.rotation,
 				Window.size)
@@ -103,6 +112,8 @@ class TwoSides(WidgetReady, BoxLayout):
 				self.dispatch('on_beforeswitch_landscape')
 				self.clear_widgets()
 				self.add_widget(self.portrait_widget)
+				if self.switch_button_showed:
+					Window.remove_widget(self.switch_button)
 				self.cannt_rotation = False
 				self.panel_shape = 'portrait'
 				self.dispatch('on_afterswitch_landscape')
