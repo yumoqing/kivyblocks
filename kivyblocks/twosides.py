@@ -37,6 +37,10 @@ class TwoSides(WidgetReady, BoxLayout):
 		self.register_event_type('on_afterswitch_portrait')
 		self.bind(fullscreen=self.show_switch_image)
 
+	def set_switch_button_pos(self):
+		h = self.switch_button.height
+		self.switch_button.pos = (4, Window.height - h - 4)
+
 	def show_switch_image(self, o, v=None):
 		def show(*args):
 			if self.switch_image and self.width > self.height:
@@ -52,8 +56,7 @@ class TwoSides(WidgetReady, BoxLayout):
 			"widgettype":"PressableBox",
 			"options":{
 				"size_hint":(None, None),
-				"size":CSize(4,4),
-				"pos":(0, Window.height - CSize(4))
+				"size":CSize(4,4)
 			},
 			"subwidgets":[
 				{
@@ -66,6 +69,7 @@ class TwoSides(WidgetReady, BoxLayout):
 		})
 		button.bind(on_press=self.switch_portrait_widget)
 		self.switch_button = button
+		self.set_switch_button_pos()
 
 	def switch_portrait_widget(self, *args):
 		def clear_modal(o, *args):
@@ -99,9 +103,7 @@ class TwoSides(WidgetReady, BoxLayout):
 				self.clear_widgets()
 				self.add_widget(self.landscape_widget)
 				if self.switch_button_showed:
-					self.switch_button.y = self.height - \
-									self.switch_button.height
-					self.switch_button.x = 0
+					self.set_switch_button_pos()
 					Window.add_widget(self.switch_button)
 				self.dispatch('on_afterswitch_landscape')
 				self.panel_shape = 'landscape'
