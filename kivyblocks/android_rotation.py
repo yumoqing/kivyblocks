@@ -1,8 +1,11 @@
 from kivy.utils import platform
 import plyer
 try:
-	from plyer.platforms.android import activity
+	from android import activity
+	# from plyer.platforms.android import activity
+	# return rotation is 0 forever 
 except:
+	print('android_rotation.py:from android import activity ERROR')
 	activity = None
 
 def get_rotation():
