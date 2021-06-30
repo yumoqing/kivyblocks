@@ -131,16 +131,12 @@ class TwoSides(WidgetReady, BoxLayout):
 		pass
 
 	def on_afterswitch_landscape(self, *args):
-		print('twosides.py:Window.rotation=', Window.rotation,
-			Window.size)
 		pass
 
 	def on_beforeswitch_portrait(self, *args):
 		pass
 
 	def on_afterswitch_portrait(self, *args):
-		print('twosides.py:Window.rotation=', Window.rotation,
-			Window.size)
 		pass
 
 	def on_interactive(self, *args):
