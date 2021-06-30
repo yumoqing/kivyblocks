@@ -1,4 +1,5 @@
 from kivy.clock import Clock
+from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
 from kivy.core.window import Window
@@ -36,6 +37,7 @@ class TwoSides(WidgetReady, BoxLayout):
 		self.register_event_type('on_beforeswitch_portrait')
 		self.register_event_type('on_afterswitch_portrait')
 		self.bind(fullscreen=self.show_switch_image)
+		self.app = App.get_running_app()
 
 	def set_switch_button_pos(self):
 		h = self.switch_button.height
@@ -108,7 +110,7 @@ class TwoSides(WidgetReady, BoxLayout):
 				self.dispatch('on_afterswitch_landscape')
 				self.panel_shape = 'landscape'
 		else:
-			print('twosides.py:Window.rotation=', Window.rotation,
+			print('twosides.py:Window.rotation=', self.app.get_rotation(),
 				Window.size)
 			if not self.portrait_widget in self.children:
 				self.dispatch('on_beforeswitch_landscape')

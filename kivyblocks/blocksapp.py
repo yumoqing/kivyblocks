@@ -36,6 +36,8 @@ from appPublic.rsa import RSA
 if platform == 'android':
 	from jnius import autoclass
 
+from .android_rotation import get_rotation
+
 class ServerInfo:
 	def __init__(self):
 		self.rsaEngine = RSA()
@@ -96,6 +98,9 @@ kivyblocks_css_keys = [
 ]
 
 class BlocksApp(App):
+	def get_rotation(self):
+		return get_rotation()
+
 	def load_csses(self):
 		config = getConfig()
 		if not config.css:
