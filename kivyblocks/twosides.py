@@ -100,6 +100,9 @@ class TwoSides(WidgetReady, BoxLayout):
 
 	def on_size(self,*args):
 		if self.width >= self.height:
+			print('twosides.py:W-Window.rotation=', 
+				self.app.get_rotation(),
+				Window.size)
 			if not self.landscape_widget in self.children:
 				self.dispatch('on_beforeswitch_landscape')
 				self.clear_widgets()
@@ -110,7 +113,8 @@ class TwoSides(WidgetReady, BoxLayout):
 				self.dispatch('on_afterswitch_landscape')
 				self.panel_shape = 'landscape'
 		else:
-			print('twosides.py:Window.rotation=', self.app.get_rotation(),
+			print('twosides.py:H-Window.rotation=', 
+				self.app.get_rotation(),
 				Window.size)
 			if not self.portrait_widget in self.children:
 				self.dispatch('on_beforeswitch_landscape')

@@ -1,11 +1,12 @@
 from kivy.utils import platform
 import plyer
 try:
-	from android import activity
-	# from plyer.platforms.android import activity
-	# return rotation is 0 forever 
+	#
+	# from android import activity
+	# get_rotation() failed module 'android.activity' has no attribute 'getWindowManager'
+	from plyer.platforms.android import activity
 except:
-	print('android_rotation.py:from android import activity ERROR')
+	print('android_rotation.py:mport ERROR')
 	activity = None
 
 def get_rotation():
