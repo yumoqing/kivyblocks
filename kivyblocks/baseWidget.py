@@ -236,7 +236,9 @@ class TimedModal(Modal):
 		Modal.__init__(self, **kw)
 
 	def open(self, *args, **kw):
-		self.time_task = Clock.schedule_once(self.dismiss, self.show_time)
+		if self.show_time > 0:
+			self.time_task = \
+				Clock.schedule_once(self.dismiss, self.show_time)
 		super().open(*args, **kw)
 
 	def dismiss(self, *args, **kw):
