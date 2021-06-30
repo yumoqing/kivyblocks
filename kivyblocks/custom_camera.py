@@ -35,6 +35,9 @@ class CustomCamera(XCamera):
 		if self.isAndroid:
 			self.angle = -90
 
+	def set_angle(self, angle):
+		self.angle = -90
+
 	def change_index(self, *args):
 		new_index = 1 if self.index == 0 else 0
 		self._camera._set_index(new_index)
@@ -69,6 +72,11 @@ class QrReader(XCamera):
 		self.qr_result = None
 		Logger.info('QrReader:Initialed')
 
+	def set_angle(self, *args, **kwargs):
+		print('kwargs=', kwargs)
+		angle = kwargs.get('angle', 0)
+		self.angle = angle
+
 	def getValue(self):
 		return {
 			"qr_result":self.qr_result
@@ -88,7 +96,7 @@ class QrReader(XCamera):
 		super(QrReader, self).on_tex(self.texture)
 
 	def dismiss(self, *args, **kw):
-		self.release()
+		self.play = False
 		cv2.destroyAllWindows()
 
 Builder.load_string(btxt)
