@@ -1,4 +1,5 @@
 from kivy.utils import platform
+import plyer
 try:
 	from plyer.platforms.android import activity
 except:
