@@ -25,22 +25,29 @@ class CustomCamera(XCamera):
 		super(CustomCamera, self).__init__(**kwargs)
 		self.isAndroid = kivy.platform == "android"
 		self.app = App.get_running_app()
+		self.angle = 270
 
 	def on_tex(self, camera):
-		super(CustomCamera, self).on_tex(camera)
+		image = np.frombuffer(camera.texture.pixels, dtype='uint8')
+		image = image.reshape(camera.texture.height, camera.texture.width, -1)
+		x = 0
 		if self.isAndroid:
 			x = self.app.get_rotation()
-			if not x:
-				x = 1
-			angle = self.angle_map[x]
-			with canvas.before:
-				PushMatrix()
-				Rotate(**{
-					angle: angle,
-					axis: (0, 0, 1),
-					origin: self.center})
-			with canvas.after:
-				PopMatrix()
+
+		if x > 0:
+			image = np.rot90(image,x)
+
+		image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
+
+		if self.detectFaces:
+			_image, faceRect = face_detection(image, (0, 255, 0, 255), self.angle)
+
+		image = cv2.cvtColor(image, cv2.COLOR_BGR2RGBA)
+		numpy_data = image.tostring()
+		self.texture.blit_buffer(numpy_data, bufferfmt="ubyte", colorfmt='rgba')
+		self.texture_size = list(self.texture.size)
+		self.canvas.ask_update()
+		return
 			
 	def change_index(self, *args):
 		new_index = 1 if self.index == 0 else 0
@@ -48,25 +55,15 @@ class CustomCamera(XCamera):
 		self.index = new_index
 		self.angle = -90 if self.index == 0 else 90
 
-
-	def on_tex(self, *l):
-		image = np.frombuffer(self.texture.pixels, dtype='uint8')
-		image = image.reshape(self.texture.height, self.texture.width, -1)
-		image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
-
-		if self.detectFaces:
-			image, faceRect = face_detection(image, (0, 255, 0, 255), self.angle)
-
-		image = cv2.cvtColor(image, cv2.COLOR_BGR2RGBA)
-		numpy_data = image.tostring()
-		self.texture.blit_buffer(numpy_data, bufferfmt="ubyte", colorfmt='rgba')
-		super(CustomCamera, self).on_tex(self.texture)
-
 	def get_cameras_count(self):
 		cameras = 1
 		if self.isAndroid:
 			cameras = self._camera.get_camera_count()
 		return cameras
+
+	def dismiss(self, *args, **kw):
+		self.play = False
+		cv2.destroyAllWindows()
 
 class QrReader(CustomCamera):
 	def __init__(self, **kw):
@@ -84,7 +81,9 @@ class QrReader(CustomCamera):
 	def on_data(self, d):
 		print('data=',d)
 
-	def on_tex(self, *l):
+	def on_tex(self, camera):
+		print('QrReader().on_tex() ....')
+		super(QrReader, self).on_tex(camera)
 		image = np.frombuffer(self.texture.pixels, dtype='uint8')
 		image = image.reshape(self.texture.height, self.texture.width, -1)
 		image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
@@ -92,9 +91,4 @@ class QrReader(CustomCamera):
 		if self.qr_result:
 			print('qr read done')
 			self.dispatch('on_data',self.qr_result)
-		super(QrReader, self).on_tex(self.texture)
-
-	def dismiss(self, *args, **kw):
-		self.play = False
-		cv2.destroyAllWindows()
 
