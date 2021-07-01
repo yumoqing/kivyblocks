@@ -5,6 +5,7 @@ from kivy.properties import BooleanProperty, NumericProperty
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import PushMatrix, Rotate, PopMatrix
+from kivy.graphics.texture import Texture
 
 import kivy
 import numpy as np
@@ -25,28 +26,41 @@ class CustomCamera(XCamera):
 		super(CustomCamera, self).__init__(**kwargs)
 		self.isAndroid = kivy.platform == "android"
 		self.app = App.get_running_app()
-		self.angle = 270
 
 	def on_tex(self, camera):
-		image = np.frombuffer(camera.texture.pixels, dtype='uint8')
-		image = image.reshape(camera.texture.height, camera.texture.width, -1)
-		x = 0
+		texture = camera.texture
+		image = np.frombuffer(texture.pixels, dtype='uint8')
+		image = image.reshape(texture.height, texture.width, -1)
+		size1 = image.shape
+		x = 2
 		if self.isAndroid:
 			x = self.app.get_rotation()
+			y = self.angle_map[x]
+			x = y / 90
 
 		if x > 0:
 			image = np.rot90(image,x)
-
-		image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
-
 		if self.detectFaces:
-			_image, faceRect = face_detection(image, (0, 255, 0, 255), self.angle)
-
-		image = cv2.cvtColor(image, cv2.COLOR_BGR2RGBA)
+			image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
+			angle = x * 90
+			image, faceRect = face_detection(image, (0, 255, 0, 255), angle)
+			image = cv2.cvtColor(image, cv2.COLOR_BGR2RGBA)
+		size3 = image.shape
+		size3_2 = size3[:2]
+		h,w,_ = size3
 		numpy_data = image.tostring()
-		self.texture.blit_buffer(numpy_data, bufferfmt="ubyte", colorfmt='rgba')
+		self.texture = Texture.create(size=(w,h), \
+							colorfmt='rgba')
+		self.texture.blit_buffer(numpy_data, 
+					size=(w,h),
+					bufferfmt="ubyte", colorfmt='rgba')
+		size4=self.texture.size
 		self.texture_size = list(self.texture.size)
 		self.canvas.ask_update()
+		print('size1=',size1,
+				'size2=', size2,
+				'size3=', size3,
+				'size4=', size4)
 		return
 			
 	def change_index(self, *args):
@@ -90,5 +104,6 @@ class QrReader(CustomCamera):
 		self.qr_result, bbox,_ = self.qr_reader.detectAndDecode(image)
 		if self.qr_result:
 			print('qr read done')
+			self.dismiss()
 			self.dispatch('on_data',self.qr_result)
 
