@@ -18,9 +18,9 @@ from .xcamera.xcamera import XCamera
 class CustomCamera(XCamera):
 	detectFaces = BooleanProperty(False)
 	angle_map = {
-		0:270,
+		0:90,
 		1:0,
-		2:90,
+		2:270,
 		3:180
 	}
 	def __init__(self, **kwargs):
