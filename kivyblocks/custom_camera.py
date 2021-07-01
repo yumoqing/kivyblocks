@@ -1,3 +1,4 @@
+from traceback import print_exc
 from kivy.app import App
 from kivy.logger import Logger
 from kivy.uix.camera import Camera
@@ -32,7 +33,7 @@ class CustomCamera(XCamera):
 		image = np.frombuffer(texture.pixels, dtype='uint8')
 		image = image.reshape(texture.height, texture.width, -1)
 		size1 = image.shape
-		x = 2
+		x = 3
 		if self.isAndroid:
 			x = self.app.get_rotation()
 			y = self.angle_map[x]
@@ -41,26 +42,23 @@ class CustomCamera(XCamera):
 		if x > 0:
 			image = np.rot90(image,x)
 		if self.detectFaces:
-			image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
-			angle = x * 90
-			image, faceRect = face_detection(image, (0, 255, 0, 255), angle)
-			image = cv2.cvtColor(image, cv2.COLOR_BGR2RGBA)
-		size3 = image.shape
-		size3_2 = size3[:2]
-		h,w,_ = size3
+			try:
+				image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
+				_image, faceRect = face_detection(image, (0, 255, 0, 255))
+				image = cv2.cvtColor(_image, cv2.COLOR_BGR2RGBA)
+			except Exception as e:
+				print('custom_camera.py:Exception:',e)
+				print_exc()
+
+		h,w,_ = image.shape
 		numpy_data = image.tostring()
 		self.texture = Texture.create(size=(w,h), \
 							colorfmt='rgba')
 		self.texture.blit_buffer(numpy_data, 
 					size=(w,h),
 					bufferfmt="ubyte", colorfmt='rgba')
-		size4=self.texture.size
 		self.texture_size = list(self.texture.size)
 		self.canvas.ask_update()
-		print('size1=',size1,
-				'size2=', size2,
-				'size3=', size3,
-				'size4=', size4)
 		return
 			
 	def change_index(self, *args):

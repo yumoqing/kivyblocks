@@ -24,6 +24,7 @@ package_data = {
 		'ttf/*.ttf', 
 		'ui/*.uidesc',
 		'xcamera/xcamera.kv',
+		'image_processing/cascades/haarcascade_frontalface_default.xml',
 		'xcamera/data/*'
 	],
 }
