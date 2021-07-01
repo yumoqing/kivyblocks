@@ -1,8 +1,11 @@
+from kivy.app import App
 from kivy.logger import Logger
 from kivy.uix.camera import Camera
 from kivy.properties import BooleanProperty, NumericProperty
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
+from kivy.graphics import PushMatrix, Rotate, PopMatrix
+
 import kivy
 import numpy as np
 import cv2
@@ -10,34 +13,35 @@ from kivy.base import Builder
 from .image_processing.image_processing import face_detection
 from .xcamera.xcamera import XCamera
 
-btxt = """<CustomCamera>:
-	resolution: (1920,1050)
-	play: True
-	keep_ratio: True
-	allow_stretch: True
-	canvas.before:
-		PushMatrix
-		Rotate:
-			angle: root.angle
-			axis: 0, 0, 1
-			origin: root.center
-	canvas.after:
-		PopMatrix
-"""
-
 class CustomCamera(XCamera):
 	detectFaces = BooleanProperty(False)
-	angle = NumericProperty(0)
+	angle_map = {
+		0:270,
+		1:0,
+		2:90,
+		3:180
+	}
 	def __init__(self, **kwargs):
 		super(CustomCamera, self).__init__(**kwargs)
-
 		self.isAndroid = kivy.platform == "android"
+		self.app = App.get_running_app()
+
+	def on_tex(self, camera):
+		super(CustomCamera, self).on_tex(camera)
 		if self.isAndroid:
-			self.angle = -90
-
-	def set_angle(self, angle):
-		self.angle = -90
-
+			x = self.app.get_rotation()
+			if not x:
+				x = 1
+			angle = self.angle_map[x]
+			with canvas.before:
+				PushMatrix()
+				Rotate(**{
+					angle: angle,
+					axis: (0, 0, 1),
+					origin: self.center})
+			with canvas.after:
+				PopMatrix()
+			
 	def change_index(self, *args):
 		new_index = 1 if self.index == 0 else 0
 		self._camera._set_index(new_index)
@@ -64,18 +68,13 @@ class CustomCamera(XCamera):
 			cameras = self._camera.get_camera_count()
 		return cameras
 
-class QrReader(XCamera):
+class QrReader(CustomCamera):
 	def __init__(self, **kw):
 		super(QrReader, self).__init__(**kw)
 		self.qr_reader = cv2.QRCodeDetector()
 		self.register_event_type('on_data')
 		self.qr_result = None
 		Logger.info('QrReader:Initialed')
-
-	def set_angle(self, *args, **kwargs):
-		print('kwargs=', kwargs)
-		angle = kwargs.get('angle', 0)
-		self.angle = angle
 
 	def getValue(self):
 		return {
@@ -99,4 +98,3 @@ class QrReader(XCamera):
 		self.play = False
 		cv2.destroyAllWindows()
 
-Builder.load_string(btxt)
