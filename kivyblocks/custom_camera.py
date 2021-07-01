@@ -94,14 +94,11 @@ class QrReader(CustomCamera):
 		print('data=',d)
 
 	def on_tex(self, camera):
-		print('QrReader().on_tex() ....')
 		super(QrReader, self).on_tex(camera)
 		image = np.frombuffer(self.texture.pixels, dtype='uint8')
 		image = image.reshape(self.texture.height, self.texture.width, -1)
 		image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
 		self.qr_result, bbox,_ = self.qr_reader.detectAndDecode(image)
 		if self.qr_result:
-			print('qr read done')
-			self.dismiss()
 			self.dispatch('on_data',self.qr_result)
 
