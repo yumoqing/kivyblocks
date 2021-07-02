@@ -7,16 +7,20 @@ from kivy.uix.label import Label
 from kivyblocks.utils import CSize
 from kivy.app import App
 
+from .colorcalc import *
+
 class WidgetCSS(object):
 	height_nm = NumericProperty(None)
 	width_nm = NumericProperty(None)
-	height_cm = NumericProperty(None)
-	width_cm = NumericProperty(None)
+	height_c = NumericProperty(None)
+	width_c = NumericProperty(None)
+	fgcolor_s = StringProperty(None)
+	bgcolor_s = StringProperty(None)
 	bgcolor = ListProperty(None)
 	fgcolor = ListProperty(None)
 	csscls = StringProperty("default")
 	radius = ListProperty(None)
-	background_rec = None
+	background_rect = None
 	bg_func = Rectangle
 
 	def on_canvas(self, o, s):
@@ -60,17 +64,17 @@ class WidgetCSS(object):
 		for k,v in css.items():
 			setattr(self,k,v)
 
-	def on_height_cm(self, o, c):
-		if not height_cm:
+	def on_height_c(self, o, c):
+		if not height_c:
 			return
 		self.size_hint_y = None
-		self.height = CSize(self.height_cm)
+		self.height = CSize(self.height_c)
 
-	def on_width_cm(self, o, c):
-		if not width_cm:
+	def on_width_c(self, o, c):
+		if not width_c:
 			return
 		self.size_hint_x = None
-		self.width = CSize(self.width_cm)
+		self.width = CSize(self.width_c)
 
 	def set_child_fgcolor(self, c):
 		if not self.fgcolor:
@@ -90,6 +94,16 @@ class WidgetCSS(object):
 		for c in self.children:
 			self.set_child_fgcolor(c)
 			
+	def on_fgcolor_s(self, o, c):
+		if not c:
+			return
+		self.fgcolor = toArrayColor(c)
+
+	def on_bgcolor_s(self, o, c):
+		if not c:
+			return
+		self.bgcolor = toArrayColor(c)
+
 	def on_fgcolor(self, o, c):
 		#Logger.info('WidgetCSS:on_fgcolor:%s fgcolor=%s', self.__class__.__name__,
 		#				self.fgcolor)
