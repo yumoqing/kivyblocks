@@ -28,7 +28,10 @@ class WidgetCSS(object):
 		self.set_background_color()
 
 	def on_size(self, o, s):
-		super(WidgetCSS, self).on_size(o, s)
+		try:
+			super(WidgetCSS, self).on_size(o, s)
+		except:
+			pass
 		self.set_background_color()
 
 	def on_pos(self, o, p):
