@@ -477,13 +477,17 @@ class Blocks(EventDispatcher):
 			if dwidget is None:
 				Logger.info('Block: desc(%s) datawidget not defined',
 							str(desc))
-			if hasattr(dwidget,'getValue'):
-				data = dwidget.getValue()
+			method = desc.get('datamethod','getValue')
+			largs = desc.get('dataargs',[]),
+			kwargs = desc.get('datakwargs',{})
+			if hasattr(dwidget, method):
+				f = getattr(dwidget, method)
+				data = f(**kwargs)
 				if desc.get('keymapping'):
 					data = keyMapping(data, desc.get('keymapping'))
 			else:
-				Logger.info('Block: desc(%s) datawidget has not getValue',
-							str(desc))
+				Logger.info('Block: desc(%s) datawidget has not %s',
+							str(desc), method)
 		return data
 
 	def registedfunctionAction(self, widget, desc, *args):
