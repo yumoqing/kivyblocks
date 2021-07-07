@@ -41,7 +41,7 @@ class TwoSides(WidgetReady, BoxLayout):
 
 	def set_switch_button_pos(self):
 		h = self.switch_button.height
-		self.switch_button.pos = (4, Window.height - h - 4)
+		self.switch_button.pos = (4, self.height - h - 4)
 
 	def show_switch_image(self, o, v=None):
 		def show(*args):
