@@ -100,6 +100,8 @@ class TwoSides(WidgetReady, BoxLayout):
 
 	def on_size(self,*args):
 		if self.width >= self.height:
+			if self.switch_button:
+				self.set_switch_button_pos()
 			print('twosides.py:W-Window.rotation=', 
 				self.app.get_rotation(),
 				Window.size)
