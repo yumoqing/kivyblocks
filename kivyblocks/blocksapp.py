@@ -15,6 +15,7 @@ from kivy.metrics import sp,dp,mm
 from kivy.core.window import WindowBase, Window
 from kivy.clock import Clock
 from kivy.logger import Logger
+from kivy.utils import platform
 
 import kivy
 import plyer
@@ -137,6 +138,8 @@ class BlocksApp(App):
 		return self.csses.get(name,self.csses.get('default',{}))
 
 	def build(self):
+		self.platform = platform
+		self.is_desktop = platform in ['win', 'linux', 'macosx']
 		config = getConfig()
 		self.csses = {
 			"default":{
