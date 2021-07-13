@@ -64,9 +64,6 @@ class NodeTrigger(ButtonBehavior, EmptyBox):
 		self.showOpenStatus()
 	
 	def on_press(self, *args):
-		Logger.info('NodeTrigger:on_press() called, open_status=%s',
-			self.open_status
-		)
 		self.open_status = False if self.open_status else True
 		# self.showOpenStatus()
 
@@ -77,7 +74,6 @@ class NodeTrigger(ButtonBehavior, EmptyBox):
 		self.showOpenStatus()
 
 	def showOpenStatus(self):
-		Logger.info('NodeTrigger:showOpenStatus() called')
 		points = self.close_points
 		if self.open_status:
 			points = self.open_points
@@ -181,14 +177,12 @@ class TreeNode(BoxLayout):
 			return
 
 		if self.data.children is None:
-			Logger.info('Tree : is a leaf node')
 			return
 
 		if self.data.children == []:
 			self.treeObj.getUrlData(self.addChildren,self.data)
 			return
 		if len(self.nodes) == 0:
-			Logger.info('Tree : add subnodes')
 			self.addChildren(self.data.children)
 		else:
 			Logger.info('Tree : not need add subnodes')
@@ -492,11 +486,6 @@ class TextTree(Tree):
 
 class MenuTreeNode(TextTreeNode):
 	def on_size(self, *args):
-		Logger.info('%s:on_size(),bgcolor=%s, fgcolor=%s,css=%s', 
-					self.__class__.__name__,
-					self.content.bgcolor,
-					self.content.fgcolor,
-					self.content.csscls)
 		self.node_box.width = self.width
 		self.content.width = self.node_box.width - self.trigger.width
 		self.text_widget.width = self.content.width - CSize(1)
@@ -632,7 +621,6 @@ class PopupMenu(BoxLayout):
 		Logger.info('PopupMenu: on_press fired')
 
 	def onMenuItemTouch(self,o,d=None,v=None):
-		Logger.info('MenuTree: on_press fired,o=%s,d=%s,v=%s',o,d,v)
 		data = {
 			'target':self.treeObj.target,
 			'menudata':d

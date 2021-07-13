@@ -33,10 +33,12 @@ if kivy.platform in ['win','linux', 'macosx']:
 	from .camerawithmic import ScreenWithMic
 from .camerawithmic import CameraWithMic
 from .scrollpanel import ScrollPanel
+from .udp_widget import UdpWidget
 
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:
 	r('ScreenWithMic', ScreenWithMic)
+r('UdpWidget', UdpWidget)
 r('ScrollPanel', ScrollPanel)
 r('TextInput', TextInput)
 r('CameraWithMic', CameraWithMic)
