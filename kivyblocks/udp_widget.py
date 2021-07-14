@@ -67,6 +67,7 @@ class UdpWidget(EventDispatcher):
 		raise Exception('timeout')
 
 	def comm_callback(self, data, addr):
+		print('received:', data, 'addr=', addr)
 		d = None
 		if data[:18] == b'0x00' * 18:
 			data = data[18:]
@@ -82,6 +83,7 @@ class UdpWidget(EventDispatcher):
 			return
 		if not isinstance(d, dict):
 			return
+		print('received: data=', d)
 		cmd = d['c']
 		f = self.inner_handler(cmd)
 		if f:
@@ -121,6 +123,7 @@ class UdpWidget(EventDispatcher):
 	def send(self, peer_id, data):
 		d = self.dataencoder.pack(peer_id, data)
 		addr = (peer_id, self.udp_port)
+		print('send():', peer_id, data)
 		self.udp_transport.send(d, addr)
 
 	def stop(self):
