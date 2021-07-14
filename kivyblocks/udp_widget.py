@@ -1,7 +1,14 @@
+try:
+	import ujson as json
+except:
+	import json
+
 import time
 from kivy.event import EventDispatcher
+from kivy.clock import Clock
 from appPublic.udp_comm import UdpComm
 from appPublic.dataencoder import DataEncoder
+
 
 class UdpWidget(EventDispatcher):
 	def __init__(self, udp_port=55000, cert_file=None, commands=[],
@@ -11,15 +18,18 @@ class UdpWidget(EventDispatcher):
 		self.commands = commands
 		self.block_commands = []
 		self.udp_transport = UdpComm(udp_port, self.comm_callback)
-		host = self.upd_transport.host
+		host = self.udp_transport.host
 		self.dataencoder = DataEncoder(host, self.get_peer_pubkey)
 		self.inner_handlers = {
-			'get_pubkey':self.resp_pubkey
+			'get_pubkey':self.resp_pubkey,
+			'set_pubkey':self.set_pubkey
 		}
 		for cmd in self.commands:
 			evt_name = 'on_%s' % cmd
 			setattr(self, evt_name, self.event_handler)
 			self.register_event_type(evt_name)
+		self.get_peer_pubkey()
+		Clock.schedule_once(self.get_peer_pubkey_loop, 2)
 
 	def block_command(self, cmd):
 		if cmd not in self.command:
@@ -33,7 +43,10 @@ class UdpWidget(EventDispatcher):
 			return
 		self.block_commands = [ c for c in self.block_command if c!=cmd ]
 
-	def get_peer_pubkey(self, peer_id, timeout=2):
+	def get_peer_pubkey_loop(self, t):
+		self.get_peer_pubkey()
+
+	def get_peer_pubkey(self, peer_id=None, timeout=1):
 		d = {
 			'c':'get_pubkey',
 			'd':{
@@ -41,15 +54,16 @@ class UdpWidget(EventDispatcher):
 			}
 		}
 		b = json.dumps(d).encode('utf-8')
-		self.udp_tranport.broadcast(b)
-		t1 = time.time()
-		t = t1
+		self.udp_transport.broadcast(b)
+		if peer_id is None:
+			return
+		t = t1 = time.time()
 		t1 += timeout
 		while t1 > t:
 			time.sleep(0.1)
 			t = time.time()
-			if self.dataencoder.exist_peer_publickeys():
-				return
+			if self.dataencoder.exist_peer_publickeys(peer_id):
+				return self.dataencder.public_keys[peer_id]
 		raise Exception('timeout')
 
 	def comm_callback(self, data, addr):
@@ -85,13 +99,29 @@ class UdpWidget(EventDispatcher):
 	def event_handler(self, o, d):
 		Logger.info('UdpWidget: received data=%s', d)
 
-	def resp_pubkey(self, data, addr):
+	def set_pubkey(self, data, addr):
 		pk = data['d']['pubkey']
 		id = addr[0]
 		self.dataencoder.set_peer_text_pubkey(id, pk)
+
+	def resp_pubkey(self, data, addr):
+		set_pubkey(data, addr)
+		data = {
+			'c':'set_pubkey',
+			'd':{
+				'pubkey':self.dataencoder.my_text_publickey()
+			}
+		}
+		self.send(addr[0], data)
+
+	def broadcast(self, data):
+		for peer in self.dataencoder.public_keys.keys():
+			self.send(peer, data)
 
 	def send(self, peer_id, data):
 		d = self.dataencoder.pack(peer_id, data)
 		addr = (peer_id, self.udp_port)
 		self.udp_transport.send(d, addr)
 
+	def stop(self):
+		self.udp_transport.stop()
