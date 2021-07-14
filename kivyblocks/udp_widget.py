@@ -47,15 +47,17 @@ class UdpWidget(EventDispatcher):
 		self.get_peer_pubkey()
 
 	def get_peer_pubkey(self, peer_id=None, timeout=1):
+		print('get_peer_pubkey(), called..')
 		d = {
 			'c':'get_pubkey',
 			'd':{
 				'pubkey':self.dataencoder.my_text_publickey()
 			}
 		}
-		b = json.dumps(d).encode('utf-8')
+		b = b'0x00' * 18 + json.dumps(d).encode('utf-8')
 		self.udp_transport.broadcast(b)
 		if peer_id is None:
+			print('get_peer_pubkey():return')
 			return
 		t = t1 = time.time()
 		t1 += timeout
@@ -67,7 +69,7 @@ class UdpWidget(EventDispatcher):
 		raise Exception('timeout')
 
 	def comm_callback(self, data, addr):
-		print('received:', data, 'addr=', addr)
+		print('comm_callback():', data, 'addr=', addr)
 		d = None
 		if data[:18] == b'0x00' * 18:
 			data = data[18:]
@@ -80,16 +82,20 @@ class UdpWidget(EventDispatcher):
 		else:
 			d = self.dataencoder.unpack(addr[0], data)
 		if d is None:
+			print('comm_callback(): d is None')
 			return
 		if not isinstance(d, dict):
+			print('comm_callback(): d is not a dict data')
 			return
 		print('received: data=', d)
 		cmd = d['c']
 		f = self.inner_handler(cmd)
 		if f:
 			f(d, addr)
+			print('comm_callback():inner callback called(),', cmd)
 			return
 		if cmd in self.block_commands:
+			print('comm_callback():', cmd, 'is blocked')
 			return
 		evt_name = 'on_%s' % cmd
 		evt_data = {
