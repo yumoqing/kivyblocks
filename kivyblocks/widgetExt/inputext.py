@@ -184,7 +184,6 @@ class MyDropDown(DropDown):
 		return ''
 		
 	def setData(self,data):
-		Logger.info('TextInput: setData data=%s', data)
 		self.si_data = data
 		self.clear_widgets()
 		h = self.options.get('height',2.5)
@@ -209,7 +208,6 @@ class MyDropDown(DropDown):
 		self.setData(d)
 			
 	def showme(self,w):
-		print('show it ',w)
 		self.target = w
 		self.open(w)
 		
@@ -237,7 +235,6 @@ class SelectInput(BoxLayout):
 		newkw = {}
 		newkw.update(kw)
 		newkw.update({'on_select':self.setData})
-		print('selectinput:kw=', newkw)
 		self.dropdown = MyDropDown(**newkw)
 		if kw.get('value'):
 			self.si_data = kw.get('value')
@@ -257,7 +254,6 @@ class SelectInput(BoxLayout):
 	def showDropdown(self,instance,yn):
 		# if self.collide_point(*touch.pos):
 		if yn:
-			print('focus(): .....')
 			self.tinp.focus = False
 			self.dropdown.showme(self)
 			self.old_value = self.getValue()
