@@ -168,9 +168,6 @@ class TreeNode(BoxLayout):
 		self.node_box.height = self.treeObj.rowheight
 		self.node_box.width = self.trigger.width + \
 						self.content.width
-		Logger.info('Tree : content=(%d,%d),box=(%d,%d)', \
-						self.content.width,self.content.height,
-						self.node_box.width,self.node_box.height)
 
 	def buildChildren(self):
 		if self.initChildren == True:
@@ -374,7 +371,6 @@ class Tree(WidgetCSS, ScrollWidget):
 
 	def unselect_row(self):
 		if self.selected_node:
-			Logger.info('selected node unselected')
 			self.selected_node.unselected()
 			self.selected_node = None
 		
@@ -396,14 +392,12 @@ class Tree(WidgetCSS, ScrollWidget):
 		config = getConfig()
 		app = App.get_running_app()
 		url = app.absurl(self.url)
-		Logger.info('Tree: getUrlData(),url=%s',url)
 		hc.get(url,params=params,
 					callback=self.dataLoaded,
 					errback=self.showError)
 
 	def showError(self,o,e):
 		traceback.print_exc()
-		Logger.info('Tree: showError() o=%s,e=%s',o,e)
 		alert(e,title='error')
 
 	def on_data(self, *largs):
@@ -422,7 +416,6 @@ class Tree(WidgetCSS, ScrollWidget):
 		self.data = d
 
 	def addNodes(self):
-		Logger.info("Tree: addNodes()")
 		for c in self.data:
 			self.addNode(c)
 
@@ -468,7 +461,6 @@ class TextTreeNode(TreeNode):
 		return 
 	
 	def onPress(self,o,v=None):
-		Logger.info('select the leaf node')
 		self.treeObj.select_row(self)
 
 	def selected(self):
@@ -526,8 +518,6 @@ class MenuTreeNode(TextTreeNode):
 		self.content.add_widget(textw)
 		self.text_widget = textw
 		self.content.bind(on_press=self.onPress)
-		print('****',self.content,'w,y=',self.content.width, 
-					self.content.height, 'tree width=', self.treeObj.width)
 		return 
 	
 
@@ -618,7 +608,7 @@ class PopupMenu(BoxLayout):
 		self.register_event_type('on_press')
 
 	def on_press(self,o,v=None):
-		Logger.info('PopupMenu: on_press fired')
+		pass
 
 	def onMenuItemTouch(self,o,d=None,v=None):
 		data = {

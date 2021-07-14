@@ -69,7 +69,6 @@ class StrInput(TextInput):
 			a['size_hint_y'] = None
 			a['height'] = CSize(h)
 
-		Logger.info('StrInput:a=%s,kv=%s',a,kv)
 		super(StrInput, self).__init__(**a)
 		self.old_value = None
 		self.register_event_type('on_changed')

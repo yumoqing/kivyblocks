@@ -61,13 +61,11 @@ class NewVideo(Video):
 			self.height = self.width * v_size[1] / v_size[0]
 
 	def on_load_success(self, *args):
-		Logger.info('NewVideo: pn_load_success fired, %s', args)
 		pass
 
 	def record_start_time(self, *args):
 		self.start_time = time.time()
 		self.load_status = 'start'
-		Logger.info('NewVideo: record_start_time() called %s',self.load_status)
 
 	def on_open_failed(self, source, x=None):
 		Logger.error(f'NewVideo: source={self.source} open failed')
@@ -110,8 +108,6 @@ class NewVideo(Video):
 			Logger.error('NewVideo: _video has not _ffplayer, do nothong')
 
 	def on_video_loaded(self, *args):
-		Logger.info('NewVideo: status=%s, load_status=%s', self.state,
-						self.load_status)
 		if self.load_status == 'start':
 			self.load_status = 'success'
 			t = time.time()
