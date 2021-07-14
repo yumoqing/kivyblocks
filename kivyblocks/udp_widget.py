@@ -55,9 +55,7 @@ class UdpWidget(EventDispatcher):
 				'pubkey':self.dataencoder.my_text_publickey()
 			}
 		}
-		b = b'0x00' * 18 + json.dumps(d).encode('utf-8')
-		b = zlib.compress(b)
-		self.udp_transport.broadcast(b)
+		self.udp_transport.broadcast(d)
 		if peer_id is None:
 			print('get_peer_pubkey():return')
 			return
@@ -72,17 +70,7 @@ class UdpWidget(EventDispatcher):
 
 	def comm_callback(self, data, addr):
 		print('comm_callback():', data, 'addr=', addr)
-		d = None
-		if data[:18] == b'0x00' * 18:
-			data = data[18:]
-			try:
-				d = json.loads(data.decode('utf-8'))
-			except Exception as e:
-				print(e, addr, data)
-				print_exc()
-				return
-		else:
-			d = self.dataencoder.unpack(addr[0], data)
+		d = self.dataencoder.unpack(addr[0], data)
 		if d is None:
 			print('comm_callback(): d is None')
 			return
