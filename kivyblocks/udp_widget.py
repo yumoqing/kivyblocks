@@ -4,6 +4,7 @@ except:
 	import json
 
 import time
+import zlib
 from kivy.event import EventDispatcher
 from kivy.clock import Clock
 from appPublic.udp_comm import UdpComm
@@ -55,6 +56,7 @@ class UdpWidget(EventDispatcher):
 			}
 		}
 		b = b'0x00' * 18 + json.dumps(d).encode('utf-8')
+		b = zlib.compress(b)
 		self.udp_transport.broadcast(b)
 		if peer_id is None:
 			print('get_peer_pubkey():return')
@@ -127,9 +129,9 @@ class UdpWidget(EventDispatcher):
 			self.send(peer, data)
 
 	def send(self, peer_id, data):
+		print('send():', peer_id, data)
 		d = self.dataencoder.pack(peer_id, data)
 		addr = (peer_id, self.udp_port)
-		print('send():', peer_id, data)
 		self.udp_transport.send(d, addr)
 
 	def stop(self):
