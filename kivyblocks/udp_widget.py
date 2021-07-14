@@ -55,7 +55,8 @@ class UdpWidget(EventDispatcher):
 				'pubkey':self.dataencoder.my_text_publickey()
 			}
 		}
-		self.udp_transport.broadcast(d)
+		bd = self.dataencoder.pack('none', d, uncrypt=True)
+		self.udp_transport.broadcast(bd)
 		if peer_id is None:
 			print('get_peer_pubkey():return')
 			return
@@ -110,15 +111,15 @@ class UdpWidget(EventDispatcher):
 				'pubkey':self.dataencoder.my_text_publickey()
 			}
 		}
-		self.send(addr[0], data)
+		self.send(addr[0], data, uncrypt=True)
 
 	def broadcast(self, data):
 		for peer in self.dataencoder.public_keys.keys():
 			self.send(peer, data)
 
-	def send(self, peer_id, data):
+	def send(self, peer_id, data, uncrypt=False):
 		print('send():', peer_id, data)
-		d = self.dataencoder.pack(peer_id, data)
+		d = self.dataencoder.pack(peer_id, data, uncrypt=uncrypt)
 		addr = (peer_id, self.udp_port)
 		self.udp_transport.send(d, addr)
 
