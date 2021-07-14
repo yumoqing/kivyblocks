@@ -115,7 +115,6 @@ class BlocksApp(App):
 			hc = HttpClient()
 			d = hc.get(self.realurl(config.css.css_url))
 			self.buildCsses(d)
-		Logger.info('blocksapp: csses=%s', self.csses)
 
 	def get_css(self, cssname):
 		return self.csses.get(cssname, 'default')
