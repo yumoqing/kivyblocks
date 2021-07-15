@@ -1,5 +1,7 @@
 import time
 import ujson as json
+from functools import partial
+
 from kivy.logger import Logger
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
@@ -406,13 +408,14 @@ class DataGrid(WidgetReady, BoxLayout):
 		return self.rowheight
 	
 	def calculateShowRows(self,t):
-		self.show_rows = int(self.normal_part.body.height/self.rowHeight())
-		self.dataloader.setPageRows(self.show_rows)
+		self.getShowRows()
+		self.dataloader.setPageRows(self.show_rows * 2)
 
 	def getShowRows(self):
 		if self.show_rows == 0:
 			return 60
-		return self.show_rows
+		self.show_rows = int(self.rowHeight() / self.normal_part.body.height)
+		return self.show_rows * 2
 
 	def clearRows(self, *args):
 		print('dg.py:clearRows() called')
@@ -421,14 +424,33 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.normal_part.body.clearRows()
 
 	def add_page(self,o,data):
+		dir = data['dir']
+		if not self.show_rows:	
+			self.getShowRows()
+
 		ids = []
 		recs = data['data']
-		page = data['page']
-		dir = data['dir']
 		idx = 0
 		if dir == 'up':
 			recs.reverse()
 			idx = -1
+		recs1 = recs[:self.show_rows]
+		recs2 = recs[self.show_rows:]
+		for r in recs1:
+			id = self.addRow(r,index=idx)
+			ids.append(id)
+
+		data['idx'] = idx
+		data['ids'] = ids
+		data['data'] = recs2
+		f = partial(self.add_page_delay,data)
+		Clock.schedule_once(f, 0)
+
+	def add_page_delay(self, data, *args):
+		recs = data['data']
+		page = data['page']
+		idx = data['idx']
+		ids = data['ids']
 		for r in recs:
 			id = self.addRow(r,index=idx)
 			ids.append(id)

@@ -15,6 +15,8 @@ BoxViewer options:
 	}
 }
 """
+from functools import partial
+
 from traceback import print_exc
 from functools import partial
 from appPublic.dictExt import dictExtend
@@ -52,7 +54,6 @@ class BoxViewer(WidgetReady, BoxLayout):
 		BoxLayout.__init__(self, orientation='vertical', **kwargs)
 		WidgetReady.__init__(self)
 		self.selected_data = None
-		self.color_level = self.options.get('color_level',-1)
 		self.radius = self.options.get('radius',[])
 		self.box_width = CSize(options['boxwidth'])
 		self.box_height = CSize(options['boxheight'])
@@ -91,6 +92,11 @@ class BoxViewer(WidgetReady, BoxLayout):
 	def deleteAllWidgets(self,o):
 		self.viewContainer.clear_widgets()
 		self.subwidgets = []
+	
+	def getShowRows(self):
+		wc = int(self.viewContainer.width / self.box_width)
+		hc = int(self.viewContainer.height / self.box_height)
+		self.show_rows = wc * hc
 
 	def addPageWidgets(self,o,data):
 		widgets = []
@@ -101,6 +107,23 @@ class BoxViewer(WidgetReady, BoxLayout):
 		if dir == 'up':
 			recs.reverse()
 			idx = -1
+		recs1 = recs[:self.show_rows]
+		recs2 = recs[self.show_rows:]
+		for r in recs1:
+			self.showObject(widgets, r, index=idx)
+		
+		data['widgets'] = widgets
+		data['idx'] = idx
+		data['data'] = recs2
+		f = partial(self.add_page_delay, data)
+		Clock.schedule_once(f, 0)
+
+	def add_page_delay(self, data, *args):
+		recs = data['data']
+		page = data['page']
+		idx = data['idx']
+		widgets = data['widgets']
+
 		for r in recs:
 			self.showObject(widgets, r, index=idx)
 
@@ -136,6 +159,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 		self.viewContainer.height = self.height - h
 
 		self.viewContainer.setCols()
+		self.getShowRows()
 		if not self.initflag:
 			self.dataloader.loadPage(1)
 			self.initflag = True
