@@ -5,6 +5,7 @@ except:
 
 import time
 import zlib
+from kivy.logger import Logger
 from kivy.event import EventDispatcher
 from kivy.clock import Clock
 from appPublic.udp_comm import UdpComm
@@ -99,7 +100,7 @@ class UdpWidget(EventDispatcher):
 		self.dispatch(evt_name, evt_data)
 
 	def my_event_handler(self, *args):
-		Logger.info('UdpWidget: args=%s', args)
+		pass
 
 	def set_pubkey(self, data, addr):
 		pk = data['d']['pubkey']
