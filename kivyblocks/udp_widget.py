@@ -105,7 +105,7 @@ class UdpWidget(EventDispatcher):
 		self.dataencoder.set_peer_text_pubkey(id, pk)
 
 	def resp_pubkey(self, data, addr):
-		set_pubkey(data, addr)
+		self.set_pubkey(data, addr)
 		print('resp_pubkey():', addr[0])
 		data = {
 			'c':'set_pubkey',
