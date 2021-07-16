@@ -90,7 +90,7 @@ class UdpWidget(EventDispatcher):
 			return
 		evt_name = 'on_%s' % cmd
 		evt_data = {
-			'data': d,
+			'd': d,
 			'addr': addr
 		}
 		self.dispatch(evt_name, evt_data)
