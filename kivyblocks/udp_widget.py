@@ -98,8 +98,8 @@ class UdpWidget(EventDispatcher):
 		print('udp_widget.py dispatch', evt_name, evt_data)
 		self.dispatch(evt_name, evt_data)
 
-	def my_event_handler(self, o, d):
-		Logger.info('UdpWidget: received data=%s', d)
+	def my_event_handler(self, *args):
+		Logger.info('UdpWidget: args=%s', args)
 
 	def set_pubkey(self, data, addr):
 		pk = data['d']['pubkey']
