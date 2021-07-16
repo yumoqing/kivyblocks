@@ -80,7 +80,7 @@ class UdpWidget(EventDispatcher):
 			return
 		print('received: data=', d)
 		cmd = d['c']
-		f = self.inner_handler(cmd)
+		f = self.inner_handlers.get(cmd)
 		if f:
 			f(d, addr)
 			print('comm_callback():inner callback called(),', cmd)
