@@ -27,8 +27,10 @@ class UdpWidget(EventDispatcher):
 		}
 		for cmd in self.commands:
 			evt_name = 'on_%s' % cmd
-			setattr(self, evt_name, self.event_handler)
+			setattr(self, evt_name, self.my_event_handler)
 			self.register_event_type(evt_name)
+			print('udp_widget.py:register', evt_name, self.my_event_handler)
+
 		self.get_peer_pubkey()
 		Clock.schedule_once(self.get_peer_pubkey_loop, 2)
 
@@ -93,9 +95,10 @@ class UdpWidget(EventDispatcher):
 			'd': d,
 			'addr': addr
 		}
+		print('udp_widget.py dispatch', evt_name, evt_data)
 		self.dispatch(evt_name, evt_data)
 
-	def event_handler(self, o, d):
+	def my_event_handler(self, o, d):
 		Logger.info('UdpWidget: received data=%s', d)
 
 	def set_pubkey(self, data, addr):
