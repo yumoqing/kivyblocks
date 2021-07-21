@@ -357,13 +357,8 @@ class Blocks(EventDispatcher):
 		# Logger.info('Block: %s bind built', str(desc))
 	
 	def multipleAction(self, widget, desc, *args):
-		mydesc = {
-			'wid':desc['wid'],
-			'event':desc['event']
-		}
-		if desc.get('conform'):
-			mydesc['conform'] = desc.get('conform')
-
+		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
+		mydesc = desc1.copy()
 		for a in desc['actions']:
 			new_desc = mydesc.copy()
 			new_desc.update(a)
@@ -398,7 +393,7 @@ class Blocks(EventDispatcher):
 							str(desc))
 			return
 		params = desc.get('params',{})
-		d = self.getActionData(widget,desc)
+		d = self.getActionData(widget,desc, *args)
 		if d:
 			params.update(d)
 		try:
@@ -417,7 +412,7 @@ class Blocks(EventDispatcher):
 		target = self.get_target(widget, desc)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
-		d = self.getActionData(widget,desc)
+		d = self.getActionData(widget,desc, *args)
 		p = opts.get('options',{}).copy()
 		if d:
 			p.update(d)
@@ -445,7 +440,7 @@ class Blocks(EventDispatcher):
 		p = opts.get('params',{}).copy()
 		if len(args) >= 1 and isinstance(args[0],dict):
 			p.update(args[0])
-		d = self.getActionData(widget,desc)
+		d = self.getActionData(widget, desc, *args)
 		if d:
 			p.update(d)
 		opts['params'] = p
@@ -471,23 +466,11 @@ class Blocks(EventDispatcher):
 			
 	def getActionData(self,widget,desc,*args):
 		data = {}
-		if desc.get('datawidget',False):
-			dwidget = Blocks.getWidgetById(desc.get('datawidget','self'),
-							from_widget=widget)
-			if dwidget is None:
-				Logger.info('Block: desc(%s) datawidget not defined',
-							str(desc))
-			method = desc.get('datamethod','getValue')
-			largs = desc.get('dataargs',[]),
-			kwargs = desc.get('datakwargs',{})
-			if hasattr(dwidget, method):
-				f = getattr(dwidget, method)
-				data = f(**kwargs)
-				if desc.get('keymapping'):
-					data = keyMapping(data, desc.get('keymapping'))
-			else:
-				Logger.info('Block: desc(%s) datawidget has not %s',
-							str(desc), method)
+		rtdesc = self.build_rtdesc(desc)
+		rt = self.get_rtdata(widget, rtdesc, *args)
+		data.update(rt)
+		if desc.get('keymapping'):
+			data = keyMapping(data, desc.get('keymapping'))
 		return data
 
 	def registedfunctionAction(self, widget, desc, *args):
@@ -501,7 +484,7 @@ class Blocks(EventDispatcher):
 			raise Exception('rfname(%s) not found' % name)
 
 		params = desc.get('params',{}).copy()
-		d = self.getActionData(widget,desc)
+		d = self.getActionData(widget,desc, *args)
 		if d:
 			params.update(d)
 		func(target, *args, **params)
@@ -513,7 +496,7 @@ class Blocks(EventDispatcher):
 							str(desc))
 			return 
 		target = self.get_target(widget, desc)
-		d = self.getActionData(widget,desc)
+		d = self.getActionData(widget,desc, *args)
 		ns = {
 			"self":target,
 			"args":args
@@ -525,7 +508,68 @@ class Blocks(EventDispatcher):
 		except Exception as e:
 			print_exc()
 			print(e)
-	
+
+	def build_rtdesc(self, desc):
+		rtdesc = desc.get('rtdata')
+		if not rtdesc:
+			if desc.get('datatarget'):
+				rtdesc = {}
+				rtdesc['target'] = desc['datatarget']
+				if desc.get('datascript'):
+					rtdesc['script'] = desc.get('datacript')
+				else:
+					rtdesc['method'] = desc.get('datamethod', 'getValue')
+				rtdesc['kwargs'] = desc.get('datakwargs', {})
+			else:
+				return {}
+		return rtdesc
+
+	def get_rtdata(self, widget, desc, *args):
+		"""
+		desc descript follow attributes
+		{
+			"target", a target name from widget
+			"method", a method name, default is 'getValue',
+			"script", script to handle the data
+			"kwargs":" a dict arguments, default is {}
+		}
+		"""
+		
+		if desc is None or desc == {}:
+			return {}
+		kwargs = desc.get('kwargs', {})
+		if not isinstance(kwargs, dict):
+			kwargs = {}
+		w = None
+		if len(args) > 0:
+			w = args[0]
+		target = desc.get('target')
+		if target:
+			w = self.getWidgetById(target, from_widget=widget)
+		if w is None:
+			return {}
+		script = desc.get('script')
+		if script:
+			ns = {
+				"self":w,
+				"args":args,
+				"kwargs":kwargs
+			}
+			d = self.eval(script, ns)
+			return d
+
+		method = desc.get('method', 'getValue')
+		if not hasattr(w, 'method'):
+			return {}
+		f = getattr(w, method)
+		try:
+			r = f(*args, **kwargs)
+			if isinstance(r, dict):
+				return r
+			return {}
+		except:
+			return {}
+
 	def methodAction(self, widget, desc, *args):
 		method = desc.get('method')
 		target = self.get_target(widget, desc)
@@ -533,10 +577,14 @@ class Blocks(EventDispatcher):
 			Logger.info('Block: methodAction():desc(%s) target not found',
 							str(desc))
 			return
+		if method is None:
+			Logger.info('Block: methodAction():desc(%s) method not found',
+							str(desc))
+			return
 		if hasattr(target,method):
 			f = getattr(target, method)
 			kwargs = desc.get('options',{}).copy()
-			d = self.getActionData(widget,desc)
+			d = self.getActionData(widget,desc, *args)
 			if d:
 				kwargs.update(d)
 			f(*args, **kwargs)
@@ -568,6 +616,9 @@ class Blocks(EventDispatcher):
 			try:
 				widget = self.w_build(desc)
 				self.dispatch('on_built',widget)
+				if hasattr(widget,'ready'):
+					print('##widget has ready .........')
+					widget.ready = True
 				return widget
 			except Exception as e:
 				print_exc()
@@ -596,6 +647,23 @@ class Blocks(EventDispatcher):
 			
 			if opts.get('url'):
 				del opts['url']
+			rtdesc = self.build_rtdesc(opts)
+			"""
+			rtdesc = opts.get('rtdata')
+			if not rtdesc:
+				if opts.get('datatarget'):
+					rtdesc = {}
+					rtdesc['target'] = opts['datatarget']
+					rtdesc['method'] = opts.get('datamethod', 'getValue')
+					rtdesc['args'] = opts.get('dataargs', [])
+					rtdesc['kwargs'] = opts.get('datakwargs', {})
+			"""
+			if rtdesc:
+				rtdata = self.get_rtdata(None, rtdesc)
+				params = opts.get('params', {})
+				params.update(rtdata)
+				opts['params'] = params
+
 			desc = self.getUrlData(url,**opts)
 			if not (isinstance(desc, DictObject) or \
 							isinstance(desc, dict)):
@@ -624,12 +692,7 @@ class Blocks(EventDispatcher):
 					return from_widget
 			if hasattr(from_widget, id):
 				w = getattr(from_widget,id)
-				if isinstance(w,Widget):
-					return w
-				if id[0] == '-':
-					w = getattr(from_widget,id[1:])
-					if isinstance(w,Widget):
-						return w
+				return w
 
 			if id[0] == '-':
 				print('find_widget_by_id(), id=', id, 

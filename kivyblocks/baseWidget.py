@@ -75,6 +75,7 @@ from .i18n import I18n
 from .widget_css import WidgetCSS
 from .ready import WidgetReady
 from .utils import CSize
+from .swipebehavior import SwipeBehavior
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
@@ -97,9 +98,14 @@ class HBox(Box):
 
 
 class VBox(Box):
-	def __init__(self,color_level=-1,radius=[],**kw):
+	def __init__(self,**kw):
 		kw.update({'orientation':'vertical'})
 		Box.__init__(self, **kw)
+
+class SwipeBox(SwipeBehavior, Box):
+	def __init__(self, **kw):
+		super(SwipeBox, self).__init__(**kw)
+
 
 class Text(Label):
 	lang=StringProperty('')
@@ -272,10 +278,10 @@ class FILEDataHandler(EventDispatcher):
 		self.register_event_type('on_success')
 		self.register_event_type('on_error')
 
-	def on_success(self,d):
+	def on_success(self,*args):
 		return
 
-	def on_error(self,e):
+	def on_error(self, *args):
 		return
 
 	def handle(self,params={}):
@@ -297,7 +303,7 @@ class FILEDataHandler(EventDispatcher):
 		self.dispatch('on_success',d)
 
 class HTTPDataHandler(EventDispatcher):
-	def __init__(self, url,method='GET',params={},
+	def __init__(self, url='',method='GET',params={},
 				headers={},
 				files={},
 				stream=False
@@ -312,11 +318,11 @@ class HTTPDataHandler(EventDispatcher):
 		self.register_event_type('on_success')
 		self.register_event_type('on_error')
 
-	def on_success(self,v):
+	def on_success(self,*args):
 		print('HTTPDataHandler():',self.url,'finished...')
 		pass
 
-	def on_error(self,e):
+	def on_error(self,*args):
 		pass
 
 	def onSuccess(self,o,v):
@@ -347,6 +353,34 @@ class HTTPDataHandler(EventDispatcher):
 						callback=self.onSuccess,
 						errback=self.onError)
 
+
+class HTTPSeriesData(HTTPDataHandler):
+	def __init__(self, rows=20, page=1, **kw):
+		super(HTTPSeriesData, self).__init__(**kw)
+		self.rows = rows
+		self.page = page
+		self.maxpage = 999999
+
+	def load(self, page=1, **params):
+		self.params.update(params)
+		if page == 1:
+			self.maxpage = 999999
+		self.page = page
+		params = {
+			'page': self.page,
+			'rows': self.rows
+		}
+		self.handle(params=params)
+
+	def loadPrevious(self, **params):
+		self.params.update(params)
+		if self.page > 0:
+			self.load(page=self.page - 1)
+
+	def loadNext(self, **params):
+		self.params.update(params)
+		if self.page < self.maxpage:
+			self.load(page=self.page + 1)
 
 def getDataHandler(url,**kwargs):
 	if url.startswith('file://'):

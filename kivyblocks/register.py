@@ -34,10 +34,14 @@ if kivy.platform in ['win','linux', 'macosx']:
 from .camerawithmic import CameraWithMic
 from .scrollpanel import ScrollPanel
 from .udp_widget import UdpWidget
+from .paging import PageLoader
 
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:
 	r('ScreenWithMic', ScreenWithMic)
+r('HTTPSeriesData', HTTPSeriesData)
+r('HTTPDataHandler', HTTPDataHandler)
+r('PageLoader', PageLoader)
 r('UdpWidget', UdpWidget)
 r('ScrollPanel', ScrollPanel)
 r('TextInput', TextInput)
@@ -109,6 +113,7 @@ r('Modal',Modal)
 r('TimedModal',TimedModal)
 r('HBox',HBox)
 r('VBox',VBox)
+r('SwipeBox',SwipeBox)
 r('ToggleItems',ToggleItems)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)
