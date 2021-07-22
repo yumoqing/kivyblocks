@@ -617,7 +617,6 @@ class Blocks(EventDispatcher):
 				widget = self.w_build(desc)
 				self.dispatch('on_built',widget)
 				if hasattr(widget,'ready'):
-					print('##widget has ready .........')
 					widget.ready = True
 				return widget
 			except Exception as e:
@@ -648,16 +647,6 @@ class Blocks(EventDispatcher):
 			if opts.get('url'):
 				del opts['url']
 			rtdesc = self.build_rtdesc(opts)
-			"""
-			rtdesc = opts.get('rtdata')
-			if not rtdesc:
-				if opts.get('datatarget'):
-					rtdesc = {}
-					rtdesc['target'] = opts['datatarget']
-					rtdesc['method'] = opts.get('datamethod', 'getValue')
-					rtdesc['args'] = opts.get('dataargs', [])
-					rtdesc['kwargs'] = opts.get('datakwargs', {})
-			"""
 			if rtdesc:
 				rtdata = self.get_rtdata(None, rtdesc)
 				params = opts.get('params', {})
