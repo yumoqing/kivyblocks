@@ -109,9 +109,10 @@ class TwoSides(WidgetReady, BoxLayout):
 				self.dispatch('on_beforeswitch_landscape')
 				self.clear_widgets()
 				self.add_widget(self.landscape_widget)
-				if self.switch_button_showed:
+				if self.switch_button_showed and self.cannt_rotation:
 					self.set_switch_button_pos()
-					Window.add_widget(self.switch_button)
+					if self.switch_button not in Window.children:
+						Window.add_widget(self.switch_button)
 				self.dispatch('on_afterswitch_landscape')
 				self.panel_shape = 'landscape'
 		else:
@@ -119,14 +120,14 @@ class TwoSides(WidgetReady, BoxLayout):
 				self.app.get_rotation(),
 				Window.size)
 			if not self.portrait_widget in self.children:
-				self.dispatch('on_beforeswitch_landscape')
+				self.dispatch('on_beforeswitch_portrait')
 				self.clear_widgets()
 				self.add_widget(self.portrait_widget)
-				if self.switch_button_showed:
+				if self.switch_button in Window.children:
 					Window.remove_widget(self.switch_button)
 				self.cannt_rotation = False
 				self.panel_shape = 'portrait'
-				self.dispatch('on_afterswitch_landscape')
+				self.dispatch('on_afterswitch_portrait')
 				self.dispatch('on_interactive')
 
 	def on_beforeswitch_landscape(self, *args):
