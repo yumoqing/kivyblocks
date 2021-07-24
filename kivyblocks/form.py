@@ -16,6 +16,7 @@ from .color_definitions import getColors
 from .dataloader import DataGraber
 from .ready import WidgetReady
 from .widget_css import WidgetCSS
+from .dateinput import DateInput
 
 """
 form options
@@ -81,7 +82,7 @@ uitypes = {
 	},
 	"date":{
 		"orientation":"horizontal",
-		"wclass":DatePicker,
+		"wclass":DateInput,
 	},
 	"time":{
 		"orientation":"horizontal",

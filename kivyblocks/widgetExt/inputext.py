@@ -18,9 +18,7 @@ from ..widget_css import WidgetCSS
 
 class BoolInput(Switch):
 	def __init__(self,csscls='input', **kw):
-		a = {}
-		a['active'] = kw.get('value', kw.get('defaultvalue',False))
-		super().__init__(**a)
+		super().__init__()
 		self.register_event_type('on_changed')
 		self.bind(active=on_active)
 
@@ -70,7 +68,7 @@ class StrInput(TextInput):
 			a['height'] = CSize(h)
 
 		super(StrInput, self).__init__(**a)
-		self.old_value = None
+		self.text = self.old_value = ''
 		self.register_event_type('on_changed')
 		self.bind(on_text_validate=self.checkChange)
 
@@ -79,7 +77,9 @@ class StrInput(TextInput):
 		
 	def checkChange(self,o,v=None):
 		v = self.getValue()
+		print('StrInput():v=', v)
 		if v != self.old_value:
+			self.old_value = v
 			self.dispatch('on_changed',v)
 
 	def getValue(self):
@@ -214,7 +214,7 @@ class SelectInput(BoxLayout):
 	def __init__(self,csscls='input', **kw):
 		a={}
 		w = kw.get('width',10)
-		h = kw.get('height',1.5)
+		h = kw.get('height',2.5)
 		if w <= 1:
 			a['size_hint_x'] = w
 		else:
@@ -224,7 +224,7 @@ class SelectInput(BoxLayout):
 			a['size_hint_y'] = h
 		else:
 			a['size_hint_y'] = None
-			a['height'] = h
+			a['height'] = CSize(h)
 
 		super(SelectInput,self).__init__(orientation='horizontal',\
 				**a)
@@ -233,7 +233,7 @@ class SelectInput(BoxLayout):
 		# self.tinp.readonly = True
 		newkw = {}
 		newkw.update(kw)
-		newkw.update({'on_select':self.setData})
+		# newkw.update({'on_select':self.setData})
 		self.dropdown = MyDropDown(**newkw)
 		if kw.get('value'):
 			self.si_data = kw.get('value')
@@ -241,12 +241,19 @@ class SelectInput(BoxLayout):
 		else:
 			self.si_data = ''
 			self.text = ''
+		self.dropdown.bind(on_select=self.dropdown_select)
 		self.tinp.text = self.text
 		self.add_widget(self.tinp)
 		self.old_value = self.si_data
 		self.tinp.bind(focus=self.showDropdown)
 		self.register_event_type('on_changed')
 		
+	def dropdown_select(self, o, d):
+		self.setData(d)
+
+	def set_selectable_data(self, data):
+		self.dropdown.setData(data)
+
 	def on_changed(self,v=None):
 		pass
 

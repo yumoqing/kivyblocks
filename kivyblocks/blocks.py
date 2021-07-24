@@ -512,9 +512,9 @@ class Blocks(EventDispatcher):
 	def build_rtdesc(self, desc):
 		rtdesc = desc.get('rtdata')
 		if not rtdesc:
-			if desc.get('datatarget'):
+			if desc.get('datawidget'):
 				rtdesc = {}
-				rtdesc['target'] = desc['datatarget']
+				rtdesc['target'] = desc['datawidget']
 				if desc.get('datascript'):
 					rtdesc['script'] = desc.get('datacript')
 				else:
@@ -536,6 +536,7 @@ class Blocks(EventDispatcher):
 		"""
 		
 		if desc is None or desc == {}:
+			print('get_rtdata():desc is None')
 			return {}
 		kwargs = desc.get('kwargs', {})
 		if not isinstance(kwargs, dict):
@@ -547,6 +548,7 @@ class Blocks(EventDispatcher):
 		if target:
 			w = self.getWidgetById(target, from_widget=widget)
 		if w is None:
+			print('get_rtdata():w is None', desc)
 			return {}
 		script = desc.get('script')
 		if script:
@@ -559,15 +561,18 @@ class Blocks(EventDispatcher):
 			return d
 
 		method = desc.get('method', 'getValue')
-		if not hasattr(w, 'method'):
+		if not hasattr(w, method):
+			print('get_rtdata():method is None', desc, type(w))
 			return {}
 		f = getattr(w, method)
 		try:
-			r = f(*args, **kwargs)
+			r = f(**kwargs)
 			if isinstance(r, dict):
 				return r
+			print('get_rtdata():method return is not dict', desc, 'ret=', r)
 			return {}
 		except:
+			print_exc()
 			return {}
 
 	def methodAction(self, widget, desc, *args):

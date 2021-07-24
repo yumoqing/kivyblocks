@@ -35,10 +35,12 @@ from .camerawithmic import CameraWithMic
 from .scrollpanel import ScrollPanel
 from .udp_widget import UdpWidget
 from .paging import PageLoader
+from .dateinput import DateInput
 
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:
 	r('ScreenWithMic', ScreenWithMic)
+r('DateInput', DateInput)
 r('HTTPSeriesData', HTTPSeriesData)
 r('HTTPDataHandler', HTTPDataHandler)
 r('PageLoader', PageLoader)
