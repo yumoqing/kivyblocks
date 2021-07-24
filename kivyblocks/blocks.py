@@ -569,7 +569,9 @@ class Blocks(EventDispatcher):
 			r = f(**kwargs)
 			if isinstance(r, dict):
 				return r
-			print('get_rtdata():method return is not dict', desc, 'ret=', r)
+			if isinstance(r, DictObject):
+				return r.to_dict()
+			print('get_rtdata():method return is not dict', desc, 'ret=', r, type(r))
 			return {}
 		except:
 			print_exc()
