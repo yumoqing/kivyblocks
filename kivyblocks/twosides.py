@@ -46,6 +46,9 @@ class TwoSides(WidgetReady, BoxLayout):
 	def show_switch_image(self, o, v=None):
 		def show(*args):
 			if self.switch_image and self.width > self.height:
+				if self.switch_button in Window.children:
+					Window.remove_widget(self.switch_button)
+				self.set_switch_button_pos()
 				Window.add_widget(self.switch_button)
 				self.switch_button_showed = True
 
@@ -71,11 +74,14 @@ class TwoSides(WidgetReady, BoxLayout):
 		})
 		button.bind(on_press=self.switch_portrait_widget)
 		self.switch_button = button
-		self.set_switch_button_pos()
 
 	def switch_portrait_widget(self, *args):
 		def clear_modal(o, *args):
 			o.clear_widgets()
+
+		if not self.fullscreen:
+			self.fullscreen = True
+			return
 
 		if not self.portrait_modal:
 			y = self.height - CSize(4)
@@ -100,35 +106,30 @@ class TwoSides(WidgetReady, BoxLayout):
 
 	def on_size(self,*args):
 		if self.width >= self.height:
-			if self.switch_button:
-				self.set_switch_button_pos()
-			print('twosides.py:W-Window.rotation=', 
-				self.app.get_rotation(),
-				Window.size)
-			if not self.landscape_widget in self.children:
+			if not self.landscape_widget in self.children or \
+					self.panel_shape == 'portrait':
 				self.dispatch('on_beforeswitch_landscape')
 				self.clear_widgets()
 				self.add_widget(self.landscape_widget)
-				if self.switch_button_showed and self.cannt_rotation:
-					self.set_switch_button_pos()
-					if self.switch_button not in Window.children:
-						Window.add_widget(self.switch_button)
 				self.dispatch('on_afterswitch_landscape')
-				self.panel_shape = 'landscape'
+			if self.switch_button_showed and self.cannt_rotation:
+				if self.switch_button in Window.children:
+					Window.remove_widget(self.switch_button)
+				self.set_switch_button_pos()
+				Window.add_widget(self.switch_button)
+			self.panel_shape = 'landscape'
 		else:
-			print('twosides.py:H-Window.rotation=', 
-				self.app.get_rotation(),
-				Window.size)
-			if not self.portrait_widget in self.children:
+			if self.portrait_widget in self.children or \
+					self.panel_shape == 'landscape':
 				self.dispatch('on_beforeswitch_portrait')
 				self.clear_widgets()
 				self.add_widget(self.portrait_widget)
-				if self.switch_button in Window.children:
-					Window.remove_widget(self.switch_button)
-				self.cannt_rotation = False
-				self.panel_shape = 'portrait'
 				self.dispatch('on_afterswitch_portrait')
 				self.dispatch('on_interactive')
+			if self.switch_button in Window.children:
+				Window.remove_widget(self.switch_button)
+			self.cannt_rotation = False
+			self.panel_shape = 'portrait'
 
 	def on_beforeswitch_landscape(self, *args):
 		pass
