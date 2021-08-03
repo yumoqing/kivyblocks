@@ -94,6 +94,9 @@ class WidgetReady(object):
 			#	Window.restore()
 			state = self._fullscreen_state
 			window.remove_widget(self)
+			for c in state['window_children']:
+				if c in Window.children:
+					Window.remove_widget(c)
 			for child in state['window_children']:
 				window.add_widget(child)
 			self.pos_hint = state['pos_hint']
