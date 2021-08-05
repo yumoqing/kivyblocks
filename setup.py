@@ -3,13 +3,14 @@
 
 from distutils.core import setup
 from setuptools import setup, find_packages
+from version import version
 
 # usage:
 # python setup.py bdist_wininst generate a window executable file
 # python setup.py bdist_egg generate a egg file
 # Release information about eway
 
-version = "0.0.4"
+# version = "0.0.4"
 description = "kivy blocks is a tool to build kivy ui with json format uidesc files"
 author = "yumoqing"
 email = "yumoqing@icloud.com"
