@@ -10,7 +10,7 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty, StringProperty, ListProperty,\
-	BooleanProperty
+	BooleanProperty, NumericProperty
 from kivy.lang import Builder
 from kivy.clock import Clock
 
@@ -32,6 +32,16 @@ class QRCodeWidget(VBox):
 	defaulting to `'data/images/image-loading.gif'`.
 	'''
 
+	version = NumericProperty(40)
+	box_size = NumericProperty(20)
+	err_level = StringProperty('L')
+	border = NumericProperty(1)
+	error_correct_values = {
+		'L':qrcode.constants.ERROR_CORRECT_L,
+		'M':qrcode.constants.ERROR_CORRECT_M,
+		'Q':qrcode.constants.ERROR_CORRECT_Q,
+		'H':qrcode.constants.ERROR_CORRECT_H
+	}
 	def __init__(self, **kwargs):
 		self.qrimage = Image(allow_stretch=True, keep_ratio=True)
 		self.addr = None
@@ -72,12 +82,17 @@ class QRCodeWidget(VBox):
 		QRCode = qrcode.QRCode
 		L = qrcode.constants.ERROR_CORRECT_L
 		addr = self.addr
+		print('self.box_size=', self.box_size)
+		errv = self.error_correct_values.get(self.err_level)
+		if not errv:
+			errv=self.error_corrent_values.get('L')
+
 		try:
 			self.qr = qr = QRCode(
-				version=None,
-				error_correction=L,
-				box_size=10,
-				border=4,
+				version=self.version,
+				error_correction=errv,
+				box_size=self.box_size,
+				border=self.border,
 				)
 			qr.add_data(addr)
 			qr.make(fit=True)

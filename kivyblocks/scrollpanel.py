@@ -1,25 +1,44 @@
-
+from kivy.properties import NumericProperty, StringProperty
 from kivy.uix.scrollview import ScrollView
 from kivy.effects.scroll import ScrollEffect
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
 
+from kivyblocks.utils import *
+
 class ScrollPanel(ScrollView):
+	x_padding_c = NumericProperty(0)
+	y_padding_c = NumericProperty(0)
+	bg_color = ListProperty(0.2, 0.2, 0.2, 1)
+	orient = StringProperty('H')
+
 	def __init__(self,inner=None, **kw):
-		print('ScrollPanel(): kw=', kw)
 		super(ScrollPanel,self).__init__()
 		self.effect_cls = ScrollEffect
 		if not inner:
 			kw.update({
 				'size_hint':(None,None),
+				'bg_color':self.bg_color,
 				'orientation':'vertical'
 			})
-			self._inner = BoxLayout(**kw)
+			desc = {
+				"widgettype":"Box",
+				"options":kw
+			}
+			self._inner = Factory.Blocks().widgetBuild(desc)
 		elif isinstance(inner, Widget):
 			self._inner = inner
 		else:
 			self._inner = Factory.Blocks().widgetBuild(inner)
+
+		if isinstance(self._inner, BoxLayout):
+			if self.orient.upper() == 'H':
+				self._inner.orientation = 'horizontal'
+			else:
+				self._inner.orientation = 'vertical'
+		self.padding = self.spacing = \
+						[CSize(self.x_padding_c), CSize(self.y_padding_c)]
 
 		self._inner.bind(
 				minimum_height=self._inner.setter('height'))
