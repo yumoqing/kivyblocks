@@ -1,4 +1,4 @@
-from kivy.properties import NumericProperty, StringProperty
+from kivy.properties import NumericProperty, StringProperty, ListProperty
 from kivy.uix.scrollview import ScrollView
 from kivy.effects.scroll import ScrollEffect
 from kivy.uix.widget import Widget
@@ -10,8 +10,8 @@ from kivyblocks.utils import *
 class ScrollPanel(ScrollView):
 	x_padding_c = NumericProperty(0)
 	y_padding_c = NumericProperty(0)
-	bg_color = ListProperty(0.2, 0.2, 0.2, 1)
-	orient = StringProperty('H')
+	bgcolor = ListProperty([0.2, 0.2, 0.2, 1])
+	orient = StringProperty('V')
 
 	def __init__(self,inner=None, **kw):
 		super(ScrollPanel,self).__init__()
@@ -19,7 +19,7 @@ class ScrollPanel(ScrollView):
 		if not inner:
 			kw.update({
 				'size_hint':(None,None),
-				'bg_color':self.bg_color,
+				'bgcolor':self.bgcolor,
 				'orientation':'vertical'
 			})
 			desc = {
@@ -37,7 +37,7 @@ class ScrollPanel(ScrollView):
 				self._inner.orientation = 'horizontal'
 			else:
 				self._inner.orientation = 'vertical'
-		self.padding = self.spacing = \
+		self._inner.padding = self._inner.spacing = \
 						[CSize(self.x_padding_c), CSize(self.y_padding_c)]
 
 		self._inner.bind(
