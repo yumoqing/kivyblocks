@@ -333,16 +333,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		options['orientation'] = 'vertical'
 		BoxLayout.__init__(self, orientation='vertical')
 		WidgetReady.__init__(self)
-		"""
-		self._fbo = Fbo(size=self.size)
-		with self._fbo:
-			self._background_color = Color(0,0,0,1)
-			self._background_rect = Rectangle(size=self.size)
-		
-		with self.canvas:
-			self._fbo_rect = Rectangle(size=self.size,
-								texture=self._fbo.texture)
-		"""
 		self.select_rowid = None
 		self.options = options
 		self.rowheight = None
@@ -390,20 +380,6 @@ class DataGrid(WidgetReady, BoxLayout):
 			self.tailer_widgets = {}
 			self.build_tailer(self.options.get('tailer'))
 
-	"""
-	def add_widget(self, widget, *args):
-		canvas = self.canvas
-		self.canvas = self._fbo
-		super(DataGrid, self).add_widget(widget, *args)
-		self.canvas = canvas
-
-	def remove_widget(self, widget,*args):
-		canvas = self.canvas
-		self.canvas = self._fbo
-		super(DataGrid, self).remove_widget(widget, *args)
-		self.canvas = canvas
-	"""
-		
 	def build_tailer(self, tailer_desc):
 		kw = tailer_desc.get('options', {})
 		kw.update({
@@ -546,9 +522,16 @@ class DataGrid(WidgetReady, BoxLayout):
 		page = data['page']
 		idx = data['idx']
 		ids = data['ids']
+		self._fbo = Fbo(size=self.size)
+		with self._fbo:
+			self._background_color = Color(0,0,0,1)
+			self._background_rect = Rectangle(size=self.size)
 		for r in recs:
 			id = self.addRow(r,index=idx)
 			ids.append(id)
+		with self.canvas:
+			self._fbo_rect = Rectangle(size=self.size,
+								texture=self._fbo.texture)
 		self.dataloader.bufferObjects(page,ids)
 		x = self.dataloader.getLocater()
 		self.locater(x)

@@ -109,8 +109,15 @@ class BoxViewer(WidgetReady, BoxLayout):
 			idx = -1
 		recs1 = recs[:self.show_rows]
 		recs2 = recs[self.show_rows:]
+		self._fbo = Fbo(size=self.size)
+		with self._fbo:
+			self._background_color = Color(0,0,0,1)
+			self._background_rect = Rectangle(size=self.size)
 		for r in recs1:
 			self.showObject(widgets, r, index=idx)
+		with self.canvas:
+			self._fbo_rect = Rectangle(size=self.size,
+								texture=self._fbo.texture)
 		
 		data['widgets'] = widgets
 		data['idx'] = idx
@@ -124,8 +131,15 @@ class BoxViewer(WidgetReady, BoxLayout):
 		idx = data['idx']
 		widgets = data['widgets']
 
+		self._fbo = Fbo(size=self.size)
+		with self._fbo:
+			self._background_color = Color(0,0,0,1)
+			self._background_rect = Rectangle(size=self.size)
 		for r in recs:
 			self.showObject(widgets, r, index=idx)
+		with self.canvas:
+			self._fbo_rect = Rectangle(size=self.size,
+								texture=self._fbo.texture)
 
 		self.subwidgets += widgets
 
