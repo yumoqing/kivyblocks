@@ -24,6 +24,7 @@ from kivy.app import App
 from kivy.factory import Factory
 from kivy.utils import platform
 from kivy.uix.boxlayout import BoxLayout
+from kivy.graphics import Fbo
 from .responsivelayout import VResponsiveLayout
 from .toolbar import Toolbar
 from .paging import Paging, RelatedLoader
