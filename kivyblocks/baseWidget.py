@@ -89,7 +89,11 @@ class WrapText(Label):
 
 class Box(WidgetCSS, WidgetReady, BoxLayout):
 	def __init__(self, **kw):
-		super(Box, self).__init__(**kw)
+		try:
+			super(Box, self).__init__(**kw)
+		except Exception as e:
+			print('Box(',kw,') Error')
+			raise e
 
 class HBox(Box):
 	def __init__(self,**kw):

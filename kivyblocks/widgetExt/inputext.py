@@ -109,7 +109,6 @@ class IntegerInput(StrInput):
 		return StrInput.insert_text(self,s, from_undo=from_undo)
 	
 	def on_focus(self,t,v):
-		super().on_focus(t,v)
 		self.cursor = (0,len(self.text))
 
 class FloatInput(IntegerInput):

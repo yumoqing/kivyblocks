@@ -7,6 +7,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
+from kivy.graphics import Fbo
 from kivy.uix.button import ButtonBehavior
 from kivy.clock import Clock
 from kivy.properties import BooleanProperty, StringProperty
@@ -289,6 +290,19 @@ class DataGrid(WidgetReady, BoxLayout):
 			"params":{
 			}
 		},
+		"tailer":{
+			"options":{
+			}
+			"info":[
+				"total_cnt",
+				"total_page",
+				"page_rows",
+				"curpage"
+			],
+			"others":{
+			}
+		},
+		"row_height": CSize,
 		"header_css":"default",
 		"body_css":"default",
 		"spacing":1,
@@ -317,8 +331,18 @@ class DataGrid(WidgetReady, BoxLayout):
 	row_selected = BooleanProperty(False)
 	def __init__(self,**options):
 		options['orientation'] = 'vertical'
-		BoxLayout.__init__(self)
+		BoxLayout.__init__(self, orientation='vertical')
 		WidgetReady.__init__(self)
+		"""
+		self._fbo = Fbo(size=self.size)
+		with self._fbo:
+			self._background_color = Color(0,0,0,1)
+			self._background_rect = Rectangle(size=self.size)
+		
+		with self.canvas:
+			self._fbo_rect = Rectangle(size=self.size,
+								texture=self._fbo.texture)
+		"""
 		self.select_rowid = None
 		self.options = options
 		self.rowheight = None
@@ -347,6 +371,7 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.dataloader = RelatedLoader(target=self, **ldr_desc)
 		self.dataloader.bind(on_deletepage=self.delete_page)
 		self.dataloader.bind(on_pageloaded=self.add_page)
+		self.dataloader.bind(on_pageloaded=self.update_tailer_info)
 		self.dataloader.bind(on_newbegin=self.clearRows)
 		self.register_event_type('on_selected')
 		self.register_event_type('on_scrollstop')
@@ -361,7 +386,70 @@ class DataGrid(WidgetReady, BoxLayout):
 		if self.normal_part:
 			b.add_widget(self.normal_part)
 		self.add_widget(b)
+		if self.options.get('tailer'):
+			self.tailer_widgets = {}
+			self.build_tailer(self.options.get('tailer'))
+
+	"""
+	def add_widget(self, widget, *args):
+		canvas = self.canvas
+		self.canvas = self._fbo
+		super(DataGrid, self).add_widget(widget, *args)
+		self.canvas = canvas
+
+	def remove_widget(self, widget,*args):
+		canvas = self.canvas
+		self.canvas = self._fbo
+		super(DataGrid, self).remove_widget(widget, *args)
+		self.canvas = canvas
+	"""
+		
+	def build_tailer(self, tailer_desc):
+		kw = tailer_desc.get('options', {})
+		kw.update({
+			'size_hint_y':None,
+			'height':self.rowheight
+		})
+		w = HBox(**kw)
+		self.add_widget(w)
+		self.show_infos(w, tailer_desc.get('info'))
+		if tailer_desc.get('others'):
+			w1 = self.build_tailer_other(tailer_desc.get('others'))
+			if w1:
+				w.add_widget(w1)
 	
+	def update_tailer_info(self, *args):
+		if not hasattr(self, 'tailer_widgets'):
+			return
+		for n,w in self.tailer_widgets.items():
+			w.text = self.loader_info(n)
+
+	def show_infos(self, tailer_widget, info_names):
+		for n in info_names:
+			desc = {
+				"widgettype":"Text",
+				"options":{
+					"text":n,
+					"i18n":True,
+				}
+			}
+			w = Factory.Blocks().widgetBuild(desc)
+			tailer_widget.add_widget(w)
+			tailer_widget.add_widget(Label(text=':'))
+			self.tailer_widgets[n] = Label(text=self.loader_info(n))
+			tailer_widget.add_widget(self.tailer_widgets[n])
+
+	def build_tailer_others(desc):
+		return Factory.Blocks().widgetBuild(desc)
+
+	def loader_info(self, n):
+		if hasattr(self.dataloader, n):
+			txt=getattr(self.dataloader, n, 0)
+			if txt is None:
+				txt = '0'
+			txt = str(txt)
+			return txt
+
 	def locater(self,pos):
 		self.normal_part.body.scroll_y = pos
 		if self.freeze_part:
@@ -436,9 +524,16 @@ class DataGrid(WidgetReady, BoxLayout):
 			idx = -1
 		recs1 = recs[:self.show_rows]
 		recs2 = recs[self.show_rows:]
+		self._fbo = Fbo(size=self.size)
+		with self._fbo:
+			self._background_color = Color(0,0,0,1)
+			self._background_rect = Rectangle(size=self.size)
 		for r in recs1:
 			id = self.addRow(r,index=idx)
 			ids.append(id)
+		with self.canvas:
+			self._fbo_rect = Rectangle(size=self.size,
+								texture=self._fbo.texture)
 
 		data['idx'] = idx
 		data['ids'] = ids

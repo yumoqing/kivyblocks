@@ -266,7 +266,7 @@ sub-widget's description file format
 		self.bar_title.add_widget(w)
 
 	def set_right_menu(self, w):
-		self.bar_right_menu.clear_widget()
+		self.bar_right_menu.clear_widgets()
 		self.bar_right_menu.add_widget(w)
 
 	def show_currentpage(self):
