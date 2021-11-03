@@ -3,6 +3,7 @@
 
 from distutils.core import setup
 from setuptools import setup, find_packages
+from Cython.Build import cythonize
 from version import version
 
 # usage:
@@ -32,6 +33,8 @@ package_data = {
 
 setup(
     name="kivyblocks",
+	ext_modules=cythonize(
+        ['kivyblocks/blocks.pyx']),
     version=version,
     
     # uncomment the following lines if you fill them out in release.py
