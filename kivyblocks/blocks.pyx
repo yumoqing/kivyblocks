@@ -441,7 +441,7 @@ class Blocks(EventDispatcher):
 			'options': opts
 		}
 
-		def doit(target,add_mode,o,w):
+		def doit(target:Widget, add_mode:str, o, w:Widget):
 			if target:
 				if add_mode == 'replace':
 					target.clear_widgets()
