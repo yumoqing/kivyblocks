@@ -1,3 +1,6 @@
+
+from traceback import print_exc
+from contextlib import contextmanager
 from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.utils import platform
@@ -14,6 +17,23 @@ class WidgetReady(object):
 	fullscreen = BooleanProperty(False)
 	ready = BooleanProperty(False)
 	_fullscreen = False
+
+	@contextmanager
+	def fboContext(self):
+		self._fbo = Fbo(size=self.size)
+		with self._fbo:
+			self._background_color = Color(0,0,0,1)
+			self._background_rect = Rectangle(size=self.size)
+
+		try:
+			yield self._fbo
+		except Exception as e:
+			print_exc()
+			print('Exeception=',e)
+			
+		with self.canvas:
+			self._fbo_rect = Rectangle(size=self.size,
+								texture=self._fbo.texture)
 
 	def on_ready(self, *args):
 		pass
@@ -77,13 +97,10 @@ class WidgetReady(object):
 			for child in window.children[:]:
 				window.remove_widget(child)
 
-			# put the video in fullscreen
 			if state['parent'] is not window:
 				state['parent'].remove_widget(self)
 			window.add_widget(self)
 
-			# ensure the video widget is in 0, 0, and the size will be
-			# readjusted
 			self.pos = (0, 0)
 			self.pos_hint = {}
 			self.size_hint = (1, 1)
