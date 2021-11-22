@@ -18,7 +18,6 @@ class PressableBox(TouchRippleButtonBehavior, Box):
 	box_actived = BooleanProperty(False)
 	def __init__(self,
 				border_width=1,
-				color_level=-1,
 				user_data=None,
 				radius=[],
 				**kw):
@@ -56,7 +55,6 @@ class PressableBox(TouchRippleButtonBehavior, Box):
 """
 ToggleItems format:
 {
-	color_level:
 	radius:
 	unit_size:
 	items_desc:
@@ -66,7 +64,6 @@ ToggleItems format:
 """
 class ToggleItems(BoxLayout, WidgetCSS):
 	def __init__(self,
-				color_level=1,
 				radius=[],
 				orientation='horizontal',
 				unit_size=3,
