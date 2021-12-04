@@ -30,7 +30,7 @@ class TypeWriterBox(WidgetCSS, WidgetReady, Widget):
 
 	def add_veritcal_box(self):
 		box = BoxLayout(orientation='vertical', size_hint_y=None)
-		box.bind(minimum_height = box.setter('height')
+		box.bind(minimum_height = box.setter('height'))
 		super(TypeWriterBox, self).add_widget(box)
 		return box
 

@@ -51,6 +51,7 @@ class ToggleText(ClickableText):
 		"on_css":"selected",
 		"off_css":"normal"
 	})
+	"""
 
 	select_state = BooleanProperty(False)
 	on_css = StringProperty('default')
@@ -59,7 +60,7 @@ class ToggleText(ClickableText):
 		super(ToggleText, self).__init__(**kw)
 
 	def on_press(self, o=None):
-		if self.select_state = if self.select_state?False else True
+		self.select_state = False if self.select_state else True
 
 	def on_select_state(self, o, f):
 		if f:
@@ -90,7 +91,7 @@ class ToggleImage(ClickableImage):
 		super(ToggleImage, self).__init__(**kw)
 
 	def on_press(self, o):
-		self.select_state = if self.select_state ? False, True
+		self.select_state = False if self.select_state else True
 	
 	def on_select_state(self, o, f):
 		if self.img_w:
@@ -104,7 +105,3 @@ class ToggleImage(ClickableImage):
 		else:
 			self.img_w = AsyncImage(source=self.source)
 
-class Select(VBox):
-	"""
-
-	"""
