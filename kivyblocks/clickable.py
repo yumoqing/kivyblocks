@@ -4,6 +4,7 @@ from kivy.uix.behaviors import TouchRippleButtonBehavior
 from kivy.graphics import Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
+from kivy.uix.image import AsyncImage
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 
 from kivyblocks.ready import WidgetReady
@@ -24,6 +25,7 @@ class ClickableBox(TouchRippleButtonBehavior, Box):
 			radius=radius,
 			**kw)
 		self.border_width = border_width
+		self.bind(minimum_height=self.setter('height'))
 
 	def on_press(self,o=None):
 		pass
@@ -33,6 +35,9 @@ class ClickableText(ClickableBox):
 	def __init__(self, **kw):
 		super(ClickableText, self).__init__(**kw)
 		self.txt_w = Text(text=self.text, i18n=True)
+		self.txt_w.size_hint = (None, None)
+		self.txt_w.bind(minimum_height=self.self.txt_w.setter('height'))
+		self.txt_w.bind(minimum_width=self.self.txt_w.setter('width'))
 		self.add_widget(self.txt_w)
 
 	def on_text(self, o, txt):
@@ -63,46 +68,43 @@ class ToggleText(ClickableText):
 			self.clscss = self.off_css
 	
 class ClickableImage(ClickableBox):
-	source=StringProperty('none')
+	source=StringProperty(None)
+	img_height = NumericProperty(None)
+	img_width = NumericProperty(None)
+	def __init__(self, **kw):	
+		super(ClickableImage, self).__init__(**kw)
+		self.img_w = None
+		if source:
+			self.img_w = AsyncImage(source=self.source)
 
-class ToggleImage(
-class PressableBox(TouchRippleButtonBehavior, Box):
-	normal_css = StringProperty("default")
-	actived_css = StringProperty("default")
-	box_actived = BooleanProperty(False)
-	def __init__(self,
-				border_width=1,
-				user_data=None,
-				radius=[],
-				**kw):
-		super(PressableBox, self).__init__(
-			padding=[border_width,
-			border_width,
-			border_width,
-			border_width],
-			radius=radius,
-			**kw)
-		self.border_width = border_width
-		self.user_data = user_data
-		self.actived = False
-		self.csscls = self.normal_css
+	def on_source(self, o, source):
+		if self.img_w:
+			self.img_w.source = source
+			return
+		self.img_w = AsyncImage(source=self.source)
 
-	def active(self, flag):
-		self.box_actived = flag
+class ToggleImage(ClickableImage):
+	on_source = StringProperty(None)
+	select_state = BooleanProperty(False)
+	def __init__(self, **kw):
+		super(ToggleImage, self).__init__(**kw)
 
-	def on_box_actived(self, o, v):
-		if self.box_actived:
-			self.csscls = self.actived_css
+	def on_press(self, o):
+		self.select_state = if self.select_state ? False, True
+	
+	def on_select_state(self, o, f):
+		if self.img_w:
+			if f:
+				self.img_w.source = self.on_source
+			else:
+				self.img_w.source = self.source
+			return
+		if f:
+			self.img_w = AsyncImage(source=self.on_source)
 		else:
-			self.csscls = self.normal_css
+			self.img_w = AsyncImage(source=self.source)
 
-	def on_press(self,o=None):
-		self.box_actived = True
+class Select(VBox):
+	"""
 
-
-	def setValue(self,d):
-		self.user_data = d
-
-	def getValue(self):
-		return self.user_data
-
+	"""
