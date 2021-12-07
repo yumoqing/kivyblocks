@@ -59,6 +59,18 @@ class ToggleText(ClickableText):
 	def __init__(self, **kw):
 		super(ToggleText, self).__init__(**kw)
 
+	def toggle(self):
+		self.select_state = False if self.select_state else True
+
+	def select(self, flag):
+		if flag:
+			self.select_state = True
+		else:
+			self.select_state = False
+
+	def state(self):
+		return self.select_state
+
 	def on_press(self, o=None):
 		self.select_state = False if self.select_state else True
 
@@ -90,18 +102,35 @@ class ToggleImage(ClickableImage):
 	def __init__(self, **kw):
 		super(ToggleImage, self).__init__(**kw)
 
+	def toggle(self):
+		self.select_state = False if self.select_state else True
+
+	def select(self, flag):
+		if flag:
+			self.select_state = True
+		else:
+			self.select_state = False
+
+	def state(self):
+		return self.select_state
+
 	def on_press(self, o):
 		self.select_state = False if self.select_state else True
 	
 	def on_select_state(self, o, f):
 		if self.img_w:
-			if f:
+			if self.select_state and self.on_source is not None:
 				self.img_w.source = self.on_source
 			else:
 				self.img_w.source = self.source
 			return
-		if f:
+		if self.select_state and self.on_source is not None:
 			self.img_w = AsyncImage(source=self.on_source)
 		else:
 			self.img_w = AsyncImage(source=self.source)
 
+r = Factory.register
+r('ClickableBox', ClickableBox)
+r('ClickableText',ClickableText)
+r('ToggleText',ToggleText)
+r('ClickableImage',ClickableImage)
