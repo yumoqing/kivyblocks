@@ -1,18 +1,19 @@
 from kivy.properties import BooleanProperty, StringProperty,\
 		ListProperty, DictProperty
-from kivyblocks.baseWidgets import VBox, PressableText
+from kivyblocks.baseWidget import VBox 
+from kivyblocks.clickable import ToggleText, ToggleImage
 from kivyblocks.typewriterbox import TypeWriterBox
 from kivy.factory import Factory
 
 class MultiSelect(TypeWriterBox):
 	items = ListProperty([])
-	item_cls = DictProperty({})
-	item_selected_cls = DictProperty({})
+	item_css = DictProperty({})
+	item_selected_css = DictProperty({})
 	all_button_position = StringProperty(None)
 	default_selected=StringProperty([])
 	
 	def __init__(self, **kw):
-		super(MultiSelectBotton, self).__init__(**kw)
+		super(MultiSelect, self).__init__(**kw)
 		self.button_dic = {}
 		self.value_b = {}
 

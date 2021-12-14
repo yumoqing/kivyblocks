@@ -5,7 +5,7 @@ from kivy.uix.textinput import TextInput
 from appPublic.registerfunction import RegisterFunction
 
 import kivyblocks.clickable
-import kivyblocks.multi-select
+import kivyblocks.multi_select
 
 from .baseWidget import *
 from .tree import Tree, TextTree, MenuTree, PopupMenu

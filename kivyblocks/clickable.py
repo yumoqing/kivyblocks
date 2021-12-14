@@ -5,7 +5,7 @@ from kivy.graphics import Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
 from kivy.uix.image import AsyncImage
-from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
+from kivy.properties import NumericProperty, ObjectProperty, StringProperty, BooleanProperty
 
 from kivyblocks.ready import WidgetReady
 from kivyblocks.bgcolorbehavior import BGColorBehavior
