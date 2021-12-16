@@ -129,39 +129,118 @@ Toolpage options
 	]
 	
 """
+
+class ScrollToolbar(ToolbarPanel):
+	"""
+	tool has the follow attributes
+	{
+		"name",
+		"source_on,
+		"source_off,
+		"label",
+	}
+	toolbar has follow attributes
+	{
+		"img_height_c":image height in charecter size
+		"img_width_c":image width in charecter size
+		"css_on",
+		"css_off",
+		"orient":"V" or "H"
+		"tools":
+	}
+
+	"""
+	css_on = StringProperty('default')
+	css_off = StringProperty('default')
+	tools = ListProperty([])
+	img_height_c = NumericProperty(2)
+	img_width_c = NumericProperty(2)
+	def __init__(self, **kw):
+		super(ScrollToolbar, self).__init__(**kw)
+		self.register_event_type('on_press')
+		self.w_dic = {}
+
+	def on_tools(self, o, tools):
+		for t in self.tools:
+			label = t.get('label')
+			source_on = t.get('source_on', t.get('img_src',None))
+			source_off = t.get('source_off', t.get('img_src', None))
+			ToggleIconText = Factory.ToggleIconText
+			ToggleText = Factory.ToggleText
+			ToggleIcon = Factory.ToggleIcon
+			if label and source_on:
+				w = ToggleIconText(css_on=self.css_on,
+								css_off=self.css_off,
+								text=label,
+								source_on=source_on,
+								source_off=source_off,
+								img_kw={
+									"size_hint":(None, None),
+									"height":CSize(self.img_height_c),
+									"width":CSize(self.img_width_c)
+								}
+				)
+			elif label:
+				w = ToggleText(css_on=self.css_on,
+								css_off=self.css_off,
+								text=label)
+			elif source_on:
+				w = ToggleIcon( source_on=source_on,
+								source_off=source_off,
+								img_kw={
+									"size_hint":(None, None),
+									"height":CSize(self.img_height_c),
+									"width":"CSize(self.img_width_c)
+								}
+				)
+
+			if w:
+				self.add_widget(w)
+				self.w_dic[w] = t
+				w.bind(on_press=self.tool_press)
+
+	def on_press(self, o):
+		pass
+
+	def select(self,name):
+		for w, v in self.w_dic.items():
+			if v['name'] == name:
+				w.select(True)
+				self.tool_press(w)
+				break
+
+	def tool_press(self, o):
+		for w,v in self.w_dic.items():
+			if w == o:
+				ret_v = v
+				w.select(True)
+			else:
+				w.select(False)
+		self.dispatch('on_press', ret_v)
+
 class ToolPage(BoxLayout):
 	normal_css=StringProperty(None)
 	actived_css=StringProperty(None)
-	def __init__(self,radius=[],
-					toolbar_size=None,
-					img_size=1.5,
-					text_size=0.7,
-					show_name=None, tool_at='top', **opts):
-		self.opts = DictObject(**opts)
-		if tool_at in [ 'top','bottom']:
+	toolbar_size = NumericProperty(2)
+	img_size = NumericProperty(1.5)
+	text_size = NumericProperty(0.7)
+	tool_at = StringProperty('top')
+	tools = ListProperty([])
+	def __init__(self, **kw):
+		if self.tool_at in [ 'top','bottom']:
 			orient = 'vertical'
 		else:
 			orient = 'horizontal'
-		if not toolbar_size:
-			toolbar_size = img_size + text_size + 0.3
-		self.toolbar_size = toolbar_size
-		self.img_size = img_size
-		self.text_size = text_size
-		names = [i.name for i in self.opts.tools]
-		if not show_name or \
-			not show_name in names:
-			show_name = self.opts.tools[0].name
-			
+		kw['orientation'] = orient
+		super(ToolPage, self).__init__(**kw)
+		if not self.toolbar_size:
+			self.toolbar_size = self.img_size + self.text_size + 0.3
 		self.content_widgets = {}
-		self.show_name = show_name
-		self.sub_radius = self.opts.radius
-		self.tool_at = tool_at
-		BoxLayout.__init__(self,orientation=orient)
 		self.content = None
 		self.toolbar = None
 		self.init()
-		print('Toolpage():self.show_name=', self.show_name)
-		Clock.schedule_once(self.show_page, 0.5)
+		name = self.tools[0]['name']
+		self.toolbar.select(name)
 	
 	def show_page(self, *args):
 		toggle_items = self.toolbar.toggle_items
@@ -187,37 +266,30 @@ class ToolPage(BoxLayout):
 		self.mywidgets = {}
 		self.content = BoxLayout()
 		self.content.widget_id = 'content'
-		opts = self.opts.copy()
+		opts = {}
+		opts['img_height_c"] = self.img_size,
+		opts['img_width_c"] = self.img_size,
+		opts['css_on'] = self.actived_css
+		opts['css_off'] = self.normal_css
+		opts['orient'] = 'H'
 		if self.tool_at in ['top','bottom']:
 			opts['size_hint_x'] = 1 
 			opts['size_hint_y'] = None
 			opts['height'] = CSize(self.toolbar_size)
-			opts['orientation'] = 'horizontal'
 		else:
 			opts['size_hint_y'] = 1
 			opts['size_hint_x'] = None
 			opts['width'] = CSize(self.toolbar_size)
-			opts['orientation'] = 'vertical'
-		self.toolbar = Toolbar(
-						radius=self.sub_radius,
-						img_size=self.img_size,
-						text_size=self.text_size,
-						**opts)
+		opts['tools'] = self.tools
+		self.toolbar = ScrollToolbar(**opts)
 		if self.tool_at in ['top','left']:
 			self.add_widget(self.toolbar)
 			self.add_widget(self.content)
 		else:
 			self.add_widget(self.content)
 			self.add_widget(self.toolbar)
-		toggle_items = self.toolbar.toggle_items
-		for t in toggle_items.item_widgets:	
-			t.bind(on_press=self.on_press_handle)
-
-	def get_tool_by_name(self,name):
-		for t in self.opts.tools:
-			if t.name == name:
-				return t
-		return None
+		
+		self.toolbar.bind(on_press=self.on_press_handle)
 
 	def build_widget(self, url):
 		desc = {
@@ -229,27 +301,28 @@ class ToolPage(BoxLayout):
 		b = Factory.Blocks()
 		return b.widgetBuild(desc)
 
-	def on_press_handle(self, o):
-		name = o.getValue()
-		t = self.get_tool_by_name(name)
+	def on_press_handle(self, o, v):
+		name = v.get('name')
+		fress = v.get('fress')
 		w = self.content_widgets.get(name)
 		self.content.clear_widgets()
-		if w is None or t.fresh:
-			if t.url:
-				w = self.build_widget(t.url)
+		if w is None or fresh:
+			url = v.get('url')
+			if url:
+				w = self.build_widget(url)
 				if w:
 					self.content_widgets[name] = w
 					self.content.add_widget(w)
 				return
-			if t.rfname:
+			rfname = v.get('rfname')
+			if rfname:
 				rf = RegisterFunction()
-				f = rf.get(t.rfname)
+				f = rf.get(rfname)
 				if f:
 					r = f()
 					if isinstance(r,Widget):
 						self.content.add_widget(r)
 			return
 		if w:
-			print('toolbar.py: Use old widget')
 			self.content.add_widget(w)
 

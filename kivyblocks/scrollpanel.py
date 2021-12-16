@@ -14,14 +14,14 @@ class ScrollPanel(ScrollView):
 	orient = StringProperty('V')
 
 	def __init__(self,inner=None, **kw):
-		super(ScrollPanel,self).__init__()
+		super(ScrollPanel,self).__init__(**kw)
 		self.effect_cls = ScrollEffect
 		if not inner:
-			kw.update({
+			kw = {
 				'size_hint':(None,None),
 				'bgcolor':self.bgcolor,
-				'orientation':'vertical'
-			})
+				'orientation':'vertical' if self.orient=='V' else 'horizontal'
+			}
 			desc = {
 				"widgettype":"Box",
 				"options":kw

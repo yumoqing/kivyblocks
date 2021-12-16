@@ -5,7 +5,8 @@ from kivy.graphics import Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
 from kivy.uix.image import AsyncImage
-from kivy.properties import NumericProperty, ObjectProperty, StringProperty, BooleanProperty
+from kivy.properties import NumericProperty, DictProperty, \
+		ObjectProperty, StringProperty, BooleanProperty
 
 from kivyblocks.ready import WidgetReady
 from kivyblocks.bgcolorbehavior import BGColorBehavior
@@ -26,6 +27,7 @@ class ClickableBox(TouchRippleButtonBehavior, Box):
 			**kw)
 		self.border_width = border_width
 		self.bind(minimum_height=self.setter('height'))
+		self.bind(minimum_width=self.setter('width'))
 
 	def on_press(self,o=None):
 		pass
@@ -35,27 +37,44 @@ class ClickableText(ClickableBox):
 	def __init__(self, **kw):
 		super(ClickableText, self).__init__(**kw)
 		self.txt_w = Text(text=self.text, i18n=True)
-		self.txt_w.size_hint = (None, None)
-		self.txt_w.bind(minimum_height=self.self.txt_w.setter('height'))
-		self.txt_w.bind(minimum_width=self.self.txt_w.setter('width'))
+		# self.txt_w.size_hint = (None, None)
+		# self.txt_w.bind(minimum_height=self.self.txt_w.setter('height'))
+		# self.txt_w.bind(minimum_width=self.self.txt_w.setter('width'))
 		self.add_widget(self.txt_w)
 
 	def on_text(self, o, txt):
 		self.txt_w.text = txt
+
+class ClickableIconText(ClickableText):
+	source = StringProperty(None)
+	img_kw = DictProperty({})
+	def __init__(self, **kw):
+		super(ClickableIconText, self).__init__(**kw)
+		self.img_w = None
+		if source:
+			self.img_w = AsyncImage(source=self.source, **self.img_kw)
+			self.add_widget(self.img_w, index=0)
+
+	def on_source(self, o, source):
+		if self.img_w:
+			self.img_w.source = source
+			return
+		self.img_w = AsyncImage(source=self.source, **self.img_kw)
+		self.add_widget(self.img_w, index=0)
 
 class ToggleText(ClickableText):
 	"""
 	construct commad
 	ToggleText(**{
 		"text":"test",
-		"on_css":"selected",
-		"off_css":"normal"
+		"css_on":"selected",
+		"css_off":"normal"
 	})
 	"""
 
 	select_state = BooleanProperty(False)
-	on_css = StringProperty('default')
-	off_css = StringProperty('default')
+	css_on = StringProperty('default')
+	css_off = StringProperty('default')
 	def __init__(self, **kw):
 		super(ToggleText, self).__init__(**kw)
 
@@ -71,36 +90,62 @@ class ToggleText(ClickableText):
 	def state(self):
 		return self.select_state
 
-	def on_press(self, o=None):
-		self.select_state = False if self.select_state else True
-
 	def on_select_state(self, o, f):
-		if f:
-			self.clscss = self.on_css
-		else:
-			self.clscss = self.off_css
+		self.clscss = self.css_on if f else self.css_off
 	
+class ToggleIconText(ToggleText):
+	"""
+	{
+		"orientation",
+		"text",
+		"css_on",
+		"css_off",
+		"source_on",
+		"source_off"
+	}
+	"""
+	source_on = StringProperty(None)
+	source_off = StringProperty(None)
+	source = StringProperty(None)
+	img_kw = DictProperty({})
+	def __init__(self, **kw):
+		super(ToggleIconText, self).__init__(**kw)
+		self.img_w = None
+		self.source = source_off
+		
+	def on_select_state(self, o, f):
+		super(ToggleIconText, self).on_select_state(o,f)
+		self.source = source_on if f else source_off
+
+	def on_source(self, o, source):
+		if not self.img_w:
+			self.img_w = AsyncImage(self.source, **self.img_kw)
+		self.add_widget(sef.img_w, index=0)
+
 class ClickableImage(ClickableBox):
 	source=StringProperty(None)
-	img_height = NumericProperty(None)
-	img_width = NumericProperty(None)
+	img_kw = DictProperty(None)
 	def __init__(self, **kw):	
 		super(ClickableImage, self).__init__(**kw)
 		self.img_w = None
 		if source:
-			self.img_w = AsyncImage(source=self.source)
+			self.img_w = AsyncImage(source=self.source, **self.img_kw)
+			self.add_widget(self.img_w)
 
 	def on_source(self, o, source):
 		if self.img_w:
 			self.img_w.source = source
 			return
-		self.img_w = AsyncImage(source=self.source)
+		self.img_w = AsyncImage(source=self.source, **self.img_kw)
+		self.add_widget(self.img_w)
 
 class ToggleImage(ClickableImage):
-	on_source = StringProperty(None)
+	source_on = StringProperty(None)
+	source_off = StringProperty(None)
 	select_state = BooleanProperty(False)
 	def __init__(self, **kw):
 		super(ToggleImage, self).__init__(**kw)
+		self.source = source_on
 
 	def toggle(self):
 		self.select_state = False if self.select_state else True
@@ -114,23 +159,16 @@ class ToggleImage(ClickableImage):
 	def state(self):
 		return self.select_state
 
-	def on_press(self, o):
-		self.select_state = False if self.select_state else True
-	
 	def on_select_state(self, o, f):
-		if self.img_w:
-			if self.select_state and self.on_source is not None:
-				self.img_w.source = self.on_source
-			else:
-				self.img_w.source = self.source
-			return
-		if self.select_state and self.on_source is not None:
-			self.img_w = AsyncImage(source=self.on_source)
+		if f:
+			self.source = self.source_on
 		else:
-			self.img_w = AsyncImage(source=self.source)
+			self.source = self.source_off
 
 r = Factory.register
 r('ClickableBox', ClickableBox)
 r('ClickableText',ClickableText)
+r('ClickableIconText',ClickableIconText)
 r('ToggleText',ToggleText)
+r('ToggleIconText',ToggleIconText)
 r('ClickableImage',ClickableImage)
