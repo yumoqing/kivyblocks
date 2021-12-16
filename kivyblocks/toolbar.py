@@ -9,7 +9,7 @@ from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.factory import Factory
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, ListProperty, NumericProperty
 
 from appPublic.dictObject import DictObject
 from appPublic.registerfunction import RegisterFunction
@@ -19,6 +19,7 @@ from .utils import *
 from .ready import WidgetReady
 from .color_definitions import getColors
 from .baseWidget import Text, Box
+from .scrollpanel import ScrollPanel
 from .toggleitems import ToggleItems
 
 """
@@ -130,7 +131,7 @@ Toolpage options
 	
 """
 
-class ScrollToolbar(ToolbarPanel):
+class ScrollToolbar(ScrollPanel):
 	"""
 	tool has the follow attributes
 	{
@@ -145,35 +146,37 @@ class ScrollToolbar(ToolbarPanel):
 		"img_width_c":image width in charecter size
 		"css_on",
 		"css_off",
-		"orient":"V" or "H"
 		"tools":
+		"tool_orient"
 	}
 
 	"""
 	css_on = StringProperty('default')
 	css_off = StringProperty('default')
 	tools = ListProperty([])
+	tool_orient = StringProperty('horizontal')
 	img_height_c = NumericProperty(2)
 	img_width_c = NumericProperty(2)
 	def __init__(self, **kw):
+		print('#############init begin##########')
 		super(ScrollToolbar, self).__init__(**kw)
+		print('#############super init end##########')
 		self.register_event_type('on_press')
 		self.w_dic = {}
-
-	def on_tools(self, o, tools):
 		for t in self.tools:
 			label = t.get('label')
 			source_on = t.get('source_on', t.get('img_src',None))
 			source_off = t.get('source_off', t.get('img_src', None))
 			ToggleIconText = Factory.ToggleIconText
 			ToggleText = Factory.ToggleText
-			ToggleIcon = Factory.ToggleIcon
+			ToggleImage = Factory.ToggleImage
 			if label and source_on:
 				w = ToggleIconText(css_on=self.css_on,
 								css_off=self.css_off,
 								text=label,
 								source_on=source_on,
 								source_off=source_off,
+								orientation=self.tool_orient,
 								img_kw={
 									"size_hint":(None, None),
 									"height":CSize(self.img_height_c),
@@ -183,14 +186,16 @@ class ScrollToolbar(ToolbarPanel):
 			elif label:
 				w = ToggleText(css_on=self.css_on,
 								css_off=self.css_off,
+								orientation=self.tool_orient,
 								text=label)
 			elif source_on:
-				w = ToggleIcon( source_on=source_on,
+				w = ToggleImage( source_on=source_on,
 								source_off=source_off,
+								orientation=self.tool_orient,
 								img_kw={
 									"size_hint":(None, None),
 									"height":CSize(self.img_height_c),
-									"width":"CSize(self.img_width_c)
+									"width":CSize(self.img_width_c)
 								}
 				)
 
@@ -260,6 +265,12 @@ class ToolPage(BoxLayout):
 			self.toolbar.height = self.height
 			self.content.height = self.height
 			self.content.width = self.width - self.toolbar.width
+		print(f'tb-width={self.toolbar.width}')
+		print(f'tb-height={self.toolbar.height}')
+		print(f'c-height={self.content.height}')
+		print(f'c-width={self.content.width}')
+		print(f'height={self.height}')
+		print(f'width={self.width}')
 
 	def init(self):
 		self.initFlag = True
@@ -267,8 +278,8 @@ class ToolPage(BoxLayout):
 		self.content = BoxLayout()
 		self.content.widget_id = 'content'
 		opts = {}
-		opts['img_height_c"] = self.img_size,
-		opts['img_width_c"] = self.img_size,
+		opts['img_height_c'] = self.img_size
+		opts['img_width_c'] = self.img_size
 		opts['css_on'] = self.actived_css
 		opts['css_off'] = self.normal_css
 		opts['orient'] = 'H'
