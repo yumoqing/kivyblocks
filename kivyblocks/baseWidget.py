@@ -74,7 +74,7 @@ from .threadcall import HttpClient
 from .i18n import I18n
 from .widget_css import WidgetCSS
 from .ready import WidgetReady
-from .utils import CSize
+from .utils import CSize, kwarg_pop
 from .swipebehavior import SwipeBehavior
 
 if platform == 'android':
@@ -90,6 +90,7 @@ class WrapText(Label):
 class Box(WidgetCSS, WidgetReady, BoxLayout):
 	def __init__(self, **kw):
 		try:
+			kwarg_pop(self, kw)
 			super(Box, self).__init__(**kw)
 		except Exception as e:
 			print('Box(',kw,') Error')
@@ -108,6 +109,7 @@ class VBox(Box):
 
 class SwipeBox(SwipeBehavior, Box):
 	def __init__(self, **kw):
+		kwarg_pop(self, kw)
 		super(SwipeBox, self).__init__(**kw)
 
 
@@ -138,6 +140,7 @@ class Text(Label):
 			pass
 		else:
 			kwargs.update(fontsize)
+		kwarg_pop(self, kwargs)
 		super().__init__(**kwargs)
 		if self._i18n:
 			self.i18n = I18n()

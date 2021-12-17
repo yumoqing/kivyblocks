@@ -31,6 +31,12 @@ class HTTPError(Exception):
 
 alert_widget= None
 
+def kwarg_pop(obj, kw):
+	keys = [k for k in kw.keys()]
+	for k in keys:
+		if hasattr(obj, k):
+			setattr(obj, k, kw.pop(k))
+
 def blockImage(name):
 	p = os.path.dirname(os.path.abspath(__file__))
 	return os.path.join(p,'imgs',name)

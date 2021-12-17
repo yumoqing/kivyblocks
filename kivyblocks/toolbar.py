@@ -9,7 +9,8 @@ from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.factory import Factory
-from kivy.properties import StringProperty, ListProperty, NumericProperty
+from kivy.properties import StringProperty, DictProperty, \
+			ListProperty, NumericProperty
 
 from appPublic.dictObject import DictObject
 from appPublic.registerfunction import RegisterFunction
@@ -77,8 +78,8 @@ class Toolbar(Box):
 						"size_hint_y":None,
 						"i18n":True,
 						"height":CSize(self.text_size),
-						"font_size":CSize(self.text_size),
-						"text":text
+						"fontsize":CSize(self.text_size),
+						"otext":text
 					}
 				})
 			desc = {
@@ -142,29 +143,53 @@ class ScrollToolbar(ScrollPanel):
 	}
 	toolbar has follow attributes
 	{
-		"img_height_c":image height in charecter size
-		"img_width_c":image width in charecter size
+		"padding_c":x spacing
+		"img_size_c":image height in charecter size
+		"text_size_c":
+		"orient":"H" or "V"
+		"tool_orient":"horizontal" or "vertical"
 		"css_on",
 		"css_off",
 		"tools":
-		"tool_orient"
 	}
-
+				css_on='default',
+				css_off='default',
+				tools=[],
+				tool_orient = 'horizontal',
+				orient='H',
+				padding_c=1,
+				img_size_c=2,
+				text_size_c=1,
+		self.css_on = css_on
+		self.css_off = css_off
+		self.tools=tools
+		self.tool_orient = tool_orient
+		self.orient = orient
+		self.padding_c = padding_c
+		self.img_size_c = img_size_c
+		self.text_size_c = text_size_c
 	"""
+
 	css_on = StringProperty('default')
 	css_off = StringProperty('default')
 	tools = ListProperty([])
 	tool_orient = StringProperty('horizontal')
-	img_height_c = NumericProperty(2)
-	img_width_c = NumericProperty(2)
+	orient = StringProperty('H')
+	padding_c = NumericProperty(1)
+	img_size_c = NumericProperty(2)
+	text_size_c = NumericProperty(1)
 	def __init__(self, **kw):
-		print('#############init begin##########')
+		kwarg_pop(self, kw)
 		super(ScrollToolbar, self).__init__(**kw)
-		print('#############super init end##########')
 		self.register_event_type('on_press')
+		if self.orient == 'H':
+			self._inner.orientation = 'horizontal'
+		else:
+			self._inner.orientation = 'vertical'
+		self.clear_widgets()
 		self.w_dic = {}
 		for t in self.tools:
-			label = t.get('label')
+			label = t.get('label', t.get('name', None))
 			source_on = t.get('source_on', t.get('img_src',None))
 			source_off = t.get('source_off', t.get('img_src', None))
 			ToggleIconText = Factory.ToggleIconText
@@ -174,19 +199,21 @@ class ScrollToolbar(ScrollPanel):
 				w = ToggleIconText(css_on=self.css_on,
 								css_off=self.css_off,
 								text=label,
+								fontsize=CSize(self.text_size_c),
 								source_on=source_on,
 								source_off=source_off,
 								orientation=self.tool_orient,
 								img_kw={
 									"size_hint":(None, None),
-									"height":CSize(self.img_height_c),
-									"width":CSize(self.img_width_c)
+									"height":CSize(self.img_size_c),
+									"width":CSize(self.img_size_c)
 								}
 				)
 			elif label:
 				w = ToggleText(css_on=self.css_on,
 								css_off=self.css_off,
 								orientation=self.tool_orient,
+								fontsize=CSize(self.text_size_c),
 								text=label)
 			elif source_on:
 				w = ToggleImage( source_on=source_on,
@@ -194,8 +221,8 @@ class ScrollToolbar(ScrollPanel):
 								orientation=self.tool_orient,
 								img_kw={
 									"size_hint":(None, None),
-									"height":CSize(self.img_height_c),
-									"width":CSize(self.img_width_c)
+									"height":CSize(self.img_size_c),
+									"width":CSize(self.img_size_c)
 								}
 				)
 
@@ -203,6 +230,19 @@ class ScrollToolbar(ScrollPanel):
 				self.add_widget(w)
 				self.w_dic[w] = t
 				w.bind(on_press=self.tool_press)
+		
+		if self.orient == 'horizontal':
+			self.do_scroll_y = False
+			self.size_hint_y = None
+			if len(self.w_dic.keys()) > 0:
+				self.height = max([w.height for w in self.w_dic.keys()])
+			self._inner.spacing = CSize(self.padding_c,0)
+		else:
+			self.do_scroll_x = False
+			self.size_hint_x = None
+			if len(self.w_dic.keys()) > 0:
+				self.width = max([w.width for w in self.w_dic.keys() ])
+			self._inner.spacing = CSize(0, self.padding_c)
 
 	def on_press(self, o):
 		pass
@@ -224,83 +264,49 @@ class ScrollToolbar(ScrollPanel):
 		self.dispatch('on_press', ret_v)
 
 class ToolPage(BoxLayout):
-	normal_css=StringProperty(None)
-	actived_css=StringProperty(None)
 	toolbar_size = NumericProperty(2)
-	img_size = NumericProperty(1.5)
-	text_size = NumericProperty(0.7)
 	tool_at = StringProperty('top')
-	tools = ListProperty([])
+	toolbar = DictProperty({})
 	def __init__(self, **kw):
-		if self.tool_at in [ 'top','bottom']:
-			orient = 'vertical'
-		else:
-			orient = 'horizontal'
-		kw['orientation'] = orient
+		print('ToolPage:kw=',kw)
 		super(ToolPage, self).__init__(**kw)
+		if self.tool_at in [ 'top','bottom']:
+			self.orientation = 'vertical'
+		else:
+			self.orientation = 'horizontal'
 		if not self.toolbar_size:
 			self.toolbar_size = self.img_size + self.text_size + 0.3
 		self.content_widgets = {}
-		self.content = None
-		self.toolbar = None
+		self.content_w = None
+		self.toolbar_w = None
 		self.init()
-		name = self.tools[0]['name']
-		self.toolbar.select(name)
+		name = self.toolbar['tools'][0]['name']
+		self.toolbar_w.select(name)
 	
-	def show_page(self, *args):
-		toggle_items = self.toolbar.toggle_items
-		for c in toggle_items.item_widgets:
-			cvalue = c.getValue()
-			if cvalue == self.show_name:
-				c.dispatch('on_press')
-
 	def on_size(self,obj,size):
-		if self.content is None:
+		if self.content_w is None:
 			return
 		if self.tool_at in ['top','bottom']:
-			self.toolbar.width = self.width
-			self.content.width = self.width
-			self.content.height = self.height - self.toolbar.height
+			self.toolbar_w.width = self.width
+			self.content_w.width = self.width
+			self.content_w.height = self.height - self.toolbar_w.height
 		else:
-			self.toolbar.height = self.height
-			self.content.height = self.height
-			self.content.width = self.width - self.toolbar.width
-		print(f'tb-width={self.toolbar.width}')
-		print(f'tb-height={self.toolbar.height}')
-		print(f'c-height={self.content.height}')
-		print(f'c-width={self.content.width}')
-		print(f'height={self.height}')
-		print(f'width={self.width}')
+			self.toolbar_w.height = self.height
+			self.content_w.height = self.height
+			self.content_w.width = self.width - self.toolbar_w.width
 
 	def init(self):
-		self.initFlag = True
-		self.mywidgets = {}
-		self.content = BoxLayout()
-		self.content.widget_id = 'content'
-		opts = {}
-		opts['img_height_c'] = self.img_size
-		opts['img_width_c'] = self.img_size
-		opts['css_on'] = self.actived_css
-		opts['css_off'] = self.normal_css
-		opts['orient'] = 'H'
-		if self.tool_at in ['top','bottom']:
-			opts['size_hint_x'] = 1 
-			opts['size_hint_y'] = None
-			opts['height'] = CSize(self.toolbar_size)
-		else:
-			opts['size_hint_y'] = 1
-			opts['size_hint_x'] = None
-			opts['width'] = CSize(self.toolbar_size)
-		opts['tools'] = self.tools
-		self.toolbar = ScrollToolbar(**opts)
+		self.content_w = BoxLayout()
+		self.content_w.widget_id = 'content'
+		self.toolbar_w = ScrollToolbar(**self.toolbar)
 		if self.tool_at in ['top','left']:
-			self.add_widget(self.toolbar)
-			self.add_widget(self.content)
+			self.add_widget(self.toolbar_w)
+			self.add_widget(self.content_w)
 		else:
-			self.add_widget(self.content)
-			self.add_widget(self.toolbar)
+			self.add_widget(self.content_w)
+			self.add_widget(self.toolbar_w)
 		
-		self.toolbar.bind(on_press=self.on_press_handle)
+		self.toolbar_w.bind(on_press=self.on_press_handle)
 
 	def build_widget(self, url):
 		desc = {
@@ -316,14 +322,14 @@ class ToolPage(BoxLayout):
 		name = v.get('name')
 		fress = v.get('fress')
 		w = self.content_widgets.get(name)
-		self.content.clear_widgets()
+		self.content_w.clear_widgets()
 		if w is None or fresh:
 			url = v.get('url')
 			if url:
 				w = self.build_widget(url)
 				if w:
 					self.content_widgets[name] = w
-					self.content.add_widget(w)
+					self.content_w.add_widget(w)
 				return
 			rfname = v.get('rfname')
 			if rfname:
@@ -332,8 +338,9 @@ class ToolPage(BoxLayout):
 				if f:
 					r = f()
 					if isinstance(r,Widget):
-						self.content.add_widget(r)
+						self.content_w.add_widget(r)
 			return
 		if w:
-			self.content.add_widget(w)
+			self.content_w.add_widget(w)
 
+Factory.register('ScrollToolbar', ScrollToolbar)
