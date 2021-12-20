@@ -37,6 +37,13 @@ def kwarg_pop(obj, kw):
 		if hasattr(obj, k):
 			setattr(obj, k, kw.pop(k))
 
+def SUPER(klass, obj, kw):
+	keys = [ k for k in kw.keys() ]
+	dic = { k:kw.pop(k) for k in keys if hasattr(obj, k) }
+	super(klass, obj).__init__(**kw)
+	for k,v in dic.items():
+		setattr(obj, k, v)
+
 def blockImage(name):
 	p = os.path.dirname(os.path.abspath(__file__))
 	return os.path.join(p,'imgs',name)

@@ -74,7 +74,7 @@ from .threadcall import HttpClient
 from .i18n import I18n
 from .widget_css import WidgetCSS
 from .ready import WidgetReady
-from .utils import CSize, kwarg_pop
+from .utils import CSize, SUPER
 from .swipebehavior import SwipeBehavior
 
 if platform == 'android':
@@ -90,8 +90,7 @@ class WrapText(Label):
 class Box(WidgetCSS, WidgetReady, BoxLayout):
 	def __init__(self, **kw):
 		try:
-			kwarg_pop(self, kw)
-			super(Box, self).__init__(**kw)
+			SUPER(Box, self, kw)
 		except Exception as e:
 			print('Box(',kw,') Error')
 			raise e
@@ -109,8 +108,7 @@ class VBox(Box):
 
 class SwipeBox(SwipeBehavior, Box):
 	def __init__(self, **kw):
-		kwarg_pop(self, kw)
-		super(SwipeBox, self).__init__(**kw)
+		SUPER(SwipeBox, self, kw)
 
 
 class Text(Label):
@@ -140,12 +138,13 @@ class Text(Label):
 			pass
 		else:
 			kwargs.update(fontsize)
-		kwarg_pop(self, kwargs)
-		super().__init__(**kwargs)
+		if not kwargs.get('text'):
+			kwargs['text'] = kwargs.get('otext','')
+		
+		SUPER(Text, self, kwargs)
 		if self._i18n:
 			self.i18n = I18n()
 			self.i18n.addI18nWidget(self)
-			self.otext = kw.get('text','')
 		if self.wrap:
 			self.size_hint_y = None
 			self.text_size = self.width, None
@@ -182,9 +181,9 @@ class Text(Label):
 
 	def on_otext(self,o,v=None):
 		if self._i18n:
-			self.text = self.i18n(v)
+			self.text = self.i18n(self.otext)
 		else:
-			self.text = v
+			self.text = self.otext
 	
 	def changeLang(self,lang):
 		self.lang = lang

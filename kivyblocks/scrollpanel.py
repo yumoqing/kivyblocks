@@ -11,10 +11,9 @@ class ScrollPanel(ScrollView):
 	x_padding_c = NumericProperty(0)
 	y_padding_c = NumericProperty(0)
 	bgcolor = ListProperty([0.2, 0.2, 0.2, 1])
-	orient = StringProperty('V')
 	def __init__(self,inner=None, **kw):
 		print('ScrollPanel:kw=', kw)
-		super(ScrollPanel,self).__init__(**kw)
+		SUPER(ScrollPanel, self, kw)
 		self.effect_cls = ScrollEffect
 		if not inner:
 			kw = {
@@ -29,11 +28,6 @@ class ScrollPanel(ScrollView):
 			if not self._inner:
 				print('desc=', desc)
 				raise Exception('widget build failed')
-			if isinstance(self._inner, BoxLayout):
-				if self.orient.upper() == 'H':
-					self._inner.orientation = 'horizontal'
-				else:
-					self._inner.orientation = 'vertical'
 			self._inner.padding = self._inner.spacing = \
 						[CSize(self.x_padding_c), CSize(self.y_padding_c)]
 		elif isinstance(inner, Widget):

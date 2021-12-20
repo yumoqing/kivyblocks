@@ -10,26 +10,25 @@ from kivy.properties import NumericProperty, DictProperty, \
 
 from kivyblocks.ready import WidgetReady
 from kivyblocks.bgcolorbehavior import BGColorBehavior
-from kivyblocks.utils import CSize, kwarg_pop
+from kivyblocks.utils import CSize, SUPER
 from kivyblocks.baseWidget import Box, Text
 from kivyblocks.widget_css import WidgetCSS
 
 class TinyText(Text):
+	def __init__(self, **kw):
+		SUPER(TinyText, self, kw)
+		self.on_texture_size(self, (1,1))
+
 	def on_texture_size(self, o, ts):
+		self._label.refresh()
 		self.size = self.texture_size
-		print('TinyText:texture_size=', self.texture_size)
+		print('TinyText:texture_size=', self.texture_size, 'text=', self.text)
 
 class ClickableBox(TouchRippleButtonBehavior, Box):
 	def __init__(self,
 				border_width=1,
 				**kw):
-		kwarg_pop(self, kw)
-		super(ClickableBox, self).__init__(
-			padding=[border_width,
-			border_width,
-			border_width,
-			border_width],
-			**kw)
+		SUPER(ClickableBox, self, kw)
 		self.border_width = border_width
 		# self.bind(minimum_height=self.setter('height'))
 		# self.bind(minimum_width=self.setter('width'))
@@ -43,9 +42,8 @@ class ClickableText(ClickableBox):
 	def __init__(self, **kw):
 		print('ClickableText begin inited')
 		self.txt_w = None
-		kwarg_pop(self, kw)
-		super(ClickableText, self).__init__(**kw)
-		self.txt_w = TinyText(otext=self.text, 
+		SUPER(ClickableText, self, kw)
+		self.txt_w = TinyText(text=self.text, 
 						i18n=True,
 						font_size=CSize(self.fontsize))
 		self.txt_w.bind(texture_size=self.reset_size)
@@ -72,8 +70,7 @@ class ClickableIconText(ClickableText):
 	img_kw = DictProperty({})
 	def __init__(self, **kw):
 		self.img_w = None
-		kwarg_pop(self, kw)
-		super(ClickableIconText, self).__init__(**kw)
+		SUPER(ClickableIconText, self, kw)
 		print('ClickableIconText inited')
 
 	def reset_size(self, o, s):
@@ -107,8 +104,7 @@ class ToggleText(ClickableText):
 	css_on = StringProperty('default')
 	css_off = StringProperty('default')
 	def __init__(self, **kw):
-		kwarg_pop(self, kw)
-		super(ToggleText, self).__init__(**kw)
+		SUPER(ToggleText, self, kw)
 
 	def toggle(self):
 		self.select_state = False if self.select_state else True
@@ -143,8 +139,7 @@ class ToggleIconText(ToggleText):
 	img_kw = DictProperty({})
 	def __init__(self, **kw):
 		self.img_w = None
-		kwarg_pop(self, kw)
-		super(ToggleIconText, self).__init__(**kw)
+		SUPER(ToggleIconText, self, kw)
 		self.source = self.source_off
 		self.img_w = AsyncImage(source=self.source, **self.img_kw)
 		self.add_widget(self.img_w, index=-1)
@@ -172,8 +167,7 @@ class ClickableImage(ClickableBox):
 	img_kw = DictProperty(None)
 	def __init__(self, **kw):	
 		self.img_w = None
-		kwarg_pop(self, kw)
-		super(ClickableImage, self).__init__(**kw)
+		SUPER(ClickableImage, self, kw)
 		self.img_w = AsyncImage(source=self.source, **self.img_kw)
 		self.add_widget(self.img_w)
 
@@ -189,8 +183,7 @@ class ToggleImage(ClickableImage):
 	source_off = StringProperty(None)
 	select_state = BooleanProperty(False)
 	def __init__(self, **kw):
-		kwarg_pop(self, kw)
-		super(ToggleImage, self).__init__(**kw)
+		SUPER(ToggleImage, self, kw)
 		self.source = self.source_on
 
 	def toggle(self):
