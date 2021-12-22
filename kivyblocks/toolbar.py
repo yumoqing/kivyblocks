@@ -135,10 +135,8 @@ class Toolbar(ScrollPanel):
 		print(w, 'children=', len(w.children))
 		if t.get('deletable', False):
 			x = ClickableImage(source=blockImage('delete.png'),
-							img_kw={
-								"size_hint":(None, None),
-								"size":CSize(1,1)
-							}
+							size_hint=(None,None),
+							size=CSize(1,1)
 						)
 			x.data = (w, t)
 			x.bind(on_press=self.delete_tool)
