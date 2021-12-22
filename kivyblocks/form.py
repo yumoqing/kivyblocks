@@ -241,8 +241,8 @@ class InputBox(BoxLayout):
 
 def defaultToolbar():
 	return {
-		"img_size":1.5,
-		"text_size":0.7,
+		"img_size_c":1.5,
+		"text_size_c":0.7,
 		"tools":[
 			{
 				"name":"__submit",
@@ -320,18 +320,6 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 		self.fsc.org_box_width = self.width / self.options_cols
 		if self.notoolbar:
 			return
-		if self.toolbar_at in [ 'top', 'bottom' ]:
-			Logger.info('Form: height:tb:%d,ti:%d,fsc:%d, fm:%d',
-						self.toolbar.height, 
-						self.toolbar.toggle_items.height,
-						self.fsc.height, self.height
-						)
-		else:
-			Logger.info('Form: width:tb:%d,ti:%d,fsc:%d, fm:%d',
-						self.toolbar.width, 
-						self.toolbar.toggle_items.width,
-						self.fsc.width, self.width
-						)
 
 	def init(self):
 		if not self.notoolbar:
@@ -359,11 +347,13 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 			if self.toolbar_at in ['top', 'bottom']:
 				desc['orientation'] = 'horizontal'
 				desc['size_hint_y'] = None
-				desc['height'] = CSize(desc['img_size'] + desc['text_size'])
+				desc['height'] = CSize(desc['img_size_c'] + \
+									desc['text_size_c'])
 			else:
 				desc['orientation'] = 'vertical'
 				desc['size_hint_x'] = None
-				desc['width'] = CSize(desc['img_size'] + desc['text_size'])
+				desc['width'] = CSize(desc['img_size_c'] + \
+									desc['text_size_c'])
 
 			self.toolbar = Toolbar(**desc)
 		self.fsc = VResponsiveLayout(

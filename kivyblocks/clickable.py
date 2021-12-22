@@ -22,7 +22,6 @@ class TinyText(Text):
 	def on_texture_size(self, o, ts):
 		self._label.refresh()
 		self.size = self.texture_size
-		print('TinyText:texture_size=', self.texture_size, 'text=', self.text)
 
 class ClickableBox(TouchRippleButtonBehavior, Box):
 	def __init__(self,
@@ -32,6 +31,16 @@ class ClickableBox(TouchRippleButtonBehavior, Box):
 		self.border_width = border_width
 		# self.bind(minimum_height=self.setter('height'))
 		# self.bind(minimum_width=self.setter('width'))
+		self.bind(children=self.reset_size)
+
+	def reset_size(self, o, s):
+		self.size_hint = (None,None)
+		if self.orientation == 'horizontal':
+			self.height = max([c.height for c in self.children])
+			self.width = sum([c.width for c in self.children])
+		else:
+			self.height = sum([c.height for c in self.children])
+			self.width = max([c.width for c in self.children])
 
 	def on_press(self,o=None):
 		pass
@@ -43,23 +52,15 @@ class ClickableText(ClickableBox):
 		print('ClickableText begin inited')
 		self.txt_w = None
 		SUPER(ClickableText, self, kw)
-		self.txt_w = TinyText(text=self.text, 
+		self.txt_w = TinyText(otext=self.text, 
 						i18n=True,
 						font_size=CSize(self.fontsize))
 		self.txt_w.bind(texture_size=self.reset_size)
 		self.add_widget(self.txt_w)
 		self.txt_w.size_hint = (None, None)
 		self.txt_w.size = self.txt_w.texture_size
-		#self.txt_w.bind(minimum_height=self.txt_w.setter('height'))
-		#self.txt_w.bind(minimum_width=self.txt_w.setter('width'))
-		print('ClickableText inited')
-
-	def reset_size(self, o, s):
-		self.size_hint = (None,None)
-		self.size = self.txt_w.texture_size
 
 	def on_text(self, o, txt):
-		print('on_text fired')
 		if self.txt_w:
 			self.txt_w.text = self.text
 			
@@ -73,22 +74,12 @@ class ClickableIconText(ClickableText):
 		SUPER(ClickableIconText, self, kw)
 		print('ClickableIconText inited')
 
-	def reset_size(self, o, s):
-		self.size_hint = (None,None)
-		if self.orientation == 'horizontal':
-			self.height = max(self.txt_w.texture_size[1], self.img_w.height)
-			self.width = self.txt_w.texture_size[0] + self.img_w.width
-		else:
-			self.height = self.txt_w.texture_size[1] + self.img_w.height
-			self.width = max(self.txt_w.texture_size[0], self.img_w.width)
-
-
 	def on_source(self, o, source):
 		if self.img_w:
 			self.img_w.source = source
 			return
 		self.img_w = AsyncImage(source=self.source, **self.img_kw)
-		self.add_widget(self.img_w, index=-1)
+		self.add_widget(self.img_w, index=len(self.children))
 
 class ToggleText(ClickableText):
 	"""
@@ -142,18 +133,8 @@ class ToggleIconText(ToggleText):
 		SUPER(ToggleIconText, self, kw)
 		self.source = self.source_off
 		self.img_w = AsyncImage(source=self.source, **self.img_kw)
-		self.add_widget(self.img_w, index=-1)
+		self.add_widget(self.img_w, index=len(self.children))
 		
-	def reset_size(self, o, s):
-		self.size_hint = (None,None)
-		if self.orientation == 'horizontal':
-			self.height = max(self.txt_w.texture_size[1], self.img_w.height)
-			self.width = self.txt_w.texture_size[0] + self.img_w.width
-		else:
-			self.height = self.txt_w.texture_size[1] + self.img_w.height
-			self.width = max(self.txt_w.texture_size[0], self.img_w.width)
-		print(f'ToggleIconText:w,h={self.width},{self.height}')
-
 	def on_select_state(self, o, f):
 		super(ToggleIconText, self).on_select_state(o,f)
 		self.source = self.source_on if f else self.source_off
@@ -168,12 +149,27 @@ class ClickableImage(ClickableBox):
 	def __init__(self, **kw):	
 		self.img_w = None
 		SUPER(ClickableImage, self, kw)
-		self.img_w = AsyncImage(source=self.source, **self.img_kw)
-		self.add_widget(self.img_w)
+		# self.img_w = AsyncImage(source=self.source, **self.img_kw)
+		# self.add_widget(self.img_w)
 
 	def on_source(self, o, source):
+		if self.source is None:
+			self.source = blockImage('broken.png')
+		self.build_widget()
+
+	def on_img_kw(self, o, img_kw):
+		self.build_widget()
+
+	def build_widget(self):
+		if not self.source:
+			return
+		if not self.img_kw:
+			self.img_kw = {}
+
 		if self.img_w:
-			self.img_w.source = source
+			self.img_w.source = self.source
+			for k,v in self.img_kw.items():
+				setattr(self.img_w, k,v)
 			return
 		self.img_w = AsyncImage(source=self.source, **self.img_kw)
 		self.add_widget(self.img_w)
@@ -204,8 +200,25 @@ class ToggleImage(ClickableImage):
 		else:
 			self.source = self.source_off
 
+class CheckBox(ToggleImage):
+	otext = StringProperty(None)
+	def __init__(self, **kw):	
+		SUPER(CheckBox, self, kw)
+		self.source_on = blockImage('checkbox-on.png')
+		self.source_off = blockImage('ceckbox-off.png')
+		if self.otext:
+			self.txt_w = TinyText(otext=self.otext, i18n=True)
+			self.add_widget(self.txt_w)
+
+	def getValue(self):
+		return self.state()
+
+	def setValue(self, v):
+		self.select_state = False if v else True
+
 r = Factory.register
 r('TinyText', TinyText)
+r('CheckBox', CheckBox)
 r('ClickableBox', ClickableBox)
 r('ClickableText',ClickableText)
 r('ClickableIconText',ClickableIconText)

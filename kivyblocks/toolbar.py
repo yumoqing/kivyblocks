@@ -10,7 +10,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.properties import StringProperty, DictProperty, \
-			ListProperty, NumericProperty
+			OptionProperty, ListProperty, NumericProperty
 
 from appPublic.dictObject import DictObject
 from appPublic.registerfunction import RegisterFunction
@@ -23,7 +23,7 @@ from .baseWidget import Text, Box
 from .scrollpanel import ScrollPanel
 from .toggleitems import ToggleItems
 
-class ScrollToolbar(ScrollPanel):
+class Toolbar(ScrollPanel):
 	"""
 	tool has the follow attributes
 	{
@@ -38,7 +38,6 @@ class ScrollToolbar(ScrollPanel):
 	}
 	toolbar has follow attributes
 	{
-		"padding_c":x spacing
 		"img_size_c":image height in charecter size
 		"text_size_c":
 		"toolbar_orient":"H" or "V"
@@ -52,54 +51,44 @@ class ScrollToolbar(ScrollPanel):
 	css_on = StringProperty('default')
 	css_off = StringProperty('default')
 	tools = ListProperty([])
-	tool_orient = StringProperty('horizontal')
-	toolbar_orient = StringProperty('H')
-	padding_c = NumericProperty(1)
+	tool_orient = OptionProperty('horizontal', \
+						options=['horizontal', 'vertical'])
+	toolbar_orient = OptionProperty('H', options=['H', 'V'])
 	img_size_c = NumericProperty(2)
 	text_size_c = NumericProperty(1)
-
 	def __init__(self, **kw):
-		SUPER(ScrollToolbar, self, kw)
+		self.w_dic = {}
+		SUPER(Toolbar, self, kw)
 		self.register_event_type('on_press')
+		self.register_event_type('on_delete_tool')
 		if self.toolbar_orient == 'H':
 			self._inner.orientation = 'horizontal'
 		else:
 			self._inner.orientation = 'vertical'
 		self.clear_widgets()
-		self.w_dic = {}
 		for t in self.tools:
 			self.add_tool(t)
 		
 		self.bar_width = 0
 		if self.toolbar_orient == 'H':
 			self.do_scroll_y = False
-			self._inner.spacing = CSize(self.padding_c,0)
 		else:
 			self.do_scroll_x = False
-			self._inner.spacing = CSize(0, self.padding_c)
 
 	def on_children_size(self, o, size):
 		self.on_size(None, None)
 
 	def on_size(self, o, size):
-		print('on_size=', size)
 		if self.toolbar_orient == 'H':
 			self.size_hint_x = 1
 			self.size_hint_y = None
 			if len(self.w_dic.keys()) > 0:
 				self.height = max([w.height for w in self.w_dic.keys()])
-			self._inner.spacing = CSize(self.padding_c,0)
 		else:
 			self.size_hint_x = None
 			self.size_hint_y = 1
 			if len(self.w_dic.keys()) > 0:
 				self.width = max([w.width for w in self.w_dic.keys() ])
-			self._inner.spacing = CSize(0, self.padding_c)
-		print('###size_hint=',
-			self.size_hint_x,
-			self.size_hint_y,
-			self.size_hint, 
-			self.size)
 		
 	def add_tool(self, t):
 		label = t.get('label', t.get('name', None))
@@ -108,6 +97,7 @@ class ScrollToolbar(ScrollPanel):
 		ToggleIconText = Factory.ToggleIconText
 		ToggleText = Factory.ToggleText
 		ToggleImage = Factory.ToggleImage
+		ClickableImage = Factory.ClickableImage
 		if label and source_on:
 			w = ToggleIconText(css_on=self.css_on,
 							css_off=self.css_off,
@@ -142,6 +132,18 @@ class ScrollToolbar(ScrollPanel):
 							}
 			)
 
+		print(w, 'children=', len(w.children))
+		if t.get('deletable', False):
+			x = ClickableImage(source=blockImage('delete.png'),
+							img_kw={
+								"size_hint":(None, None),
+								"size":CSize(1,1)
+							}
+						)
+			x.data = (w, t)
+			x.bind(on_press=self.delete_tool)
+			w.add_widget(x)
+
 		if w:
 			self.add_widget(w)
 			self.w_dic[w] = t
@@ -150,13 +152,20 @@ class ScrollToolbar(ScrollPanel):
 			w.bind(on_press=self.tool_press)
 			w.bind(minimum_width=w.setter('width'))
 			w.bind(minimum_height=w.setter('height'))
+		print(w, 'children=', len(w.children))
 
-	def del_tool(self, name):
-		m = [ x for x,y in self.w_dic.items() if y['name'] == name ]
-		for w in m:
-			self.remove(w)
+	def delete_tool(self, o):
+		w, t = o.data
+		self.del_tool(w)
+		self.dispatch('on_delete_tool', o.data)
+
+	def on_delete_tool(self, o, d=None):
+		pass
+
+	def del_tool(self, w):
+		self.remove_widget(w)
 		self.w_dic = {k:v for k,v in self.w_dic.copy().items() \
-						if k not in m }
+						if k != w }
 		
 	def on_press(self, o):
 		pass
@@ -187,7 +196,8 @@ class ToolPage(Box):
 	}
 	"""
 	toolbar_size = NumericProperty(2)
-	tool_at = StringProperty('top')
+	tool_at = OptionProperty('top', \
+					options=['top', 'bottom', 'left', 'right'])
 	toolbar = DictProperty({})
 	def __init__(self, **kw):
 		print('ToolPage:kw=',kw)
@@ -202,16 +212,20 @@ class ToolPage(Box):
 		self.content_w = None
 		self.toolbar_w = None
 		self.init()
+		self.toolbar_w.bind(on_delete_tool=self.delete_content_widget)
 		name = self.toolbar['tools'][0]['name']
 		self.toolbar_w.select(name)
 	
+	def delete_content_widget(self, o, d):
+		w, dic = d
+		self.del_tool(dic['name'])
+
 	def add_tool(self, tool):
 		self.toolbar_w.add_tool(tool)
 
 	def del_tool(self, name):
-		self.toolbar_w.del_tool(o)
 		g = self.content_widgets.copy()
-		self.content_widgets = {k:v for k,v in g.items()}
+		self.content_widgets = {k:v for k,v in g.items() if k!=name}
 
 	def on_size(self,obj,size):
 		if self.content_w is None:
@@ -226,7 +240,7 @@ class ToolPage(Box):
 	def init(self):
 		self.content_w = BoxLayout()
 		self.content_w.widget_id = 'content'
-		self.toolbar_w = ScrollToolbar(**self.toolbar)
+		self.toolbar_w = Toolbar(**self.toolbar)
 		if self.tool_at in ['top','left']:
 			self.add_widget(self.toolbar_w)
 			self.add_widget(self.content_w)
@@ -264,7 +278,8 @@ class ToolPage(Box):
 	def on_press_handle(self, o, v):
 		name = v.get('name')
 		refresh = v.get('refresh', False)
-		self.print_all()
+		# self.print_all()
+
 		w = self.content_widgets.get(name)
 		self.content_w.clear_widgets()
 		if w and not refresh:
@@ -287,5 +302,3 @@ class ToolPage(Box):
 				if isinstance(r,Widget):
 						self.content_w.add_widget(r)
 
-Factory.register('ScrollToolbar', ScrollToolbar)
-Toolbar = ScrollToolbar

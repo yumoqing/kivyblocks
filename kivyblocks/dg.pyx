@@ -21,7 +21,7 @@ from appPublic.timecost import TimeCost
 from appPublic.uniqueID import getID
 from appPublic.myTE import string_template_render
 
-from .utils import CSize, setSizeOptions, loading, loaded, absurl, alert
+from .utils import CSize, setSizeOptions, loading, loaded, absurl, alert, SUPER
 from .baseWidget import Text, HBox, VBox
 from .scrollpanel import ScrollPanel
 from .paging import Paging, RelatedLoader
@@ -166,7 +166,7 @@ class Row(BoxLayout):
 
 class Header(WidgetReady, ScrollPanel):
 	def __init__(self,part,**kw):
-		super(Header, self).__init__(**kw)
+		SUPER(Header, self, kw)
 		self.part = part
 		self.init(1)
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
@@ -185,8 +185,8 @@ class Header(WidgetReady, ScrollPanel):
 class Body(WidgetReady, ScrollPanel):
 	def __init__(self,part,**kw):
 		self.part = part
-		kw.update({'spacing':self.part.datagrid.linewidth})
-		super(Body, self).__init__(**kw)
+		SUPER(Body, self, kw)
+		self._inner.spacing = self.part.datagrid.linewidth
 		self.size_hint=(1,1)
 		self.idRow = {}
 		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
@@ -262,6 +262,11 @@ class DataGridPart(WidgetReady, BoxLayout):
 		if not self.datagrid.noheader:
 			self.header = Header(self,**kw)
 			self.add_widget(self.header)
+		inner = {
+			"widgettype":"VBox",
+			"options":{
+			}
+		}
 		self.body = Body(self)
 		self.add_widget(self.body)
 		if not self.freeze_flag:
@@ -522,6 +527,8 @@ class DataGrid(WidgetReady, BoxLayout):
 		data['data'] = recs2
 		f = partial(self.add_page_delay,data)
 		Clock.schedule_once(f, 0)
+		print('body=', self.normal_part.body.size,
+				'inner=', self.normal_part.body._inner.size)
 
 	def add_page_delay(self, data, *args):
 		recs = data['data']
