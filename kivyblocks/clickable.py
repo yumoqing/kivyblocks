@@ -10,13 +10,14 @@ from kivy.properties import NumericProperty, DictProperty, \
 
 from kivyblocks.ready import WidgetReady
 from kivyblocks.bgcolorbehavior import BGColorBehavior
-from kivyblocks.utils import CSize, SUPER
+from kivyblocks.utils import CSize, SUPER, blockImage
 from kivyblocks.baseWidget import Box, Text
 from kivyblocks.widget_css import WidgetCSS
 
 class TinyText(Text):
 	def __init__(self, **kw):
 		SUPER(TinyText, self, kw)
+		self.size_hint = (None, None)
 		self.on_texture_size(self, (1,1))
 
 	def on_texture_size(self, o, ts):
@@ -28,6 +29,7 @@ class ClickableBox(TouchRippleButtonBehavior, Box):
 				border_width=1,
 				**kw):
 		SUPER(ClickableBox, self, kw)
+		self.size_hint = [None, None]
 		self.border_width = border_width
 		# self.bind(minimum_height=self.setter('height'))
 		# self.bind(minimum_width=self.setter('width'))
@@ -49,7 +51,6 @@ class ClickableText(ClickableBox):
 	text = StringProperty(' ')
 	fontsize = NumericProperty(1)
 	def __init__(self, **kw):
-		print('ClickableText begin inited')
 		self.txt_w = None
 		SUPER(ClickableText, self, kw)
 		self.txt_w = TinyText(otext=self.text, 
@@ -72,7 +73,6 @@ class ClickableIconText(ClickableText):
 	def __init__(self, **kw):
 		self.img_w = None
 		SUPER(ClickableIconText, self, kw)
-		print('ClickableIconText inited')
 
 	def on_source(self, o, source):
 		if self.img_w:
@@ -111,7 +111,6 @@ class ToggleText(ClickableText):
 
 	def on_select_state(self, o, f):
 		self.csscls = self.css_on if f else self.css_off
-		print(f'using {self.csscls}')
 	
 class ToggleIconText(ToggleText):
 	"""
@@ -149,8 +148,6 @@ class ClickableImage(ClickableBox):
 	def __init__(self, **kw):	
 		self.img_w = None
 		SUPER(ClickableImage, self, kw)
-		# self.img_w = AsyncImage(source=self.source, **self.img_kw)
-		# self.add_widget(self.img_w)
 
 	def on_source(self, o, source):
 		if self.source is None:
@@ -200,25 +197,69 @@ class ToggleImage(ClickableImage):
 		else:
 			self.source = self.source_off
 
-class CheckBox(ToggleImage):
+class SingleCheckBox(ClickableBox):
 	otext = StringProperty(None)
+	select_state = BooleanProperty(False)
 	def __init__(self, **kw):	
-		SUPER(CheckBox, self, kw)
+		self.old_state = None
+		self.register_event_type('on_changed')
+		SUPER(SingleCheckBox, self, kw)
 		self.source_on = blockImage('checkbox-on.png')
-		self.source_off = blockImage('ceckbox-off.png')
+		self.source_off = blockImage('checkbox-off.png')
+		self.select(False)
+		self.create_img_w()
 		if self.otext:
 			self.txt_w = TinyText(otext=self.otext, i18n=True)
+			self.txt_w.bind(size=self.reset_size)
 			self.add_widget(self.txt_w)
+		self.reset_size(self, None)
+
+	def on_changed(self, o=None):
+		pass
+
+	def on_press(self, o=None):
+		self.toggle()
+
+	def select(self, f):
+		self.select_state = f
+	
+	def change_img_source(self):
+		self.img_w.source = self.source_on if self.select_state else \
+							self.source_off
+
+	def toggle(self):
+		self.select_state = False if self.select_state else True
+
+	def state(self):
+		return self.select_state
+
+	def on_select_state(self, o, f):
+		self.change_img_source()
+		self.dispatch('on_changed', self.select_state)
 
 	def getValue(self):
 		return self.state()
 
 	def setValue(self, v):
-		self.select_state = False if v else True
+		self.select(True if v else False)
+
+	def create_img_w(self):
+		if self.select_state:
+			self.img_w = AsyncImage(source=self.source_on, 
+						size_hint=(None, None),
+						size=CSize(1, 1)
+						)
+		else:
+			self.img_w = AsyncImage(source=self.source_off, 
+						size_hint=(None, None),
+						size=CSize(1, 1)
+						)
+		self.add_widget(self.img_w)
+		self.img_w.bind(size=self.reset_size)
 
 r = Factory.register
 r('TinyText', TinyText)
-r('CheckBox', CheckBox)
+r('SingleCheckBox', SingleCheckBox)
 r('ClickableBox', ClickableBox)
 r('ClickableText',ClickableText)
 r('ClickableIconText',ClickableIconText)

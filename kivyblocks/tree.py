@@ -19,7 +19,7 @@ from appPublic.registerfunction import getRegisterFunctionByName
 from .baseWidget import PressableLabel, Text, HBox, VBox
 from .color_definitions import getColors
 from .widget_css import WidgetCSS
-from .utils import alert,absurl
+from .utils import alert,absurl, SUPER
 from .toggleitems import PressableBox
 from .threadcall import HttpClient
 
@@ -38,12 +38,11 @@ class EmptyBox(Label):
 class NodeTrigger(ButtonBehavior, EmptyBox):
 	open_status = BooleanProperty(False)
 	color = ListProperty([1,0,0,1])
-	def __init__(self, color=[1,0,0,1],**kw):
-		# super(NodeTrigger, self).__init__(**kw)
-		EmptyBox.__init__(self, **kw)
-		ButtonBehavior.__init__(self)
+	def __init__(self, **kw):
+		self.open_points = None
+		self.close_points = None
+		SUPER(NodeTrigger, self, kw)
 		self.countPoints()
-		self.color = color
 		self.bind(size=self.onSize,pos=self.onSize)
 
 	def countPoints(self):
@@ -65,7 +64,6 @@ class NodeTrigger(ButtonBehavior, EmptyBox):
 	
 	def on_press(self, *args):
 		self.open_status = False if self.open_status else True
-		# self.showOpenStatus()
 
 	def on_open_status(self, *largs):
 		self.showOpenStatus()
@@ -74,6 +72,8 @@ class NodeTrigger(ButtonBehavior, EmptyBox):
 		self.showOpenStatus()
 
 	def showOpenStatus(self):
+		if self.close_points is None:
+			return
 		points = self.close_points
 		if self.open_status:
 			points = self.open_points

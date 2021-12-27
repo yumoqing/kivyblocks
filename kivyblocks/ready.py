@@ -1,6 +1,8 @@
 
+
 from traceback import print_exc
 from contextlib import contextmanager
+from kivy.graphics import Fbo, Color, Rectangle
 from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.utils import platform

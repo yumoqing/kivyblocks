@@ -1,5 +1,6 @@
 import os
 from traceback import print_exc
+from traceback import print_exc
 from kivy.app import App
 from appPublic.jsonConfig import getConfig
 from kivy.uix.popup import Popup
@@ -42,7 +43,12 @@ def SUPER(klass, obj, kw):
 	dic = { k:kw.pop(k) for k in keys if hasattr(obj, k) }
 	super(klass, obj).__init__(**kw)
 	for k,v in dic.items():
-		setattr(obj, k, v)
+		try:
+			setattr(obj, k, v)
+		except Exception as e:
+			print(f'obj={obj}, setattr(obj, "{k}","{v}") error')
+			print_exc()
+			raise e
 
 def blockImage(name):
 	p = os.path.dirname(os.path.abspath(__file__))

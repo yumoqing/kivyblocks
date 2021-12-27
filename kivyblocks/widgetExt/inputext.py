@@ -77,7 +77,6 @@ class StrInput(TextInput):
 		
 	def checkChange(self,o,v=None):
 		v = self.getValue()
-		print('StrInput():v=', v)
 		if v != self.old_value:
 			self.old_value = v
 			self.dispatch('on_changed',v)
@@ -89,6 +88,8 @@ class StrInput(TextInput):
 		if v is None:
 			v = ''
 		self.text = str(v)
+		self.old_value = self.text
+		
 
 class Password(StrInput):
 	def __init__(self, **kw):
