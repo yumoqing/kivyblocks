@@ -39,6 +39,8 @@ from .scrollpanel import ScrollPanel
 from .udp_widget import UdpWidget
 from .paging import PageLoader
 from .dateinput import DateInput
+from .block_test import BlockTest
+from .hirarchy import Hirarchy
 
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:

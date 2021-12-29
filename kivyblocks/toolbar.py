@@ -132,7 +132,7 @@ class Toolbar(ScrollPanel):
 							}
 			)
 
-		print(w, 'children=', len(w.children))
+		w.widget_id = t['name']
 		if t.get('deletable', False):
 			x = ClickableImage(source=blockImage('delete.png'),
 							size_hint=(None,None),
@@ -144,7 +144,8 @@ class Toolbar(ScrollPanel):
 
 		if w:
 			self.add_widget(w)
-			self.w_dic[w] = t
+			self.w_dic[w] = t.copy()
+			self.w_dic[w]['widget'] = w
 			w.select(False)
 			w.bind(size=self.on_children_size)
 			w.bind(on_press=self.tool_press)

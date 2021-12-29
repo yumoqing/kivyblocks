@@ -356,18 +356,18 @@ class Tree(WidgetCSS, ScrollWidget):
 		pass
 
 	def select_row(self, node):
-		self.unselect_row()
-		self.selected_node = node
-		node.selected()
-		if not self.select_leaf_only or not node.hasChildren_nodes:
-			self.dispatch('on_press', node)
-		if node.hasChildren_nodes:
+		if node.hasChildren_nodes and self.select_leaf_only:
 			node.toggleChildren(node)
 			node.trigger.on_press()
 			if node.children_open and self.single_expand:
 				for n in node.sibling():
 					if n.hasChildren_nodes and n.children_open:
 						n.collapse()
+			return
+		self.unselect_row()
+		self.selected_node = node
+		node.selected()
+		self.dispatch('on_press', node)
 
 	def unselect_row(self):
 		if self.selected_node:
