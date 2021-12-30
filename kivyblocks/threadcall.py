@@ -99,6 +99,7 @@ class HttpClient(Http_Client):
 				stream=False,
 				callback=None,
 				errback=None):
+		method = method.upper()
 		def cb(t,resp):
 			return resp
 

@@ -3,7 +3,7 @@ import traceback
 from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.properties import ListProperty, BooleanProperty, \
-			StringProperty, DictProperty
+			StringProperty, DictProperty, NumericProperty
 from kivy.uix.treeview import TreeView, TreeViewNode, TreeViewLabel
 from kivy.uix.boxlayout import BoxLayout
 
@@ -11,14 +11,17 @@ from .threadcall import HttpClient
 from .scrollpanel import ScrollPanel
 from .clickable import SingleCheckBox
 from .baseWidget import Text
+from .utils import CSize
 
 class TreeViewComplexNode(BoxLayout, TreeViewLabel):
 	otext = StringProperty(None)
 	checkbox = BooleanProperty(False)
 	icon = StringProperty(None)
+	data = DictProperty(None)
 	def __init__(self, **kw):
 		super(TreeViewComplexNode, self).__init__(**kw)
 		self.orientation = 'horizontal'
+		self.size_hint_x = None
 		if self.checkbox:
 			cb = SingleCheckBox(size_hint=(None,None))
 			cb.bind(on_press=self.set_checked)
@@ -28,10 +31,13 @@ class TreeViewComplexNode(BoxLayout, TreeViewLabel):
 			self.add_widget(img)
 		txt = Text(otext=self.otext, i18n=True)
 		txt.texture_update()
+		txt.size_hint = (None, None)
 		txt.size = txt.texture_size
 		self.add_widget(txt)
 		
 	def set_checked(self, o):
+		if not self.data:
+			return
 		if o.state():
 			self.data['checked'] = True
 		else:
@@ -47,12 +53,20 @@ class Hirarchy(ScrollPanel):
 	checkbox = BooleanProperty(False)
 	icon = StringProperty(None)
 	def __init__(self, **kw):
+		self.register_event_type('on_selected')
 		self.tree = TreeView(hide_root=True)
-		self.tree.size_hint_y = None
+		self.tree.size_hint = (None, None)
 		self.tree.bind(on_node_expand=self.check_load_subnodes)
+		self.tree.bind(selected_node=self.node_selected)
 		super(Hirarchy, self).__init__(inner=self.tree, **kw)
 		if self.url:
 			self.data = self.get_remote_data()
+
+	def on_selected(self, node):
+		print('selected node=', node)
+
+	def node_selected(self, o, v):
+		self.dispatch('on_selected', o.selected_node)
 
 	def check_load_subnodes(self, treeview, node):
 		if node.is_loaded:
@@ -68,19 +82,26 @@ class Hirarchy(ScrollPanel):
 			icon=self.icon
 		)
 		n.data = data
-		if self.checkbox:
-			cb = SingleCheckBox()
-			n.add_widget(cb, index=len(n.children))
+		n.width = self.tree.indent_start + \
+						self.tree.indent_level * n.level \
+						+ sum([i.width for i in n.children])
 		if node:
 			self.tree.add_node(n, node)
 		else:
 			self.tree.add_node(n)
+		children = data.get('children')
+		if not children:
+			return
+		for c in children:
+			self.create_new_node(c, n)
+		n.is_loaded = True
 		
 	def get_remote_data(self, node=None):
 		hc = HttpClient()
 		params = self.params.copy() if self.params else {}
 		if node:
 			params['id'] = node.data[self.idField]
+		print('params=', params)
 		d = hc(self.url, method=self.method, params=params)
 		if isinstance(d, list):
 			return d
