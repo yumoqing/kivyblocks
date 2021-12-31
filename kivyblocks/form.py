@@ -6,8 +6,6 @@ from kivy.core.window import Window
 from kivy.graphics import Color
 from kivycalendar import DatePicker
 from .responsivelayout import VResponsiveLayout
-from .widgetExt.inputext import FloatInput,IntegerInput, \
-		StrInput,SelectInput, BoolInput, AmountInput, Password
 from .baseWidget import *
 from .utils import *
 from .i18n import I18n
@@ -17,6 +15,7 @@ from .dataloader import DataGraber
 from .ready import WidgetReady
 from .widget_css import WidgetCSS
 from .dateinput import DateInput
+from .uitype import get_input_builder
 
 """
 form options
@@ -51,75 +50,11 @@ form options
 }
 """
 
-uitypes = {
-	"str":{
-		"orientation":"horizontal",
-		"wclass":StrInput,
-	},
-	"string":{
-		"orientation":"horizontal",
-		"wclass":StrInput,
-	},
-	"password":{
-		"orientation":"horizontal",
-		"wclass":Password,
-	},
-	"int":{
-		"orientation":"horizontal",
-		"wclass":IntegerInput,
-	},
-	"number":{
-		"orientation":"horizontal",
-		"wclass":IntegerInput,
-	},
-	"float":{
-		"orientation":"horizontal",
-		"wclass":FloatInput,
-	},
-	"amount":{
-		"orientation":"horizontal",
-		"wclass":AmountInput,
-	},
-	"date":{
-		"orientation":"horizontal",
-		"wclass":DateInput,
-	},
-	"time":{
-		"orientation":"horizontal",
-		"wclass":StrInput,
-	},
-	"bool":{
-		"orientation":"horizontal",
-		"wclass":BoolInput,
-	},
-	"code":{
-		"orientation":"horizontal",
-		"wclass":SelectInput,
-	},
-	"text":{
-		"orientation":"horizontal",
-		"wclass":StrInput,
-		"options":{
-			"multiline":True,
-			"height":4,
-		}
-	},
-	"teleno":{
-		"orientation":"horizontal",
-		"wclass":StrInput,
-	},
-	"email":{
-		"orientation":"horizontal",
-		"wclass":StrInput,
-	},
-}
 class InputBox(BoxLayout):
 	def __init__(self, form, **options):
 		self.form = form
 		self.options = options
-		self.uitype = options.get('uitype',options.get('datatype','string'))
-		self.uidef = uitypes[self.uitype]
-		orientation = self.uidef['orientation']
+		self.uitype = options.get('uitype',options.get('datatype','str'))
 		width = self.form.inputwidth
 		height = self.form.inputheight
 		if self.uitype == 'text':
@@ -129,7 +64,7 @@ class InputBox(BoxLayout):
 
 		self.labelwidth = self.form.labelwidth
 		kwargs = {
-			"orientation":orientation,
+			"orientation":'horizontal',
 		}
 		if height<=1:
 			kwargs['size_hint_y'] = height
@@ -159,17 +94,12 @@ class InputBox(BoxLayout):
 			"size_hint_y":None,
 			"height":CSize(2)
 		}
-		if self.labelwidth<=1:
-			opts['size_hint_x'] = self.labelwidth
-		else:
-			opts['size_hint_x'] = None
-			opts['width'] = self.labelwidth
 		bl = BoxLayout(**opts)
 		self.add_widget(bl)
 		label = self.options.get('label',self.options.get('name'))
 		kwargs = {
 			"i18n":True,
-			"text":label,
+			"otext":label,
 			"font_size":CSize(1),
 		}
 		self.labeltext = Text(**kwargs)
@@ -180,17 +110,11 @@ class InputBox(BoxLayout):
 						size_hint_x=None,
 						width=CSize(1))
 			bl.add_widget(star)
-		options = self.uidef.get('options',{}).copy()
-		options.update(self.options.get('uiparams',{}))
-		options['allow_copy'] = True
-		options['width'] = options.get('width',1)
-		options['height'] = options.get('height',1)
-		options['csscls'] = self.form.input_css
-		if self.options.get('hint_text'):
-			options['hint_text'] = i18n(self.options.get('hint_text'))
-
-		Logger.info('Form: uitype=%s', self.uitype)
-		self.input_widget = self.uidef['wclass'](**options)
+		
+		options = self.options.copy()
+		options['hint_text'] = i18n(self.options.get('hint_text'))
+		f = get_input_builder(self.uitype)
+		self.input_widget = f(options)
 		if self.options.get('readonly'):
 			self.input_widget.disabled = True
 		if self.options.get('value'):
@@ -200,6 +124,12 @@ class InputBox(BoxLayout):
 
 		self.input_widget.widget_id = self.options['name']
 		self.add_widget(self.input_widget)
+		if self.labelwidth<=1:
+			self.labeltext.size_hint_x = self.labelwidth
+			self.input_widget.size_hint_x = 1 - self.labelwidth
+		else:
+			self.labeltext.size_hint_x = None
+			self.labeltext.width = CSize(self.labelwidth)
 		self.initflag = True
 		self.input_widget.bind(on_focus=self.on_focus)
 
