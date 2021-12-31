@@ -6,6 +6,7 @@ from kivy.properties import ListProperty, BooleanProperty, \
 			StringProperty, DictProperty, NumericProperty
 from kivy.uix.treeview import TreeView, TreeViewNode, TreeViewLabel
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.image import AsyncImage
 
 from .threadcall import HttpClient
 from .scrollpanel import ScrollPanel
@@ -27,7 +28,8 @@ class TreeViewComplexNode(BoxLayout, TreeViewLabel):
 			cb.bind(on_press=self.set_checked)
 			self.add_widget(cb)
 		if self.icon:
-			img = AsyncImage(source=self.icon)
+			img = AsyncImage(source=self.icon, size_hint=(None,None))
+			img.size = CSize(1,1)
 			self.add_widget(img)
 		txt = Text(otext=self.otext, i18n=True)
 		txt.texture_update()
@@ -52,6 +54,7 @@ class Hirarchy(ScrollPanel):
 	data = ListProperty(None)
 	checkbox = BooleanProperty(False)
 	icon = StringProperty(None)
+	single_expand = BooleanProperty(False)
 	def __init__(self, **kw):
 		self.register_event_type('on_selected')
 		self.tree = TreeView(hide_root=True)
@@ -68,8 +71,18 @@ class Hirarchy(ScrollPanel):
 	def node_selected(self, o, v):
 		self.dispatch('on_selected', o.selected_node)
 
+	def collapse_others(self, node):
+		for n in self.tree.iterate_open_nodes(node=node.parent_node):
+			if n != node and n !=node.parent_node and n.is_open:
+				self.tree.toggle_node(n)
+
 	def check_load_subnodes(self, treeview, node):
+		if self.single_expand:
+			self.collapse_others(node)
 		if node.is_loaded:
+			return
+		if not self.url:
+			node.is_loaded = True
 			return
 		data = self.get_remote_data(node)
 		for d in data:
@@ -79,7 +92,7 @@ class Hirarchy(ScrollPanel):
 	def create_new_node(self, data, node=None):
 		n = TreeViewComplexNode(otext=data[self.textField],
 			checkbox=self.checkbox,
-			icon=self.icon
+			icon=data.get('icon') or self.icon
 		)
 		n.data = data
 		n.width = self.tree.indent_start + \
@@ -97,6 +110,8 @@ class Hirarchy(ScrollPanel):
 		n.is_loaded = True
 		
 	def get_remote_data(self, node=None):
+		if not self.url:
+			return
 		hc = HttpClient()
 		params = self.params.copy() if self.params else {}
 		if node:
@@ -115,4 +130,58 @@ class Hirarchy(ScrollPanel):
 		for d in self.data:
 			self.create_new_node(d)
 			
+class Menu(Hirarchy):
+	target = StringProperty(None)
+	def __init__(self, **kw):
+		self.target_w = None
+		super(Menu, self).__init__(**kw)
+
+	def on_selected(self, node):
+		data = {}
+		dw = node.data.get('datawidget')
+		if dw:
+			data_widget = Factory.Blocks.getWidgetById(dw)
+			if data_widget:
+				vn = node.data.get('datamethod', 'getValue')
+				if hasattr(data_widget, vn):
+					f = getattr(data_widget, vn)
+					data = f()
+					if not isinstance(data, dict):
+						data = {}
+
+		url = node.data.get('url')
+		target = Factory.Blocks.getWidgetById(node.data.get('target',self.target),self)
+		if url:
+			params = node.data.get('params',{})
+			params.update(data)
+			blocks = Factory.Blocks()
+			desc = {
+				"widgettype":"urlwidget",
+				"options":{
+					"url":url,
+					"params":params
+				}
+			}
+			w = blocks.widgetBuild(desc)
+			if w and target:
+				target.add_widget(w)
+			return 
+
+		rfname = node.data.get('rfname')
+		if rfname:
+			f = getRegisterFunctionByName(rfname)
+			if f:
+				f(self, **data)
+			return
+		
+		script = node.data.get('script')
+		if script:
+			target_name = node.data.get('target', self.target)
+			target =  Factory.Blocks.getWidgetById(target_name, self)
+			data.update({'self':target})
+			if target:
+				eval(script,data)
+			return
+		
 Factory.register('Hirarchy', Hirarchy)
+Factory.register('Menu', Menu)

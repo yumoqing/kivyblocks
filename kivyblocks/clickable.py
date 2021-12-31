@@ -21,7 +21,7 @@ class TinyText(Text):
 		self.on_texture_size(self, (1,1))
 
 	def on_texture_size(self, o, ts):
-		self._label.refresh()
+		self.texture_update()
 		self.size = self.texture_size
 
 class ClickableBox(TouchRippleButtonBehavior, Box):
@@ -48,24 +48,39 @@ class ClickableBox(TouchRippleButtonBehavior, Box):
 		pass
 
 class ClickableText(ClickableBox):
-	text = StringProperty(' ')
+	text = StringProperty(None)
 	fontsize = NumericProperty(1)
 	def __init__(self, **kw):
 		self.txt_w = None
 		SUPER(ClickableText, self, kw)
+		self.create_text_widget()
+
+	def create_text_widget(self):
+		if self.text is None:
+			return
 		self.txt_w = TinyText(otext=self.text, 
 						i18n=True,
 						font_size=CSize(self.fontsize))
+		self.txt_w.font_size = CSize(self.fontsize)
 		self.txt_w.bind(texture_size=self.reset_size)
 		self.add_widget(self.txt_w)
 		self.txt_w.size_hint = (None, None)
 		self.txt_w.size = self.txt_w.texture_size
 
+	def on_fontsize(self, o, fs):
+		if self.txt_w:
+			self.txt_w.font_size = CSize(self.fontsize)
+			self.txt_w.texture_update()
+
 	def on_text(self, o, txt):
+		if self.text is None:
+			return
+		if not self.txt_w:
+			self.create_text_widget()
+			return
 		if self.txt_w:
 			self.txt_w.text = self.text
-			
-			
+			self.txt_w.texture_update()
 
 class ClickableIconText(ClickableText):
 	source = StringProperty(None)
@@ -139,6 +154,8 @@ class ToggleIconText(ToggleText):
 		self.source = self.source_on if f else self.source_off
 
 	def on_source(self, o, source):
+		if source is None:
+			return
 		if self.img_w:
 			self.img_w.source = self.source
 

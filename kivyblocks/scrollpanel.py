@@ -6,9 +6,10 @@ from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.factory import Factory
 
-from kivyblocks.utils import *
+from .utils import *
+from .widget_css import WidgetCSS
 
-class ScrollPanel(ScrollView):
+class ScrollPanel(WidgetCSS, ScrollView):
 	orientation = OptionProperty('vertical', \
 						options=['vertical', 'horizontal'])
 	bgcolor = ListProperty([0.2, 0.2, 0.2, 1])

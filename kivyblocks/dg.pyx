@@ -29,50 +29,7 @@ from .ready import WidgetReady
 from .toolbar import Toolbar
 from .bgcolorbehavior import BGColorBehavior
 from .widget_css import WidgetCSS
-
-def field_widget(desc, rec):
-	viewer = desc.get('viewer')
-	if viewer:
-		if not isinstance(viewer,str):
-			viewer = json.dumps(viewer)
-		rendered = string_template_render(viewer, rec)
-		dic = json.loads(rendered)
-		if dic is None:
-			return None
-		blocks = Factory.Blocks()
-		return blocks.widgetBuild(dic)
-
-	uitype = desc.get('uitype', 'str')
-	if uitype is None:
-		uitype = desc.get('datatype')
-	if uitype in [ 'str' 'date', 'time', 'timestamp' ]:
-		return Text(text = str(desc['value']), 
-					font_size=CSize(1),wrap=True,
-					halign='left', valign='middle'
-			)
-	if uitype in [ 'long', 'int','integer' ]:
-		return Text(text=str(desc['value']),
-					font_size=CSize(1), wrap=True,
-					halign='right', valign='middle'
-			)
-	if uitype == 'float':
-		f = '%%.0%df' % desc.get('dec',2)
-		return Text(text=f % float(desc['value']),
-					font_size=CSize(1), wrap=True,
-					halign='right', valign='middle'
-			)
-	if uitype == 'code':
-		tf = desc.get('textField','text')
-		vf = desc.get('valueField','value')
-		v = rec.get(tf,rec.get(vf, ' '))
-		return Text(text=v, font_size = CSize(1), wrap=True,
-					halign='right', valign='middle'
-		)
-	return Text(text = str(desc['value']), 
-				font_size=CSize(1),wrap=True,
-				halign='left', valign='middle'
-		)
-
+from .uitype import build_view_widget
 
 class BLabel(ButtonBehavior, Text):
 	def __init__(self, **kw):
@@ -107,7 +64,7 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 				halign='left', valign='middle'
 			)
 		else:
-			bl = field_widget(desc,self.row.row_data) 
+			bl = build_view_widget(desc,self.row.row_data) 
 		if bl:
 			self.add_widget(bl)
 
