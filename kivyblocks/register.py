@@ -41,6 +41,7 @@ from .paging import PageLoader
 from .dateinput import DateInput
 from .block_test import BlockTest
 from .hirarchy import Hirarchy
+from .price import Price
 
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:
