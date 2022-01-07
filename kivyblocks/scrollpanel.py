@@ -30,6 +30,9 @@ class ScrollPanel(WidgetCSS, ScrollView):
 		self._inner.bind(
 				minimum_width=self._inner.setter('width'))
 
+	def get_subwidgets(self):
+		return self._inner.children
+
 	def create_default_inner(self):
 		kw = {
 			'size_hint':(None,None),

@@ -1,4 +1,6 @@
 from kivy.factory import Factory
+from kivy.properties import NumericProperty, StringProperty, \
+		DictProperty, ListProperty, OptionProperty, BooleanProperty
 from kivy.logger import Logger
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
@@ -23,7 +25,7 @@ form options
 	"toolbar":
 	"dataloader":{
 		"dataurl":"first"
-		"datatarget":"second",
+		"datatargment":"second",
 		"datarfname":"third"
 		"params":
 		"method"
@@ -52,9 +54,11 @@ form options
 
 class InputBox(BoxLayout):
 	def __init__(self, form, **options):
+		self.input_widget = None
 		self.form = form
 		self.options = options
 		self.uitype = options.get('uitype',options.get('datatype','str'))
+		self.size_hint = (None, None)
 		width = self.form.inputwidth
 		height = self.form.inputheight
 		if self.uitype == 'text':
@@ -82,6 +86,18 @@ class InputBox(BoxLayout):
 					pos=self.setSize)
 		self.register_event_type("on_datainput")
 
+	def on_size(self, *args):
+		if self.input_widget is None:
+			return
+		self.labeltext.size_hint_x = None
+		if self.form.labelwidth < 1:
+			self.labeltext.width = self.width * self.form.labelwidth - \
+									CSize(1)
+		else:
+			self.labeltext.width = CSize(self.form.labelwidth)
+
+		self.input_widget.size_hint_x = None
+		self.input_widget.width = self.width - self.labeltext.width - CSize(1)
 	def on_datainput(self,o,v=None):
 		print('on_datainput fired ...',o,v)
 
@@ -92,8 +108,14 @@ class InputBox(BoxLayout):
 		opts = {
 			"orientation":"horizontal",
 			"size_hint_y":None,
-			"height":CSize(2)
+			"height":CSize(self.form.inputheight)
 		}
+		if self.form.inputwidth > 1:
+			opts['size_hint_x'] = None
+			opts['width'] = CSize(self.form.inputwidth)
+		else:
+			opts['size_hint_x'] = self.form.inputwidth
+
 		bl = BoxLayout(**opts)
 		self.add_widget(bl)
 		label = self.options.get('label',self.options.get('name'))
@@ -102,6 +124,12 @@ class InputBox(BoxLayout):
 			"otext":label,
 			"font_size":CSize(1),
 		}
+		if self.form.labelwidth < 1:
+			kwargs['size_hint_x'] = self.form.labelwidth
+		else:
+			kwargs['size_hint_x'] = None
+			kwargs['width'] = CSize(self.form.labelwidth)
+
 		self.labeltext = Text(**kwargs)
 		bl.add_widget(self.labeltext)
 		if self.options.get('required',False):
@@ -115,6 +143,11 @@ class InputBox(BoxLayout):
 		options['hint_text'] = i18n(self.options.get('hint_text'))
 		f = get_input_builder(self.uitype)
 		self.input_widget = f(options)
+		if self.form.labelwidth < 1:
+			self.input_widget.size_hint_x = 1 - self.form.labelwidth
+		else:
+			self.input_widget.size_hint_x = None
+			self.input_widget.width = self.width - self.labeltext.width - CSize(1)
 		if self.options.get('readonly'):
 			self.input_widget.disabled = True
 		if self.options.get('value'):
@@ -171,17 +204,21 @@ class InputBox(BoxLayout):
 
 def defaultToolbar():
 	return {
-		"img_size_c":1.5,
-		"text_size_c":0.7,
+		"img_size_c":1,
+		"text_size_c":1,
+		"toolbar_orient":"H",
+		"tool_orient":"horizontal",
 		"tools":[
 			{
 				"name":"__submit",
-				"img_src":"/imgs/submit.png",
+				"source_on":blockImage("save.png"),
+				"source_off":blockImage("save.png"),
 				"label":"submit"
 			},
 			{
 				"name":"__clear",
-				"img_src":"/imgs/clear.png",
+				"source_on":blockImage("clear.png"),
+				"source_off":blockImage("clear.png"),
 				"label":"clear"
 			}
 		]
@@ -189,44 +226,30 @@ def defaultToolbar():
 	}
 
 class Form(WidgetCSS, WidgetReady, BoxLayout):
+	cols = NumericProperty(1)
+	csscls=StringProperty('formcss')
+	input_css=StringProperty('formfieldcss')
+	inputwidth=NumericProperty(1)
+	inputheight=NumericProperty(3)
+	labelwidth=NumericProperty(0.3)
+	toolbar_at=OptionProperty('top', \
+						options=['top','bottom','left','right'])
+	dataloader=DictProperty(None)
+	fields = ListProperty([])
+	toolbar=DictProperty(None)
+	submit=DictProperty(None)
+	clear=DictProperty(None)
+	notoolbar=BooleanProperty(False)
 	def __init__(self,
-					cols=1,
-					csscls='default',
-					input_css='input',
-					inputwidth=0,
-					inputheight=3,
-					labelwidth=0.3,
-					notoolbar=False,
-					toolbar_at='top', #'top', 'bottom', 'left', 'right'
-					dataloader={},
-					fields=[],
-					submit={},
-					clear={},
-					toolbar={},
 					**options):
-		self.inputwidth = 1
-		self.input_css = input_css
-		self.inputheight = inputheight
-		self.labelwidth= labelwidth
-		self.fields = fields
-		self.notoolbar = notoolbar
-		self.submit = submit
-		self.clear = clear
-		self.toolbar = toolbar
-		self.toolbar_at=toolbar_at
-		self.dataloader = dataloader
-		self.readiedInput = 0
 		if self.toolbar_at in ['top','bottom']:
 			options['orientation'] = 'vertical'
 		else:
 			options['orientation'] = 'horizontal'
-		print('options=', options)
-		super(Form, self).__init__(**options)
-		#BoxLayout.__init__(self, **options)
-		#WidgetReady.__init__(self)
-		#WidgetCSS.__init__(self)
-		self.csscls = csscls
-		self.cols = self.options_cols = cols
+		SUPER(Form, self, options)
+		if self.inputwidth <= 1:
+			self.cols = 1
+		self.options_cols = self.cols
 		if isHandHold() and Window.width < Window.height:
 			self.cols = 1
 		self.options = options
@@ -239,53 +262,47 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 
 		if not self.notoolbar:
 			if self.toolbar_at in ['top', 'bottom']:
-				self.fsc.height = self.height - self.toolbar.height
+				self.fsc.height = self.height - self.toolbar_w.height
 			else:
-				self.fsc.width = self.width - self.toolbar.width
+				self.fsc.width = self.width - self.toolbar_w.width
 		else:
 			if self.toolbar_at in ['top', 'bottom']:
 				self.fsc.height = self.height
 			else:
 				self.fsc.width = self.width
 		self.fsc.org_box_width = self.width / self.options_cols
-		if self.notoolbar:
-			return
 
 	def init(self):
 		if not self.notoolbar:
 			desc = defaultToolbar()
 			desc1 = self.toolbar
+			tools = desc['tools'].copy()
 			if desc1:
-				tools = desc['tools'] + desc1['tools']
-				desc1['tools'] = tools
-				desc = desc1
+				desc.update(desc1)
+				tools = tools + desc1['tools']
 			if self.submit:
 				kw = self.submit.copy()
 				if kw.get('name'):
 					del kw['name']
-				for t in desc['tools']:
+				for t in tools:
 					if t['name'] == '__submit':
 						t.update(kw)
 			if self.clear:
 				kw = self.clear.copy()
 				if kw.get('name'):
 					del kw['name']
-				for t in desc['tools']:
+				for t in tools:
 					if t['name'] == '__clear':
 						t.update(kw)
 				
+			desc['tools'] = tools
 			if self.toolbar_at in ['top', 'bottom']:
-				desc['orientation'] = 'horizontal'
-				desc['size_hint_y'] = None
-				desc['height'] = CSize(desc['img_size_c'] + \
-									desc['text_size_c'])
+				desc['toolbar_orient'] = 'H'
 			else:
-				desc['orientation'] = 'vertical'
-				desc['size_hint_x'] = None
-				desc['width'] = CSize(desc['img_size_c'] + \
-									desc['text_size_c'])
-
-			self.toolbar = Toolbar(**desc)
+				desc['toolbar_orient'] = 'V'
+				desc['tool_orient'] = 'veritcal'
+			
+		self.toolbar_w = Factory.Toolbar(**desc)
 		self.fsc = VResponsiveLayout(
 						self.inputwidth,
 						self.cols,
@@ -293,10 +310,10 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 		)
 
 		if self.toolbar_at in ['top', 'left'] and not self.notoolbar:
-			self.add_widget(self.toolbar)
+			self.add_widget(self.toolbar_w)
 		self.add_widget(self.fsc)
 		if self.toolbar_at in ['bottom', 'right'] and not self.notoolbar:
-			self.add_widget(self.toolbar)
+			self.add_widget(self.toolbar_w)
 		
 		self.fieldWidgets=[]
 		for f in self.fields:
@@ -348,7 +365,7 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 		Logger.info('kivyblcks: input check success')
 		return True
 
-	def on_submit(self,v=None):
+	def on_submit(self,o, v=None):
 		print('Form():on_submit fired ...',v)
 		return False
 

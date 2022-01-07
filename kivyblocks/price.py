@@ -1,11 +1,11 @@
 
 from kivy.uix.label import Label
-from kivy.properties import NumericProperty
+from kivy.properties import NumericProperty, ColorProperty
 from kivy.factory import Factory
 
 from kivyblocks.uitype import view_register, get_value
 
-class Price(Label):
+class PriceView(Label):
 	dec = NumericProperty(4)
 	old_price = NumericProperty(None)
 	price = NumericProperty(None)
@@ -13,7 +13,7 @@ class Price(Label):
 	inc_color = ColorProperty([0.9,0,0,1]) 	# red
 	dec_color = ColorProperty([0,0.9,0,1])	# green
 	def __init__(self, **kw):
-		super(Price, self).__init__(text='', **kw)
+		super(PriceView, self).__init__(text='', **kw)
 
 	def on_price(self, price):
 		if self.price is None:
@@ -34,11 +34,17 @@ class Price(Label):
 			self.color = nor_color
 		self.old_price = self.price
 
-Factory.register('Price', Price)
+	def getValue(self):
+		return self.price
+
+	def setValue(self, v):
+		self.price = v
+
+Factory.register('PriceView', PriceView)
 
 def build_view_price_widget(desc, rec=None):
 	v = get_value(desc, rec=rec)
-	return Factory.Price(price=v,
+	return Factory.PriceView(price=v,
 					font_size=CSize(1),
 					halign='right',
 					valign='middle'

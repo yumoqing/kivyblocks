@@ -2,13 +2,14 @@ import os
 from traceback import print_exc
 from traceback import print_exc
 from kivy.app import App
+from kivy.logger import Logger
 from appPublic.jsonConfig import getConfig
 from kivy.uix.popup import Popup
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.modalview import ModalView
-from kivy.uix.image import Image
+from kivy.uix.image import AsyncImage
 from appPublic.dictObject import DictObject
 
 from .kivysize import KivySizes
@@ -62,7 +63,8 @@ def loaded(widget):
 
 def loading(parent):
 	fp = os.path.join(os.path.dirname(__file__),'imgs','loading1.gif')
-	image = Image(source=fp,width=CSize(2),height=CSize(2),
+	image = AsyncImage(source=blockImage('loading1.gif'), \
+					width=CSize(2), height=CSize(2),
 					size_hint=(None,None))
 	view = ModalView(auto_dismiss=False)
 	view.add_widget(image)
@@ -213,3 +215,7 @@ def absurl(url,parent):
 		paths.append(i)
 	return config.uihome + '/'.join(paths)
 
+def show_widget_info(w, tag='DEBUG'):
+	id = getattr(w, 'widget_id', 'null')
+	msg=f"""{tag}:size_hint={w.size_hint},size={w.size},pos={w.pos},widget_id={id}"""
+	Logger.info(msg)

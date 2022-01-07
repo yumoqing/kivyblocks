@@ -411,9 +411,13 @@ class DataGrid(WidgetReady, BoxLayout):
 		if self.freeze_part and o == self.freeze_part.body:
 			self.normal_part.body.scroll_y = o.scroll_y
 
-		if o.scroll_y <= 0.001:
+		if o.scroll_y <= 0.01:
+			print('loading next page...', self.dataloader.curpage)
+			self.loading = True
 			self.dataloader.loadNextPage()
-		if o.scroll_y >= 0.999:
+		if o.scroll_y >= 0.99:
+			print('loading previous page...', self.dataloader.curpage)
+			self.loading = True
 			self.dataloader.loadPreviousPage()
 
 	def getValue(self):
@@ -484,8 +488,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		data['data'] = recs2
 		f = partial(self.add_page_delay,data)
 		Clock.schedule_once(f, 0)
-		print('body=', self.normal_part.body.size,
-				'inner=', self.normal_part.body._inner.size)
 
 	def add_page_delay(self, data, *args):
 		recs = data['data']
@@ -505,6 +507,7 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.dataloader.bufferObjects(page,ids)
 		x = self.dataloader.getLocater()
 		self.locater(x)
+		self.loading = False
 
 	def delete_page(self,o,data):
 		print('dg.py:delete_page() called')

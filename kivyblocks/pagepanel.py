@@ -140,7 +140,6 @@ sub-widget's description file format
 					bar_at='top', 
 					enable_on_close=False, 
 					left_menu=None, **kw):
-		print('PagePanel().__init__():', bar_size, bar_at, left_menu)
 		self.bar_size = bar_size
 		self.bar_at = bar_at
 		self.singlepage = singlepage
@@ -243,6 +242,14 @@ sub-widget's description file format
 		self.left_menu_showed = False
 		self.right_menu_showed = False
 
+	def get_subwidgets(self):
+		children = [self.bar]
+		if self.fixed_before:
+			children.append(self.fixed_before)
+		if self.fixed_after:
+			children.append(self.fixed_after)
+		return children + self.sub_widgets
+
 	def on_close_handle(self, o, *args):
 		print('app.on_close fired, ...')
 		if not self.enable_on_close:
@@ -281,11 +288,12 @@ sub-widget's description file format
 
 	def on_swipe_next_page(self, o, *args):
 		if len(self.swipe_buffer) < 1:
-			return
+			return True
 		self.swipe_right = True
 		w = self.swipe_buffer[0]
 		del self.swipe_buffer[0]
 		self.add_widget(w)
+		return True
 
 	def clear_widgets(self):
 		self.bar_back.clear_widgets()
@@ -293,16 +301,18 @@ sub-widget's description file format
 		self.bar_right_menu.clear_widgets()
 
 	def add_widget(self, w, *args):
+		print('here ....')
 		if not self.swipe_right:
 			self.swipe_buffer = []
 		self.swipe_right = False
 		self.clear_widgets()
-		if len(self.sub_widgets) > 0:
-			pass
 		if self.singlepage:
 			self.sub_widgets = []
 		self.sub_widgets.append(w)
 		self.show_currentpage()
+		show_widget_info(self)
+		for w in self.get_subwidgets():
+			show_widget_info(w)
 
 	def show_left_menu(self, o):
 		def x(*args):
@@ -345,6 +355,7 @@ sub-widget's description file format
 			return True
 		mc = MenuContainer()
 		mc.add_widget(w.menu_widget)
+		self.w.menu_widget.bind(on_press=mc.dismiss)
 		mc.size_hint = (None,None)
 		mc.height = self.content.height
 		mc.width = self.width * 0.4

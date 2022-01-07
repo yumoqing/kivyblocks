@@ -491,7 +491,8 @@ class Blocks(EventDispatcher):
 		d = self.getActionData(widget,desc, *args)
 		ns = {
 			"self":target,
-			"args":args
+			"args":args,
+			"kwargs":d
 		}
 		if d:
 			ns.update(d)
@@ -692,7 +693,10 @@ class Blocks(EventDispatcher):
 							from_widget=from_widget.parent)
 				return None
 			else:
-				for c in from_widget.children:
+				children = [i for i in from_widget.children]
+				if hasattr(from_widget, 'get_subwidgets'):
+					children = from_widget.get_subwidgets()
+				for c in children:
 					ret = find_widget_by_id(id,from_widget=c)
 					if ret:
 						return ret

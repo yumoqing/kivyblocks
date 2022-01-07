@@ -215,6 +215,11 @@ class ToolPage(Box):
 		name = self.toolbar['tools'][0]['name']
 		self.toolbar_w.select(name)
 	
+	def get_subwidgets(self):
+		children = [ i for i in self.children]
+		x = [ i for i in self.content_widgets.values() ]
+		return children + x
+
 	def delete_content_widget(self, o, d):
 		w, dic = d
 		self.del_tool(dic['name'])

@@ -56,7 +56,7 @@ class Hirarchy(ScrollPanel):
 	icon = StringProperty(None)
 	single_expand = BooleanProperty(False)
 	def __init__(self, **kw):
-		self.register_event_type('on_selected')
+		self.register_event_type('on_press')
 		self.tree = TreeView(hide_root=True)
 		self.tree.size_hint = (None, None)
 		self.tree.bind(on_node_expand=self.check_load_subnodes)
@@ -65,11 +65,11 @@ class Hirarchy(ScrollPanel):
 		if self.url:
 			self.data = self.get_remote_data()
 
-	def on_selected(self, node):
+	def on_press(self, node):
 		print('selected node=', node)
 
 	def node_selected(self, o, v):
-		self.dispatch('on_selected', o.selected_node)
+		self.dispatch('on_press', o.selected_node)
 
 	def collapse_others(self, node):
 		for n in self.tree.iterate_open_nodes(node=node.parent_node):
@@ -136,7 +136,7 @@ class Menu(Hirarchy):
 		self.target_w = None
 		super(Menu, self).__init__(**kw)
 
-	def on_selected(self, node):
+	def on_press(self, node):
 		data = {}
 		dw = node.data.get('datawidget')
 		if dw:
