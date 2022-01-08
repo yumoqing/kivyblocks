@@ -69,7 +69,7 @@ class Hirarchy(ScrollPanel):
 		print('selected node=', node)
 
 	def node_selected(self, o, v):
-		if selected_node:
+		if self.tree.selected_node:
 			self.dispatch('on_press', o.selected_node)
 
 	def collapse_others(self, node):
@@ -138,7 +138,7 @@ class Menu(Hirarchy):
 		super(Menu, self).__init__(**kw)
 
 	def on_press(self, node):
-		self.selected_node = None
+		self.tree.deselect_node()
 		data = {}
 		dw = node.data.get('datawidget')
 		if dw:
