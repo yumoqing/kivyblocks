@@ -5,9 +5,37 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivyblocks.utils import CSize
-from kivy.app import App
 
 from .colorcalc import *
+
+csses = {
+	"default":{
+		"bgcolor":[0.35,0.35,0.35,1],
+		"fgcolor":[0.85,0.85,0.85,1]
+	}
+}
+
+csskeys=[
+	"height_nm",
+	"width_nm",
+	"height_c",
+	"width_c",
+	"fgcolor_s",
+	"bgcolor_s",
+	"bgcolor",
+	"fgcolor",
+	"csscls",
+	"radius",
+	"height",
+	"width",
+]
+
+def register_css(cssname, cssdic):
+	dic = {k:v for k,v in cssdic.items() if k in csskeys }
+	csses.update({cssname:dic})
+
+def get_css(cssname,default='default'):
+	return csses.get(cssname, csses.get(default))
 
 class WidgetCSS(object):
 	height_nm = NumericProperty(None)
@@ -61,10 +89,8 @@ class WidgetCSS(object):
 
 	def set_css(self, css_str):
 		css = {}
-		app = App.get_running_app()
 		for css_name in css_str.split(' '):
-			css.update(app.get_css(css_name))
-		# Logger.info('WidgetCSS:set_css():%s',css.keys())
+			css.update(get_css(css_name))
 		for k,v in css.items():
 			setattr(self,k,v)
 

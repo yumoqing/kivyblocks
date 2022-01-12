@@ -10,7 +10,8 @@ from kivy.uix.label import Label
 from kivy.graphics import Fbo
 from kivy.uix.button import ButtonBehavior
 from kivy.clock import Clock
-from kivy.properties import BooleanProperty, StringProperty
+from kivy.properties import BooleanProperty, StringProperty, \
+		OptionProperty, DictProperty, NumericProperty, ListProperty
 from kivy.properties import ListProperty
 from kivy.graphics import Color, Rectangle
 from kivy.app import App
@@ -21,7 +22,7 @@ from appPublic.timecost import TimeCost
 from appPublic.uniqueID import getID
 from appPublic.myTE import string_template_render
 
-from .utils import CSize, setSizeOptions, loading, loaded, absurl, alert, SUPER
+from .utils import *
 from .baseWidget import Text, HBox, VBox
 from .scrollpanel import ScrollPanel
 from .paging import Paging, RelatedLoader
@@ -38,6 +39,9 @@ class BLabel(ButtonBehavior, Text):
 		self.csscls = 'dummy'
 		
 class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
+	colume_name = StringProperty(None)
+	cell_type = OptionProperty('data', \
+			options=['data', 'header'])
 	def __init__(self,row,desc, **kw):
 		"""
 		desc:{
@@ -50,27 +54,25 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 		"""
 		self.desc = desc
 		self.row = row
-		csscls=self.row.part.datagrid.body_css
-		if self.row.header:
-			csscls=self.row.part.datagrid.header_css
 		super().__init__(size_hint=(None,None),
 							width = self.desc['width'],
-							height = self.row.part.datagrid.rowHeight(),
-							csscls=csscls
+							height = self.row.part.datagrid.rowHeight()
 		)
+		self.csscls=self.row.part.datagrid.row_normal_css
+		if self.row.header:
+			self.csscls=self.row.part.datagrid.header_css
 		if desc['header']:
 			bl = Text(i18n=True, text=str(desc['value']),
 				font_size=CSize(1),wrap=True,
 				halign='left', valign='middle'
 			)
+			self.cell_type = 'header'
 		else:
+			self.cell_type = 'data'
 			bl = build_view_widget(desc,self.row.row_data) 
+		self.colume_name = desc['name']
 		if bl:
 			self.add_widget(bl)
-
-	def on_press(self,o=None):
-		if not self.row.header:
-			self.row.selected()
 
 class Row(BoxLayout):
 	def __init__(self,part, rowdesc,header=False,data=None, **kw):
@@ -99,6 +101,8 @@ class Row(BoxLayout):
 		self.height = self.part.datagrid.rowHeight()
 		self.init(0)
 
+	def on_row_press(self, *args):
+		pass
 
 	def init(self,t):
 		w = 0
@@ -107,28 +111,33 @@ class Row(BoxLayout):
 			c['header'] = self.header
 			cell = Cell(self,c)
 			self.add_widget(cell)
+			cell.bind(on_press=self.part.datagrid.cell_pressed)
 			w += cell.width
 		self.size_hint = None,None
 		self.width = w + self.linewidth * (len(self.rowdesc)+1)
 
-	def selected(self):
-		if not hasattr(self,'row_data'):
-			return # header
-		print('row selected',self.row_id, self.row_data)
+	def unselected(self):
+		self.select(False)
 
-		self.part.datagrid.row_selected = True
-		self.part.datagrid.select_rowid = self.row_id
-		self.part.datagrid.select_row = self
-		self.part.datagrid.dispatch('on_selected',self)
+	def selected(self):
+		self.select(True)
+
+	def select(self, flag):
+		for c in self.children:
+			if flag:
+				c.csscls = self.part.datagrid.row_selected_css
+			else:
+				c.csscls = self.part.datagrid.row_normal_css
 
 class Header(WidgetReady, ScrollPanel):
 	def __init__(self,part,**kw):
 		SUPER(Header, self, kw)
 		self.part = part
 		self.init(1)
-		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
+		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
 		if self.part.freeze_flag:
 			self.bar_width = 0
+		self.bar_width = 0
 
 	def init(self,t):
 		rd = [ f.copy() for f in self.part.rowdesc ]
@@ -146,7 +155,7 @@ class Body(WidgetReady, ScrollPanel):
 		self._inner.spacing = self.part.datagrid.linewidth
 		self.size_hint=(1,1)
 		self.idRow = {}
-		self.bind(on_scroll_stop=self.part.datagrid.on_scrollstop)
+		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
 		if self.part.freeze_flag:
 			self.bar_width = 0
 
@@ -175,6 +184,9 @@ class Body(WidgetReady, ScrollPanel):
 
 	def getRowHeight(self):
 		return self.part.datagrid.rowHeight()
+
+	def get_row_by_id(self, rowid):
+		return self.idRow.get(rowid)
 
 class DataGridPart(WidgetReady, BoxLayout):
 	def __init__(self,dg, freeze_flag, fields):
@@ -246,7 +258,7 @@ class DataGridPart(WidgetReady, BoxLayout):
 			self.body.height = self.height
 
 
-class DataGrid(WidgetReady, BoxLayout):
+class DataGrid(VBox):
 	"""
 	DataGrid data format:
 	{
@@ -297,46 +309,44 @@ class DataGrid(WidgetReady, BoxLayout):
 	}
 	"""
 	row_selected = BooleanProperty(False)
+	row_normal_css = StringProperty('default')
+	row_selected_css = StringProperty('default')
+	header_css = StringProperty('default')
+	body_css = StringProperty('default')
+	row_height = NumericProperty(2)
+	noheader = BooleanProperty(False)
+	linewidth = NumericProperty(1)
+	toolbar = DictProperty(None)
+	dataloader = DictProperty(None)
+	fields = ListProperty(None)
+	tailer = ListProperty(None)
 	def __init__(self,**options):
-		options['orientation'] = 'vertical'
-		BoxLayout.__init__(self, orientation='vertical')
-		WidgetReady.__init__(self)
 		self.select_rowid = None
-		self.options = options
 		self.rowheight = None
 		self.on_sizeTask = None
 		self.selected_rowid = None
 		self.show_rows = 0
-		self.toolbar = None
+		self._toolbar = None
 		self.freeze_part = None
 		self.normal_part = None
-		self.page_rows = self.options.get('page_rows', 60)
-		self.params = self.options.get('params',{})
-		self.total_cnt = 0
-		self.max_row = 0
-		self.row_height = self.options.get('row_height',2)
-		self.header_css = self.options.get('header_css','default')
-		self.noheader = self.options.get('noheader',False)
-		self.body_css = self.options.get('body_css', 'default')
-		self.linewidth = self.options.get('linewidth',1)
-		self.curpage = 0
-		self.loading = False
+		SUPER(DataGrid, self, options)
 		self.freeze_fields = self.getPartFields(freeze_flag=True)
 		self.normal_fields = self.getPartFields(freeze_flag=False)
-		ldr_desc = options.get('dataloader')
-		if not ldr_desc:
+		if not self.dataloader:
 			raise Exception('DataGrid need a DataLoader')
-		self.dataloader = RelatedLoader(target=self, **ldr_desc)
-		self.dataloader.bind(on_deletepage=self.delete_page)
-		self.dataloader.bind(on_pageloaded=self.add_page)
-		self.dataloader.bind(on_pageloaded=self.update_tailer_info)
-		self.dataloader.bind(on_newbegin=self.clearRows)
+		self._dataloader = RelatedLoader(target=self, **self.dataloader)
+		self._dataloader.bind(on_deletepage=self.delete_page)
+		self._dataloader.bind(on_pageloaded=self.add_page)
+		self._dataloader.bind(on_pageloaded=self.update_tailer_info)
+		self._dataloader.bind(on_newbegin=self.clearRows)
 		self.register_event_type('on_selected')
-		self.register_event_type('on_scrollstop')
+		self.register_event_type('on_rowpress')
+		self.register_event_type('on_cellpress')
+		self.register_event_type('on_headerpress')
 		self.createDataGridPart()
 		self.createToolbar()
-		if self.toolbar:
-			self.add_widget(self.toolbar)
+		if self._toolbar:
+			self.add_widget(self._toolbar)
 		
 		b = BoxLayout(orientation='horizontal')
 		if self.freeze_part:
@@ -344,9 +354,49 @@ class DataGrid(WidgetReady, BoxLayout):
 		if self.normal_part:
 			b.add_widget(self.normal_part)
 		self.add_widget(b)
-		if self.options.get('tailer'):
+		if self.tailer:
 			self.tailer_widgets = {}
-			self.build_tailer(self.options.get('tailer'))
+			self.build_tailer(self.tailer)
+
+	def on_rowpress(self, *args):
+		print('on_rowpress fire, args=', args)
+
+	def on_cellpress(self, *args):
+		print('on_cesspress fire, args=', args)
+
+	def on_headerpress(self, *args):
+		print('on_headerpress fire, args=', args)
+
+	def cell_pressed(self, o):
+		if o.cell_type == 'header':
+			self.dispatch('on_headerpress', o.colume_name)
+			return
+		row = o.row
+		if self.selected_rowid:
+			self.unselect_row(self.selected_rowid)
+		
+		self.selected_rowid = row.row_id
+		self.select_row(row.row_id)
+		self.dispatch('on_cellpress', o)
+		self.dispatch('on_rowpress', row)
+		self.dispatch('on_selected', row)
+
+	def unselect_row(self, row_id):
+		if self.freeze_part:
+			row = self.freeze_part.body.get_row_by_id(row_id)
+			row.unselected()
+		row = self.normal_part.body.get_row_by_id(row_id)
+		row.unselected()
+
+	def select_row(self, row_id):
+		if self.freeze_part:
+			row = self.freeze_part.body.get_row_by_id(row_id)
+			row.selected()
+		row = self.normal_part.body.get_row_by_id(row_id)
+		row.selected()
+		
+	def on_ready(self, *args):
+		self.loadData()
 
 	def build_tailer(self, tailer_desc):
 		kw = tailer_desc.get('options', {})
@@ -387,8 +437,8 @@ class DataGrid(WidgetReady, BoxLayout):
 		return Factory.Blocks().widgetBuild(desc)
 
 	def loader_info(self, n):
-		if hasattr(self.dataloader, n):
-			txt=getattr(self.dataloader, n, 0)
+		if hasattr(self._dataloader, n):
+			txt=getattr(self._dataloader, n, 0)
 			if txt is None:
 				txt = '0'
 			txt = str(txt)
@@ -399,7 +449,7 @@ class DataGrid(WidgetReady, BoxLayout):
 		if self.freeze_part:
 			self.freeze_part.body.scroll_y = pos
 
-	def on_scrollstop(self,o,v=None):
+	def scrollstop(self,o,v=None):
 		if not self.noheader and o == self.normal_part.header:
 			self.normal_part.body.scroll_x = o.scroll_x
 			return
@@ -412,13 +462,9 @@ class DataGrid(WidgetReady, BoxLayout):
 			self.normal_part.body.scroll_y = o.scroll_y
 
 		if o.scroll_y <= 0.01:
-			print('loading next page...', self.dataloader.curpage)
-			self.loading = True
-			self.dataloader.loadNextPage()
+			self._dataloader.loadNextPage()
 		if o.scroll_y >= 0.99:
-			print('loading previous page...', self.dataloader.curpage)
-			self.loading = True
-			self.dataloader.loadPreviousPage()
+			self._dataloader.loadPreviousPage()
 
 	def getValue(self):
 		if not self.select_rowid:
@@ -430,7 +476,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		if self.freeze_part:
 			d.update(self.freeze_part.body.getRowData(rowid))
 		d.update(self.normal_part.body.getRowData(rowid))
-		print('getValue() return=',d)
 		return DictObject(**d)
 
 	def bodyOnSize(self,o,s):
@@ -445,7 +490,7 @@ class DataGrid(WidgetReady, BoxLayout):
 	
 	def calculateShowRows(self,t):
 		self.getShowRows()
-		self.dataloader.setPageRows(self.show_rows * 2)
+		self._dataloader.setPageRows(self.show_rows * 2)
 
 	def getShowRows(self):
 		if self.show_rows == 0:
@@ -454,7 +499,6 @@ class DataGrid(WidgetReady, BoxLayout):
 		return self.show_rows * 2
 
 	def clearRows(self, *args):
-		print('dg.py:clearRows() called')
 		if self.freeze_part:
 			self.freeze_part.body.clearRows()
 		self.normal_part.body.clearRows()
@@ -504,13 +548,11 @@ class DataGrid(WidgetReady, BoxLayout):
 		with self.canvas:
 			self._fbo_rect = Rectangle(size=self.size,
 								texture=self._fbo.texture)
-		self.dataloader.bufferObjects(page,ids)
-		x = self.dataloader.getLocater()
+		self._dataloader.bufferObjects(page,ids)
+		x = self._dataloader.getLocater()
 		self.locater(x)
-		self.loading = False
 
 	def delete_page(self,o,data):
-		print('dg.py:delete_page() called')
 		for id in data:
 			self.delRow(id)
 
@@ -528,17 +570,16 @@ class DataGrid(WidgetReady, BoxLayout):
 		self.normal_part.body.delRowById(id)
 
 	def createToolbar(self):
-		if 'toolbar' in self.options.keys():
-			tb = self.options['toolbar']
-			self.toolbar = Toolbar(**tb)
+		if self.toolbar:
+			self._toolbar = Toolbar(**self.toolbar)
 
 	def on_selected(self,row):
 		print("DataGrid():on_selected fire")
 
 	def loadData(self,*args, **kwargs):
-		print('args=', args, 'kwargs=',kwargs)
 		kwargs['page'] = 1
-		self.dataloader.do_search(None,kwargs)
+		self.selected_rowid = None
+		self._dataloader.do_search(None,kwargs)
 
 	def createDataGridPart(self):
 		self.freeze_part = None
@@ -550,7 +591,7 @@ class DataGrid(WidgetReady, BoxLayout):
 
 	def getPartFields(self,freeze_flag:bool=False) -> list:
 		fs = []
-		for f in self.options['fields']:
+		for f in self.fields:
 			if freeze_flag:
 				if f.get('freeze',False):
 					fs.append(f)

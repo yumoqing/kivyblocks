@@ -33,6 +33,7 @@ from .utils import *
 from .pagescontainer import PageContainer
 from .blocks import Blocks
 from .theming import ThemeManager
+from .widget_css import register_css
 from appPublic.rsa import RSA
 if platform == 'android':
 	from jnius import autoclass
@@ -85,19 +86,6 @@ def getAuthHeader():
 	print('serverinfo authCode not found')
 	return {}
 
-kivyblocks_css_keys = [
-	"height_nm",
-	"width_nm",
-	"height_cm",
-	"width_cm",
-	"bgcolor",
-	"fgcolor",
-	"radius",
-	"spacing",
-	"padding",
-	"border"
-]
-
 class BlocksApp(App):
 	def get_rotation(self):
 		return get_rotation()
@@ -116,9 +104,6 @@ class BlocksApp(App):
 			d = hc.get(self.realurl(config.css.css_url))
 			self.buildCsses(d)
 
-	def get_css(self, cssname):
-		return self.csses.get(cssname, 'default')
-
 	def on_rotate(self,*largs):
 		self.current_rotation = Window.rotation
 		Logger.info('BlocksApp:on_rotate(), largs=%s', 
@@ -127,14 +112,7 @@ class BlocksApp(App):
 	def buildCsses(self, dic):
 		for k,v in dic.items():
 			if isinstance(v,dict):
-				self.csses[k] = \
-					{x:y for x,y in v.items() if x in kivyblocks_css_keys}
-
-	def get_csses(self):
-		return self.csses
-
-	def get_css(self, name):
-		return self.csses.get(name,self.csses.get('default',{}))
+				register_css(k,v)
 
 	def build(self):
 		self.platform = platform
