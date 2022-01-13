@@ -1,6 +1,12 @@
 
 import os
 import sys
+from kivy.resources import resource_add_path
+resource_add_path(os.path.join(os.path.dirname(__file__),'./ttf'))
+Config.set('kivy', 'default_font', [
+	'msgothic',
+	'DroidSansFallback.ttf'])
+
 import signal
 import codecs
 import json
@@ -8,6 +14,7 @@ import json
 from appPublic.jsonConfig import getConfig
 from appPublic.folderUtils import ProgramPath
 from appPublic.uniqueID import getID
+from appPublic.rsa import RSA
 
 from kivy.factory import Factory
 from kivy.config import Config
@@ -16,54 +23,19 @@ from kivy.core.window import WindowBase, Window
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.utils import platform
+from kivy.app import App
 
-import kivy
 import plyer
 
-from kivy.resources import resource_add_path
-resource_add_path(os.path.join(os.path.dirname(__file__),'./ttf'))
-Config.set('kivy', 'default_font', [
-	'msgothic',
-	'DroidSansFallback.ttf'])
-
-from kivy.app import App
-from kivy.utils import platform
+from .register import *
 from .threadcall import HttpClient,Workers
 from .utils import *
-from .pagescontainer import PageContainer
-from .blocks import Blocks
-from .theming import ThemeManager
 from .widget_css import register_css
-from appPublic.rsa import RSA
+
 if platform == 'android':
 	from jnius import autoclass
 
 from .android_rotation import get_rotation
-
-class ServerInfo:
-	def __init__(self):
-		self.rsaEngine = RSA()
-		self.publickey = None
-		self.authCode = None
-	
-	def getServerPK(self):
-		config = getConfig()
-		url = '%s%s' % (config.uihome, config.publickey_url)
-		hc = App.get_running_app().hc
-		d = hc.get(url)
-		self.publickey = self.rsaEngine. publickeyFromText(d)
-	
-	def encode(self,uinfo):
-		if self.publickey is None:
-			self.getServerPK()
-
-		if uinfo['authmethod'] == 'password':
-			authinfo = '%s::%s::%s' % (uinfo['authmethod'], uinfo['userid'], uinfo['passwd'])
-			x = self.rsaEngine.encode(self.publickey, authinfo)
-			self.authCode = x
-			return x
-		return None
-
 
 def  signal_handler(signal, frame):
 	app = App.get_running_app()
@@ -72,19 +44,6 @@ def  signal_handler(signal, frame):
 	print('Singal handled .........')
 
 signal.signal(signal.SIGINT, signal_handler)
-
-def getAuthHeader():
-	app = App.get_running_app()
-	if not hasattr(app,'serverinfo'):
-		print('app serverinfo not found')
-		return {}
-	serverinfo = app.serverinfo
-	if hasattr(serverinfo,'authCode'):
-		return {
-			'authorization':serverinfo.authCode
-		}
-	print('serverinfo authCode not found')
-	return {}
 
 class BlocksApp(App):
 	def get_rotation(self):
@@ -118,21 +77,9 @@ class BlocksApp(App):
 		self.platform = platform
 		self.is_desktop = platform in ['win', 'linux', 'macosx']
 		config = getConfig()
-		self.csses = {
-			"default":{
-				"bgcolor":[0.35,0.35,0.35,1],
-				"fgcolor":[0.85,0.85,0.85,1]
-			},
-			"input":{
-				"bgcolor":[0.35,0.35,0.35,1],
-				"fgcolor":[0.85,0.85,0.85,1]
-			},
-			"input_focus":{
-				"bgcolor":[0.25,0.25,0.25,1],
-				"fgcolor":[0.8,0.8,0.8,1]
-			}
+		self.public_headers = {
+			"platform":self.platform
 		}
-		self.public_headers = {}
 		Window.bind(on_request_close=self.on_close)
 		Window.bind(on_rotate=self.on_rotate)
 		Window.bind(size=self.device_info)
@@ -141,7 +88,7 @@ class BlocksApp(App):
 		self.load_csses()
 		self.running = True
 		if config.root:
-			blocks = Blocks()
+			blocks = Factory.Blocks()
 			x = blocks.widgetBuild(config.root)
 			if x is None:
 				alert('buildError,Exit', title='Error')
