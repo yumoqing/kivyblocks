@@ -2,6 +2,7 @@
 import os
 import sys
 from kivy.resources import resource_add_path
+from kivy.config import Config
 resource_add_path(os.path.join(os.path.dirname(__file__),'./ttf'))
 Config.set('kivy', 'default_font', [
 	'msgothic',
@@ -17,7 +18,6 @@ from appPublic.uniqueID import getID
 from appPublic.rsa import RSA
 
 from kivy.factory import Factory
-from kivy.config import Config
 from kivy.metrics import sp,dp,mm
 from kivy.core.window import WindowBase, Window
 from kivy.clock import Clock

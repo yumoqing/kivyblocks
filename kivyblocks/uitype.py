@@ -8,6 +8,8 @@ we use a register machinans to maintian the ui type information to build the vie
 
 import ujson as json
 from kivy.factory import Factory
+from kivy.properties import NumericProperty, StringProperty, \
+		BooleanProperty
 from kivy.uix.label import Label
 
 from appPublic.myTE import string_template_render
@@ -16,6 +18,36 @@ from kivyblocks.utils import CSize
 from .baseWidget import WrapText, Text
 from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, AmountInput, Password
+
+class StringView(Label):
+	def __init__(self, **kw):
+		super(StringView, self).__init__(**kw)
+		self.wrap = True
+		self.halign = 'left'
+		self.valign = 'middle'
+
+	def getValue(self):
+		return self.text
+
+	def setValue(self, v):
+		self.text = str(v)
+
+class PasswordView(StringView):
+	def __init__(self, text='*', **kw):
+		super(PasswordView, self).__init__(text=text, **kw)
+
+	def getValue(self):
+		return None
+
+	def setValue(self, v):
+		pass
+
+class TextView(WrapText):
+	def getValue(self):
+		return self.text
+
+	def setValue(self, v):
+		self.text = v
 
 view_widget_builders = {
 }
@@ -62,7 +94,7 @@ def get_value(desc, rec=None):
 	
 def build_view_str_widget(desc, rec=None):
 	txt = get_value(desc, rec=rec)
-	return Label(text=str(txt) if txt else '',
+	return StringView(text=str(txt) if txt else '',
 						font_size=CSize(1),
 						halign='left',
 						valign='middle')
@@ -74,7 +106,7 @@ view_register('timestamp', build_view_str_widget)
 
 def build_view_text_widget(desc, rec=None):
 	txt = get_value(desc, rec=rec)
-	return WrapText(text=str(txt) if txt else '',
+	return TextView(text=str(txt) if txt else '',
 						font_size=CSize(1),
 						halign='left',
 						valign='middle')
@@ -82,32 +114,74 @@ def build_view_text_widget(desc, rec=None):
 view_register('text', build_view_text_widget)
 
 def build_view_passwd_widget(desc, rec=None):
-	return Label(text='*',
+	return PasswordView(text='*',
 						font_size=CSize(1),
 						halign='left',
 						valign='middle')
 
 view_register('password', build_view_passwd_widget)
+
+class BoolView(Label):
+	value = BooleanProperty(False)
+	def __init__(self, text='', **kw):
+		super(BoolView, self).__init__(text='', **kw)
+		self.wrap = True
+		self.halign = 'center'
+		self.valign = 'middle'
+	
+	def on_value(self, *args):
+		if self.value:
+			self.text = 'true'
+		else:
+			self.text = 'false'
+
+	def getValue(self):
+		return self.value
+
+	def setValue(self, v):
+		self.value = v
+
 def build_view_bool_widget(desc, rec=None):
 	v = get_value(desc, rec)
 	if v is not None:
-		return Label(text='True' if v else 'False',
+		return BoolView(value=v,
 						font_size=CSize(1),
 						halign='left',
 						valign='middle')
 	
-	default_value = desc.get('nullvalue','')
-	return Label(text=default_value,
+	default_value = desc.get('nullvalue',False)
+	return BoolView(value=default_Value,
 						font_size=CSize(1),
 						halign='left',
 						valign='middle')
 
 view_register('bool', build_view_bool_widget)
 
+class IntView(Text):
+	value = NumericProperty(None)
+	nullstr = StringProperty('')
+	def __init__(self, **kw):
+		super(IntView, self).__init__(text='', **kw)
+		self.wrap = True
+		self.halign = 'right'
+		self.valign = 'middle'
+
+	def on_value(self, *args):
+		if self.value is not None:
+			self.text = str(v)
+		else:
+			self.text = self.nullstr
+
+	def setValue(self, v):
+		self.value = v
+
+	def getValue(self):
+		return self.value
+
 def build_view_int_widget(desc, rec=None):
 	v = get_value(desc, rec=rec)
-	default_value = desc.get('nullvalue','')
-	return Label(text=str(v) if v is not None else default_value,
+	return IntValue(value=v,
+			nullstr=desc.get('nullstr',''),
 			font_size=CSize(1), 
 			halign='right', 
 			valign='middle'
@@ -115,11 +189,33 @@ def build_view_int_widget(desc, rec=None):
 
 view_register('int', build_view_int_widget)
 
+class FloatView(Text):
+	value = NumericProperty(None)
+	nullstr = StringProperty('')
+	dec = NumericProperty(2)
+	def __init__(self, **kw):
+		super(FloatView, self).__init__(text=self.nullstr, **kw)
+		self.wrap = True
+		self.halign = 'right'
+		self.valign = 'middle'
+
+	def on_value(self, *args):
+		if self.value is None:
+			self.text = self.bullstr
+		f = '%%.0%df' % self.dec
+		self.text = f % self.value
+		
+	def getValue(self):
+		return self.value
+
+	def setValue(self, v):
+		self.value = v
+
 def build_view_float_widget(desc, rec=None):
 	v = get_value(desc, rec=rec)
-	f = '%%.0%df' % desc.get('dec',2)
-	default_value = desc.get('nullvalue','')
-	return Label(text=f % float(v) if v is not None else default_value,
+	return FloatView(value=v,
+					dec=desc.get('dec', 2),
+					nullstr=desc.get('nullstr',''),
 					font_size=CSize(1), 
 					halign='right', 
 					valign='middle'
@@ -141,38 +237,45 @@ def build_view_code_widget(desc, rec=None):
 
 view_register('code', build_view_code_widget)
 
-def amount_str(v, dec):
-	f = '%%.0%df' % dec
-	s = f % v
-	parts = s.split('.')
-	p_int = parts[0]
-	subs = []
-	if p_int[0] == '-':
-		subs.append('-')
-		p_int = p_int[1:]
-	l = [i for i in p_int]
-	l.reverse()
-	k = []
-	for i,c in enumerate(l):
-		if i and (i) % 3 == 0:
-			k.append(',')
-		k.append(c)
-	k.reverse()
-	subs.append(''.join(k))
-	if len(parts) > 1:
-		subs.append(f'.{parts[1]}')
-	return ''.join(subs)
+class AmountView(FloatView):
+	def on_value(self, *args):
+		if self.value is None:
+			self.text = self.nullstr
+		else:
+			self.text = self.amount_str()
 	
+	def amount_str(self):
+		f = '%%.0%df' % self.dec
+		s = f % self.value
+		parts = s.split('.')
+		p_int = parts[0]
+		subs = []
+		if p_int[0] == '-':
+			subs.append('-')
+			p_int = p_int[1:]
+		l = [i for i in p_int]
+		l.reverse()
+		k = []
+		for i,c in enumerate(l):
+			if i and (i) % 3 == 0:
+				k.append(',')
+			k.append(c)
+		k.reverse()
+		subs.append(''.join(k))
+		if len(parts) > 1:
+			subs.append(f'.{parts[1]}')
+		return ''.join(subs)
+
 def build_view_amount_widget(desc, rec=None):
 	v = get_value(desc, rec=rec)
-	defaultvalue = desc.get('nullvalue', '')
-	if v:
-		f = '%%.0%df' % desc.get('dec',2)
-		return Label(text=amount_str(v, dec),
+	defaultvalue = desc.get('nullstr', '')
+	return Amount(value=v,
+					dec=desc.get('dec', 2),
+					nullstr=defaultvale,
 					font_size=CSize(1), 
 					halign='right', 
 					valign='middle'
-		)
+	)
 
 view_register('amount', build_view_amount_widget)
 
