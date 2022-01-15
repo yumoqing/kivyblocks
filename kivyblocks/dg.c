@@ -1784,6 +1784,7 @@ static const char __pyx_k_DataGrid_loadData[] = "DataGrid.loadData";
 static const char __pyx_k_DataGrid_on_ready[] = "DataGrid.on_ready";
 static const char __pyx_k_build_view_widget[] = "build_view_widget";
 static const char __pyx_k_calculateShowRows[] = "calculateShowRows";
+static const char __pyx_k_get_selected_data[] = "get_selected_data";
 static const char __pyx_k_kivyblocks_dg_pyx[] = "kivyblocks\\dg.pyx";
 static const char __pyx_k_Body_get_row_by_id[] = "Body.get_row_by_id";
 static const char __pyx_k_DataGrid_clearRows[] = "DataGrid.clearRows";
@@ -1829,6 +1830,7 @@ static const char __pyx_k_DataGrid_on_headerpress[] = "DataGrid.on_headerpress";
 static const char __pyx_k_on_headerpress_fire_args[] = "on_headerpress fire, args=";
 static const char __pyx_k_DataGrid_on_selected_fire[] = "DataGrid():on_selected fire";
 static const char __pyx_k_DataGrid_calculateShowRows[] = "DataGrid.calculateShowRows";
+static const char __pyx_k_DataGrid_get_selected_data[] = "DataGrid.get_selected_data";
 static const char __pyx_k_DataGrid_need_a_DataLoader[] = "DataGrid need a DataLoader";
 static const char __pyx_k_DataGridPart_getFieldsWidth[] = "DataGridPart.getFieldsWidth";
 static const char __pyx_k_DataGrid_createDataGridPart[] = "DataGrid.createDataGridPart";
@@ -1885,6 +1887,7 @@ static PyObject *__pyx_n_s_DataGrid_delete_page;
 static PyObject *__pyx_n_s_DataGrid_getPartFields;
 static PyObject *__pyx_n_s_DataGrid_getShowRows;
 static PyObject *__pyx_n_s_DataGrid_getValue;
+static PyObject *__pyx_n_s_DataGrid_get_selected_data;
 static PyObject *__pyx_n_s_DataGrid_loadData;
 static PyObject *__pyx_n_s_DataGrid_loader_info;
 static PyObject *__pyx_n_s_DataGrid_locater;
@@ -2025,6 +2028,7 @@ static PyObject *__pyx_n_s_getRowHeight;
 static PyObject *__pyx_n_s_getShowRows;
 static PyObject *__pyx_n_s_getValue;
 static PyObject *__pyx_n_s_get_row_by_id;
+static PyObject *__pyx_n_s_get_selected_data;
 static PyObject *__pyx_n_s_h;
 static PyObject *__pyx_n_s_halign;
 static PyObject *__pyx_n_s_header;
@@ -2243,6 +2247,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_56on_selected(CYTHON_UNUSED
 static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_58loadData(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs); /* proto */
 static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_freeze_flag); /* proto */
+static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_update = {0, &__pyx_n_s_update, 0, 0, 0};
 static PyObject *__pyx_float_0_3;
 static PyObject *__pyx_float_0_01;
@@ -2322,6 +2327,7 @@ static PyObject *__pyx_tuple__122;
 static PyObject *__pyx_tuple__124;
 static PyObject *__pyx_tuple__126;
 static PyObject *__pyx_tuple__128;
+static PyObject *__pyx_tuple__129;
 static PyObject *__pyx_codeobj__12;
 static PyObject *__pyx_codeobj__15;
 static PyObject *__pyx_codeobj__17;
@@ -2378,6 +2384,7 @@ static PyObject *__pyx_codeobj__121;
 static PyObject *__pyx_codeobj__123;
 static PyObject *__pyx_codeobj__125;
 static PyObject *__pyx_codeobj__127;
+static PyObject *__pyx_codeobj__130;
 /* Late includes */
 
 /* "kivyblocks/dg.pyx":36
@@ -8102,7 +8109,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_12on_size(CYTHON_UNUSE
 
 /* "kivyblocks/dg.pyx":323
  * 	fields = ListProperty(None)
- * 	tailer = ListProperty(None)
+ * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):             # <<<<<<<<<<<<<<
  * 		self.select_rowid = None
  * 		self.rowheight = None
@@ -8185,7 +8192,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "kivyblocks/dg.pyx":324
- * 	tailer = ListProperty(None)
+ * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):
  * 		self.select_rowid = None             # <<<<<<<<<<<<<<
  * 		self.rowheight = None
@@ -8937,7 +8944,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
 
   /* "kivyblocks/dg.pyx":323
  * 	fields = ListProperty(None)
- * 	tailer = ListProperty(None)
+ * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):             # <<<<<<<<<<<<<<
  * 		self.select_rowid = None
  * 		self.rowheight = None
@@ -17091,6 +17098,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
  * 					fs.append(f)
  * 		return fs             # <<<<<<<<<<<<<<
  * 
+ * 	def get_selected_data(self):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_fs);
@@ -17115,6 +17123,238 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_fs);
   __Pyx_XDECREF(__pyx_v_f);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "kivyblocks/dg.pyx":603
+ * 		return fs
+ * 
+ * 	def get_selected_data(self):             # <<<<<<<<<<<<<<
+ * 		if not self.selected_rowid:
+ * 			return {}
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_65get_selected_data(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_10kivyblocks_2dg_8DataGrid_65get_selected_data = {"get_selected_data", (PyCFunction)__pyx_pw_10kivyblocks_2dg_8DataGrid_65get_selected_data, METH_O, 0};
+static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_65get_selected_data(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_selected_data (wrapper)", 0);
+  __pyx_r = __pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(__pyx_self, ((PyObject *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_v_data = NULL;
+  PyObject *__pyx_v_row = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_selected_data", 0);
+
+  /* "kivyblocks/dg.pyx":604
+ * 
+ * 	def get_selected_data(self):
+ * 		if not self.selected_rowid:             # <<<<<<<<<<<<<<
+ * 			return {}
+ * 		data = {}
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 604, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 604, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = ((!__pyx_t_2) != 0);
+  if (__pyx_t_3) {
+
+    /* "kivyblocks/dg.pyx":605
+ * 	def get_selected_data(self):
+ * 		if not self.selected_rowid:
+ * 			return {}             # <<<<<<<<<<<<<<
+ * 		data = {}
+ * 		if self.freeze_part:
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 605, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+
+    /* "kivyblocks/dg.pyx":604
+ * 
+ * 	def get_selected_data(self):
+ * 		if not self.selected_rowid:             # <<<<<<<<<<<<<<
+ * 			return {}
+ * 		data = {}
+ */
+  }
+
+  /* "kivyblocks/dg.pyx":606
+ * 		if not self.selected_rowid:
+ * 			return {}
+ * 		data = {}             # <<<<<<<<<<<<<<
+ * 		if self.freeze_part:
+ * 			row = self.freeze_part.body.get_row_by_id(row_id)
+ */
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 606, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_data = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "kivyblocks/dg.pyx":607
+ * 			return {}
+ * 		data = {}
+ * 		if self.freeze_part:             # <<<<<<<<<<<<<<
+ * 			row = self.freeze_part.body.get_row_by_id(row_id)
+ * 			data.update(row.row_data)
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 607, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 607, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (__pyx_t_3) {
+
+    /* "kivyblocks/dg.pyx":608
+ * 		data = {}
+ * 		if self.freeze_part:
+ * 			row = self.freeze_part.body.get_row_by_id(row_id)             # <<<<<<<<<<<<<<
+ * 			data.update(row.row_data)
+ * 		row = self.normal_part.body.get_row_by_id(row_id)
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 608, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 608, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 608, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_row_id); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 608, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+      }
+    }
+    __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 608, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_v_row = __pyx_t_1;
+    __pyx_t_1 = 0;
+
+    /* "kivyblocks/dg.pyx":609
+ * 		if self.freeze_part:
+ * 			row = self.freeze_part.body.get_row_by_id(row_id)
+ * 			data.update(row.row_data)             # <<<<<<<<<<<<<<
+ * 		row = self.normal_part.body.get_row_by_id(row_id)
+ * 		data.update(row.row_data)
+ */
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 609, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_data, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 609, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "kivyblocks/dg.pyx":607
+ * 			return {}
+ * 		data = {}
+ * 		if self.freeze_part:             # <<<<<<<<<<<<<<
+ * 			row = self.freeze_part.body.get_row_by_id(row_id)
+ * 			data.update(row.row_data)
+ */
+  }
+
+  /* "kivyblocks/dg.pyx":610
+ * 			row = self.freeze_part.body.get_row_by_id(row_id)
+ * 			data.update(row.row_data)
+ * 		row = self.normal_part.body.get_row_by_id(row_id)             # <<<<<<<<<<<<<<
+ * 		data.update(row.row_data)
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 610, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 610, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 610, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_row_id); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 610, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_6)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_6);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 610, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_XDECREF_SET(__pyx_v_row, __pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "kivyblocks/dg.pyx":611
+ * 			data.update(row.row_data)
+ * 		row = self.normal_part.body.get_row_by_id(row_id)
+ * 		data.update(row.row_data)             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 611, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_data, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 611, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "kivyblocks/dg.pyx":603
+ * 		return fs
+ * 
+ * 	def get_selected_data(self):             # <<<<<<<<<<<<<<
+ * 		if not self.selected_rowid:
+ * 			return {}
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("kivyblocks.dg.DataGrid.get_selected_data", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_data);
+  __Pyx_XDECREF(__pyx_v_row);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -17352,6 +17592,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_DataGrid_getPartFields, __pyx_k_DataGrid_getPartFields, sizeof(__pyx_k_DataGrid_getPartFields), 0, 0, 1, 1},
   {&__pyx_n_s_DataGrid_getShowRows, __pyx_k_DataGrid_getShowRows, sizeof(__pyx_k_DataGrid_getShowRows), 0, 0, 1, 1},
   {&__pyx_n_s_DataGrid_getValue, __pyx_k_DataGrid_getValue, sizeof(__pyx_k_DataGrid_getValue), 0, 0, 1, 1},
+  {&__pyx_n_s_DataGrid_get_selected_data, __pyx_k_DataGrid_get_selected_data, sizeof(__pyx_k_DataGrid_get_selected_data), 0, 0, 1, 1},
   {&__pyx_n_s_DataGrid_loadData, __pyx_k_DataGrid_loadData, sizeof(__pyx_k_DataGrid_loadData), 0, 0, 1, 1},
   {&__pyx_n_s_DataGrid_loader_info, __pyx_k_DataGrid_loader_info, sizeof(__pyx_k_DataGrid_loader_info), 0, 0, 1, 1},
   {&__pyx_n_s_DataGrid_locater, __pyx_k_DataGrid_locater, sizeof(__pyx_k_DataGrid_locater), 0, 0, 1, 1},
@@ -17492,6 +17733,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_getShowRows, __pyx_k_getShowRows, sizeof(__pyx_k_getShowRows), 0, 0, 1, 1},
   {&__pyx_n_s_getValue, __pyx_k_getValue, sizeof(__pyx_k_getValue), 0, 0, 1, 1},
   {&__pyx_n_s_get_row_by_id, __pyx_k_get_row_by_id, sizeof(__pyx_k_get_row_by_id), 0, 0, 1, 1},
+  {&__pyx_n_s_get_selected_data, __pyx_k_get_selected_data, sizeof(__pyx_k_get_selected_data), 0, 0, 1, 1},
   {&__pyx_n_s_h, __pyx_k_h, sizeof(__pyx_k_h), 0, 0, 1, 1},
   {&__pyx_n_s_halign, __pyx_k_halign, sizeof(__pyx_k_halign), 0, 0, 1, 1},
   {&__pyx_n_s_header, __pyx_k_header, sizeof(__pyx_k_header), 0, 0, 1, 1},
@@ -18066,7 +18308,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
   /* "kivyblocks/dg.pyx":323
  * 	fields = ListProperty(None)
- * 	tailer = ListProperty(None)
+ * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):             # <<<<<<<<<<<<<<
  * 		self.select_rowid = None
  * 		self.rowheight = None
@@ -18453,6 +18695,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__128 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__128)) __PYX_ERR(0, 592, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__128);
   __Pyx_GIVEREF(__pyx_tuple__128);
+
+  /* "kivyblocks/dg.pyx":603
+ * 		return fs
+ * 
+ * 	def get_selected_data(self):             # <<<<<<<<<<<<<<
+ * 		if not self.selected_rowid:
+ * 			return {}
+ */
+  __pyx_tuple__129 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_row); if (unlikely(!__pyx_tuple__129)) __PYX_ERR(0, 603, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__129);
+  __Pyx_GIVEREF(__pyx_tuple__129);
+  __pyx_codeobj__130 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__129, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_get_selected_data, 603, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__130)) __PYX_ERR(0, 603, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -20266,7 +20520,7 @@ if (!__Pyx_RefNanny) {
  * 	toolbar = DictProperty(None)
  * 	dataloader = DictProperty(None)             # <<<<<<<<<<<<<<
  * 	fields = ListProperty(None)
- * 	tailer = ListProperty(None)
+ * 	tailer = DictProperty(None)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DictProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -20292,7 +20546,7 @@ if (!__Pyx_RefNanny) {
  * 	toolbar = DictProperty(None)
  * 	dataloader = DictProperty(None)
  * 	fields = ListProperty(None)             # <<<<<<<<<<<<<<
- * 	tailer = ListProperty(None)
+ * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ListProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 321, __pyx_L1_error)
@@ -20318,11 +20572,11 @@ if (!__Pyx_RefNanny) {
   /* "kivyblocks/dg.pyx":322
  * 	dataloader = DictProperty(None)
  * 	fields = ListProperty(None)
- * 	tailer = ListProperty(None)             # <<<<<<<<<<<<<<
+ * 	tailer = DictProperty(None)             # <<<<<<<<<<<<<<
  * 	def __init__(self,**options):
  * 		self.select_rowid = None
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ListProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DictProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -20344,7 +20598,7 @@ if (!__Pyx_RefNanny) {
 
   /* "kivyblocks/dg.pyx":323
  * 	fields = ListProperty(None)
- * 	tailer = ListProperty(None)
+ * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):             # <<<<<<<<<<<<<<
  * 		self.select_rowid = None
  * 		self.rowheight = None
@@ -20732,6 +20986,18 @@ if (!__Pyx_RefNanny) {
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_getPartFields, __pyx_t_3) < 0) __PYX_ERR(0, 592, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "kivyblocks/dg.pyx":603
+ * 		return fs
+ * 
+ * 	def get_selected_data(self):             # <<<<<<<<<<<<<<
+ * 		if not self.selected_rowid:
+ * 			return {}
+ */
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_65get_selected_data, 0, __pyx_n_s_DataGrid_get_selected_data, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__130)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 603, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_get_selected_data, __pyx_t_3) < 0) __PYX_ERR(0, 603, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "kivyblocks/dg.pyx":261

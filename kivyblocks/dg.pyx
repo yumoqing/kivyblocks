@@ -319,7 +319,7 @@ class DataGrid(VBox):
 	toolbar = DictProperty(None)
 	dataloader = DictProperty(None)
 	fields = ListProperty(None)
-	tailer = ListProperty(None)
+	tailer = DictProperty(None)
 	def __init__(self,**options):
 		self.select_rowid = None
 		self.rowheight = None
@@ -600,3 +600,12 @@ class DataGrid(VBox):
 					fs.append(f)
 		return fs
 	
+	def get_selected_data(self):
+		if not self.selected_rowid:
+			return {}
+		data = {}
+		if self.freeze_part:
+			row = self.freeze_part.body.get_row_by_id(row_id)
+			data.update(row.row_data)
+		row = self.normal_part.body.get_row_by_id(row_id)
+		data.update(row.row_data)

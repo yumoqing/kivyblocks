@@ -10,7 +10,8 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.properties import StringProperty, DictProperty, \
-			OptionProperty, ListProperty, NumericProperty
+			OptionProperty, ListProperty, NumericProperty, \
+			BooleanProperty
 
 from appPublic.dictObject import DictObject
 from appPublic.registerfunction import RegisterFunction
@@ -56,9 +57,12 @@ class Toolbar(ScrollPanel):
 	toolbar_orient = OptionProperty('H', options=['H', 'V'])
 	img_size_c = NumericProperty(2)
 	text_size_c = NumericProperty(1)
+	target = StringProperty(None)
+	executable = BooleanProperty(False)
 	def __init__(self, **kw):
 		self.w_dic = {}
 		SUPER(Toolbar, self, kw)
+		self.buffer = {}
 		self.register_event_type('on_press')
 		self.register_event_type('on_delete_tool')
 		if self.toolbar_orient == 'H':
@@ -183,7 +187,34 @@ class Toolbar(ScrollPanel):
 				w.select(True)
 			else:
 				w.select(False)
-		self.dispatch('on_press', ret_v)
+		if not self.executable:
+			self.dispatch('on_press', ret_v)
+			return
+
+		blocks = Factory.Blocks()
+		desc = {
+		}
+		v = self.w_dic[o]
+		desc['target'] = v.get('target', self.target)
+		if v.get('datatarget'):
+			desc['datatarget'] = v.get('datatarget')
+			if v.get('datamethod'):
+				desc['datamethod'] = v['datamethod']
+		keys = v.keys()
+		if 'url' in keys:
+			desc['mode'] = 'replace'
+			options = {
+				'params':v.get('params',{}),
+				'url':v.get('url')
+			}
+			desc['options'] = options
+			Factory.Blocks().urlwidgetAction(self, desc)
+		if 'rfname' in keys:
+			desc['params'] = v.get('params',{})
+			Factory.Blocks().registedfunctionAction(self, desc)
+		if 'script' in keys:
+			desc['script'] = v.get('script')
+			Factory.Blocks().scriptAction(self, desc)
 
 class ToolPage(Box):
 	"""

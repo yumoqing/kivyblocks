@@ -357,7 +357,10 @@ class Blocks(EventDispatcher):
 		w.open()
 
 	def uniaction(self, widget:Widget, desc, *args):
-		Logger.info('Block: uniaction() called, desc=%s', str(desc))
+		Logger.info('Block: uniaction() called, desc=%s, args=%s', \
+						str(desc),
+						args
+		)
 			
 		acttype = desc.get('actiontype')
 		if acttype=='blocks':

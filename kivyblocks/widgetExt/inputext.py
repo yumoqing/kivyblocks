@@ -14,7 +14,7 @@ from kivy.properties import BooleanProperty, ListProperty
 
 from ..threadcall import HttpClient
 from ..utils import CSize
-from ..widget_css import WidgetCSS
+from ..widget_css import WidgetCSS, get_css
 
 class BoolInput(Switch):
 	def __init__(self,csscls='input', **kw):
@@ -39,8 +39,7 @@ class StrInput(TextInput):
 				**kv):
 		if kv is None:
 			kv = {}
-		app = App.get_running_app()
-		css = app.get_css(csscls)
+		css = get_css(csscls)
 		a = {
 			"allow_copy":True,
 			"password":False,

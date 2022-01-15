@@ -16,6 +16,7 @@ from appPublic.myTE import string_template_render
 
 from kivyblocks.utils import CSize
 from .baseWidget import WrapText, Text
+from .dateinput import DateInput
 from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, AmountInput, Password
 

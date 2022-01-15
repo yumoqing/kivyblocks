@@ -13,6 +13,7 @@ from kivyblocks.bgcolorbehavior import BGColorBehavior
 from kivyblocks.utils import CSize, SUPER, blockImage
 from kivyblocks.baseWidget import Box, Text
 from kivyblocks.widget_css import WidgetCSS
+from kivyblocks.uitype import view_register, input_register, get_value
 
 class TinyText(Text):
 	def __init__(self, **kw):
@@ -91,6 +92,8 @@ class ClickableIconText(ClickableText):
 
 	def on_source(self, o, source):
 		if self.img_w:
+			if source is None:
+				source = blockIamge('broken.png')
 			self.img_w.source = source
 			return
 		self.img_w = AsyncImage(source=self.source, **self.img_kw)
@@ -273,6 +276,16 @@ class SingleCheckBox(ClickableBox):
 						)
 		self.add_widget(self.img_w)
 		self.img_w.bind(size=self.reset_size)
+
+def build_checkbox(desc, rec=None):
+	v = get_value(desc, rec)
+	if v is None:
+		v = False
+	x = SingleCheckBox(select_state=v)
+	return x
+
+view_register('checkbox', build_checkbox)
+input_register('checkbox', build_checkbox)
 
 r = Factory.register
 r('TinyText', TinyText)
