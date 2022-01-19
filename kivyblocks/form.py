@@ -6,7 +6,6 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 from kivy.graphics import Color
-from kivycalendar import DatePicker
 from .responsivelayout import VResponsiveLayout
 from .baseWidget import *
 from .utils import *
