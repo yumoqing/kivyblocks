@@ -2,7 +2,8 @@ import sys
 import math
 from traceback import print_exc
 
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty, StringProperty, \
+			NumericProperty, BooleanProperty
 from kivy.app import App
 from kivy.utils import platform
 from kivy.uix.button import Button, ButtonBehavior
@@ -51,8 +52,7 @@ from kivy.uix.carousel import Carousel
 from kivy.uix.bubble import Bubble
 from kivy.uix.codeinput import CodeInput
 from kivy.graphics import Color, Rectangle
-from kivy.properties import ListProperty
-from kivycalendar import DatePicker
+from kivy.properties import ListProperty, DictProperty
 from kivy.factory import Factory
 
 from appPublic.dictObject import DictObject
@@ -221,17 +221,16 @@ class Title6(Text):
 		kw.update({'texttype':'title6','bold':True})
 		Text.__init__(self, **kw)
 
-class Modal(ModalView):
-	def __init__(self, auto_open=False, 
-				content=None,
-				**kw):
-		ModalView.__init__(self, **kw)
-		self.auto_open = auto_open
-		if content:
+class Modal(WidgetCSS, WidgetReady, ModalView):
+	content = DictProperty(None)
+	auto_open = BooleanProperty(True)
+	def __init__(self, **kw):
+		super(ModalView, self).__init__(**kw)
+		if self.content:
 			blocks = Factory.Blocks()
-			self.content = blocks.widgetBuild(content)
-			if self.content:
-				self.add_widget(self.content)
+			self.content_w = blocks.widgetBuild(self.content)
+			if self.content_w:
+				self.add_widget(self.content_w)
 			else:
 				print(content,':cannot build widget')
 			
@@ -242,12 +241,15 @@ class Modal(ModalView):
 			self.open()
 
 class TimedModal(Modal):
-	def __init__(self, show_time=5, **kw):
-		self.show_time = show_time
+	show_time = NumericProperty(0)
+	def __init__(self, **kw):
 		self.time_task = None
 		Modal.__init__(self, **kw)
 
 	def open(self, *args, **kw):
+		if self.time_task is not None:
+			self.time_task.cancel()
+			self.time_task = None
 		if self.show_time > 0:
 			self.time_task = \
 				Clock.schedule_once(self.dismiss, self.show_time)

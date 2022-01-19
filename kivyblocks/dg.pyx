@@ -604,8 +604,10 @@ class DataGrid(VBox):
 		if not self.selected_rowid:
 			return {}
 		data = {}
+		row_id = self.selected_rowid
 		if self.freeze_part:
 			row = self.freeze_part.body.get_row_by_id(row_id)
 			data.update(row.row_data)
 		row = self.normal_part.body.get_row_by_id(row_id)
 		data.update(row.row_data)
+		return data

@@ -4,7 +4,6 @@ import codecs
 import ujson as json
 from traceback import print_exc
 
-import kivy
 from functools import partial
 
 from appPublic.dictExt import dictExtend
@@ -20,6 +19,7 @@ from kivy.metrics import sp,dp,mm
 from kivy.core.window import WindowBase, Window
 from kivy.properties import BooleanProperty
 from kivy.uix.widget import Widget
+from kivy.uix.modalview import ModalView
 from kivy.app import App
 from kivy.factory import Factory
 from kivy.uix.video import Video
@@ -128,7 +128,6 @@ class Blocks(EventDispatcher):
 		func =partial(blocks.conform_action,widget, desc)
 		return func
 		
-
 	def eval(self, s:str, l:dict):
 		g = {}
 		forbidens = [
@@ -413,6 +412,9 @@ class Blocks(EventDispatcher):
 			p.update(d)
 		opts['options'] = p
 		def doit(target:Widget, add_mode:str, o, w:Widget):
+			if isinstance(w, ModalView):
+				return
+
 			if target:
 				if add_mode == 'replace':
 					target.clear_widgets()
@@ -429,6 +431,10 @@ class Blocks(EventDispatcher):
 		b.widgetBuild(opts)
 		
 	def urlwidgetAction(self, widget:Widget, desc, *args):
+		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
+						str(desc),
+						args
+		)
 		target = self.get_target(widget, desc)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
@@ -445,6 +451,9 @@ class Blocks(EventDispatcher):
 		}
 
 		def doit(target:Widget, add_mode:str, o, w:Widget):
+			if isinstance(w, ModalView):
+				return
+
 			if target:
 				if add_mode == 'replace':
 					target.clear_widgets()
@@ -459,13 +468,18 @@ class Blocks(EventDispatcher):
 		b.bind(on_failed=doerr)
 		b.widgetBuild(d)
 			
-	def getActionData(self, widget:Widget, desc,*args):
+	def getActionData(self, widget:Widget, desc, *args):
+		Logger.info('Block: getActionData(): desc=%s args=%s'
+							,str(desc), args)
+		
 		data = {}
 		rtdesc = self.build_rtdesc(desc)
-		rt = self.get_rtdata(widget, rtdesc, *args)
-		data.update(rt)
-		if desc.get('keymapping'):
-			data = keyMapping(data, desc.get('keymapping'))
+		if rtdesc:
+			rt = self.get_rtdata(widget, rtdesc, *args)
+			if rt:
+				data.update(rt)
+			if desc.get('keymapping'):
+				data = keyMapping(data, desc.get('keymapping'))
 		return data
 
 	def registedfunctionAction(self, widget:Widget, desc, *args):
@@ -516,8 +530,6 @@ class Blocks(EventDispatcher):
 				else:
 					rtdesc['method'] = desc.get('datamethod', 'getValue')
 				rtdesc['kwargs'] = desc.get('datakwargs', {})
-			else:
-				return {}
 		return rtdesc
 
 	def get_rtdata(self, widget:Widget, desc, *args):
@@ -730,6 +742,7 @@ class Blocks(EventDispatcher):
 					and Window.fullscreen == True \
 					and app.root != app.fs_widget:
 				w = find_widget_by_id(id, app.fs_widget)
+
 			if w is None:
 				print(id, 'not found ....')
 				return None

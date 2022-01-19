@@ -22,7 +22,7 @@ from .ready import WidgetReady
 from .color_definitions import getColors
 from .baseWidget import Text, Box
 from .scrollpanel import ScrollPanel
-from .toggleitems import ToggleItems
+from .command_action import cmd_action
 
 class Toolbar(ScrollPanel):
 	"""
@@ -191,30 +191,11 @@ class Toolbar(ScrollPanel):
 			self.dispatch('on_press', ret_v)
 			return
 
-		blocks = Factory.Blocks()
-		desc = {
-		}
-		v = self.w_dic[o]
-		desc['target'] = v.get('target', self.target)
-		if v.get('datatarget'):
-			desc['datatarget'] = v.get('datatarget')
-			if v.get('datamethod'):
-				desc['datamethod'] = v['datamethod']
-		keys = v.keys()
-		if 'url' in keys:
-			desc['mode'] = 'replace'
-			options = {
-				'params':v.get('params',{}),
-				'url':v.get('url')
-			}
-			desc['options'] = options
-			Factory.Blocks().urlwidgetAction(self, desc)
-		if 'rfname' in keys:
-			desc['params'] = v.get('params',{})
-			Factory.Blocks().registedfunctionAction(self, desc)
-		if 'script' in keys:
-			desc['script'] = v.get('script')
-			Factory.Blocks().scriptAction(self, desc)
+		desc = self.w_dic[o].copy()
+		if not desc.get('target'):
+			desc['target'] = self.target
+
+		cmd_action(desc, self)
 
 class ToolPage(Box):
 	"""

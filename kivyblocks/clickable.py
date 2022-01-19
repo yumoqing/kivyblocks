@@ -91,12 +91,14 @@ class ClickableIconText(ClickableText):
 		SUPER(ClickableIconText, self, kw)
 
 	def on_source(self, o, source):
+		if source is None:
+			source = blockIamge('broken.png')
+
 		if self.img_w:
-			if source is None:
-				source = blockIamge('broken.png')
 			self.img_w.source = source
 			return
-		self.img_w = AsyncImage(source=self.source, **self.img_kw)
+
+		self.img_w = AsyncImage(source=source, **self.img_kw)
 		self.add_widget(self.img_w, index=len(self.children))
 
 class ToggleText(ClickableText):
