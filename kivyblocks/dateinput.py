@@ -1,5 +1,6 @@
 from appPublic.timeUtils import curDateString, monthMaxDay
 
+from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.properties import NumericProperty
 from kivy.uix.boxlayout import BoxLayout
@@ -16,6 +17,8 @@ class YearInput(SelectInput):
 		self.showed_max = None
 		self.valueField = self.dropdown.valueField
 		self.textField = self.dropdown.textField
+		self.reopen = False
+		self.dropdown.bind(on_dismiss=self.reopen_dropdown)
 
 	def e_year_change(self, y):
 		self.e_year = y
@@ -44,6 +47,11 @@ class YearInput(SelectInput):
 		})
 		return d
 
+	def reopen_dropdown(self, *args):
+		if not self.reopen:
+			return
+		self.dropdown.open(self)
+
 	def dropdown_select(self, o, d):
 		if d[0] == -10000:
 			smin = self.showed_min - self.show_years
@@ -51,6 +59,7 @@ class YearInput(SelectInput):
 				smin = 0
 			smax = smin + self.show_years
 			self.set_selectable_data(self.years_data(smin, smax))
+			self.reopen = True
 			return
 		if d[0] == 10000:
 			smax = self.showed_max + self.show_years
@@ -58,9 +67,10 @@ class YearInput(SelectInput):
 				smax = 9999
 			smin = smax - self.show_years
 			self.set_selectable_data(self.years_data(smin, smax))
-			self.dropdown.open()
+			self.reopen = True
 			return
 		super().dropdown_select(o,d)
+		self.reopen = False
 
 	def setValue(self, v):
 		super().setValue(v)
@@ -69,17 +79,14 @@ class YearInput(SelectInput):
 class DateInput(HBox):
 	def __init__(self, allow_copy=True, **kw):
 		print('DateInput():kw=', kw)
-		kw['size_hint_y'] = None
-		kw['height'] = CSize(3)
+		self.datetype = 'yyyy-mm-dd'
 		kw['size_hint_x'] = None
 		kw['width'] = 10
 		super(DateInput, self).__init__(**kw)
 		self.register_event_type('on_changed')
 		self.old_datestr = None
 		value = kw.get('value',kw.get('defautvalue',curDateString()))
-		y = int(value[:4])
-		m = int(value[5:7])
-		d = int(value[9:10])
+		y, m, d = self.str2ymd(value)
 		months_data = []
 		days_data = []
 		for i in range(12):
@@ -96,7 +103,7 @@ class DateInput(HBox):
 			})
 		self.days_data = days_data
 		self.yw = YearInput(data=[],
-						size_hint_x=None, width=4)
+						size_hint_x=None, width=3.6)
 		self.mw = SelectInput(size_hint_x=None, width=2,
 						data=months_data)
 		self.dw = SelectInput( size_hint_x=None, width=2,
@@ -114,6 +121,32 @@ class DateInput(HBox):
 		self.yw.bind(on_changed=self.data_changed)
 		self.mw.bind(on_changed=self.data_changed)
 		self.dw.bind(on_changed=self.data_changed)
+		self.on_size()
+
+	def on_size(self, *args):
+		if not hasattr(self, 'yw'):
+			return 
+		self.yw.height = self.height
+		self.mw.height = self.height
+		self.dw.height = self.height
+
+	def str2ymd(self, datestr):
+		if len(datestr) == 8:
+			self.datetype = 'yyyymmdd'
+			y = int(datestr[:4])
+			m = int(datestr[4:6])
+			d = int(datestr[6:8])
+			return y, m, d
+		self.datetype = 'yyyy-mm-dd'
+		y = int(datestr[:4])
+		m = int(datestr[5:7])
+		d = int(datestr[9:10])
+		return y, m, d
+
+	def ymd2str(self, y, m, d):
+		if self.datetype == 'yyyymmdd':
+			return '%4d%02d%02d' % (y,m,d)
+		return '%04d-%02d-%02d' % (y, m, d)
 
 	def data_changed(self, o, d):
 		y = self.yw.getValue()
@@ -124,7 +157,7 @@ class DateInput(HBox):
 			data = self.days_data[:mdays]
 			self.dw.set_selectable_data(data)
 		if d <= mdays and d>0:
-			datestr = '%d-%02d-%02d' % (y,m,d)
+			datestr = self.ymd2str(y,m,d)
 			if self.old_datestr != datestr:
 				self.old_datestr = datestr
 				self.dispatch('on_changed', datestr)
@@ -138,14 +171,12 @@ class DateInput(HBox):
 		d = self.dw.getValue()
 		mdays = monthMaxDay(y,m)
 		if d <= mdays and d>0:
-			return '%d-%02d-%02d' % (y,m,d)
+			return self.ymd2str(y,m,d)
 		return None
 
 	def setValue(self, datestr):
 		self.old_value = datestr
-		y = int(datestr[:4])
-		m = int(datestr[5:7])
-		d = int(datestr[9:10])
+		y, m, d = self.str2ymd(datestr)
 		self.yw.setValue(y)
 		self.mw.setValue(m)
 		self.dw.setValue(d)
