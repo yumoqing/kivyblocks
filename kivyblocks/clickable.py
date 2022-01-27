@@ -13,7 +13,7 @@ from kivyblocks.bgcolorbehavior import BGColorBehavior
 from kivyblocks.utils import CSize, SUPER, blockImage
 from kivyblocks.baseWidget import Box, Text
 from kivyblocks.widget_css import WidgetCSS
-from kivyblocks.uitype import view_register, input_register, get_value
+from .uitype.factory import UiFactory, get_value
 
 class TinyText(Text):
 	def __init__(self, **kw):
@@ -286,8 +286,7 @@ def build_checkbox(desc, rec=None):
 	x = SingleCheckBox(select_state=v)
 	return x
 
-view_register('checkbox', build_checkbox)
-input_register('checkbox', build_checkbox)
+UiFactory.register('checkbox', build_checkbox, build_checkbox)
 
 r = Factory.register
 r('TinyText', TinyText)

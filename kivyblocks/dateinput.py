@@ -140,7 +140,7 @@ class DateInput(HBox):
 		self.datetype = 'yyyy-mm-dd'
 		y = int(datestr[:4])
 		m = int(datestr[5:7])
-		d = int(datestr[9:10])
+		d = int(datestr[8:10])
 		return y, m, d
 
 	def ymd2str(self, y, m, d):
@@ -175,6 +175,8 @@ class DateInput(HBox):
 		return None
 
 	def setValue(self, datestr):
+		if datestr == '':
+			datestr = curDateString()
 		self.old_value = datestr
 		y, m, d = self.str2ymd(datestr)
 		self.yw.setValue(y)

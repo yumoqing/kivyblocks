@@ -1,35 +1,42 @@
 
+from math import floor
+from kivy.properties import NumericProperty
 from kivy.utils import platform
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 from kivy.graphics import Color, Ellipse,Rectangle
 from kivy.clock import Clock
-from .utils import CSize, isHandHold
+from .utils import CSize, isHandHold, show_widget_info
 
 class VResponsiveLayout(ScrollView):
-	def __init__(self,box_width,cols, **kw):
-		self.org_box_width = box_width
-		self.org_cols = cols
-		self.box_width = box_width
-		self.box_cols = cols
+	box_width = NumericProperty(1)
+	def __init__(self, **kw):
+		self._inner = None
 		super(VResponsiveLayout, self).__init__(**kw)
 		self.options = kw
-		self._inner = GridLayout(cols=self.org_cols, padding=2, 
+		self._inner = GridLayout(cols=1, padding=2, 
 						spacing=2,size_hint=(1,None))
+		self._inner.col_force_default = True
+		self._inner.col_default_width = self.box_width
 		super(VResponsiveLayout,self).add_widget(self._inner)
 		self._inner.bind(
 				minimum_height=self._inner.setter('height'))
-		self.sizeChangedTask = None
+		self.setCols()
 		self.bind(pos=self.setCols,size=self.setCols)
 	
+	def on_box_width(self, *args):
+		if not self._inner:
+			return
+		self._inner.col_default_width = self.box_width
+		for w in self._inner.children:
+			w.size_hint_x = None
+			w.width = self.box_width
+		self.setCols()
+
 	def on_orientation(self,o):
 		self.setCols()
 
 	def add_widget(self,widget,**kw):
-		width = self.box_width
-		if hasattr(widget, 'cols'):
-			width = widget.cols * self.box_width
-		widget.width = width
 		a = self._inner.add_widget(widget,**kw)
 		return a
 
@@ -41,13 +48,13 @@ class VResponsiveLayout(ScrollView):
 		return a
 
 	def setCols(self,*args):
-		cols = round(self.width / self.org_box_width)
+		cols = floor(self.width / self.box_width)
 		if cols < 1:
 			cols = 1
-		if isHandHold() and self.width < self.height and self.org_cols >= 2:
-			cols = 2
-		box_width = self.width / cols - 2
 		self._inner.cols = cols
-		for w in self._inner.children:
-			w.width = box_width
+		#print(self.width, self._inner.width, self.box_width, cols, cols * self.box_width)
+		#for c in self.children[:2]:
+		#	show_widget_info(c)
+		#	for c1 in c.children:
+		#		show_widget_info(c1)
 

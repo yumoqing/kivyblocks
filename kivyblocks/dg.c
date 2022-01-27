@@ -1607,7 +1607,6 @@ static const char __pyx_k_row_id[] = "row_id";
 static const char __pyx_k_select[] = "select";
 static const char __pyx_k_tailer[] = "tailer";
 static const char __pyx_k_target[] = "target";
-static const char __pyx_k_uitype[] = "uitype";
 static const char __pyx_k_update[] = "update";
 static const char __pyx_k_valign[] = "valign";
 static const char __pyx_k_Factory[] = "Factory";
@@ -1648,6 +1647,7 @@ static const char __pyx_k_setWidth[] = "setWidth";
 static const char __pyx_k_vertical[] = "vertical";
 static const char __pyx_k_BoxLayout[] = "BoxLayout";
 static const char __pyx_k_Rectangle[] = "Rectangle";
+static const char __pyx_k_UiFactory[] = "UiFactory";
 static const char __pyx_k_WidgetCSS[] = "WidgetCSS";
 static const char __pyx_k_bar_width[] = "bar_width";
 static const char __pyx_k_cell_type[] = "cell_type";
@@ -1759,6 +1759,7 @@ static const char __pyx_k_on_scroll_stop[] = "on_scroll_stop";
 static const char __pyx_k_row_normal_css[] = "row_normal_css";
 static const char __pyx_k_selected_rowid[] = "selected_rowid";
 static const char __pyx_k_tailer_widgets[] = "tailer_widgets";
+static const char __pyx_k_uitype_factory[] = "uitype.factory";
 static const char __pyx_k_BGColorBehavior[] = "BGColorBehavior";
 static const char __pyx_k_Body_delRowById[] = "Body.delRowById";
 static const char __pyx_k_Body_getRowData[] = "Body.getRowData";
@@ -1935,6 +1936,7 @@ static PyObject *__pyx_n_s_StringProperty;
 static PyObject *__pyx_n_s_Text;
 static PyObject *__pyx_n_s_TimeCost;
 static PyObject *__pyx_n_s_Toolbar;
+static PyObject *__pyx_n_s_UiFactory;
 static PyObject *__pyx_n_s_VBox;
 static PyObject *__pyx_n_s_WidgetCSS;
 static PyObject *__pyx_n_s_WidgetReady;
@@ -2171,7 +2173,7 @@ static PyObject *__pyx_n_s_time;
 static PyObject *__pyx_n_s_toolbar;
 static PyObject *__pyx_n_s_toolbar_2;
 static PyObject *__pyx_n_s_txt;
-static PyObject *__pyx_n_s_uitype;
+static PyObject *__pyx_n_s_uitype_factory;
 static PyObject *__pyx_n_s_ujson;
 static PyObject *__pyx_n_s_unselect_row;
 static PyObject *__pyx_n_s_unselected;
@@ -2937,7 +2939,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
  * 			self.cell_type = 'header'
  * 		else:
  * 			self.cell_type = 'data'             # <<<<<<<<<<<<<<
- * 			bl = build_view_widget(desc,self.row.row_data)
+ * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)
  * 		self.colume_name = desc['name']
  */
   /*else*/ {
@@ -2946,43 +2948,46 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
     /* "kivyblocks/dg.pyx":72
  * 		else:
  * 			self.cell_type = 'data'
- * 			bl = build_view_widget(desc,self.row.row_data)             # <<<<<<<<<<<<<<
+ * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)             # <<<<<<<<<<<<<<
  * 		self.colume_name = desc['name']
  * 		if bl:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_build_view_widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_UiFactory); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_build_view_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_row_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_row_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = NULL;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = NULL;
     __pyx_t_7 = 0;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_1)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_1);
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_4)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_4);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
         __pyx_t_7 = 1;
       }
     }
     #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_4)) {
-      PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_desc, __pyx_t_2};
-      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (PyFunction_Check(__pyx_t_1)) {
+      PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_v_desc, __pyx_t_2};
+      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-      PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_desc, __pyx_t_2};
-      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
+      PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_v_desc, __pyx_t_2};
+      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
@@ -2990,8 +2995,8 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
     {
       __pyx_t_3 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      if (__pyx_t_1) {
-        __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1); __pyx_t_1 = NULL;
+      if (__pyx_t_4) {
+        __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
       }
       __Pyx_INCREF(__pyx_v_desc);
       __Pyx_GIVEREF(__pyx_v_desc);
@@ -2999,11 +3004,11 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_7, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_bl = __pyx_t_5;
     __pyx_t_5 = 0;
   }
@@ -3011,7 +3016,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
 
   /* "kivyblocks/dg.pyx":73
  * 			self.cell_type = 'data'
- * 			bl = build_view_widget(desc,self.row.row_data)
+ * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)
  * 		self.colume_name = desc['name']             # <<<<<<<<<<<<<<
  * 		if bl:
  * 			self.add_widget(bl)
@@ -3022,7 +3027,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "kivyblocks/dg.pyx":74
- * 			bl = build_view_widget(desc,self.row.row_data)
+ * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)
  * 		self.colume_name = desc['name']
  * 		if bl:             # <<<<<<<<<<<<<<
  * 			self.add_widget(bl)
@@ -3038,27 +3043,27 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
  * 
  * class Row(BoxLayout):
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_1);
       if (likely(__pyx_t_3)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
         __Pyx_INCREF(__pyx_t_3);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
       }
     }
-    __pyx_t_5 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_3, __pyx_v_bl) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_bl);
+    __pyx_t_5 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_v_bl) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_bl);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
     /* "kivyblocks/dg.pyx":74
- * 			bl = build_view_widget(desc,self.row.row_data)
+ * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)
  * 		self.colume_name = desc['name']
  * 		if bl:             # <<<<<<<<<<<<<<
  * 			self.add_widget(bl)
@@ -17656,6 +17661,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Text, __pyx_k_Text, sizeof(__pyx_k_Text), 0, 0, 1, 1},
   {&__pyx_n_s_TimeCost, __pyx_k_TimeCost, sizeof(__pyx_k_TimeCost), 0, 0, 1, 1},
   {&__pyx_n_s_Toolbar, __pyx_k_Toolbar, sizeof(__pyx_k_Toolbar), 0, 0, 1, 1},
+  {&__pyx_n_s_UiFactory, __pyx_k_UiFactory, sizeof(__pyx_k_UiFactory), 0, 0, 1, 1},
   {&__pyx_n_s_VBox, __pyx_k_VBox, sizeof(__pyx_k_VBox), 0, 0, 1, 1},
   {&__pyx_n_s_WidgetCSS, __pyx_k_WidgetCSS, sizeof(__pyx_k_WidgetCSS), 0, 0, 1, 1},
   {&__pyx_n_s_WidgetReady, __pyx_k_WidgetReady, sizeof(__pyx_k_WidgetReady), 0, 0, 1, 1},
@@ -17892,7 +17898,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_toolbar, __pyx_k_toolbar, sizeof(__pyx_k_toolbar), 0, 0, 1, 1},
   {&__pyx_n_s_toolbar_2, __pyx_k_toolbar_2, sizeof(__pyx_k_toolbar_2), 0, 0, 1, 1},
   {&__pyx_n_s_txt, __pyx_k_txt, sizeof(__pyx_k_txt), 0, 0, 1, 1},
-  {&__pyx_n_s_uitype, __pyx_k_uitype, sizeof(__pyx_k_uitype), 0, 0, 1, 1},
+  {&__pyx_n_s_uitype_factory, __pyx_k_uitype_factory, sizeof(__pyx_k_uitype_factory), 0, 0, 1, 1},
   {&__pyx_n_s_ujson, __pyx_k_ujson, sizeof(__pyx_k_ujson), 0, 0, 1, 1},
   {&__pyx_n_s_unselect_row, __pyx_k_unselect_row, sizeof(__pyx_k_unselect_row), 0, 0, 1, 1},
   {&__pyx_n_s_unselected, __pyx_k_unselected, sizeof(__pyx_k_unselected), 0, 0, 1, 1},
@@ -19608,7 +19614,7 @@ if (!__Pyx_RefNanny) {
  * from .toolbar import Toolbar
  * from .bgcolorbehavior import BGColorBehavior             # <<<<<<<<<<<<<<
  * from .widget_css import WidgetCSS
- * from .uitype import build_view_widget
+ * from .uitype.factory import UiFactory
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -19628,7 +19634,7 @@ if (!__Pyx_RefNanny) {
  * from .toolbar import Toolbar
  * from .bgcolorbehavior import BGColorBehavior
  * from .widget_css import WidgetCSS             # <<<<<<<<<<<<<<
- * from .uitype import build_view_widget
+ * from .uitype.factory import UiFactory
  * 
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
@@ -19648,26 +19654,26 @@ if (!__Pyx_RefNanny) {
   /* "kivyblocks/dg.pyx":33
  * from .bgcolorbehavior import BGColorBehavior
  * from .widget_css import WidgetCSS
- * from .uitype import build_view_widget             # <<<<<<<<<<<<<<
+ * from .uitype.factory import UiFactory             # <<<<<<<<<<<<<<
  * 
  * class BLabel(ButtonBehavior, Text):
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_n_s_build_view_widget);
-  __Pyx_GIVEREF(__pyx_n_s_build_view_widget);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_build_view_widget);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_uitype, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_INCREF(__pyx_n_s_UiFactory);
+  __Pyx_GIVEREF(__pyx_n_s_UiFactory);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_UiFactory);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_uitype_factory, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_build_view_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_UiFactory); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_build_view_widget, __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_UiFactory, __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "kivyblocks/dg.pyx":35
- * from .uitype import build_view_widget
+ * from .uitype.factory import UiFactory
  * 
  * class BLabel(ButtonBehavior, Text):             # <<<<<<<<<<<<<<
  * 	def __init__(self, **kw):
@@ -19703,7 +19709,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "kivyblocks/dg.pyx":35
- * from .uitype import build_view_widget
+ * from .uitype.factory import UiFactory
  * 
  * class BLabel(ButtonBehavior, Text):             # <<<<<<<<<<<<<<
  * 	def __init__(self, **kw):

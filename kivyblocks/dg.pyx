@@ -30,7 +30,7 @@ from .ready import WidgetReady
 from .toolbar import Toolbar
 from .bgcolorbehavior import BGColorBehavior
 from .widget_css import WidgetCSS
-from .uitype import build_view_widget
+from .uitype.factory import UiFactory
 
 class BLabel(ButtonBehavior, Text):
 	def __init__(self, **kw):
@@ -69,7 +69,7 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 			self.cell_type = 'header'
 		else:
 			self.cell_type = 'data'
-			bl = build_view_widget(desc,self.row.row_data) 
+			bl = UiFactory.build_view_widget(desc,self.row.row_data) 
 		self.colume_name = desc['name']
 		if bl:
 			self.add_widget(bl)

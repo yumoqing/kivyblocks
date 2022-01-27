@@ -74,6 +74,20 @@ def loading(parent):
 	view.open()
 	return view
 
+def set_widget_width(self, width):
+	if width <= 1:
+		self.size_hint_x = width
+	else:
+		self.size_hint_x = None
+		self.width = width
+
+def set_widget_height(self, height):
+	if height <= 1:
+		self.size_hint_y = height
+	else:
+		self.size_hint_y = None
+		self.height = height
+
 def setSizeOptions(desc,kw):
 	"""
 	desc's width, and height to setup a widget's size options 
@@ -217,5 +231,5 @@ def absurl(url,parent):
 
 def show_widget_info(w, tag='DEBUG'):
 	id = getattr(w, 'widget_id', 'null')
-	msg=f"""{tag}:size_hint={w.size_hint},size={w.size},pos={w.pos},widget_id={id}"""
+	msg=f"""{tag}:size_hint={w.size_hint},size={w.size},pos={w.pos},widget_id={id},{w}"""
 	Logger.info(msg)

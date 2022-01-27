@@ -1,14 +1,13 @@
 from kivy.utils import platform
 from .binstateimage import BinStateImage
 from .jsoncodeinput import JsonCodeInput
-from .inputext import FloatInput,IntegerInput,StrInput,SelectInput, BoolInput, AmountInput, Password
+from .inputext import FloatInput,IntegerInput,StrInput,SelectInput, BoolInput, Password
 from .scrollwidget import ScrollWidget
 from .messager import Messager
 __all__ = [
 BinStateImage,
 JsonCodeInput,
 FloatInput,
-AmountInput,
 Password,
 BoolInput,
 IntegerInput,

@@ -3,10 +3,15 @@ from kivy.factory import Factory
 from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.image import AsyncImage
 from .utils import *
-from .baseWidget import Modal, Text, HBox,VBox
+from .baseWidget import Modal, Text, HBox,VBox, TimedModal
 from .widget_css import register_css
 from .clickable import ClickableIconText
 from .toggleitems import PressableBox
+
+error_default_title_css = {
+	"bgcolor":[0.88,0,0,1],
+	"fgcolor":[0.12,0.12,0.12,1]
+}
 
 conform_default_title_css = {
 	"bgcolor":[0.88,0.88,0.88,1],
@@ -28,9 +33,52 @@ cancel_button_default_css = {
 }
 
 register_css('conform_default_title_css', conform_default_title_css)
+register_css('message_default_title_css', conform_default_title_css)
+register_css('error_default_title_css', error_default_title_css)
 register_css('conform_default_body_css', conform_default_body_css)
+register_css('message_default_body_css', conform_default_body_css)
 register_css('conform_button_default_css', conform_button_default_css)
 register_css('cancel_button_default_css', cancel_button_default_css)
+
+class Message(TimedModal):
+	title = StringProperty(None)
+	default_title = 'Message'
+	default_message = 'Message'
+	title_icon = StringProperty(blockImage('info.png'))
+	message = StringPrperty(None)
+	body_css = StringProperty('message_default_body_css')
+	title_css = StringProperty('message_default_title_css')
+	def __init__(self, **kw):
+		SUPER(Message, self, kw)
+		b = VBox(csscls=self.title_css)
+		b1 = HBox(size_hint_y=None, height=CSize(2))
+		b1.add_widget(AsyncImage(source=self.title_icon,
+									size_hint=[None,None],
+									height=CSize(1.2),
+									width=CSize(1.2)))
+		b1.add_widget(Text(otext=self.title or self.default_title,
+									font_size=CSize(1.2),
+									i18n=True,
+									wrap=True,
+									halign='left',
+									valign='center',
+									))
+		b.add_widget(b1)
+		b2 = HBox(csscls=self.body_css)
+		b2.add_widget(Text(text=self.message or self.default_message,
+									i18n=True,
+									wrap=True,
+									halign='left',
+									size_hint=(1,1),
+									font_size=CSize(1)))
+		b.add_widget(b2)
+		self.add_widget(b)
+		
+class Error(Message):
+	default_title = 'Error'
+	default_message = 'Error message'
+	title_icon = StringProperty(blockImage('error.png'))
+	title_css = StringProperty('error_default_title_css')
 
 class Conform(Modal):
 	title = StringProperty(None)

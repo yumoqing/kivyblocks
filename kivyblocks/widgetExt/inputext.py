@@ -10,10 +10,11 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.switch import Switch
 from kivy.metrics import sp,dp
 from kivy.app import App
-from kivy.properties import BooleanProperty, ListProperty
+from kivy.properties import BooleanProperty, ListProperty, \
+			NumericProperty
 
 from ..threadcall import HttpClient
-from ..utils import CSize
+from ..utils import CSize, set_widget_height, set_widget_width
 from ..widget_css import WidgetCSS, get_css
 
 class BoolInput(Switch):
@@ -34,12 +35,11 @@ class BoolInput(Switch):
 	def setValue(self,v):
 		self.active = v
 	
-class StrInput(TextInput):
-	def __init__(self,csscls='default',
-				**kv):
+class StrInput(WidgetCSS, TextInput):
+	length = NumericProperty(None)
+	def __init__(self, **kv):
 		if kv is None:
 			kv = {}
-		css = get_css(csscls)
 		a = {
 			"allow_copy":True,
 			"password":False,
@@ -51,25 +51,16 @@ class StrInput(TextInput):
 			"write_tab":False
 		}
 		a.update(kv)
-		a['background_color'] = css['bgcolor']
-		a['foreground_color'] = css['fgcolor']
-		w = kv.get('width',1)
-		h = kv.get('height',1)
-		if w <= 1:
-			a['size_hint_x'] = w
-		else:	
-			a['size_hint_x'] = None
-			a['width'] = CSize(w)
-		if h <= 1:
-			a['size_hint_y'] = h
-		else:
-			a['size_hint_y'] = None
-			a['height'] = CSize(h)
-
 		super(StrInput, self).__init__(**a)
 		self.text = self.old_value = ''
 		self.register_event_type('on_changed')
 		self.bind(on_text_validate=self.checkChange)
+
+	def on_bgcolor(self, *args):
+		self.background_color = self.bgcolor
+
+	def on_fgcolor(self, *args):
+		self.foreground_color = self.fgcolor
 
 	def on_changed(self,v=None):
 		pass
@@ -80,6 +71,14 @@ class StrInput(TextInput):
 			self.old_value = v
 			self.dispatch('on_changed',v)
 
+	def insert_text(self, substring, from_undo=False):
+		if self.length:
+			if len(self.text) + len(substring) > self.length:
+				return None
+		ret = super().insert_text(substring, from_undo=from_undo)
+		# ret is None
+		return ret
+
 	def getValue(self):
 		return self.text
 
@@ -89,11 +88,10 @@ class StrInput(TextInput):
 		self.text = str(v)
 		self.old_value = self.text
 		
-
 class Password(StrInput):
 	def __init__(self, **kw):
-		kw['password'] = True
 		super().__init__(**kw)
+		self.password = True
 
 class IntegerInput(StrInput):
 	def __init__(self,**kw):
@@ -101,49 +99,23 @@ class IntegerInput(StrInput):
 		a.update(kw)
 		a['halign'] = 'right'
 		super().__init__(**a)
+		self.input_filter = 'int'
 
-	pat = re.compile('[^0-9]')
-	def insert_text(self, substring, from_undo=False):
-		pat = self.pat
-		s = re.sub(pat, '', substring)
-		return StrInput.insert_text(self,s, from_undo=from_undo)
-	
 	def on_focus(self,t,v):
 		self.cursor = (0,len(self.text))
 
+	def getValue(self):
+		return int(self.text)
+
 class FloatInput(IntegerInput):
-	pat = re.compile('[^0-9]')
-	def filter(self,substring):
-		pat = self.pat
-		if '.' in self.text:
-			s = re.sub(pat, '', substring)
-		else:
-			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
-		return s
+	dec = NumericProperty(2)
+	def __init__(self,**kw):
+		super(FloatInput, self).__init__(**kw)
+		self.input_filter = 'float'
 
-	def insert_text(self, substring, from_undo=False):
-		s = self.filter(substring)
-		return StrInput.insert_text(self,s, from_undo=from_undo)
+	def getValue(self):
+		return float(self.text)
 
-class AmountInput(FloatInput):
-	def filter(self,substring):
-		s = super(AmountInput,self).filter(substring)
-		a = s.split('.')
-		b = a[0]
-		if len(b)>3:
-			k = []
-			while len(b)>3:
-				x = b[-3:]
-				k.insert(0,x)
-				b = b[:-3]
-			a[0] = ','.join(k)
-		s = '.'.join(a)
-		return '.'.join(a)
-
-	def insert_text(self, substring, from_undo=False):
-		s = self.filter(substring)
-		return StrInput.insert_text(self,s, from_undo=from_undo)
-			
 class MyDropDown(DropDown):
 	def __init__(self,csscls='input', **kw):
 		super(MyDropDown,self).__init__()

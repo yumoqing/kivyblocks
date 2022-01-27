@@ -63,7 +63,7 @@ from .widgetExt.scrollwidget import ScrollWidget
 from .widgetExt.binstateimage import BinStateImage
 from .widgetExt.jsoncodeinput import JsonCodeInput
 from .widgetExt.inputext import FloatInput,IntegerInput, \
-		StrInput,SelectInput, BoolInput, AmountInput
+		StrInput,SelectInput, BoolInput, Password
 from .widgetExt.messager import Messager
 from .charts.bar import Bar
 from .bgcolorbehavior import BGColorBehavior

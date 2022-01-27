@@ -155,7 +155,6 @@ class Toolbar(ScrollPanel):
 			w.bind(on_press=self.tool_press)
 			w.bind(minimum_width=w.setter('width'))
 			w.bind(minimum_height=w.setter('height'))
-		print(w, 'children=', len(w.children))
 
 	def delete_tool(self, o):
 		w, t = o.data

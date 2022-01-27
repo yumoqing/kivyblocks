@@ -1,9 +1,11 @@
+from math import floor
 from kivy.factory import Factory
 from kivy.properties import NumericProperty, StringProperty, \
 		DictProperty, ListProperty, OptionProperty, BooleanProperty
 from kivy.logger import Logger
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.stacklayout import StackLayout
 from kivy.core.window import Window
 from kivy.graphics import Color
 from .responsivelayout import VResponsiveLayout
@@ -16,7 +18,7 @@ from .dataloader import DataGraber
 from .ready import WidgetReady
 from .widget_css import WidgetCSS
 from .dateinput import DateInput
-from .uitype import get_input_builder
+from .uitype.factory import UiFactory      # import get_input_builder
 
 """
 form options
@@ -58,7 +60,6 @@ class InputBox(BoxLayout):
 		self.options = options
 		self.uitype = options.get('uitype',options.get('datatype','str'))
 		self.size_hint = (None, None)
-		width = self.form.inputwidth
 		height = self.form.inputheight
 		if self.uitype == 'text':
 			if not options.get('height'):
@@ -74,16 +75,21 @@ class InputBox(BoxLayout):
 		else:
 			kwargs['size_hint_y'] = None
 			kwargs['height'] = CSize(height)
-		if width <= 1:
-			kwargs['size_hint_x'] = width
+		if self.form.input_width <= 1:
+			kwargs['size_hint_x'] = self.form.input_width
 		else:
 			kwargs['size_hint_x'] = None
-			kwargs['width'] = CSize(width)
+			kwargs['width'] = self.form.input_width
 		super().__init__(**kwargs)
 		self.initflag = False
-		self.bind(size=self.setSize,
-					pos=self.setSize)
 		self.register_event_type("on_datainput")
+		self.init()
+	
+	def focus_act(self, *args):
+		show_widget_info(self,'test')
+		show_widget_info(self.labeltext,'test')
+		show_widget_info(self.input_widget,'test')
+		
 
 	def on_size(self, *args):
 		if self.input_widget is None:
@@ -97,6 +103,10 @@ class InputBox(BoxLayout):
 
 		self.input_widget.size_hint_x = None
 		self.input_widget.width = self.width - self.labeltext.width - CSize(1)
+		show_widget_info(self,'test')
+		show_widget_info(self.labeltext,'test')
+		show_widget_info(self.input_widget,'test')
+
 	def on_datainput(self,o,v=None):
 		print('on_datainput fired ...',o,v)
 
@@ -104,44 +114,42 @@ class InputBox(BoxLayout):
 		if self.initflag:
 			return
 		i18n = I18n()
-		opts = {
-			"orientation":"horizontal",
-			"size_hint_y":None,
-			"height":CSize(self.form.inputheight)
-		}
-		if self.form.inputwidth > 1:
-			opts['size_hint_x'] = None
-			opts['width'] = CSize(self.form.inputwidth)
-		else:
-			opts['size_hint_x'] = self.form.inputwidth
-
-		bl = BoxLayout(**opts)
-		self.add_widget(bl)
 		label = self.options.get('label',self.options.get('name'))
 		kwargs = {
 			"i18n":True,
 			"otext":label,
 			"font_size":CSize(1),
 		}
-		if self.form.labelwidth < 1:
+		if self.form.labelwidth <= 1:
 			kwargs['size_hint_x'] = self.form.labelwidth
 		else:
 			kwargs['size_hint_x'] = None
 			kwargs['width'] = CSize(self.form.labelwidth)
 
 		self.labeltext = Text(**kwargs)
-		bl.add_widget(self.labeltext)
+		self.add_widget(self.labeltext)
 		if self.options.get('required',False):
 			star = Label(text='*',
 						color=(1,0,0,1),
 						size_hint_x=None,
 						width=CSize(1))
-			bl.add_widget(star)
+			self.add_widget(star)
 		
 		options = self.options.copy()
 		options['hint_text'] = i18n(self.options.get('hint_text'))
-		f = get_input_builder(self.uitype)
-		self.input_widget = f(options)
+		options['size_hint_y'] = None
+		options['height'] = self.height
+		print('options=', options)
+		self.input_widget = UiFactory.build_input_widget(options)
+		
+		print('inputw.height=',self.input_widget.height)
+		try:
+			self.input_widget.bind(focus=self.focus_act)
+		except:
+			pass
+		self.input_widget.height = self.height
+		self.input_widget.size_hint_y = None
+
 		if self.form.labelwidth < 1:
 			self.input_widget.size_hint_x = 1 - self.form.labelwidth
 		else:
@@ -186,9 +194,6 @@ class InputBox(BoxLayout):
 			if self.old_value != o.text:
 				self.dispatch('on_datainput',o.text)
 		
-	def setSize(self,o,v=None):
-		self.init()
-	
 	def setValue(self,v):
 		self.input_widget.setValue(v)
 	
@@ -225,7 +230,7 @@ def defaultToolbar():
 	}
 
 class Form(WidgetCSS, WidgetReady, BoxLayout):
-	cols = NumericProperty(1)
+	cols = NumericProperty(None)
 	csscls=StringProperty('formcss')
 	input_css=StringProperty('formfieldcss')
 	inputwidth=NumericProperty(1)
@@ -239,21 +244,59 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 	submit=DictProperty(None)
 	clear=DictProperty(None)
 	notoolbar=BooleanProperty(False)
-	def __init__(self,
-					**options):
+	def __init__(self, **options):
+		self.cols = 1
 		if self.toolbar_at in ['top','bottom']:
 			options['orientation'] = 'vertical'
 		else:
 			options['orientation'] = 'horizontal'
 		SUPER(Form, self, options)
-		if self.inputwidth <= 1:
-			self.cols = 1
-		self.options_cols = self.cols
-		if isHandHold() and Window.width < Window.height:
-			self.cols = 1
-		self.options = options
+		self.setup_cols_and_inputwidth()
 		self.init()
 		self.register_event_type('on_submit')
+
+	def setup_cols_and_inputwidth(self):
+		if isHandHold() and Window.width < Window.height:
+			self._cols = 1
+			self.input_width = 1
+			print('1-inputwidth=', self.inputwidth,
+				'input_width=',self.input_width,
+				'CSize(1)=', CSize(1))
+			return
+		if self.cols is None and self.inputwidth is None:
+			self.input_width = 1
+			self._cols = 1
+			print('2-inputwidth=', self.inputwidth,
+				'input_width=',self.input_width,
+				'CSize(1)=', CSize(1))
+			return
+		if self.inputwidth > 1:
+			self.input_width = CSize(self.inputwidth)
+			self._cols = -1			# auto calculate
+			print('3-inputwidth=', self.inputwidth,
+				'input_width=',self.input_width,
+				'CSize(1)=', CSize(1), CSize(self.inputwidth))
+			return
+		if self.cols is not None:
+			self._cols = self.cols
+			if self.inputwidth is None:
+				self.input_width = -1
+			else:
+				self.input_width = CSize(self.inputwidth)
+			print('4-inputwidth=', self.inputwidth,
+				'input_width=',self.input_width,
+				'CSize(1)=', CSize(1))
+			return
+		self.input_width = -1
+		self._cols = 1
+		print('5-inputwidth=', self.inputwidth,
+				'input_width=',self.input_width,
+				'CSize(1)=', CSize(1), CSize(self.inputwidth))
+
+	def set_grid_attrs(self):
+		if self._cols == 1 and self.input_width <= 1:
+			self.input_width = self.width
+		self.fsc.box_width = self.input_width
 
 	def on_size(self, *args):
 		if not hasattr(self,'fsc'):
@@ -269,7 +312,7 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 				self.fsc.height = self.height
 			else:
 				self.fsc.width = self.width
-		self.fsc.org_box_width = self.width / self.options_cols
+		self.set_grid_attrs()
 
 	def init(self):
 		if not self.notoolbar:
@@ -303,8 +346,7 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 			
 		self.toolbar_w = Factory.Toolbar(**desc)
 		self.fsc = VResponsiveLayout(
-						self.inputwidth,
-						self.cols,
+						box_width = self.input_width,
 						size_hint=(1,1)
 		)
 
