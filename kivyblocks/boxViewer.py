@@ -24,20 +24,27 @@ from kivy.app import App
 from kivy.factory import Factory
 from kivy.utils import platform
 from kivy.uix.boxlayout import BoxLayout
-from kivy.graphics import Fbo
+from kivy.graphics import Fbo, Color, Rectangle
 from .responsivelayout import VResponsiveLayout
 from .toolbar import Toolbar
 from .paging import Paging, RelatedLoader
 from .utils import CSize
 from .ready import WidgetReady
+from .baseWidget import VBox
 
 
-class BoxViewer(WidgetReady, BoxLayout):
+class BoxViewer(VBox):
+	toolbar = DictProperty(None)
+	dataloader = DictProperty(None)
+	boxwidth = NumericProperty(0.48)
+	boxheight = NumericProperty(None)
+	viewer = DictProperty(None)
+	viewer_url = StringProperty(None)
+	viewer_css = StringProperty('viewer_css')
 	def __init__(self, **options):
 		self.options = options
 		self.subwidgets = []
 		self.toolbar = None
-		self.parenturl = None
 		self.dataloader = None
 		self.initflag = False
 		remind = ['toolbar',
@@ -45,44 +52,33 @@ class BoxViewer(WidgetReady, BoxLayout):
 				'orientation',
 				'boxwidth',
 				'boxheight',
-				'color_level',
-				'radius',
 				'viewer_url',
 				'viewer'
 				]
-		kwargs = {k:v for k,v in options.items() if k not in remind }
-		print('BoxViewer():kwargs=',kwargs)
-		BoxLayout.__init__(self, orientation='vertical', **kwargs)
-		WidgetReady.__init__(self)
+		SUPER(BoxViewer, self, options)
 		self.selected_data = None
-		self.radius = self.options.get('radius',[])
-		self.box_width = CSize(options['boxwidth'])
-		self.box_height = CSize(options['boxheight'])
+		self.box_width = CSize(self.boxwidth)
+		self.box_height = CSize(self.boxheight)
 		self.viewContainer = VResponsiveLayout(box_width=self.box_width)
-		if options.get('toolbar'):
-			self.toolbar = Toolbar(options['toolbar'])
-		lopts = options['dataloader'].copy()
-		if lopts.get('options'):
-			lopts = lopts.get('options')
+		if self.toolbar:
+			self.toolbar_w = Toolbar(self.toolbar)
+		lopts = self.dataloader.get('options', {}).copy()
 		self.dataloader = RelatedLoader(target=self,**lopts)
 		self.dataloader.bind(on_deletepage=self.deleteWidgets)
 		self.dataloader.bind(on_pageloaded=self.addPageWidgets)
 		self.dataloader.bind(on_newbegin=self.deleteAllWidgets)
-		self.params = self.options['dataloader']['options'].get('params',{})
+		self.params = lopts.get('params',{})
 
-		if self.toolbar:
-			self.add_widget(self.toolbar)
+		if self.toolbar_w:
+			self.add_widget(self.toolbar_w)
 		if self.dataloader.widget:
 			self.add_widget(self.dataloader.widget)
-			self.dataloader.bind(on_submit=self.getParams)
+			self.dataloader.widget.bind(on_submit=self.getParams)
 		self.add_widget(self.viewContainer)
 		self.register_event_type('on_selected')
 		self.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
-		# use_keyboard() will block the python
-		# no reason !!!!
-		# self.use_keyboard()
 
 	def key_handle(self,keyinfo):
 		print('keyinfo=',keyinfo,'...................')

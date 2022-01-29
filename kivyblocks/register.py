@@ -23,11 +23,7 @@ from .tab import TabsPanel
 from .qrdata import QRCodeWidget
 # from .kivycamera import KivyCamera
 from .filebrowser import FileLoaderBrowser
-from .graph import Graph, MeshLinePlot, MeshStemPlot, LinePlot, \
-	SmoothLinePlot, ContourPlot, BarPlot, HBar, VBar, ScatterPlot, \
-	PointPlot
 from .mapview import MapView
-from .chart2d import Chart2d
 from .message import Conform
 from .pagepanel import PagePanel
 from .markdown import Markdown
@@ -59,19 +55,7 @@ r('QrReader', QrReader)
 r('Markdown', Markdown)
 r('PagePanel', PagePanel)
 r('Conform', Conform)
-r('Chart2d', Chart2d)
 r('Popup', Popup)
-r('Graph', Graph)
-r('MeshLinePlot', MeshLinePlot)
-r('MeshStemPlot', MeshStemPlot)
-r('LinePlot', LinePlot)
-r('SmoothLinePlot', SmoothLinePlot)
-r('ContourPlot', ContourPlot)
-r('BarPlot', BarPlot)
-r('HBar', HBar)
-r('VBar', VBar)
-r('ScatterPlot', ScatterPlot)
-r('PointPlot', PointPlot)
 r('MapView', MapView)
 r('DataGrid',DataGrid)
 r('FileLoaderBrowser',FileLoaderBrowser)
