@@ -65,7 +65,6 @@ from .widgetExt.jsoncodeinput import JsonCodeInput
 from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, Password
 from .widgetExt.messager import Messager
-from .charts.bar import Bar
 from .bgcolorbehavior import BGColorBehavior
 from .utils import NeedLogin, InsufficientPrivilege, HTTPError
 from .login import LoginForm
