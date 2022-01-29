@@ -262,14 +262,7 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 			self.input_width = CSize(self.inputwidth)
 			self._cols = -1			# auto calculate
 			return
-		if self.cols is not None:
-			self._cols = self.cols
-			if self.inputwidth is None:
-				self.input_width = -1
-			else:
-				self.input_width = CSize(self.inputwidth)
-			return
-		self.input_width = -1
+		self.input_width = self.inputwidth
 		self._cols = 1
 
 	def set_grid_attrs(self):

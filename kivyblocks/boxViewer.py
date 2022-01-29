@@ -22,13 +22,15 @@ from functools import partial
 from appPublic.dictExt import dictExtend
 from kivy.app import App
 from kivy.factory import Factory
+from kivy.clock import Clock
 from kivy.utils import platform
 from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import Fbo, Color, Rectangle
+from kivy.properties import NumericProperty, StringProperty, DictProperty
 from .responsivelayout import VResponsiveLayout
 from .toolbar import Toolbar
 from .paging import Paging, RelatedLoader
-from .utils import CSize
+from .utils import CSize, SUPER
 from .ready import WidgetReady
 from .baseWidget import VBox
 
@@ -36,49 +38,52 @@ from .baseWidget import VBox
 class BoxViewer(VBox):
 	toolbar = DictProperty(None)
 	dataloader = DictProperty(None)
-	boxwidth = NumericProperty(0.48)
+	boxwidth = NumericProperty(None)
+	boxwidth_c = NumericProperty(None)
 	boxheight = NumericProperty(None)
+	boxheight_c = NumericProperty(None)
 	viewer = DictProperty(None)
 	viewer_url = StringProperty(None)
 	viewer_css = StringProperty('viewer_css')
 	def __init__(self, **options):
-		self.options = options
 		self.subwidgets = []
-		self.toolbar = None
-		self.dataloader = None
+		self.toolbar_w = None
+		self._dataloader = None
 		self.initflag = False
-		remind = ['toolbar',
-				'dataloader',
-				'orientation',
-				'boxwidth',
-				'boxheight',
-				'viewer_url',
-				'viewer'
-				]
 		SUPER(BoxViewer, self, options)
 		self.selected_data = None
-		self.box_width = CSize(self.boxwidth)
-		self.box_height = CSize(self.boxheight)
 		self.viewContainer = VResponsiveLayout(box_width=self.box_width)
 		if self.toolbar:
 			self.toolbar_w = Toolbar(self.toolbar)
 		lopts = self.dataloader.get('options', {}).copy()
-		self.dataloader = RelatedLoader(target=self,**lopts)
-		self.dataloader.bind(on_deletepage=self.deleteWidgets)
-		self.dataloader.bind(on_pageloaded=self.addPageWidgets)
-		self.dataloader.bind(on_newbegin=self.deleteAllWidgets)
+		self._dataloader = RelatedLoader(target=self,**lopts)
+		self._dataloader.bind(on_deletepage=self.deleteWidgets)
+		self._dataloader.bind(on_pageloaded=self.addPageWidgets)
+		self._dataloader.bind(on_newbegin=self.deleteAllWidgets)
 		self.params = lopts.get('params',{})
 
 		if self.toolbar_w:
 			self.add_widget(self.toolbar_w)
-		if self.dataloader.widget:
-			self.add_widget(self.dataloader.widget)
-			self.dataloader.widget.bind(on_submit=self.getParams)
+		if self._dataloader.widget:
+			self.add_widget(self._dataloader.widget)
+			self._dataloader.widget.bind(on_submit=self.getParams)
 		self.add_widget(self.viewContainer)
 		self.register_event_type('on_selected')
 		self.bind(size=self.resetCols,
 								pos=self.resetCols)
 		self.viewContainer.bind(on_scroll_stop=self.on_scroll_stop)
+
+	def on_boxheight(self, *args):
+		self.box_height = self.boxheight
+
+	def on_boxheight_c(self, *args):
+		self.box_height = CSize(self.boxheight_c)
+
+	def on_boxwidth_c(self, *args):
+		self.box_width = CSize(self.boxwidth_c)
+
+	def on_boxwidth(self, *args):
+		self.box_width = self.boxwidth
 
 	def key_handle(self,keyinfo):
 		print('keyinfo=',keyinfo,'...................')
@@ -91,7 +96,7 @@ class BoxViewer(VBox):
 		self.subwidgets = []
 	
 	def getShowRows(self):
-		wc = int(self.viewContainer.width / self.box_width)
+		wc = self.viewContainer.get_cols()
 		hc = int(self.viewContainer.height / self.box_height)
 		self.show_rows = wc * hc
 
@@ -140,14 +145,14 @@ class BoxViewer(VBox):
 
 		self.subwidgets += widgets
 
-		self.dataloader.bufferObjects(page, widgets)
-		x = self.dataloader.getLocater()
+		self._dataloader.bufferObjects(page, widgets)
+		x = self._dataloader.getLocater()
 		self.locater(x)
 
 	def loadData(self, **kw):
 		self.params = kw
 		self.deleteAllWidgets(None)
-		self.dataloader.loadPage(1)
+		self._dataloader.loadPage(1)
 		self.initflag = True
 
 	def deleteWidgets(self,o,data):
@@ -165,14 +170,14 @@ class BoxViewer(VBox):
 		h = 0
 		if self.toolbar:
 			h += self.toolbar.height
-		if self.dataloader.widget:
-			h += self.dataloader.widget.height
+		if self._dataloader.widget:
+			h += self._dataloader.widget.height
 		self.viewContainer.height = self.height - h
 
 		self.viewContainer.setCols()
 		self.getShowRows()
 		if not self.initflag:
-			self.dataloader.loadPage(1)
+			self._dataloader.loadPage(1)
 			self.initflag = True
 
 	def showObject(self, holders, rec,index=0):
@@ -195,17 +200,17 @@ class BoxViewer(VBox):
 		self.subwidgets.append(box)
 		holders.append(box)
 		desc = {}
-		if self.options.get('viewer_url'):
+		if self.viewer_url:
 			desc = {
 				"widgettype":"urlwidget",
 				"options":{
 					"params":rec,
 					"method":"GET",
-					"url":self.options.get('viewer_url')
+					"url":self.viewer_url
 				}
 			}
 		else:
-			desc = self.options.get('viewer').copy()
+			desc = self.viewer.copy()
 			if desc['widgettype'] == 'urlwidget':
 				desc = dictExtend(desc,{'options':{'params':rec}})
 			else:
@@ -219,9 +224,9 @@ class BoxViewer(VBox):
 
 	def on_scroll_stop(self,o,v=None):
 		if o.scroll_y <= 0.001:
-			self.dataloader.loadNextPage()
+			self._dataloader.loadNextPage()
 		if o.scroll_y >= 0.999:
-			self.dataloader.loadPreviousPage()
+			self._dataloader.loadPreviousPage()
 
 	def select_record(self,o,v=None):
 		for w in self.subwidgets:
@@ -236,7 +241,7 @@ class BoxViewer(VBox):
 			"caller":self,
 			"page_rows":1,
 			"page":self.selected_data['__posInSet__'],
-			"dataurl":self.options['dataloader']['options']['dataurl'],
+			"dataurl":self.dataloader['options']['dataurl'],
 			"params":self.params
 		}
 		return d
