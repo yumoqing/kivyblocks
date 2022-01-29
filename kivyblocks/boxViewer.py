@@ -58,7 +58,7 @@ class BoxViewer(WidgetReady, BoxLayout):
 		self.radius = self.options.get('radius',[])
 		self.box_width = CSize(options['boxwidth'])
 		self.box_height = CSize(options['boxheight'])
-		self.viewContainer = VResponsiveLayout(cols=2,box_width=self.box_width)
+		self.viewContainer = VResponsiveLayout(box_width=self.box_width)
 		if options.get('toolbar'):
 			self.toolbar = Toolbar(options['toolbar'])
 		lopts = options['dataloader'].copy()

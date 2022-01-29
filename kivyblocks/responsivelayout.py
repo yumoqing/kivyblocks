@@ -27,10 +27,13 @@ class VResponsiveLayout(ScrollView):
 	def on_box_width(self, *args):
 		if not self._inner:
 			return
-		self._inner.col_default_width = self.box_width
+		if self.box_width <= 1:
+			self._inner.col_default_width = self.width * self.box_width
+		else:
+			self._inner.col_default_width = self.box_width
 		for w in self._inner.children:
 			w.size_hint_x = None
-			w.width = self.box_width
+			w.width = self._inner.col_default_width
 		self.setCols()
 
 	def on_orientation(self,o):
@@ -48,7 +51,7 @@ class VResponsiveLayout(ScrollView):
 		return a
 
 	def setCols(self,*args):
-		cols = floor(self.width / self.box_width)
+		cols = floor(self.width / self._inner.col_default_width)
 		if cols < 1:
 			cols = 1
 		self._inner.cols = cols
