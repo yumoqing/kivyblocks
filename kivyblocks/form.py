@@ -86,9 +86,7 @@ class InputBox(BoxLayout):
 		self.init()
 	
 	def focus_act(self, *args):
-		show_widget_info(self,'test')
-		show_widget_info(self.labeltext,'test')
-		show_widget_info(self.input_widget,'test')
+		pass
 		
 
 	def on_size(self, *args):
@@ -103,12 +101,10 @@ class InputBox(BoxLayout):
 
 		self.input_widget.size_hint_x = None
 		self.input_widget.width = self.width - self.labeltext.width - CSize(1)
-		show_widget_info(self,'test')
-		show_widget_info(self.labeltext,'test')
-		show_widget_info(self.input_widget,'test')
 
 	def on_datainput(self,o,v=None):
-		print('on_datainput fired ...',o,v)
+		pass
+		#print('on_datainput fired ...',o,v)
 
 	def init(self):
 		if self.initflag:
@@ -139,10 +135,7 @@ class InputBox(BoxLayout):
 		options['hint_text'] = i18n(self.options.get('hint_text'))
 		options['size_hint_y'] = None
 		options['height'] = self.height
-		print('options=', options)
 		self.input_widget = UiFactory.build_input_widget(options)
-		
-		print('inputw.height=',self.input_widget.height)
 		try:
 			self.input_widget.bind(focus=self.focus_act)
 		except:
@@ -246,6 +239,7 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 	notoolbar=BooleanProperty(False)
 	def __init__(self, **options):
 		self.cols = 1
+		self.toolbar_w = None
 		if self.toolbar_at in ['top','bottom']:
 			options['orientation'] = 'vertical'
 		else:
@@ -259,23 +253,14 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 		if isHandHold() and Window.width < Window.height:
 			self._cols = 1
 			self.input_width = 1
-			print('1-inputwidth=', self.inputwidth,
-				'input_width=',self.input_width,
-				'CSize(1)=', CSize(1))
 			return
 		if self.cols is None and self.inputwidth is None:
 			self.input_width = 1
 			self._cols = 1
-			print('2-inputwidth=', self.inputwidth,
-				'input_width=',self.input_width,
-				'CSize(1)=', CSize(1))
 			return
 		if self.inputwidth > 1:
 			self.input_width = CSize(self.inputwidth)
 			self._cols = -1			# auto calculate
-			print('3-inputwidth=', self.inputwidth,
-				'input_width=',self.input_width,
-				'CSize(1)=', CSize(1), CSize(self.inputwidth))
 			return
 		if self.cols is not None:
 			self._cols = self.cols
@@ -283,15 +268,9 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 				self.input_width = -1
 			else:
 				self.input_width = CSize(self.inputwidth)
-			print('4-inputwidth=', self.inputwidth,
-				'input_width=',self.input_width,
-				'CSize(1)=', CSize(1))
 			return
 		self.input_width = -1
 		self._cols = 1
-		print('5-inputwidth=', self.inputwidth,
-				'input_width=',self.input_width,
-				'CSize(1)=', CSize(1), CSize(self.inputwidth))
 
 	def set_grid_attrs(self):
 		if self._cols == 1 and self.input_width <= 1:
@@ -344,16 +323,16 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 				desc['toolbar_orient'] = 'V'
 				desc['tool_orient'] = 'veritcal'
 			
-		self.toolbar_w = Factory.Toolbar(**desc)
+			self.toolbar_w = Factory.Toolbar(**desc)
 		self.fsc = VResponsiveLayout(
 						box_width = self.input_width,
 						size_hint=(1,1)
 		)
 
-		if self.toolbar_at in ['top', 'left'] and not self.notoolbar:
+		if self.toolbar_at in ['top', 'left'] and self.toolbar_w:
 			self.add_widget(self.toolbar_w)
 		self.add_widget(self.fsc)
-		if self.toolbar_at in ['bottom', 'right'] and not self.notoolbar:
+		if self.toolbar_at in ['bottom', 'right'] and self.toolbar_w:
 			self.add_widget(self.toolbar_w)
 		
 		self.fieldWidgets=[]
@@ -407,7 +386,6 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 		return True
 
 	def on_submit(self,o, v=None):
-		print('Form():on_submit fired ...',v)
 		return False
 
 	def on_submit_button(self,o,v=None):
@@ -466,5 +444,4 @@ class StrSearchForm(BoxLayout):
 			self.dispatch('on_submit',d)
 
 	def on_submit(self,v=None):
-		print('StrSearchForm():on_submit fired ..........')
-
+		pass

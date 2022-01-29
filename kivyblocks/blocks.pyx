@@ -332,7 +332,6 @@ class Blocks(EventDispatcher):
 			Logger.info('Block: get a null function,%s',str(desc))
 			return
 		w.bind(**{event:f})
-		# Logger.info('Block: %s bind built', str(desc))
 	
 	def multipleAction(self, widget:Widget, desc, *args):
 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
@@ -356,11 +355,6 @@ class Blocks(EventDispatcher):
 		w.open()
 
 	def uniaction(self, widget:Widget, desc, *args):
-		Logger.info('Block: uniaction() called, desc=%s, args=%s', \
-						str(desc),
-						args
-		)
-			
 		acttype = desc.get('actiontype')
 		if acttype=='blocks':
 			return self.blocksAction(widget,desc, *args)
@@ -415,7 +409,7 @@ class Blocks(EventDispatcher):
 			if isinstance(w, ModalView):
 				return
 
-			if target:
+			if target and not w.parent:
 				if add_mode == 'replace':
 					target.clear_widgets()
 				target.add_widget(w)
@@ -431,10 +425,6 @@ class Blocks(EventDispatcher):
 		b.widgetBuild(opts)
 		
 	def urlwidgetAction(self, widget:Widget, desc, *args):
-		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
-						str(desc),
-						args
-		)
 		target = self.get_target(widget, desc)
 		add_mode = desc.get('mode','replace')
 		opts = desc.get('options').copy()
@@ -454,7 +444,7 @@ class Blocks(EventDispatcher):
 			if isinstance(w, ModalView):
 				return
 
-			if target:
+			if target and not w.parent:
 				if add_mode == 'replace':
 					target.clear_widgets()
 				target.add_widget(w)

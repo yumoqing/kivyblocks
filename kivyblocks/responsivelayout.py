@@ -52,9 +52,4 @@ class VResponsiveLayout(ScrollView):
 		if cols < 1:
 			cols = 1
 		self._inner.cols = cols
-		#print(self.width, self._inner.width, self.box_width, cols, cols * self.box_width)
-		#for c in self.children[:2]:
-		#	show_widget_info(c)
-		#	for c1 in c.children:
-		#		show_widget_info(c1)
 

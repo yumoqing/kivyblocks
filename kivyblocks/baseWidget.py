@@ -3,7 +3,7 @@ import math
 from traceback import print_exc
 
 from kivy.properties import ObjectProperty, StringProperty, \
-			NumericProperty, BooleanProperty
+			NumericProperty, BooleanProperty, OptionProperty
 from kivy.app import App
 from kivy.utils import platform
 from kivy.uix.button import Button, ButtonBehavior
@@ -221,11 +221,16 @@ class Title6(Text):
 		kw.update({'texttype':'title6','bold':True})
 		Text.__init__(self, **kw)
 
-class Modal(WidgetCSS, WidgetReady, ModalView):
+class Modal(VBox):
 	content = DictProperty(None)
 	auto_open = BooleanProperty(True)
+	auto_dismiss = BooleanProperty(True)
+	position = OptionProperty('tc',options=['tl', 'tc', 'tr',
+											'cl', 'cc', 'cr',
+											'bl', 'bc', 'br'])
+
 	def __init__(self, **kw):
-		super(ModalView, self).__init__(**kw)
+		SUPER(Modal, self, kw)
 		if self.content:
 			blocks = Factory.Blocks()
 			self.content_w = blocks.widgetBuild(self.content)
@@ -233,10 +238,69 @@ class Modal(WidgetCSS, WidgetReady, ModalView):
 				self.add_widget(self.content_w)
 			else:
 				print(content,':cannot build widget')
+		self.register_event_type('on_open')
+		self.register_event_type('on_pre_open')
+		self.register_event_type('on_pre_dismiss')
+		self.register_event_type('on_dismiss')
+
+	def on_touch_down(self, touch):
+		if 	not self.collide_point(touch.x, touch.y):
+			if self.auto_dismiss:
+				self.dispatch('on_pre_dismiss')
+				self.dismiss()
+				return True
+				
+		return super().on_touch_down(touch)
+
+	def set_modal_position(self, w):
+		xn = self.position[1]
+		yn = self.position[0]
+		x, y = 0, 0
+		if xn == 'c':
+			x = (w.width - self.width) / 2
+		elif xn == 'r':
+			x = w.width - self.width
+		if x < 0:
+			x = 0
+		if yn == 'c':
+			y = (w.height - self.height) / 2
+		elif yn == 'b':
+			y = w.height - self.height
+		if y < 0:
+			y = 0
+		if w == Window:
+			self.pos = x, y
+		else:
+			self.pos = w.pos[0] + x, w.pos[1] + y
+
+	def open(self, widget=None):
+		self.dispatch('on_pre_open')
+		if widget is None:
+			widget = Window
+		self.set_modal_position(widget)
+		Window.add_widget(self)
+		self.dispatch('on_open')
+
+	def dismiss(self, *args):
+		self.dispatch('on_pre_dismiss')
+		self.dispatch('on_dismiss')
+		Window.remove_widget(self)
 			
+	def on_open(self, *args):
+		pass
+
+	def on_dismiss(self, *args):
+		pass
+			
+	def on_pre_open(self, *args):
+		pass
+
+	def on_pre_dismiss(self, *args):
+		pass
 
 	def add_widget(self, w, *args, **kw):
 		super().add_widget(w, *args, **kw)
+		# super().add_widget(Label(text='1111'))
 		if self.auto_open:
 			self.open()
 
@@ -244,7 +308,7 @@ class TimedModal(Modal):
 	show_time = NumericProperty(0)
 	def __init__(self, **kw):
 		self.time_task = None
-		Modal.__init__(self, **kw)
+		SUPER(TimedModal, self, kw)
 
 	def open(self, *args, **kw):
 		if self.time_task is not None:
@@ -259,7 +323,7 @@ class TimedModal(Modal):
 		if self.time_task:
 			self.time_task.cancel()
 			self.time_task = None
-		super().dismiss(*args, **kw)
+		super().dismiss()
 
 class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):

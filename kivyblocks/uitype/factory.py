@@ -23,12 +23,18 @@ class UiFactory:
 	def build_view_widget(self, desc, rec=None):
 		ut = desc.get('uitype', 'str')
 		f = view_widget_builders.get(ut)
+		if f is None:
+			print(desc, 'view builder not defined')
+			return None
 		return f(desc, rec=rec)
 
 	@classmethod
 	def build_input_widget(self, desc, rec=None):
 		ut = desc.get('uitype', 'str')
 		f = input_widget_builders.get(ut)
+		if f is None:
+			print(desc, 'input builder not defined')
+			return None
 		return f(desc, rec=rec)
 
 class StringView(Label):

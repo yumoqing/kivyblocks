@@ -210,7 +210,6 @@ class ToolPage(Box):
 					options=['top', 'bottom', 'left', 'right'])
 	toolbar = DictProperty({})
 	def __init__(self, **kw):
-		print('ToolPage:kw=',kw)
 		SUPER(ToolPage, self, kw)
 		if self.tool_at in [ 'top','bottom']:
 			self.orientation = 'vertical'
@@ -306,7 +305,6 @@ class ToolPage(Box):
 			if w:
 				self.content_widgets[name] = w
 				self.content_w.add_widget(w)
-				print('w=', w)
 			return
 		rfname = v.get('rfname')
 		if rfname:

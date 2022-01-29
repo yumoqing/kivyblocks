@@ -862,7 +862,7 @@ struct __pyx_defaults4 {
   PyObject *__pyx_arg_localnamespace;
 };
 
-/* "kivyblocks/blocks.pyx":405
+/* "kivyblocks/blocks.pyx":399
  * 		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
  * 
  * 	def blocksAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -875,12 +875,12 @@ struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct__blocksAction {
 };
 
 
-/* "kivyblocks/blocks.pyx":433
+/* "kivyblocks/blocks.pyx":427
  * 		b.widgetBuild(opts)
  * 
  * 	def urlwidgetAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		target = self.get_target(widget, desc)
+ * 		add_mode = desc.get('mode','replace')
  */
 struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction {
   PyObject_HEAD
@@ -888,7 +888,7 @@ struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction {
 };
 
 
-/* "kivyblocks/blocks.pyx":609
+/* "kivyblocks/blocks.pyx":599
  * 			alert('%s method not found' % method)
  * 
  * 	def widgetBuild(self, desc):             # <<<<<<<<<<<<<<
@@ -901,7 +901,7 @@ struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct_2_widgetBuild {
 };
 
 
-/* "kivyblocks/blocks.pyx":688
+/* "kivyblocks/blocks.pyx":678
  * 
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:             # <<<<<<<<<<<<<<
@@ -2016,8 +2016,6 @@ static const char __pyx_k_Block_eventAction_desc_s_miss_di[] = "Block: eventActi
 static const char __pyx_k_Block_methodAction_desc_s_method[] = "Block: methodAction():desc(%s) method not found";
 static const char __pyx_k_Block_methodAction_desc_s_target[] = "Block: methodAction():desc(%s) target not found";
 static const char __pyx_k_Block_scriptAction_desc_s_target[] = "Block: scriptAction():desc(%s) target not found";
-static const char __pyx_k_Block_uniaction_called_desc_s_ar[] = "Block: uniaction() called, desc=%s, args=%s";
-static const char __pyx_k_Block_urlwidgetAction_called_des[] = "Block: urlwidgetAction() called, desc=%s, args=%s";
 static const char __pyx_k_Block_urlwidgetAction_desc_s_wid[] = "Block: urlwidgetAction(): desc=%s widgetBuild error";
 static const char __pyx_k_Blocks_blocksAction_locals_doerr[] = "Blocks.blocksAction.<locals>.doerr";
 static const char __pyx_k_Blocks_getWidgetById_locals_find[] = "Blocks.getWidgetById.<locals>.find_widget_by_id";
@@ -2046,8 +2044,6 @@ static PyObject *__pyx_kp_s_Block_methodAction_desc_s_method;
 static PyObject *__pyx_kp_s_Block_methodAction_desc_s_target;
 static PyObject *__pyx_kp_s_Block_s_s;
 static PyObject *__pyx_kp_s_Block_scriptAction_desc_s_target;
-static PyObject *__pyx_kp_s_Block_uniaction_called_desc_s_ar;
-static PyObject *__pyx_kp_s_Block_urlwidgetAction_called_des;
 static PyObject *__pyx_kp_s_Block_urlwidgetAction_desc_s_wid;
 static PyObject *__pyx_kp_s_Block_w_build_desc_invalid;
 static PyObject *__pyx_n_s_Blocks;
@@ -11896,7 +11892,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_26buildBind(CYTHON_UNUSED
  * 			Logger.info('Block: get a null function,%s',str(desc))
  * 			return             # <<<<<<<<<<<<<<
  * 		w.bind(**{event:f})
- * 		# Logger.info('Block: %s bind built', str(desc))
+ * 
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
@@ -11915,8 +11911,8 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_26buildBind(CYTHON_UNUSED
  * 			Logger.info('Block: get a null function,%s',str(desc))
  * 			return
  * 		w.bind(**{event:f})             # <<<<<<<<<<<<<<
- * 		# Logger.info('Block: %s bind built', str(desc))
  * 
+ * 	def multipleAction(self, widget:Widget, desc, *args):
  */
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_bind); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -11962,8 +11958,8 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_26buildBind(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":337
- * 		# Logger.info('Block: %s bind built', str(desc))
+/* "kivyblocks/blocks.pyx":336
+ * 		w.bind(**{event:f})
  * 
  * 	def multipleAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
@@ -12019,18 +12015,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_29multipleAction(PyObject
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("multipleAction", 0, 3, 3, 1); __PYX_ERR(0, 337, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("multipleAction", 0, 3, 3, 1); __PYX_ERR(0, 336, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("multipleAction", 0, 3, 3, 2); __PYX_ERR(0, 337, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("multipleAction", 0, 3, 3, 2); __PYX_ERR(0, 336, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "multipleAction") < 0)) __PYX_ERR(0, 337, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "multipleAction") < 0)) __PYX_ERR(0, 336, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -12045,7 +12041,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_29multipleAction(PyObject
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("multipleAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 337, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("multipleAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 336, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.multipleAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -12084,7 +12080,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("multipleAction", 0);
 
-  /* "kivyblocks/blocks.pyx":338
+  /* "kivyblocks/blocks.pyx":337
  * 
  * 	def multipleAction(self, widget:Widget, desc, *args):
  * 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}             # <<<<<<<<<<<<<<
@@ -12092,9 +12088,9 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
  * 		for a in desc['actions']:
  */
   { /* enter inner scope */
-    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L5_error)
+    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_items); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 338, __pyx_L5_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_items); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 337, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -12108,16 +12104,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
     }
     __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L5_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 337, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
       __pyx_t_3 = __pyx_t_2; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 338, __pyx_L5_error)
+      __pyx_t_5 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 337, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_6 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 338, __pyx_L5_error)
+      __pyx_t_6 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     for (;;) {
@@ -12125,17 +12121,17 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
         if (likely(PyList_CheckExact(__pyx_t_3))) {
           if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 338, __pyx_L5_error)
+          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 337, __pyx_L5_error)
           #else
-          __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L5_error)
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 337, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         } else {
           if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 338, __pyx_L5_error)
+          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 337, __pyx_L5_error)
           #else
-          __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L5_error)
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 337, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         }
@@ -12145,7 +12141,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 338, __pyx_L5_error)
+            else __PYX_ERR(0, 337, __pyx_L5_error)
           }
           break;
         }
@@ -12157,7 +12153,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
         if (unlikely(size != 2)) {
           if (size > 2) __Pyx_RaiseTooManyValuesError(2);
           else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          __PYX_ERR(0, 338, __pyx_L5_error)
+          __PYX_ERR(0, 337, __pyx_L5_error)
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
         if (likely(PyTuple_CheckExact(sequence))) {
@@ -12170,15 +12166,15 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
         __Pyx_INCREF(__pyx_t_4);
         __Pyx_INCREF(__pyx_t_7);
         #else
-        __pyx_t_4 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_4 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 337, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_7 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_7 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 337, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_7);
         #endif
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       } else {
         Py_ssize_t index = -1;
-        __pyx_t_8 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_8 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 337, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
@@ -12186,7 +12182,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
         __Pyx_GOTREF(__pyx_t_4);
         index = 1; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L8_unpacking_failed;
         __Pyx_GOTREF(__pyx_t_7);
-        if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 2) < 0) __PYX_ERR(0, 338, __pyx_L5_error)
+        if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 2) < 0) __PYX_ERR(0, 337, __pyx_L5_error)
         __pyx_t_9 = NULL;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         goto __pyx_L9_unpacking_done;
@@ -12194,16 +12190,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         __pyx_t_9 = NULL;
         if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-        __PYX_ERR(0, 338, __pyx_L5_error)
+        __PYX_ERR(0, 337, __pyx_L5_error)
         __pyx_L9_unpacking_done:;
       }
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_k, __pyx_t_4);
       __pyx_t_4 = 0;
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_v, __pyx_t_7);
       __pyx_t_7 = 0;
-      __pyx_t_10 = (__Pyx_PyString_Equals(__pyx_7genexpr__pyx_v_k, __pyx_n_s_actions, Py_NE)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 338, __pyx_L5_error)
+      __pyx_t_10 = (__Pyx_PyString_Equals(__pyx_7genexpr__pyx_v_k, __pyx_n_s_actions, Py_NE)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 337, __pyx_L5_error)
       if (__pyx_t_10) {
-        if (unlikely(PyDict_SetItem(__pyx_t_1, (PyObject*)__pyx_7genexpr__pyx_v_k, (PyObject*)__pyx_7genexpr__pyx_v_v))) __PYX_ERR(0, 338, __pyx_L5_error)
+        if (unlikely(PyDict_SetItem(__pyx_t_1, (PyObject*)__pyx_7genexpr__pyx_v_k, (PyObject*)__pyx_7genexpr__pyx_v_v))) __PYX_ERR(0, 337, __pyx_L5_error)
       }
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -12219,34 +12215,34 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
   __pyx_v_desc1 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":339
+  /* "kivyblocks/blocks.pyx":338
  * 	def multipleAction(self, widget:Widget, desc, *args):
  * 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
  * 		mydesc = desc1.copy()             # <<<<<<<<<<<<<<
  * 		for a in desc['actions']:
  * 			new_desc = mydesc.copy()
  */
-  __pyx_t_1 = PyDict_Copy(__pyx_v_desc1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_1 = PyDict_Copy(__pyx_v_desc1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_mydesc = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":340
+  /* "kivyblocks/blocks.pyx":339
  * 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
  * 		mydesc = desc1.copy()
  * 		for a in desc['actions']:             # <<<<<<<<<<<<<<
  * 			new_desc = mydesc.copy()
  * 			new_desc.update(a)
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_3 = __pyx_t_1; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
   } else {
-    __pyx_t_5 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 340, __pyx_L1_error)
+    __pyx_t_5 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 339, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 340, __pyx_L1_error)
+    __pyx_t_6 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 339, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -12254,17 +12250,17 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
       if (likely(PyList_CheckExact(__pyx_t_3))) {
         if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 340, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 339, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 340, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 339, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -12274,7 +12270,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 340, __pyx_L1_error)
+          else __PYX_ERR(0, 339, __pyx_L1_error)
         }
         break;
       }
@@ -12283,7 +12279,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
     __Pyx_XDECREF_SET(__pyx_v_a, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":341
+    /* "kivyblocks/blocks.pyx":340
  * 		mydesc = desc1.copy()
  * 		for a in desc['actions']:
  * 			new_desc = mydesc.copy()             # <<<<<<<<<<<<<<
@@ -12292,34 +12288,34 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
  */
     if (unlikely(__pyx_v_mydesc == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "copy");
-      __PYX_ERR(0, 341, __pyx_L1_error)
+      __PYX_ERR(0, 340, __pyx_L1_error)
     }
-    __pyx_t_1 = PyDict_Copy(__pyx_v_mydesc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+    __pyx_t_1 = PyDict_Copy(__pyx_v_mydesc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_new_desc, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":342
+    /* "kivyblocks/blocks.pyx":341
  * 		for a in desc['actions']:
  * 			new_desc = mydesc.copy()
  * 			new_desc.update(a)             # <<<<<<<<<<<<<<
  * 			self.uniaction(widget,new_desc, *args)
  * 
  */
-    __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_new_desc, __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_new_desc, __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":343
+    /* "kivyblocks/blocks.pyx":342
  * 			new_desc = mydesc.copy()
  * 			new_desc.update(a)
  * 			self.uniaction(widget,new_desc, *args)             # <<<<<<<<<<<<<<
  * 
  * 	def conform_action(self, widget:Widget, desc, *args):
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_uniaction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 343, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_uniaction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 343, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
@@ -12327,16 +12323,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
     __Pyx_INCREF(__pyx_v_new_desc);
     __Pyx_GIVEREF(__pyx_v_new_desc);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_new_desc);
-    __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_v_args); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 343, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_v_args); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 343, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/blocks.pyx":340
+    /* "kivyblocks/blocks.pyx":339
  * 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
  * 		mydesc = desc1.copy()
  * 		for a in desc['actions']:             # <<<<<<<<<<<<<<
@@ -12346,8 +12342,8 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/blocks.pyx":337
- * 		# Logger.info('Block: %s bind built', str(desc))
+  /* "kivyblocks/blocks.pyx":336
+ * 		w.bind(**{event:f})
  * 
  * 	def multipleAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
@@ -12378,7 +12374,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_28multipleAction(CYTHON_U
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":345
+/* "kivyblocks/blocks.pyx":344
  * 			self.uniaction(widget,new_desc, *args)
  * 
  * 	def conform_action(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -12435,18 +12431,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_31conform_action(PyObject
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("conform_action", 0, 3, 3, 1); __PYX_ERR(0, 345, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("conform_action", 0, 3, 3, 1); __PYX_ERR(0, 344, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("conform_action", 0, 3, 3, 2); __PYX_ERR(0, 345, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("conform_action", 0, 3, 3, 2); __PYX_ERR(0, 344, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "conform_action") < 0)) __PYX_ERR(0, 345, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "conform_action") < 0)) __PYX_ERR(0, 344, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -12461,7 +12457,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_31conform_action(PyObject
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("conform_action", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 345, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("conform_action", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 344, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.conform_action", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -12497,14 +12493,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("conform_action", 0);
 
-  /* "kivyblocks/blocks.pyx":346
+  /* "kivyblocks/blocks.pyx":345
  * 
  * 	def conform_action(self, widget:Widget, desc, *args):
  * 		conform_desc = desc.get('conform')             # <<<<<<<<<<<<<<
  * 		blocks = Blocks()
  * 		if not conform_desc:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 346, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 345, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -12518,20 +12514,20 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_conform) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_conform);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 346, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 345, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_conform_desc = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":347
+  /* "kivyblocks/blocks.pyx":346
  * 	def conform_action(self, widget:Widget, desc, *args):
  * 		conform_desc = desc.get('conform')
  * 		blocks = Blocks()             # <<<<<<<<<<<<<<
  * 		if not conform_desc:
  * 			blocks.uniaction(widget, desc,*args, **kw)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 347, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -12545,33 +12541,33 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 347, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_blocks = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":348
+  /* "kivyblocks/blocks.pyx":347
  * 		conform_desc = desc.get('conform')
  * 		blocks = Blocks()
  * 		if not conform_desc:             # <<<<<<<<<<<<<<
  * 			blocks.uniaction(widget, desc,*args, **kw)
  * 			return
  */
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_conform_desc); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 348, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_conform_desc); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 347, __pyx_L1_error)
   __pyx_t_5 = ((!__pyx_t_4) != 0);
   if (__pyx_t_5) {
 
-    /* "kivyblocks/blocks.pyx":349
+    /* "kivyblocks/blocks.pyx":348
  * 		blocks = Blocks()
  * 		if not conform_desc:
  * 			blocks.uniaction(widget, desc,*args, **kw)             # <<<<<<<<<<<<<<
  * 			return
  * 		w = blocks.widgetBuild({
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_blocks, __pyx_n_s_uniaction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 349, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_blocks, __pyx_n_s_uniaction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 349, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
@@ -12579,32 +12575,32 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_desc);
-    __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 349, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_kw); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 349, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_kw); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (unlikely(__pyx_t_6 == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-      __PYX_ERR(0, 349, __pyx_L1_error)
+      __PYX_ERR(0, 348, __pyx_L1_error)
     }
     if (likely(PyDict_CheckExact(__pyx_t_6))) {
-      __pyx_t_2 = PyDict_Copy(__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 349, __pyx_L1_error)
+      __pyx_t_2 = PyDict_Copy(__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 348, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else {
-      __pyx_t_2 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 349, __pyx_L1_error)
+      __pyx_t_2 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 348, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 349, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "kivyblocks/blocks.pyx":350
+    /* "kivyblocks/blocks.pyx":349
  * 		if not conform_desc:
  * 			blocks.uniaction(widget, desc,*args, **kw)
  * 			return             # <<<<<<<<<<<<<<
@@ -12615,7 +12611,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":348
+    /* "kivyblocks/blocks.pyx":347
  * 		conform_desc = desc.get('conform')
  * 		blocks = Blocks()
  * 		if not conform_desc:             # <<<<<<<<<<<<<<
@@ -12624,35 +12620,35 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
  */
   }
 
-  /* "kivyblocks/blocks.pyx":351
+  /* "kivyblocks/blocks.pyx":350
  * 			blocks.uniaction(widget, desc,*args, **kw)
  * 			return
  * 		w = blocks.widgetBuild({             # <<<<<<<<<<<<<<
  * 			"widgettype":"Conform",
  * 			"options":conform_desc
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_blocks, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_blocks, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "kivyblocks/blocks.pyx":352
+  /* "kivyblocks/blocks.pyx":351
  * 			return
  * 		w = blocks.widgetBuild({
  * 			"widgettype":"Conform",             # <<<<<<<<<<<<<<
  * 			"options":conform_desc
  * 		})
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 352, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_widgettype, __pyx_n_s_Conform) < 0) __PYX_ERR(0, 352, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_widgettype, __pyx_n_s_Conform) < 0) __PYX_ERR(0, 351, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":353
+  /* "kivyblocks/blocks.pyx":352
  * 		w = blocks.widgetBuild({
  * 			"widgettype":"Conform",
  * 			"options":conform_desc             # <<<<<<<<<<<<<<
  * 		})
  * 		w.bind(on_conform=partial(blocks.uniaction, widget, desc))
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_options, __pyx_v_conform_desc) < 0) __PYX_ERR(0, 352, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_options, __pyx_v_conform_desc) < 0) __PYX_ERR(0, 351, __pyx_L1_error)
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
     __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_2);
@@ -12666,26 +12662,26 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
   __pyx_t_6 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 351, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_w = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "kivyblocks/blocks.pyx":355
+  /* "kivyblocks/blocks.pyx":354
  * 			"options":conform_desc
  * 		})
  * 		w.bind(on_conform=partial(blocks.uniaction, widget, desc))             # <<<<<<<<<<<<<<
  * 		w.open()
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_bind); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 355, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_bind); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 355, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_partial); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 355, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_partial); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_blocks, __pyx_n_s_uniaction); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 355, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_blocks, __pyx_n_s_uniaction); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -12702,7 +12698,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[4] = {__pyx_t_8, __pyx_t_7, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_9, 3+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 355, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_9, 3+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 354, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -12711,14 +12707,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[4] = {__pyx_t_8, __pyx_t_7, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_9, 3+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 355, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_9, 3+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 354, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   } else
   #endif
   {
-    __pyx_t_10 = PyTuple_New(3+__pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 355, __pyx_L1_error)
+    __pyx_t_10 = PyTuple_New(3+__pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     if (__pyx_t_8) {
       __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_8); __pyx_t_8 = NULL;
@@ -12732,27 +12728,27 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_10, 2+__pyx_t_9, __pyx_v_desc);
     __pyx_t_7 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 355, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_on_conform, __pyx_t_3) < 0) __PYX_ERR(0, 355, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_on_conform, __pyx_t_3) < 0) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 355, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/blocks.pyx":356
+  /* "kivyblocks/blocks.pyx":355
  * 		})
  * 		w.bind(on_conform=partial(blocks.uniaction, widget, desc))
  * 		w.open()             # <<<<<<<<<<<<<<
  * 
  * 	def uniaction(self, widget:Widget, desc, *args):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_open); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_open); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -12766,12 +12762,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 356, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/blocks.pyx":345
+  /* "kivyblocks/blocks.pyx":344
  * 			self.uniaction(widget,new_desc, *args)
  * 
  * 	def conform_action(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -12801,12 +12797,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_30conform_action(CYTHON_U
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":358
+/* "kivyblocks/blocks.pyx":357
  * 		w.open()
  * 
  * 	def uniaction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: uniaction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		acttype = desc.get('actiontype')
+ * 		if acttype=='blocks':
  */
 
 /* Python wrapper */
@@ -12858,18 +12854,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_33uniaction(PyObject *__p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("uniaction", 0, 3, 3, 1); __PYX_ERR(0, 358, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("uniaction", 0, 3, 3, 1); __PYX_ERR(0, 357, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("uniaction", 0, 3, 3, 2); __PYX_ERR(0, 358, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("uniaction", 0, 3, 3, 2); __PYX_ERR(0, 357, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "uniaction") < 0)) __PYX_ERR(0, 358, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "uniaction") < 0)) __PYX_ERR(0, 357, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -12884,7 +12880,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_33uniaction(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("uniaction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 358, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("uniaction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 357, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.uniaction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -12906,135 +12902,51 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  int __pyx_t_5;
-  PyObject *__pyx_t_6 = NULL;
-  int __pyx_t_7;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("uniaction", 0);
 
-  /* "kivyblocks/blocks.pyx":359
+  /* "kivyblocks/blocks.pyx":358
  * 
  * 	def uniaction(self, widget:Widget, desc, *args):
- * 		Logger.info('Block: uniaction() called, desc=%s, args=%s', \             # <<<<<<<<<<<<<<
- * 						str(desc),
- * 						args
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 359, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 359, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "kivyblocks/blocks.pyx":360
- * 	def uniaction(self, widget:Widget, desc, *args):
- * 		Logger.info('Block: uniaction() called, desc=%s, args=%s', \
- * 						str(desc),             # <<<<<<<<<<<<<<
- * 						args
- * 		)
- */
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 360, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-
-  /* "kivyblocks/blocks.pyx":361
- * 		Logger.info('Block: uniaction() called, desc=%s, args=%s', \
- * 						str(desc),
- * 						args             # <<<<<<<<<<<<<<
- * 		)
- * 
- */
-  __pyx_t_4 = NULL;
-  __pyx_t_5 = 0;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_4)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-      __pyx_t_5 = 1;
-    }
-  }
-  #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_3)) {
-    PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_kp_s_Block_uniaction_called_desc_s_ar, __pyx_t_2, __pyx_v_args};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 359, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  } else
-  #endif
-  #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-    PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_kp_s_Block_uniaction_called_desc_s_ar, __pyx_t_2, __pyx_v_args};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 359, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  } else
-  #endif
-  {
-    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 359, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    if (__pyx_t_4) {
-      __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
-    }
-    __Pyx_INCREF(__pyx_kp_s_Block_uniaction_called_desc_s_ar);
-    __Pyx_GIVEREF(__pyx_kp_s_Block_uniaction_called_desc_s_ar);
-    PyTuple_SET_ITEM(__pyx_t_6, 0+__pyx_t_5, __pyx_kp_s_Block_uniaction_called_desc_s_ar);
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_t_2);
-    __Pyx_INCREF(__pyx_v_args);
-    __Pyx_GIVEREF(__pyx_v_args);
-    PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_5, __pyx_v_args);
-    __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 359, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "kivyblocks/blocks.pyx":364
- * 		)
- * 
  * 		acttype = desc.get('actiontype')             # <<<<<<<<<<<<<<
  * 		if acttype=='blocks':
  * 			return self.blocksAction(widget,desc, *args)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 364, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_6);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
     }
   }
-  __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_n_s_actiontype) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_n_s_actiontype);
-  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 364, __pyx_L1_error)
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_actiontype) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_actiontype);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_acttype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":365
- * 
+  /* "kivyblocks/blocks.pyx":359
+ * 	def uniaction(self, widget:Widget, desc, *args):
  * 		acttype = desc.get('actiontype')
  * 		if acttype=='blocks':             # <<<<<<<<<<<<<<
  * 			return self.blocksAction(widget,desc, *args)
  * 		if acttype=='urlwidget':
  */
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_blocks, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 365, __pyx_L1_error)
-  if (__pyx_t_7) {
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_blocks, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 359, __pyx_L1_error)
+  if (__pyx_t_4) {
 
-    /* "kivyblocks/blocks.pyx":366
+    /* "kivyblocks/blocks.pyx":360
  * 		acttype = desc.get('actiontype')
  * 		if acttype=='blocks':
  * 			return self.blocksAction(widget,desc, *args)             # <<<<<<<<<<<<<<
@@ -13042,29 +12954,29 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
  * 			return self.urlwidgetAction(widget,desc, *args)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_blocksAction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 366, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_blocksAction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 360, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 366, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 360, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_widget);
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_widget);
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
-    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_desc);
-    __pyx_t_6 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 366, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 366, __pyx_L1_error)
+    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_desc);
+    __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 360, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 360, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_r = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_r = __pyx_t_2;
+    __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":365
- * 
+    /* "kivyblocks/blocks.pyx":359
+ * 	def uniaction(self, widget:Widget, desc, *args):
  * 		acttype = desc.get('actiontype')
  * 		if acttype=='blocks':             # <<<<<<<<<<<<<<
  * 			return self.blocksAction(widget,desc, *args)
@@ -13072,17 +12984,17 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
  */
   }
 
-  /* "kivyblocks/blocks.pyx":367
+  /* "kivyblocks/blocks.pyx":361
  * 		if acttype=='blocks':
  * 			return self.blocksAction(widget,desc, *args)
  * 		if acttype=='urlwidget':             # <<<<<<<<<<<<<<
  * 			return self.urlwidgetAction(widget,desc, *args)
  * 		if acttype == 'registedfunction':
  */
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_urlwidget, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 367, __pyx_L1_error)
-  if (__pyx_t_7) {
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_urlwidget, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 361, __pyx_L1_error)
+  if (__pyx_t_4) {
 
-    /* "kivyblocks/blocks.pyx":368
+    /* "kivyblocks/blocks.pyx":362
  * 			return self.blocksAction(widget,desc, *args)
  * 		if acttype=='urlwidget':
  * 			return self.urlwidgetAction(widget,desc, *args)             # <<<<<<<<<<<<<<
@@ -13090,28 +13002,28 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
  * 			return self.registedfunctionAction(widget,desc, *args)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_urlwidgetAction); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 368, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_urlwidgetAction); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 362, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 362, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 368, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
-    PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_widget);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_widget);
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
-    PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_desc);
-    __pyx_t_1 = PyNumber_Add(__pyx_t_6, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 368, __pyx_L1_error)
+    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_desc);
+    __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 362, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 368, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 362, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_r = __pyx_t_6;
-    __pyx_t_6 = 0;
+    __pyx_r = __pyx_t_3;
+    __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":367
+    /* "kivyblocks/blocks.pyx":361
  * 		if acttype=='blocks':
  * 			return self.blocksAction(widget,desc, *args)
  * 		if acttype=='urlwidget':             # <<<<<<<<<<<<<<
@@ -13120,17 +13032,17 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
  */
   }
 
-  /* "kivyblocks/blocks.pyx":369
+  /* "kivyblocks/blocks.pyx":363
  * 		if acttype=='urlwidget':
  * 			return self.urlwidgetAction(widget,desc, *args)
  * 		if acttype == 'registedfunction':             # <<<<<<<<<<<<<<
  * 			return self.registedfunctionAction(widget,desc, *args)
  * 		if acttype == 'script':
  */
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_registedfunction, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 369, __pyx_L1_error)
-  if (__pyx_t_7) {
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_registedfunction, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 363, __pyx_L1_error)
+  if (__pyx_t_4) {
 
-    /* "kivyblocks/blocks.pyx":370
+    /* "kivyblocks/blocks.pyx":364
  * 			return self.urlwidgetAction(widget,desc, *args)
  * 		if acttype == 'registedfunction':
  * 			return self.registedfunctionAction(widget,desc, *args)             # <<<<<<<<<<<<<<
@@ -13138,8 +13050,152 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
  * 			return self.scriptAction(widget, desc, *args)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_registedfunctionAction); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 370, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_registedfunctionAction); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_v_widget);
+    __Pyx_GIVEREF(__pyx_v_widget);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_widget);
+    __Pyx_INCREF(__pyx_v_desc);
+    __Pyx_GIVEREF(__pyx_v_desc);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_desc);
+    __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_v_args); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+
+    /* "kivyblocks/blocks.pyx":363
+ * 		if acttype=='urlwidget':
+ * 			return self.urlwidgetAction(widget,desc, *args)
+ * 		if acttype == 'registedfunction':             # <<<<<<<<<<<<<<
+ * 			return self.registedfunctionAction(widget,desc, *args)
+ * 		if acttype == 'script':
+ */
+  }
+
+  /* "kivyblocks/blocks.pyx":365
+ * 		if acttype == 'registedfunction':
+ * 			return self.registedfunctionAction(widget,desc, *args)
+ * 		if acttype == 'script':             # <<<<<<<<<<<<<<
+ * 			return self.scriptAction(widget, desc, *args)
+ * 		if acttype == 'method':
+ */
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_script_2, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 365, __pyx_L1_error)
+  if (__pyx_t_4) {
+
+    /* "kivyblocks/blocks.pyx":366
+ * 			return self.registedfunctionAction(widget,desc, *args)
+ * 		if acttype == 'script':
+ * 			return self.scriptAction(widget, desc, *args)             # <<<<<<<<<<<<<<
+ * 		if acttype == 'method':
+ * 			return self.methodAction(widget, desc, *args)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_scriptAction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 366, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 366, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_v_widget);
+    __Pyx_GIVEREF(__pyx_v_widget);
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_widget);
+    __Pyx_INCREF(__pyx_v_desc);
+    __Pyx_GIVEREF(__pyx_v_desc);
+    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_desc);
+    __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 366, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 366, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_r = __pyx_t_2;
+    __pyx_t_2 = 0;
+    goto __pyx_L0;
+
+    /* "kivyblocks/blocks.pyx":365
+ * 		if acttype == 'registedfunction':
+ * 			return self.registedfunctionAction(widget,desc, *args)
+ * 		if acttype == 'script':             # <<<<<<<<<<<<<<
+ * 			return self.scriptAction(widget, desc, *args)
+ * 		if acttype == 'method':
+ */
+  }
+
+  /* "kivyblocks/blocks.pyx":367
+ * 		if acttype == 'script':
+ * 			return self.scriptAction(widget, desc, *args)
+ * 		if acttype == 'method':             # <<<<<<<<<<<<<<
+ * 			return self.methodAction(widget, desc, *args)
+ * 		if acttype == 'event':
+ */
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_method, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 367, __pyx_L1_error)
+  if (__pyx_t_4) {
+
+    /* "kivyblocks/blocks.pyx":368
+ * 			return self.scriptAction(widget, desc, *args)
+ * 		if acttype == 'method':
+ * 			return self.methodAction(widget, desc, *args)             # <<<<<<<<<<<<<<
+ * 		if acttype == 'event':
+ * 			return self.eventAction(widget, desc, *args)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_methodAction); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 368, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 368, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_INCREF(__pyx_v_widget);
+    __Pyx_GIVEREF(__pyx_v_widget);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_widget);
+    __Pyx_INCREF(__pyx_v_desc);
+    __Pyx_GIVEREF(__pyx_v_desc);
+    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_desc);
+    __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 368, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 368, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_3;
+    __pyx_t_3 = 0;
+    goto __pyx_L0;
+
+    /* "kivyblocks/blocks.pyx":367
+ * 		if acttype == 'script':
+ * 			return self.scriptAction(widget, desc, *args)
+ * 		if acttype == 'method':             # <<<<<<<<<<<<<<
+ * 			return self.methodAction(widget, desc, *args)
+ * 		if acttype == 'event':
+ */
+  }
+
+  /* "kivyblocks/blocks.pyx":369
+ * 		if acttype == 'method':
+ * 			return self.methodAction(widget, desc, *args)
+ * 		if acttype == 'event':             # <<<<<<<<<<<<<<
+ * 			return self.eventAction(widget, desc, *args)
+ * 		if acttype == 'multiple':
+ */
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_event, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 369, __pyx_L1_error)
+  if (__pyx_t_4) {
+
+    /* "kivyblocks/blocks.pyx":370
+ * 			return self.methodAction(widget, desc, *args)
+ * 		if acttype == 'event':
+ * 			return self.eventAction(widget, desc, *args)             # <<<<<<<<<<<<<<
+ * 		if acttype == 'multiple':
+ * 			return self.multipleAction(widget, desc, *args)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_eventAction); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 370, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 370, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_v_widget);
@@ -13148,181 +13204,37 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_desc);
-    __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 370, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_v_args); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 370, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 370, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 370, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
     /* "kivyblocks/blocks.pyx":369
- * 		if acttype=='urlwidget':
- * 			return self.urlwidgetAction(widget,desc, *args)
- * 		if acttype == 'registedfunction':             # <<<<<<<<<<<<<<
- * 			return self.registedfunctionAction(widget,desc, *args)
- * 		if acttype == 'script':
+ * 		if acttype == 'method':
+ * 			return self.methodAction(widget, desc, *args)
+ * 		if acttype == 'event':             # <<<<<<<<<<<<<<
+ * 			return self.eventAction(widget, desc, *args)
+ * 		if acttype == 'multiple':
  */
   }
 
   /* "kivyblocks/blocks.pyx":371
- * 		if acttype == 'registedfunction':
- * 			return self.registedfunctionAction(widget,desc, *args)
- * 		if acttype == 'script':             # <<<<<<<<<<<<<<
- * 			return self.scriptAction(widget, desc, *args)
- * 		if acttype == 'method':
- */
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_script_2, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 371, __pyx_L1_error)
-  if (__pyx_t_7) {
-
-    /* "kivyblocks/blocks.pyx":372
- * 			return self.registedfunctionAction(widget,desc, *args)
- * 		if acttype == 'script':
- * 			return self.scriptAction(widget, desc, *args)             # <<<<<<<<<<<<<<
- * 		if acttype == 'method':
- * 			return self.methodAction(widget, desc, *args)
- */
-    __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_scriptAction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 372, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 372, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_INCREF(__pyx_v_widget);
-    __Pyx_GIVEREF(__pyx_v_widget);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_widget);
-    __Pyx_INCREF(__pyx_v_desc);
-    __Pyx_GIVEREF(__pyx_v_desc);
-    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_desc);
-    __pyx_t_6 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 372, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 372, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_r = __pyx_t_3;
-    __pyx_t_3 = 0;
-    goto __pyx_L0;
-
-    /* "kivyblocks/blocks.pyx":371
- * 		if acttype == 'registedfunction':
- * 			return self.registedfunctionAction(widget,desc, *args)
- * 		if acttype == 'script':             # <<<<<<<<<<<<<<
- * 			return self.scriptAction(widget, desc, *args)
- * 		if acttype == 'method':
- */
-  }
-
-  /* "kivyblocks/blocks.pyx":373
- * 		if acttype == 'script':
- * 			return self.scriptAction(widget, desc, *args)
- * 		if acttype == 'method':             # <<<<<<<<<<<<<<
- * 			return self.methodAction(widget, desc, *args)
- * 		if acttype == 'event':
- */
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_method, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 373, __pyx_L1_error)
-  if (__pyx_t_7) {
-
-    /* "kivyblocks/blocks.pyx":374
- * 			return self.scriptAction(widget, desc, *args)
- * 		if acttype == 'method':
- * 			return self.methodAction(widget, desc, *args)             # <<<<<<<<<<<<<<
- * 		if acttype == 'event':
- * 			return self.eventAction(widget, desc, *args)
- */
-    __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_methodAction); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 374, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 374, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_INCREF(__pyx_v_widget);
-    __Pyx_GIVEREF(__pyx_v_widget);
-    PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_widget);
-    __Pyx_INCREF(__pyx_v_desc);
-    __Pyx_GIVEREF(__pyx_v_desc);
-    PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_desc);
-    __pyx_t_1 = PyNumber_Add(__pyx_t_6, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 374, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 374, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_r = __pyx_t_6;
-    __pyx_t_6 = 0;
-    goto __pyx_L0;
-
-    /* "kivyblocks/blocks.pyx":373
- * 		if acttype == 'script':
- * 			return self.scriptAction(widget, desc, *args)
- * 		if acttype == 'method':             # <<<<<<<<<<<<<<
- * 			return self.methodAction(widget, desc, *args)
- * 		if acttype == 'event':
- */
-  }
-
-  /* "kivyblocks/blocks.pyx":375
- * 		if acttype == 'method':
- * 			return self.methodAction(widget, desc, *args)
- * 		if acttype == 'event':             # <<<<<<<<<<<<<<
- * 			return self.eventAction(widget, desc, *args)
- * 		if acttype == 'multiple':
- */
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_event, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 375, __pyx_L1_error)
-  if (__pyx_t_7) {
-
-    /* "kivyblocks/blocks.pyx":376
- * 			return self.methodAction(widget, desc, *args)
- * 		if acttype == 'event':
- * 			return self.eventAction(widget, desc, *args)             # <<<<<<<<<<<<<<
- * 		if acttype == 'multiple':
- * 			return self.multipleAction(widget, desc, *args)
- */
-    __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_eventAction); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 376, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 376, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_INCREF(__pyx_v_widget);
-    __Pyx_GIVEREF(__pyx_v_widget);
-    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_widget);
-    __Pyx_INCREF(__pyx_v_desc);
-    __Pyx_GIVEREF(__pyx_v_desc);
-    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_desc);
-    __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 376, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 376, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_r = __pyx_t_1;
-    __pyx_t_1 = 0;
-    goto __pyx_L0;
-
-    /* "kivyblocks/blocks.pyx":375
- * 		if acttype == 'method':
- * 			return self.methodAction(widget, desc, *args)
- * 		if acttype == 'event':             # <<<<<<<<<<<<<<
- * 			return self.eventAction(widget, desc, *args)
- * 		if acttype == 'multiple':
- */
-  }
-
-  /* "kivyblocks/blocks.pyx":377
  * 		if acttype == 'event':
  * 			return self.eventAction(widget, desc, *args)
  * 		if acttype == 'multiple':             # <<<<<<<<<<<<<<
  * 			return self.multipleAction(widget, desc, *args)
  * 
  */
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_multiple, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 377, __pyx_L1_error)
-  if (__pyx_t_7) {
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_acttype, __pyx_n_s_multiple, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 371, __pyx_L1_error)
+  if (__pyx_t_4) {
 
-    /* "kivyblocks/blocks.pyx":378
+    /* "kivyblocks/blocks.pyx":372
  * 			return self.eventAction(widget, desc, *args)
  * 		if acttype == 'multiple':
  * 			return self.multipleAction(widget, desc, *args)             # <<<<<<<<<<<<<<
@@ -13330,28 +13242,28 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
  * 		alert("actiontype(%s) invalid" % acttype,title='error')
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_multipleAction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 378, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_multipleAction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 372, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 378, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 372, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_widget);
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_widget);
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
-    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_desc);
-    __pyx_t_6 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 378, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 378, __pyx_L1_error)
+    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_desc);
+    __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 372, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 372, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_r = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_r = __pyx_t_2;
+    __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":377
+    /* "kivyblocks/blocks.pyx":371
  * 		if acttype == 'event':
  * 			return self.eventAction(widget, desc, *args)
  * 		if acttype == 'multiple':             # <<<<<<<<<<<<<<
@@ -13360,38 +13272,38 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
  */
   }
 
-  /* "kivyblocks/blocks.pyx":380
+  /* "kivyblocks/blocks.pyx":374
  * 			return self.multipleAction(widget, desc, *args)
  * 
  * 		alert("actiontype(%s) invalid" % acttype,title='error')             # <<<<<<<<<<<<<<
  * 
  * 	def eventAction(self, widget:Widget, desc, *args):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_alert); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 380, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyString_FormatSafe(__pyx_kp_s_actiontype_s_invalid, __pyx_v_acttype); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 380, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6);
-  __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 380, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_title, __pyx_n_s_error) < 0) __PYX_ERR(0, 380, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 380, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_alert); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 374, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_3 = __Pyx_PyString_FormatSafe(__pyx_kp_s_actiontype_s_invalid, __pyx_v_acttype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+  __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_title, __pyx_n_s_error) < 0) __PYX_ERR(0, 374, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":358
+  /* "kivyblocks/blocks.pyx":357
  * 		w.open()
  * 
  * 	def uniaction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: uniaction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		acttype = desc.get('actiontype')
+ * 		if acttype=='blocks':
  */
 
   /* function exit code */
@@ -13401,8 +13313,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.uniaction", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -13412,7 +13323,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_32uniaction(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":382
+/* "kivyblocks/blocks.pyx":376
  * 		alert("actiontype(%s) invalid" % acttype,title='error')
  * 
  * 	def eventAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -13469,18 +13380,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_35eventAction(PyObject *_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("eventAction", 0, 3, 3, 1); __PYX_ERR(0, 382, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("eventAction", 0, 3, 3, 1); __PYX_ERR(0, 376, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("eventAction", 0, 3, 3, 2); __PYX_ERR(0, 382, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("eventAction", 0, 3, 3, 2); __PYX_ERR(0, 376, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "eventAction") < 0)) __PYX_ERR(0, 382, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "eventAction") < 0)) __PYX_ERR(0, 376, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -13495,7 +13406,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_35eventAction(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("eventAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 382, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("eventAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 376, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.eventAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -13538,14 +13449,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eventAction", 0);
 
-  /* "kivyblocks/blocks.pyx":383
+  /* "kivyblocks/blocks.pyx":377
  * 
  * 	def eventAction(self, widget:Widget, desc, *args):
  * 		target = self.get_target(widget, desc)             # <<<<<<<<<<<<<<
  * 		event = desc.get('dispatch_event')
  * 		if not event:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 383, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -13562,7 +13473,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 383, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 377, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -13570,13 +13481,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 383, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 377, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 383, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 377, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -13587,7 +13498,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_desc);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 383, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 377, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -13595,14 +13506,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   __pyx_v_target = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":384
+  /* "kivyblocks/blocks.pyx":378
  * 	def eventAction(self, widget:Widget, desc, *args):
  * 		target = self.get_target(widget, desc)
  * 		event = desc.get('dispatch_event')             # <<<<<<<<<<<<<<
  * 		if not event:
  * 			Logger.info('Block: eventAction():desc(%s) miss dispatch_event',
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 384, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -13616,44 +13527,44 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   }
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_5, __pyx_n_s_dispatch_event) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_dispatch_event);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 384, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_event = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":385
+  /* "kivyblocks/blocks.pyx":379
  * 		target = self.get_target(widget, desc)
  * 		event = desc.get('dispatch_event')
  * 		if not event:             # <<<<<<<<<<<<<<
  * 			Logger.info('Block: eventAction():desc(%s) miss dispatch_event',
  * 							str(desc))
  */
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_event); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_event); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 379, __pyx_L1_error)
   __pyx_t_7 = ((!__pyx_t_6) != 0);
   if (__pyx_t_7) {
 
-    /* "kivyblocks/blocks.pyx":386
+    /* "kivyblocks/blocks.pyx":380
  * 		event = desc.get('dispatch_event')
  * 		if not event:
  * 			Logger.info('Block: eventAction():desc(%s) miss dispatch_event',             # <<<<<<<<<<<<<<
  * 							str(desc))
  * 			return
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 386, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 380, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 386, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 380, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/blocks.pyx":387
+    /* "kivyblocks/blocks.pyx":381
  * 		if not event:
  * 			Logger.info('Block: eventAction():desc(%s) miss dispatch_event',
  * 							str(desc))             # <<<<<<<<<<<<<<
  * 			return
  * 		params = desc.get('params',{})
  */
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 387, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     __pyx_t_4 = 0;
@@ -13670,7 +13581,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_kp_s_Block_eventAction_desc_s_miss_di, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 386, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -13679,14 +13590,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_kp_s_Block_eventAction_desc_s_miss_di, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 386, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 386, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 380, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_3) {
         __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -13697,14 +13608,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_4, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 386, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":388
+    /* "kivyblocks/blocks.pyx":382
  * 			Logger.info('Block: eventAction():desc(%s) miss dispatch_event',
  * 							str(desc))
  * 			return             # <<<<<<<<<<<<<<
@@ -13715,7 +13626,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":385
+    /* "kivyblocks/blocks.pyx":379
  * 		target = self.get_target(widget, desc)
  * 		event = desc.get('dispatch_event')
  * 		if not event:             # <<<<<<<<<<<<<<
@@ -13724,16 +13635,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
  */
   }
 
-  /* "kivyblocks/blocks.pyx":389
+  /* "kivyblocks/blocks.pyx":383
  * 							str(desc))
  * 			return
  * 		params = desc.get('params',{})             # <<<<<<<<<<<<<<
  * 		d = self.getActionData(widget,desc, *args)
  * 		if d:
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 389, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 383, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 389, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 383, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_2 = NULL;
   __pyx_t_4 = 0;
@@ -13750,7 +13661,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_5)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_n_s_params, __pyx_t_8};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 389, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 383, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -13759,14 +13670,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_n_s_params, __pyx_t_8};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 389, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 383, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   } else
   #endif
   {
-    __pyx_t_3 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 389, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 383, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (__pyx_t_2) {
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -13777,7 +13688,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     __Pyx_GIVEREF(__pyx_t_8);
     PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_4, __pyx_t_8);
     __pyx_t_8 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 389, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 383, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
@@ -13785,16 +13696,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   __pyx_v_params = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":390
+  /* "kivyblocks/blocks.pyx":384
  * 			return
  * 		params = desc.get('params',{})
  * 		d = self.getActionData(widget,desc, *args)             # <<<<<<<<<<<<<<
  * 		if d:
  * 			params.update(d)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_v_widget);
   __Pyx_GIVEREF(__pyx_v_widget);
@@ -13802,34 +13713,34 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   __Pyx_INCREF(__pyx_v_desc);
   __Pyx_GIVEREF(__pyx_v_desc);
   PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_v_desc);
-  __pyx_t_3 = PyNumber_Add(__pyx_t_5, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_t_5, __pyx_v_args); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_d = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":391
+  /* "kivyblocks/blocks.pyx":385
  * 		params = desc.get('params',{})
  * 		d = self.getActionData(widget,desc, *args)
  * 		if d:             # <<<<<<<<<<<<<<
  * 			params.update(d)
  * 		try:
  */
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 391, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 385, __pyx_L1_error)
   if (__pyx_t_7) {
 
-    /* "kivyblocks/blocks.pyx":392
+    /* "kivyblocks/blocks.pyx":386
  * 		d = self.getActionData(widget,desc, *args)
  * 		if d:
  * 			params.update(d)             # <<<<<<<<<<<<<<
  * 		try:
  * 			target.dispatch(event, params)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_params, __pyx_n_s_update); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 392, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_params, __pyx_n_s_update); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 386, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -13843,12 +13754,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     }
     __pyx_t_5 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_1, __pyx_v_d) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_d);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 392, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 386, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/blocks.pyx":391
+    /* "kivyblocks/blocks.pyx":385
  * 		params = desc.get('params',{})
  * 		d = self.getActionData(widget,desc, *args)
  * 		if d:             # <<<<<<<<<<<<<<
@@ -13857,7 +13768,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
  */
   }
 
-  /* "kivyblocks/blocks.pyx":393
+  /* "kivyblocks/blocks.pyx":387
  * 		if d:
  * 			params.update(d)
  * 		try:             # <<<<<<<<<<<<<<
@@ -13873,14 +13784,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     __Pyx_XGOTREF(__pyx_t_11);
     /*try:*/ {
 
-      /* "kivyblocks/blocks.pyx":394
+      /* "kivyblocks/blocks.pyx":388
  * 			params.update(d)
  * 		try:
  * 			target.dispatch(event, params)             # <<<<<<<<<<<<<<
  * 		except Exception as e:
  * 			Logger.info(f'Block: eventAction():dispatch {event} error')
  */
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 394, __pyx_L5_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_1 = NULL;
       __pyx_t_4 = 0;
@@ -13897,7 +13808,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_event, __pyx_v_params};
-        __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 394, __pyx_L5_error)
+        __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 388, __pyx_L5_error)
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_GOTREF(__pyx_t_5);
       } else
@@ -13905,13 +13816,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_event, __pyx_v_params};
-        __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 394, __pyx_L5_error)
+        __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 388, __pyx_L5_error)
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_GOTREF(__pyx_t_5);
       } else
       #endif
       {
-        __pyx_t_8 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 394, __pyx_L5_error)
+        __pyx_t_8 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 388, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_8);
         if (__pyx_t_1) {
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -13922,14 +13833,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
         __Pyx_INCREF(__pyx_v_params);
         __Pyx_GIVEREF(__pyx_v_params);
         PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_4, __pyx_v_params);
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 394, __pyx_L5_error)
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 388, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "kivyblocks/blocks.pyx":393
+      /* "kivyblocks/blocks.pyx":387
  * 		if d:
  * 			params.update(d)
  * 		try:             # <<<<<<<<<<<<<<
@@ -13948,7 +13859,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kivyblocks/blocks.pyx":395
+    /* "kivyblocks/blocks.pyx":389
  * 		try:
  * 			target.dispatch(event, params)
  * 		except Exception as e:             # <<<<<<<<<<<<<<
@@ -13958,26 +13869,26 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     __pyx_t_4 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_4) {
       __Pyx_AddTraceback("kivyblocks.blocks.Blocks.eventAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_3, &__pyx_t_8) < 0) __PYX_ERR(0, 395, __pyx_L7_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_3, &__pyx_t_8) < 0) __PYX_ERR(0, 389, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_INCREF(__pyx_t_3);
       __pyx_v_e = __pyx_t_3;
 
-      /* "kivyblocks/blocks.pyx":396
+      /* "kivyblocks/blocks.pyx":390
  * 			target.dispatch(event, params)
  * 		except Exception as e:
  * 			Logger.info(f'Block: eventAction():dispatch {event} error')             # <<<<<<<<<<<<<<
  * 			print_exc()
  * 			return
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 396, __pyx_L7_except_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 390, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 396, __pyx_L7_except_error)
+      __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 390, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 396, __pyx_L7_except_error)
+      __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 390, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_13 = 0;
       __pyx_t_14 = 127;
@@ -13985,7 +13896,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
       __pyx_t_13 += 30;
       __Pyx_GIVEREF(__pyx_kp_u_Block_eventAction_dispatch);
       PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_Block_eventAction_dispatch);
-      __pyx_t_15 = __Pyx_PyObject_FormatSimple(__pyx_v_event, __pyx_empty_unicode); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 396, __pyx_L7_except_error)
+      __pyx_t_15 = __Pyx_PyObject_FormatSimple(__pyx_v_event, __pyx_empty_unicode); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 390, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_15);
       __pyx_t_14 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_15) > __pyx_t_14) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_15) : __pyx_t_14;
       __pyx_t_13 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_15);
@@ -13996,7 +13907,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
       __pyx_t_13 += 6;
       __Pyx_GIVEREF(__pyx_kp_u_error_2);
       PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_kp_u_error_2);
-      __pyx_t_15 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_13, __pyx_t_14); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 396, __pyx_L7_except_error)
+      __pyx_t_15 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_13, __pyx_t_14); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 390, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_15);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_2 = NULL;
@@ -14012,19 +13923,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
       __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_12, __pyx_t_2, __pyx_t_15) : __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_15);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 396, __pyx_L7_except_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 390, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":397
+      /* "kivyblocks/blocks.pyx":391
  * 		except Exception as e:
  * 			Logger.info(f'Block: eventAction():dispatch {event} error')
  * 			print_exc()             # <<<<<<<<<<<<<<
  * 			return
  * 
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_n_s_print_exc); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 397, __pyx_L7_except_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_n_s_print_exc); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 391, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_12);
       __pyx_t_15 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_12))) {
@@ -14038,12 +13949,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
       }
       __pyx_t_1 = (__pyx_t_15) ? __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_15) : __Pyx_PyObject_CallNoArg(__pyx_t_12);
       __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 397, __pyx_L7_except_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 391, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":398
+      /* "kivyblocks/blocks.pyx":392
  * 			Logger.info(f'Block: eventAction():dispatch {event} error')
  * 			print_exc()
  * 			return             # <<<<<<<<<<<<<<
@@ -14060,7 +13971,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     goto __pyx_L7_except_error;
     __pyx_L7_except_error:;
 
-    /* "kivyblocks/blocks.pyx":393
+    /* "kivyblocks/blocks.pyx":387
  * 		if d:
  * 			params.update(d)
  * 		try:             # <<<<<<<<<<<<<<
@@ -14081,7 +13992,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
     __pyx_L10_try_end:;
   }
 
-  /* "kivyblocks/blocks.pyx":382
+  /* "kivyblocks/blocks.pyx":376
  * 		alert("actiontype(%s) invalid" % acttype,title='error')
  * 
  * 	def eventAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -14113,7 +14024,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_34eventAction(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":400
+/* "kivyblocks/blocks.pyx":394
  * 			return
  * 
  * 	def get_target(self, widget:Widget, desc):             # <<<<<<<<<<<<<<
@@ -14159,17 +14070,17 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_37get_target(PyObject *__
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_target", 1, 3, 3, 1); __PYX_ERR(0, 400, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_target", 1, 3, 3, 1); __PYX_ERR(0, 394, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_target", 1, 3, 3, 2); __PYX_ERR(0, 400, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_target", 1, 3, 3, 2); __PYX_ERR(0, 394, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_target") < 0)) __PYX_ERR(0, 400, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_target") < 0)) __PYX_ERR(0, 394, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -14184,7 +14095,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_37get_target(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_target", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 400, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_target", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 394, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.get_target", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -14211,14 +14122,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_36get_target(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_target", 0);
 
-  /* "kivyblocks/blocks.pyx":401
+  /* "kivyblocks/blocks.pyx":395
  * 
  * 	def get_target(self, widget:Widget, desc):
  * 		if not desc.get('target'):             # <<<<<<<<<<<<<<
  * 			return None
  * 		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -14232,15 +14143,15 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_36get_target(CYTHON_UNUSE
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_target) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_target);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_5 = ((!__pyx_t_4) != 0);
   if (__pyx_t_5) {
 
-    /* "kivyblocks/blocks.pyx":402
+    /* "kivyblocks/blocks.pyx":396
  * 	def get_target(self, widget:Widget, desc):
  * 		if not desc.get('target'):
  * 			return None             # <<<<<<<<<<<<<<
@@ -14251,7 +14162,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_36get_target(CYTHON_UNUSE
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":401
+    /* "kivyblocks/blocks.pyx":395
  * 
  * 	def get_target(self, widget:Widget, desc):
  * 		if not desc.get('target'):             # <<<<<<<<<<<<<<
@@ -14260,7 +14171,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_36get_target(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/blocks.pyx":403
+  /* "kivyblocks/blocks.pyx":397
  * 		if not desc.get('target'):
  * 			return None
  * 		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)             # <<<<<<<<<<<<<<
@@ -14268,12 +14179,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_36get_target(CYTHON_UNUSE
  * 	def blocksAction(self, widget:Widget, desc, *args):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_getWidgetById); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_getWidgetById); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -14287,18 +14198,18 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_36get_target(CYTHON_UNUSE
   }
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_n_s_target) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_n_s_target);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_from_widget, __pyx_v_widget) < 0) __PYX_ERR(0, 403, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 403, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_from_widget, __pyx_v_widget) < 0) __PYX_ERR(0, 397, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -14307,7 +14218,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_36get_target(CYTHON_UNUSE
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/blocks.pyx":400
+  /* "kivyblocks/blocks.pyx":394
  * 			return
  * 
  * 	def get_target(self, widget:Widget, desc):             # <<<<<<<<<<<<<<
@@ -14329,7 +14240,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_36get_target(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":405
+/* "kivyblocks/blocks.pyx":399
  * 		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
  * 
  * 	def blocksAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -14386,18 +14297,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_39blocksAction(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("blocksAction", 0, 3, 3, 1); __PYX_ERR(0, 405, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("blocksAction", 0, 3, 3, 1); __PYX_ERR(0, 399, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("blocksAction", 0, 3, 3, 2); __PYX_ERR(0, 405, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("blocksAction", 0, 3, 3, 2); __PYX_ERR(0, 399, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "blocksAction") < 0)) __PYX_ERR(0, 405, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "blocksAction") < 0)) __PYX_ERR(0, 399, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -14412,7 +14323,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_39blocksAction(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("blocksAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 405, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("blocksAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 399, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.blocksAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -14427,7 +14338,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_39blocksAction(PyObject *
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":414
+/* "kivyblocks/blocks.pyx":408
  * 			p.update(d)
  * 		opts['options'] = p
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):             # <<<<<<<<<<<<<<
@@ -14476,23 +14387,23 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_12blocksAction_1doit(PyOb
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_add_mode)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 1); __PYX_ERR(0, 414, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 1); __PYX_ERR(0, 408, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_o)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 2); __PYX_ERR(0, 414, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 2); __PYX_ERR(0, 408, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_w)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 3); __PYX_ERR(0, 414, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 3); __PYX_ERR(0, 408, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "doit") < 0)) __PYX_ERR(0, 414, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "doit") < 0)) __PYX_ERR(0, 408, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -14509,13 +14420,13 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_12blocksAction_1doit(PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 414, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 408, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.blocksAction.doit", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_add_mode), (&PyString_Type), 1, "add_mode", 1))) __PYX_ERR(0, 414, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_add_mode), (&PyString_Type), 1, "add_mode", 1))) __PYX_ERR(0, 408, __pyx_L1_error)
   __pyx_r = __pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_doit(__pyx_self, __pyx_v_target, __pyx_v_add_mode, __pyx_v_o, __pyx_v_w);
 
   /* function exit code */
@@ -14533,39 +14444,40 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_doit(CYTHO
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
   int __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("doit", 0);
 
-  /* "kivyblocks/blocks.pyx":415
+  /* "kivyblocks/blocks.pyx":409
  * 		opts['options'] = p
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):
  * 			if isinstance(w, ModalView):             # <<<<<<<<<<<<<<
  * 				return
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ModalView); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 415, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ModalView); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_IsInstance(__pyx_v_w, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 415, __pyx_L1_error)
+  __pyx_t_2 = PyObject_IsInstance(__pyx_v_w, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 409, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":416
+    /* "kivyblocks/blocks.pyx":410
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):
  * 			if isinstance(w, ModalView):
  * 				return             # <<<<<<<<<<<<<<
  * 
- * 			if target:
+ * 			if target and not w.parent:
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":415
+    /* "kivyblocks/blocks.pyx":409
  * 		opts['options'] = p
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):
  * 			if isinstance(w, ModalView):             # <<<<<<<<<<<<<<
@@ -14574,98 +14486,110 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_doit(CYTHO
  */
   }
 
-  /* "kivyblocks/blocks.pyx":418
+  /* "kivyblocks/blocks.pyx":412
  * 				return
  * 
- * 			if target:             # <<<<<<<<<<<<<<
+ * 			if target and not w.parent:             # <<<<<<<<<<<<<<
  * 				if add_mode == 'replace':
  * 					target.clear_widgets()
  */
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_target); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 418, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_target); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 412, __pyx_L1_error)
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_3 = __pyx_t_2;
+    goto __pyx_L5_bool_binop_done;
+  }
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_parent); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 412, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 412, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = ((!__pyx_t_2) != 0);
+  __pyx_t_3 = __pyx_t_4;
+  __pyx_L5_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":419
+    /* "kivyblocks/blocks.pyx":413
  * 
- * 			if target:
+ * 			if target and not w.parent:
  * 				if add_mode == 'replace':             # <<<<<<<<<<<<<<
  * 					target.clear_widgets()
  * 				target.add_widget(w)
  */
-    __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_add_mode, __pyx_n_s_replace, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 419, __pyx_L1_error)
-    __pyx_t_2 = (__pyx_t_3 != 0);
-    if (__pyx_t_2) {
+    __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_add_mode, __pyx_n_s_replace, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 413, __pyx_L1_error)
+    __pyx_t_4 = (__pyx_t_3 != 0);
+    if (__pyx_t_4) {
 
-      /* "kivyblocks/blocks.pyx":420
- * 			if target:
+      /* "kivyblocks/blocks.pyx":414
+ * 			if target and not w.parent:
  * 				if add_mode == 'replace':
  * 					target.clear_widgets()             # <<<<<<<<<<<<<<
  * 				target.add_widget(w)
  * 
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_clear_widgets); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 420, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = NULL;
-      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-        __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
-        if (likely(__pyx_t_5)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-          __Pyx_INCREF(__pyx_t_5);
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_clear_widgets); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 414, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_6 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+        __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+        if (likely(__pyx_t_6)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+          __Pyx_INCREF(__pyx_t_6);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_4, function);
+          __Pyx_DECREF_SET(__pyx_t_5, function);
         }
       }
-      __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
-      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 420, __pyx_L1_error)
+      __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 414, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":419
+      /* "kivyblocks/blocks.pyx":413
  * 
- * 			if target:
+ * 			if target and not w.parent:
  * 				if add_mode == 'replace':             # <<<<<<<<<<<<<<
  * 					target.clear_widgets()
  * 				target.add_widget(w)
  */
     }
 
-    /* "kivyblocks/blocks.pyx":421
+    /* "kivyblocks/blocks.pyx":415
  * 				if add_mode == 'replace':
  * 					target.clear_widgets()
  * 				target.add_widget(w)             # <<<<<<<<<<<<<<
  * 
  * 		def doerr(o,e):
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 421, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_5)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_5);
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 415, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+        __Pyx_INCREF(__pyx_t_6);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __Pyx_DECREF_SET(__pyx_t_5, function);
       }
     }
-    __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_v_w) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_w);
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 421, __pyx_L1_error)
+    __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_v_w) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_w);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 415, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":418
+    /* "kivyblocks/blocks.pyx":412
  * 				return
  * 
- * 			if target:             # <<<<<<<<<<<<<<
+ * 			if target and not w.parent:             # <<<<<<<<<<<<<<
  * 				if add_mode == 'replace':
  * 					target.clear_widgets()
  */
   }
 
-  /* "kivyblocks/blocks.pyx":414
+  /* "kivyblocks/blocks.pyx":408
  * 			p.update(d)
  * 		opts['options'] = p
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):             # <<<<<<<<<<<<<<
@@ -14678,8 +14602,8 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_doit(CYTHO
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.blocksAction.doit", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -14688,7 +14612,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_doit(CYTHO
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":423
+/* "kivyblocks/blocks.pyx":417
  * 				target.add_widget(w)
  * 
  * 		def doerr(o,e):             # <<<<<<<<<<<<<<
@@ -14731,11 +14655,11 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_12blocksAction_3doerr(PyO
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_e)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("doerr", 1, 2, 2, 1); __PYX_ERR(0, 423, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("doerr", 1, 2, 2, 1); __PYX_ERR(0, 417, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "doerr") < 0)) __PYX_ERR(0, 423, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "doerr") < 0)) __PYX_ERR(0, 417, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -14748,7 +14672,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_12blocksAction_3doerr(PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("doerr", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 423, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("doerr", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 417, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.blocksAction.doerr", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -14779,28 +14703,28 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_2doerr(PyO
   __pyx_outer_scope = (struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct__blocksAction *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
 
-  /* "kivyblocks/blocks.pyx":424
+  /* "kivyblocks/blocks.pyx":418
  * 
  * 		def doerr(o,e):
  * 			Logger.info('Block: blocksAction(): desc=%s widgetBuild error'             # <<<<<<<<<<<<<<
  * 								,str(desc))
  * 			raise e
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 424, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 418, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 424, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 418, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":425
+  /* "kivyblocks/blocks.pyx":419
  * 		def doerr(o,e):
  * 			Logger.info('Block: blocksAction(): desc=%s widgetBuild error'
  * 								,str(desc))             # <<<<<<<<<<<<<<
  * 			raise e
  * 
  */
-  if (unlikely(!__pyx_cur_scope->__pyx_v_desc)) { __Pyx_RaiseClosureNameError("desc"); __PYX_ERR(0, 425, __pyx_L1_error) }
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_cur_scope->__pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 425, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_v_desc)) { __Pyx_RaiseClosureNameError("desc"); __PYX_ERR(0, 419, __pyx_L1_error) }
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_cur_scope->__pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 419, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -14817,7 +14741,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_2doerr(PyO
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_kp_s_Block_blocksAction_desc_s_widget, __pyx_t_2};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 424, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 418, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -14826,14 +14750,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_2doerr(PyO
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_kp_s_Block_blocksAction_desc_s_widget, __pyx_t_2};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 424, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 418, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 424, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 418, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -14844,14 +14768,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_2doerr(PyO
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 424, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 418, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":426
+  /* "kivyblocks/blocks.pyx":420
  * 			Logger.info('Block: blocksAction(): desc=%s widgetBuild error'
  * 								,str(desc))
  * 			raise e             # <<<<<<<<<<<<<<
@@ -14859,9 +14783,9 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_2doerr(PyO
  * 		b = Blocks()
  */
   __Pyx_Raise(__pyx_v_e, 0, 0, 0);
-  __PYX_ERR(0, 426, __pyx_L1_error)
+  __PYX_ERR(0, 420, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":423
+  /* "kivyblocks/blocks.pyx":417
  * 				target.add_widget(w)
  * 
  * 		def doerr(o,e):             # <<<<<<<<<<<<<<
@@ -14883,7 +14807,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_12blocksAction_2doerr(PyO
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":405
+/* "kivyblocks/blocks.pyx":399
  * 		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
  * 
  * 	def blocksAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -14919,7 +14843,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct__blocksAction *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 405, __pyx_L1_error)
+    __PYX_ERR(0, 399, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -14927,14 +14851,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_desc);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_desc);
 
-  /* "kivyblocks/blocks.pyx":406
+  /* "kivyblocks/blocks.pyx":400
  * 
  * 	def blocksAction(self, widget:Widget, desc, *args):
  * 		target = self.get_target(widget, desc)             # <<<<<<<<<<<<<<
  * 		add_mode = desc.get('mode','replace')
  * 		opts = desc.get('options').copy()
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 400, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -14951,7 +14875,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_cur_scope->__pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -14959,13 +14883,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_cur_scope->__pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 406, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 400, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -14976,7 +14900,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
     __Pyx_INCREF(__pyx_cur_scope->__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_cur_scope->__pyx_v_desc);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -14984,29 +14908,29 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   __pyx_v_target = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":407
+  /* "kivyblocks/blocks.pyx":401
  * 	def blocksAction(self, widget:Widget, desc, *args):
  * 		target = self.get_target(widget, desc)
  * 		add_mode = desc.get('mode','replace')             # <<<<<<<<<<<<<<
  * 		opts = desc.get('options').copy()
  * 		d = self.getActionData(widget,desc, *args)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_add_mode = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":408
+  /* "kivyblocks/blocks.pyx":402
  * 		target = self.get_target(widget, desc)
  * 		add_mode = desc.get('mode','replace')
  * 		opts = desc.get('options').copy()             # <<<<<<<<<<<<<<
  * 		d = self.getActionData(widget,desc, *args)
  * 		p = opts.get('options',{}).copy()
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 408, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 402, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -15020,10 +14944,10 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_3, __pyx_n_s_options) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_n_s_options);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 408, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_copy); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 408, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_copy); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 402, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -15038,22 +14962,22 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   }
   __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 408, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 402, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_opts = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":409
+  /* "kivyblocks/blocks.pyx":403
  * 		add_mode = desc.get('mode','replace')
  * 		opts = desc.get('options').copy()
  * 		d = self.getActionData(widget,desc, *args)             # <<<<<<<<<<<<<<
  * 		p = opts.get('options',{}).copy()
  * 		if d:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_v_widget);
   __Pyx_GIVEREF(__pyx_v_widget);
@@ -15061,26 +14985,26 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_desc);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_desc);
   PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_cur_scope->__pyx_v_desc);
-  __pyx_t_1 = PyNumber_Add(__pyx_t_5, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_t_5, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":410
+  /* "kivyblocks/blocks.pyx":404
  * 		opts = desc.get('options').copy()
  * 		d = self.getActionData(widget,desc, *args)
  * 		p = opts.get('options',{}).copy()             # <<<<<<<<<<<<<<
  * 		if d:
  * 			p.update(d)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   __pyx_t_4 = 0;
@@ -15097,7 +15021,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_options, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -15106,14 +15030,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_options, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 404, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -15124,12 +15048,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_4, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -15144,30 +15068,30 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   }
   __pyx_t_5 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 410, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_p = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":411
+  /* "kivyblocks/blocks.pyx":405
  * 		d = self.getActionData(widget,desc, *args)
  * 		p = opts.get('options',{}).copy()
  * 		if d:             # <<<<<<<<<<<<<<
  * 			p.update(d)
  * 		opts['options'] = p
  */
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 411, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 405, __pyx_L1_error)
   if (__pyx_t_8) {
 
-    /* "kivyblocks/blocks.pyx":412
+    /* "kivyblocks/blocks.pyx":406
  * 		p = opts.get('options',{}).copy()
  * 		if d:
  * 			p.update(d)             # <<<<<<<<<<<<<<
  * 		opts['options'] = p
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_update); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 412, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_update); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -15181,12 +15105,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
     }
     __pyx_t_5 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_v_d) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_d);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 412, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/blocks.pyx":411
+    /* "kivyblocks/blocks.pyx":405
  * 		d = self.getActionData(widget,desc, *args)
  * 		p = opts.get('options',{}).copy()
  * 		if d:             # <<<<<<<<<<<<<<
@@ -15195,60 +15119,60 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
  */
   }
 
-  /* "kivyblocks/blocks.pyx":413
+  /* "kivyblocks/blocks.pyx":407
  * 		if d:
  * 			p.update(d)
  * 		opts['options'] = p             # <<<<<<<<<<<<<<
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):
  * 			if isinstance(w, ModalView):
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_opts, __pyx_n_s_options, __pyx_v_p) < 0)) __PYX_ERR(0, 413, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_opts, __pyx_n_s_options, __pyx_v_p) < 0)) __PYX_ERR(0, 407, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":414
+  /* "kivyblocks/blocks.pyx":408
  * 			p.update(d)
  * 		opts['options'] = p
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):             # <<<<<<<<<<<<<<
  * 			if isinstance(w, ModalView):
  * 				return
  */
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 414, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 414, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_target, __pyx_t_2) < 0) __PYX_ERR(0, 414, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_target, __pyx_t_2) < 0) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_add_mode, __pyx_n_u_str_2) < 0) __PYX_ERR(0, 414, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 414, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_add_mode, __pyx_n_u_str_2) < 0) __PYX_ERR(0, 408, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_w, __pyx_t_2) < 0) __PYX_ERR(0, 414, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_w, __pyx_t_2) < 0) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_12blocksAction_1doit, 0, __pyx_n_s_Blocks_blocksAction_locals_doit, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 414, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_12blocksAction_1doit, 0, __pyx_n_s_Blocks_blocksAction_locals_doit, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_doit = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":423
+  /* "kivyblocks/blocks.pyx":417
  * 				target.add_widget(w)
  * 
  * 		def doerr(o,e):             # <<<<<<<<<<<<<<
  * 			Logger.info('Block: blocksAction(): desc=%s widgetBuild error'
  * 								,str(desc))
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_12blocksAction_3doerr, 0, __pyx_n_s_Blocks_blocksAction_locals_doerr, ((PyObject*)__pyx_cur_scope), __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 423, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_12blocksAction_3doerr, 0, __pyx_n_s_Blocks_blocksAction_locals_doerr, ((PyObject*)__pyx_cur_scope), __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 417, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_doerr = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":428
+  /* "kivyblocks/blocks.pyx":422
  * 			raise e
  * 
  * 		b = Blocks()             # <<<<<<<<<<<<<<
  * 		b.bind(on_built=partial(doit,target,add_mode))
  * 		b.bind(on_failed=doerr)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 428, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 422, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -15262,24 +15186,24 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   }
   __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 428, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 422, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_b = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":429
+  /* "kivyblocks/blocks.pyx":423
  * 
  * 		b = Blocks()
  * 		b.bind(on_built=partial(doit,target,add_mode))             # <<<<<<<<<<<<<<
  * 		b.bind(on_failed=doerr)
  * 		b.widgetBuild(opts)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_partial); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_partial); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -15296,7 +15220,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_7)) {
     PyObject *__pyx_temp[4] = {__pyx_t_3, __pyx_v_doit, __pyx_v_target, __pyx_v_add_mode};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 429, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -15304,13 +15228,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
     PyObject *__pyx_temp[4] = {__pyx_t_3, __pyx_v_doit, __pyx_v_target, __pyx_v_add_mode};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 429, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 429, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 423, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -15324,45 +15248,45 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
     __Pyx_INCREF(__pyx_v_add_mode);
     __Pyx_GIVEREF(__pyx_v_add_mode);
     PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_4, __pyx_v_add_mode);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 429, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_on_built, __pyx_t_1) < 0) __PYX_ERR(0, 429, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_on_built, __pyx_t_1) < 0) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":430
+  /* "kivyblocks/blocks.pyx":424
  * 		b = Blocks()
  * 		b.bind(on_built=partial(doit,target,add_mode))
  * 		b.bind(on_failed=doerr)             # <<<<<<<<<<<<<<
  * 		b.widgetBuild(opts)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 430, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 424, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 430, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 424, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_on_failed, __pyx_v_doerr) < 0) __PYX_ERR(0, 430, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 430, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_on_failed, __pyx_v_doerr) < 0) __PYX_ERR(0, 424, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 424, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":431
+  /* "kivyblocks/blocks.pyx":425
  * 		b.bind(on_built=partial(doit,target,add_mode))
  * 		b.bind(on_failed=doerr)
  * 		b.widgetBuild(opts)             # <<<<<<<<<<<<<<
  * 
  * 	def urlwidgetAction(self, widget:Widget, desc, *args):
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 431, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 425, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -15376,12 +15300,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   }
   __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_1, __pyx_v_opts) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_opts);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 431, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 425, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":405
+  /* "kivyblocks/blocks.pyx":399
  * 		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
  * 
  * 	def blocksAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -15416,12 +15340,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_38blocksAction(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":433
+/* "kivyblocks/blocks.pyx":427
  * 		b.widgetBuild(opts)
  * 
  * 	def urlwidgetAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		target = self.get_target(widget, desc)
+ * 		add_mode = desc.get('mode','replace')
  */
 
 /* Python wrapper */
@@ -15473,18 +15397,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_41urlwidgetAction(PyObjec
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("urlwidgetAction", 0, 3, 3, 1); __PYX_ERR(0, 433, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("urlwidgetAction", 0, 3, 3, 1); __PYX_ERR(0, 427, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("urlwidgetAction", 0, 3, 3, 2); __PYX_ERR(0, 433, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("urlwidgetAction", 0, 3, 3, 2); __PYX_ERR(0, 427, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "urlwidgetAction") < 0)) __PYX_ERR(0, 433, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "urlwidgetAction") < 0)) __PYX_ERR(0, 427, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -15499,7 +15423,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_41urlwidgetAction(PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("urlwidgetAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 433, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("urlwidgetAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 427, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.urlwidgetAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -15514,7 +15438,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_41urlwidgetAction(PyObjec
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":453
+/* "kivyblocks/blocks.pyx":443
  * 		}
  * 
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):             # <<<<<<<<<<<<<<
@@ -15563,23 +15487,23 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_1doit(P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_add_mode)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 1); __PYX_ERR(0, 453, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 1); __PYX_ERR(0, 443, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_o)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 2); __PYX_ERR(0, 453, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 2); __PYX_ERR(0, 443, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_w)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 3); __PYX_ERR(0, 453, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, 3); __PYX_ERR(0, 443, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "doit") < 0)) __PYX_ERR(0, 453, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "doit") < 0)) __PYX_ERR(0, 443, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -15596,13 +15520,13 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_1doit(P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 453, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("doit", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 443, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.urlwidgetAction.doit", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_add_mode), (&PyString_Type), 1, "add_mode", 1))) __PYX_ERR(0, 453, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_add_mode), (&PyString_Type), 1, "add_mode", 1))) __PYX_ERR(0, 443, __pyx_L1_error)
   __pyx_r = __pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_doit(__pyx_self, __pyx_v_target, __pyx_v_add_mode, __pyx_v_o, __pyx_v_w);
 
   /* function exit code */
@@ -15620,39 +15544,40 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_doit(CY
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
   int __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("doit", 0);
 
-  /* "kivyblocks/blocks.pyx":454
+  /* "kivyblocks/blocks.pyx":444
  * 
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):
  * 			if isinstance(w, ModalView):             # <<<<<<<<<<<<<<
  * 				return
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ModalView); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 454, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ModalView); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 444, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_IsInstance(__pyx_v_w, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 454, __pyx_L1_error)
+  __pyx_t_2 = PyObject_IsInstance(__pyx_v_w, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 444, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":455
+    /* "kivyblocks/blocks.pyx":445
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):
  * 			if isinstance(w, ModalView):
  * 				return             # <<<<<<<<<<<<<<
  * 
- * 			if target:
+ * 			if target and not w.parent:
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":454
+    /* "kivyblocks/blocks.pyx":444
  * 
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):
  * 			if isinstance(w, ModalView):             # <<<<<<<<<<<<<<
@@ -15661,98 +15586,110 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_doit(CY
  */
   }
 
-  /* "kivyblocks/blocks.pyx":457
+  /* "kivyblocks/blocks.pyx":447
  * 				return
  * 
- * 			if target:             # <<<<<<<<<<<<<<
+ * 			if target and not w.parent:             # <<<<<<<<<<<<<<
  * 				if add_mode == 'replace':
  * 					target.clear_widgets()
  */
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_target); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 457, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_target); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 447, __pyx_L1_error)
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_3 = __pyx_t_2;
+    goto __pyx_L5_bool_binop_done;
+  }
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_parent); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 447, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 447, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = ((!__pyx_t_2) != 0);
+  __pyx_t_3 = __pyx_t_4;
+  __pyx_L5_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":458
+    /* "kivyblocks/blocks.pyx":448
  * 
- * 			if target:
+ * 			if target and not w.parent:
  * 				if add_mode == 'replace':             # <<<<<<<<<<<<<<
  * 					target.clear_widgets()
  * 				target.add_widget(w)
  */
-    __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_add_mode, __pyx_n_s_replace, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 458, __pyx_L1_error)
-    __pyx_t_2 = (__pyx_t_3 != 0);
-    if (__pyx_t_2) {
+    __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_add_mode, __pyx_n_s_replace, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 448, __pyx_L1_error)
+    __pyx_t_4 = (__pyx_t_3 != 0);
+    if (__pyx_t_4) {
 
-      /* "kivyblocks/blocks.pyx":459
- * 			if target:
+      /* "kivyblocks/blocks.pyx":449
+ * 			if target and not w.parent:
  * 				if add_mode == 'replace':
  * 					target.clear_widgets()             # <<<<<<<<<<<<<<
  * 				target.add_widget(w)
  * 
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_clear_widgets); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 459, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = NULL;
-      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-        __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
-        if (likely(__pyx_t_5)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-          __Pyx_INCREF(__pyx_t_5);
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_clear_widgets); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 449, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_6 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+        __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+        if (likely(__pyx_t_6)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+          __Pyx_INCREF(__pyx_t_6);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_4, function);
+          __Pyx_DECREF_SET(__pyx_t_5, function);
         }
       }
-      __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
-      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 459, __pyx_L1_error)
+      __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 449, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":458
+      /* "kivyblocks/blocks.pyx":448
  * 
- * 			if target:
+ * 			if target and not w.parent:
  * 				if add_mode == 'replace':             # <<<<<<<<<<<<<<
  * 					target.clear_widgets()
  * 				target.add_widget(w)
  */
     }
 
-    /* "kivyblocks/blocks.pyx":460
+    /* "kivyblocks/blocks.pyx":450
  * 				if add_mode == 'replace':
  * 					target.clear_widgets()
  * 				target.add_widget(w)             # <<<<<<<<<<<<<<
  * 
  * 		def doerr(o,e):
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 460, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_5)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_5);
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_target, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 450, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+        __Pyx_INCREF(__pyx_t_6);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __Pyx_DECREF_SET(__pyx_t_5, function);
       }
     }
-    __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_v_w) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_w);
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 460, __pyx_L1_error)
+    __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_v_w) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_w);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 450, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":457
+    /* "kivyblocks/blocks.pyx":447
  * 				return
  * 
- * 			if target:             # <<<<<<<<<<<<<<
+ * 			if target and not w.parent:             # <<<<<<<<<<<<<<
  * 				if add_mode == 'replace':
  * 					target.clear_widgets()
  */
   }
 
-  /* "kivyblocks/blocks.pyx":453
+  /* "kivyblocks/blocks.pyx":443
  * 		}
  * 
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):             # <<<<<<<<<<<<<<
@@ -15765,8 +15702,8 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_doit(CY
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.urlwidgetAction.doit", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -15775,7 +15712,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_doit(CY
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":462
+/* "kivyblocks/blocks.pyx":452
  * 				target.add_widget(w)
  * 
  * 		def doerr(o,e):             # <<<<<<<<<<<<<<
@@ -15818,11 +15755,11 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_3doerr(
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_e)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("doerr", 1, 2, 2, 1); __PYX_ERR(0, 462, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("doerr", 1, 2, 2, 1); __PYX_ERR(0, 452, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "doerr") < 0)) __PYX_ERR(0, 462, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "doerr") < 0)) __PYX_ERR(0, 452, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -15835,7 +15772,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_3doerr(
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("doerr", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 462, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("doerr", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 452, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.urlwidgetAction.doerr", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -15866,28 +15803,28 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_2doerr(
   __pyx_outer_scope = (struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
 
-  /* "kivyblocks/blocks.pyx":463
+  /* "kivyblocks/blocks.pyx":453
  * 
  * 		def doerr(o,e):
  * 			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error'             # <<<<<<<<<<<<<<
  * 								,str(desc))
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 463, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 463, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 453, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":464
+  /* "kivyblocks/blocks.pyx":454
  * 		def doerr(o,e):
  * 			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error'
  * 								,str(desc))             # <<<<<<<<<<<<<<
  * 
  * 		b = Blocks()
  */
-  if (unlikely(!__pyx_cur_scope->__pyx_v_desc)) { __Pyx_RaiseClosureNameError("desc"); __PYX_ERR(0, 464, __pyx_L1_error) }
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_cur_scope->__pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_v_desc)) { __Pyx_RaiseClosureNameError("desc"); __PYX_ERR(0, 454, __pyx_L1_error) }
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_cur_scope->__pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 454, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -15904,7 +15841,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_2doerr(
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_kp_s_Block_urlwidgetAction_desc_s_wid, __pyx_t_2};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 463, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -15913,14 +15850,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_2doerr(
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_kp_s_Block_urlwidgetAction_desc_s_wid, __pyx_t_2};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 463, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 463, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -15931,14 +15868,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_2doerr(
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 463, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":462
+  /* "kivyblocks/blocks.pyx":452
  * 				target.add_widget(w)
  * 
  * 		def doerr(o,e):             # <<<<<<<<<<<<<<
@@ -15963,12 +15900,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_2doerr(
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":433
+/* "kivyblocks/blocks.pyx":427
  * 		b.widgetBuild(opts)
  * 
  * 	def urlwidgetAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		target = self.get_target(widget, desc)
+ * 		add_mode = desc.get('mode','replace')
  */
 
 static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_desc, PyObject *__pyx_v_args) {
@@ -15986,8 +15923,8 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  int __pyx_t_5;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   int __pyx_t_8;
@@ -16002,7 +15939,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 433, __pyx_L1_error)
+    __PYX_ERR(0, 427, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -16010,318 +15947,236 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_desc);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_desc);
 
-  /* "kivyblocks/blocks.pyx":434
+  /* "kivyblocks/blocks.pyx":428
  * 
  * 	def urlwidgetAction(self, widget:Widget, desc, *args):
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \             # <<<<<<<<<<<<<<
- * 						str(desc),
- * 						args
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 434, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 434, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "kivyblocks/blocks.pyx":435
- * 	def urlwidgetAction(self, widget:Widget, desc, *args):
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
- * 						str(desc),             # <<<<<<<<<<<<<<
- * 						args
- * 		)
- */
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_cur_scope->__pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 435, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-
-  /* "kivyblocks/blocks.pyx":436
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
- * 						str(desc),
- * 						args             # <<<<<<<<<<<<<<
- * 		)
- * 		target = self.get_target(widget, desc)
- */
-  __pyx_t_4 = NULL;
-  __pyx_t_5 = 0;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_4)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-      __pyx_t_5 = 1;
-    }
-  }
-  #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_3)) {
-    PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_kp_s_Block_urlwidgetAction_called_des, __pyx_t_2, __pyx_v_args};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 434, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  } else
-  #endif
-  #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-    PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_kp_s_Block_urlwidgetAction_called_des, __pyx_t_2, __pyx_v_args};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 434, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  } else
-  #endif
-  {
-    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 434, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    if (__pyx_t_4) {
-      __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
-    }
-    __Pyx_INCREF(__pyx_kp_s_Block_urlwidgetAction_called_des);
-    __Pyx_GIVEREF(__pyx_kp_s_Block_urlwidgetAction_called_des);
-    PyTuple_SET_ITEM(__pyx_t_6, 0+__pyx_t_5, __pyx_kp_s_Block_urlwidgetAction_called_des);
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_t_2);
-    __Pyx_INCREF(__pyx_v_args);
-    __Pyx_GIVEREF(__pyx_v_args);
-    PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_5, __pyx_v_args);
-    __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 434, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "kivyblocks/blocks.pyx":438
- * 						args
- * 		)
  * 		target = self.get_target(widget, desc)             # <<<<<<<<<<<<<<
  * 		add_mode = desc.get('mode','replace')
  * 		opts = desc.get('options').copy()
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 438, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = NULL;
-  __pyx_t_5 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_6);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 428, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  __pyx_t_4 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-      __pyx_t_5 = 1;
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_4 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_3)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_v_widget, __pyx_cur_scope->__pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 438, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (PyFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_cur_scope->__pyx_v_desc};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 428, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_v_widget, __pyx_cur_scope->__pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 438, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_cur_scope->__pyx_v_desc};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 428, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_2 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 438, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    if (__pyx_t_6) {
-      __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6); __pyx_t_6 = NULL;
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 428, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__pyx_t_3) {
+      __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
     }
     __Pyx_INCREF(__pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
-    PyTuple_SET_ITEM(__pyx_t_2, 0+__pyx_t_5, __pyx_v_widget);
+    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_4, __pyx_v_widget);
     __Pyx_INCREF(__pyx_cur_scope->__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_desc);
-    PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_5, __pyx_cur_scope->__pyx_v_desc);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 438, __pyx_L1_error)
+    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_cur_scope->__pyx_v_desc);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 428, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_target = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":439
- * 		)
+  /* "kivyblocks/blocks.pyx":429
+ * 	def urlwidgetAction(self, widget:Widget, desc, *args):
  * 		target = self.get_target(widget, desc)
  * 		add_mode = desc.get('mode','replace')             # <<<<<<<<<<<<<<
  * 		opts = desc.get('options').copy()
  * 		p = opts.get('params',{}).copy()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 439, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 429, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 439, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_add_mode = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_v_add_mode = __pyx_t_2;
+  __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":440
+  /* "kivyblocks/blocks.pyx":430
  * 		target = self.get_target(widget, desc)
  * 		add_mode = desc.get('mode','replace')
  * 		opts = desc.get('options').copy()             # <<<<<<<<<<<<<<
  * 		p = opts.get('params',{}).copy()
  * 		if len(args) >= 1 and isinstance(args[0],dict):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 440, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_6);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 430, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_5);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
     }
   }
-  __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_6, __pyx_n_s_options) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_options);
-  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 440, __pyx_L1_error)
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_3, __pyx_n_s_options) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_n_s_options);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 430, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 440, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_copy); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 430, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_2);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_5);
     if (likely(__pyx_t_1)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
       __Pyx_INCREF(__pyx_t_1);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
     }
   }
-  __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
+  __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 440, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_opts = __pyx_t_3;
-  __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 430, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_v_opts = __pyx_t_2;
+  __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":441
+  /* "kivyblocks/blocks.pyx":431
  * 		add_mode = desc.get('mode','replace')
  * 		opts = desc.get('options').copy()
  * 		p = opts.get('params',{}).copy()             # <<<<<<<<<<<<<<
  * 		if len(args) >= 1 and isinstance(args[0],dict):
  * 			p.update(args[0])
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 441, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 431, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 441, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = NULL;
-  __pyx_t_5 = 0;
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 431, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_6 = NULL;
+  __pyx_t_4 = 0;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_4)) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_6)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_1, function);
-      __pyx_t_5 = 1;
+      __pyx_t_4 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_s_params, __pyx_t_6};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 441, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_params, __pyx_t_3};
+    __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 431, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_s_params, __pyx_t_6};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 441, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_params, __pyx_t_3};
+    __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 431, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 441, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 431, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (__pyx_t_4) {
-      __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4); __pyx_t_4 = NULL;
+    if (__pyx_t_6) {
+      __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __pyx_t_6 = NULL;
     }
     __Pyx_INCREF(__pyx_n_s_params);
     __Pyx_GIVEREF(__pyx_n_s_params);
-    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_5, __pyx_n_s_params);
-    __Pyx_GIVEREF(__pyx_t_6);
-    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_5, __pyx_t_6);
-    __pyx_t_6 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 441, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
+    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_4, __pyx_n_s_params);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_4, __pyx_t_3);
+    __pyx_t_3 = 0;
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 431, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 441, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_copy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 431, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = NULL;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_2)) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_5)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_1, function);
     }
   }
-  __pyx_t_3 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 441, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 431, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_p = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_v_p = __pyx_t_2;
+  __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":442
+  /* "kivyblocks/blocks.pyx":432
  * 		opts = desc.get('options').copy()
  * 		p = opts.get('params',{}).copy()
  * 		if len(args) >= 1 and isinstance(args[0],dict):             # <<<<<<<<<<<<<<
  * 			p.update(args[0])
  * 		d = self.getActionData(widget, desc, *args)
  */
-  __pyx_t_9 = PyTuple_GET_SIZE(__pyx_v_args); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 442, __pyx_L1_error)
+  __pyx_t_9 = PyTuple_GET_SIZE(__pyx_v_args); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 432, __pyx_L1_error)
   __pyx_t_10 = ((__pyx_t_9 >= 1) != 0);
   if (__pyx_t_10) {
   } else {
     __pyx_t_8 = __pyx_t_10;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 442, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_10 = PyDict_Check(__pyx_t_3); 
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 432, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_10 = PyDict_Check(__pyx_t_2); 
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_11 = (__pyx_t_10 != 0);
   __pyx_t_8 = __pyx_t_11;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_8) {
 
-    /* "kivyblocks/blocks.pyx":443
+    /* "kivyblocks/blocks.pyx":433
  * 		p = opts.get('params',{}).copy()
  * 		if len(args) >= 1 and isinstance(args[0],dict):
  * 			p.update(args[0])             # <<<<<<<<<<<<<<
  * 		d = self.getActionData(widget, desc, *args)
  * 		if d:
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_update); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_update); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 433, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 443, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 433, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
       __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_1);
@@ -16332,15 +16187,15 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
         __Pyx_DECREF_SET(__pyx_t_1, function);
       }
     }
-    __pyx_t_3 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_7, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_2);
+    __pyx_t_2 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_7, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 443, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 433, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/blocks.pyx":442
+    /* "kivyblocks/blocks.pyx":432
  * 		opts = desc.get('options').copy()
  * 		p = opts.get('params',{}).copy()
  * 		if len(args) >= 1 and isinstance(args[0],dict):             # <<<<<<<<<<<<<<
@@ -16349,16 +16204,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
  */
   }
 
-  /* "kivyblocks/blocks.pyx":444
+  /* "kivyblocks/blocks.pyx":434
  * 		if len(args) >= 1 and isinstance(args[0],dict):
  * 			p.update(args[0])
  * 		d = self.getActionData(widget, desc, *args)             # <<<<<<<<<<<<<<
  * 		if d:
  * 			p.update(d)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 444, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 444, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 434, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 434, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_widget);
   __Pyx_GIVEREF(__pyx_v_widget);
@@ -16366,53 +16221,53 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_desc);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_desc);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_cur_scope->__pyx_v_desc);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_v_args); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 444, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = PyNumber_Add(__pyx_t_1, __pyx_v_args); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 434, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 444, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 434, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_d = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":445
+  /* "kivyblocks/blocks.pyx":435
  * 			p.update(args[0])
  * 		d = self.getActionData(widget, desc, *args)
  * 		if d:             # <<<<<<<<<<<<<<
  * 			p.update(d)
  * 		opts['params'] = p
  */
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 445, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 435, __pyx_L1_error)
   if (__pyx_t_8) {
 
-    /* "kivyblocks/blocks.pyx":446
+    /* "kivyblocks/blocks.pyx":436
  * 		d = self.getActionData(widget, desc, *args)
  * 		if d:
  * 			p.update(d)             # <<<<<<<<<<<<<<
  * 		opts['params'] = p
  * 		d = {
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_update); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 446, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-      if (likely(__pyx_t_3)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-        __Pyx_INCREF(__pyx_t_3);
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_update); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 436, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_2 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_5);
+      if (likely(__pyx_t_2)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+        __Pyx_INCREF(__pyx_t_2);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_2, function);
+        __Pyx_DECREF_SET(__pyx_t_5, function);
       }
     }
-    __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_d) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_d);
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 446, __pyx_L1_error)
+    __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_2, __pyx_v_d) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_d);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 436, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":445
+    /* "kivyblocks/blocks.pyx":435
  * 			p.update(args[0])
  * 		d = self.getActionData(widget, desc, *args)
  * 		if d:             # <<<<<<<<<<<<<<
@@ -16421,220 +16276,220 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
  */
   }
 
-  /* "kivyblocks/blocks.pyx":447
+  /* "kivyblocks/blocks.pyx":437
  * 		if d:
  * 			p.update(d)
  * 		opts['params'] = p             # <<<<<<<<<<<<<<
  * 		d = {
  * 			'widgettype' : 'urlwidget',
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_opts, __pyx_n_s_params, __pyx_v_p) < 0)) __PYX_ERR(0, 447, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_opts, __pyx_n_s_params, __pyx_v_p) < 0)) __PYX_ERR(0, 437, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":449
+  /* "kivyblocks/blocks.pyx":439
  * 		opts['params'] = p
  * 		d = {
  * 			'widgettype' : 'urlwidget',             # <<<<<<<<<<<<<<
  * 			'options': opts
  * 		}
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 449, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_widgettype, __pyx_n_s_urlwidget) < 0) __PYX_ERR(0, 449, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_widgettype, __pyx_n_s_urlwidget) < 0) __PYX_ERR(0, 439, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":450
+  /* "kivyblocks/blocks.pyx":440
  * 		d = {
  * 			'widgettype' : 'urlwidget',
  * 			'options': opts             # <<<<<<<<<<<<<<
  * 		}
  * 
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_options, __pyx_v_opts) < 0) __PYX_ERR(0, 449, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_options, __pyx_v_opts) < 0) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_d, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":453
+  /* "kivyblocks/blocks.pyx":443
  * 		}
  * 
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):             # <<<<<<<<<<<<<<
  * 			if isinstance(w, ModalView):
  * 				return
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_target, __pyx_t_2) < 0) __PYX_ERR(0, 453, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_add_mode, __pyx_n_u_str_2) < 0) __PYX_ERR(0, 453, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_w, __pyx_t_2) < 0) __PYX_ERR(0, 453, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_1doit, 0, __pyx_n_s_Blocks_urlwidgetAction_locals_do, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_1);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Widget); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 443, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_target, __pyx_t_5) < 0) __PYX_ERR(0, 443, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_add_mode, __pyx_n_u_str_2) < 0) __PYX_ERR(0, 443, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Widget); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 443, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_w, __pyx_t_5) < 0) __PYX_ERR(0, 443, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_1doit, 0, __pyx_n_s_Blocks_urlwidgetAction_locals_do, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 443, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_doit = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_v_doit = __pyx_t_5;
+  __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":462
+  /* "kivyblocks/blocks.pyx":452
  * 				target.add_widget(w)
  * 
  * 		def doerr(o,e):             # <<<<<<<<<<<<<<
  * 			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error'
  * 								,str(desc))
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_3doerr, 0, __pyx_n_s_Blocks_urlwidgetAction_locals_do_2, ((PyObject*)__pyx_cur_scope), __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 462, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_v_doerr = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_15urlwidgetAction_3doerr, 0, __pyx_n_s_Blocks_urlwidgetAction_locals_do_2, ((PyObject*)__pyx_cur_scope), __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 452, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_v_doerr = __pyx_t_5;
+  __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":466
+  /* "kivyblocks/blocks.pyx":456
  * 								,str(desc))
  * 
  * 		b = Blocks()             # <<<<<<<<<<<<<<
  * 		b.bind(on_built=partial(doit,target,add_mode))
  * 		b.bind(on_failed=doerr)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 466, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 456, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = NULL;
+  __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_3)) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_2)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_1, function);
     }
   }
-  __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 456, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_b = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_v_b = __pyx_t_5;
+  __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":467
+  /* "kivyblocks/blocks.pyx":457
  * 
  * 		b = Blocks()
  * 		b.bind(on_built=partial(doit,target,add_mode))             # <<<<<<<<<<<<<<
  * 		b.bind(on_failed=doerr)
  * 		b.widgetBuild(d)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 467, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 467, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_bind); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 457, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 457, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_partial); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 467, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_partial); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 457, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = NULL;
-  __pyx_t_5 = 0;
+  __pyx_t_3 = NULL;
+  __pyx_t_4 = 0;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_7);
-    if (likely(__pyx_t_6)) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_7);
+    if (likely(__pyx_t_3)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
-      __Pyx_INCREF(__pyx_t_6);
+      __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_7, function);
-      __pyx_t_5 = 1;
+      __pyx_t_4 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_7)) {
-    PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_v_doit, __pyx_v_target, __pyx_v_add_mode};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 467, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
+    PyObject *__pyx_temp[4] = {__pyx_t_3, __pyx_v_doit, __pyx_v_target, __pyx_v_add_mode};
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 457, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
-    PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_v_doit, __pyx_v_target, __pyx_v_add_mode};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 467, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
+    PyObject *__pyx_temp[4] = {__pyx_t_3, __pyx_v_doit, __pyx_v_target, __pyx_v_add_mode};
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 457, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
   } else
   #endif
   {
-    __pyx_t_4 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 467, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    if (__pyx_t_6) {
-      __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6); __pyx_t_6 = NULL;
+    __pyx_t_6 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 457, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    if (__pyx_t_3) {
+      __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __pyx_t_3 = NULL;
     }
     __Pyx_INCREF(__pyx_v_doit);
     __Pyx_GIVEREF(__pyx_v_doit);
-    PyTuple_SET_ITEM(__pyx_t_4, 0+__pyx_t_5, __pyx_v_doit);
+    PyTuple_SET_ITEM(__pyx_t_6, 0+__pyx_t_4, __pyx_v_doit);
     __Pyx_INCREF(__pyx_v_target);
     __Pyx_GIVEREF(__pyx_v_target);
-    PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_5, __pyx_v_target);
+    PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_4, __pyx_v_target);
     __Pyx_INCREF(__pyx_v_add_mode);
     __Pyx_GIVEREF(__pyx_v_add_mode);
-    PyTuple_SET_ITEM(__pyx_t_4, 2+__pyx_t_5, __pyx_v_add_mode);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 467, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_4, __pyx_v_add_mode);
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 457, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_on_built, __pyx_t_3) < 0) __PYX_ERR(0, 467, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 467, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_on_built, __pyx_t_2) < 0) __PYX_ERR(0, 457, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 457, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":468
+  /* "kivyblocks/blocks.pyx":458
  * 		b = Blocks()
  * 		b.bind(on_built=partial(doit,target,add_mode))
  * 		b.bind(on_failed=doerr)             # <<<<<<<<<<<<<<
  * 		b.widgetBuild(d)
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_bind); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 468, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 468, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_on_failed, __pyx_v_doerr) < 0) __PYX_ERR(0, 468, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 468, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 458, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_on_failed, __pyx_v_doerr) < 0) __PYX_ERR(0, 458, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 458, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":469
+  /* "kivyblocks/blocks.pyx":459
  * 		b.bind(on_built=partial(doit,target,add_mode))
  * 		b.bind(on_failed=doerr)
  * 		b.widgetBuild(d)             # <<<<<<<<<<<<<<
  * 
  * 	def getActionData(self, widget:Widget, desc, *args):
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 469, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 459, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = NULL;
+  __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_3)) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_2)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_1, function);
     }
   }
-  __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_v_d) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_d);
-  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 469, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_2, __pyx_v_d) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_d);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 459, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":433
+  /* "kivyblocks/blocks.pyx":427
  * 		b.widgetBuild(opts)
  * 
  * 	def urlwidgetAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		target = self.get_target(widget, desc)
+ * 		add_mode = desc.get('mode','replace')
  */
 
   /* function exit code */
@@ -16644,7 +16499,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.urlwidgetAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -16664,7 +16519,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_40urlwidgetAction(CYTHON_
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":471
+/* "kivyblocks/blocks.pyx":461
  * 		b.widgetBuild(d)
  * 
  * 	def getActionData(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -16721,18 +16576,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_43getActionData(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("getActionData", 0, 3, 3, 1); __PYX_ERR(0, 471, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("getActionData", 0, 3, 3, 1); __PYX_ERR(0, 461, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("getActionData", 0, 3, 3, 2); __PYX_ERR(0, 471, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("getActionData", 0, 3, 3, 2); __PYX_ERR(0, 461, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "getActionData") < 0)) __PYX_ERR(0, 471, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "getActionData") < 0)) __PYX_ERR(0, 461, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -16747,7 +16602,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_43getActionData(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getActionData", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 471, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getActionData", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 461, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.getActionData", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -16780,27 +16635,27 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getActionData", 0);
 
-  /* "kivyblocks/blocks.pyx":472
+  /* "kivyblocks/blocks.pyx":462
  * 
  * 	def getActionData(self, widget:Widget, desc, *args):
  * 		Logger.info('Block: getActionData(): desc=%s args=%s'             # <<<<<<<<<<<<<<
  * 							,str(desc), args)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 462, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 462, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":473
+  /* "kivyblocks/blocks.pyx":463
  * 	def getActionData(self, widget:Widget, desc, *args):
  * 		Logger.info('Block: getActionData(): desc=%s args=%s'
  * 							,str(desc), args)             # <<<<<<<<<<<<<<
  * 
  * 		data = {}
  */
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 473, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 463, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -16817,7 +16672,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_kp_s_Block_getActionData_desc_s_args, __pyx_t_2, __pyx_v_args};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 472, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 462, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -16826,14 +16681,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_kp_s_Block_getActionData_desc_s_args, __pyx_t_2, __pyx_v_args};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 472, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 462, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 472, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 462, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -16847,33 +16702,33 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
     __Pyx_GIVEREF(__pyx_v_args);
     PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_5, __pyx_v_args);
     __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 472, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 462, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":475
+  /* "kivyblocks/blocks.pyx":465
  * 							,str(desc), args)
  * 
  * 		data = {}             # <<<<<<<<<<<<<<
  * 		rtdesc = self.build_rtdesc(desc)
  * 		if rtdesc:
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 475, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 465, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_data = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":476
+  /* "kivyblocks/blocks.pyx":466
  * 
  * 		data = {}
  * 		rtdesc = self.build_rtdesc(desc)             # <<<<<<<<<<<<<<
  * 		if rtdesc:
  * 			rt = self.get_rtdata(widget, rtdesc, *args)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_build_rtdesc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 476, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_build_rtdesc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -16887,32 +16742,32 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
   }
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_v_desc) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_desc);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 476, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_rtdesc = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":477
+  /* "kivyblocks/blocks.pyx":467
  * 		data = {}
  * 		rtdesc = self.build_rtdesc(desc)
  * 		if rtdesc:             # <<<<<<<<<<<<<<
  * 			rt = self.get_rtdata(widget, rtdesc, *args)
  * 			if rt:
  */
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_rtdesc); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 477, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_rtdesc); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 467, __pyx_L1_error)
   if (__pyx_t_7) {
 
-    /* "kivyblocks/blocks.pyx":478
+    /* "kivyblocks/blocks.pyx":468
  * 		rtdesc = self.build_rtdesc(desc)
  * 		if rtdesc:
  * 			rt = self.get_rtdata(widget, rtdesc, *args)             # <<<<<<<<<<<<<<
  * 			if rt:
  * 				data.update(rt)
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_rtdata); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 478, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_rtdata); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 468, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 478, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 468, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
@@ -16920,34 +16775,34 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
     __Pyx_INCREF(__pyx_v_rtdesc);
     __Pyx_GIVEREF(__pyx_v_rtdesc);
     PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_rtdesc);
-    __pyx_t_6 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 478, __pyx_L1_error)
+    __pyx_t_6 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 468, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 478, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 468, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_rt = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "kivyblocks/blocks.pyx":479
+    /* "kivyblocks/blocks.pyx":469
  * 		if rtdesc:
  * 			rt = self.get_rtdata(widget, rtdesc, *args)
  * 			if rt:             # <<<<<<<<<<<<<<
  * 				data.update(rt)
  * 			if desc.get('keymapping'):
  */
-    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_rt); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 479, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_rt); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 469, __pyx_L1_error)
     if (__pyx_t_7) {
 
-      /* "kivyblocks/blocks.pyx":480
+      /* "kivyblocks/blocks.pyx":470
  * 			rt = self.get_rtdata(widget, rtdesc, *args)
  * 			if rt:
  * 				data.update(rt)             # <<<<<<<<<<<<<<
  * 			if desc.get('keymapping'):
  * 				data = keyMapping(data, desc.get('keymapping'))
  */
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_update); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 480, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_update); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 470, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_1 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -16961,12 +16816,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
       }
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_1, __pyx_v_rt) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_v_rt);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 480, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 470, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "kivyblocks/blocks.pyx":479
+      /* "kivyblocks/blocks.pyx":469
  * 		if rtdesc:
  * 			rt = self.get_rtdata(widget, rtdesc, *args)
  * 			if rt:             # <<<<<<<<<<<<<<
@@ -16975,14 +16830,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
  */
     }
 
-    /* "kivyblocks/blocks.pyx":481
+    /* "kivyblocks/blocks.pyx":471
  * 			if rt:
  * 				data.update(rt)
  * 			if desc.get('keymapping'):             # <<<<<<<<<<<<<<
  * 				data = keyMapping(data, desc.get('keymapping'))
  * 		return data
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 481, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 471, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -16996,23 +16851,23 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
     }
     __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_1, __pyx_n_s_keymapping) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_n_s_keymapping);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 481, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 471, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 481, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 471, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_7) {
 
-      /* "kivyblocks/blocks.pyx":482
+      /* "kivyblocks/blocks.pyx":472
  * 				data.update(rt)
  * 			if desc.get('keymapping'):
  * 				data = keyMapping(data, desc.get('keymapping'))             # <<<<<<<<<<<<<<
  * 		return data
  * 
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_keyMapping); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 482, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_keyMapping); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 472, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 482, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 472, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_4 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -17026,7 +16881,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
       }
       __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_4, __pyx_n_s_keymapping) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_keymapping);
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 472, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_2 = NULL;
@@ -17044,7 +16899,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_6)) {
         PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_data, __pyx_t_1};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 482, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 472, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -17053,14 +16908,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
         PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_data, __pyx_t_1};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 482, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 472, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       } else
       #endif
       {
-        __pyx_t_4 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 482, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 472, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         if (__pyx_t_2) {
           __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -17071,7 +16926,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
         __Pyx_GIVEREF(__pyx_t_1);
         PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_5, __pyx_t_1);
         __pyx_t_1 = 0;
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 482, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 472, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       }
@@ -17079,7 +16934,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
       __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "kivyblocks/blocks.pyx":481
+      /* "kivyblocks/blocks.pyx":471
  * 			if rt:
  * 				data.update(rt)
  * 			if desc.get('keymapping'):             # <<<<<<<<<<<<<<
@@ -17088,7 +16943,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
  */
     }
 
-    /* "kivyblocks/blocks.pyx":477
+    /* "kivyblocks/blocks.pyx":467
  * 		data = {}
  * 		rtdesc = self.build_rtdesc(desc)
  * 		if rtdesc:             # <<<<<<<<<<<<<<
@@ -17097,7 +16952,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
  */
   }
 
-  /* "kivyblocks/blocks.pyx":483
+  /* "kivyblocks/blocks.pyx":473
  * 			if desc.get('keymapping'):
  * 				data = keyMapping(data, desc.get('keymapping'))
  * 		return data             # <<<<<<<<<<<<<<
@@ -17109,7 +16964,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
   __pyx_r = __pyx_v_data;
   goto __pyx_L0;
 
-  /* "kivyblocks/blocks.pyx":471
+  /* "kivyblocks/blocks.pyx":461
  * 		b.widgetBuild(d)
  * 
  * 	def getActionData(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -17135,7 +16990,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_42getActionData(CYTHON_UN
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":485
+/* "kivyblocks/blocks.pyx":475
  * 		return data
  * 
  * 	def registedfunctionAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -17192,18 +17047,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_45registedfunctionAction(
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("registedfunctionAction", 0, 3, 3, 1); __PYX_ERR(0, 485, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("registedfunctionAction", 0, 3, 3, 1); __PYX_ERR(0, 475, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("registedfunctionAction", 0, 3, 3, 2); __PYX_ERR(0, 485, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("registedfunctionAction", 0, 3, 3, 2); __PYX_ERR(0, 475, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "registedfunctionAction") < 0)) __PYX_ERR(0, 485, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "registedfunctionAction") < 0)) __PYX_ERR(0, 475, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -17218,7 +17073,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_45registedfunctionAction(
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("registedfunctionAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 485, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("registedfunctionAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 475, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.registedfunctionAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -17256,14 +17111,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("registedfunctionAction", 0);
 
-  /* "kivyblocks/blocks.pyx":486
+  /* "kivyblocks/blocks.pyx":476
  * 
  * 	def registedfunctionAction(self, widget:Widget, desc, *args):
  * 		target = self.get_target(widget, desc)             # <<<<<<<<<<<<<<
  * 		rf = RegisterFunction()
  * 		name = desc.get('rfname')
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 476, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -17280,7 +17135,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 486, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -17288,13 +17143,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 486, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 486, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -17305,7 +17160,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_desc);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 486, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -17313,14 +17168,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   __pyx_v_target = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":487
+  /* "kivyblocks/blocks.pyx":477
  * 	def registedfunctionAction(self, widget:Widget, desc, *args):
  * 		target = self.get_target(widget, desc)
  * 		rf = RegisterFunction()             # <<<<<<<<<<<<<<
  * 		name = desc.get('rfname')
  * 		func = rf.get(name)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_RegisterFunction); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 487, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_RegisterFunction); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -17334,20 +17189,20 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   }
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 487, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_rf = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":488
+  /* "kivyblocks/blocks.pyx":478
  * 		target = self.get_target(widget, desc)
  * 		rf = RegisterFunction()
  * 		name = desc.get('rfname')             # <<<<<<<<<<<<<<
  * 		func = rf.get(name)
  * 		if func is None:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 488, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -17361,20 +17216,20 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   }
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_5, __pyx_n_s_rfname) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_rfname);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 488, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_name = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":489
+  /* "kivyblocks/blocks.pyx":479
  * 		rf = RegisterFunction()
  * 		name = desc.get('rfname')
  * 		func = rf.get(name)             # <<<<<<<<<<<<<<
  * 		if func is None:
  * 			Logger.info('Block: desc=%s rfname(%s) not found',
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_rf, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 489, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_rf, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 479, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -17388,13 +17243,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   }
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_5, __pyx_v_name) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_name);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 489, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 479, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_func = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":490
+  /* "kivyblocks/blocks.pyx":480
  * 		name = desc.get('rfname')
  * 		func = rf.get(name)
  * 		if func is None:             # <<<<<<<<<<<<<<
@@ -17405,27 +17260,27 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   __pyx_t_7 = (__pyx_t_6 != 0);
   if (unlikely(__pyx_t_7)) {
 
-    /* "kivyblocks/blocks.pyx":491
+    /* "kivyblocks/blocks.pyx":481
  * 		func = rf.get(name)
  * 		if func is None:
  * 			Logger.info('Block: desc=%s rfname(%s) not found',             # <<<<<<<<<<<<<<
  * 						str(desc), name)
  * 			raise Exception('rfname(%s) not found' % name)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 491, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 491, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/blocks.pyx":492
+    /* "kivyblocks/blocks.pyx":482
  * 		if func is None:
  * 			Logger.info('Block: desc=%s rfname(%s) not found',
  * 						str(desc), name)             # <<<<<<<<<<<<<<
  * 			raise Exception('rfname(%s) not found' % name)
  * 
  */
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 492, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 482, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     __pyx_t_4 = 0;
@@ -17442,7 +17297,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[4] = {__pyx_t_3, __pyx_kp_s_Block_desc_s_rfname_s_not_found, __pyx_t_2, __pyx_v_name};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 491, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 481, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -17451,14 +17306,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[4] = {__pyx_t_3, __pyx_kp_s_Block_desc_s_rfname_s_not_found, __pyx_t_2, __pyx_v_name};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 491, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 481, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 491, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 481, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_3) {
         __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -17472,30 +17327,30 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
       __Pyx_GIVEREF(__pyx_v_name);
       PyTuple_SET_ITEM(__pyx_t_8, 2+__pyx_t_4, __pyx_v_name);
       __pyx_t_2 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 491, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 481, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":493
+    /* "kivyblocks/blocks.pyx":483
  * 			Logger.info('Block: desc=%s rfname(%s) not found',
  * 						str(desc), name)
  * 			raise Exception('rfname(%s) not found' % name)             # <<<<<<<<<<<<<<
  * 
  * 		params = desc.get('params',{}).copy()
  */
-    __pyx_t_1 = __Pyx_PyString_FormatSafe(__pyx_kp_s_rfname_s_not_found, __pyx_v_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 493, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyString_FormatSafe(__pyx_kp_s_rfname_s_not_found, __pyx_v_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 493, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_Raise(__pyx_t_5, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __PYX_ERR(0, 493, __pyx_L1_error)
+    __PYX_ERR(0, 483, __pyx_L1_error)
 
-    /* "kivyblocks/blocks.pyx":490
+    /* "kivyblocks/blocks.pyx":480
  * 		name = desc.get('rfname')
  * 		func = rf.get(name)
  * 		if func is None:             # <<<<<<<<<<<<<<
@@ -17504,16 +17359,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
  */
   }
 
-  /* "kivyblocks/blocks.pyx":495
+  /* "kivyblocks/blocks.pyx":485
  * 			raise Exception('rfname(%s) not found' % name)
  * 
  * 		params = desc.get('params',{}).copy()             # <<<<<<<<<<<<<<
  * 		d = self.getActionData(widget,desc, *args)
  * 		if d:
  */
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -17530,7 +17385,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_8)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_n_s_params, __pyx_t_2};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 495, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 485, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -17539,14 +17394,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_8)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_n_s_params, __pyx_t_2};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 495, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 485, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else
   #endif
   {
-    __pyx_t_9 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 495, __pyx_L1_error)
+    __pyx_t_9 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 485, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -17557,12 +17412,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_4, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 495, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 485, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   }
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_copy); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_copy); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -17577,22 +17432,22 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   }
   __pyx_t_5 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 495, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_v_params = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":496
+  /* "kivyblocks/blocks.pyx":486
  * 
  * 		params = desc.get('params',{}).copy()
  * 		d = self.getActionData(widget,desc, *args)             # <<<<<<<<<<<<<<
  * 		if d:
  * 			params.update(d)
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_INCREF(__pyx_v_widget);
   __Pyx_GIVEREF(__pyx_v_widget);
@@ -17600,34 +17455,34 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   __Pyx_INCREF(__pyx_v_desc);
   __Pyx_GIVEREF(__pyx_v_desc);
   PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_v_desc);
-  __pyx_t_1 = PyNumber_Add(__pyx_t_8, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_t_8, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d = __pyx_t_8;
   __pyx_t_8 = 0;
 
-  /* "kivyblocks/blocks.pyx":497
+  /* "kivyblocks/blocks.pyx":487
  * 		params = desc.get('params',{}).copy()
  * 		d = self.getActionData(widget,desc, *args)
  * 		if d:             # <<<<<<<<<<<<<<
  * 			params.update(d)
  * 		func(target, *args, **params)
  */
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 497, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 487, __pyx_L1_error)
   if (__pyx_t_7) {
 
-    /* "kivyblocks/blocks.pyx":498
+    /* "kivyblocks/blocks.pyx":488
  * 		d = self.getActionData(widget,desc, *args)
  * 		if d:
  * 			params.update(d)             # <<<<<<<<<<<<<<
  * 		func(target, *args, **params)
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_params, __pyx_n_s_update); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 498, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_params, __pyx_n_s_update); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 488, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -17641,12 +17496,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
     }
     __pyx_t_8 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_v_d) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_d);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 498, __pyx_L1_error)
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 488, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kivyblocks/blocks.pyx":497
+    /* "kivyblocks/blocks.pyx":487
  * 		params = desc.get('params',{}).copy()
  * 		d = self.getActionData(widget,desc, *args)
  * 		if d:             # <<<<<<<<<<<<<<
@@ -17655,39 +17510,39 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
  */
   }
 
-  /* "kivyblocks/blocks.pyx":499
+  /* "kivyblocks/blocks.pyx":489
  * 		if d:
  * 			params.update(d)
  * 		func(target, *args, **params)             # <<<<<<<<<<<<<<
  * 
  * 	def scriptAction(self, widget:Widget, desc, *args):
  */
-  __pyx_t_8 = PyTuple_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 499, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 489, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_INCREF(__pyx_v_target);
   __Pyx_GIVEREF(__pyx_v_target);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_v_target);
-  __pyx_t_1 = PyNumber_Add(__pyx_t_8, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 499, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_t_8, __pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 489, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   if (unlikely(__pyx_v_params == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-    __PYX_ERR(0, 499, __pyx_L1_error)
+    __PYX_ERR(0, 489, __pyx_L1_error)
   }
   if (likely(PyDict_CheckExact(__pyx_v_params))) {
-    __pyx_t_8 = PyDict_Copy(__pyx_v_params); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 499, __pyx_L1_error)
+    __pyx_t_8 = PyDict_Copy(__pyx_v_params); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 489, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
   } else {
-    __pyx_t_8 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_params, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 499, __pyx_L1_error)
+    __pyx_t_8 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_params, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 489, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
   }
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_v_func, __pyx_t_1, __pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 499, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_v_func, __pyx_t_1, __pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 489, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":485
+  /* "kivyblocks/blocks.pyx":475
  * 		return data
  * 
  * 	def registedfunctionAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -17719,7 +17574,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_44registedfunctionAction(
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":501
+/* "kivyblocks/blocks.pyx":491
  * 		func(target, *args, **params)
  * 
  * 	def scriptAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -17776,18 +17631,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_47scriptAction(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("scriptAction", 0, 3, 3, 1); __PYX_ERR(0, 501, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("scriptAction", 0, 3, 3, 1); __PYX_ERR(0, 491, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("scriptAction", 0, 3, 3, 2); __PYX_ERR(0, 501, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("scriptAction", 0, 3, 3, 2); __PYX_ERR(0, 491, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "scriptAction") < 0)) __PYX_ERR(0, 501, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "scriptAction") < 0)) __PYX_ERR(0, 491, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -17802,7 +17657,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_47scriptAction(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("scriptAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 501, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("scriptAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 491, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.scriptAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -17842,14 +17697,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("scriptAction", 0);
 
-  /* "kivyblocks/blocks.pyx":502
+  /* "kivyblocks/blocks.pyx":492
  * 
  * 	def scriptAction(self, widget:Widget, desc, *args):
  * 		script = desc.get('script')             # <<<<<<<<<<<<<<
  * 		if not script:
  * 			Logger.info('Block: scriptAction():desc(%s) target not found',
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 502, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 492, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -17863,44 +17718,44 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_script_2) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_script_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 502, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 492, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_script = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":503
+  /* "kivyblocks/blocks.pyx":493
  * 	def scriptAction(self, widget:Widget, desc, *args):
  * 		script = desc.get('script')
  * 		if not script:             # <<<<<<<<<<<<<<
  * 			Logger.info('Block: scriptAction():desc(%s) target not found',
  * 							str(desc))
  */
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_script); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 503, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_script); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 493, __pyx_L1_error)
   __pyx_t_5 = ((!__pyx_t_4) != 0);
   if (__pyx_t_5) {
 
-    /* "kivyblocks/blocks.pyx":504
+    /* "kivyblocks/blocks.pyx":494
  * 		script = desc.get('script')
  * 		if not script:
  * 			Logger.info('Block: scriptAction():desc(%s) target not found',             # <<<<<<<<<<<<<<
  * 							str(desc))
  * 			return
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 504, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 494, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 504, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 494, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/blocks.pyx":505
+    /* "kivyblocks/blocks.pyx":495
  * 		if not script:
  * 			Logger.info('Block: scriptAction():desc(%s) target not found',
  * 							str(desc))             # <<<<<<<<<<<<<<
  * 			return
  * 		target = self.get_target(widget, desc)
  */
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 505, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -17917,7 +17772,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_kp_s_Block_scriptAction_desc_s_target, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 504, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 494, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -17926,14 +17781,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_kp_s_Block_scriptAction_desc_s_target, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 504, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 494, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 504, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 494, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -17944,14 +17799,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 504, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 494, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":506
+    /* "kivyblocks/blocks.pyx":496
  * 			Logger.info('Block: scriptAction():desc(%s) target not found',
  * 							str(desc))
  * 			return             # <<<<<<<<<<<<<<
@@ -17962,7 +17817,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":503
+    /* "kivyblocks/blocks.pyx":493
  * 	def scriptAction(self, widget:Widget, desc, *args):
  * 		script = desc.get('script')
  * 		if not script:             # <<<<<<<<<<<<<<
@@ -17971,14 +17826,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
  */
   }
 
-  /* "kivyblocks/blocks.pyx":507
+  /* "kivyblocks/blocks.pyx":497
  * 							str(desc))
  * 			return
  * 		target = self.get_target(widget, desc)             # <<<<<<<<<<<<<<
  * 		d = self.getActionData(widget,desc, *args)
  * 		ns = {
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_8 = NULL;
   __pyx_t_7 = 0;
@@ -17995,7 +17850,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -18003,13 +17858,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_2 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 507, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 497, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     if (__pyx_t_8) {
       __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_8); __pyx_t_8 = NULL;
@@ -18020,7 +17875,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_7, __pyx_v_desc);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -18028,16 +17883,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
   __pyx_v_target = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":508
+  /* "kivyblocks/blocks.pyx":498
  * 			return
  * 		target = self.get_target(widget, desc)
  * 		d = self.getActionData(widget,desc, *args)             # <<<<<<<<<<<<<<
  * 		ns = {
  * 			"self":target,
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 508, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 508, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_v_widget);
   __Pyx_GIVEREF(__pyx_v_widget);
@@ -18045,69 +17900,69 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
   __Pyx_INCREF(__pyx_v_desc);
   __Pyx_GIVEREF(__pyx_v_desc);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_desc);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 508, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 508, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_d = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "kivyblocks/blocks.pyx":510
+  /* "kivyblocks/blocks.pyx":500
  * 		d = self.getActionData(widget,desc, *args)
  * 		ns = {
  * 			"self":target,             # <<<<<<<<<<<<<<
  * 			"args":args,
  * 			"kwargs":d
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 510, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 500, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_self, __pyx_v_target) < 0) __PYX_ERR(0, 510, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_self, __pyx_v_target) < 0) __PYX_ERR(0, 500, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":511
+  /* "kivyblocks/blocks.pyx":501
  * 		ns = {
  * 			"self":target,
  * 			"args":args,             # <<<<<<<<<<<<<<
  * 			"kwargs":d
  * 		}
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_args, __pyx_v_args) < 0) __PYX_ERR(0, 510, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_args, __pyx_v_args) < 0) __PYX_ERR(0, 500, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":512
+  /* "kivyblocks/blocks.pyx":502
  * 			"self":target,
  * 			"args":args,
  * 			"kwargs":d             # <<<<<<<<<<<<<<
  * 		}
  * 		if d:
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_kwargs, __pyx_v_d) < 0) __PYX_ERR(0, 510, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_kwargs, __pyx_v_d) < 0) __PYX_ERR(0, 500, __pyx_L1_error)
   __pyx_v_ns = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "kivyblocks/blocks.pyx":514
+  /* "kivyblocks/blocks.pyx":504
  * 			"kwargs":d
  * 		}
  * 		if d:             # <<<<<<<<<<<<<<
  * 			ns.update(d)
  * 		try:
  */
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 504, __pyx_L1_error)
   if (__pyx_t_5) {
 
-    /* "kivyblocks/blocks.pyx":515
+    /* "kivyblocks/blocks.pyx":505
  * 		}
  * 		if d:
  * 			ns.update(d)             # <<<<<<<<<<<<<<
  * 		try:
  * 			self.eval(script, ns)
  */
-    __pyx_t_3 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_ns, __pyx_v_d); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 515, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_ns, __pyx_v_d); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 505, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "kivyblocks/blocks.pyx":514
+    /* "kivyblocks/blocks.pyx":504
  * 			"kwargs":d
  * 		}
  * 		if d:             # <<<<<<<<<<<<<<
@@ -18116,7 +17971,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
  */
   }
 
-  /* "kivyblocks/blocks.pyx":516
+  /* "kivyblocks/blocks.pyx":506
  * 		if d:
  * 			ns.update(d)
  * 		try:             # <<<<<<<<<<<<<<
@@ -18132,14 +17987,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     __Pyx_XGOTREF(__pyx_t_11);
     /*try:*/ {
 
-      /* "kivyblocks/blocks.pyx":517
+      /* "kivyblocks/blocks.pyx":507
  * 			ns.update(d)
  * 		try:
  * 			self.eval(script, ns)             # <<<<<<<<<<<<<<
  * 		except Exception as e:
  * 			print_exc()
  */
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_eval); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 517, __pyx_L5_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_eval); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 507, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_1 = NULL;
       __pyx_t_7 = 0;
@@ -18156,7 +18011,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_script, __pyx_v_ns};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 517, __pyx_L5_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 507, __pyx_L5_error)
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
@@ -18164,13 +18019,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_script, __pyx_v_ns};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 517, __pyx_L5_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 507, __pyx_L5_error)
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
       #endif
       {
-        __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 517, __pyx_L5_error)
+        __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 507, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_8);
         if (__pyx_t_1) {
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -18181,14 +18036,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
         __Pyx_INCREF(__pyx_v_ns);
         __Pyx_GIVEREF(__pyx_v_ns);
         PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_v_ns);
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 517, __pyx_L5_error)
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 507, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "kivyblocks/blocks.pyx":516
+      /* "kivyblocks/blocks.pyx":506
  * 		if d:
  * 			ns.update(d)
  * 		try:             # <<<<<<<<<<<<<<
@@ -18207,7 +18062,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kivyblocks/blocks.pyx":518
+    /* "kivyblocks/blocks.pyx":508
  * 		try:
  * 			self.eval(script, ns)
  * 		except Exception as e:             # <<<<<<<<<<<<<<
@@ -18217,21 +18072,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     __pyx_t_7 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_7) {
       __Pyx_AddTraceback("kivyblocks.blocks.Blocks.scriptAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_2, &__pyx_t_8) < 0) __PYX_ERR(0, 518, __pyx_L7_except_error)
+      if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_2, &__pyx_t_8) < 0) __PYX_ERR(0, 508, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_INCREF(__pyx_t_2);
       __pyx_v_e = __pyx_t_2;
 
-      /* "kivyblocks/blocks.pyx":519
+      /* "kivyblocks/blocks.pyx":509
  * 			self.eval(script, ns)
  * 		except Exception as e:
  * 			print_exc()             # <<<<<<<<<<<<<<
  * 			print(e)
  * 
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_print_exc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 519, __pyx_L7_except_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_print_exc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 509, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_12 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -18245,19 +18100,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
       }
       __pyx_t_1 = (__pyx_t_12) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_12) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
       __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 519, __pyx_L7_except_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 509, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":520
+      /* "kivyblocks/blocks.pyx":510
  * 		except Exception as e:
  * 			print_exc()
  * 			print(e)             # <<<<<<<<<<<<<<
  * 
  * 	def build_rtdesc(self, desc):
  */
-      if (__Pyx_PrintOne(0, __pyx_v_e) < 0) __PYX_ERR(0, 520, __pyx_L7_except_error)
+      if (__Pyx_PrintOne(0, __pyx_v_e) < 0) __PYX_ERR(0, 510, __pyx_L7_except_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -18266,7 +18121,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     goto __pyx_L7_except_error;
     __pyx_L7_except_error:;
 
-    /* "kivyblocks/blocks.pyx":516
+    /* "kivyblocks/blocks.pyx":506
  * 		if d:
  * 			ns.update(d)
  * 		try:             # <<<<<<<<<<<<<<
@@ -18286,7 +18141,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
     __pyx_L10_try_end:;
   }
 
-  /* "kivyblocks/blocks.pyx":501
+  /* "kivyblocks/blocks.pyx":491
  * 		func(target, *args, **params)
  * 
  * 	def scriptAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -18317,7 +18172,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_46scriptAction(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":522
+/* "kivyblocks/blocks.pyx":512
  * 			print(e)
  * 
  * 	def build_rtdesc(self, desc):             # <<<<<<<<<<<<<<
@@ -18360,11 +18215,11 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_49build_rtdesc(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("build_rtdesc", 1, 2, 2, 1); __PYX_ERR(0, 522, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("build_rtdesc", 1, 2, 2, 1); __PYX_ERR(0, 512, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "build_rtdesc") < 0)) __PYX_ERR(0, 522, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "build_rtdesc") < 0)) __PYX_ERR(0, 512, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -18377,7 +18232,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_49build_rtdesc(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("build_rtdesc", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 522, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("build_rtdesc", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 512, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.build_rtdesc", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -18407,14 +18262,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("build_rtdesc", 0);
 
-  /* "kivyblocks/blocks.pyx":523
+  /* "kivyblocks/blocks.pyx":513
  * 
  * 	def build_rtdesc(self, desc):
  * 		rtdesc = desc.get('rtdata')             # <<<<<<<<<<<<<<
  * 		if not rtdesc:
  * 			if desc.get('datawidget'):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 523, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -18428,31 +18283,31 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_rtdata) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_rtdata);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 523, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_rtdesc = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":524
+  /* "kivyblocks/blocks.pyx":514
  * 	def build_rtdesc(self, desc):
  * 		rtdesc = desc.get('rtdata')
  * 		if not rtdesc:             # <<<<<<<<<<<<<<
  * 			if desc.get('datawidget'):
  * 				rtdesc = {}
  */
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_rtdesc); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 524, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_rtdesc); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 514, __pyx_L1_error)
   __pyx_t_5 = ((!__pyx_t_4) != 0);
   if (__pyx_t_5) {
 
-    /* "kivyblocks/blocks.pyx":525
+    /* "kivyblocks/blocks.pyx":515
  * 		rtdesc = desc.get('rtdata')
  * 		if not rtdesc:
  * 			if desc.get('datawidget'):             # <<<<<<<<<<<<<<
  * 				rtdesc = {}
  * 				rtdesc['target'] = desc['datawidget']
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 525, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 515, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -18466,45 +18321,45 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
     }
     __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_datawidget) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_datawidget);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 525, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 515, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 525, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 515, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_5) {
 
-      /* "kivyblocks/blocks.pyx":526
+      /* "kivyblocks/blocks.pyx":516
  * 		if not rtdesc:
  * 			if desc.get('datawidget'):
  * 				rtdesc = {}             # <<<<<<<<<<<<<<
  * 				rtdesc['target'] = desc['datawidget']
  * 				if desc.get('datascript'):
  */
-      __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 526, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 516, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF_SET(__pyx_v_rtdesc, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":527
+      /* "kivyblocks/blocks.pyx":517
  * 			if desc.get('datawidget'):
  * 				rtdesc = {}
  * 				rtdesc['target'] = desc['datawidget']             # <<<<<<<<<<<<<<
  * 				if desc.get('datascript'):
  * 					rtdesc['script'] = desc.get('datacript')
  */
-      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_datawidget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 527, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_datawidget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 517, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (unlikely(PyObject_SetItem(__pyx_v_rtdesc, __pyx_n_s_target, __pyx_t_1) < 0)) __PYX_ERR(0, 527, __pyx_L1_error)
+      if (unlikely(PyObject_SetItem(__pyx_v_rtdesc, __pyx_n_s_target, __pyx_t_1) < 0)) __PYX_ERR(0, 517, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":528
+      /* "kivyblocks/blocks.pyx":518
  * 				rtdesc = {}
  * 				rtdesc['target'] = desc['datawidget']
  * 				if desc.get('datascript'):             # <<<<<<<<<<<<<<
  * 					rtdesc['script'] = desc.get('datacript')
  * 				else:
  */
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 528, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 518, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_3 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -18518,21 +18373,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
       }
       __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_datascript) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_datascript);
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 528, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 518, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 528, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 518, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_5) {
 
-        /* "kivyblocks/blocks.pyx":529
+        /* "kivyblocks/blocks.pyx":519
  * 				rtdesc['target'] = desc['datawidget']
  * 				if desc.get('datascript'):
  * 					rtdesc['script'] = desc.get('datacript')             # <<<<<<<<<<<<<<
  * 				else:
  * 					rtdesc['method'] = desc.get('datamethod', 'getValue')
  */
-        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 529, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 519, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __pyx_t_3 = NULL;
         if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -18546,13 +18401,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
         }
         __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_datacript) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_datacript);
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 529, __pyx_L1_error)
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 519, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        if (unlikely(PyObject_SetItem(__pyx_v_rtdesc, __pyx_n_s_script_2, __pyx_t_1) < 0)) __PYX_ERR(0, 529, __pyx_L1_error)
+        if (unlikely(PyObject_SetItem(__pyx_v_rtdesc, __pyx_n_s_script_2, __pyx_t_1) < 0)) __PYX_ERR(0, 519, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "kivyblocks/blocks.pyx":528
+        /* "kivyblocks/blocks.pyx":518
  * 				rtdesc = {}
  * 				rtdesc['target'] = desc['datawidget']
  * 				if desc.get('datascript'):             # <<<<<<<<<<<<<<
@@ -18562,7 +18417,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
         goto __pyx_L5;
       }
 
-      /* "kivyblocks/blocks.pyx":531
+      /* "kivyblocks/blocks.pyx":521
  * 					rtdesc['script'] = desc.get('datacript')
  * 				else:
  * 					rtdesc['method'] = desc.get('datamethod', 'getValue')             # <<<<<<<<<<<<<<
@@ -18570,26 +18425,26 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
  * 		return rtdesc
  */
       /*else*/ {
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 531, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 521, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 531, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 521, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        if (unlikely(PyObject_SetItem(__pyx_v_rtdesc, __pyx_n_s_method, __pyx_t_2) < 0)) __PYX_ERR(0, 531, __pyx_L1_error)
+        if (unlikely(PyObject_SetItem(__pyx_v_rtdesc, __pyx_n_s_method, __pyx_t_2) < 0)) __PYX_ERR(0, 521, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
       __pyx_L5:;
 
-      /* "kivyblocks/blocks.pyx":532
+      /* "kivyblocks/blocks.pyx":522
  * 				else:
  * 					rtdesc['method'] = desc.get('datamethod', 'getValue')
  * 				rtdesc['kwargs'] = desc.get('datakwargs', {})             # <<<<<<<<<<<<<<
  * 		return rtdesc
  * 
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 532, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 522, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 532, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 522, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_6 = NULL;
       __pyx_t_7 = 0;
@@ -18606,7 +18461,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_datakwargs, __pyx_t_3};
-        __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 532, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 522, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -18615,14 +18470,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_datakwargs, __pyx_t_3};
-        __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 532, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 522, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       } else
       #endif
       {
-        __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 532, __pyx_L1_error)
+        __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 522, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         if (__pyx_t_6) {
           __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -18633,15 +18488,15 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
         __Pyx_GIVEREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_3);
         __pyx_t_3 = 0;
-        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 532, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 522, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(PyObject_SetItem(__pyx_v_rtdesc, __pyx_n_s_kwargs, __pyx_t_2) < 0)) __PYX_ERR(0, 532, __pyx_L1_error)
+      if (unlikely(PyObject_SetItem(__pyx_v_rtdesc, __pyx_n_s_kwargs, __pyx_t_2) < 0)) __PYX_ERR(0, 522, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "kivyblocks/blocks.pyx":525
+      /* "kivyblocks/blocks.pyx":515
  * 		rtdesc = desc.get('rtdata')
  * 		if not rtdesc:
  * 			if desc.get('datawidget'):             # <<<<<<<<<<<<<<
@@ -18650,7 +18505,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
  */
     }
 
-    /* "kivyblocks/blocks.pyx":524
+    /* "kivyblocks/blocks.pyx":514
  * 	def build_rtdesc(self, desc):
  * 		rtdesc = desc.get('rtdata')
  * 		if not rtdesc:             # <<<<<<<<<<<<<<
@@ -18659,7 +18514,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
  */
   }
 
-  /* "kivyblocks/blocks.pyx":533
+  /* "kivyblocks/blocks.pyx":523
  * 					rtdesc['method'] = desc.get('datamethod', 'getValue')
  * 				rtdesc['kwargs'] = desc.get('datakwargs', {})
  * 		return rtdesc             # <<<<<<<<<<<<<<
@@ -18671,7 +18526,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
   __pyx_r = __pyx_v_rtdesc;
   goto __pyx_L0;
 
-  /* "kivyblocks/blocks.pyx":522
+  /* "kivyblocks/blocks.pyx":512
  * 			print(e)
  * 
  * 	def build_rtdesc(self, desc):             # <<<<<<<<<<<<<<
@@ -18695,7 +18550,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_48build_rtdesc(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":535
+/* "kivyblocks/blocks.pyx":525
  * 		return rtdesc
  * 
  * 	def get_rtdata(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -18753,18 +18608,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_51get_rtdata(PyObject *__
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_rtdata", 0, 3, 3, 1); __PYX_ERR(0, 535, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_rtdata", 0, 3, 3, 1); __PYX_ERR(0, 525, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_rtdata", 0, 3, 3, 2); __PYX_ERR(0, 535, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_rtdata", 0, 3, 3, 2); __PYX_ERR(0, 525, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "get_rtdata") < 0)) __PYX_ERR(0, 535, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "get_rtdata") < 0)) __PYX_ERR(0, 525, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -18779,7 +18634,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_51get_rtdata(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_rtdata", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 535, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_rtdata", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 525, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.get_rtdata", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -18825,7 +18680,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_rtdata", 0);
 
-  /* "kivyblocks/blocks.pyx":546
+  /* "kivyblocks/blocks.pyx":536
  * 		"""
  * 
  * 		if desc is None or desc == {}:             # <<<<<<<<<<<<<<
@@ -18839,26 +18694,26 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __pyx_t_1 = __pyx_t_3;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 546, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 536, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_v_desc, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 546, __pyx_L1_error)
+  __pyx_t_5 = PyObject_RichCompare(__pyx_v_desc, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 536, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 546, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 536, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_1 = __pyx_t_3;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "kivyblocks/blocks.pyx":547
+    /* "kivyblocks/blocks.pyx":537
  * 
  * 		if desc is None or desc == {}:
  * 			print('get_rtdata():desc is None')             # <<<<<<<<<<<<<<
  * 			return {}
  * 		kwargs = desc.get('kwargs', {})
  */
-    if (__Pyx_PrintOne(0, __pyx_kp_s_get_rtdata_desc_is_None) < 0) __PYX_ERR(0, 547, __pyx_L1_error)
+    if (__Pyx_PrintOne(0, __pyx_kp_s_get_rtdata_desc_is_None) < 0) __PYX_ERR(0, 537, __pyx_L1_error)
 
-    /* "kivyblocks/blocks.pyx":548
+    /* "kivyblocks/blocks.pyx":538
  * 		if desc is None or desc == {}:
  * 			print('get_rtdata():desc is None')
  * 			return {}             # <<<<<<<<<<<<<<
@@ -18866,13 +18721,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  * 		if not isinstance(kwargs, dict):
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 548, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 538, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_r = __pyx_t_5;
     __pyx_t_5 = 0;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":546
+    /* "kivyblocks/blocks.pyx":536
  * 		"""
  * 
  * 		if desc is None or desc == {}:             # <<<<<<<<<<<<<<
@@ -18881,16 +18736,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/blocks.pyx":549
+  /* "kivyblocks/blocks.pyx":539
  * 			print('get_rtdata():desc is None')
  * 			return {}
  * 		kwargs = desc.get('kwargs', {})             # <<<<<<<<<<<<<<
  * 		if not isinstance(kwargs, dict):
  * 			kwargs = {}
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 549, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 549, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = NULL;
   __pyx_t_8 = 0;
@@ -18907,7 +18762,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_n_s_kwargs, __pyx_t_6};
-    __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 549, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -18916,14 +18771,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_n_s_kwargs, __pyx_t_6};
-    __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 549, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   } else
   #endif
   {
-    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 549, __pyx_L1_error)
+    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -18934,7 +18789,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __Pyx_GIVEREF(__pyx_t_6);
     PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_t_6);
     __pyx_t_6 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 549, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   }
@@ -18942,7 +18797,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   __pyx_v_kwargs = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":550
+  /* "kivyblocks/blocks.pyx":540
  * 			return {}
  * 		kwargs = desc.get('kwargs', {})
  * 		if not isinstance(kwargs, dict):             # <<<<<<<<<<<<<<
@@ -18953,19 +18808,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   __pyx_t_3 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":551
+    /* "kivyblocks/blocks.pyx":541
  * 		kwargs = desc.get('kwargs', {})
  * 		if not isinstance(kwargs, dict):
  * 			kwargs = {}             # <<<<<<<<<<<<<<
  * 		w = None
  * 		if len(args) > 0:
  */
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 551, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 541, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF_SET(__pyx_v_kwargs, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "kivyblocks/blocks.pyx":550
+    /* "kivyblocks/blocks.pyx":540
  * 			return {}
  * 		kwargs = desc.get('kwargs', {})
  * 		if not isinstance(kwargs, dict):             # <<<<<<<<<<<<<<
@@ -18974,7 +18829,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/blocks.pyx":552
+  /* "kivyblocks/blocks.pyx":542
  * 		if not isinstance(kwargs, dict):
  * 			kwargs = {}
  * 		w = None             # <<<<<<<<<<<<<<
@@ -18984,30 +18839,30 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   __Pyx_INCREF(Py_None);
   __pyx_v_w = Py_None;
 
-  /* "kivyblocks/blocks.pyx":553
+  /* "kivyblocks/blocks.pyx":543
  * 			kwargs = {}
  * 		w = None
  * 		if len(args) > 0:             # <<<<<<<<<<<<<<
  * 			w = args[0]
  * 		target = desc.get('target')
  */
-  __pyx_t_10 = PyTuple_GET_SIZE(__pyx_v_args); if (unlikely(__pyx_t_10 == ((Py_ssize_t)-1))) __PYX_ERR(0, 553, __pyx_L1_error)
+  __pyx_t_10 = PyTuple_GET_SIZE(__pyx_v_args); if (unlikely(__pyx_t_10 == ((Py_ssize_t)-1))) __PYX_ERR(0, 543, __pyx_L1_error)
   __pyx_t_3 = ((__pyx_t_10 > 0) != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":554
+    /* "kivyblocks/blocks.pyx":544
  * 		w = None
  * 		if len(args) > 0:
  * 			w = args[0]             # <<<<<<<<<<<<<<
  * 		target = desc.get('target')
  * 		if target:
  */
-    __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 554, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 544, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF_SET(__pyx_v_w, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "kivyblocks/blocks.pyx":553
+    /* "kivyblocks/blocks.pyx":543
  * 			kwargs = {}
  * 		w = None
  * 		if len(args) > 0:             # <<<<<<<<<<<<<<
@@ -19016,14 +18871,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/blocks.pyx":555
+  /* "kivyblocks/blocks.pyx":545
  * 		if len(args) > 0:
  * 			w = args[0]
  * 		target = desc.get('target')             # <<<<<<<<<<<<<<
  * 		if target:
  * 			w = self.getWidgetById(target, from_widget=widget)
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 555, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 545, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_9 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -19037,40 +18892,40 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   }
   __pyx_t_5 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_9, __pyx_n_s_target) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_n_s_target);
   __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 555, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 545, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_target = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "kivyblocks/blocks.pyx":556
+  /* "kivyblocks/blocks.pyx":546
  * 			w = args[0]
  * 		target = desc.get('target')
  * 		if target:             # <<<<<<<<<<<<<<
  * 			w = self.getWidgetById(target, from_widget=widget)
  * 		if w is None:
  */
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_target); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 556, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_target); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 546, __pyx_L1_error)
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":557
+    /* "kivyblocks/blocks.pyx":547
  * 		target = desc.get('target')
  * 		if target:
  * 			w = self.getWidgetById(target, from_widget=widget)             # <<<<<<<<<<<<<<
  * 		if w is None:
  * 			print('get_rtdata():w is None', desc)
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getWidgetById); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 557, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getWidgetById); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 547, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 557, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 547, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_v_target);
     __Pyx_GIVEREF(__pyx_v_target);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_target);
-    __pyx_t_9 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 557, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 547, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_from_widget, __pyx_v_widget) < 0) __PYX_ERR(0, 557, __pyx_L1_error)
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 557, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_from_widget, __pyx_v_widget) < 0) __PYX_ERR(0, 547, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 547, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -19078,7 +18933,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __Pyx_DECREF_SET(__pyx_v_w, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "kivyblocks/blocks.pyx":556
+    /* "kivyblocks/blocks.pyx":546
  * 			w = args[0]
  * 		target = desc.get('target')
  * 		if target:             # <<<<<<<<<<<<<<
@@ -19087,7 +18942,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/blocks.pyx":558
+  /* "kivyblocks/blocks.pyx":548
  * 		if target:
  * 			w = self.getWidgetById(target, from_widget=widget)
  * 		if w is None:             # <<<<<<<<<<<<<<
@@ -19098,14 +18953,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   __pyx_t_1 = (__pyx_t_3 != 0);
   if (__pyx_t_1) {
 
-    /* "kivyblocks/blocks.pyx":559
+    /* "kivyblocks/blocks.pyx":549
  * 			w = self.getWidgetById(target, from_widget=widget)
  * 		if w is None:
  * 			print('get_rtdata():w is None', desc)             # <<<<<<<<<<<<<<
  * 			return {}
  * 		script = desc.get('script')
  */
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 559, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 549, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_kp_s_get_rtdata_w_is_None);
     __Pyx_GIVEREF(__pyx_kp_s_get_rtdata_w_is_None);
@@ -19113,10 +18968,10 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_desc);
-    if (__Pyx_PrintOne(0, __pyx_t_6) < 0) __PYX_ERR(0, 559, __pyx_L1_error)
+    if (__Pyx_PrintOne(0, __pyx_t_6) < 0) __PYX_ERR(0, 549, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "kivyblocks/blocks.pyx":560
+    /* "kivyblocks/blocks.pyx":550
  * 		if w is None:
  * 			print('get_rtdata():w is None', desc)
  * 			return {}             # <<<<<<<<<<<<<<
@@ -19124,13 +18979,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  * 		if script:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 560, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 550, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_r = __pyx_t_6;
     __pyx_t_6 = 0;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":558
+    /* "kivyblocks/blocks.pyx":548
  * 		if target:
  * 			w = self.getWidgetById(target, from_widget=widget)
  * 		if w is None:             # <<<<<<<<<<<<<<
@@ -19139,14 +18994,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/blocks.pyx":561
+  /* "kivyblocks/blocks.pyx":551
  * 			print('get_rtdata():w is None', desc)
  * 			return {}
  * 		script = desc.get('script')             # <<<<<<<<<<<<<<
  * 		if script:
  * 			ns = {
  */
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 561, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 551, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_9))) {
@@ -19160,61 +19015,61 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   }
   __pyx_t_6 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_4, __pyx_n_s_script_2) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_n_s_script_2);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 561, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 551, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_v_script = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "kivyblocks/blocks.pyx":562
+  /* "kivyblocks/blocks.pyx":552
  * 			return {}
  * 		script = desc.get('script')
  * 		if script:             # <<<<<<<<<<<<<<
  * 			ns = {
  * 				"self":w,
  */
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_script); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 562, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_script); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 552, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "kivyblocks/blocks.pyx":564
+    /* "kivyblocks/blocks.pyx":554
  * 		if script:
  * 			ns = {
  * 				"self":w,             # <<<<<<<<<<<<<<
  * 				"args":args,
  * 				"kwargs":kwargs
  */
-    __pyx_t_6 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 564, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 554, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_self, __pyx_v_w) < 0) __PYX_ERR(0, 564, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_self, __pyx_v_w) < 0) __PYX_ERR(0, 554, __pyx_L1_error)
 
-    /* "kivyblocks/blocks.pyx":565
+    /* "kivyblocks/blocks.pyx":555
  * 			ns = {
  * 				"self":w,
  * 				"args":args,             # <<<<<<<<<<<<<<
  * 				"kwargs":kwargs
  * 			}
  */
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_args, __pyx_v_args) < 0) __PYX_ERR(0, 564, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_args, __pyx_v_args) < 0) __PYX_ERR(0, 554, __pyx_L1_error)
 
-    /* "kivyblocks/blocks.pyx":566
+    /* "kivyblocks/blocks.pyx":556
  * 				"self":w,
  * 				"args":args,
  * 				"kwargs":kwargs             # <<<<<<<<<<<<<<
  * 			}
  * 			d = self.eval(script, ns)
  */
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_kwargs, __pyx_v_kwargs) < 0) __PYX_ERR(0, 564, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_kwargs, __pyx_v_kwargs) < 0) __PYX_ERR(0, 554, __pyx_L1_error)
     __pyx_v_ns = ((PyObject*)__pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "kivyblocks/blocks.pyx":568
+    /* "kivyblocks/blocks.pyx":558
  * 				"kwargs":kwargs
  * 			}
  * 			d = self.eval(script, ns)             # <<<<<<<<<<<<<<
  * 			return d
  * 
  */
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_eval); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 568, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_eval); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 558, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_4 = NULL;
     __pyx_t_8 = 0;
@@ -19231,7 +19086,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_9)) {
       PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_v_script, __pyx_v_ns};
-      __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 568, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 558, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_6);
     } else
@@ -19239,13 +19094,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_9)) {
       PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_v_script, __pyx_v_ns};
-      __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 568, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 558, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_6);
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 568, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 558, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_4) {
         __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -19256,7 +19111,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
       __Pyx_INCREF(__pyx_v_ns);
       __Pyx_GIVEREF(__pyx_v_ns);
       PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_8, __pyx_v_ns);
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_5, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 568, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_5, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 558, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -19264,7 +19119,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __pyx_v_d = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "kivyblocks/blocks.pyx":569
+    /* "kivyblocks/blocks.pyx":559
  * 			}
  * 			d = self.eval(script, ns)
  * 			return d             # <<<<<<<<<<<<<<
@@ -19276,7 +19131,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __pyx_r = __pyx_v_d;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":562
+    /* "kivyblocks/blocks.pyx":552
  * 			return {}
  * 		script = desc.get('script')
  * 		if script:             # <<<<<<<<<<<<<<
@@ -19285,40 +19140,40 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/blocks.pyx":571
+  /* "kivyblocks/blocks.pyx":561
  * 			return d
  * 
  * 		method = desc.get('method', 'getValue')             # <<<<<<<<<<<<<<
  * 		if not hasattr(w, method):
  * 			print('get_rtdata():method is None', desc, type(w))
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 571, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 561, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 571, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 561, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_method = __pyx_t_9;
   __pyx_t_9 = 0;
 
-  /* "kivyblocks/blocks.pyx":572
+  /* "kivyblocks/blocks.pyx":562
  * 
  * 		method = desc.get('method', 'getValue')
  * 		if not hasattr(w, method):             # <<<<<<<<<<<<<<
  * 			print('get_rtdata():method is None', desc, type(w))
  * 			return {}
  */
-  __pyx_t_1 = __Pyx_HasAttr(__pyx_v_w, __pyx_v_method); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 572, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_HasAttr(__pyx_v_w, __pyx_v_method); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 562, __pyx_L1_error)
   __pyx_t_3 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":573
+    /* "kivyblocks/blocks.pyx":563
  * 		method = desc.get('method', 'getValue')
  * 		if not hasattr(w, method):
  * 			print('get_rtdata():method is None', desc, type(w))             # <<<<<<<<<<<<<<
  * 			return {}
  * 		f = getattr(w, method)
  */
-    __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 573, __pyx_L1_error)
+    __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 563, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_INCREF(__pyx_kp_s_get_rtdata_method_is_None);
     __Pyx_GIVEREF(__pyx_kp_s_get_rtdata_method_is_None);
@@ -19329,10 +19184,10 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __Pyx_INCREF(((PyObject *)Py_TYPE(__pyx_v_w)));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(__pyx_v_w)));
     PyTuple_SET_ITEM(__pyx_t_9, 2, ((PyObject *)Py_TYPE(__pyx_v_w)));
-    if (__Pyx_PrintOne(0, __pyx_t_9) < 0) __PYX_ERR(0, 573, __pyx_L1_error)
+    if (__Pyx_PrintOne(0, __pyx_t_9) < 0) __PYX_ERR(0, 563, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "kivyblocks/blocks.pyx":574
+    /* "kivyblocks/blocks.pyx":564
  * 		if not hasattr(w, method):
  * 			print('get_rtdata():method is None', desc, type(w))
  * 			return {}             # <<<<<<<<<<<<<<
@@ -19340,13 +19195,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  * 		try:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_9 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 574, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 564, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_r = __pyx_t_9;
     __pyx_t_9 = 0;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":572
+    /* "kivyblocks/blocks.pyx":562
  * 
  * 		method = desc.get('method', 'getValue')
  * 		if not hasattr(w, method):             # <<<<<<<<<<<<<<
@@ -19355,19 +19210,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/blocks.pyx":575
+  /* "kivyblocks/blocks.pyx":565
  * 			print('get_rtdata():method is None', desc, type(w))
  * 			return {}
  * 		f = getattr(w, method)             # <<<<<<<<<<<<<<
  * 		try:
  * 			r = f(**kwargs)
  */
-  __pyx_t_9 = __Pyx_GetAttr(__pyx_v_w, __pyx_v_method); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 575, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_GetAttr(__pyx_v_w, __pyx_v_method); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 565, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __pyx_v_f = __pyx_t_9;
   __pyx_t_9 = 0;
 
-  /* "kivyblocks/blocks.pyx":576
+  /* "kivyblocks/blocks.pyx":566
  * 			return {}
  * 		f = getattr(w, method)
  * 		try:             # <<<<<<<<<<<<<<
@@ -19383,7 +19238,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __Pyx_XGOTREF(__pyx_t_13);
     /*try:*/ {
 
-      /* "kivyblocks/blocks.pyx":577
+      /* "kivyblocks/blocks.pyx":567
  * 		f = getattr(w, method)
  * 		try:
  * 			r = f(**kwargs)             # <<<<<<<<<<<<<<
@@ -19392,22 +19247,22 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
       if (unlikely(__pyx_v_kwargs == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-        __PYX_ERR(0, 577, __pyx_L12_error)
+        __PYX_ERR(0, 567, __pyx_L12_error)
       }
       if (likely(PyDict_CheckExact(__pyx_v_kwargs))) {
-        __pyx_t_9 = PyDict_Copy(__pyx_v_kwargs); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 577, __pyx_L12_error)
+        __pyx_t_9 = PyDict_Copy(__pyx_v_kwargs); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 567, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_9);
       } else {
-        __pyx_t_9 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_kwargs, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 577, __pyx_L12_error)
+        __pyx_t_9 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_kwargs, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 567, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_9);
       }
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_v_f, __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 577, __pyx_L12_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_v_f, __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 567, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r = __pyx_t_6;
       __pyx_t_6 = 0;
 
-      /* "kivyblocks/blocks.pyx":578
+      /* "kivyblocks/blocks.pyx":568
  * 		try:
  * 			r = f(**kwargs)
  * 			if isinstance(r, dict):             # <<<<<<<<<<<<<<
@@ -19418,7 +19273,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
       __pyx_t_1 = (__pyx_t_3 != 0);
       if (__pyx_t_1) {
 
-        /* "kivyblocks/blocks.pyx":579
+        /* "kivyblocks/blocks.pyx":569
  * 			r = f(**kwargs)
  * 			if isinstance(r, dict):
  * 				return r             # <<<<<<<<<<<<<<
@@ -19430,7 +19285,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
         __pyx_r = __pyx_v_r;
         goto __pyx_L16_try_return;
 
-        /* "kivyblocks/blocks.pyx":578
+        /* "kivyblocks/blocks.pyx":568
  * 		try:
  * 			r = f(**kwargs)
  * 			if isinstance(r, dict):             # <<<<<<<<<<<<<<
@@ -19439,21 +19294,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
       }
 
-      /* "kivyblocks/blocks.pyx":580
+      /* "kivyblocks/blocks.pyx":570
  * 			if isinstance(r, dict):
  * 				return r
  * 			if isinstance(r, DictObject):             # <<<<<<<<<<<<<<
  * 				return r.to_dict()
  * 			print('get_rtdata():method return is not dict', desc, 'ret=', r, type(r))
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 580, __pyx_L12_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 570, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_1 = PyObject_IsInstance(__pyx_v_r, __pyx_t_6); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 580, __pyx_L12_error)
+      __pyx_t_1 = PyObject_IsInstance(__pyx_v_r, __pyx_t_6); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 570, __pyx_L12_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_3 = (__pyx_t_1 != 0);
       if (__pyx_t_3) {
 
-        /* "kivyblocks/blocks.pyx":581
+        /* "kivyblocks/blocks.pyx":571
  * 				return r
  * 			if isinstance(r, DictObject):
  * 				return r.to_dict()             # <<<<<<<<<<<<<<
@@ -19461,7 +19316,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  * 			return {}
  */
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 581, __pyx_L12_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 571, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_9);
         __pyx_t_5 = NULL;
         if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_9))) {
@@ -19475,14 +19330,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
         }
         __pyx_t_6 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_9);
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 581, __pyx_L12_error)
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 571, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __pyx_r = __pyx_t_6;
         __pyx_t_6 = 0;
         goto __pyx_L16_try_return;
 
-        /* "kivyblocks/blocks.pyx":580
+        /* "kivyblocks/blocks.pyx":570
  * 			if isinstance(r, dict):
  * 				return r
  * 			if isinstance(r, DictObject):             # <<<<<<<<<<<<<<
@@ -19491,14 +19346,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
       }
 
-      /* "kivyblocks/blocks.pyx":582
+      /* "kivyblocks/blocks.pyx":572
  * 			if isinstance(r, DictObject):
  * 				return r.to_dict()
  * 			print('get_rtdata():method return is not dict', desc, 'ret=', r, type(r))             # <<<<<<<<<<<<<<
  * 			return {}
  * 		except:
  */
-      __pyx_t_6 = PyTuple_New(5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 582, __pyx_L12_error)
+      __pyx_t_6 = PyTuple_New(5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 572, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_kp_s_get_rtdata_method_return_is_not);
       __Pyx_GIVEREF(__pyx_kp_s_get_rtdata_method_return_is_not);
@@ -19515,10 +19370,10 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
       __Pyx_INCREF(((PyObject *)Py_TYPE(__pyx_v_r)));
       __Pyx_GIVEREF(((PyObject *)Py_TYPE(__pyx_v_r)));
       PyTuple_SET_ITEM(__pyx_t_6, 4, ((PyObject *)Py_TYPE(__pyx_v_r)));
-      if (__Pyx_PrintOne(0, __pyx_t_6) < 0) __PYX_ERR(0, 582, __pyx_L12_error)
+      if (__Pyx_PrintOne(0, __pyx_t_6) < 0) __PYX_ERR(0, 572, __pyx_L12_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "kivyblocks/blocks.pyx":583
+      /* "kivyblocks/blocks.pyx":573
  * 				return r.to_dict()
  * 			print('get_rtdata():method return is not dict', desc, 'ret=', r, type(r))
  * 			return {}             # <<<<<<<<<<<<<<
@@ -19526,13 +19381,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  * 			print_exc()
  */
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_6 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 583, __pyx_L12_error)
+      __pyx_t_6 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 573, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_r = __pyx_t_6;
       __pyx_t_6 = 0;
       goto __pyx_L16_try_return;
 
-      /* "kivyblocks/blocks.pyx":576
+      /* "kivyblocks/blocks.pyx":566
  * 			return {}
  * 		f = getattr(w, method)
  * 		try:             # <<<<<<<<<<<<<<
@@ -19547,7 +19402,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "kivyblocks/blocks.pyx":584
+    /* "kivyblocks/blocks.pyx":574
  * 			print('get_rtdata():method return is not dict', desc, 'ret=', r, type(r))
  * 			return {}
  * 		except:             # <<<<<<<<<<<<<<
@@ -19556,19 +19411,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  */
     /*except:*/ {
       __Pyx_AddTraceback("kivyblocks.blocks.Blocks.get_rtdata", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_9, &__pyx_t_5) < 0) __PYX_ERR(0, 584, __pyx_L14_except_error)
+      if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_9, &__pyx_t_5) < 0) __PYX_ERR(0, 574, __pyx_L14_except_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_GOTREF(__pyx_t_5);
 
-      /* "kivyblocks/blocks.pyx":585
+      /* "kivyblocks/blocks.pyx":575
  * 			return {}
  * 		except:
  * 			print_exc()             # <<<<<<<<<<<<<<
  * 			return {}
  * 
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_print_exc); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 585, __pyx_L14_except_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_print_exc); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 575, __pyx_L14_except_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_14 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -19582,12 +19437,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
       }
       __pyx_t_4 = (__pyx_t_14) ? __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_14) : __Pyx_PyObject_CallNoArg(__pyx_t_7);
       __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 585, __pyx_L14_except_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 575, __pyx_L14_except_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "kivyblocks/blocks.pyx":586
+      /* "kivyblocks/blocks.pyx":576
  * 		except:
  * 			print_exc()
  * 			return {}             # <<<<<<<<<<<<<<
@@ -19595,7 +19450,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
  * 	def methodAction(self, widget:Widget, desc, *args):
  */
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_4 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 586, __pyx_L14_except_error)
+      __pyx_t_4 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 576, __pyx_L14_except_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_r = __pyx_t_4;
       __pyx_t_4 = 0;
@@ -19606,7 +19461,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     }
     __pyx_L14_except_error:;
 
-    /* "kivyblocks/blocks.pyx":576
+    /* "kivyblocks/blocks.pyx":566
  * 			return {}
  * 		f = getattr(w, method)
  * 		try:             # <<<<<<<<<<<<<<
@@ -19632,7 +19487,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
     goto __pyx_L0;
   }
 
-  /* "kivyblocks/blocks.pyx":535
+  /* "kivyblocks/blocks.pyx":525
  * 		return rtdesc
  * 
  * 	def get_rtdata(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -19665,7 +19520,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_50get_rtdata(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":588
+/* "kivyblocks/blocks.pyx":578
  * 			return {}
  * 
  * 	def methodAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -19722,18 +19577,18 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_53methodAction(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("methodAction", 0, 3, 3, 1); __PYX_ERR(0, 588, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("methodAction", 0, 3, 3, 1); __PYX_ERR(0, 578, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("methodAction", 0, 3, 3, 2); __PYX_ERR(0, 588, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("methodAction", 0, 3, 3, 2); __PYX_ERR(0, 578, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "methodAction") < 0)) __PYX_ERR(0, 588, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "methodAction") < 0)) __PYX_ERR(0, 578, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 3) {
       goto __pyx_L5_argtuple_error;
@@ -19748,7 +19603,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_53methodAction(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("methodAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 588, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("methodAction", 0, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 578, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.methodAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -19785,14 +19640,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("methodAction", 0);
 
-  /* "kivyblocks/blocks.pyx":589
+  /* "kivyblocks/blocks.pyx":579
  * 
  * 	def methodAction(self, widget:Widget, desc, *args):
  * 		method = desc.get('method')             # <<<<<<<<<<<<<<
  * 		target = self.get_target(widget, desc)
  * 		if target is None:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 589, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 579, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -19806,20 +19661,20 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_n_s_method) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_method);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 589, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 579, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_method = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":590
+  /* "kivyblocks/blocks.pyx":580
  * 	def methodAction(self, widget:Widget, desc, *args):
  * 		method = desc.get('method')
  * 		target = self.get_target(widget, desc)             # <<<<<<<<<<<<<<
  * 		if target is None:
  * 			Logger.info('Block: methodAction():desc(%s) target not found',
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 590, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_target); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 580, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -19836,7 +19691,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 590, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 580, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -19844,13 +19699,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_widget, __pyx_v_desc};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 590, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 580, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 590, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 580, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -19861,7 +19716,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_desc);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 590, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 580, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -19869,7 +19724,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
   __pyx_v_target = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":591
+  /* "kivyblocks/blocks.pyx":581
  * 		method = desc.get('method')
  * 		target = self.get_target(widget, desc)
  * 		if target is None:             # <<<<<<<<<<<<<<
@@ -19880,27 +19735,27 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
   __pyx_t_7 = (__pyx_t_6 != 0);
   if (__pyx_t_7) {
 
-    /* "kivyblocks/blocks.pyx":592
+    /* "kivyblocks/blocks.pyx":582
  * 		target = self.get_target(widget, desc)
  * 		if target is None:
  * 			Logger.info('Block: methodAction():desc(%s) target not found',             # <<<<<<<<<<<<<<
  * 							str(desc))
  * 			return
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 592, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 582, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 592, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 582, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/blocks.pyx":593
+    /* "kivyblocks/blocks.pyx":583
  * 		if target is None:
  * 			Logger.info('Block: methodAction():desc(%s) target not found',
  * 							str(desc))             # <<<<<<<<<<<<<<
  * 			return
  * 		if method is None:
  */
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 593, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 583, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     __pyx_t_4 = 0;
@@ -19917,7 +19772,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_kp_s_Block_methodAction_desc_s_target, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 592, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 582, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -19926,14 +19781,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_kp_s_Block_methodAction_desc_s_target, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 592, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 582, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 592, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 582, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_3) {
         __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -19944,14 +19799,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_4, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 592, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 582, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":594
+    /* "kivyblocks/blocks.pyx":584
  * 			Logger.info('Block: methodAction():desc(%s) target not found',
  * 							str(desc))
  * 			return             # <<<<<<<<<<<<<<
@@ -19962,7 +19817,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":591
+    /* "kivyblocks/blocks.pyx":581
  * 		method = desc.get('method')
  * 		target = self.get_target(widget, desc)
  * 		if target is None:             # <<<<<<<<<<<<<<
@@ -19971,7 +19826,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
  */
   }
 
-  /* "kivyblocks/blocks.pyx":595
+  /* "kivyblocks/blocks.pyx":585
  * 							str(desc))
  * 			return
  * 		if method is None:             # <<<<<<<<<<<<<<
@@ -19982,27 +19837,27 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
   __pyx_t_6 = (__pyx_t_7 != 0);
   if (__pyx_t_6) {
 
-    /* "kivyblocks/blocks.pyx":596
+    /* "kivyblocks/blocks.pyx":586
  * 			return
  * 		if method is None:
  * 			Logger.info('Block: methodAction():desc(%s) method not found',             # <<<<<<<<<<<<<<
  * 							str(desc))
  * 			return
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Logger); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 596, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Logger); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 586, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_info); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 596, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_info); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 586, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/blocks.pyx":597
+    /* "kivyblocks/blocks.pyx":587
  * 		if method is None:
  * 			Logger.info('Block: methodAction():desc(%s) method not found',
  * 							str(desc))             # <<<<<<<<<<<<<<
  * 			return
  * 		if hasattr(target,method):
  */
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 597, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_desc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 587, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_2 = NULL;
     __pyx_t_4 = 0;
@@ -20019,7 +19874,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_8)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_kp_s_Block_methodAction_desc_s_method, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 596, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 586, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -20028,14 +19883,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_8)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_kp_s_Block_methodAction_desc_s_method, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 596, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 586, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_3 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 596, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 586, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       if (__pyx_t_2) {
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -20046,14 +19901,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_4, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 596, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 586, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":598
+    /* "kivyblocks/blocks.pyx":588
  * 			Logger.info('Block: methodAction():desc(%s) method not found',
  * 							str(desc))
  * 			return             # <<<<<<<<<<<<<<
@@ -20064,7 +19919,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":595
+    /* "kivyblocks/blocks.pyx":585
  * 							str(desc))
  * 			return
  * 		if method is None:             # <<<<<<<<<<<<<<
@@ -20073,39 +19928,39 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
  */
   }
 
-  /* "kivyblocks/blocks.pyx":599
+  /* "kivyblocks/blocks.pyx":589
  * 							str(desc))
  * 			return
  * 		if hasattr(target,method):             # <<<<<<<<<<<<<<
  * 			f = getattr(target, method)
  * 			kwargs = desc.get('options',{}).copy()
  */
-  __pyx_t_6 = __Pyx_HasAttr(__pyx_v_target, __pyx_v_method); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 599, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_HasAttr(__pyx_v_target, __pyx_v_method); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 589, __pyx_L1_error)
   __pyx_t_7 = (__pyx_t_6 != 0);
   if (__pyx_t_7) {
 
-    /* "kivyblocks/blocks.pyx":600
+    /* "kivyblocks/blocks.pyx":590
  * 			return
  * 		if hasattr(target,method):
  * 			f = getattr(target, method)             # <<<<<<<<<<<<<<
  * 			kwargs = desc.get('options',{}).copy()
  * 			d = self.getActionData(widget,desc, *args)
  */
-    __pyx_t_1 = __Pyx_GetAttr(__pyx_v_target, __pyx_v_method); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 600, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetAttr(__pyx_v_target, __pyx_v_method); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 590, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_f = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":601
+    /* "kivyblocks/blocks.pyx":591
  * 		if hasattr(target,method):
  * 			f = getattr(target, method)
  * 			kwargs = desc.get('options',{}).copy()             # <<<<<<<<<<<<<<
  * 			d = self.getActionData(widget,desc, *args)
  * 			if d:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 601, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 591, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 601, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 591, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_2 = NULL;
     __pyx_t_4 = 0;
@@ -20122,7 +19977,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_n_s_options, __pyx_t_5};
-      __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 601, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 591, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -20131,14 +19986,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_n_s_options, __pyx_t_5};
-      __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 601, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 591, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_9 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 601, __pyx_L1_error)
+      __pyx_t_9 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 591, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       if (__pyx_t_2) {
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -20149,12 +20004,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_4, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 601, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 591, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_copy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 601, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_copy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 591, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_8 = NULL;
@@ -20169,22 +20024,22 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     }
     __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_8) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 601, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 591, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_kwargs = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":602
+    /* "kivyblocks/blocks.pyx":592
  * 			f = getattr(target, method)
  * 			kwargs = desc.get('options',{}).copy()
  * 			d = self.getActionData(widget,desc, *args)             # <<<<<<<<<<<<<<
  * 			if d:
  * 				kwargs.update(d)
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 602, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getActionData); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 592, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 602, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 592, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
@@ -20192,34 +20047,34 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     __Pyx_INCREF(__pyx_v_desc);
     __Pyx_GIVEREF(__pyx_v_desc);
     PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_desc);
-    __pyx_t_8 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 602, __pyx_L1_error)
+    __pyx_t_8 = PyNumber_Add(__pyx_t_3, __pyx_v_args); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 592, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 602, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 592, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_v_d = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "kivyblocks/blocks.pyx":603
+    /* "kivyblocks/blocks.pyx":593
  * 			kwargs = desc.get('options',{}).copy()
  * 			d = self.getActionData(widget,desc, *args)
  * 			if d:             # <<<<<<<<<<<<<<
  * 				kwargs.update(d)
  * 			f(*args, **kwargs)
  */
-    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 603, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_d); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 593, __pyx_L1_error)
     if (__pyx_t_7) {
 
-      /* "kivyblocks/blocks.pyx":604
+      /* "kivyblocks/blocks.pyx":594
  * 			d = self.getActionData(widget,desc, *args)
  * 			if d:
  * 				kwargs.update(d)             # <<<<<<<<<<<<<<
  * 			f(*args, **kwargs)
  * 		else:
  */
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_update); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 604, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_update); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 594, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_1 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
@@ -20233,12 +20088,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
       }
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_1, __pyx_v_d) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_v_d);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 604, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 594, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "kivyblocks/blocks.pyx":603
+      /* "kivyblocks/blocks.pyx":593
  * 			kwargs = desc.get('options',{}).copy()
  * 			d = self.getActionData(widget,desc, *args)
  * 			if d:             # <<<<<<<<<<<<<<
@@ -20247,7 +20102,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
  */
     }
 
-    /* "kivyblocks/blocks.pyx":605
+    /* "kivyblocks/blocks.pyx":595
  * 			if d:
  * 				kwargs.update(d)
  * 			f(*args, **kwargs)             # <<<<<<<<<<<<<<
@@ -20256,21 +20111,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
  */
     if (unlikely(__pyx_v_kwargs == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-      __PYX_ERR(0, 605, __pyx_L1_error)
+      __PYX_ERR(0, 595, __pyx_L1_error)
     }
     if (likely(PyDict_CheckExact(__pyx_v_kwargs))) {
-      __pyx_t_3 = PyDict_Copy(__pyx_v_kwargs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 605, __pyx_L1_error)
+      __pyx_t_3 = PyDict_Copy(__pyx_v_kwargs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 595, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     } else {
-      __pyx_t_3 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_kwargs, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 605, __pyx_L1_error)
+      __pyx_t_3 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_kwargs, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 595, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_v_f, __pyx_v_args, __pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 605, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_v_f, __pyx_v_args, __pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 595, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kivyblocks/blocks.pyx":599
+    /* "kivyblocks/blocks.pyx":589
  * 							str(desc))
  * 			return
  * 		if hasattr(target,method):             # <<<<<<<<<<<<<<
@@ -20280,7 +20135,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     goto __pyx_L5;
   }
 
-  /* "kivyblocks/blocks.pyx":607
+  /* "kivyblocks/blocks.pyx":597
  * 			f(*args, **kwargs)
  * 		else:
  * 			alert('%s method not found' % method)             # <<<<<<<<<<<<<<
@@ -20288,9 +20143,9 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
  * 	def widgetBuild(self, desc):
  */
   /*else*/ {
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_alert); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 607, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_alert); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 597, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __Pyx_PyString_FormatSafe(__pyx_kp_s_s_method_not_found, __pyx_v_method); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 607, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyString_FormatSafe(__pyx_kp_s_s_method_not_found, __pyx_v_method); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 597, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_9 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -20305,14 +20160,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
     __pyx_t_8 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_9, __pyx_t_1) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1);
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 607, __pyx_L1_error)
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 597, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
   __pyx_L5:;
 
-  /* "kivyblocks/blocks.pyx":588
+  /* "kivyblocks/blocks.pyx":578
  * 			return {}
  * 
  * 	def methodAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
@@ -20343,7 +20198,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_52methodAction(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":609
+/* "kivyblocks/blocks.pyx":599
  * 			alert('%s method not found' % method)
  * 
  * 	def widgetBuild(self, desc):             # <<<<<<<<<<<<<<
@@ -20387,11 +20242,11 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_55widgetBuild(PyObject *_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("widgetBuild", 1, 2, 2, 1); __PYX_ERR(0, 609, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("widgetBuild", 1, 2, 2, 1); __PYX_ERR(0, 599, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "widgetBuild") < 0)) __PYX_ERR(0, 609, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "widgetBuild") < 0)) __PYX_ERR(0, 599, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -20404,7 +20259,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_55widgetBuild(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("widgetBuild", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 609, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("widgetBuild", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 599, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.widgetBuild", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -20417,7 +20272,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_55widgetBuild(PyObject *_
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":622
+/* "kivyblocks/blocks.pyx":612
  * 		}
  * 		"""
  * 		def doit(desc):             # <<<<<<<<<<<<<<
@@ -20467,28 +20322,28 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
   __pyx_cur_scope = __pyx_outer_scope;
   __Pyx_INCREF(__pyx_v_desc);
 
-  /* "kivyblocks/blocks.pyx":623
+  /* "kivyblocks/blocks.pyx":613
  * 		"""
  * 		def doit(desc):
  * 			if isinstance(desc,DictObject):             # <<<<<<<<<<<<<<
  * 				desc = desc.to_dict()
  * 			if not isinstance(desc,dict):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 623, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 613, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_IsInstance(__pyx_v_desc, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 623, __pyx_L1_error)
+  __pyx_t_2 = PyObject_IsInstance(__pyx_v_desc, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 613, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":624
+    /* "kivyblocks/blocks.pyx":614
  * 		def doit(desc):
  * 			if isinstance(desc,DictObject):
  * 				desc = desc.to_dict()             # <<<<<<<<<<<<<<
  * 			if not isinstance(desc,dict):
  * 				Logger.info('Block: desc(%s) must be a dict object(%s)',
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 624, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 614, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -20502,13 +20357,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 624, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 614, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF_SET(__pyx_v_desc, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":623
+    /* "kivyblocks/blocks.pyx":613
  * 		"""
  * 		def doit(desc):
  * 			if isinstance(desc,DictObject):             # <<<<<<<<<<<<<<
@@ -20517,7 +20372,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
  */
   }
 
-  /* "kivyblocks/blocks.pyx":625
+  /* "kivyblocks/blocks.pyx":615
  * 			if isinstance(desc,DictObject):
  * 				desc = desc.to_dict()
  * 			if not isinstance(desc,dict):             # <<<<<<<<<<<<<<
@@ -20528,20 +20383,20 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
   __pyx_t_2 = ((!(__pyx_t_3 != 0)) != 0);
   if (__pyx_t_2) {
 
-    /* "kivyblocks/blocks.pyx":626
+    /* "kivyblocks/blocks.pyx":616
  * 				desc = desc.to_dict()
  * 			if not isinstance(desc,dict):
  * 				Logger.info('Block: desc(%s) must be a dict object(%s)',             # <<<<<<<<<<<<<<
  * 							desc,type(desc))
  * 				return None
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Logger); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 626, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Logger); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 616, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 626, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 616, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kivyblocks/blocks.pyx":627
+    /* "kivyblocks/blocks.pyx":617
  * 			if not isinstance(desc,dict):
  * 				Logger.info('Block: desc(%s) must be a dict object(%s)',
  * 							desc,type(desc))             # <<<<<<<<<<<<<<
@@ -20563,7 +20418,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_kp_s_Block_desc_s_must_be_a_dict_obje, __pyx_v_desc, ((PyObject *)Py_TYPE(__pyx_v_desc))};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 626, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 616, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -20571,13 +20426,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_kp_s_Block_desc_s_must_be_a_dict_obje, __pyx_v_desc, ((PyObject *)Py_TYPE(__pyx_v_desc))};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 626, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 616, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_7 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 626, __pyx_L1_error)
+      __pyx_t_7 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 616, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       if (__pyx_t_4) {
         __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -20591,14 +20446,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
       __Pyx_INCREF(((PyObject *)Py_TYPE(__pyx_v_desc)));
       __Pyx_GIVEREF(((PyObject *)Py_TYPE(__pyx_v_desc)));
       PyTuple_SET_ITEM(__pyx_t_7, 2+__pyx_t_6, ((PyObject *)Py_TYPE(__pyx_v_desc)));
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 626, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 616, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":628
+    /* "kivyblocks/blocks.pyx":618
  * 				Logger.info('Block: desc(%s) must be a dict object(%s)',
  * 							desc,type(desc))
  * 				return None             # <<<<<<<<<<<<<<
@@ -20609,7 +20464,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":625
+    /* "kivyblocks/blocks.pyx":615
  * 			if isinstance(desc,DictObject):
  * 				desc = desc.to_dict()
  * 			if not isinstance(desc,dict):             # <<<<<<<<<<<<<<
@@ -20618,7 +20473,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
  */
   }
 
-  /* "kivyblocks/blocks.pyx":631
+  /* "kivyblocks/blocks.pyx":621
  * 
  * 			# desc = self.valueExpr(desc)
  * 			try:             # <<<<<<<<<<<<<<
@@ -20634,15 +20489,15 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     __Pyx_XGOTREF(__pyx_t_10);
     /*try:*/ {
 
-      /* "kivyblocks/blocks.pyx":632
+      /* "kivyblocks/blocks.pyx":622
  * 			# desc = self.valueExpr(desc)
  * 			try:
  * 				widget = self.w_build(desc)             # <<<<<<<<<<<<<<
  * 				self.dispatch('on_built',widget)
  * 				if hasattr(widget,'ready'):
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 632, __pyx_L5_error) }
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_w_build); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 632, __pyx_L5_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 622, __pyx_L5_error) }
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_w_build); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 622, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_7 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -20656,21 +20511,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
       }
       __pyx_t_1 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_7, __pyx_v_desc) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_desc);
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 632, __pyx_L5_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 622, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_v_widget = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":633
+      /* "kivyblocks/blocks.pyx":623
  * 			try:
  * 				widget = self.w_build(desc)
  * 				self.dispatch('on_built',widget)             # <<<<<<<<<<<<<<
  * 				if hasattr(widget,'ready'):
  * 					widget.ready = True
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 633, __pyx_L5_error) }
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 633, __pyx_L5_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 623, __pyx_L5_error) }
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 623, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_7 = NULL;
       __pyx_t_6 = 0;
@@ -20687,7 +20542,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_5)) {
         PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_n_s_on_built, __pyx_v_widget};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 633, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 623, __pyx_L5_error)
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_GOTREF(__pyx_t_1);
       } else
@@ -20695,13 +20550,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
         PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_n_s_on_built, __pyx_v_widget};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 633, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 623, __pyx_L5_error)
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_GOTREF(__pyx_t_1);
       } else
       #endif
       {
-        __pyx_t_4 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 633, __pyx_L5_error)
+        __pyx_t_4 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 623, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_4);
         if (__pyx_t_7) {
           __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -20712,34 +20567,34 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
         __Pyx_INCREF(__pyx_v_widget);
         __Pyx_GIVEREF(__pyx_v_widget);
         PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_6, __pyx_v_widget);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 633, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 623, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       }
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":634
+      /* "kivyblocks/blocks.pyx":624
  * 				widget = self.w_build(desc)
  * 				self.dispatch('on_built',widget)
  * 				if hasattr(widget,'ready'):             # <<<<<<<<<<<<<<
  * 					widget.ready = True
  * 				return widget
  */
-      __pyx_t_2 = __Pyx_HasAttr(__pyx_v_widget, __pyx_n_s_ready); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 634, __pyx_L5_error)
+      __pyx_t_2 = __Pyx_HasAttr(__pyx_v_widget, __pyx_n_s_ready); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 624, __pyx_L5_error)
       __pyx_t_3 = (__pyx_t_2 != 0);
       if (__pyx_t_3) {
 
-        /* "kivyblocks/blocks.pyx":635
+        /* "kivyblocks/blocks.pyx":625
  * 				self.dispatch('on_built',widget)
  * 				if hasattr(widget,'ready'):
  * 					widget.ready = True             # <<<<<<<<<<<<<<
  * 				return widget
  * 			except Exception as e:
  */
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_widget, __pyx_n_s_ready, Py_True) < 0) __PYX_ERR(0, 635, __pyx_L5_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_widget, __pyx_n_s_ready, Py_True) < 0) __PYX_ERR(0, 625, __pyx_L5_error)
 
-        /* "kivyblocks/blocks.pyx":634
+        /* "kivyblocks/blocks.pyx":624
  * 				widget = self.w_build(desc)
  * 				self.dispatch('on_built',widget)
  * 				if hasattr(widget,'ready'):             # <<<<<<<<<<<<<<
@@ -20748,7 +20603,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
  */
       }
 
-      /* "kivyblocks/blocks.pyx":636
+      /* "kivyblocks/blocks.pyx":626
  * 				if hasattr(widget,'ready'):
  * 					widget.ready = True
  * 				return widget             # <<<<<<<<<<<<<<
@@ -20760,7 +20615,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
       __pyx_r = __pyx_v_widget;
       goto __pyx_L9_try_return;
 
-      /* "kivyblocks/blocks.pyx":631
+      /* "kivyblocks/blocks.pyx":621
  * 
  * 			# desc = self.valueExpr(desc)
  * 			try:             # <<<<<<<<<<<<<<
@@ -20774,7 +20629,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "kivyblocks/blocks.pyx":637
+    /* "kivyblocks/blocks.pyx":627
  * 					widget.ready = True
  * 				return widget
  * 			except Exception as e:             # <<<<<<<<<<<<<<
@@ -20784,21 +20639,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     __pyx_t_6 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_6) {
       __Pyx_AddTraceback("kivyblocks.blocks.Blocks.widgetBuild.doit", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 637, __pyx_L7_except_error)
+      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 627, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_INCREF(__pyx_t_5);
       __pyx_v_e = __pyx_t_5;
 
-      /* "kivyblocks/blocks.pyx":638
+      /* "kivyblocks/blocks.pyx":628
  * 				return widget
  * 			except Exception as e:
  * 				print_exc()             # <<<<<<<<<<<<<<
  * 				self.dispatch('on_failed',e)
  * 				return None
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_print_exc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 638, __pyx_L7_except_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_print_exc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 628, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_11);
       __pyx_t_12 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_11))) {
@@ -20812,20 +20667,20 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
       }
       __pyx_t_7 = (__pyx_t_12) ? __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_12) : __Pyx_PyObject_CallNoArg(__pyx_t_11);
       __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
-      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 638, __pyx_L7_except_error)
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 628, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "kivyblocks/blocks.pyx":639
+      /* "kivyblocks/blocks.pyx":629
  * 			except Exception as e:
  * 				print_exc()
  * 				self.dispatch('on_failed',e)             # <<<<<<<<<<<<<<
  * 				return None
  * 
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 639, __pyx_L7_except_error) }
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 639, __pyx_L7_except_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 629, __pyx_L7_except_error) }
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 629, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_11);
       __pyx_t_12 = NULL;
       __pyx_t_6 = 0;
@@ -20842,7 +20697,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_11)) {
         PyObject *__pyx_temp[3] = {__pyx_t_12, __pyx_n_s_on_failed, __pyx_v_e};
-        __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 639, __pyx_L7_except_error)
+        __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 629, __pyx_L7_except_error)
         __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_GOTREF(__pyx_t_7);
       } else
@@ -20850,13 +20705,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
         PyObject *__pyx_temp[3] = {__pyx_t_12, __pyx_n_s_on_failed, __pyx_v_e};
-        __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 639, __pyx_L7_except_error)
+        __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 629, __pyx_L7_except_error)
         __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_GOTREF(__pyx_t_7);
       } else
       #endif
       {
-        __pyx_t_13 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 639, __pyx_L7_except_error)
+        __pyx_t_13 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 629, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_13);
         if (__pyx_t_12) {
           __Pyx_GIVEREF(__pyx_t_12); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_12); __pyx_t_12 = NULL;
@@ -20867,14 +20722,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
         __Pyx_INCREF(__pyx_v_e);
         __Pyx_GIVEREF(__pyx_v_e);
         PyTuple_SET_ITEM(__pyx_t_13, 1+__pyx_t_6, __pyx_v_e);
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_13, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 639, __pyx_L7_except_error)
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_13, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 629, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       }
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "kivyblocks/blocks.pyx":640
+      /* "kivyblocks/blocks.pyx":630
  * 				print_exc()
  * 				self.dispatch('on_failed',e)
  * 				return None             # <<<<<<<<<<<<<<
@@ -20891,7 +20746,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     goto __pyx_L7_except_error;
     __pyx_L7_except_error:;
 
-    /* "kivyblocks/blocks.pyx":631
+    /* "kivyblocks/blocks.pyx":621
  * 
  * 			# desc = self.valueExpr(desc)
  * 			try:             # <<<<<<<<<<<<<<
@@ -20917,7 +20772,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
     goto __pyx_L0;
   }
 
-  /* "kivyblocks/blocks.pyx":622
+  /* "kivyblocks/blocks.pyx":612
  * 		}
  * 		"""
  * 		def doit(desc):             # <<<<<<<<<<<<<<
@@ -20945,7 +20800,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(PyObje
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":609
+/* "kivyblocks/blocks.pyx":599
  * 			alert('%s method not found' % method)
  * 
  * 	def widgetBuild(self, desc):             # <<<<<<<<<<<<<<
@@ -20984,7 +20839,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct_2_widgetBuild *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 609, __pyx_L1_error)
+    __PYX_ERR(0, 599, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -20993,40 +20848,40 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_INCREF(__pyx_v_desc);
 
-  /* "kivyblocks/blocks.pyx":622
+  /* "kivyblocks/blocks.pyx":612
  * 		}
  * 		"""
  * 		def doit(desc):             # <<<<<<<<<<<<<<
  * 			if isinstance(desc,DictObject):
  * 				desc = desc.to_dict()
  */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_11widgetBuild_1doit, 0, __pyx_n_s_Blocks_widgetBuild_locals_doit, ((PyObject*)__pyx_cur_scope), __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 622, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_11widgetBuild_1doit, 0, __pyx_n_s_Blocks_widgetBuild_locals_doit, ((PyObject*)__pyx_cur_scope), __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 612, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_doit = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":642
+  /* "kivyblocks/blocks.pyx":632
  * 				return None
  * 
  * 		if isinstance(desc,DictObject):             # <<<<<<<<<<<<<<
  * 			desc = desc.to_dict()
  * 		if not isinstance(desc, dict):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 642, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 632, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_IsInstance(__pyx_v_desc, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 642, __pyx_L1_error)
+  __pyx_t_2 = PyObject_IsInstance(__pyx_v_desc, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 632, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":643
+    /* "kivyblocks/blocks.pyx":633
  * 
  * 		if isinstance(desc,DictObject):
  * 			desc = desc.to_dict()             # <<<<<<<<<<<<<<
  * 		if not isinstance(desc, dict):
  * 			print('widgetBuild1: desc must be a dict object',
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 643, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 633, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -21040,13 +20895,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 643, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 633, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF_SET(__pyx_v_desc, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":642
+    /* "kivyblocks/blocks.pyx":632
  * 				return None
  * 
  * 		if isinstance(desc,DictObject):             # <<<<<<<<<<<<<<
@@ -21055,7 +20910,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
   }
 
-  /* "kivyblocks/blocks.pyx":644
+  /* "kivyblocks/blocks.pyx":634
  * 		if isinstance(desc,DictObject):
  * 			desc = desc.to_dict()
  * 		if not isinstance(desc, dict):             # <<<<<<<<<<<<<<
@@ -21066,14 +20921,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
   __pyx_t_2 = ((!(__pyx_t_3 != 0)) != 0);
   if (__pyx_t_2) {
 
-    /* "kivyblocks/blocks.pyx":645
+    /* "kivyblocks/blocks.pyx":635
  * 			desc = desc.to_dict()
  * 		if not isinstance(desc, dict):
  * 			print('widgetBuild1: desc must be a dict object',             # <<<<<<<<<<<<<<
  * 						desc,type(desc))
  * 			self.dispatch('on_failed',Exception('miss url'))
  */
-    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 645, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 635, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_kp_s_widgetBuild1_desc_must_be_a_dict);
     __Pyx_GIVEREF(__pyx_kp_s_widgetBuild1_desc_must_be_a_dict);
@@ -21084,19 +20939,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     __Pyx_INCREF(((PyObject *)Py_TYPE(__pyx_v_desc)));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(__pyx_v_desc)));
     PyTuple_SET_ITEM(__pyx_t_1, 2, ((PyObject *)Py_TYPE(__pyx_v_desc)));
-    if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 645, __pyx_L1_error)
+    if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 635, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":647
+    /* "kivyblocks/blocks.pyx":637
  * 			print('widgetBuild1: desc must be a dict object',
  * 						desc,type(desc))
  * 			self.dispatch('on_failed',Exception('miss url'))             # <<<<<<<<<<<<<<
  * 			return
  * 
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 647, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 637, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 647, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 637, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -21113,7 +20968,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_on_failed, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 647, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 637, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -21122,14 +20977,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_on_failed, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 647, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 637, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 647, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 637, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -21140,14 +20995,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 647, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 637, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":648
+    /* "kivyblocks/blocks.pyx":638
  * 						desc,type(desc))
  * 			self.dispatch('on_failed',Exception('miss url'))
  * 			return             # <<<<<<<<<<<<<<
@@ -21158,7 +21013,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":644
+    /* "kivyblocks/blocks.pyx":634
  * 		if isinstance(desc,DictObject):
  * 			desc = desc.to_dict()
  * 		if not isinstance(desc, dict):             # <<<<<<<<<<<<<<
@@ -21167,14 +21022,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
   }
 
-  /* "kivyblocks/blocks.pyx":650
+  /* "kivyblocks/blocks.pyx":640
  * 			return
  * 
  * 		widgettype = desc.get('widgettype')             # <<<<<<<<<<<<<<
  * 		while widgettype == "urlwidget":
  * 			opts = desc.get('options',{}).copy()
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 650, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 640, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_8 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -21188,13 +21043,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
   }
   __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_8, __pyx_n_s_widgettype) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_n_s_widgettype);
   __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 650, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 640, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_widgettype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":651
+  /* "kivyblocks/blocks.pyx":641
  * 
  * 		widgettype = desc.get('widgettype')
  * 		while widgettype == "urlwidget":             # <<<<<<<<<<<<<<
@@ -21202,19 +21057,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  * 			extend = desc.get('extend')
  */
   while (1) {
-    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_v_widgettype, __pyx_n_s_urlwidget, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 651, __pyx_L1_error)
+    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_v_widgettype, __pyx_n_s_urlwidget, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 641, __pyx_L1_error)
     if (!__pyx_t_2) break;
 
-    /* "kivyblocks/blocks.pyx":652
+    /* "kivyblocks/blocks.pyx":642
  * 		widgettype = desc.get('widgettype')
  * 		while widgettype == "urlwidget":
  * 			opts = desc.get('options',{}).copy()             # <<<<<<<<<<<<<<
  * 			extend = desc.get('extend')
  * 			addon = None
  */
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 652, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 642, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 652, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 642, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -21231,7 +21086,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_8)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_options, __pyx_t_5};
-      __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 652, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 642, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -21240,14 +21095,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_8)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_n_s_options, __pyx_t_5};
-      __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 652, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 642, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_9 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 652, __pyx_L1_error)
+      __pyx_t_9 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 642, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -21258,12 +21113,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_7, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 652, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 642, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_copy); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 652, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_copy); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 642, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -21278,20 +21133,20 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_8);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 652, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 642, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_XDECREF_SET(__pyx_v_opts, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":653
+    /* "kivyblocks/blocks.pyx":643
  * 		while widgettype == "urlwidget":
  * 			opts = desc.get('options',{}).copy()
  * 			extend = desc.get('extend')             # <<<<<<<<<<<<<<
  * 			addon = None
  * 			if desc.get('extend'):
  */
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 653, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 643, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
@@ -21305,13 +21160,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_4, __pyx_n_s_extend) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_n_s_extend);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 653, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 643, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_XDECREF_SET(__pyx_v_extend, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":654
+    /* "kivyblocks/blocks.pyx":644
  * 			opts = desc.get('options',{}).copy()
  * 			extend = desc.get('extend')
  * 			addon = None             # <<<<<<<<<<<<<<
@@ -21321,14 +21176,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     __Pyx_INCREF(Py_None);
     __Pyx_XDECREF_SET(__pyx_v_addon, Py_None);
 
-    /* "kivyblocks/blocks.pyx":655
+    /* "kivyblocks/blocks.pyx":645
  * 			extend = desc.get('extend')
  * 			addon = None
  * 			if desc.get('extend'):             # <<<<<<<<<<<<<<
  * 				addon = desc.get('extend').copy()
  * 			url = opts.get('url')
  */
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 655, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 645, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
@@ -21342,21 +21197,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_4, __pyx_n_s_extend) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_n_s_extend);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 655, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 645, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 655, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 645, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "kivyblocks/blocks.pyx":656
+      /* "kivyblocks/blocks.pyx":646
  * 			addon = None
  * 			if desc.get('extend'):
  * 				addon = desc.get('extend').copy()             # <<<<<<<<<<<<<<
  * 			url = opts.get('url')
  * 			if url is None:
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 656, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 646, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_9 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -21370,10 +21225,10 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       }
       __pyx_t_8 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_9, __pyx_n_s_extend) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_n_s_extend);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 656, __pyx_L1_error)
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 646, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_copy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 656, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_copy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 646, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_8 = NULL;
@@ -21388,13 +21243,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       }
       __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_8) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 656, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 646, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_addon, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":655
+      /* "kivyblocks/blocks.pyx":645
  * 			extend = desc.get('extend')
  * 			addon = None
  * 			if desc.get('extend'):             # <<<<<<<<<<<<<<
@@ -21403,14 +21258,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
     }
 
-    /* "kivyblocks/blocks.pyx":657
+    /* "kivyblocks/blocks.pyx":647
  * 			if desc.get('extend'):
  * 				addon = desc.get('extend').copy()
  * 			url = opts.get('url')             # <<<<<<<<<<<<<<
  * 			if url is None:
  * 				self.dispatch('on_failed',Exception('miss url'))
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 657, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 647, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -21424,13 +21279,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     }
     __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_8, __pyx_n_s_url) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_n_s_url);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 657, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 647, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF_SET(__pyx_v_url, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":658
+    /* "kivyblocks/blocks.pyx":648
  * 				addon = desc.get('extend').copy()
  * 			url = opts.get('url')
  * 			if url is None:             # <<<<<<<<<<<<<<
@@ -21441,16 +21296,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     __pyx_t_3 = (__pyx_t_2 != 0);
     if (__pyx_t_3) {
 
-      /* "kivyblocks/blocks.pyx":659
+      /* "kivyblocks/blocks.pyx":649
  * 			url = opts.get('url')
  * 			if url is None:
  * 				self.dispatch('on_failed',Exception('miss url'))             # <<<<<<<<<<<<<<
  * 				return
  * 
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 659, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 649, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 659, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 649, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = NULL;
       __pyx_t_7 = 0;
@@ -21467,7 +21322,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[3] = {__pyx_t_9, __pyx_n_s_on_failed, __pyx_t_8};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 659, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 649, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -21476,14 +21331,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[3] = {__pyx_t_9, __pyx_n_s_on_failed, __pyx_t_8};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 659, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 649, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       } else
       #endif
       {
-        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 659, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 649, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         if (__pyx_t_9) {
           __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -21494,14 +21349,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
         __Pyx_GIVEREF(__pyx_t_8);
         PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_7, __pyx_t_8);
         __pyx_t_8 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 659, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 649, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":660
+      /* "kivyblocks/blocks.pyx":650
  * 			if url is None:
  * 				self.dispatch('on_failed',Exception('miss url'))
  * 				return             # <<<<<<<<<<<<<<
@@ -21512,7 +21367,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       __pyx_r = Py_None; __Pyx_INCREF(Py_None);
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":658
+      /* "kivyblocks/blocks.pyx":648
  * 				addon = desc.get('extend').copy()
  * 			url = opts.get('url')
  * 			if url is None:             # <<<<<<<<<<<<<<
@@ -21521,14 +21376,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
     }
 
-    /* "kivyblocks/blocks.pyx":662
+    /* "kivyblocks/blocks.pyx":652
  * 				return
  * 
  * 			if opts.get('url'):             # <<<<<<<<<<<<<<
  * 				del opts['url']
  * 			rtdesc = self.build_rtdesc(opts)
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 662, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 652, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -21542,23 +21397,23 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_n_s_url) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_n_s_url);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 662, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 652, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 662, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 652, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "kivyblocks/blocks.pyx":663
+      /* "kivyblocks/blocks.pyx":653
  * 
  * 			if opts.get('url'):
  * 				del opts['url']             # <<<<<<<<<<<<<<
  * 			rtdesc = self.build_rtdesc(opts)
  * 			if rtdesc:
  */
-      if (unlikely(PyObject_DelItem(__pyx_v_opts, __pyx_n_s_url) < 0)) __PYX_ERR(0, 663, __pyx_L1_error)
+      if (unlikely(PyObject_DelItem(__pyx_v_opts, __pyx_n_s_url) < 0)) __PYX_ERR(0, 653, __pyx_L1_error)
 
-      /* "kivyblocks/blocks.pyx":662
+      /* "kivyblocks/blocks.pyx":652
  * 				return
  * 
  * 			if opts.get('url'):             # <<<<<<<<<<<<<<
@@ -21567,14 +21422,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
     }
 
-    /* "kivyblocks/blocks.pyx":664
+    /* "kivyblocks/blocks.pyx":654
  * 			if opts.get('url'):
  * 				del opts['url']
  * 			rtdesc = self.build_rtdesc(opts)             # <<<<<<<<<<<<<<
  * 			if rtdesc:
  * 				rtdata = self.get_rtdata(None, rtdesc)
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_build_rtdesc); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 664, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_build_rtdesc); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 654, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -21588,30 +21443,30 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_v_opts) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_opts);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 664, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 654, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF_SET(__pyx_v_rtdesc, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":665
+    /* "kivyblocks/blocks.pyx":655
  * 				del opts['url']
  * 			rtdesc = self.build_rtdesc(opts)
  * 			if rtdesc:             # <<<<<<<<<<<<<<
  * 				rtdata = self.get_rtdata(None, rtdesc)
  * 				params = opts.get('params', {})
  */
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_rtdesc); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 665, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_rtdesc); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 655, __pyx_L1_error)
     if (__pyx_t_3) {
 
-      /* "kivyblocks/blocks.pyx":666
+      /* "kivyblocks/blocks.pyx":656
  * 			rtdesc = self.build_rtdesc(opts)
  * 			if rtdesc:
  * 				rtdata = self.get_rtdata(None, rtdesc)             # <<<<<<<<<<<<<<
  * 				params = opts.get('params', {})
  * 				params.update(rtdata)
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_get_rtdata); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 666, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_get_rtdata); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 656, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_5 = NULL;
       __pyx_t_7 = 0;
@@ -21628,7 +21483,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[3] = {__pyx_t_5, Py_None, __pyx_v_rtdesc};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 666, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 656, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_1);
       } else
@@ -21636,13 +21491,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[3] = {__pyx_t_5, Py_None, __pyx_v_rtdesc};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 666, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 656, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_1);
       } else
       #endif
       {
-        __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 666, __pyx_L1_error)
+        __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 656, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         if (__pyx_t_5) {
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -21653,7 +21508,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
         __Pyx_INCREF(__pyx_v_rtdesc);
         __Pyx_GIVEREF(__pyx_v_rtdesc);
         PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_v_rtdesc);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 666, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 656, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
@@ -21661,16 +21516,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       __Pyx_XDECREF_SET(__pyx_v_rtdata, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":667
+      /* "kivyblocks/blocks.pyx":657
  * 			if rtdesc:
  * 				rtdata = self.get_rtdata(None, rtdesc)
  * 				params = opts.get('params', {})             # <<<<<<<<<<<<<<
  * 				params.update(rtdata)
  * 				opts['params'] = params
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 667, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_opts, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 657, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 667, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 657, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_5 = NULL;
       __pyx_t_7 = 0;
@@ -21687,7 +21542,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_s_params, __pyx_t_8};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 667, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 657, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -21696,14 +21551,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_s_params, __pyx_t_8};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 667, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 657, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       } else
       #endif
       {
-        __pyx_t_9 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 667, __pyx_L1_error)
+        __pyx_t_9 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 657, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_9);
         if (__pyx_t_5) {
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -21714,7 +21569,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
         __Pyx_GIVEREF(__pyx_t_8);
         PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_7, __pyx_t_8);
         __pyx_t_8 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 667, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 657, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       }
@@ -21722,14 +21577,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       __Pyx_XDECREF_SET(__pyx_v_params, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":668
+      /* "kivyblocks/blocks.pyx":658
  * 				rtdata = self.get_rtdata(None, rtdesc)
  * 				params = opts.get('params', {})
  * 				params.update(rtdata)             # <<<<<<<<<<<<<<
  * 				opts['params'] = params
  * 
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_params, __pyx_n_s_update); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 668, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_params, __pyx_n_s_update); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 658, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_9 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -21743,21 +21598,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       }
       __pyx_t_1 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_9, __pyx_v_rtdata) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_rtdata);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 668, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 658, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/blocks.pyx":669
+      /* "kivyblocks/blocks.pyx":659
  * 				params = opts.get('params', {})
  * 				params.update(rtdata)
  * 				opts['params'] = params             # <<<<<<<<<<<<<<
  * 
  * 			desc = self.getUrlData(url,**opts)
  */
-      if (unlikely(PyObject_SetItem(__pyx_v_opts, __pyx_n_s_params, __pyx_v_params) < 0)) __PYX_ERR(0, 669, __pyx_L1_error)
+      if (unlikely(PyObject_SetItem(__pyx_v_opts, __pyx_n_s_params, __pyx_v_params) < 0)) __PYX_ERR(0, 659, __pyx_L1_error)
 
-      /* "kivyblocks/blocks.pyx":665
+      /* "kivyblocks/blocks.pyx":655
  * 				del opts['url']
  * 			rtdesc = self.build_rtdesc(opts)
  * 			if rtdesc:             # <<<<<<<<<<<<<<
@@ -21766,32 +21621,32 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
     }
 
-    /* "kivyblocks/blocks.pyx":671
+    /* "kivyblocks/blocks.pyx":661
  * 				opts['params'] = params
  * 
  * 			desc = self.getUrlData(url,**opts)             # <<<<<<<<<<<<<<
  * 			if not (isinstance(desc, DictObject) or \
  * 							isinstance(desc, dict)):
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_getUrlData); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 671, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_getUrlData); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 661, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 671, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 661, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_v_url);
     __Pyx_GIVEREF(__pyx_v_url);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_url);
     if (unlikely(__pyx_v_opts == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-      __PYX_ERR(0, 671, __pyx_L1_error)
+      __PYX_ERR(0, 661, __pyx_L1_error)
     }
     if (likely(PyDict_CheckExact(__pyx_v_opts))) {
-      __pyx_t_9 = PyDict_Copy(__pyx_v_opts); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 671, __pyx_L1_error)
+      __pyx_t_9 = PyDict_Copy(__pyx_v_opts); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 661, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
     } else {
-      __pyx_t_9 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_opts, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 671, __pyx_L1_error)
+      __pyx_t_9 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_opts, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 661, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
     }
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 671, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 661, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -21799,16 +21654,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     __Pyx_DECREF_SET(__pyx_v_desc, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "kivyblocks/blocks.pyx":672
+    /* "kivyblocks/blocks.pyx":662
  * 
  * 			desc = self.getUrlData(url,**opts)
  * 			if not (isinstance(desc, DictObject) or \             # <<<<<<<<<<<<<<
  * 							isinstance(desc, dict)):
  * 				print('Block2: desc must be a dict object',
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 672, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 662, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_2 = PyObject_IsInstance(__pyx_v_desc, __pyx_t_8); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 672, __pyx_L1_error)
+    __pyx_t_2 = PyObject_IsInstance(__pyx_v_desc, __pyx_t_8); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 662, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_10 = (__pyx_t_2 != 0);
     if (!__pyx_t_10) {
@@ -21817,7 +21672,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       goto __pyx_L12_bool_binop_done;
     }
 
-    /* "kivyblocks/blocks.pyx":673
+    /* "kivyblocks/blocks.pyx":663
  * 			desc = self.getUrlData(url,**opts)
  * 			if not (isinstance(desc, DictObject) or \
  * 							isinstance(desc, dict)):             # <<<<<<<<<<<<<<
@@ -21829,7 +21684,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     __pyx_t_3 = __pyx_t_2;
     __pyx_L12_bool_binop_done:;
 
-    /* "kivyblocks/blocks.pyx":672
+    /* "kivyblocks/blocks.pyx":662
  * 
  * 			desc = self.getUrlData(url,**opts)
  * 			if not (isinstance(desc, DictObject) or \             # <<<<<<<<<<<<<<
@@ -21839,14 +21694,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     __pyx_t_2 = ((!__pyx_t_3) != 0);
     if (__pyx_t_2) {
 
-      /* "kivyblocks/blocks.pyx":674
+      /* "kivyblocks/blocks.pyx":664
  * 			if not (isinstance(desc, DictObject) or \
  * 							isinstance(desc, dict)):
  * 				print('Block2: desc must be a dict object',             # <<<<<<<<<<<<<<
  * 								desc,type(desc))
  * 				self.dispatch('on_failed',Exception('miss url'))
  */
-      __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 674, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 664, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_INCREF(__pyx_kp_s_Block2_desc_must_be_a_dict_objec);
       __Pyx_GIVEREF(__pyx_kp_s_Block2_desc_must_be_a_dict_objec);
@@ -21857,19 +21712,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       __Pyx_INCREF(((PyObject *)Py_TYPE(__pyx_v_desc)));
       __Pyx_GIVEREF(((PyObject *)Py_TYPE(__pyx_v_desc)));
       PyTuple_SET_ITEM(__pyx_t_8, 2, ((PyObject *)Py_TYPE(__pyx_v_desc)));
-      if (__Pyx_PrintOne(0, __pyx_t_8) < 0) __PYX_ERR(0, 674, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_8) < 0) __PYX_ERR(0, 664, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "kivyblocks/blocks.pyx":676
+      /* "kivyblocks/blocks.pyx":666
  * 				print('Block2: desc must be a dict object',
  * 								desc,type(desc))
  * 				self.dispatch('on_failed',Exception('miss url'))             # <<<<<<<<<<<<<<
  * 				return
  * 
  */
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 676, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 666, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 676, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 666, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_1 = NULL;
       __pyx_t_7 = 0;
@@ -21886,7 +21741,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_9)) {
         PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_n_s_on_failed, __pyx_t_4};
-        __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 676, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 666, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -21895,14 +21750,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_9)) {
         PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_n_s_on_failed, __pyx_t_4};
-        __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 676, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 666, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       } else
       #endif
       {
-        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 676, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 666, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         if (__pyx_t_1) {
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -21913,14 +21768,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
         __Pyx_GIVEREF(__pyx_t_4);
         PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_7, __pyx_t_4);
         __pyx_t_4 = 0;
-        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_5, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 676, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_5, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 666, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "kivyblocks/blocks.pyx":677
+      /* "kivyblocks/blocks.pyx":667
  * 								desc,type(desc))
  * 				self.dispatch('on_failed',Exception('miss url'))
  * 				return             # <<<<<<<<<<<<<<
@@ -21931,7 +21786,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       __pyx_r = Py_None; __Pyx_INCREF(Py_None);
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":672
+      /* "kivyblocks/blocks.pyx":662
  * 
  * 			desc = self.getUrlData(url,**opts)
  * 			if not (isinstance(desc, DictObject) or \             # <<<<<<<<<<<<<<
@@ -21940,24 +21795,24 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
     }
 
-    /* "kivyblocks/blocks.pyx":679
+    /* "kivyblocks/blocks.pyx":669
  * 				return
  * 
  * 			if addon:             # <<<<<<<<<<<<<<
  * 				desc = dictExtend(desc,addon)
  * 			widgettype = desc.get('widgettype')
  */
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_addon); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 679, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_addon); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 669, __pyx_L1_error)
     if (__pyx_t_2) {
 
-      /* "kivyblocks/blocks.pyx":680
+      /* "kivyblocks/blocks.pyx":670
  * 
  * 			if addon:
  * 				desc = dictExtend(desc,addon)             # <<<<<<<<<<<<<<
  * 			widgettype = desc.get('widgettype')
  * 		if widgettype is None:
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_dictExtend); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 680, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_dictExtend); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 670, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __pyx_t_5 = NULL;
       __pyx_t_7 = 0;
@@ -21974,7 +21829,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_9)) {
         PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_desc, __pyx_v_addon};
-        __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 680, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 670, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_8);
       } else
@@ -21982,13 +21837,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_9)) {
         PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_desc, __pyx_v_addon};
-        __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 680, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 670, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_8);
       } else
       #endif
       {
-        __pyx_t_4 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 680, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 670, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         if (__pyx_t_5) {
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -21999,7 +21854,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
         __Pyx_INCREF(__pyx_v_addon);
         __Pyx_GIVEREF(__pyx_v_addon);
         PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_7, __pyx_v_addon);
-        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_4, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 680, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_4, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 670, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       }
@@ -22007,7 +21862,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
       __Pyx_DECREF_SET(__pyx_v_desc, __pyx_t_8);
       __pyx_t_8 = 0;
 
-      /* "kivyblocks/blocks.pyx":679
+      /* "kivyblocks/blocks.pyx":669
  * 				return
  * 
  * 			if addon:             # <<<<<<<<<<<<<<
@@ -22016,14 +21871,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
     }
 
-    /* "kivyblocks/blocks.pyx":681
+    /* "kivyblocks/blocks.pyx":671
  * 			if addon:
  * 				desc = dictExtend(desc,addon)
  * 			widgettype = desc.get('widgettype')             # <<<<<<<<<<<<<<
  * 		if widgettype is None:
  * 			print('Block3: desc must be a dict object not None')
  */
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 681, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 671, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_9))) {
@@ -22037,14 +21892,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     }
     __pyx_t_8 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_4, __pyx_n_s_widgettype) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_n_s_widgettype);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 681, __pyx_L1_error)
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 671, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF_SET(__pyx_v_widgettype, __pyx_t_8);
     __pyx_t_8 = 0;
   }
 
-  /* "kivyblocks/blocks.pyx":682
+  /* "kivyblocks/blocks.pyx":672
  * 				desc = dictExtend(desc,addon)
  * 			widgettype = desc.get('widgettype')
  * 		if widgettype is None:             # <<<<<<<<<<<<<<
@@ -22055,16 +21910,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/blocks.pyx":683
+    /* "kivyblocks/blocks.pyx":673
  * 			widgettype = desc.get('widgettype')
  * 		if widgettype is None:
  * 			print('Block3: desc must be a dict object not None')             # <<<<<<<<<<<<<<
  * 			return None
  * 		return doit(desc)
  */
-    if (__Pyx_PrintOne(0, __pyx_kp_s_Block3_desc_must_be_a_dict_objec) < 0) __PYX_ERR(0, 683, __pyx_L1_error)
+    if (__Pyx_PrintOne(0, __pyx_kp_s_Block3_desc_must_be_a_dict_objec) < 0) __PYX_ERR(0, 673, __pyx_L1_error)
 
-    /* "kivyblocks/blocks.pyx":684
+    /* "kivyblocks/blocks.pyx":674
  * 		if widgettype is None:
  * 			print('Block3: desc must be a dict object not None')
  * 			return None             # <<<<<<<<<<<<<<
@@ -22075,7 +21930,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":682
+    /* "kivyblocks/blocks.pyx":672
  * 				desc = dictExtend(desc,addon)
  * 			widgettype = desc.get('widgettype')
  * 		if widgettype is None:             # <<<<<<<<<<<<<<
@@ -22084,7 +21939,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  */
   }
 
-  /* "kivyblocks/blocks.pyx":685
+  /* "kivyblocks/blocks.pyx":675
  * 			print('Block3: desc must be a dict object not None')
  * 			return None
  * 		return doit(desc)             # <<<<<<<<<<<<<<
@@ -22092,13 +21947,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
  * 	@classmethod
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = __pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(__pyx_v_doit, __pyx_v_desc); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 685, __pyx_L1_error)
+  __pyx_t_8 = __pyx_pf_10kivyblocks_6blocks_6Blocks_11widgetBuild_doit(__pyx_v_doit, __pyx_v_desc); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 675, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_r = __pyx_t_8;
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/blocks.pyx":609
+  /* "kivyblocks/blocks.pyx":599
  * 			alert('%s method not found' % method)
  * 
  * 	def widgetBuild(self, desc):             # <<<<<<<<<<<<<<
@@ -22133,7 +21988,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_54widgetBuild(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":688
+/* "kivyblocks/blocks.pyx":678
  * 
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:             # <<<<<<<<<<<<<<
@@ -22180,7 +22035,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_57getWidgetById(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_id)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("getWidgetById", 0, 2, 3, 1); __PYX_ERR(0, 688, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("getWidgetById", 0, 2, 3, 1); __PYX_ERR(0, 678, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -22190,7 +22045,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_57getWidgetById(PyObject 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "getWidgetById") < 0)) __PYX_ERR(0, 688, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "getWidgetById") < 0)) __PYX_ERR(0, 678, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -22208,13 +22063,13 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_57getWidgetById(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getWidgetById", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 688, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getWidgetById", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 678, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.getWidgetById", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_id), (&PyString_Type), 1, "id", 1))) __PYX_ERR(0, 688, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_id), (&PyString_Type), 1, "id", 1))) __PYX_ERR(0, 678, __pyx_L1_error)
   __pyx_r = __pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(__pyx_self, __pyx_v_self, __pyx_v_id, __pyx_v_from_widget);
 
   /* function exit code */
@@ -22226,7 +22081,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_57getWidgetById(PyObject 
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":689
+/* "kivyblocks/blocks.pyx":679
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:
  * 		def find_widget_by_id(id, from_widget):             # <<<<<<<<<<<<<<
@@ -22269,11 +22124,11 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_13getWidgetById_1find_wid
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_from_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("find_widget_by_id", 1, 2, 2, 1); __PYX_ERR(0, 689, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("find_widget_by_id", 1, 2, 2, 1); __PYX_ERR(0, 679, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_widget_by_id") < 0)) __PYX_ERR(0, 689, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_widget_by_id") < 0)) __PYX_ERR(0, 679, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -22286,7 +22141,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_13getWidgetById_1find_wid
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find_widget_by_id", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 689, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("find_widget_by_id", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 679, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.getWidgetById.find_widget_by_id", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -22324,17 +22179,17 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
   __pyx_outer_scope = (struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct_3_getWidgetById *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
 
-  /* "kivyblocks/blocks.pyx":690
+  /* "kivyblocks/blocks.pyx":680
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:
  * 		def find_widget_by_id(id, from_widget):
  * 			if id=='self':             # <<<<<<<<<<<<<<
  * 				return from_widget
  * 			if hasattr(from_widget,'widget_id'):
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_id, __pyx_n_s_self, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 690, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_id, __pyx_n_s_self, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 680, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "kivyblocks/blocks.pyx":691
+    /* "kivyblocks/blocks.pyx":681
  * 		def find_widget_by_id(id, from_widget):
  * 			if id=='self':
  * 				return from_widget             # <<<<<<<<<<<<<<
@@ -22346,7 +22201,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
     __pyx_r = __pyx_v_from_widget;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":690
+    /* "kivyblocks/blocks.pyx":680
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:
  * 		def find_widget_by_id(id, from_widget):
  * 			if id=='self':             # <<<<<<<<<<<<<<
@@ -22355,33 +22210,33 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
   }
 
-  /* "kivyblocks/blocks.pyx":692
+  /* "kivyblocks/blocks.pyx":682
  * 			if id=='self':
  * 				return from_widget
  * 			if hasattr(from_widget,'widget_id'):             # <<<<<<<<<<<<<<
  * 				if from_widget.widget_id == id:
  * 					return from_widget
  */
-  __pyx_t_1 = __Pyx_HasAttr(__pyx_v_from_widget, __pyx_n_s_widget_id); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 692, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_HasAttr(__pyx_v_from_widget, __pyx_n_s_widget_id); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 682, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "kivyblocks/blocks.pyx":693
+    /* "kivyblocks/blocks.pyx":683
  * 				return from_widget
  * 			if hasattr(from_widget,'widget_id'):
  * 				if from_widget.widget_id == id:             # <<<<<<<<<<<<<<
  * 					return from_widget
  * 				if id[0] == '-' and from_widget.widget_id == id[1:]:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_widget_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 693, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_widget_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_v_id, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 693, __pyx_L1_error)
+    __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_v_id, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 693, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_2) {
 
-      /* "kivyblocks/blocks.pyx":694
+      /* "kivyblocks/blocks.pyx":684
  * 			if hasattr(from_widget,'widget_id'):
  * 				if from_widget.widget_id == id:
  * 					return from_widget             # <<<<<<<<<<<<<<
@@ -22393,7 +22248,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
       __pyx_r = __pyx_v_from_widget;
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":693
+      /* "kivyblocks/blocks.pyx":683
  * 				return from_widget
  * 			if hasattr(from_widget,'widget_id'):
  * 				if from_widget.widget_id == id:             # <<<<<<<<<<<<<<
@@ -22402,36 +22257,36 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
     }
 
-    /* "kivyblocks/blocks.pyx":695
+    /* "kivyblocks/blocks.pyx":685
  * 				if from_widget.widget_id == id:
  * 					return from_widget
  * 				if id[0] == '-' and from_widget.widget_id == id[1:]:             # <<<<<<<<<<<<<<
  * 					return from_widget
  * 			if hasattr(from_widget, id):
  */
-    __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_id, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 695, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_id, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_t_4, __pyx_kp_s__24, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 695, __pyx_L1_error)
+    __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_t_4, __pyx_kp_s__24, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_1) {
     } else {
       __pyx_t_2 = __pyx_t_1;
       goto __pyx_L7_bool_binop_done;
     }
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_widget_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 695, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_widget_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_id, 1, 0, NULL, NULL, &__pyx_slice__25, 1, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 695, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_id, 1, 0, NULL, NULL, &__pyx_slice__25, 1, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = PyObject_RichCompare(__pyx_t_4, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 695, __pyx_L1_error)
+    __pyx_t_5 = PyObject_RichCompare(__pyx_t_4, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 695, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_2 = __pyx_t_1;
     __pyx_L7_bool_binop_done:;
     if (__pyx_t_2) {
 
-      /* "kivyblocks/blocks.pyx":696
+      /* "kivyblocks/blocks.pyx":686
  * 					return from_widget
  * 				if id[0] == '-' and from_widget.widget_id == id[1:]:
  * 					return from_widget             # <<<<<<<<<<<<<<
@@ -22443,7 +22298,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
       __pyx_r = __pyx_v_from_widget;
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":695
+      /* "kivyblocks/blocks.pyx":685
  * 				if from_widget.widget_id == id:
  * 					return from_widget
  * 				if id[0] == '-' and from_widget.widget_id == id[1:]:             # <<<<<<<<<<<<<<
@@ -22452,7 +22307,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
     }
 
-    /* "kivyblocks/blocks.pyx":692
+    /* "kivyblocks/blocks.pyx":682
  * 			if id=='self':
  * 				return from_widget
  * 			if hasattr(from_widget,'widget_id'):             # <<<<<<<<<<<<<<
@@ -22461,30 +22316,30 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
   }
 
-  /* "kivyblocks/blocks.pyx":697
+  /* "kivyblocks/blocks.pyx":687
  * 				if id[0] == '-' and from_widget.widget_id == id[1:]:
  * 					return from_widget
  * 			if hasattr(from_widget, id):             # <<<<<<<<<<<<<<
  * 				w = getattr(from_widget,id)
  * 				return w
  */
-  __pyx_t_2 = __Pyx_HasAttr(__pyx_v_from_widget, __pyx_v_id); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 697, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_HasAttr(__pyx_v_from_widget, __pyx_v_id); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 687, __pyx_L1_error)
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "kivyblocks/blocks.pyx":698
+    /* "kivyblocks/blocks.pyx":688
  * 					return from_widget
  * 			if hasattr(from_widget, id):
  * 				w = getattr(from_widget,id)             # <<<<<<<<<<<<<<
  * 				return w
  * 
  */
-    __pyx_t_5 = __Pyx_GetAttr(__pyx_v_from_widget, __pyx_v_id); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 698, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetAttr(__pyx_v_from_widget, __pyx_v_id); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 688, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_v_w = __pyx_t_5;
     __pyx_t_5 = 0;
 
-    /* "kivyblocks/blocks.pyx":699
+    /* "kivyblocks/blocks.pyx":689
  * 			if hasattr(from_widget, id):
  * 				w = getattr(from_widget,id)
  * 				return w             # <<<<<<<<<<<<<<
@@ -22496,7 +22351,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
     __pyx_r = __pyx_v_w;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":697
+    /* "kivyblocks/blocks.pyx":687
  * 				if id[0] == '-' and from_widget.widget_id == id[1:]:
  * 					return from_widget
  * 			if hasattr(from_widget, id):             # <<<<<<<<<<<<<<
@@ -22505,27 +22360,27 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
   }
 
-  /* "kivyblocks/blocks.pyx":701
+  /* "kivyblocks/blocks.pyx":691
  * 				return w
  * 
  * 			if id[0] == '-':             # <<<<<<<<<<<<<<
  * 				print('find_widget_by_id(), id=', id,
  * 							'widget=', from_widget)
  */
-  __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_id, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 701, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_id, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 691, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_t_5, __pyx_kp_s__24, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 701, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_t_5, __pyx_kp_s__24, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 691, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__pyx_t_1) {
 
-    /* "kivyblocks/blocks.pyx":702
+    /* "kivyblocks/blocks.pyx":692
  * 
  * 			if id[0] == '-':
  * 				print('find_widget_by_id(), id=', id,             # <<<<<<<<<<<<<<
  * 							'widget=', from_widget)
  * 				if isinstance(from_widget, WindowBase):
  */
-    __pyx_t_5 = PyTuple_New(4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 702, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 692, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_INCREF(__pyx_kp_s_find_widget_by_id_id);
     __Pyx_GIVEREF(__pyx_kp_s_find_widget_by_id_id);
@@ -22539,24 +22394,24 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
     __Pyx_INCREF(__pyx_v_from_widget);
     __Pyx_GIVEREF(__pyx_v_from_widget);
     PyTuple_SET_ITEM(__pyx_t_5, 3, __pyx_v_from_widget);
-    if (__Pyx_PrintOne(0, __pyx_t_5) < 0) __PYX_ERR(0, 702, __pyx_L1_error)
+    if (__Pyx_PrintOne(0, __pyx_t_5) < 0) __PYX_ERR(0, 692, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/blocks.pyx":704
+    /* "kivyblocks/blocks.pyx":694
  * 				print('find_widget_by_id(), id=', id,
  * 							'widget=', from_widget)
  * 				if isinstance(from_widget, WindowBase):             # <<<<<<<<<<<<<<
  * 					return None
  * 				if from_widget.parent:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_WindowBase); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 704, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_WindowBase); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 694, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = PyObject_IsInstance(__pyx_v_from_widget, __pyx_t_5); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 704, __pyx_L1_error)
+    __pyx_t_1 = PyObject_IsInstance(__pyx_v_from_widget, __pyx_t_5); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 694, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_2 = (__pyx_t_1 != 0);
     if (__pyx_t_2) {
 
-      /* "kivyblocks/blocks.pyx":705
+      /* "kivyblocks/blocks.pyx":695
  * 							'widget=', from_widget)
  * 				if isinstance(from_widget, WindowBase):
  * 					return None             # <<<<<<<<<<<<<<
@@ -22567,7 +22422,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
       __pyx_r = Py_None; __Pyx_INCREF(Py_None);
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":704
+      /* "kivyblocks/blocks.pyx":694
  * 				print('find_widget_by_id(), id=', id,
  * 							'widget=', from_widget)
  * 				if isinstance(from_widget, WindowBase):             # <<<<<<<<<<<<<<
@@ -22576,20 +22431,20 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
     }
 
-    /* "kivyblocks/blocks.pyx":706
+    /* "kivyblocks/blocks.pyx":696
  * 				if isinstance(from_widget, WindowBase):
  * 					return None
  * 				if from_widget.parent:             # <<<<<<<<<<<<<<
  * 					return find_widget_by_id(id,
  * 							from_widget=from_widget.parent)
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_parent); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 706, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_parent); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 696, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 706, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 696, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_2) {
 
-      /* "kivyblocks/blocks.pyx":707
+      /* "kivyblocks/blocks.pyx":697
  * 					return None
  * 				if from_widget.parent:
  * 					return find_widget_by_id(id,             # <<<<<<<<<<<<<<
@@ -22597,35 +22452,35 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  * 				return None
  */
       __Pyx_XDECREF(__pyx_r);
-      if (unlikely(!__pyx_cur_scope->__pyx_v_find_widget_by_id)) { __Pyx_RaiseClosureNameError("find_widget_by_id"); __PYX_ERR(0, 707, __pyx_L1_error) }
-      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 707, __pyx_L1_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_v_find_widget_by_id)) { __Pyx_RaiseClosureNameError("find_widget_by_id"); __PYX_ERR(0, 697, __pyx_L1_error) }
+      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 697, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_v_id);
       __Pyx_GIVEREF(__pyx_v_id);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_id);
 
-      /* "kivyblocks/blocks.pyx":708
+      /* "kivyblocks/blocks.pyx":698
  * 				if from_widget.parent:
  * 					return find_widget_by_id(id,
  * 							from_widget=from_widget.parent)             # <<<<<<<<<<<<<<
  * 				return None
  * 			else:
  */
-      __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 708, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 698, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_parent); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 708, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_parent); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 698, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_from_widget, __pyx_t_4) < 0) __PYX_ERR(0, 708, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_from_widget, __pyx_t_4) < 0) __PYX_ERR(0, 698, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "kivyblocks/blocks.pyx":707
+      /* "kivyblocks/blocks.pyx":697
  * 					return None
  * 				if from_widget.parent:
  * 					return find_widget_by_id(id,             # <<<<<<<<<<<<<<
  * 							from_widget=from_widget.parent)
  * 				return None
  */
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_find_widget_by_id, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 707, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_find_widget_by_id, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 697, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -22633,7 +22488,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
       __pyx_t_4 = 0;
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":706
+      /* "kivyblocks/blocks.pyx":696
  * 				if isinstance(from_widget, WindowBase):
  * 					return None
  * 				if from_widget.parent:             # <<<<<<<<<<<<<<
@@ -22642,7 +22497,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
     }
 
-    /* "kivyblocks/blocks.pyx":709
+    /* "kivyblocks/blocks.pyx":699
  * 					return find_widget_by_id(id,
  * 							from_widget=from_widget.parent)
  * 				return None             # <<<<<<<<<<<<<<
@@ -22653,7 +22508,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":701
+    /* "kivyblocks/blocks.pyx":691
  * 				return w
  * 
  * 			if id[0] == '-':             # <<<<<<<<<<<<<<
@@ -22662,7 +22517,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
   }
 
-  /* "kivyblocks/blocks.pyx":711
+  /* "kivyblocks/blocks.pyx":701
  * 				return None
  * 			else:
  * 				children = [i for i in from_widget.children]             # <<<<<<<<<<<<<<
@@ -22670,17 +22525,17 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  * 					children = from_widget.get_subwidgets()
  */
   /*else*/ {
-    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 711, __pyx_L1_error)
+    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 701, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_children); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 711, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_children); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 701, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
       __pyx_t_5 = __pyx_t_3; __Pyx_INCREF(__pyx_t_5); __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 711, __pyx_L1_error)
+      __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 701, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 711, __pyx_L1_error)
+      __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 701, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     for (;;) {
@@ -22688,17 +22543,17 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
         if (likely(PyList_CheckExact(__pyx_t_5))) {
           if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_5)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 711, __pyx_L1_error)
+          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 701, __pyx_L1_error)
           #else
-          __pyx_t_3 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 711, __pyx_L1_error)
+          __pyx_t_3 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 701, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         } else {
           if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_5)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 711, __pyx_L1_error)
+          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 701, __pyx_L1_error)
           #else
-          __pyx_t_3 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 711, __pyx_L1_error)
+          __pyx_t_3 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 701, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         }
@@ -22708,7 +22563,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 711, __pyx_L1_error)
+            else __PYX_ERR(0, 701, __pyx_L1_error)
           }
           break;
         }
@@ -22716,31 +22571,31 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
       }
       __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_3);
       __pyx_t_3 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_v_i))) __PYX_ERR(0, 711, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_v_i))) __PYX_ERR(0, 701, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_children = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "kivyblocks/blocks.pyx":712
+    /* "kivyblocks/blocks.pyx":702
  * 			else:
  * 				children = [i for i in from_widget.children]
  * 				if hasattr(from_widget, 'get_subwidgets'):             # <<<<<<<<<<<<<<
  * 					children = from_widget.get_subwidgets()
  * 				for c in children:
  */
-    __pyx_t_2 = __Pyx_HasAttr(__pyx_v_from_widget, __pyx_n_s_get_subwidgets); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 712, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_HasAttr(__pyx_v_from_widget, __pyx_n_s_get_subwidgets); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 702, __pyx_L1_error)
     __pyx_t_1 = (__pyx_t_2 != 0);
     if (__pyx_t_1) {
 
-      /* "kivyblocks/blocks.pyx":713
+      /* "kivyblocks/blocks.pyx":703
  * 				children = [i for i in from_widget.children]
  * 				if hasattr(from_widget, 'get_subwidgets'):
  * 					children = from_widget.get_subwidgets()             # <<<<<<<<<<<<<<
  * 				for c in children:
  * 					ret = find_widget_by_id(id,from_widget=c)
  */
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_get_subwidgets); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 713, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_from_widget, __pyx_n_s_get_subwidgets); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 703, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_3 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -22754,13 +22609,13 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
       }
       __pyx_t_4 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 713, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 703, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF_SET(__pyx_v_children, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "kivyblocks/blocks.pyx":712
+      /* "kivyblocks/blocks.pyx":702
  * 			else:
  * 				children = [i for i in from_widget.children]
  * 				if hasattr(from_widget, 'get_subwidgets'):             # <<<<<<<<<<<<<<
@@ -22769,7 +22624,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
     }
 
-    /* "kivyblocks/blocks.pyx":714
+    /* "kivyblocks/blocks.pyx":704
  * 				if hasattr(from_widget, 'get_subwidgets'):
  * 					children = from_widget.get_subwidgets()
  * 				for c in children:             # <<<<<<<<<<<<<<
@@ -22780,26 +22635,26 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
       __pyx_t_4 = __pyx_v_children; __Pyx_INCREF(__pyx_t_4); __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_children); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 714, __pyx_L1_error)
+      __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_children); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 704, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_7 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 714, __pyx_L1_error)
+      __pyx_t_7 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 704, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_7)) {
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 714, __pyx_L1_error)
+          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 704, __pyx_L1_error)
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 714, __pyx_L1_error)
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 704, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         } else {
           if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 714, __pyx_L1_error)
+          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 704, __pyx_L1_error)
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 714, __pyx_L1_error)
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 704, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         }
@@ -22809,7 +22664,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 714, __pyx_L1_error)
+            else __PYX_ERR(0, 704, __pyx_L1_error)
           }
           break;
         }
@@ -22818,40 +22673,40 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
       __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "kivyblocks/blocks.pyx":715
+      /* "kivyblocks/blocks.pyx":705
  * 					children = from_widget.get_subwidgets()
  * 				for c in children:
  * 					ret = find_widget_by_id(id,from_widget=c)             # <<<<<<<<<<<<<<
  * 					if ret:
  * 						return ret
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_v_find_widget_by_id)) { __Pyx_RaiseClosureNameError("find_widget_by_id"); __PYX_ERR(0, 715, __pyx_L1_error) }
-      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 715, __pyx_L1_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_v_find_widget_by_id)) { __Pyx_RaiseClosureNameError("find_widget_by_id"); __PYX_ERR(0, 705, __pyx_L1_error) }
+      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 705, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_v_id);
       __Pyx_GIVEREF(__pyx_v_id);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_id);
-      __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 715, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 705, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_from_widget, __pyx_v_c) < 0) __PYX_ERR(0, 715, __pyx_L1_error)
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_find_widget_by_id, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 715, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_from_widget, __pyx_v_c) < 0) __PYX_ERR(0, 705, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_find_widget_by_id, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 705, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_XDECREF_SET(__pyx_v_ret, __pyx_t_8);
       __pyx_t_8 = 0;
 
-      /* "kivyblocks/blocks.pyx":716
+      /* "kivyblocks/blocks.pyx":706
  * 				for c in children:
  * 					ret = find_widget_by_id(id,from_widget=c)
  * 					if ret:             # <<<<<<<<<<<<<<
  * 						return ret
  * 			return None
  */
-      __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_ret); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 716, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_ret); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 706, __pyx_L1_error)
       if (__pyx_t_1) {
 
-        /* "kivyblocks/blocks.pyx":717
+        /* "kivyblocks/blocks.pyx":707
  * 					ret = find_widget_by_id(id,from_widget=c)
  * 					if ret:
  * 						return ret             # <<<<<<<<<<<<<<
@@ -22864,7 +22719,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         goto __pyx_L0;
 
-        /* "kivyblocks/blocks.pyx":716
+        /* "kivyblocks/blocks.pyx":706
  * 				for c in children:
  * 					ret = find_widget_by_id(id,from_widget=c)
  * 					if ret:             # <<<<<<<<<<<<<<
@@ -22873,7 +22728,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
  */
       }
 
-      /* "kivyblocks/blocks.pyx":714
+      /* "kivyblocks/blocks.pyx":704
  * 				if hasattr(from_widget, 'get_subwidgets'):
  * 					children = from_widget.get_subwidgets()
  * 				for c in children:             # <<<<<<<<<<<<<<
@@ -22884,7 +22739,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
 
-  /* "kivyblocks/blocks.pyx":718
+  /* "kivyblocks/blocks.pyx":708
  * 					if ret:
  * 						return ret
  * 			return None             # <<<<<<<<<<<<<<
@@ -22895,7 +22750,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "kivyblocks/blocks.pyx":689
+  /* "kivyblocks/blocks.pyx":679
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:
  * 		def find_widget_by_id(id, from_widget):             # <<<<<<<<<<<<<<
@@ -22922,7 +22777,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widg
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":688
+/* "kivyblocks/blocks.pyx":678
  * 
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:             # <<<<<<<<<<<<<<
@@ -22955,48 +22810,48 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_10kivyblocks_6blocks___pyx_scope_struct_3_getWidgetById *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 688, __pyx_L1_error)
+    __PYX_ERR(0, 678, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
   __Pyx_INCREF(__pyx_v_id);
   __Pyx_INCREF(__pyx_v_from_widget);
 
-  /* "kivyblocks/blocks.pyx":689
+  /* "kivyblocks/blocks.pyx":679
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:
  * 		def find_widget_by_id(id, from_widget):             # <<<<<<<<<<<<<<
  * 			if id=='self':
  * 				return from_widget
  */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_13getWidgetById_1find_widget_by_id, 0, __pyx_n_s_Blocks_getWidgetById_locals_find, ((PyObject*)__pyx_cur_scope), __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 689, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_13getWidgetById_1find_widget_by_id, 0, __pyx_n_s_Blocks_getWidgetById_locals_find, ((PyObject*)__pyx_cur_scope), __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 679, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_cur_scope->__pyx_v_find_widget_by_id = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":720
+  /* "kivyblocks/blocks.pyx":710
  * 			return None
  * 
  * 		ids = id.split('.')             # <<<<<<<<<<<<<<
  * 		app = App.get_running_app()
  * 		fid = ids[0]
  */
-  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyString_Type_split, __pyx_v_id, __pyx_kp_s__8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 720, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyString_Type_split, __pyx_v_id, __pyx_kp_s__8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 710, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_ids = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":721
+  /* "kivyblocks/blocks.pyx":711
  * 
  * 		ids = id.split('.')
  * 		app = App.get_running_app()             # <<<<<<<<<<<<<<
  * 		fid = ids[0]
  * 		if fid == '/self' or fid == 'root':
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_App); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 721, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_App); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 711, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get_running_app); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 721, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get_running_app); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 711, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -23011,66 +22866,66 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 721, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 711, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_app = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":722
+  /* "kivyblocks/blocks.pyx":712
  * 		ids = id.split('.')
  * 		app = App.get_running_app()
  * 		fid = ids[0]             # <<<<<<<<<<<<<<
  * 		if fid == '/self' or fid == 'root':
  * 			from_widget = app.root
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_ids, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 722, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_ids, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 712, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_fid = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/blocks.pyx":723
+  /* "kivyblocks/blocks.pyx":713
  * 		app = App.get_running_app()
  * 		fid = ids[0]
  * 		if fid == '/self' or fid == 'root':             # <<<<<<<<<<<<<<
  * 			from_widget = app.root
  * 			if len(ids) == 1:
  */
-  __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_v_fid, __pyx_kp_s_self_2, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 723, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_v_fid, __pyx_kp_s_self_2, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 713, __pyx_L1_error)
   if (!__pyx_t_5) {
   } else {
     __pyx_t_4 = __pyx_t_5;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_v_fid, __pyx_n_s_root_2, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 723, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_v_fid, __pyx_n_s_root_2, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 713, __pyx_L1_error)
   __pyx_t_4 = __pyx_t_5;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "kivyblocks/blocks.pyx":724
+    /* "kivyblocks/blocks.pyx":714
  * 		fid = ids[0]
  * 		if fid == '/self' or fid == 'root':
  * 			from_widget = app.root             # <<<<<<<<<<<<<<
  * 			if len(ids) == 1:
  * 				return from_widget
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_root_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 724, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_root_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 714, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF_SET(__pyx_v_from_widget, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":725
+    /* "kivyblocks/blocks.pyx":715
  * 		if fid == '/self' or fid == 'root':
  * 			from_widget = app.root
  * 			if len(ids) == 1:             # <<<<<<<<<<<<<<
  * 				return from_widget
  * 			ids = ids[1:]
  */
-    __pyx_t_6 = PyObject_Length(__pyx_v_ids); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 725, __pyx_L1_error)
+    __pyx_t_6 = PyObject_Length(__pyx_v_ids); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 715, __pyx_L1_error)
     __pyx_t_4 = ((__pyx_t_6 == 1) != 0);
     if (__pyx_t_4) {
 
-      /* "kivyblocks/blocks.pyx":726
+      /* "kivyblocks/blocks.pyx":716
  * 			from_widget = app.root
  * 			if len(ids) == 1:
  * 				return from_widget             # <<<<<<<<<<<<<<
@@ -23082,7 +22937,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
       __pyx_r = __pyx_v_from_widget;
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":725
+      /* "kivyblocks/blocks.pyx":715
  * 		if fid == '/self' or fid == 'root':
  * 			from_widget = app.root
  * 			if len(ids) == 1:             # <<<<<<<<<<<<<<
@@ -23091,19 +22946,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
     }
 
-    /* "kivyblocks/blocks.pyx":727
+    /* "kivyblocks/blocks.pyx":717
  * 			if len(ids) == 1:
  * 				return from_widget
  * 			ids = ids[1:]             # <<<<<<<<<<<<<<
  * 		if fid == 'Window':
  * 			from_widget == Window
  */
-    __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_ids, 1, 0, NULL, NULL, &__pyx_slice__25, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 727, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_ids, 1, 0, NULL, NULL, &__pyx_slice__25, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 717, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF_SET(__pyx_v_ids, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":723
+    /* "kivyblocks/blocks.pyx":713
  * 		app = App.get_running_app()
  * 		fid = ids[0]
  * 		if fid == '/self' or fid == 'root':             # <<<<<<<<<<<<<<
@@ -23112,41 +22967,41 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
   }
 
-  /* "kivyblocks/blocks.pyx":728
+  /* "kivyblocks/blocks.pyx":718
  * 				return from_widget
  * 			ids = ids[1:]
  * 		if fid == 'Window':             # <<<<<<<<<<<<<<
  * 			from_widget == Window
  * 			if len(ids) == 1:
  */
-  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_fid, __pyx_n_s_Window, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 728, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_fid, __pyx_n_s_Window, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 718, __pyx_L1_error)
   if (__pyx_t_4) {
 
-    /* "kivyblocks/blocks.pyx":729
+    /* "kivyblocks/blocks.pyx":719
  * 			ids = ids[1:]
  * 		if fid == 'Window':
  * 			from_widget == Window             # <<<<<<<<<<<<<<
  * 			if len(ids) == 1:
  * 				return from_widget
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Window); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 729, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Window); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 719, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_v_from_widget, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 729, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_v_from_widget, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 719, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "kivyblocks/blocks.pyx":730
+    /* "kivyblocks/blocks.pyx":720
  * 		if fid == 'Window':
  * 			from_widget == Window
  * 			if len(ids) == 1:             # <<<<<<<<<<<<<<
  * 				return from_widget
  * 			ids = ids[1:]
  */
-    __pyx_t_6 = PyObject_Length(__pyx_v_ids); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 730, __pyx_L1_error)
+    __pyx_t_6 = PyObject_Length(__pyx_v_ids); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 720, __pyx_L1_error)
     __pyx_t_4 = ((__pyx_t_6 == 1) != 0);
     if (__pyx_t_4) {
 
-      /* "kivyblocks/blocks.pyx":731
+      /* "kivyblocks/blocks.pyx":721
  * 			from_widget == Window
  * 			if len(ids) == 1:
  * 				return from_widget             # <<<<<<<<<<<<<<
@@ -23158,7 +23013,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
       __pyx_r = __pyx_v_from_widget;
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":730
+      /* "kivyblocks/blocks.pyx":720
  * 		if fid == 'Window':
  * 			from_widget == Window
  * 			if len(ids) == 1:             # <<<<<<<<<<<<<<
@@ -23167,19 +23022,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
     }
 
-    /* "kivyblocks/blocks.pyx":732
+    /* "kivyblocks/blocks.pyx":722
  * 			if len(ids) == 1:
  * 				return from_widget
  * 			ids = ids[1:]             # <<<<<<<<<<<<<<
  * 		if fid == 'app':
  * 			return app
  */
-    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_ids, 1, 0, NULL, NULL, &__pyx_slice__25, 1, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 732, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_ids, 1, 0, NULL, NULL, &__pyx_slice__25, 1, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 722, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF_SET(__pyx_v_ids, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "kivyblocks/blocks.pyx":728
+    /* "kivyblocks/blocks.pyx":718
  * 				return from_widget
  * 			ids = ids[1:]
  * 		if fid == 'Window':             # <<<<<<<<<<<<<<
@@ -23188,17 +23043,17 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
   }
 
-  /* "kivyblocks/blocks.pyx":733
+  /* "kivyblocks/blocks.pyx":723
  * 				return from_widget
  * 			ids = ids[1:]
  * 		if fid == 'app':             # <<<<<<<<<<<<<<
  * 			return app
  * 
  */
-  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_fid, __pyx_n_s_app_2, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 733, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_fid, __pyx_n_s_app_2, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 723, __pyx_L1_error)
   if (__pyx_t_4) {
 
-    /* "kivyblocks/blocks.pyx":734
+    /* "kivyblocks/blocks.pyx":724
  * 			ids = ids[1:]
  * 		if fid == 'app':
  * 			return app             # <<<<<<<<<<<<<<
@@ -23210,7 +23065,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
     __pyx_r = __pyx_v_app;
     goto __pyx_L0;
 
-    /* "kivyblocks/blocks.pyx":733
+    /* "kivyblocks/blocks.pyx":723
  * 				return from_widget
  * 			ids = ids[1:]
  * 		if fid == 'app':             # <<<<<<<<<<<<<<
@@ -23219,7 +23074,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
   }
 
-  /* "kivyblocks/blocks.pyx":736
+  /* "kivyblocks/blocks.pyx":726
  * 			return app
  * 
  * 		if from_widget is None:             # <<<<<<<<<<<<<<
@@ -23230,19 +23085,19 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
   __pyx_t_5 = (__pyx_t_4 != 0);
   if (__pyx_t_5) {
 
-    /* "kivyblocks/blocks.pyx":737
+    /* "kivyblocks/blocks.pyx":727
  * 
  * 		if from_widget is None:
  * 			from_widget = app.root             # <<<<<<<<<<<<<<
  * 		for id in ids:
  * 			w = find_widget_by_id(id,from_widget=from_widget)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_root_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 737, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_root_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 727, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF_SET(__pyx_v_from_widget, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "kivyblocks/blocks.pyx":736
+    /* "kivyblocks/blocks.pyx":726
  * 			return app
  * 
  * 		if from_widget is None:             # <<<<<<<<<<<<<<
@@ -23251,7 +23106,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
   }
 
-  /* "kivyblocks/blocks.pyx":738
+  /* "kivyblocks/blocks.pyx":728
  * 		if from_widget is None:
  * 			from_widget = app.root
  * 		for id in ids:             # <<<<<<<<<<<<<<
@@ -23262,26 +23117,26 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
     __pyx_t_3 = __pyx_v_ids; __Pyx_INCREF(__pyx_t_3); __pyx_t_6 = 0;
     __pyx_t_7 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_ids); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 738, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_ids); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 728, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 738, __pyx_L1_error)
+    __pyx_t_7 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 728, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_7)) {
       if (likely(PyList_CheckExact(__pyx_t_3))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 738, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 728, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 738, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 728, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 738, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 728, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 738, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 728, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -23291,39 +23146,39 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 738, __pyx_L1_error)
+          else __PYX_ERR(0, 728, __pyx_L1_error)
         }
         break;
       }
       __Pyx_GOTREF(__pyx_t_1);
     }
-    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 738, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 728, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_id, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/blocks.pyx":739
+    /* "kivyblocks/blocks.pyx":729
  * 			from_widget = app.root
  * 		for id in ids:
  * 			w = find_widget_by_id(id,from_widget=from_widget)             # <<<<<<<<<<<<<<
  * 			if w is None \
  * 					and id == ids[0] \
  */
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 739, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 729, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_v_id);
     __Pyx_GIVEREF(__pyx_v_id);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_id);
-    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 739, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 729, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_from_widget, __pyx_v_from_widget) < 0) __PYX_ERR(0, 739, __pyx_L1_error)
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_find_widget_by_id, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 739, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_from_widget, __pyx_v_from_widget) < 0) __PYX_ERR(0, 729, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_find_widget_by_id, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 729, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_XDECREF_SET(__pyx_v_w, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "kivyblocks/blocks.pyx":740
+    /* "kivyblocks/blocks.pyx":730
  * 		for id in ids:
  * 			w = find_widget_by_id(id,from_widget=from_widget)
  * 			if w is None \             # <<<<<<<<<<<<<<
@@ -23338,16 +23193,16 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
       goto __pyx_L14_bool_binop_done;
     }
 
-    /* "kivyblocks/blocks.pyx":741
+    /* "kivyblocks/blocks.pyx":731
  * 			w = find_widget_by_id(id,from_widget=from_widget)
  * 			if w is None \
  * 					and id == ids[0] \             # <<<<<<<<<<<<<<
  * 					and Window.fullscreen == True \
  * 					and app.root != app.fs_widget:
  */
-    __pyx_t_8 = __Pyx_GetItemInt(__pyx_v_ids, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 741, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_GetItemInt(__pyx_v_ids, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 731, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_9 = (__Pyx_PyString_Equals(__pyx_v_id, __pyx_t_8, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 741, __pyx_L1_error)
+    __pyx_t_9 = (__Pyx_PyString_Equals(__pyx_v_id, __pyx_t_8, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 731, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     if (__pyx_t_9) {
     } else {
@@ -23355,21 +23210,21 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
       goto __pyx_L14_bool_binop_done;
     }
 
-    /* "kivyblocks/blocks.pyx":742
+    /* "kivyblocks/blocks.pyx":732
  * 			if w is None \
  * 					and id == ids[0] \
  * 					and Window.fullscreen == True \             # <<<<<<<<<<<<<<
  * 					and app.root != app.fs_widget:
  * 				w = find_widget_by_id(id, app.fs_widget)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Window); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 742, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Window); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 732, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_fullscreen); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 742, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_fullscreen); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 732, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = PyObject_RichCompare(__pyx_t_2, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 742, __pyx_L1_error)
+    __pyx_t_8 = PyObject_RichCompare(__pyx_t_2, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 732, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 742, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 732, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     if (__pyx_t_9) {
     } else {
@@ -23377,26 +23232,26 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
       goto __pyx_L14_bool_binop_done;
     }
 
-    /* "kivyblocks/blocks.pyx":743
+    /* "kivyblocks/blocks.pyx":733
  * 					and id == ids[0] \
  * 					and Window.fullscreen == True \
  * 					and app.root != app.fs_widget:             # <<<<<<<<<<<<<<
  * 				w = find_widget_by_id(id, app.fs_widget)
  * 
  */
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_root_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 743, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_root_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 733, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_fs_widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 743, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_fs_widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 733, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_8, __pyx_t_2, Py_NE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 743, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_8, __pyx_t_2, Py_NE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 733, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 743, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 733, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = __pyx_t_9;
     __pyx_L14_bool_binop_done:;
 
-    /* "kivyblocks/blocks.pyx":740
+    /* "kivyblocks/blocks.pyx":730
  * 		for id in ids:
  * 			w = find_widget_by_id(id,from_widget=from_widget)
  * 			if w is None \             # <<<<<<<<<<<<<<
@@ -23405,22 +23260,22 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
     if (__pyx_t_5) {
 
-      /* "kivyblocks/blocks.pyx":744
+      /* "kivyblocks/blocks.pyx":734
  * 					and Window.fullscreen == True \
  * 					and app.root != app.fs_widget:
  * 				w = find_widget_by_id(id, app.fs_widget)             # <<<<<<<<<<<<<<
  * 
  * 			if w is None:
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_fs_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 744, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_app, __pyx_n_s_fs_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 734, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widget_by_id(__pyx_cur_scope->__pyx_v_find_widget_by_id, __pyx_v_id, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 744, __pyx_L1_error)
+      __pyx_t_2 = __pyx_pf_10kivyblocks_6blocks_6Blocks_13getWidgetById_find_widget_by_id(__pyx_cur_scope->__pyx_v_find_widget_by_id, __pyx_v_id, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 734, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF_SET(__pyx_v_w, __pyx_t_2);
       __pyx_t_2 = 0;
 
-      /* "kivyblocks/blocks.pyx":740
+      /* "kivyblocks/blocks.pyx":730
  * 		for id in ids:
  * 			w = find_widget_by_id(id,from_widget=from_widget)
  * 			if w is None \             # <<<<<<<<<<<<<<
@@ -23429,7 +23284,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
     }
 
-    /* "kivyblocks/blocks.pyx":746
+    /* "kivyblocks/blocks.pyx":736
  * 				w = find_widget_by_id(id, app.fs_widget)
  * 
  * 			if w is None:             # <<<<<<<<<<<<<<
@@ -23440,14 +23295,14 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
     __pyx_t_9 = (__pyx_t_5 != 0);
     if (__pyx_t_9) {
 
-      /* "kivyblocks/blocks.pyx":747
+      /* "kivyblocks/blocks.pyx":737
  * 
  * 			if w is None:
  * 				print(id, 'not found ....')             # <<<<<<<<<<<<<<
  * 				return None
  * 			from_widget = w
  */
-      __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 747, __pyx_L1_error)
+      __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 737, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_INCREF(__pyx_v_id);
       __Pyx_GIVEREF(__pyx_v_id);
@@ -23455,10 +23310,10 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
       __Pyx_INCREF(__pyx_kp_s_not_found);
       __Pyx_GIVEREF(__pyx_kp_s_not_found);
       PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_kp_s_not_found);
-      if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 747, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 737, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "kivyblocks/blocks.pyx":748
+      /* "kivyblocks/blocks.pyx":738
  * 			if w is None:
  * 				print(id, 'not found ....')
  * 				return None             # <<<<<<<<<<<<<<
@@ -23470,7 +23325,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L0;
 
-      /* "kivyblocks/blocks.pyx":746
+      /* "kivyblocks/blocks.pyx":736
  * 				w = find_widget_by_id(id, app.fs_widget)
  * 
  * 			if w is None:             # <<<<<<<<<<<<<<
@@ -23479,7 +23334,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  */
     }
 
-    /* "kivyblocks/blocks.pyx":749
+    /* "kivyblocks/blocks.pyx":739
  * 				print(id, 'not found ....')
  * 				return None
  * 			from_widget = w             # <<<<<<<<<<<<<<
@@ -23489,7 +23344,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
     __Pyx_INCREF(__pyx_v_w);
     __Pyx_DECREF_SET(__pyx_v_from_widget, __pyx_v_w);
 
-    /* "kivyblocks/blocks.pyx":738
+    /* "kivyblocks/blocks.pyx":728
  * 		if from_widget is None:
  * 			from_widget = app.root
  * 		for id in ids:             # <<<<<<<<<<<<<<
@@ -23499,7 +23354,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/blocks.pyx":750
+  /* "kivyblocks/blocks.pyx":740
  * 				return None
  * 			from_widget = w
  * 		return w             # <<<<<<<<<<<<<<
@@ -23507,12 +23362,12 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
  * 	def on_built(self,v=None):
  */
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_w)) { __Pyx_RaiseUnboundLocalError("w"); __PYX_ERR(0, 750, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_w)) { __Pyx_RaiseUnboundLocalError("w"); __PYX_ERR(0, 740, __pyx_L1_error) }
   __Pyx_INCREF(__pyx_v_w);
   __pyx_r = __pyx_v_w;
   goto __pyx_L0;
 
-  /* "kivyblocks/blocks.pyx":688
+  /* "kivyblocks/blocks.pyx":678
  * 
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:             # <<<<<<<<<<<<<<
@@ -23541,7 +23396,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_56getWidgetById(CYTHON_UN
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":752
+/* "kivyblocks/blocks.pyx":742
  * 		return w
  * 
  * 	def on_built(self,v=None):             # <<<<<<<<<<<<<<
@@ -23589,7 +23444,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_59on_built(PyObject *__py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "on_built") < 0)) __PYX_ERR(0, 752, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "on_built") < 0)) __PYX_ERR(0, 742, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -23605,7 +23460,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_59on_built(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_built", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 752, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_built", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 742, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.on_built", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -23623,7 +23478,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_58on_built(CYTHON_UNUSED 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("on_built", 0);
 
-  /* "kivyblocks/blocks.pyx":753
+  /* "kivyblocks/blocks.pyx":743
  * 
  * 	def on_built(self,v=None):
  * 		return             # <<<<<<<<<<<<<<
@@ -23634,7 +23489,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_58on_built(CYTHON_UNUSED 
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "kivyblocks/blocks.pyx":752
+  /* "kivyblocks/blocks.pyx":742
  * 		return w
  * 
  * 	def on_built(self,v=None):             # <<<<<<<<<<<<<<
@@ -23649,7 +23504,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_58on_built(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "kivyblocks/blocks.pyx":755
+/* "kivyblocks/blocks.pyx":745
  * 		return
  * 
  * 	def on_failed(self,e=None):             # <<<<<<<<<<<<<<
@@ -23697,7 +23552,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_61on_failed(PyObject *__p
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "on_failed") < 0)) __PYX_ERR(0, 755, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "on_failed") < 0)) __PYX_ERR(0, 745, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -23713,7 +23568,7 @@ static PyObject *__pyx_pw_10kivyblocks_6blocks_6Blocks_61on_failed(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_failed", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 755, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_failed", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 745, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.blocks.Blocks.on_failed", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -23731,7 +23586,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_60on_failed(CYTHON_UNUSED
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("on_failed", 0);
 
-  /* "kivyblocks/blocks.pyx":756
+  /* "kivyblocks/blocks.pyx":746
  * 
  * 	def on_failed(self,e=None):
  * 		return             # <<<<<<<<<<<<<<
@@ -23742,7 +23597,7 @@ static PyObject *__pyx_pf_10kivyblocks_6blocks_6Blocks_60on_failed(CYTHON_UNUSED
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "kivyblocks/blocks.pyx":755
+  /* "kivyblocks/blocks.pyx":745
  * 		return
  * 
  * 	def on_failed(self,e=None):             # <<<<<<<<<<<<<<
@@ -24416,8 +24271,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Block_methodAction_desc_s_target, __pyx_k_Block_methodAction_desc_s_target, sizeof(__pyx_k_Block_methodAction_desc_s_target), 0, 0, 1, 0},
   {&__pyx_kp_s_Block_s_s, __pyx_k_Block_s_s, sizeof(__pyx_k_Block_s_s), 0, 0, 1, 0},
   {&__pyx_kp_s_Block_scriptAction_desc_s_target, __pyx_k_Block_scriptAction_desc_s_target, sizeof(__pyx_k_Block_scriptAction_desc_s_target), 0, 0, 1, 0},
-  {&__pyx_kp_s_Block_uniaction_called_desc_s_ar, __pyx_k_Block_uniaction_called_desc_s_ar, sizeof(__pyx_k_Block_uniaction_called_desc_s_ar), 0, 0, 1, 0},
-  {&__pyx_kp_s_Block_urlwidgetAction_called_des, __pyx_k_Block_urlwidgetAction_called_des, sizeof(__pyx_k_Block_urlwidgetAction_called_des), 0, 0, 1, 0},
   {&__pyx_kp_s_Block_urlwidgetAction_desc_s_wid, __pyx_k_Block_urlwidgetAction_desc_s_wid, sizeof(__pyx_k_Block_urlwidgetAction_desc_s_wid), 0, 0, 1, 0},
   {&__pyx_kp_s_Block_w_build_desc_invalid, __pyx_k_Block_w_build_desc_invalid, sizeof(__pyx_k_Block_w_build_desc_invalid), 0, 0, 1, 0},
   {&__pyx_n_s_Blocks, __pyx_k_Blocks, sizeof(__pyx_k_Blocks), 0, 0, 1, 1},
@@ -24863,132 +24716,132 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "kivyblocks/blocks.pyx":407
+  /* "kivyblocks/blocks.pyx":401
  * 	def blocksAction(self, widget:Widget, desc, *args):
  * 		target = self.get_target(widget, desc)
  * 		add_mode = desc.get('mode','replace')             # <<<<<<<<<<<<<<
  * 		opts = desc.get('options').copy()
  * 		d = self.getActionData(widget,desc, *args)
  */
-  __pyx_tuple__10 = PyTuple_Pack(2, __pyx_n_s_mode, __pyx_n_s_replace); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 407, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(2, __pyx_n_s_mode, __pyx_n_s_replace); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 401, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "kivyblocks/blocks.pyx":414
+  /* "kivyblocks/blocks.pyx":408
  * 			p.update(d)
  * 		opts['options'] = p
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):             # <<<<<<<<<<<<<<
  * 			if isinstance(w, ModalView):
  * 				return
  */
-  __pyx_tuple__11 = PyTuple_Pack(4, __pyx_n_s_target, __pyx_n_s_add_mode, __pyx_n_s_o, __pyx_n_s_w); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 414, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(4, __pyx_n_s_target, __pyx_n_s_add_mode, __pyx_n_s_o, __pyx_n_s_w); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doit, 414, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 414, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doit, 408, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 408, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":423
+  /* "kivyblocks/blocks.pyx":417
  * 				target.add_widget(w)
  * 
  * 		def doerr(o,e):             # <<<<<<<<<<<<<<
  * 			Logger.info('Block: blocksAction(): desc=%s widgetBuild error'
  * 								,str(desc))
  */
-  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_o, __pyx_n_s_e); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 423, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_o, __pyx_n_s_e); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 417, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doerr, 423, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 423, __pyx_L1_error)
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doerr, 417, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 417, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":453
+  /* "kivyblocks/blocks.pyx":443
  * 		}
  * 
  * 		def doit(target:Widget, add_mode:str, o, w:Widget):             # <<<<<<<<<<<<<<
  * 			if isinstance(w, ModalView):
  * 				return
  */
-  __pyx_tuple__15 = PyTuple_Pack(4, __pyx_n_s_target, __pyx_n_s_add_mode, __pyx_n_s_o, __pyx_n_s_w); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(4, __pyx_n_s_target, __pyx_n_s_add_mode, __pyx_n_s_o, __pyx_n_s_w); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 443, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doit, 453, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doit, 443, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 443, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":462
+  /* "kivyblocks/blocks.pyx":452
  * 				target.add_widget(w)
  * 
  * 		def doerr(o,e):             # <<<<<<<<<<<<<<
  * 			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error'
  * 								,str(desc))
  */
-  __pyx_tuple__17 = PyTuple_Pack(2, __pyx_n_s_o, __pyx_n_s_e); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 462, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(2, __pyx_n_s_o, __pyx_n_s_e); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 452, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doerr, 462, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 462, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doerr, 452, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 452, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":531
+  /* "kivyblocks/blocks.pyx":521
  * 					rtdesc['script'] = desc.get('datacript')
  * 				else:
  * 					rtdesc['method'] = desc.get('datamethod', 'getValue')             # <<<<<<<<<<<<<<
  * 				rtdesc['kwargs'] = desc.get('datakwargs', {})
  * 		return rtdesc
  */
-  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_datamethod, __pyx_n_s_getValue); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 531, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_datamethod, __pyx_n_s_getValue); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 521, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
 
-  /* "kivyblocks/blocks.pyx":571
+  /* "kivyblocks/blocks.pyx":561
  * 			return d
  * 
  * 		method = desc.get('method', 'getValue')             # <<<<<<<<<<<<<<
  * 		if not hasattr(w, method):
  * 			print('get_rtdata():method is None', desc, type(w))
  */
-  __pyx_tuple__20 = PyTuple_Pack(2, __pyx_n_s_method, __pyx_n_s_getValue); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 571, __pyx_L1_error)
+  __pyx_tuple__20 = PyTuple_Pack(2, __pyx_n_s_method, __pyx_n_s_getValue); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 561, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
 
-  /* "kivyblocks/blocks.pyx":622
+  /* "kivyblocks/blocks.pyx":612
  * 		}
  * 		"""
  * 		def doit(desc):             # <<<<<<<<<<<<<<
  * 			if isinstance(desc,DictObject):
  * 				desc = desc.to_dict()
  */
-  __pyx_tuple__21 = PyTuple_Pack(3, __pyx_n_s_desc, __pyx_n_s_widget, __pyx_n_s_e); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 622, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(3, __pyx_n_s_desc, __pyx_n_s_widget, __pyx_n_s_e); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 612, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doit, 622, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 622, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_doit, 612, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 612, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":647
+  /* "kivyblocks/blocks.pyx":637
  * 			print('widgetBuild1: desc must be a dict object',
  * 						desc,type(desc))
  * 			self.dispatch('on_failed',Exception('miss url'))             # <<<<<<<<<<<<<<
  * 			return
  * 
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_miss_url); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 647, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_miss_url); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 637, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
 
-  /* "kivyblocks/blocks.pyx":695
+  /* "kivyblocks/blocks.pyx":685
  * 				if from_widget.widget_id == id:
  * 					return from_widget
  * 				if id[0] == '-' and from_widget.widget_id == id[1:]:             # <<<<<<<<<<<<<<
  * 					return from_widget
  * 			if hasattr(from_widget, id):
  */
-  __pyx_slice__25 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__25)) __PYX_ERR(0, 695, __pyx_L1_error)
+  __pyx_slice__25 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__25)) __PYX_ERR(0, 685, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__25);
   __Pyx_GIVEREF(__pyx_slice__25);
 
-  /* "kivyblocks/blocks.pyx":689
+  /* "kivyblocks/blocks.pyx":679
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:
  * 		def find_widget_by_id(id, from_widget):             # <<<<<<<<<<<<<<
  * 			if id=='self':
  * 				return from_widget
  */
-  __pyx_tuple__26 = PyTuple_Pack(7, __pyx_n_s_id, __pyx_n_s_from_widget, __pyx_n_s_w, __pyx_n_s_children, __pyx_n_s_c, __pyx_n_s_ret_2, __pyx_n_s_i); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 689, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(7, __pyx_n_s_id, __pyx_n_s_from_widget, __pyx_n_s_w, __pyx_n_s_children, __pyx_n_s_c, __pyx_n_s_ret_2, __pyx_n_s_i); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 679, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_find_widget_by_id, 689, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 689, __pyx_L1_error)
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_find_widget_by_id, 679, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 679, __pyx_L1_error)
 
   /* "kivyblocks/blocks.pyx":42
  * 
@@ -25356,216 +25209,216 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__89);
   __pyx_codeobj__90 = (PyObject*)__Pyx_PyCode_New(3, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__89, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_buildBind, 319, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__90)) __PYX_ERR(0, 319, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":337
- * 		# Logger.info('Block: %s bind built', str(desc))
+  /* "kivyblocks/blocks.pyx":336
+ * 		w.bind(**{event:f})
  * 
  * 	def multipleAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
  * 		mydesc = desc1.copy()
  */
-  __pyx_tuple__91 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_desc1, __pyx_n_s_mydesc, __pyx_n_s_a, __pyx_n_s_new_desc, __pyx_n_s_k, __pyx_n_s_v); if (unlikely(!__pyx_tuple__91)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_tuple__91 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_desc1, __pyx_n_s_mydesc, __pyx_n_s_a, __pyx_n_s_new_desc, __pyx_n_s_k, __pyx_n_s_v); if (unlikely(!__pyx_tuple__91)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__91);
   __Pyx_GIVEREF(__pyx_tuple__91);
-  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(3, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__91, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_multipleAction, 337, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(3, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__91, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_multipleAction, 336, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) __PYX_ERR(0, 336, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":345
+  /* "kivyblocks/blocks.pyx":344
  * 			self.uniaction(widget,new_desc, *args)
  * 
  * 	def conform_action(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		conform_desc = desc.get('conform')
  * 		blocks = Blocks()
  */
-  __pyx_tuple__93 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_conform_desc, __pyx_n_s_blocks, __pyx_n_s_w); if (unlikely(!__pyx_tuple__93)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_tuple__93 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_conform_desc, __pyx_n_s_blocks, __pyx_n_s_w); if (unlikely(!__pyx_tuple__93)) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__93);
   __Pyx_GIVEREF(__pyx_tuple__93);
-  __pyx_codeobj__94 = (PyObject*)__Pyx_PyCode_New(3, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__93, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_conform_action, 345, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__94)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_codeobj__94 = (PyObject*)__Pyx_PyCode_New(3, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__93, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_conform_action, 344, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__94)) __PYX_ERR(0, 344, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":358
+  /* "kivyblocks/blocks.pyx":357
  * 		w.open()
  * 
  * 	def uniaction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: uniaction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		acttype = desc.get('actiontype')
+ * 		if acttype=='blocks':
  */
-  __pyx_tuple__95 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_acttype); if (unlikely(!__pyx_tuple__95)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __pyx_tuple__95 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_acttype); if (unlikely(!__pyx_tuple__95)) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__95);
   __Pyx_GIVEREF(__pyx_tuple__95);
-  __pyx_codeobj__96 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__95, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_uniaction, 358, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__96)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __pyx_codeobj__96 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__95, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_uniaction, 357, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__96)) __PYX_ERR(0, 357, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":382
+  /* "kivyblocks/blocks.pyx":376
  * 		alert("actiontype(%s) invalid" % acttype,title='error')
  * 
  * 	def eventAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		target = self.get_target(widget, desc)
  * 		event = desc.get('dispatch_event')
  */
-  __pyx_tuple__97 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_target, __pyx_n_s_event, __pyx_n_s_params, __pyx_n_s_d, __pyx_n_s_e); if (unlikely(!__pyx_tuple__97)) __PYX_ERR(0, 382, __pyx_L1_error)
+  __pyx_tuple__97 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_target, __pyx_n_s_event, __pyx_n_s_params, __pyx_n_s_d, __pyx_n_s_e); if (unlikely(!__pyx_tuple__97)) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__97);
   __Pyx_GIVEREF(__pyx_tuple__97);
-  __pyx_codeobj__98 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__97, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_eventAction, 382, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__98)) __PYX_ERR(0, 382, __pyx_L1_error)
+  __pyx_codeobj__98 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__97, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_eventAction, 376, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__98)) __PYX_ERR(0, 376, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":400
+  /* "kivyblocks/blocks.pyx":394
  * 			return
  * 
  * 	def get_target(self, widget:Widget, desc):             # <<<<<<<<<<<<<<
  * 		if not desc.get('target'):
  * 			return None
  */
-  __pyx_tuple__99 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc); if (unlikely(!__pyx_tuple__99)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_tuple__99 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc); if (unlikely(!__pyx_tuple__99)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__99);
   __Pyx_GIVEREF(__pyx_tuple__99);
-  __pyx_codeobj__100 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__99, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_get_target, 400, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__100)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_codeobj__100 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__99, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_get_target, 394, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__100)) __PYX_ERR(0, 394, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":405
+  /* "kivyblocks/blocks.pyx":399
  * 		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
  * 
  * 	def blocksAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		target = self.get_target(widget, desc)
  * 		add_mode = desc.get('mode','replace')
  */
-  __pyx_tuple__101 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_target, __pyx_n_s_add_mode, __pyx_n_s_opts, __pyx_n_s_d, __pyx_n_s_p, __pyx_n_s_doit, __pyx_n_s_doit, __pyx_n_s_doerr, __pyx_n_s_doerr, __pyx_n_s_b); if (unlikely(!__pyx_tuple__101)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_tuple__101 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_target, __pyx_n_s_add_mode, __pyx_n_s_opts, __pyx_n_s_d, __pyx_n_s_p, __pyx_n_s_doit, __pyx_n_s_doit, __pyx_n_s_doerr, __pyx_n_s_doerr, __pyx_n_s_b); if (unlikely(!__pyx_tuple__101)) __PYX_ERR(0, 399, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__101);
   __Pyx_GIVEREF(__pyx_tuple__101);
-  __pyx_codeobj__102 = (PyObject*)__Pyx_PyCode_New(3, 0, 14, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__101, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_blocksAction, 405, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__102)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_codeobj__102 = (PyObject*)__Pyx_PyCode_New(3, 0, 14, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__101, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_blocksAction, 399, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__102)) __PYX_ERR(0, 399, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":433
+  /* "kivyblocks/blocks.pyx":427
  * 		b.widgetBuild(opts)
  * 
  * 	def urlwidgetAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		target = self.get_target(widget, desc)
+ * 		add_mode = desc.get('mode','replace')
  */
-  __pyx_tuple__103 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_target, __pyx_n_s_add_mode, __pyx_n_s_opts, __pyx_n_s_p, __pyx_n_s_d, __pyx_n_s_doit, __pyx_n_s_doit, __pyx_n_s_doerr, __pyx_n_s_doerr, __pyx_n_s_b); if (unlikely(!__pyx_tuple__103)) __PYX_ERR(0, 433, __pyx_L1_error)
+  __pyx_tuple__103 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_target, __pyx_n_s_add_mode, __pyx_n_s_opts, __pyx_n_s_p, __pyx_n_s_d, __pyx_n_s_doit, __pyx_n_s_doit, __pyx_n_s_doerr, __pyx_n_s_doerr, __pyx_n_s_b); if (unlikely(!__pyx_tuple__103)) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__103);
   __Pyx_GIVEREF(__pyx_tuple__103);
-  __pyx_codeobj__104 = (PyObject*)__Pyx_PyCode_New(3, 0, 14, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__103, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_urlwidgetAction, 433, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__104)) __PYX_ERR(0, 433, __pyx_L1_error)
+  __pyx_codeobj__104 = (PyObject*)__Pyx_PyCode_New(3, 0, 14, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__103, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_urlwidgetAction, 427, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__104)) __PYX_ERR(0, 427, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":471
+  /* "kivyblocks/blocks.pyx":461
  * 		b.widgetBuild(d)
  * 
  * 	def getActionData(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		Logger.info('Block: getActionData(): desc=%s args=%s'
  * 							,str(desc), args)
  */
-  __pyx_tuple__105 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_data, __pyx_n_s_rtdesc, __pyx_n_s_rt); if (unlikely(!__pyx_tuple__105)) __PYX_ERR(0, 471, __pyx_L1_error)
+  __pyx_tuple__105 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_data, __pyx_n_s_rtdesc, __pyx_n_s_rt); if (unlikely(!__pyx_tuple__105)) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__105);
   __Pyx_GIVEREF(__pyx_tuple__105);
-  __pyx_codeobj__106 = (PyObject*)__Pyx_PyCode_New(3, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__105, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_getActionData, 471, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__106)) __PYX_ERR(0, 471, __pyx_L1_error)
+  __pyx_codeobj__106 = (PyObject*)__Pyx_PyCode_New(3, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__105, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_getActionData, 461, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__106)) __PYX_ERR(0, 461, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":485
+  /* "kivyblocks/blocks.pyx":475
  * 		return data
  * 
  * 	def registedfunctionAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		target = self.get_target(widget, desc)
  * 		rf = RegisterFunction()
  */
-  __pyx_tuple__107 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_target, __pyx_n_s_rf, __pyx_n_s_name, __pyx_n_s_func, __pyx_n_s_params, __pyx_n_s_d); if (unlikely(!__pyx_tuple__107)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_tuple__107 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_target, __pyx_n_s_rf, __pyx_n_s_name, __pyx_n_s_func, __pyx_n_s_params, __pyx_n_s_d); if (unlikely(!__pyx_tuple__107)) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__107);
   __Pyx_GIVEREF(__pyx_tuple__107);
-  __pyx_codeobj__108 = (PyObject*)__Pyx_PyCode_New(3, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__107, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_registedfunctionAction, 485, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__108)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_codeobj__108 = (PyObject*)__Pyx_PyCode_New(3, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__107, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_registedfunctionAction, 475, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__108)) __PYX_ERR(0, 475, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":501
+  /* "kivyblocks/blocks.pyx":491
  * 		func(target, *args, **params)
  * 
  * 	def scriptAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		script = desc.get('script')
  * 		if not script:
  */
-  __pyx_tuple__109 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_script_2, __pyx_n_s_target, __pyx_n_s_d, __pyx_n_s_ns, __pyx_n_s_e); if (unlikely(!__pyx_tuple__109)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_tuple__109 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_script_2, __pyx_n_s_target, __pyx_n_s_d, __pyx_n_s_ns, __pyx_n_s_e); if (unlikely(!__pyx_tuple__109)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__109);
   __Pyx_GIVEREF(__pyx_tuple__109);
-  __pyx_codeobj__110 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__109, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_scriptAction, 501, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__110)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_codeobj__110 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__109, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_scriptAction, 491, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__110)) __PYX_ERR(0, 491, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":522
+  /* "kivyblocks/blocks.pyx":512
  * 			print(e)
  * 
  * 	def build_rtdesc(self, desc):             # <<<<<<<<<<<<<<
  * 		rtdesc = desc.get('rtdata')
  * 		if not rtdesc:
  */
-  __pyx_tuple__111 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_desc, __pyx_n_s_rtdesc); if (unlikely(!__pyx_tuple__111)) __PYX_ERR(0, 522, __pyx_L1_error)
+  __pyx_tuple__111 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_desc, __pyx_n_s_rtdesc); if (unlikely(!__pyx_tuple__111)) __PYX_ERR(0, 512, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__111);
   __Pyx_GIVEREF(__pyx_tuple__111);
-  __pyx_codeobj__112 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__111, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_build_rtdesc, 522, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__112)) __PYX_ERR(0, 522, __pyx_L1_error)
+  __pyx_codeobj__112 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__111, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_build_rtdesc, 512, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__112)) __PYX_ERR(0, 512, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":535
+  /* "kivyblocks/blocks.pyx":525
  * 		return rtdesc
  * 
  * 	def get_rtdata(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		"""
  * 		desc descript follow attributes
  */
-  __pyx_tuple__113 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_kwargs, __pyx_n_s_w, __pyx_n_s_target, __pyx_n_s_script_2, __pyx_n_s_ns, __pyx_n_s_d, __pyx_n_s_method, __pyx_n_s_f, __pyx_n_s_r); if (unlikely(!__pyx_tuple__113)) __PYX_ERR(0, 535, __pyx_L1_error)
+  __pyx_tuple__113 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_kwargs, __pyx_n_s_w, __pyx_n_s_target, __pyx_n_s_script_2, __pyx_n_s_ns, __pyx_n_s_d, __pyx_n_s_method, __pyx_n_s_f, __pyx_n_s_r); if (unlikely(!__pyx_tuple__113)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__113);
   __Pyx_GIVEREF(__pyx_tuple__113);
-  __pyx_codeobj__114 = (PyObject*)__Pyx_PyCode_New(3, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__113, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_get_rtdata, 535, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__114)) __PYX_ERR(0, 535, __pyx_L1_error)
+  __pyx_codeobj__114 = (PyObject*)__Pyx_PyCode_New(3, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__113, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_get_rtdata, 525, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__114)) __PYX_ERR(0, 525, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":588
+  /* "kivyblocks/blocks.pyx":578
  * 			return {}
  * 
  * 	def methodAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		method = desc.get('method')
  * 		target = self.get_target(widget, desc)
  */
-  __pyx_tuple__115 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_method, __pyx_n_s_target, __pyx_n_s_f, __pyx_n_s_kwargs, __pyx_n_s_d); if (unlikely(!__pyx_tuple__115)) __PYX_ERR(0, 588, __pyx_L1_error)
+  __pyx_tuple__115 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_widget, __pyx_n_s_desc, __pyx_n_s_args, __pyx_n_s_method, __pyx_n_s_target, __pyx_n_s_f, __pyx_n_s_kwargs, __pyx_n_s_d); if (unlikely(!__pyx_tuple__115)) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__115);
   __Pyx_GIVEREF(__pyx_tuple__115);
-  __pyx_codeobj__116 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__115, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_methodAction, 588, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__116)) __PYX_ERR(0, 588, __pyx_L1_error)
+  __pyx_codeobj__116 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__115, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_methodAction, 578, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__116)) __PYX_ERR(0, 578, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":609
+  /* "kivyblocks/blocks.pyx":599
  * 			alert('%s method not found' % method)
  * 
  * 	def widgetBuild(self, desc):             # <<<<<<<<<<<<<<
  * 		"""
  * 		desc format:
  */
-  __pyx_tuple__117 = PyTuple_Pack(12, __pyx_n_s_self, __pyx_n_s_desc, __pyx_n_s_doit, __pyx_n_s_doit, __pyx_n_s_widgettype, __pyx_n_s_opts, __pyx_n_s_extend, __pyx_n_s_addon, __pyx_n_s_url, __pyx_n_s_rtdesc, __pyx_n_s_rtdata, __pyx_n_s_params); if (unlikely(!__pyx_tuple__117)) __PYX_ERR(0, 609, __pyx_L1_error)
+  __pyx_tuple__117 = PyTuple_Pack(12, __pyx_n_s_self, __pyx_n_s_desc, __pyx_n_s_doit, __pyx_n_s_doit, __pyx_n_s_widgettype, __pyx_n_s_opts, __pyx_n_s_extend, __pyx_n_s_addon, __pyx_n_s_url, __pyx_n_s_rtdesc, __pyx_n_s_rtdata, __pyx_n_s_params); if (unlikely(!__pyx_tuple__117)) __PYX_ERR(0, 599, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__117);
   __Pyx_GIVEREF(__pyx_tuple__117);
-  __pyx_codeobj__118 = (PyObject*)__Pyx_PyCode_New(2, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__117, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_widgetBuild, 609, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__118)) __PYX_ERR(0, 609, __pyx_L1_error)
+  __pyx_codeobj__118 = (PyObject*)__Pyx_PyCode_New(2, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__117, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_widgetBuild, 599, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__118)) __PYX_ERR(0, 599, __pyx_L1_error)
 
-  /* "kivyblocks/blocks.pyx":688
+  /* "kivyblocks/blocks.pyx":678
  * 
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:             # <<<<<<<<<<<<<<
  * 		def find_widget_by_id(id, from_widget):
  * 			if id=='self':
  */
-  __pyx_tuple__119 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_from_widget, __pyx_n_s_find_widget_by_id, __pyx_n_s_find_widget_by_id, __pyx_n_s_ids, __pyx_n_s_app_2, __pyx_n_s_fid, __pyx_n_s_w); if (unlikely(!__pyx_tuple__119)) __PYX_ERR(0, 688, __pyx_L1_error)
+  __pyx_tuple__119 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_from_widget, __pyx_n_s_find_widget_by_id, __pyx_n_s_find_widget_by_id, __pyx_n_s_ids, __pyx_n_s_app_2, __pyx_n_s_fid, __pyx_n_s_w); if (unlikely(!__pyx_tuple__119)) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__119);
   __Pyx_GIVEREF(__pyx_tuple__119);
-  __pyx_codeobj__120 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__119, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_getWidgetById, 688, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__120)) __PYX_ERR(0, 688, __pyx_L1_error)
-  __pyx_tuple__121 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__121)) __PYX_ERR(0, 688, __pyx_L1_error)
+  __pyx_codeobj__120 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__119, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_getWidgetById, 678, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__120)) __PYX_ERR(0, 678, __pyx_L1_error)
+  __pyx_tuple__121 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__121)) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__121);
   __Pyx_GIVEREF(__pyx_tuple__121);
 
-  /* "kivyblocks/blocks.pyx":752
+  /* "kivyblocks/blocks.pyx":742
  * 		return w
  * 
  * 	def on_built(self,v=None):             # <<<<<<<<<<<<<<
  * 		return
  * 
  */
-  __pyx_tuple__122 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_v); if (unlikely(!__pyx_tuple__122)) __PYX_ERR(0, 752, __pyx_L1_error)
+  __pyx_tuple__122 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_v); if (unlikely(!__pyx_tuple__122)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__122);
   __Pyx_GIVEREF(__pyx_tuple__122);
-  __pyx_codeobj__123 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__122, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_on_built, 752, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__123)) __PYX_ERR(0, 752, __pyx_L1_error)
-  __pyx_tuple__124 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__124)) __PYX_ERR(0, 752, __pyx_L1_error)
+  __pyx_codeobj__123 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__122, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_on_built, 742, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__123)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_tuple__124 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__124)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__124);
   __Pyx_GIVEREF(__pyx_tuple__124);
 
-  /* "kivyblocks/blocks.pyx":755
+  /* "kivyblocks/blocks.pyx":745
  * 		return
  * 
  * 	def on_failed(self,e=None):             # <<<<<<<<<<<<<<
  * 		return
  * 
  */
-  __pyx_tuple__125 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_e); if (unlikely(!__pyx_tuple__125)) __PYX_ERR(0, 755, __pyx_L1_error)
+  __pyx_tuple__125 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_e); if (unlikely(!__pyx_tuple__125)) __PYX_ERR(0, 745, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__125);
   __Pyx_GIVEREF(__pyx_tuple__125);
-  __pyx_codeobj__126 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__125, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_on_failed, 755, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__126)) __PYX_ERR(0, 755, __pyx_L1_error)
-  __pyx_tuple__127 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__127)) __PYX_ERR(0, 755, __pyx_L1_error)
+  __pyx_codeobj__126 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__125, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_blocks_pyx, __pyx_n_s_on_failed, 745, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__126)) __PYX_ERR(0, 745, __pyx_L1_error)
+  __pyx_tuple__127 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__127)) __PYX_ERR(0, 745, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__127);
   __Pyx_GIVEREF(__pyx_tuple__127);
   __Pyx_RefNannyFinishContext();
@@ -25628,7 +25481,7 @@ static int __Pyx_modinit_type_init_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_10kivyblocks_6blocks___pyx_scope_struct__blocksAction) < 0) __PYX_ERR(0, 405, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10kivyblocks_6blocks___pyx_scope_struct__blocksAction) < 0) __PYX_ERR(0, 399, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_10kivyblocks_6blocks___pyx_scope_struct__blocksAction.tp_print = 0;
   #endif
@@ -25636,7 +25489,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_10kivyblocks_6blocks___pyx_scope_struct__blocksAction.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_10kivyblocks_6blocks___pyx_scope_struct__blocksAction = &__pyx_type_10kivyblocks_6blocks___pyx_scope_struct__blocksAction;
-  if (PyType_Ready(&__pyx_type_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction) < 0) __PYX_ERR(0, 433, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction) < 0) __PYX_ERR(0, 427, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction.tp_print = 0;
   #endif
@@ -25644,7 +25497,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction = &__pyx_type_10kivyblocks_6blocks___pyx_scope_struct_1_urlwidgetAction;
-  if (PyType_Ready(&__pyx_type_10kivyblocks_6blocks___pyx_scope_struct_2_widgetBuild) < 0) __PYX_ERR(0, 609, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10kivyblocks_6blocks___pyx_scope_struct_2_widgetBuild) < 0) __PYX_ERR(0, 599, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_10kivyblocks_6blocks___pyx_scope_struct_2_widgetBuild.tp_print = 0;
   #endif
@@ -25652,7 +25505,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_10kivyblocks_6blocks___pyx_scope_struct_2_widgetBuild.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_10kivyblocks_6blocks___pyx_scope_struct_2_widgetBuild = &__pyx_type_10kivyblocks_6blocks___pyx_scope_struct_2_widgetBuild;
-  if (PyType_Ready(&__pyx_type_10kivyblocks_6blocks___pyx_scope_struct_3_getWidgetById) < 0) __PYX_ERR(0, 688, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10kivyblocks_6blocks___pyx_scope_struct_3_getWidgetById) < 0) __PYX_ERR(0, 678, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_10kivyblocks_6blocks___pyx_scope_struct_3_getWidgetById.tp_print = 0;
   #endif
@@ -27374,331 +27227,331 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_buildBind, __pyx_t_4) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":337
- * 		# Logger.info('Block: %s bind built', str(desc))
+  /* "kivyblocks/blocks.pyx":336
+ * 		w.bind(**{event:f})
  * 
  * 	def multipleAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		desc1 = {k:v for k, v in desc.items() if k != 'actions'}
  * 		mydesc = desc1.copy()
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 337, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_29multipleAction, 0, __pyx_n_s_Blocks_multipleAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__92)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_29multipleAction, 0, __pyx_n_s_Blocks_multipleAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__92)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_multipleAction, __pyx_t_6) < 0) __PYX_ERR(0, 337, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_multipleAction, __pyx_t_6) < 0) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/blocks.pyx":345
+  /* "kivyblocks/blocks.pyx":344
  * 			self.uniaction(widget,new_desc, *args)
  * 
  * 	def conform_action(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		conform_desc = desc.get('conform')
  * 		blocks = Blocks()
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 345, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_31conform_action, 0, __pyx_n_s_Blocks_conform_action, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__94)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_31conform_action, 0, __pyx_n_s_Blocks_conform_action, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__94)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_conform_action, __pyx_t_4) < 0) __PYX_ERR(0, 345, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_conform_action, __pyx_t_4) < 0) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":358
+  /* "kivyblocks/blocks.pyx":357
  * 		w.open()
  * 
  * 	def uniaction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: uniaction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		acttype = desc.get('actiontype')
+ * 		if acttype=='blocks':
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 358, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_33uniaction, 0, __pyx_n_s_Blocks_uniaction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__96)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_33uniaction, 0, __pyx_n_s_Blocks_uniaction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__96)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_uniaction, __pyx_t_6) < 0) __PYX_ERR(0, 358, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_uniaction, __pyx_t_6) < 0) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/blocks.pyx":382
+  /* "kivyblocks/blocks.pyx":376
  * 		alert("actiontype(%s) invalid" % acttype,title='error')
  * 
  * 	def eventAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		target = self.get_target(widget, desc)
  * 		event = desc.get('dispatch_event')
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 382, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 382, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 382, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_35eventAction, 0, __pyx_n_s_Blocks_eventAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__98)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 382, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_35eventAction, 0, __pyx_n_s_Blocks_eventAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__98)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_eventAction, __pyx_t_4) < 0) __PYX_ERR(0, 382, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_eventAction, __pyx_t_4) < 0) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":400
+  /* "kivyblocks/blocks.pyx":394
  * 			return
  * 
  * 	def get_target(self, widget:Widget, desc):             # <<<<<<<<<<<<<<
  * 		if not desc.get('target'):
  * 			return None
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 400, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_37get_target, 0, __pyx_n_s_Blocks_get_target, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__100)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_37get_target, 0, __pyx_n_s_Blocks_get_target, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__100)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_get_target, __pyx_t_6) < 0) __PYX_ERR(0, 400, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_get_target, __pyx_t_6) < 0) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/blocks.pyx":405
+  /* "kivyblocks/blocks.pyx":399
  * 		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
  * 
  * 	def blocksAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		target = self.get_target(widget, desc)
  * 		add_mode = desc.get('mode','replace')
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 399, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 399, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 405, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 399, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_39blocksAction, 0, __pyx_n_s_Blocks_blocksAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__102)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_39blocksAction, 0, __pyx_n_s_Blocks_blocksAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__102)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 399, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_blocksAction, __pyx_t_4) < 0) __PYX_ERR(0, 405, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_blocksAction, __pyx_t_4) < 0) __PYX_ERR(0, 399, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":433
+  /* "kivyblocks/blocks.pyx":427
  * 		b.widgetBuild(opts)
  * 
  * 	def urlwidgetAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
- * 		Logger.info('Block: urlwidgetAction() called, desc=%s, args=%s', \
- * 						str(desc),
+ * 		target = self.get_target(widget, desc)
+ * 		add_mode = desc.get('mode','replace')
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 433, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 433, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 433, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_41urlwidgetAction, 0, __pyx_n_s_Blocks_urlwidgetAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__104)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 433, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_41urlwidgetAction, 0, __pyx_n_s_Blocks_urlwidgetAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__104)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_urlwidgetAction, __pyx_t_6) < 0) __PYX_ERR(0, 433, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_urlwidgetAction, __pyx_t_6) < 0) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/blocks.pyx":471
+  /* "kivyblocks/blocks.pyx":461
  * 		b.widgetBuild(d)
  * 
  * 	def getActionData(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		Logger.info('Block: getActionData(): desc=%s args=%s'
  * 							,str(desc), args)
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 471, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 471, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 471, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_43getActionData, 0, __pyx_n_s_Blocks_getActionData, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__106)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 471, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_43getActionData, 0, __pyx_n_s_Blocks_getActionData, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__106)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_getActionData, __pyx_t_4) < 0) __PYX_ERR(0, 471, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_getActionData, __pyx_t_4) < 0) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":485
+  /* "kivyblocks/blocks.pyx":475
  * 		return data
  * 
  * 	def registedfunctionAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		target = self.get_target(widget, desc)
  * 		rf = RegisterFunction()
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_45registedfunctionAction, 0, __pyx_n_s_Blocks_registedfunctionAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__108)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_45registedfunctionAction, 0, __pyx_n_s_Blocks_registedfunctionAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__108)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_registedfunctionAction, __pyx_t_6) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_registedfunctionAction, __pyx_t_6) < 0) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/blocks.pyx":501
+  /* "kivyblocks/blocks.pyx":491
  * 		func(target, *args, **params)
  * 
  * 	def scriptAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		script = desc.get('script')
  * 		if not script:
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 501, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_47scriptAction, 0, __pyx_n_s_Blocks_scriptAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__110)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_47scriptAction, 0, __pyx_n_s_Blocks_scriptAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__110)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_scriptAction, __pyx_t_4) < 0) __PYX_ERR(0, 501, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_scriptAction, __pyx_t_4) < 0) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":522
+  /* "kivyblocks/blocks.pyx":512
  * 			print(e)
  * 
  * 	def build_rtdesc(self, desc):             # <<<<<<<<<<<<<<
  * 		rtdesc = desc.get('rtdata')
  * 		if not rtdesc:
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_49build_rtdesc, 0, __pyx_n_s_Blocks_build_rtdesc, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__112)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 522, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_49build_rtdesc, 0, __pyx_n_s_Blocks_build_rtdesc, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__112)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 512, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_build_rtdesc, __pyx_t_4) < 0) __PYX_ERR(0, 522, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_build_rtdesc, __pyx_t_4) < 0) __PYX_ERR(0, 512, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":535
+  /* "kivyblocks/blocks.pyx":525
  * 		return rtdesc
  * 
  * 	def get_rtdata(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		"""
  * 		desc descript follow attributes
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 535, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 535, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 535, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widget, __pyx_t_6) < 0) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_51get_rtdata, 0, __pyx_n_s_Blocks_get_rtdata, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__114)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 535, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_51get_rtdata, 0, __pyx_n_s_Blocks_get_rtdata, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__114)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_get_rtdata, __pyx_t_6) < 0) __PYX_ERR(0, 535, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_get_rtdata, __pyx_t_6) < 0) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/blocks.pyx":588
+  /* "kivyblocks/blocks.pyx":578
  * 			return {}
  * 
  * 	def methodAction(self, widget:Widget, desc, *args):             # <<<<<<<<<<<<<<
  * 		method = desc.get('method')
  * 		target = self.get_target(widget, desc)
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 588, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 588, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Widget); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 588, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_widget, __pyx_t_4) < 0) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_53methodAction, 0, __pyx_n_s_Blocks_methodAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__116)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 588, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_53methodAction, 0, __pyx_n_s_Blocks_methodAction, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__116)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_methodAction, __pyx_t_4) < 0) __PYX_ERR(0, 588, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_methodAction, __pyx_t_4) < 0) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":609
+  /* "kivyblocks/blocks.pyx":599
  * 			alert('%s method not found' % method)
  * 
  * 	def widgetBuild(self, desc):             # <<<<<<<<<<<<<<
  * 		"""
  * 		desc format:
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_55widgetBuild, 0, __pyx_n_s_Blocks_widgetBuild, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__118)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 609, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_55widgetBuild, 0, __pyx_n_s_Blocks_widgetBuild, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__118)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 599, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_widgetBuild, __pyx_t_4) < 0) __PYX_ERR(0, 609, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_widgetBuild, __pyx_t_4) < 0) __PYX_ERR(0, 599, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":688
+  /* "kivyblocks/blocks.pyx":678
  * 
  * 	@classmethod
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:             # <<<<<<<<<<<<<<
  * 		def find_widget_by_id(id, from_widget):
  * 			if id=='self':
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 688, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_id, __pyx_n_u_str_2) < 0) __PYX_ERR(0, 688, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 688, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_id, __pyx_n_u_str_2) < 0) __PYX_ERR(0, 678, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_from_widget, __pyx_t_6) < 0) __PYX_ERR(0, 688, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_from_widget, __pyx_t_6) < 0) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 688, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_t_6) < 0) __PYX_ERR(0, 688, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_t_6) < 0) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_57getWidgetById, __Pyx_CYFUNCTION_CLASSMETHOD, __pyx_n_s_Blocks_getWidgetById, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__120)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 688, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_57getWidgetById, __Pyx_CYFUNCTION_CLASSMETHOD, __pyx_n_s_Blocks_getWidgetById, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__120)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_6, __pyx_tuple__121);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":687
+  /* "kivyblocks/blocks.pyx":677
  * 		return doit(desc)
  * 
  * 	@classmethod             # <<<<<<<<<<<<<<
  * 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:
  * 		def find_widget_by_id(id, from_widget):
  */
-  __pyx_t_4 = __Pyx_Method_ClassMethod(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 687, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Method_ClassMethod(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 677, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_getWidgetById, __pyx_t_4) < 0) __PYX_ERR(0, 688, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_getWidgetById, __pyx_t_4) < 0) __PYX_ERR(0, 678, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":752
+  /* "kivyblocks/blocks.pyx":742
  * 		return w
  * 
  * 	def on_built(self,v=None):             # <<<<<<<<<<<<<<
  * 		return
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_59on_built, 0, __pyx_n_s_Blocks_on_built, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__123)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 752, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_59on_built, 0, __pyx_n_s_Blocks_on_built, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__123)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__124);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_on_built, __pyx_t_4) < 0) __PYX_ERR(0, 752, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_on_built, __pyx_t_4) < 0) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/blocks.pyx":755
+  /* "kivyblocks/blocks.pyx":745
  * 		return
  * 
  * 	def on_failed(self,e=None):             # <<<<<<<<<<<<<<
  * 		return
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_61on_failed, 0, __pyx_n_s_Blocks_on_failed, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__126)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 755, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_6blocks_6Blocks_61on_failed, 0, __pyx_n_s_Blocks_on_failed, NULL, __pyx_n_s_kivyblocks_blocks, __pyx_d, ((PyObject *)__pyx_codeobj__126)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 745, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__127);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_on_failed, __pyx_t_4) < 0) __PYX_ERR(0, 755, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_on_failed, __pyx_t_4) < 0) __PYX_ERR(0, 745, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "kivyblocks/blocks.pyx":109
@@ -27716,21 +27569,21 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":758
+  /* "kivyblocks/blocks.pyx":748
  * 		return
  * 
  * Factory.register('Blocks',Blocks)             # <<<<<<<<<<<<<<
  * Factory.register('Video',Video)
  * Factory.register('OrientationLayout', OrientationLayout)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Factory); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 758, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Factory); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_register); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 758, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_register); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 758, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 758, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_Blocks);
   __Pyx_GIVEREF(__pyx_n_s_Blocks);
@@ -27738,26 +27591,26 @@ if (!__Pyx_RefNanny) {
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 758, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":759
+  /* "kivyblocks/blocks.pyx":749
  * 
  * Factory.register('Blocks',Blocks)
  * Factory.register('Video',Video)             # <<<<<<<<<<<<<<
  * Factory.register('OrientationLayout', OrientationLayout)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Factory); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 759, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Factory); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 749, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_register); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 759, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_register); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 749, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Video); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 759, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Video); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 749, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 759, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 749, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_Video);
   __Pyx_GIVEREF(__pyx_n_s_Video);
@@ -27765,25 +27618,25 @@ if (!__Pyx_RefNanny) {
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 759, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 749, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/blocks.pyx":760
+  /* "kivyblocks/blocks.pyx":750
  * Factory.register('Blocks',Blocks)
  * Factory.register('Video',Video)
  * Factory.register('OrientationLayout', OrientationLayout)             # <<<<<<<<<<<<<<
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Factory); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 760, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Factory); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 750, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_register); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 760, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_register); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 750, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_OrientationLayout); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 760, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_OrientationLayout); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 750, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 760, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 750, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_OrientationLayout);
   __Pyx_GIVEREF(__pyx_n_s_OrientationLayout);
@@ -27791,7 +27644,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 760, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 750, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;

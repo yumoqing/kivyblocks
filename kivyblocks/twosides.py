@@ -89,6 +89,7 @@ class TwoSides(WidgetReady, BoxLayout):
 			w = Factory.Blocks().widgetBuild({
 					"widgettype":"Modal",
 					"options":{
+						"auto_open":False,
 						"auto_dismiss":True,
 						"size_hint":[None,None],
 						"size":(x,y),

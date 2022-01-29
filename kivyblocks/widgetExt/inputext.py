@@ -105,7 +105,11 @@ class IntegerInput(StrInput):
 		self.cursor = (0,len(self.text))
 
 	def getValue(self):
-		return int(self.text)
+		try:
+			return int(self.text)
+		except:
+			pass
+		return None
 
 class FloatInput(IntegerInput):
 	dec = NumericProperty(2)
@@ -114,7 +118,11 @@ class FloatInput(IntegerInput):
 		self.input_filter = 'float'
 
 	def getValue(self):
-		return float(self.text)
+		try:
+			return float(self.text)
+		except:
+			pass
+		return None
 
 class MyDropDown(DropDown):
 	def __init__(self,csscls='input', **kw):
@@ -151,7 +159,7 @@ class MyDropDown(DropDown):
 			if d.get(self.textField) == v:
 				r = d.get(self.valueField)
 				return r
-		return ''
+		return None
 		
 	def setData(self,data):
 		self.si_data = data

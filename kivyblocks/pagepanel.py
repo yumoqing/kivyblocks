@@ -310,9 +310,6 @@ sub-widget's description file format
 			self.sub_widgets = []
 		self.sub_widgets.append(w)
 		self.show_currentpage()
-		show_widget_info(self)
-		for w in self.get_subwidgets():
-			show_widget_info(w)
 
 	def show_left_menu(self, o):
 		def x(*args):
