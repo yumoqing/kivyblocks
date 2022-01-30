@@ -36,7 +36,7 @@ from .udp_widget import UdpWidget
 from .paging import PageLoader
 from .dateinput import DateInput
 from .block_test import BlockTest
-from .hirarchy import Hirarchy
+from .hierarchy import Hierarchy
 from .price import PriceView
 
 r = Factory.register
