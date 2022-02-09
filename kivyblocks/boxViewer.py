@@ -109,23 +109,12 @@ class BoxViewer(VBox):
 		if dir == 'up':
 			recs.reverse()
 			idx = -1
-		recs1 = recs[:self.show_rows]
-		recs2 = recs[self.show_rows:]
-		self._fbo = Fbo(size=self.size)
-		with self._fbo:
-			self._background_color = Color(0,0,0,1)
-			self._background_rect = Rectangle(size=self.size)
-		for r in recs1:
-			self.showObject(widgets, r, index=idx)
-		with self.canvas:
-			self._fbo_rect = Rectangle(size=self.size,
-								texture=self._fbo.texture)
+		with self.fboContext():
+			for r in recs:
+				self.showObject(widgets, r, index=idx)
 		
 		data['widgets'] = widgets
 		data['idx'] = idx
-		data['data'] = recs2
-		f = partial(self.add_page_delay, data)
-		Clock.schedule_once(f, 0)
 
 	def add_page_delay(self, data, *args):
 		recs = data['data']
@@ -182,11 +171,7 @@ class BoxViewer(VBox):
 
 	def showObject(self, holders, rec,index=0):
 		opts = {
-			"size_hint":[None,None],
-			"height":self.box_height,
-			"width":self.box_width,
-			"color_level":self.color_level,
-			"radius":self.radius
+			"csscls":self.viewer_css
 		}
 		desc = {
 			"widgettype":"PressableBox",

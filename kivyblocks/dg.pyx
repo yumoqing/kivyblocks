@@ -18,7 +18,6 @@ from kivy.app import App
 from kivy.factory import Factory
 
 from appPublic.dictObject import DictObject
-from appPublic.timecost import TimeCost
 from appPublic.uniqueID import getID
 from appPublic.myTE import string_template_render
 

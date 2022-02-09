@@ -317,6 +317,7 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 				desc['tool_orient'] = 'veritcal'
 			
 			self.toolbar_w = Factory.Toolbar(**desc)
+		print('box_width=', self.input_width)
 		self.fsc = VResponsiveLayout(
 						box_width = self.input_width,
 						size_hint=(1,1)

@@ -14,6 +14,8 @@ from .clickable import SingleCheckBox
 from .baseWidget import Text
 from .utils import CSize
 
+from appPublic.registerfunction import getRegisterFunctionByName
+
 class TreeViewComplexNode(BoxLayout, TreeViewLabel):
 	otext = StringProperty(None)
 	checkbox = BooleanProperty(False)

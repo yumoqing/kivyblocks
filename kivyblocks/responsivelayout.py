@@ -26,31 +26,44 @@ class VResponsiveLayout(WidgetCSS, WidgetReady, ScrollView):
 		super(VResponsiveLayout,self).add_widget(self._inner)
 		self._inner.bind(
 				minimum_height=self._inner.setter('height'))
-		self.setCols()
-		self.bind(pos=self.setCols,size=self.setCols)
+		self.bind(pos=self.set_col_width_cnt,size=self.set_col_width_cnt)
 	
 	def on_box_width_c(self, *args):
+		print('on_box_width_c fire......')
+		if self.box_width_c is None:
+			return
 		if self.box_width:
+			return
+		if not self._inner:
 			return
 		self.col_width = CSize(self.box_width)
 		self.col_width_hint = False
-		self.set_cols()
+		self.set_col_width_cnt()
 
 	def on_box_width(self, *args):
+		print('on_box_width fire......')
 		if not self._inner:
+			return
+		if self.box_width is None:
 			return
 		if self.box_width <= 1:
 			self.col_width = self.box_width
-			self.col_width_hint = self.box_width
+			self.col_width_hint = True
 		else:
 			self.col_width = self.box_width
-		self.col_width_hint = False
-		self.set_cols()
+			self.col_width_hint = False
+		self.set_col_width_cnt()
 
 	def calculate_col_width(self):
 		# cnt * col_width + 2*padding + (cnt-1) * spacing = width
 		w = self._inner
-		width = w.width - 2 * w.padding
+		if len(w.padding) == 1:
+			width = w.width - 2 * w.padding
+			return width * self.col_width
+		if len(w.padding) == 2:
+			width = w.width - 2 * w.padding[0]
+			return width * self.col_width
+		width = w.width - w.padding[0] - w.padding[2]
 		return width * self.col_width
 
 	def get_col_width(self):
@@ -59,9 +72,31 @@ class VResponsiveLayout(WidgetCSS, WidgetReady, ScrollView):
 	def get_cols(self):
 		return self._inner.cols
 
-	def set_col_width_cnt(self):
+	def set_col_width(self):
+		if self.box_width_c is not None:
+			self.col_width = CSize(self.box_width)
+			self.col_width_hint = False
+			return
+		if self.box_width is not None:
+			if self.box_width <= 1:
+				self.col_width = self.box_width
+				self.col_width_hint = True
+			else:
+				self.col_width = self.box_width
+				self.col_width_hint = False
+		return
+			
+			
+	def set_col_width_cnt(self, *args):
+		print('set_col_width_cnt() called .....')
+		if self.col_width is None:
+			self.set_col_width()
+		if self.col_width is None:
+			return
+				
 		if self.col_width_hint:
-			self._inner.col_default_width = self.calc_col_width()
+			self._inner.col_default_width = \
+						self.calculate_col_width()
 		else:
 			self._inner.col_default_width = self.col_width
 		self.setCols()
@@ -70,7 +105,7 @@ class VResponsiveLayout(WidgetCSS, WidgetReady, ScrollView):
 			w.width = self._inner.col_default_width
 
 	def on_orientation(self,o):
-		self.setCols()
+		self.set_col_width_cnt()
 
 	def add_widget(self,widget,**kw):
 		a = self._inner.add_widget(widget,**kw)

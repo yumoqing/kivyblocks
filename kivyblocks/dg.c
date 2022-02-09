@@ -1625,7 +1625,6 @@ static const char __pyx_k_texture[] = "texture";
 static const char __pyx_k_toolbar[] = "_toolbar";
 static const char __pyx_k_DataGrid[] = "DataGrid";
 static const char __pyx_k_Row_init[] = "Row.init";
-static const char __pyx_k_TimeCost[] = "TimeCost";
 static const char __pyx_k_add_page[] = "add_page";
 static const char __pyx_k_body_css[] = "body_css";
 static const char __pyx_k_children[] = "children";
@@ -1790,7 +1789,6 @@ static const char __pyx_k_kivyblocks_dg_pyx[] = "kivyblocks\\dg.pyx";
 static const char __pyx_k_Body_get_row_by_id[] = "Body.get_row_by_id";
 static const char __pyx_k_DataGrid_clearRows[] = "DataGrid.clearRows";
 static const char __pyx_k_DataGrid_rowHeight[] = "DataGrid.rowHeight";
-static const char __pyx_k_appPublic_timecost[] = "appPublic.timecost";
 static const char __pyx_k_appPublic_uniqueID[] = "appPublic.uniqueID";
 static const char __pyx_k_build_tailer_other[] = "build_tailer_other";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
@@ -1934,7 +1932,6 @@ static PyObject *__pyx_n_s_ScrollPanel;
 static PyObject *__pyx_n_s_ScrollView;
 static PyObject *__pyx_n_s_StringProperty;
 static PyObject *__pyx_n_s_Text;
-static PyObject *__pyx_n_s_TimeCost;
 static PyObject *__pyx_n_s_Toolbar;
 static PyObject *__pyx_n_s_UiFactory;
 static PyObject *__pyx_n_s_VBox;
@@ -1948,7 +1945,6 @@ static PyObject *__pyx_n_s_add_page_delay;
 static PyObject *__pyx_n_s_add_widget;
 static PyObject *__pyx_n_s_appPublic_dictObject;
 static PyObject *__pyx_n_s_appPublic_myTE;
-static PyObject *__pyx_n_s_appPublic_timecost;
 static PyObject *__pyx_n_s_appPublic_uniqueID;
 static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_args;
@@ -2389,7 +2385,7 @@ static PyObject *__pyx_codeobj__127;
 static PyObject *__pyx_codeobj__130;
 /* Late includes */
 
-/* "kivyblocks/dg.pyx":36
+/* "kivyblocks/dg.pyx":35
  * 
  * class BLabel(ButtonBehavior, Text):
  * 	def __init__(self, **kw):             # <<<<<<<<<<<<<<
@@ -2430,7 +2426,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_6BLabel_1__init__(PyObject *__pyx_sel
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 36, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 35, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -2441,7 +2437,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_6BLabel_1__init__(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 36, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 35, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kw); __pyx_v_kw = 0;
   __Pyx_AddTraceback("kivyblocks.dg.BLabel.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -2468,16 +2464,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6BLabel___init__(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "kivyblocks/dg.pyx":37
+  /* "kivyblocks/dg.pyx":36
  * class BLabel(ButtonBehavior, Text):
  * 	def __init__(self, **kw):
  * 		ButtonBehavior.__init__(self)             # <<<<<<<<<<<<<<
  * 		Text.__init__(self,**kw)
  * 		self.csscls = 'dummy'
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_ButtonBehavior); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_ButtonBehavior); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -2492,47 +2488,47 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6BLabel___init__(CYTHON_UNUSED PyObje
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_self) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":38
+  /* "kivyblocks/dg.pyx":37
  * 	def __init__(self, **kw):
  * 		ButtonBehavior.__init__(self)
  * 		Text.__init__(self,**kw)             # <<<<<<<<<<<<<<
  * 		self.csscls = 'dummy'
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Text); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Text); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_self);
-  __pyx_t_2 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_2 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":39
+  /* "kivyblocks/dg.pyx":38
  * 		ButtonBehavior.__init__(self)
  * 		Text.__init__(self,**kw)
  * 		self.csscls = 'dummy'             # <<<<<<<<<<<<<<
  * 
  * class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_csscls, __pyx_n_s_dummy) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_csscls, __pyx_n_s_dummy) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":36
+  /* "kivyblocks/dg.pyx":35
  * 
  * class BLabel(ButtonBehavior, Text):
  * 	def __init__(self, **kw):             # <<<<<<<<<<<<<<
@@ -2556,7 +2552,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6BLabel___init__(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":45
+/* "kivyblocks/dg.pyx":44
  * 	cell_type = OptionProperty('data', \
  * 			options=['data', 'header'])
  * 	def __init__(self,row,desc, **kw):             # <<<<<<<<<<<<<<
@@ -2606,17 +2602,17 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Cell_1__init__(PyObject *__pyx_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_row)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 45, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 44, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 45, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 44, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 45, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 44, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2631,7 +2627,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Cell_1__init__(PyObject *__pyx_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 45, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 44, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kw); __pyx_v_kw = 0;
   __Pyx_AddTraceback("kivyblocks.dg.Cell.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -2662,25 +2658,25 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "kivyblocks/dg.pyx":55
+  /* "kivyblocks/dg.pyx":54
  * 		}
  * 		"""
  * 		self.desc = desc             # <<<<<<<<<<<<<<
  * 		self.row = row
  * 		super().__init__(size_hint=(None,None),
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_desc, __pyx_v_desc) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_desc, __pyx_v_desc) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":56
+  /* "kivyblocks/dg.pyx":55
  * 		"""
  * 		self.desc = desc
  * 		self.row = row             # <<<<<<<<<<<<<<
  * 		super().__init__(size_hint=(None,None),
  * 							width = self.desc['width'],
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_row, __pyx_v_row) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_row, __pyx_v_row) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":57
+  /* "kivyblocks/dg.pyx":56
  * 		self.desc = desc
  * 		self.row = row
  * 		super().__init__(size_hint=(None,None),             # <<<<<<<<<<<<<<
@@ -2688,9 +2684,9 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
  * 							height = self.row.part.datagrid.rowHeight()
  */
   __pyx_t_1 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 57, __pyx_L1_error) }
+  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 56, __pyx_L1_error) }
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -2698,47 +2694,47 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_size_hint, __pyx_tuple_) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_size_hint, __pyx_tuple_) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":58
+  /* "kivyblocks/dg.pyx":57
  * 		self.row = row
  * 		super().__init__(size_hint=(None,None),
  * 							width = self.desc['width'],             # <<<<<<<<<<<<<<
  * 							height = self.row.part.datagrid.rowHeight()
  * 		)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_desc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_desc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_3, __pyx_n_s_width); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_3, __pyx_n_s_width); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_width, __pyx_t_4) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_width, __pyx_t_4) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":59
+  /* "kivyblocks/dg.pyx":58
  * 		super().__init__(size_hint=(None,None),
  * 							width = self.desc['width'],
  * 							height = self.row.part.datagrid.rowHeight()             # <<<<<<<<<<<<<<
  * 		)
  * 		self.csscls=self.row.part.datagrid.row_normal_css
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -2753,84 +2749,84 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
   }
   __pyx_t_4 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_height, __pyx_t_4) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_height, __pyx_t_4) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":57
+  /* "kivyblocks/dg.pyx":56
  * 		self.desc = desc
  * 		self.row = row
  * 		super().__init__(size_hint=(None,None),             # <<<<<<<<<<<<<<
  * 							width = self.desc['width'],
  * 							height = self.row.part.datagrid.rowHeight()
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":61
+  /* "kivyblocks/dg.pyx":60
  * 							height = self.row.part.datagrid.rowHeight()
  * 		)
  * 		self.csscls=self.row.part.datagrid.row_normal_css             # <<<<<<<<<<<<<<
  * 		if self.row.header:
  * 			self.csscls=self.row.part.datagrid.header_css
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_row_normal_css); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_row_normal_css); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_csscls, __pyx_t_1) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_csscls, __pyx_t_1) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":62
+  /* "kivyblocks/dg.pyx":61
  * 		)
  * 		self.csscls=self.row.part.datagrid.row_normal_css
  * 		if self.row.header:             # <<<<<<<<<<<<<<
  * 			self.csscls=self.row.part.datagrid.header_css
  * 		if desc['header']:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_header); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_header); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_6) {
 
-    /* "kivyblocks/dg.pyx":63
+    /* "kivyblocks/dg.pyx":62
  * 		self.csscls=self.row.part.datagrid.row_normal_css
  * 		if self.row.header:
  * 			self.csscls=self.row.part.datagrid.header_css             # <<<<<<<<<<<<<<
  * 		if desc['header']:
  * 			bl = Text(i18n=True, text=str(desc['value']),
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 63, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 63, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_header_css); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_header_css); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_csscls, __pyx_t_1) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_csscls, __pyx_t_1) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":62
+    /* "kivyblocks/dg.pyx":61
  * 		)
  * 		self.csscls=self.row.part.datagrid.row_normal_css
  * 		if self.row.header:             # <<<<<<<<<<<<<<
@@ -2839,47 +2835,47 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
  */
   }
 
-  /* "kivyblocks/dg.pyx":64
+  /* "kivyblocks/dg.pyx":63
  * 		if self.row.header:
  * 			self.csscls=self.row.part.datagrid.header_css
  * 		if desc['header']:             # <<<<<<<<<<<<<<
  * 			bl = Text(i18n=True, text=str(desc['value']),
  * 				font_size=CSize(1),wrap=True,
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_header); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_header); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "kivyblocks/dg.pyx":65
+    /* "kivyblocks/dg.pyx":64
  * 			self.csscls=self.row.part.datagrid.header_css
  * 		if desc['header']:
  * 			bl = Text(i18n=True, text=str(desc['value']),             # <<<<<<<<<<<<<<
  * 				font_size=CSize(1),wrap=True,
  * 				halign='left', valign='middle'
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Text); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Text); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 65, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_i18n, Py_True) < 0) __PYX_ERR(0, 65, __pyx_L1_error)
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_i18n, Py_True) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 65, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_text, __pyx_t_5) < 0) __PYX_ERR(0, 65, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_text, __pyx_t_5) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":66
+    /* "kivyblocks/dg.pyx":65
  * 		if desc['header']:
  * 			bl = Text(i18n=True, text=str(desc['value']),
  * 				font_size=CSize(1),wrap=True,             # <<<<<<<<<<<<<<
  * 				halign='left', valign='middle'
  * 			)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -2893,39 +2889,39 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
     }
     __pyx_t_5 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_int_1);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 65, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_font_size, __pyx_t_5) < 0) __PYX_ERR(0, 65, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_font_size, __pyx_t_5) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_wrap, Py_True) < 0) __PYX_ERR(0, 65, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_halign, __pyx_n_s_left) < 0) __PYX_ERR(0, 65, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_valign, __pyx_n_s_middle) < 0) __PYX_ERR(0, 65, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_wrap, Py_True) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_halign, __pyx_n_s_left) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_valign, __pyx_n_s_middle) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":65
+    /* "kivyblocks/dg.pyx":64
  * 			self.csscls=self.row.part.datagrid.header_css
  * 		if desc['header']:
  * 			bl = Text(i18n=True, text=str(desc['value']),             # <<<<<<<<<<<<<<
  * 				font_size=CSize(1),wrap=True,
  * 				halign='left', valign='middle'
  */
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 65, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_bl = __pyx_t_5;
     __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":69
+    /* "kivyblocks/dg.pyx":68
  * 				halign='left', valign='middle'
  * 			)
  * 			self.cell_type = 'header'             # <<<<<<<<<<<<<<
  * 		else:
  * 			self.cell_type = 'data'
  */
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_cell_type, __pyx_n_s_header) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_cell_type, __pyx_n_s_header) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":64
+    /* "kivyblocks/dg.pyx":63
  * 		if self.row.header:
  * 			self.csscls=self.row.part.datagrid.header_css
  * 		if desc['header']:             # <<<<<<<<<<<<<<
@@ -2935,7 +2931,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
     goto __pyx_L4;
   }
 
-  /* "kivyblocks/dg.pyx":71
+  /* "kivyblocks/dg.pyx":70
  * 			self.cell_type = 'header'
  * 		else:
  * 			self.cell_type = 'data'             # <<<<<<<<<<<<<<
@@ -2943,23 +2939,23 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
  * 		self.colume_name = desc['name']
  */
   /*else*/ {
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_cell_type, __pyx_n_s_data) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_cell_type, __pyx_n_s_data) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":72
+    /* "kivyblocks/dg.pyx":71
  * 		else:
  * 			self.cell_type = 'data'
  * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)             # <<<<<<<<<<<<<<
  * 		self.colume_name = desc['name']
  * 		if bl:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_UiFactory); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_UiFactory); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_build_view_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_build_view_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_row_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_row_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -2977,7 +2973,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_1)) {
       PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_v_desc, __pyx_t_2};
-      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2986,14 +2982,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
       PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_v_desc, __pyx_t_2};
-      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_3 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       if (__pyx_t_4) {
         __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -3004,7 +3000,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_7, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
@@ -3014,36 +3010,36 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
   }
   __pyx_L4:;
 
-  /* "kivyblocks/dg.pyx":73
+  /* "kivyblocks/dg.pyx":72
  * 			self.cell_type = 'data'
  * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)
  * 		self.colume_name = desc['name']             # <<<<<<<<<<<<<<
  * 		if bl:
  * 			self.add_widget(bl)
  */
-  __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_name); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_desc, __pyx_n_s_name); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_colume_name, __pyx_t_5) < 0) __PYX_ERR(0, 73, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_colume_name, __pyx_t_5) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/dg.pyx":74
+  /* "kivyblocks/dg.pyx":73
  * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)
  * 		self.colume_name = desc['name']
  * 		if bl:             # <<<<<<<<<<<<<<
  * 			self.add_widget(bl)
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_bl); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_bl); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
   if (__pyx_t_6) {
 
-    /* "kivyblocks/dg.pyx":75
+    /* "kivyblocks/dg.pyx":74
  * 		self.colume_name = desc['name']
  * 		if bl:
  * 			self.add_widget(bl)             # <<<<<<<<<<<<<<
  * 
  * class Row(BoxLayout):
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -3057,12 +3053,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
     }
     __pyx_t_5 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_v_bl) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_bl);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":74
+    /* "kivyblocks/dg.pyx":73
  * 			bl = UiFactory.build_view_widget(desc,self.row.row_data)
  * 		self.colume_name = desc['name']
  * 		if bl:             # <<<<<<<<<<<<<<
@@ -3071,7 +3067,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
  */
   }
 
-  /* "kivyblocks/dg.pyx":45
+  /* "kivyblocks/dg.pyx":44
  * 	cell_type = OptionProperty('data', \
  * 			options=['data', 'header'])
  * 	def __init__(self,row,desc, **kw):             # <<<<<<<<<<<<<<
@@ -3097,7 +3093,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Cell___init__(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":78
+/* "kivyblocks/dg.pyx":77
  * 
  * class Row(BoxLayout):
  * 	def __init__(self,part, rowdesc,header=False,data=None, **kw):             # <<<<<<<<<<<<<<
@@ -3155,13 +3151,13 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_1__init__(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_part)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 5, 1); __PYX_ERR(0, 78, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 5, 1); __PYX_ERR(0, 77, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_rowdesc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 5, 2); __PYX_ERR(0, 78, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 5, 2); __PYX_ERR(0, 77, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -3177,7 +3173,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_1__init__(PyObject *__pyx_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 78, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 77, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3200,7 +3196,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_1__init__(PyObject *__pyx_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 78, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 77, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kw); __pyx_v_kw = 0;
   __Pyx_AddTraceback("kivyblocks.dg.Row.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3227,118 +3223,118 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row___init__(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "kivyblocks/dg.pyx":89
+  /* "kivyblocks/dg.pyx":88
  * 
  * 		"""
  * 		self.part = part             # <<<<<<<<<<<<<<
  * 		self.header = header
  * 		self.row_data = data
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_part, __pyx_v_part) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_part, __pyx_v_part) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":90
+  /* "kivyblocks/dg.pyx":89
  * 		"""
  * 		self.part = part
  * 		self.header = header             # <<<<<<<<<<<<<<
  * 		self.row_data = data
  * 		self.row_id = None
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_header, __pyx_v_header) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_header, __pyx_v_header) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":91
+  /* "kivyblocks/dg.pyx":90
  * 		self.part = part
  * 		self.header = header
  * 		self.row_data = data             # <<<<<<<<<<<<<<
  * 		self.row_id = None
  * 		self.linewidth = self.part.datagrid.linewidth
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_row_data, __pyx_v_data) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_row_data, __pyx_v_data) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":92
+  /* "kivyblocks/dg.pyx":91
  * 		self.header = header
  * 		self.row_data = data
  * 		self.row_id = None             # <<<<<<<<<<<<<<
  * 		self.linewidth = self.part.datagrid.linewidth
  * 		self.rowdesc = rowdesc
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_row_id, Py_None) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_row_id, Py_None) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":93
+  /* "kivyblocks/dg.pyx":92
  * 		self.row_data = data
  * 		self.row_id = None
  * 		self.linewidth = self.part.datagrid.linewidth             # <<<<<<<<<<<<<<
  * 		self.rowdesc = rowdesc
  * 		opts = kw.copy()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_linewidth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_linewidth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_linewidth, __pyx_t_1) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_linewidth, __pyx_t_1) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":94
+  /* "kivyblocks/dg.pyx":93
  * 		self.row_id = None
  * 		self.linewidth = self.part.datagrid.linewidth
  * 		self.rowdesc = rowdesc             # <<<<<<<<<<<<<<
  * 		opts = kw.copy()
  * 		opts.update({
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc, __pyx_v_rowdesc) < 0) __PYX_ERR(0, 94, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc, __pyx_v_rowdesc) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":95
+  /* "kivyblocks/dg.pyx":94
  * 		self.linewidth = self.part.datagrid.linewidth
  * 		self.rowdesc = rowdesc
  * 		opts = kw.copy()             # <<<<<<<<<<<<<<
  * 		opts.update({
  * 			"spacing":self.linewidth,
  */
-  __pyx_t_1 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_1 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_opts = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":97
+  /* "kivyblocks/dg.pyx":96
  * 		opts = kw.copy()
  * 		opts.update({
  * 			"spacing":self.linewidth,             # <<<<<<<<<<<<<<
  * 			"orientation":"horizontal"
  * 		})
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_linewidth); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_linewidth); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_spacing, __pyx_t_2) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_spacing, __pyx_t_2) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_orientation, __pyx_n_s_horizontal) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_orientation, __pyx_n_s_horizontal) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":96
+  /* "kivyblocks/dg.pyx":95
  * 		self.rowdesc = rowdesc
  * 		opts = kw.copy()
  * 		opts.update({             # <<<<<<<<<<<<<<
  * 			"spacing":self.linewidth,
  * 			"orientation":"horizontal"
  */
-  __pyx_t_2 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_opts, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_opts, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":100
+  /* "kivyblocks/dg.pyx":99
  * 			"orientation":"horizontal"
  * 		})
  * 		super(Row, self).__init__(**opts)             # <<<<<<<<<<<<<<
  * 		self.height = self.part.datagrid.rowHeight()
  * 		self.init(0)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Row); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Row); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -3346,37 +3342,37 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row___init__(CYTHON_UNUSED PyObject 
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_self);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_v_opts == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-    __PYX_ERR(0, 100, __pyx_L1_error)
+    __PYX_ERR(0, 99, __pyx_L1_error)
   }
-  __pyx_t_2 = PyDict_Copy(__pyx_v_opts); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_2 = PyDict_Copy(__pyx_v_opts); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/dg.pyx":101
+  /* "kivyblocks/dg.pyx":100
  * 		})
  * 		super(Row, self).__init__(**opts)
  * 		self.height = self.part.datagrid.rowHeight()             # <<<<<<<<<<<<<<
  * 		self.init(0)
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -3391,20 +3387,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row___init__(CYTHON_UNUSED PyObject 
   }
   __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_height, __pyx_t_3) < 0) __PYX_ERR(0, 101, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_height, __pyx_t_3) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/dg.pyx":102
+  /* "kivyblocks/dg.pyx":101
  * 		super(Row, self).__init__(**opts)
  * 		self.height = self.part.datagrid.rowHeight()
  * 		self.init(0)             # <<<<<<<<<<<<<<
  * 
  * 	def on_row_press(self, *args):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3418,12 +3414,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row___init__(CYTHON_UNUSED PyObject 
   }
   __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_int_0) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_int_0);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/dg.pyx":78
+  /* "kivyblocks/dg.pyx":77
  * 
  * class Row(BoxLayout):
  * 	def __init__(self,part, rowdesc,header=False,data=None, **kw):             # <<<<<<<<<<<<<<
@@ -3447,7 +3443,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row___init__(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":104
+/* "kivyblocks/dg.pyx":103
  * 		self.init(0)
  * 
  * 	def on_row_press(self, *args):             # <<<<<<<<<<<<<<
@@ -3497,7 +3493,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_3on_row_press(PyObject *__pyx_se
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 1) ? pos_args : 1;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_row_press") < 0)) __PYX_ERR(0, 104, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_row_press") < 0)) __PYX_ERR(0, 103, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 1) {
       goto __pyx_L5_argtuple_error;
@@ -3508,7 +3504,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_3on_row_press(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_row_press", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 104, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_row_press", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 103, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.dg.Row.on_row_press", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3535,7 +3531,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_2on_row_press(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":107
+/* "kivyblocks/dg.pyx":106
  * 		pass
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
@@ -3578,11 +3574,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_5init(PyObject *__pyx_self, PyOb
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, 1); __PYX_ERR(0, 107, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, 1); __PYX_ERR(0, 106, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "init") < 0)) __PYX_ERR(0, 107, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "init") < 0)) __PYX_ERR(0, 106, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3595,7 +3591,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_5init(PyObject *__pyx_self, PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 107, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 106, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.Row.init", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3628,7 +3624,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init", 0);
 
-  /* "kivyblocks/dg.pyx":108
+  /* "kivyblocks/dg.pyx":107
  * 
  * 	def init(self,t):
  * 		w = 0             # <<<<<<<<<<<<<<
@@ -3638,7 +3634,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_w = __pyx_int_0;
 
-  /* "kivyblocks/dg.pyx":109
+  /* "kivyblocks/dg.pyx":108
  * 	def init(self,t):
  * 		w = 0
  * 		h = 0             # <<<<<<<<<<<<<<
@@ -3647,22 +3643,22 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
  */
   __pyx_v_h = 0;
 
-  /* "kivyblocks/dg.pyx":110
+  /* "kivyblocks/dg.pyx":109
  * 		w = 0
  * 		h = 0
  * 		for c in self.rowdesc:             # <<<<<<<<<<<<<<
  * 			c['header'] = self.header
  * 			cell = Cell(self,c)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -3670,17 +3666,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 110, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 109, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 110, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 109, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -3690,7 +3686,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 110, __pyx_L1_error)
+          else __PYX_ERR(0, 109, __pyx_L1_error)
         }
         break;
       }
@@ -3699,26 +3695,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
     __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":111
+    /* "kivyblocks/dg.pyx":110
  * 		h = 0
  * 		for c in self.rowdesc:
  * 			c['header'] = self.header             # <<<<<<<<<<<<<<
  * 			cell = Cell(self,c)
  * 			self.add_widget(cell)
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (unlikely(PyObject_SetItem(__pyx_v_c, __pyx_n_s_header, __pyx_t_1) < 0)) __PYX_ERR(0, 111, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(__pyx_v_c, __pyx_n_s_header, __pyx_t_1) < 0)) __PYX_ERR(0, 110, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":112
+    /* "kivyblocks/dg.pyx":111
  * 		for c in self.rowdesc:
  * 			c['header'] = self.header
  * 			cell = Cell(self,c)             # <<<<<<<<<<<<<<
  * 			self.add_widget(cell)
  * 			cell.bind(on_press=self.part.datagrid.cell_pressed)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Cell); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Cell); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 111, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -3735,7 +3731,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_v_self, __pyx_v_c};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -3743,13 +3739,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_v_self, __pyx_v_c};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 112, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 111, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -3760,7 +3756,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
       __Pyx_INCREF(__pyx_v_c);
       __Pyx_GIVEREF(__pyx_v_c);
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_v_c);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
@@ -3768,14 +3764,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
     __Pyx_XDECREF_SET(__pyx_v_cell, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":113
+    /* "kivyblocks/dg.pyx":112
  * 			c['header'] = self.header
  * 			cell = Cell(self,c)
  * 			self.add_widget(cell)             # <<<<<<<<<<<<<<
  * 			cell.bind(on_press=self.part.datagrid.cell_pressed)
  * 			w += cell.width
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 112, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3789,54 +3785,54 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
     }
     __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_8, __pyx_v_cell) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_cell);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":114
+    /* "kivyblocks/dg.pyx":113
  * 			cell = Cell(self,c)
  * 			self.add_widget(cell)
  * 			cell.bind(on_press=self.part.datagrid.cell_pressed)             # <<<<<<<<<<<<<<
  * 			w += cell.width
  * 		self.size_hint = None,None
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_cell, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_cell, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 114, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 114, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_cell_pressed); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 114, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_cell_pressed); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_on_press, __pyx_t_8) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_on_press, __pyx_t_8) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 114, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kivyblocks/dg.pyx":115
+    /* "kivyblocks/dg.pyx":114
  * 			self.add_widget(cell)
  * 			cell.bind(on_press=self.part.datagrid.cell_pressed)
  * 			w += cell.width             # <<<<<<<<<<<<<<
  * 		self.size_hint = None,None
  * 		self.width = w + self.linewidth * (len(self.rowdesc)+1)
  */
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_cell, __pyx_n_s_width); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 115, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_cell, __pyx_n_s_width); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_v_w, __pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 115, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_v_w, __pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF_SET(__pyx_v_w, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":110
+    /* "kivyblocks/dg.pyx":109
  * 		w = 0
  * 		h = 0
  * 		for c in self.rowdesc:             # <<<<<<<<<<<<<<
@@ -3846,41 +3842,41 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":116
+  /* "kivyblocks/dg.pyx":115
  * 			cell.bind(on_press=self.part.datagrid.cell_pressed)
  * 			w += cell.width
  * 		self.size_hint = None,None             # <<<<<<<<<<<<<<
  * 		self.width = w + self.linewidth * (len(self.rowdesc)+1)
  * 
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_size_hint, __pyx_tuple_) < 0) __PYX_ERR(0, 116, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_size_hint, __pyx_tuple_) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":117
+  /* "kivyblocks/dg.pyx":116
  * 			w += cell.width
  * 		self.size_hint = None,None
  * 		self.width = w + self.linewidth * (len(self.rowdesc)+1)             # <<<<<<<<<<<<<<
  * 
  * 	def unselected(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_linewidth); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_linewidth); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_3 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyInt_FromSsize_t((__pyx_t_3 + 1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_5 = PyInt_FromSsize_t((__pyx_t_3 + 1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_8 = PyNumber_Multiply(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Multiply(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyNumber_Add(__pyx_v_w, __pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_Add(__pyx_v_w, __pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_width, __pyx_t_5) < 0) __PYX_ERR(0, 117, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_width, __pyx_t_5) < 0) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/dg.pyx":107
+  /* "kivyblocks/dg.pyx":106
  * 		pass
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
@@ -3908,7 +3904,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_4init(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":119
+/* "kivyblocks/dg.pyx":118
  * 		self.width = w + self.linewidth * (len(self.rowdesc)+1)
  * 
  * 	def unselected(self):             # <<<<<<<<<<<<<<
@@ -3941,14 +3937,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_6unselected(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("unselected", 0);
 
-  /* "kivyblocks/dg.pyx":120
+  /* "kivyblocks/dg.pyx":119
  * 
  * 	def unselected(self):
  * 		self.select(False)             # <<<<<<<<<<<<<<
  * 
  * 	def selected(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3962,12 +3958,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_6unselected(CYTHON_UNUSED PyObje
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, Py_False) : __Pyx_PyObject_CallOneArg(__pyx_t_2, Py_False);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":119
+  /* "kivyblocks/dg.pyx":118
  * 		self.width = w + self.linewidth * (len(self.rowdesc)+1)
  * 
  * 	def unselected(self):             # <<<<<<<<<<<<<<
@@ -3990,7 +3986,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_6unselected(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":122
+/* "kivyblocks/dg.pyx":121
  * 		self.select(False)
  * 
  * 	def selected(self):             # <<<<<<<<<<<<<<
@@ -4023,14 +4019,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_8selected(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("selected", 0);
 
-  /* "kivyblocks/dg.pyx":123
+  /* "kivyblocks/dg.pyx":122
  * 
  * 	def selected(self):
  * 		self.select(True)             # <<<<<<<<<<<<<<
  * 
  * 	def select(self, flag):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4044,12 +4040,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_8selected(CYTHON_UNUSED PyObject
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, Py_True) : __Pyx_PyObject_CallOneArg(__pyx_t_2, Py_True);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":122
+  /* "kivyblocks/dg.pyx":121
  * 		self.select(False)
  * 
  * 	def selected(self):             # <<<<<<<<<<<<<<
@@ -4072,7 +4068,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_8selected(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":125
+/* "kivyblocks/dg.pyx":124
  * 		self.select(True)
  * 
  * 	def select(self, flag):             # <<<<<<<<<<<<<<
@@ -4115,11 +4111,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_11select(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_flag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("select", 1, 2, 2, 1); __PYX_ERR(0, 125, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("select", 1, 2, 2, 1); __PYX_ERR(0, 124, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "select") < 0)) __PYX_ERR(0, 125, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "select") < 0)) __PYX_ERR(0, 124, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4132,7 +4128,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_3Row_11select(PyObject *__pyx_self, P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("select", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 125, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("select", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 124, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.Row.select", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4160,22 +4156,22 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_10select(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("select", 0);
 
-  /* "kivyblocks/dg.pyx":126
+  /* "kivyblocks/dg.pyx":125
  * 
  * 	def select(self, flag):
  * 		for c in self.children:             # <<<<<<<<<<<<<<
  * 			if flag:
  * 				c.csscls = self.part.datagrid.row_selected_css
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_children); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_children); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 125, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -4183,17 +4179,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_10select(CYTHON_UNUSED PyObject 
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 126, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 125, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 126, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 125, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -4203,7 +4199,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_10select(CYTHON_UNUSED PyObject 
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 126, __pyx_L1_error)
+          else __PYX_ERR(0, 125, __pyx_L1_error)
         }
         break;
       }
@@ -4212,35 +4208,35 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_10select(CYTHON_UNUSED PyObject 
     __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":127
+    /* "kivyblocks/dg.pyx":126
  * 	def select(self, flag):
  * 		for c in self.children:
  * 			if flag:             # <<<<<<<<<<<<<<
  * 				c.csscls = self.part.datagrid.row_selected_css
  * 			else:
  */
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_flag); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_flag); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 126, __pyx_L1_error)
     if (__pyx_t_5) {
 
-      /* "kivyblocks/dg.pyx":128
+      /* "kivyblocks/dg.pyx":127
  * 		for c in self.children:
  * 			if flag:
  * 				c.csscls = self.part.datagrid.row_selected_css             # <<<<<<<<<<<<<<
  * 			else:
  * 				c.csscls = self.part.datagrid.row_normal_css
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 128, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 127, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_row_selected_css); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_row_selected_css); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PyObject_SetAttrStr(__pyx_v_c, __pyx_n_s_csscls, __pyx_t_1) < 0) __PYX_ERR(0, 128, __pyx_L1_error)
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_c, __pyx_n_s_csscls, __pyx_t_1) < 0) __PYX_ERR(0, 127, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kivyblocks/dg.pyx":127
+      /* "kivyblocks/dg.pyx":126
  * 	def select(self, flag):
  * 		for c in self.children:
  * 			if flag:             # <<<<<<<<<<<<<<
@@ -4250,7 +4246,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_10select(CYTHON_UNUSED PyObject 
       goto __pyx_L5;
     }
 
-    /* "kivyblocks/dg.pyx":130
+    /* "kivyblocks/dg.pyx":129
  * 				c.csscls = self.part.datagrid.row_selected_css
  * 			else:
  * 				c.csscls = self.part.datagrid.row_normal_css             # <<<<<<<<<<<<<<
@@ -4258,20 +4254,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_10select(CYTHON_UNUSED PyObject 
  * class Header(WidgetReady, ScrollPanel):
  */
     /*else*/ {
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 130, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 129, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_row_normal_css); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_row_normal_css); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PyObject_SetAttrStr(__pyx_v_c, __pyx_n_s_csscls, __pyx_t_1) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_c, __pyx_n_s_csscls, __pyx_t_1) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
     __pyx_L5:;
 
-    /* "kivyblocks/dg.pyx":126
+    /* "kivyblocks/dg.pyx":125
  * 
  * 	def select(self, flag):
  * 		for c in self.children:             # <<<<<<<<<<<<<<
@@ -4281,7 +4277,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_10select(CYTHON_UNUSED PyObject 
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":125
+  /* "kivyblocks/dg.pyx":124
  * 		self.select(True)
  * 
  * 	def select(self, flag):             # <<<<<<<<<<<<<<
@@ -4305,7 +4301,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_3Row_10select(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":133
+/* "kivyblocks/dg.pyx":132
  * 
  * class Header(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
@@ -4351,11 +4347,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_6Header_1__init__(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_part)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 133, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 132, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 133, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 132, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4368,7 +4364,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_6Header_1__init__(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 133, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 132, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kw); __pyx_v_kw = 0;
   __Pyx_AddTraceback("kivyblocks.dg.Header.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -4398,16 +4394,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header___init__(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "kivyblocks/dg.pyx":134
+  /* "kivyblocks/dg.pyx":133
  * class Header(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):
  * 		SUPER(Header, self, kw)             # <<<<<<<<<<<<<<
  * 		self.part = part
  * 		self.init(1)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_SUPER); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_SUPER); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Header); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Header); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -4424,7 +4420,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header___init__(CYTHON_UNUSED PyObje
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_t_3, __pyx_v_self, __pyx_v_kw};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4433,14 +4429,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header___init__(CYTHON_UNUSED PyObje
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_t_3, __pyx_v_self, __pyx_v_kw};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -4454,30 +4450,30 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header___init__(CYTHON_UNUSED PyObje
     __Pyx_GIVEREF(__pyx_v_kw);
     PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_5, __pyx_v_kw);
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":135
+  /* "kivyblocks/dg.pyx":134
  * 	def __init__(self,part,**kw):
  * 		SUPER(Header, self, kw)
  * 		self.part = part             # <<<<<<<<<<<<<<
  * 		self.init(1)
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_part, __pyx_v_part) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_part, __pyx_v_part) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":136
+  /* "kivyblocks/dg.pyx":135
  * 		SUPER(Header, self, kw)
  * 		self.part = part
  * 		self.init(1)             # <<<<<<<<<<<<<<
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  * 		if self.part.freeze_flag:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4491,64 +4487,64 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header___init__(CYTHON_UNUSED PyObje
   }
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_6, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_int_1);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":137
+  /* "kivyblocks/dg.pyx":136
  * 		self.part = part
  * 		self.init(1)
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)             # <<<<<<<<<<<<<<
  * 		if self.part.freeze_flag:
  * 			self.bar_width = 0
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_scrollstop); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_scrollstop); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_on_scroll_stop, __pyx_t_6) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_on_scroll_stop, __pyx_t_6) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":138
+  /* "kivyblocks/dg.pyx":137
  * 		self.init(1)
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  * 		if self.part.freeze_flag:             # <<<<<<<<<<<<<<
  * 			self.bar_width = 0
  * 		self.bar_width = 0
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_7) {
 
-    /* "kivyblocks/dg.pyx":139
+    /* "kivyblocks/dg.pyx":138
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  * 		if self.part.freeze_flag:
  * 			self.bar_width = 0             # <<<<<<<<<<<<<<
  * 		self.bar_width = 0
  * 
  */
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_bar_width, __pyx_int_0) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_bar_width, __pyx_int_0) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":138
+    /* "kivyblocks/dg.pyx":137
  * 		self.init(1)
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  * 		if self.part.freeze_flag:             # <<<<<<<<<<<<<<
@@ -4557,16 +4553,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header___init__(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "kivyblocks/dg.pyx":140
+  /* "kivyblocks/dg.pyx":139
  * 		if self.part.freeze_flag:
  * 			self.bar_width = 0
  * 		self.bar_width = 0             # <<<<<<<<<<<<<<
  * 
  * 	def init(self,t):
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_bar_width, __pyx_int_0) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_bar_width, __pyx_int_0) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":133
+  /* "kivyblocks/dg.pyx":132
  * 
  * class Header(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
@@ -4591,7 +4587,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header___init__(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":142
+/* "kivyblocks/dg.pyx":141
  * 		self.bar_width = 0
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
@@ -4634,11 +4630,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_6Header_3init(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, 1); __PYX_ERR(0, 142, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, 1); __PYX_ERR(0, 141, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "init") < 0)) __PYX_ERR(0, 142, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "init") < 0)) __PYX_ERR(0, 141, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4651,7 +4647,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_6Header_3init(PyObject *__pyx_self, P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 142, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 141, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.Header.init", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4689,27 +4685,27 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init", 0);
 
-  /* "kivyblocks/dg.pyx":143
+  /* "kivyblocks/dg.pyx":142
  * 
  * 	def init(self,t):
  * 		rd = [ f.copy() for f in self.part.rowdesc ]             # <<<<<<<<<<<<<<
  * 		[ f.update({'value':self.part.fields[i].get('label', \
  * 							self.part.fields[i].get('name'))}) \
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
     __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 142, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   for (;;) {
@@ -4717,17 +4713,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 143, __pyx_L1_error)
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 142, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 143, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 142, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
@@ -4737,7 +4733,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 143, __pyx_L1_error)
+          else __PYX_ERR(0, 142, __pyx_L1_error)
         }
         break;
       }
@@ -4745,7 +4741,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
     }
     __Pyx_XDECREF_SET(__pyx_v_f, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_copy); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_copy); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -4759,29 +4755,29 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
     }
     __pyx_t_3 = (__pyx_t_7) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 143, __pyx_L1_error)
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_rd = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":144
+  /* "kivyblocks/dg.pyx":143
  * 	def init(self,t):
  * 		rd = [ f.copy() for f in self.part.rowdesc ]
  * 		[ f.update({'value':self.part.fields[i].get('label', \             # <<<<<<<<<<<<<<
  * 							self.part.fields[i].get('name'))}) \
  * 							for i,f in enumerate(rd) ]
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_int_0);
   __pyx_t_2 = __pyx_int_0;
 
-  /* "kivyblocks/dg.pyx":146
+  /* "kivyblocks/dg.pyx":145
  * 		[ f.update({'value':self.part.fields[i].get('label', \
  * 							self.part.fields[i].get('name'))}) \
  * 							for i,f in enumerate(rd) ]             # <<<<<<<<<<<<<<
@@ -4792,60 +4788,60 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
   for (;;) {
     if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_3)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_6 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_6); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_6 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_6); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 145, __pyx_L1_error)
     #else
-    __pyx_t_6 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_6 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_f, __pyx_t_6);
     __pyx_t_6 = 0;
     __Pyx_INCREF(__pyx_t_2);
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_2);
-    __pyx_t_6 = __Pyx_PyInt_AddObjC(__pyx_t_2, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_AddObjC(__pyx_t_2, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2);
     __pyx_t_2 = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "kivyblocks/dg.pyx":144
+    /* "kivyblocks/dg.pyx":143
  * 	def init(self,t):
  * 		rd = [ f.copy() for f in self.part.rowdesc ]
  * 		[ f.update({'value':self.part.fields[i].get('label', \             # <<<<<<<<<<<<<<
  * 							self.part.fields[i].get('name'))}) \
  * 							for i,f in enumerate(rd) ]
  */
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_update); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_update); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_fields); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_fields); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_t_11, __pyx_v_i); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_t_11, __pyx_v_i); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_get); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_get); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-    /* "kivyblocks/dg.pyx":145
+    /* "kivyblocks/dg.pyx":144
  * 		rd = [ f.copy() for f in self.part.rowdesc ]
  * 		[ f.update({'value':self.part.fields[i].get('label', \
  * 							self.part.fields[i].get('name'))}) \             # <<<<<<<<<<<<<<
  * 							for i,f in enumerate(rd) ]
  * 		self.header = Row(self.part,rd,header=True)
  */
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_fields); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_fields); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_13, __pyx_v_i); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_13, __pyx_v_i); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_get); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_get); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __pyx_t_12 = NULL;
@@ -4860,7 +4856,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
     }
     __pyx_t_10 = (__pyx_t_12) ? __Pyx_PyObject_Call2Args(__pyx_t_13, __pyx_t_12, __pyx_n_s_name) : __Pyx_PyObject_CallOneArg(__pyx_t_13, __pyx_n_s_name);
     __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
-    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 145, __pyx_L1_error)
+    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     __pyx_t_13 = NULL;
@@ -4878,7 +4874,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_11)) {
       PyObject *__pyx_temp[3] = {__pyx_t_13, __pyx_n_s_label, __pyx_t_10};
-      __pyx_t_9 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_14, 2+__pyx_t_14); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 144, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_14, 2+__pyx_t_14); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -4887,14 +4883,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
       PyObject *__pyx_temp[3] = {__pyx_t_13, __pyx_n_s_label, __pyx_t_10};
-      __pyx_t_9 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_14, 2+__pyx_t_14); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 144, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_14, 2+__pyx_t_14); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     } else
     #endif
     {
-      __pyx_t_12 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 144, __pyx_L1_error)
+      __pyx_t_12 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       if (__pyx_t_13) {
         __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13); __pyx_t_13 = NULL;
@@ -4905,12 +4901,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
       __Pyx_GIVEREF(__pyx_t_10);
       PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_14, __pyx_t_10);
       __pyx_t_10 = 0;
-      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_12, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 144, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_12, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_value, __pyx_t_9) < 0) __PYX_ERR(0, 144, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_value, __pyx_t_9) < 0) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_9 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
@@ -4925,13 +4921,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
     __pyx_t_6 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_9, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_8);
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 144, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_6))) __PYX_ERR(0, 144, __pyx_L1_error)
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_6))) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "kivyblocks/dg.pyx":146
+    /* "kivyblocks/dg.pyx":145
  * 		[ f.update({'value':self.part.fields[i].get('label', \
  * 							self.part.fields[i].get('name'))}) \
  * 							for i,f in enumerate(rd) ]             # <<<<<<<<<<<<<<
@@ -4943,18 +4939,18 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":147
+  /* "kivyblocks/dg.pyx":146
  * 							self.part.fields[i].get('name'))}) \
  * 							for i,f in enumerate(rd) ]
  * 		self.header = Row(self.part,rd,header=True)             # <<<<<<<<<<<<<<
  * 		self.add_widget(self.header)
  * 		self.height = self.header.height
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
@@ -4962,27 +4958,27 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
   __Pyx_GIVEREF(__pyx_v_rd);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_rd);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_header, Py_True) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 147, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_header, Py_True) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_header, __pyx_t_6) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_header, __pyx_t_6) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":148
+  /* "kivyblocks/dg.pyx":147
  * 							for i,f in enumerate(rd) ]
  * 		self.header = Row(self.part,rd,header=True)
  * 		self.add_widget(self.header)             # <<<<<<<<<<<<<<
  * 		self.height = self.header.height
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4997,27 +4993,27 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
   __pyx_t_6 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":149
+  /* "kivyblocks/dg.pyx":148
  * 		self.header = Row(self.part,rd,header=True)
  * 		self.add_widget(self.header)
  * 		self.height = self.header.height             # <<<<<<<<<<<<<<
  * 
  * class Body(WidgetReady, ScrollPanel):
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_height); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_height); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_height, __pyx_t_2) < 0) __PYX_ERR(0, 149, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_height, __pyx_t_2) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":142
+  /* "kivyblocks/dg.pyx":141
  * 		self.bar_width = 0
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
@@ -5051,7 +5047,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_6Header_2init(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":152
+/* "kivyblocks/dg.pyx":151
  * 
  * class Body(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
@@ -5097,11 +5093,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_1__init__(PyObject *__pyx_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_part)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 152, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 151, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 152, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 151, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5114,7 +5110,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_1__init__(PyObject *__pyx_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 152, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 151, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kw); __pyx_v_kw = 0;
   __Pyx_AddTraceback("kivyblocks.dg.Body.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -5144,25 +5140,25 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body___init__(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "kivyblocks/dg.pyx":153
+  /* "kivyblocks/dg.pyx":152
  * class Body(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):
  * 		self.part = part             # <<<<<<<<<<<<<<
  * 		SUPER(Body, self, kw)
  * 		self._inner.spacing = self.part.datagrid.linewidth
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_part, __pyx_v_part) < 0) __PYX_ERR(0, 153, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_part, __pyx_v_part) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":154
+  /* "kivyblocks/dg.pyx":153
  * 	def __init__(self,part,**kw):
  * 		self.part = part
  * 		SUPER(Body, self, kw)             # <<<<<<<<<<<<<<
  * 		self._inner.spacing = self.part.datagrid.linewidth
  * 		self.size_hint=(1,1)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_SUPER); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_SUPER); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Body); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Body); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -5179,7 +5175,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body___init__(CYTHON_UNUSED PyObject
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_t_3, __pyx_v_self, __pyx_v_kw};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5188,14 +5184,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body___init__(CYTHON_UNUSED PyObject
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_t_3, __pyx_v_self, __pyx_v_kw};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -5209,108 +5205,108 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body___init__(CYTHON_UNUSED PyObject
     __Pyx_GIVEREF(__pyx_v_kw);
     PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_5, __pyx_v_kw);
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":155
+  /* "kivyblocks/dg.pyx":154
  * 		self.part = part
  * 		SUPER(Body, self, kw)
  * 		self._inner.spacing = self.part.datagrid.linewidth             # <<<<<<<<<<<<<<
  * 		self.size_hint=(1,1)
  * 		self.idRow = {}
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_linewidth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_linewidth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_inner); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_inner); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_spacing, __pyx_t_1) < 0) __PYX_ERR(0, 155, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_spacing, __pyx_t_1) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":156
+  /* "kivyblocks/dg.pyx":155
  * 		SUPER(Body, self, kw)
  * 		self._inner.spacing = self.part.datagrid.linewidth
  * 		self.size_hint=(1,1)             # <<<<<<<<<<<<<<
  * 		self.idRow = {}
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_size_hint, __pyx_tuple__2) < 0) __PYX_ERR(0, 156, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_size_hint, __pyx_tuple__2) < 0) __PYX_ERR(0, 155, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":157
+  /* "kivyblocks/dg.pyx":156
  * 		self._inner.spacing = self.part.datagrid.linewidth
  * 		self.size_hint=(1,1)
  * 		self.idRow = {}             # <<<<<<<<<<<<<<
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  * 		if self.part.freeze_flag:
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_idRow, __pyx_t_2) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_idRow, __pyx_t_2) < 0) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":158
+  /* "kivyblocks/dg.pyx":157
  * 		self.size_hint=(1,1)
  * 		self.idRow = {}
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)             # <<<<<<<<<<<<<<
  * 		if self.part.freeze_flag:
  * 			self.bar_width = 0
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_scrollstop); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_scrollstop); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_on_scroll_stop, __pyx_t_6) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_on_scroll_stop, __pyx_t_6) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":159
+  /* "kivyblocks/dg.pyx":158
  * 		self.idRow = {}
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  * 		if self.part.freeze_flag:             # <<<<<<<<<<<<<<
  * 			self.bar_width = 0
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_7) {
 
-    /* "kivyblocks/dg.pyx":160
+    /* "kivyblocks/dg.pyx":159
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  * 		if self.part.freeze_flag:
  * 			self.bar_width = 0             # <<<<<<<<<<<<<<
  * 
  * 	def addRow(self,id, data,index=0):
  */
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_bar_width, __pyx_int_0) < 0) __PYX_ERR(0, 160, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_bar_width, __pyx_int_0) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":159
+    /* "kivyblocks/dg.pyx":158
  * 		self.idRow = {}
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  * 		if self.part.freeze_flag:             # <<<<<<<<<<<<<<
@@ -5319,7 +5315,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body___init__(CYTHON_UNUSED PyObject
  */
   }
 
-  /* "kivyblocks/dg.pyx":152
+  /* "kivyblocks/dg.pyx":151
  * 
  * class Body(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
@@ -5344,7 +5340,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body___init__(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":162
+/* "kivyblocks/dg.pyx":161
  * 			self.bar_width = 0
  * 
  * 	def addRow(self,id, data,index=0):             # <<<<<<<<<<<<<<
@@ -5394,13 +5390,13 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_3addRow(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_id)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("addRow", 0, 3, 4, 1); __PYX_ERR(0, 162, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("addRow", 0, 3, 4, 1); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("addRow", 0, 3, 4, 2); __PYX_ERR(0, 162, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("addRow", 0, 3, 4, 2); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -5410,7 +5406,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_3addRow(PyObject *__pyx_self, P
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "addRow") < 0)) __PYX_ERR(0, 162, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "addRow") < 0)) __PYX_ERR(0, 161, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5430,7 +5426,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_3addRow(PyObject *__pyx_self, P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("addRow", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 162, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("addRow", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 161, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.Body.addRow", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5465,27 +5461,27 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("addRow", 0);
 
-  /* "kivyblocks/dg.pyx":163
+  /* "kivyblocks/dg.pyx":162
  * 
  * 	def addRow(self,id, data,index=0):
  * 		rd = [ f.copy() for f in self.part.rowdesc ]             # <<<<<<<<<<<<<<
  * 		[ f.update({'value':data.get(f['name'])}) for f in rd ]
  * 		row = Row(self.part,rd,data=data)
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
     __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 162, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   for (;;) {
@@ -5493,17 +5489,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 163, __pyx_L1_error)
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 162, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 163, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 162, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
@@ -5513,7 +5509,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 163, __pyx_L1_error)
+          else __PYX_ERR(0, 162, __pyx_L1_error)
         }
         break;
       }
@@ -5521,7 +5517,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
     }
     __Pyx_XDECREF_SET(__pyx_v_f, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_copy); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_copy); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -5535,43 +5531,43 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
     }
     __pyx_t_3 = (__pyx_t_7) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 163, __pyx_L1_error)
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_rd = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":164
+  /* "kivyblocks/dg.pyx":163
  * 	def addRow(self,id, data,index=0):
  * 		rd = [ f.copy() for f in self.part.rowdesc ]
  * 		[ f.update({'value':data.get(f['name'])}) for f in rd ]             # <<<<<<<<<<<<<<
  * 		row = Row(self.part,rd,data=data)
  * 		row.row_id = id
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __pyx_v_rd; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
   for (;;) {
     if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 163, __pyx_L1_error)
     #else
-    __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_f, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_update); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_update); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_name); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_name); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __pyx_t_11 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_9))) {
@@ -5586,10 +5582,10 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
     __pyx_t_8 = (__pyx_t_11) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_11, __pyx_t_10) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_10);
     __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 164, __pyx_L1_error)
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_value, __pyx_t_8) < 0) __PYX_ERR(0, 164, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_value, __pyx_t_8) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -5604,27 +5600,27 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
     __pyx_t_3 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 164, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 164, __pyx_L1_error)
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":165
+  /* "kivyblocks/dg.pyx":164
  * 		rd = [ f.copy() for f in self.part.rowdesc ]
  * 		[ f.update({'value':data.get(f['name'])}) for f in rd ]
  * 		row = Row(self.part,rd,data=data)             # <<<<<<<<<<<<<<
  * 		row.row_id = id
  * 		self.add_widget(row,index=index)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
@@ -5632,10 +5628,10 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
   __Pyx_GIVEREF(__pyx_v_rd);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_rd);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_data, __pyx_v_data) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 165, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_data, __pyx_v_data) < 0) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5643,52 +5639,52 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
   __pyx_v_row = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":166
+  /* "kivyblocks/dg.pyx":165
  * 		[ f.update({'value':data.get(f['name'])}) for f in rd ]
  * 		row = Row(self.part,rd,data=data)
  * 		row.row_id = id             # <<<<<<<<<<<<<<
  * 		self.add_widget(row,index=index)
  * 		self.idRow[id] = row
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_row, __pyx_n_s_row_id, __pyx_v_id) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_row, __pyx_n_s_row_id, __pyx_v_id) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":167
+  /* "kivyblocks/dg.pyx":166
  * 		row = Row(self.part,rd,data=data)
  * 		row.row_id = id
  * 		self.add_widget(row,index=index)             # <<<<<<<<<<<<<<
  * 		self.idRow[id] = row
  * 		return row
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 167, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 167, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_row);
   __Pyx_GIVEREF(__pyx_v_row);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_row);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 167, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_index, __pyx_v_index) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_index, __pyx_v_index) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":168
+  /* "kivyblocks/dg.pyx":167
  * 		row.row_id = id
  * 		self.add_widget(row,index=index)
  * 		self.idRow[id] = row             # <<<<<<<<<<<<<<
  * 		return row
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely(PyObject_SetItem(__pyx_t_1, __pyx_v_id, __pyx_v_row) < 0)) __PYX_ERR(0, 168, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_t_1, __pyx_v_id, __pyx_v_row) < 0)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":169
+  /* "kivyblocks/dg.pyx":168
  * 		self.add_widget(row,index=index)
  * 		self.idRow[id] = row
  * 		return row             # <<<<<<<<<<<<<<
@@ -5700,7 +5696,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
   __pyx_r = __pyx_v_row;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":162
+  /* "kivyblocks/dg.pyx":161
  * 			self.bar_width = 0
  * 
  * 	def addRow(self,id, data,index=0):             # <<<<<<<<<<<<<<
@@ -5730,7 +5726,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_2addRow(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":171
+/* "kivyblocks/dg.pyx":170
  * 		return row
  * 
  * 	def clearRows(self):             # <<<<<<<<<<<<<<
@@ -5763,26 +5759,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_4clearRows(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("clearRows", 0);
 
-  /* "kivyblocks/dg.pyx":172
+  /* "kivyblocks/dg.pyx":171
  * 
  * 	def clearRows(self):
  * 		self.idRow = {}             # <<<<<<<<<<<<<<
  * 		self.clear_widgets()
  * 
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_idRow, __pyx_t_1) < 0) __PYX_ERR(0, 172, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_idRow, __pyx_t_1) < 0) __PYX_ERR(0, 171, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":173
+  /* "kivyblocks/dg.pyx":172
  * 	def clearRows(self):
  * 		self.idRow = {}
  * 		self.clear_widgets()             # <<<<<<<<<<<<<<
  * 
  * 	def delRowById(self,id):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_clear_widgets); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_clear_widgets); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -5796,12 +5792,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_4clearRows(CYTHON_UNUSED PyObje
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":171
+  /* "kivyblocks/dg.pyx":170
  * 		return row
  * 
  * 	def clearRows(self):             # <<<<<<<<<<<<<<
@@ -5824,7 +5820,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_4clearRows(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":175
+/* "kivyblocks/dg.pyx":174
  * 		self.clear_widgets()
  * 
  * 	def delRowById(self,id):             # <<<<<<<<<<<<<<
@@ -5867,11 +5863,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_7delRowById(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_id)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("delRowById", 1, 2, 2, 1); __PYX_ERR(0, 175, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("delRowById", 1, 2, 2, 1); __PYX_ERR(0, 174, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "delRowById") < 0)) __PYX_ERR(0, 175, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "delRowById") < 0)) __PYX_ERR(0, 174, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5884,7 +5880,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_7delRowById(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("delRowById", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 175, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("delRowById", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 174, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.Body.delRowById", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5910,16 +5906,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_6delRowById(CYTHON_UNUSED PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delRowById", 0);
 
-  /* "kivyblocks/dg.pyx":176
+  /* "kivyblocks/dg.pyx":175
  * 
  * 	def delRowById(self,id):
  * 		row = self.idRow.get(id)             # <<<<<<<<<<<<<<
  * 		if row:
  * 			self.remove_widget(row)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5934,30 +5930,30 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_6delRowById(CYTHON_UNUSED PyObj
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_id) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_id);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_row = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":177
+  /* "kivyblocks/dg.pyx":176
  * 	def delRowById(self,id):
  * 		row = self.idRow.get(id)
  * 		if row:             # <<<<<<<<<<<<<<
  * 			self.remove_widget(row)
  * 		if self.idRow.get(id):
  */
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_row); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_row); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
   if (__pyx_t_4) {
 
-    /* "kivyblocks/dg.pyx":178
+    /* "kivyblocks/dg.pyx":177
  * 		row = self.idRow.get(id)
  * 		if row:
  * 			self.remove_widget(row)             # <<<<<<<<<<<<<<
  * 		if self.idRow.get(id):
  * 			del self.idRow[id]
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_remove_widget); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_remove_widget); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_2 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -5971,12 +5967,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_6delRowById(CYTHON_UNUSED PyObj
     }
     __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_row) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_row);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":177
+    /* "kivyblocks/dg.pyx":176
  * 	def delRowById(self,id):
  * 		row = self.idRow.get(id)
  * 		if row:             # <<<<<<<<<<<<<<
@@ -5985,16 +5981,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_6delRowById(CYTHON_UNUSED PyObj
  */
   }
 
-  /* "kivyblocks/dg.pyx":179
+  /* "kivyblocks/dg.pyx":178
  * 		if row:
  * 			self.remove_widget(row)
  * 		if self.idRow.get(id):             # <<<<<<<<<<<<<<
  * 			del self.idRow[id]
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -6009,26 +6005,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_6delRowById(CYTHON_UNUSED PyObj
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_id) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_id);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_4) {
 
-    /* "kivyblocks/dg.pyx":180
+    /* "kivyblocks/dg.pyx":179
  * 			self.remove_widget(row)
  * 		if self.idRow.get(id):
  * 			del self.idRow[id]             # <<<<<<<<<<<<<<
  * 
  * 	def getRowData(self,rowid):
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (unlikely(PyObject_DelItem(__pyx_t_1, __pyx_v_id) < 0)) __PYX_ERR(0, 180, __pyx_L1_error)
+    if (unlikely(PyObject_DelItem(__pyx_t_1, __pyx_v_id) < 0)) __PYX_ERR(0, 179, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":179
+    /* "kivyblocks/dg.pyx":178
  * 		if row:
  * 			self.remove_widget(row)
  * 		if self.idRow.get(id):             # <<<<<<<<<<<<<<
@@ -6037,7 +6033,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_6delRowById(CYTHON_UNUSED PyObj
  */
   }
 
-  /* "kivyblocks/dg.pyx":175
+  /* "kivyblocks/dg.pyx":174
  * 		self.clear_widgets()
  * 
  * 	def delRowById(self,id):             # <<<<<<<<<<<<<<
@@ -6061,7 +6057,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_6delRowById(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":182
+/* "kivyblocks/dg.pyx":181
  * 			del self.idRow[id]
  * 
  * 	def getRowData(self,rowid):             # <<<<<<<<<<<<<<
@@ -6104,11 +6100,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_9getRowData(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_rowid)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("getRowData", 1, 2, 2, 1); __PYX_ERR(0, 182, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("getRowData", 1, 2, 2, 1); __PYX_ERR(0, 181, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "getRowData") < 0)) __PYX_ERR(0, 182, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "getRowData") < 0)) __PYX_ERR(0, 181, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -6121,7 +6117,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_9getRowData(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getRowData", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 182, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getRowData", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 181, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.Body.getRowData", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6144,7 +6140,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_8getRowData(CYTHON_UNUSED PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getRowData", 0);
 
-  /* "kivyblocks/dg.pyx":183
+  /* "kivyblocks/dg.pyx":182
  * 
  * 	def getRowData(self,rowid):
  * 		return self.idRow[rowid].row_data             # <<<<<<<<<<<<<<
@@ -6152,19 +6148,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_8getRowData(CYTHON_UNUSED PyObj
  * 	def getRowHeight(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_rowid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_rowid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_row_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_row_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":182
+  /* "kivyblocks/dg.pyx":181
  * 			del self.idRow[id]
  * 
  * 	def getRowData(self,rowid):             # <<<<<<<<<<<<<<
@@ -6184,7 +6180,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_8getRowData(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":185
+/* "kivyblocks/dg.pyx":184
  * 		return self.idRow[rowid].row_data
  * 
  * 	def getRowHeight(self):             # <<<<<<<<<<<<<<
@@ -6217,7 +6213,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_10getRowHeight(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getRowHeight", 0);
 
-  /* "kivyblocks/dg.pyx":186
+  /* "kivyblocks/dg.pyx":185
  * 
  * 	def getRowHeight(self):
  * 		return self.part.datagrid.rowHeight()             # <<<<<<<<<<<<<<
@@ -6225,12 +6221,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_10getRowHeight(CYTHON_UNUSED Py
  * 	def get_row_by_id(self, rowid):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -6245,14 +6241,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_10getRowHeight(CYTHON_UNUSED Py
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":185
+  /* "kivyblocks/dg.pyx":184
  * 		return self.idRow[rowid].row_data
  * 
  * 	def getRowHeight(self):             # <<<<<<<<<<<<<<
@@ -6273,7 +6269,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_10getRowHeight(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":188
+/* "kivyblocks/dg.pyx":187
  * 		return self.part.datagrid.rowHeight()
  * 
  * 	def get_row_by_id(self, rowid):             # <<<<<<<<<<<<<<
@@ -6316,11 +6312,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_13get_row_by_id(PyObject *__pyx
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_rowid)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_row_by_id", 1, 2, 2, 1); __PYX_ERR(0, 188, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_row_by_id", 1, 2, 2, 1); __PYX_ERR(0, 187, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_row_by_id") < 0)) __PYX_ERR(0, 188, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_row_by_id") < 0)) __PYX_ERR(0, 187, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -6333,7 +6329,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_4Body_13get_row_by_id(PyObject *__pyx
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_row_by_id", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 188, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_row_by_id", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 187, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.Body.get_row_by_id", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6357,7 +6353,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_12get_row_by_id(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_row_by_id", 0);
 
-  /* "kivyblocks/dg.pyx":189
+  /* "kivyblocks/dg.pyx":188
  * 
  * 	def get_row_by_id(self, rowid):
  * 		return self.idRow.get(rowid)             # <<<<<<<<<<<<<<
@@ -6365,9 +6361,9 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_12get_row_by_id(CYTHON_UNUSED P
  * class DataGridPart(WidgetReady, BoxLayout):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_idRow); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -6382,14 +6378,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_12get_row_by_id(CYTHON_UNUSED P
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_rowid) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_rowid);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":188
+  /* "kivyblocks/dg.pyx":187
  * 		return self.part.datagrid.rowHeight()
  * 
  * 	def get_row_by_id(self, rowid):             # <<<<<<<<<<<<<<
@@ -6410,7 +6406,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_4Body_12get_row_by_id(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":192
+/* "kivyblocks/dg.pyx":191
  * 
  * class DataGridPart(WidgetReady, BoxLayout):
  * 	def __init__(self,dg, freeze_flag, fields):             # <<<<<<<<<<<<<<
@@ -6459,23 +6455,23 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_1__init__(PyObject *__
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dg)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 1); __PYX_ERR(0, 192, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 1); __PYX_ERR(0, 191, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_freeze_flag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 2); __PYX_ERR(0, 192, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 2); __PYX_ERR(0, 191, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_fields)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 3); __PYX_ERR(0, 192, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 3); __PYX_ERR(0, 191, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 192, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 191, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -6492,7 +6488,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_1__init__(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 192, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 191, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGridPart.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6517,79 +6513,79 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart___init__(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "kivyblocks/dg.pyx":193
+  /* "kivyblocks/dg.pyx":192
  * class DataGridPart(WidgetReady, BoxLayout):
  * 	def __init__(self,dg, freeze_flag, fields):
  * 		self.datagrid = dg             # <<<<<<<<<<<<<<
  * 		self.fields = fields
  * 		self.freeze_flag = freeze_flag
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_datagrid, __pyx_v_dg) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_datagrid, __pyx_v_dg) < 0) __PYX_ERR(0, 192, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":194
+  /* "kivyblocks/dg.pyx":193
  * 	def __init__(self,dg, freeze_flag, fields):
  * 		self.datagrid = dg
  * 		self.fields = fields             # <<<<<<<<<<<<<<
  * 		self.freeze_flag = freeze_flag
  * 		self.fields_width = None
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fields, __pyx_v_fields) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fields, __pyx_v_fields) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":195
+  /* "kivyblocks/dg.pyx":194
  * 		self.datagrid = dg
  * 		self.fields = fields
  * 		self.freeze_flag = freeze_flag             # <<<<<<<<<<<<<<
  * 		self.fields_width = None
  * 		BoxLayout.__init__(self, orientation='vertical')
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_flag, __pyx_v_freeze_flag) < 0) __PYX_ERR(0, 195, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_flag, __pyx_v_freeze_flag) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":196
+  /* "kivyblocks/dg.pyx":195
  * 		self.fields = fields
  * 		self.freeze_flag = freeze_flag
  * 		self.fields_width = None             # <<<<<<<<<<<<<<
  * 		BoxLayout.__init__(self, orientation='vertical')
  * 		WidgetReady.__init__(self)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fields_width, Py_None) < 0) __PYX_ERR(0, 196, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fields_width, Py_None) < 0) __PYX_ERR(0, 195, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":197
+  /* "kivyblocks/dg.pyx":196
  * 		self.freeze_flag = freeze_flag
  * 		self.fields_width = None
  * 		BoxLayout.__init__(self, orientation='vertical')             # <<<<<<<<<<<<<<
  * 		WidgetReady.__init__(self)
  * 		self.init(0)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_self);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_orientation, __pyx_n_s_vertical) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 197, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_orientation, __pyx_n_s_vertical) < 0) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":198
+  /* "kivyblocks/dg.pyx":197
  * 		self.fields_width = None
  * 		BoxLayout.__init__(self, orientation='vertical')
  * 		WidgetReady.__init__(self)             # <<<<<<<<<<<<<<
  * 		self.init(0)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -6604,19 +6600,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart___init__(CYTHON_UNUSED
   }
   __pyx_t_4 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_v_self) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_self);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":199
+  /* "kivyblocks/dg.pyx":198
  * 		BoxLayout.__init__(self, orientation='vertical')
  * 		WidgetReady.__init__(self)
  * 		self.init(0)             # <<<<<<<<<<<<<<
  * 
  * 	def setWidth(self):
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 199, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -6630,12 +6626,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart___init__(CYTHON_UNUSED
   }
   __pyx_t_4 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_int_0) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_int_0);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 199, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":192
+  /* "kivyblocks/dg.pyx":191
  * 
  * class DataGridPart(WidgetReady, BoxLayout):
  * 	def __init__(self,dg, freeze_flag, fields):             # <<<<<<<<<<<<<<
@@ -6659,7 +6655,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart___init__(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":201
+/* "kivyblocks/dg.pyx":200
  * 		self.init(0)
  * 
  * 	def setWidth(self):             # <<<<<<<<<<<<<<
@@ -6693,36 +6689,36 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_2setWidth(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setWidth", 0);
 
-  /* "kivyblocks/dg.pyx":202
+  /* "kivyblocks/dg.pyx":201
  * 
  * 	def setWidth(self):
  * 		if self.freeze_flag:             # <<<<<<<<<<<<<<
  * 			self.size_hint_x = None
  * 			self.width = self.getFieldsWidth()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 201, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 201, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":203
+    /* "kivyblocks/dg.pyx":202
  * 	def setWidth(self):
  * 		if self.freeze_flag:
  * 			self.size_hint_x = None             # <<<<<<<<<<<<<<
  * 			self.width = self.getFieldsWidth()
  * 
  */
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_size_hint_x, Py_None) < 0) __PYX_ERR(0, 203, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_size_hint_x, Py_None) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":204
+    /* "kivyblocks/dg.pyx":203
  * 		if self.freeze_flag:
  * 			self.size_hint_x = None
  * 			self.width = self.getFieldsWidth()             # <<<<<<<<<<<<<<
  * 
  * 	def getFieldsWidth(self):
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getFieldsWidth); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getFieldsWidth); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 203, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -6736,13 +6732,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_2setWidth(CYTHON_UNUSE
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_width, __pyx_t_1) < 0) __PYX_ERR(0, 204, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_width, __pyx_t_1) < 0) __PYX_ERR(0, 203, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":202
+    /* "kivyblocks/dg.pyx":201
  * 
  * 	def setWidth(self):
  * 		if self.freeze_flag:             # <<<<<<<<<<<<<<
@@ -6751,7 +6747,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_2setWidth(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/dg.pyx":201
+  /* "kivyblocks/dg.pyx":200
  * 		self.init(0)
  * 
  * 	def setWidth(self):             # <<<<<<<<<<<<<<
@@ -6774,7 +6770,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_2setWidth(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":206
+/* "kivyblocks/dg.pyx":205
  * 			self.width = self.getFieldsWidth()
  * 
  * 	def getFieldsWidth(self):             # <<<<<<<<<<<<<<
@@ -6813,21 +6809,21 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getFieldsWidth", 0);
 
-  /* "kivyblocks/dg.pyx":207
+  /* "kivyblocks/dg.pyx":206
  * 
  * 	def getFieldsWidth(self):
  * 		if not self.fields_width:             # <<<<<<<<<<<<<<
  * 			width = 0
  * 			for f in self.rowdesc:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields_width); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields_width); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":208
+    /* "kivyblocks/dg.pyx":207
  * 	def getFieldsWidth(self):
  * 		if not self.fields_width:
  * 			width = 0             # <<<<<<<<<<<<<<
@@ -6837,22 +6833,22 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
     __Pyx_INCREF(__pyx_int_0);
     __pyx_v_width = __pyx_int_0;
 
-    /* "kivyblocks/dg.pyx":209
+    /* "kivyblocks/dg.pyx":208
  * 		if not self.fields_width:
  * 			width = 0
  * 			for f in self.rowdesc:             # <<<<<<<<<<<<<<
  * 				width += f['width']
  * 			self.fields_width =  width
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_4 = __pyx_t_1; __Pyx_INCREF(__pyx_t_4); __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 209, __pyx_L1_error)
+      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 208, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 209, __pyx_L1_error)
+      __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 208, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -6860,17 +6856,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 209, __pyx_L1_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 208, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 209, __pyx_L1_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 208, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -6880,7 +6876,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 209, __pyx_L1_error)
+            else __PYX_ERR(0, 208, __pyx_L1_error)
           }
           break;
         }
@@ -6889,22 +6885,22 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
       __Pyx_XDECREF_SET(__pyx_v_f, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "kivyblocks/dg.pyx":210
+      /* "kivyblocks/dg.pyx":209
  * 			width = 0
  * 			for f in self.rowdesc:
  * 				width += f['width']             # <<<<<<<<<<<<<<
  * 			self.fields_width =  width
  * 		return self.fields_width
  */
-      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_width); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_width); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_7 = PyNumber_InPlaceAdd(__pyx_v_width, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 210, __pyx_L1_error)
+      __pyx_t_7 = PyNumber_InPlaceAdd(__pyx_v_width, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 209, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF_SET(__pyx_v_width, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "kivyblocks/dg.pyx":209
+      /* "kivyblocks/dg.pyx":208
  * 		if not self.fields_width:
  * 			width = 0
  * 			for f in self.rowdesc:             # <<<<<<<<<<<<<<
@@ -6914,16 +6910,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":211
+    /* "kivyblocks/dg.pyx":210
  * 			for f in self.rowdesc:
  * 				width += f['width']
  * 			self.fields_width =  width             # <<<<<<<<<<<<<<
  * 		return self.fields_width
  * 
  */
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fields_width, __pyx_v_width) < 0) __PYX_ERR(0, 211, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fields_width, __pyx_v_width) < 0) __PYX_ERR(0, 210, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":207
+    /* "kivyblocks/dg.pyx":206
  * 
  * 	def getFieldsWidth(self):
  * 		if not self.fields_width:             # <<<<<<<<<<<<<<
@@ -6932,7 +6928,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
  */
   }
 
-  /* "kivyblocks/dg.pyx":212
+  /* "kivyblocks/dg.pyx":211
  * 				width += f['width']
  * 			self.fields_width =  width
  * 		return self.fields_width             # <<<<<<<<<<<<<<
@@ -6940,13 +6936,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
  * 	def init(self,t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields_width); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 212, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields_width); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 211, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":206
+  /* "kivyblocks/dg.pyx":205
  * 			self.width = self.getFieldsWidth()
  * 
  * 	def getFieldsWidth(self):             # <<<<<<<<<<<<<<
@@ -6969,7 +6965,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_4getFieldsWidth(CYTHON
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":214
+/* "kivyblocks/dg.pyx":213
  * 		return self.fields_width
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
@@ -7012,11 +7008,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_7init(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, 1); __PYX_ERR(0, 214, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, 1); __PYX_ERR(0, 213, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "init") < 0)) __PYX_ERR(0, 214, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "init") < 0)) __PYX_ERR(0, 213, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -7029,7 +7025,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_7init(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 214, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("init", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 213, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGridPart.init", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -7065,34 +7061,34 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init", 0);
 
-  /* "kivyblocks/dg.pyx":215
+  /* "kivyblocks/dg.pyx":214
  * 
  * 	def init(self,t):
  * 		rd = []             # <<<<<<<<<<<<<<
  * 		for f in self.fields:
  * 			r = f.copy()
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_rd = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":216
+  /* "kivyblocks/dg.pyx":215
  * 	def init(self,t):
  * 		rd = []
  * 		for f in self.fields:             # <<<<<<<<<<<<<<
  * 			r = f.copy()
  * 			r['width'] = CSize(f.get('width',10))
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 216, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 215, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -7100,17 +7096,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 216, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 215, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 216, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 215, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -7120,7 +7116,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 216, __pyx_L1_error)
+          else __PYX_ERR(0, 215, __pyx_L1_error)
         }
         break;
       }
@@ -7129,14 +7125,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
     __Pyx_XDECREF_SET(__pyx_v_f, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":217
+    /* "kivyblocks/dg.pyx":216
  * 		rd = []
  * 		for f in self.fields:
  * 			r = f.copy()             # <<<<<<<<<<<<<<
  * 			r['width'] = CSize(f.get('width',10))
  * 			rd.append(r)
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_copy); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 217, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_copy); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 216, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -7150,24 +7146,24 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
     }
     __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_r, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":218
+    /* "kivyblocks/dg.pyx":217
  * 		for f in self.fields:
  * 			r = f.copy()
  * 			r['width'] = CSize(f.get('width',10))             # <<<<<<<<<<<<<<
  * 			rd.append(r)
  * 		self.rowdesc = rd
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_CSize); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_CSize); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = NULL;
@@ -7183,22 +7179,22 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
     __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_7);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(PyObject_SetItem(__pyx_v_r, __pyx_n_s_width, __pyx_t_1) < 0)) __PYX_ERR(0, 218, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(__pyx_v_r, __pyx_n_s_width, __pyx_t_1) < 0)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":219
+    /* "kivyblocks/dg.pyx":218
  * 			r = f.copy()
  * 			r['width'] = CSize(f.get('width',10))
  * 			rd.append(r)             # <<<<<<<<<<<<<<
  * 		self.rowdesc = rd
  * 		self.setWidth()
  */
-    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_rd, __pyx_v_r); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_rd, __pyx_v_r); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 218, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":216
+    /* "kivyblocks/dg.pyx":215
  * 	def init(self,t):
  * 		rd = []
  * 		for f in self.fields:             # <<<<<<<<<<<<<<
@@ -7208,23 +7204,23 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":220
+  /* "kivyblocks/dg.pyx":219
  * 			r['width'] = CSize(f.get('width',10))
  * 			rd.append(r)
  * 		self.rowdesc = rd             # <<<<<<<<<<<<<<
  * 		self.setWidth()
  * 		kw = {}
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc, __pyx_v_rd) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rowdesc, __pyx_v_rd) < 0) __PYX_ERR(0, 219, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":221
+  /* "kivyblocks/dg.pyx":220
  * 			rd.append(r)
  * 		self.rowdesc = rd
  * 		self.setWidth()             # <<<<<<<<<<<<<<
  * 		kw = {}
  * 		if self.freeze_flag:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_setWidth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_setWidth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -7238,58 +7234,58 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
   }
   __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":222
+  /* "kivyblocks/dg.pyx":221
  * 		self.rowdesc = rd
  * 		self.setWidth()
  * 		kw = {}             # <<<<<<<<<<<<<<
  * 		if self.freeze_flag:
  * 			kw['width'] = self.fields_width
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_kw = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":223
+  /* "kivyblocks/dg.pyx":222
  * 		self.setWidth()
  * 		kw = {}
  * 		if self.freeze_flag:             # <<<<<<<<<<<<<<
  * 			kw['width'] = self.fields_width
  * 			kw['size_hint'] = (None,None)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_9) {
 
-    /* "kivyblocks/dg.pyx":224
+    /* "kivyblocks/dg.pyx":223
  * 		kw = {}
  * 		if self.freeze_flag:
  * 			kw['width'] = self.fields_width             # <<<<<<<<<<<<<<
  * 			kw['size_hint'] = (None,None)
  * 		else:
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields_width); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields_width); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (unlikely(PyDict_SetItem(__pyx_v_kw, __pyx_n_s_width, __pyx_t_2) < 0)) __PYX_ERR(0, 224, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_kw, __pyx_n_s_width, __pyx_t_2) < 0)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/dg.pyx":225
+    /* "kivyblocks/dg.pyx":224
  * 		if self.freeze_flag:
  * 			kw['width'] = self.fields_width
  * 			kw['size_hint'] = (None,None)             # <<<<<<<<<<<<<<
  * 		else:
  * 			kw['size_hint'] = (1,None)
  */
-    if (unlikely(PyDict_SetItem(__pyx_v_kw, __pyx_n_s_size_hint, __pyx_tuple_) < 0)) __PYX_ERR(0, 225, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_kw, __pyx_n_s_size_hint, __pyx_tuple_) < 0)) __PYX_ERR(0, 224, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":223
+    /* "kivyblocks/dg.pyx":222
  * 		self.setWidth()
  * 		kw = {}
  * 		if self.freeze_flag:             # <<<<<<<<<<<<<<
@@ -7299,7 +7295,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
     goto __pyx_L5;
   }
 
-  /* "kivyblocks/dg.pyx":227
+  /* "kivyblocks/dg.pyx":226
  * 			kw['size_hint'] = (None,None)
  * 		else:
  * 			kw['size_hint'] = (1,None)             # <<<<<<<<<<<<<<
@@ -7307,20 +7303,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
  * 
  */
   /*else*/ {
-    if (unlikely(PyDict_SetItem(__pyx_v_kw, __pyx_n_s_size_hint, __pyx_tuple__4) < 0)) __PYX_ERR(0, 227, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_kw, __pyx_n_s_size_hint, __pyx_tuple__4) < 0)) __PYX_ERR(0, 226, __pyx_L1_error)
   }
   __pyx_L5:;
 
-  /* "kivyblocks/dg.pyx":228
+  /* "kivyblocks/dg.pyx":227
  * 		else:
  * 			kw['size_hint'] = (1,None)
  * 		kw['height'] = self.datagrid.rowHeight()             # <<<<<<<<<<<<<<
  * 
  * 		self.header = None
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -7335,72 +7331,72 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
   }
   __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(PyDict_SetItem(__pyx_v_kw, __pyx_n_s_height, __pyx_t_2) < 0)) __PYX_ERR(0, 228, __pyx_L1_error)
+  if (unlikely(PyDict_SetItem(__pyx_v_kw, __pyx_n_s_height, __pyx_t_2) < 0)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":230
+  /* "kivyblocks/dg.pyx":229
  * 		kw['height'] = self.datagrid.rowHeight()
  * 
  * 		self.header = None             # <<<<<<<<<<<<<<
  * 		if not self.datagrid.noheader:
  * 			self.header = Header(self,**kw)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_header, Py_None) < 0) __PYX_ERR(0, 230, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_header, Py_None) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":231
+  /* "kivyblocks/dg.pyx":230
  * 
  * 		self.header = None
  * 		if not self.datagrid.noheader:             # <<<<<<<<<<<<<<
  * 			self.header = Header(self,**kw)
  * 			self.add_widget(self.header)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_noheader); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_noheader); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_10 = ((!__pyx_t_9) != 0);
   if (__pyx_t_10) {
 
-    /* "kivyblocks/dg.pyx":232
+    /* "kivyblocks/dg.pyx":231
  * 		self.header = None
  * 		if not self.datagrid.noheader:
  * 			self.header = Header(self,**kw)             # <<<<<<<<<<<<<<
  * 			self.add_widget(self.header)
  * 		inner = {
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Header); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 232, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Header); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_self);
     __Pyx_GIVEREF(__pyx_v_self);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_self);
-    __pyx_t_1 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 232, __pyx_L1_error)
+    __pyx_t_1 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 232, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_header, __pyx_t_7) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_header, __pyx_t_7) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "kivyblocks/dg.pyx":233
+    /* "kivyblocks/dg.pyx":232
  * 		if not self.datagrid.noheader:
  * 			self.header = Header(self,**kw)
  * 			self.add_widget(self.header)             # <<<<<<<<<<<<<<
  * 		inner = {
  * 			"widgettype":"VBox",
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 233, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 232, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 233, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -7415,12 +7411,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
     __pyx_t_7 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 233, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 232, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "kivyblocks/dg.pyx":231
+    /* "kivyblocks/dg.pyx":230
  * 
  * 		self.header = None
  * 		if not self.datagrid.noheader:             # <<<<<<<<<<<<<<
@@ -7429,39 +7425,39 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
  */
   }
 
-  /* "kivyblocks/dg.pyx":235
+  /* "kivyblocks/dg.pyx":234
  * 			self.add_widget(self.header)
  * 		inner = {
  * 			"widgettype":"VBox",             # <<<<<<<<<<<<<<
  * 			"options":{
  * 			}
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_widgettype, __pyx_n_s_VBox) < 0) __PYX_ERR(0, 235, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_widgettype, __pyx_n_s_VBox) < 0) __PYX_ERR(0, 234, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":236
+  /* "kivyblocks/dg.pyx":235
  * 		inner = {
  * 			"widgettype":"VBox",
  * 			"options":{             # <<<<<<<<<<<<<<
  * 			}
  * 		}
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_options, __pyx_t_1) < 0) __PYX_ERR(0, 235, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_options, __pyx_t_1) < 0) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_inner = ((PyObject*)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":239
+  /* "kivyblocks/dg.pyx":238
  * 			}
  * 		}
  * 		self.body = Body(self)             # <<<<<<<<<<<<<<
  * 		self.add_widget(self.body)
  * 		if not self.freeze_flag:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Body); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Body); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -7475,22 +7471,22 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
   }
   __pyx_t_7 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_2, __pyx_v_self) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_self);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 239, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_body, __pyx_t_7) < 0) __PYX_ERR(0, 239, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_body, __pyx_t_7) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":240
+  /* "kivyblocks/dg.pyx":239
  * 		}
  * 		self.body = Body(self)
  * 		self.add_widget(self.body)             # <<<<<<<<<<<<<<
  * 		if not self.freeze_flag:
  * 			self.body.bind(pos=self.datagrid.bodyOnSize,
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -7505,76 +7501,76 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
   __pyx_t_7 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 240, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":241
+  /* "kivyblocks/dg.pyx":240
  * 		self.body = Body(self)
  * 		self.add_widget(self.body)
  * 		if not self.freeze_flag:             # <<<<<<<<<<<<<<
  * 			self.body.bind(pos=self.datagrid.bodyOnSize,
  * 							size=self.datagrid.bodyOnSize)
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_flag); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_9 = ((!__pyx_t_10) != 0);
   if (__pyx_t_9) {
 
-    /* "kivyblocks/dg.pyx":242
+    /* "kivyblocks/dg.pyx":241
  * 		self.add_widget(self.body)
  * 		if not self.freeze_flag:
  * 			self.body.bind(pos=self.datagrid.bodyOnSize,             # <<<<<<<<<<<<<<
  * 							size=self.datagrid.bodyOnSize)
  * 
  */
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 242, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 242, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 242, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_bodyOnSize); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 242, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_bodyOnSize); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_pos, __pyx_t_5) < 0) __PYX_ERR(0, 242, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_pos, __pyx_t_5) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":243
+    /* "kivyblocks/dg.pyx":242
  * 		if not self.freeze_flag:
  * 			self.body.bind(pos=self.datagrid.bodyOnSize,
  * 							size=self.datagrid.bodyOnSize)             # <<<<<<<<<<<<<<
  * 
  * 	def clearRows(self):
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 243, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_datagrid); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 242, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_bodyOnSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 243, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_bodyOnSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_size, __pyx_t_2) < 0) __PYX_ERR(0, 242, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_size, __pyx_t_2) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/dg.pyx":242
+    /* "kivyblocks/dg.pyx":241
  * 		self.add_widget(self.body)
  * 		if not self.freeze_flag:
  * 			self.body.bind(pos=self.datagrid.bodyOnSize,             # <<<<<<<<<<<<<<
  * 							size=self.datagrid.bodyOnSize)
  * 
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/dg.pyx":241
+    /* "kivyblocks/dg.pyx":240
  * 		self.body = Body(self)
  * 		self.add_widget(self.body)
  * 		if not self.freeze_flag:             # <<<<<<<<<<<<<<
@@ -7583,7 +7579,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
  */
   }
 
-  /* "kivyblocks/dg.pyx":214
+  /* "kivyblocks/dg.pyx":213
  * 		return self.fields_width
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
@@ -7613,7 +7609,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_6init(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":245
+/* "kivyblocks/dg.pyx":244
  * 							size=self.datagrid.bodyOnSize)
  * 
  * 	def clearRows(self):             # <<<<<<<<<<<<<<
@@ -7646,7 +7642,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_8clearRows(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("clearRows", 0);
 
-  /* "kivyblocks/dg.pyx":246
+  /* "kivyblocks/dg.pyx":245
  * 
  * 	def clearRows(self):
  * 		return self.body.clearRows()             # <<<<<<<<<<<<<<
@@ -7654,9 +7650,9 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_8clearRows(CYTHON_UNUS
  * 	def addRow(self,id, data):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_clearRows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_clearRows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -7671,14 +7667,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_8clearRows(CYTHON_UNUS
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 246, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":245
+  /* "kivyblocks/dg.pyx":244
  * 							size=self.datagrid.bodyOnSize)
  * 
  * 	def clearRows(self):             # <<<<<<<<<<<<<<
@@ -7699,7 +7695,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_8clearRows(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":248
+/* "kivyblocks/dg.pyx":247
  * 		return self.body.clearRows()
  * 
  * 	def addRow(self,id, data):             # <<<<<<<<<<<<<<
@@ -7745,17 +7741,17 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_11addRow(PyObject *__p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_id)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("addRow", 1, 3, 3, 1); __PYX_ERR(0, 248, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("addRow", 1, 3, 3, 1); __PYX_ERR(0, 247, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("addRow", 1, 3, 3, 2); __PYX_ERR(0, 248, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("addRow", 1, 3, 3, 2); __PYX_ERR(0, 247, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "addRow") < 0)) __PYX_ERR(0, 248, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "addRow") < 0)) __PYX_ERR(0, 247, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -7770,7 +7766,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_11addRow(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("addRow", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 248, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("addRow", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 247, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGridPart.addRow", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -7796,7 +7792,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_10addRow(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("addRow", 0);
 
-  /* "kivyblocks/dg.pyx":249
+  /* "kivyblocks/dg.pyx":248
  * 
  * 	def addRow(self,id, data):
  * 		return self.body.addRow(id, data)             # <<<<<<<<<<<<<<
@@ -7804,9 +7800,9 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_10addRow(CYTHON_UNUSED
  * 	def on_size(self, o, s=None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 248, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_addRow); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_addRow); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 248, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -7824,7 +7820,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_10addRow(CYTHON_UNUSED
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_id, __pyx_v_data};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -7832,13 +7828,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_10addRow(CYTHON_UNUSED
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_id, __pyx_v_data};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 248, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_2) {
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -7849,7 +7845,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_10addRow(CYTHON_UNUSED
     __Pyx_INCREF(__pyx_v_data);
     __Pyx_GIVEREF(__pyx_v_data);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_data);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -7858,7 +7854,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_10addRow(CYTHON_UNUSED
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":248
+  /* "kivyblocks/dg.pyx":247
  * 		return self.body.clearRows()
  * 
  * 	def addRow(self,id, data):             # <<<<<<<<<<<<<<
@@ -7880,7 +7876,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_10addRow(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":251
+/* "kivyblocks/dg.pyx":250
  * 		return self.body.addRow(id, data)
  * 
  * 	def on_size(self, o, s=None):             # <<<<<<<<<<<<<<
@@ -7927,7 +7923,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_13on_size(PyObject *__
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_o)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("on_size", 0, 2, 3, 1); __PYX_ERR(0, 251, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("on_size", 0, 2, 3, 1); __PYX_ERR(0, 250, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -7937,7 +7933,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_13on_size(PyObject *__
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "on_size") < 0)) __PYX_ERR(0, 251, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "on_size") < 0)) __PYX_ERR(0, 250, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -7955,7 +7951,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_12DataGridPart_13on_size(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_size", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 251, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_size", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 250, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGridPart.on_size", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -7981,18 +7977,18 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_12on_size(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_size", 0);
 
-  /* "kivyblocks/dg.pyx":252
+  /* "kivyblocks/dg.pyx":251
  * 
  * 	def on_size(self, o, s=None):
  * 		if not hasattr(self, 'body'):             # <<<<<<<<<<<<<<
  * 			return
  * 		self.body.size_hint_y = None
  */
-  __pyx_t_1 = __Pyx_HasAttr(__pyx_v_self, __pyx_n_s_body); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_HasAttr(__pyx_v_self, __pyx_n_s_body); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 251, __pyx_L1_error)
   __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":253
+    /* "kivyblocks/dg.pyx":252
  * 	def on_size(self, o, s=None):
  * 		if not hasattr(self, 'body'):
  * 			return             # <<<<<<<<<<<<<<
@@ -8003,7 +7999,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_12on_size(CYTHON_UNUSE
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/dg.pyx":252
+    /* "kivyblocks/dg.pyx":251
  * 
  * 	def on_size(self, o, s=None):
  * 		if not hasattr(self, 'body'):             # <<<<<<<<<<<<<<
@@ -8012,56 +8008,56 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_12on_size(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/dg.pyx":254
+  /* "kivyblocks/dg.pyx":253
  * 		if not hasattr(self, 'body'):
  * 			return
  * 		self.body.size_hint_y = None             # <<<<<<<<<<<<<<
  * 		if self.header:
  * 			self.body.height = self.height - self.header.height
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_3, __pyx_n_s_size_hint_y, Py_None) < 0) __PYX_ERR(0, 254, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_3, __pyx_n_s_size_hint_y, Py_None) < 0) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/dg.pyx":255
+  /* "kivyblocks/dg.pyx":254
  * 			return
  * 		self.body.size_hint_y = None
  * 		if self.header:             # <<<<<<<<<<<<<<
  * 			self.body.height = self.height - self.header.height
  * 		else:
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":256
+    /* "kivyblocks/dg.pyx":255
  * 		self.body.size_hint_y = None
  * 		if self.header:
  * 			self.body.height = self.height - self.header.height             # <<<<<<<<<<<<<<
  * 		else:
  * 			self.body.height = self.height
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_height); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_height); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 256, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_header); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_height); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 256, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_height); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_Subtract(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 256, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Subtract(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 256, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_5, __pyx_n_s_height, __pyx_t_4) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_5, __pyx_n_s_height, __pyx_t_4) < 0) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":255
+    /* "kivyblocks/dg.pyx":254
  * 			return
  * 		self.body.size_hint_y = None
  * 		if self.header:             # <<<<<<<<<<<<<<
@@ -8071,7 +8067,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_12on_size(CYTHON_UNUSE
     goto __pyx_L4;
   }
 
-  /* "kivyblocks/dg.pyx":258
+  /* "kivyblocks/dg.pyx":257
  * 			self.body.height = self.height - self.header.height
  * 		else:
  * 			self.body.height = self.height             # <<<<<<<<<<<<<<
@@ -8079,17 +8075,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_12on_size(CYTHON_UNUSE
  * 
  */
   /*else*/ {
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_height); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 258, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_height); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 257, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 258, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 257, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_n_s_height, __pyx_t_5) < 0) __PYX_ERR(0, 258, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_n_s_height, __pyx_t_5) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_L4:;
 
-  /* "kivyblocks/dg.pyx":251
+  /* "kivyblocks/dg.pyx":250
  * 		return self.body.addRow(id, data)
  * 
  * 	def on_size(self, o, s=None):             # <<<<<<<<<<<<<<
@@ -8112,7 +8108,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_12DataGridPart_12on_size(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":323
+/* "kivyblocks/dg.pyx":322
  * 	fields = ListProperty(None)
  * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):             # <<<<<<<<<<<<<<
@@ -8153,7 +8149,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_1__init__(PyObject *__pyx_s
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_options, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 323, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_options, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 322, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -8164,7 +8160,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_1__init__(PyObject *__pyx_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 323, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 322, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_options); __pyx_v_options = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -8196,88 +8192,88 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "kivyblocks/dg.pyx":324
+  /* "kivyblocks/dg.pyx":323
  * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):
  * 		self.select_rowid = None             # <<<<<<<<<<<<<<
  * 		self.rowheight = None
  * 		self.on_sizeTask = None
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_select_rowid, Py_None) < 0) __PYX_ERR(0, 324, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_select_rowid, Py_None) < 0) __PYX_ERR(0, 323, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":325
+  /* "kivyblocks/dg.pyx":324
  * 	def __init__(self,**options):
  * 		self.select_rowid = None
  * 		self.rowheight = None             # <<<<<<<<<<<<<<
  * 		self.on_sizeTask = None
  * 		self.selected_rowid = None
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rowheight, Py_None) < 0) __PYX_ERR(0, 325, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rowheight, Py_None) < 0) __PYX_ERR(0, 324, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":326
+  /* "kivyblocks/dg.pyx":325
  * 		self.select_rowid = None
  * 		self.rowheight = None
  * 		self.on_sizeTask = None             # <<<<<<<<<<<<<<
  * 		self.selected_rowid = None
  * 		self.show_rows = 0
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_on_sizeTask, Py_None) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_on_sizeTask, Py_None) < 0) __PYX_ERR(0, 325, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":327
+  /* "kivyblocks/dg.pyx":326
  * 		self.rowheight = None
  * 		self.on_sizeTask = None
  * 		self.selected_rowid = None             # <<<<<<<<<<<<<<
  * 		self.show_rows = 0
  * 		self._toolbar = None
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid, Py_None) < 0) __PYX_ERR(0, 327, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid, Py_None) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":328
+  /* "kivyblocks/dg.pyx":327
  * 		self.on_sizeTask = None
  * 		self.selected_rowid = None
  * 		self.show_rows = 0             # <<<<<<<<<<<<<<
  * 		self._toolbar = None
  * 		self.freeze_part = None
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_show_rows, __pyx_int_0) < 0) __PYX_ERR(0, 328, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_show_rows, __pyx_int_0) < 0) __PYX_ERR(0, 327, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":329
+  /* "kivyblocks/dg.pyx":328
  * 		self.selected_rowid = None
  * 		self.show_rows = 0
  * 		self._toolbar = None             # <<<<<<<<<<<<<<
  * 		self.freeze_part = None
  * 		self.normal_part = None
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_toolbar, Py_None) < 0) __PYX_ERR(0, 329, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_toolbar, Py_None) < 0) __PYX_ERR(0, 328, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":330
+  /* "kivyblocks/dg.pyx":329
  * 		self.show_rows = 0
  * 		self._toolbar = None
  * 		self.freeze_part = None             # <<<<<<<<<<<<<<
  * 		self.normal_part = None
  * 		SUPER(DataGrid, self, options)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part, Py_None) < 0) __PYX_ERR(0, 330, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part, Py_None) < 0) __PYX_ERR(0, 329, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":331
+  /* "kivyblocks/dg.pyx":330
  * 		self._toolbar = None
  * 		self.freeze_part = None
  * 		self.normal_part = None             # <<<<<<<<<<<<<<
  * 		SUPER(DataGrid, self, options)
  * 		self.freeze_fields = self.getPartFields(freeze_flag=True)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_normal_part, Py_None) < 0) __PYX_ERR(0, 331, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_normal_part, Py_None) < 0) __PYX_ERR(0, 330, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":332
+  /* "kivyblocks/dg.pyx":331
  * 		self.freeze_part = None
  * 		self.normal_part = None
  * 		SUPER(DataGrid, self, options)             # <<<<<<<<<<<<<<
  * 		self.freeze_fields = self.getPartFields(freeze_flag=True)
  * 		self.normal_fields = self.getPartFields(freeze_flag=False)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_SUPER); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 332, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_SUPER); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 331, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DataGrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 332, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DataGrid); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 331, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -8294,7 +8290,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_t_3, __pyx_v_self, __pyx_v_options};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8303,14 +8299,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_t_3, __pyx_v_self, __pyx_v_options};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -8324,79 +8320,79 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
     __Pyx_GIVEREF(__pyx_v_options);
     PyTuple_SET_ITEM(__pyx_t_6, 2+__pyx_t_5, __pyx_v_options);
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":333
+  /* "kivyblocks/dg.pyx":332
  * 		self.normal_part = None
  * 		SUPER(DataGrid, self, options)
  * 		self.freeze_fields = self.getPartFields(freeze_flag=True)             # <<<<<<<<<<<<<<
  * 		self.normal_fields = self.getPartFields(freeze_flag=False)
  * 		if not self.dataloader:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getPartFields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getPartFields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_freeze_flag, Py_True) < 0) __PYX_ERR(0, 333, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 333, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_freeze_flag, Py_True) < 0) __PYX_ERR(0, 332, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_fields, __pyx_t_6) < 0) __PYX_ERR(0, 333, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_fields, __pyx_t_6) < 0) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":334
+  /* "kivyblocks/dg.pyx":333
  * 		SUPER(DataGrid, self, options)
  * 		self.freeze_fields = self.getPartFields(freeze_flag=True)
  * 		self.normal_fields = self.getPartFields(freeze_flag=False)             # <<<<<<<<<<<<<<
  * 		if not self.dataloader:
  * 			raise Exception('DataGrid need a DataLoader')
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getPartFields); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 334, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getPartFields); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 334, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_freeze_flag, Py_False) < 0) __PYX_ERR(0, 334, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_freeze_flag, Py_False) < 0) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_normal_fields, __pyx_t_1) < 0) __PYX_ERR(0, 334, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_normal_fields, __pyx_t_1) < 0) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":335
+  /* "kivyblocks/dg.pyx":334
  * 		self.freeze_fields = self.getPartFields(freeze_flag=True)
  * 		self.normal_fields = self.getPartFields(freeze_flag=False)
  * 		if not self.dataloader:             # <<<<<<<<<<<<<<
  * 			raise Exception('DataGrid need a DataLoader')
  * 		self._dataloader = RelatedLoader(target=self, **self.dataloader)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 335, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_8 = ((!__pyx_t_7) != 0);
   if (unlikely(__pyx_t_8)) {
 
-    /* "kivyblocks/dg.pyx":336
+    /* "kivyblocks/dg.pyx":335
  * 		self.normal_fields = self.getPartFields(freeze_flag=False)
  * 		if not self.dataloader:
  * 			raise Exception('DataGrid need a DataLoader')             # <<<<<<<<<<<<<<
  * 		self._dataloader = RelatedLoader(target=self, **self.dataloader)
  * 		self._dataloader.bind(on_deletepage=self.delete_page)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 336, __pyx_L1_error)
+    __PYX_ERR(0, 335, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":335
+    /* "kivyblocks/dg.pyx":334
  * 		self.freeze_fields = self.getPartFields(freeze_flag=True)
  * 		self.normal_fields = self.getPartFields(freeze_flag=False)
  * 		if not self.dataloader:             # <<<<<<<<<<<<<<
@@ -8405,139 +8401,139 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "kivyblocks/dg.pyx":337
+  /* "kivyblocks/dg.pyx":336
  * 		if not self.dataloader:
  * 			raise Exception('DataGrid need a DataLoader')
  * 		self._dataloader = RelatedLoader(target=self, **self.dataloader)             # <<<<<<<<<<<<<<
  * 		self._dataloader.bind(on_deletepage=self.delete_page)
  * 		self._dataloader.bind(on_pageloaded=self.add_page)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_RelatedLoader); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_RelatedLoader); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_target, __pyx_v_self) < 0) __PYX_ERR(0, 337, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_target, __pyx_v_self) < 0) __PYX_ERR(0, 336, __pyx_L1_error)
   __pyx_t_2 = __pyx_t_6;
   __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   if (unlikely(__pyx_t_6 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-    __PYX_ERR(0, 337, __pyx_L1_error)
+    __PYX_ERR(0, 336, __pyx_L1_error)
   }
-  if (__Pyx_MergeKeywords(__pyx_t_2, __pyx_t_6) < 0) __PYX_ERR(0, 337, __pyx_L1_error)
+  if (__Pyx_MergeKeywords(__pyx_t_2, __pyx_t_6) < 0) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2, __pyx_t_6) < 0) __PYX_ERR(0, 337, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2, __pyx_t_6) < 0) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":338
+  /* "kivyblocks/dg.pyx":337
  * 			raise Exception('DataGrid need a DataLoader')
  * 		self._dataloader = RelatedLoader(target=self, **self.dataloader)
  * 		self._dataloader.bind(on_deletepage=self.delete_page)             # <<<<<<<<<<<<<<
  * 		self._dataloader.bind(on_pageloaded=self.add_page)
  * 		self._dataloader.bind(on_pageloaded=self.update_tailer_info)
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 337, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_delete_page); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_delete_page); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_on_deletepage, __pyx_t_1) < 0) __PYX_ERR(0, 338, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_on_deletepage, __pyx_t_1) < 0) __PYX_ERR(0, 337, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":339
+  /* "kivyblocks/dg.pyx":338
  * 		self._dataloader = RelatedLoader(target=self, **self.dataloader)
  * 		self._dataloader.bind(on_deletepage=self.delete_page)
  * 		self._dataloader.bind(on_pageloaded=self.add_page)             # <<<<<<<<<<<<<<
  * 		self._dataloader.bind(on_pageloaded=self.update_tailer_info)
  * 		self._dataloader.bind(on_newbegin=self.clearRows)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bind); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bind); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_page); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_page); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_on_pageloaded, __pyx_t_2) < 0) __PYX_ERR(0, 339, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_on_pageloaded, __pyx_t_2) < 0) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":340
+  /* "kivyblocks/dg.pyx":339
  * 		self._dataloader.bind(on_deletepage=self.delete_page)
  * 		self._dataloader.bind(on_pageloaded=self.add_page)
  * 		self._dataloader.bind(on_pageloaded=self.update_tailer_info)             # <<<<<<<<<<<<<<
  * 		self._dataloader.bind(on_newbegin=self.clearRows)
  * 		self.register_event_type('on_selected')
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_bind); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_update_tailer_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_update_tailer_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_on_pageloaded, __pyx_t_6) < 0) __PYX_ERR(0, 340, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_on_pageloaded, __pyx_t_6) < 0) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":341
+  /* "kivyblocks/dg.pyx":340
  * 		self._dataloader.bind(on_pageloaded=self.add_page)
  * 		self._dataloader.bind(on_pageloaded=self.update_tailer_info)
  * 		self._dataloader.bind(on_newbegin=self.clearRows)             # <<<<<<<<<<<<<<
  * 		self.register_event_type('on_selected')
  * 		self.register_event_type('on_rowpress')
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_bind); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_clearRows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_clearRows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_on_newbegin, __pyx_t_1) < 0) __PYX_ERR(0, 341, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_on_newbegin, __pyx_t_1) < 0) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":342
+  /* "kivyblocks/dg.pyx":341
  * 		self._dataloader.bind(on_pageloaded=self.update_tailer_info)
  * 		self._dataloader.bind(on_newbegin=self.clearRows)
  * 		self.register_event_type('on_selected')             # <<<<<<<<<<<<<<
  * 		self.register_event_type('on_rowpress')
  * 		self.register_event_type('on_cellpress')
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_register_event_type); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 342, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_register_event_type); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 341, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8551,19 +8547,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_2, __pyx_n_s_on_selected) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_n_s_on_selected);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":343
+  /* "kivyblocks/dg.pyx":342
  * 		self._dataloader.bind(on_newbegin=self.clearRows)
  * 		self.register_event_type('on_selected')
  * 		self.register_event_type('on_rowpress')             # <<<<<<<<<<<<<<
  * 		self.register_event_type('on_cellpress')
  * 		self.register_event_type('on_headerpress')
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_register_event_type); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 343, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_register_event_type); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8577,19 +8573,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_2, __pyx_n_s_on_rowpress) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_n_s_on_rowpress);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 343, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":344
+  /* "kivyblocks/dg.pyx":343
  * 		self.register_event_type('on_selected')
  * 		self.register_event_type('on_rowpress')
  * 		self.register_event_type('on_cellpress')             # <<<<<<<<<<<<<<
  * 		self.register_event_type('on_headerpress')
  * 		self.createDataGridPart()
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_register_event_type); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 344, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_register_event_type); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 343, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8603,19 +8599,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_2, __pyx_n_s_on_cellpress) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_n_s_on_cellpress);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 344, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 343, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":345
+  /* "kivyblocks/dg.pyx":344
  * 		self.register_event_type('on_rowpress')
  * 		self.register_event_type('on_cellpress')
  * 		self.register_event_type('on_headerpress')             # <<<<<<<<<<<<<<
  * 		self.createDataGridPart()
  * 		self.createToolbar()
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_register_event_type); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_register_event_type); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8629,19 +8625,45 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_2, __pyx_n_s_on_headerpress) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_n_s_on_headerpress);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 345, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":346
+  /* "kivyblocks/dg.pyx":345
  * 		self.register_event_type('on_cellpress')
  * 		self.register_event_type('on_headerpress')
  * 		self.createDataGridPart()             # <<<<<<<<<<<<<<
  * 		self.createToolbar()
  * 		if self._toolbar:
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_createDataGridPart); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 346, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_createDataGridPart); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_2 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_6);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_6, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "kivyblocks/dg.pyx":346
+ * 		self.register_event_type('on_headerpress')
+ * 		self.createDataGridPart()
+ * 		self.createToolbar()             # <<<<<<<<<<<<<<
+ * 		if self._toolbar:
+ * 			self.add_widget(self._toolbar)
+ */
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_createToolbar); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8661,54 +8683,28 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kivyblocks/dg.pyx":347
- * 		self.register_event_type('on_headerpress')
- * 		self.createDataGridPart()
- * 		self.createToolbar()             # <<<<<<<<<<<<<<
- * 		if self._toolbar:
- * 			self.add_widget(self._toolbar)
- */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_createToolbar); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 347, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_6);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-      __Pyx_INCREF(__pyx_t_2);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_6, function);
-    }
-  }
-  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 347, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "kivyblocks/dg.pyx":348
  * 		self.createDataGridPart()
  * 		self.createToolbar()
  * 		if self._toolbar:             # <<<<<<<<<<<<<<
  * 			self.add_widget(self._toolbar)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_toolbar); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 348, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_toolbar); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 347, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 348, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 347, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_8) {
 
-    /* "kivyblocks/dg.pyx":349
+    /* "kivyblocks/dg.pyx":348
  * 		self.createToolbar()
  * 		if self._toolbar:
  * 			self.add_widget(self._toolbar)             # <<<<<<<<<<<<<<
  * 
  * 		b = BoxLayout(orientation='horizontal')
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 349, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_toolbar); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 349, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_toolbar); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8723,12 +8719,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
     __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 349, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":348
+    /* "kivyblocks/dg.pyx":347
  * 		self.createDataGridPart()
  * 		self.createToolbar()
  * 		if self._toolbar:             # <<<<<<<<<<<<<<
@@ -8737,48 +8733,48 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "kivyblocks/dg.pyx":351
+  /* "kivyblocks/dg.pyx":350
  * 			self.add_widget(self._toolbar)
  * 
  * 		b = BoxLayout(orientation='horizontal')             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			b.add_widget(self.freeze_part)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 351, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 351, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_orientation, __pyx_n_s_horizontal) < 0) __PYX_ERR(0, 351, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_orientation, __pyx_n_s_horizontal) < 0) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_b = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":352
+  /* "kivyblocks/dg.pyx":351
  * 
  * 		b = BoxLayout(orientation='horizontal')
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			b.add_widget(self.freeze_part)
  * 		if self.normal_part:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 352, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 352, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_8) {
 
-    /* "kivyblocks/dg.pyx":353
+    /* "kivyblocks/dg.pyx":352
  * 		b = BoxLayout(orientation='horizontal')
  * 		if self.freeze_part:
  * 			b.add_widget(self.freeze_part)             # <<<<<<<<<<<<<<
  * 		if self.normal_part:
  * 			b.add_widget(self.normal_part)
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 353, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 352, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 353, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8793,12 +8789,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
     __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_3, __pyx_t_1) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_1);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 353, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 352, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/dg.pyx":352
+    /* "kivyblocks/dg.pyx":351
  * 
  * 		b = BoxLayout(orientation='horizontal')
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -8807,29 +8803,29 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "kivyblocks/dg.pyx":354
+  /* "kivyblocks/dg.pyx":353
  * 		if self.freeze_part:
  * 			b.add_widget(self.freeze_part)
  * 		if self.normal_part:             # <<<<<<<<<<<<<<
  * 			b.add_widget(self.normal_part)
  * 		self.add_widget(b)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 354, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 353, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 354, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 353, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_8) {
 
-    /* "kivyblocks/dg.pyx":355
+    /* "kivyblocks/dg.pyx":354
  * 			b.add_widget(self.freeze_part)
  * 		if self.normal_part:
  * 			b.add_widget(self.normal_part)             # <<<<<<<<<<<<<<
  * 		self.add_widget(b)
  * 		if self.tailer:
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 355, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_b, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 355, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8844,12 +8840,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
     __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_3, __pyx_t_1) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_1);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 355, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/dg.pyx":354
+    /* "kivyblocks/dg.pyx":353
  * 		if self.freeze_part:
  * 			b.add_widget(self.freeze_part)
  * 		if self.normal_part:             # <<<<<<<<<<<<<<
@@ -8858,14 +8854,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "kivyblocks/dg.pyx":356
+  /* "kivyblocks/dg.pyx":355
  * 		if self.normal_part:
  * 			b.add_widget(self.normal_part)
  * 		self.add_widget(b)             # <<<<<<<<<<<<<<
  * 		if self.tailer:
  * 			self.tailer_widgets = {}
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 356, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8879,46 +8875,46 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   }
   __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_1, __pyx_v_b) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_v_b);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":357
+  /* "kivyblocks/dg.pyx":356
  * 			b.add_widget(self.normal_part)
  * 		self.add_widget(b)
  * 		if self.tailer:             # <<<<<<<<<<<<<<
  * 			self.tailer_widgets = {}
  * 			self.build_tailer(self.tailer)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 356, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_8) {
 
-    /* "kivyblocks/dg.pyx":358
+    /* "kivyblocks/dg.pyx":357
  * 		self.add_widget(b)
  * 		if self.tailer:
  * 			self.tailer_widgets = {}             # <<<<<<<<<<<<<<
  * 			self.build_tailer(self.tailer)
  * 
  */
-    __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 358, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 357, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_tailer_widgets, __pyx_t_2) < 0) __PYX_ERR(0, 358, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_tailer_widgets, __pyx_t_2) < 0) __PYX_ERR(0, 357, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/dg.pyx":359
+    /* "kivyblocks/dg.pyx":358
  * 		if self.tailer:
  * 			self.tailer_widgets = {}
  * 			self.build_tailer(self.tailer)             # <<<<<<<<<<<<<<
  * 
  * 	def on_rowpress(self, *args):
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_build_tailer); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 359, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_build_tailer); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 359, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -8933,12 +8929,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
     __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_3, __pyx_t_1) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_1);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 359, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/dg.pyx":357
+    /* "kivyblocks/dg.pyx":356
  * 			b.add_widget(self.normal_part)
  * 		self.add_widget(b)
  * 		if self.tailer:             # <<<<<<<<<<<<<<
@@ -8947,7 +8943,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "kivyblocks/dg.pyx":323
+  /* "kivyblocks/dg.pyx":322
  * 	fields = ListProperty(None)
  * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):             # <<<<<<<<<<<<<<
@@ -8973,7 +8969,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid___init__(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":361
+/* "kivyblocks/dg.pyx":360
  * 			self.build_tailer(self.tailer)
  * 
  * 	def on_rowpress(self, *args):             # <<<<<<<<<<<<<<
@@ -9023,7 +9019,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_3on_rowpress(PyObject *__py
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 1) ? pos_args : 1;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_rowpress") < 0)) __PYX_ERR(0, 361, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_rowpress") < 0)) __PYX_ERR(0, 360, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 1) {
       goto __pyx_L5_argtuple_error;
@@ -9034,7 +9030,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_3on_rowpress(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_rowpress", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 361, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_rowpress", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 360, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.on_rowpress", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -9058,14 +9054,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_2on_rowpress(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_rowpress", 0);
 
-  /* "kivyblocks/dg.pyx":362
+  /* "kivyblocks/dg.pyx":361
  * 
  * 	def on_rowpress(self, *args):
  * 		print('on_rowpress fire, args=', args)             # <<<<<<<<<<<<<<
  * 
  * 	def on_cellpress(self, *args):
  */
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 362, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 361, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_kp_s_on_rowpress_fire_args);
   __Pyx_GIVEREF(__pyx_kp_s_on_rowpress_fire_args);
@@ -9073,10 +9069,10 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_2on_rowpress(CYTHON_UNUSED 
   __Pyx_INCREF(__pyx_v_args);
   __Pyx_GIVEREF(__pyx_v_args);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_args);
-  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 362, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 361, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":361
+  /* "kivyblocks/dg.pyx":360
  * 			self.build_tailer(self.tailer)
  * 
  * 	def on_rowpress(self, *args):             # <<<<<<<<<<<<<<
@@ -9097,7 +9093,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_2on_rowpress(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":364
+/* "kivyblocks/dg.pyx":363
  * 		print('on_rowpress fire, args=', args)
  * 
  * 	def on_cellpress(self, *args):             # <<<<<<<<<<<<<<
@@ -9147,7 +9143,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_5on_cellpress(PyObject *__p
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 1) ? pos_args : 1;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_cellpress") < 0)) __PYX_ERR(0, 364, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_cellpress") < 0)) __PYX_ERR(0, 363, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 1) {
       goto __pyx_L5_argtuple_error;
@@ -9158,7 +9154,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_5on_cellpress(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_cellpress", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 364, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_cellpress", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 363, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.on_cellpress", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -9182,14 +9178,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_4on_cellpress(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_cellpress", 0);
 
-  /* "kivyblocks/dg.pyx":365
+  /* "kivyblocks/dg.pyx":364
  * 
  * 	def on_cellpress(self, *args):
  * 		print('on_cesspress fire, args=', args)             # <<<<<<<<<<<<<<
  * 
  * 	def on_headerpress(self, *args):
  */
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_kp_s_on_cesspress_fire_args);
   __Pyx_GIVEREF(__pyx_kp_s_on_cesspress_fire_args);
@@ -9197,10 +9193,10 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_4on_cellpress(CYTHON_UNUSED
   __Pyx_INCREF(__pyx_v_args);
   __Pyx_GIVEREF(__pyx_v_args);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_args);
-  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 365, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":364
+  /* "kivyblocks/dg.pyx":363
  * 		print('on_rowpress fire, args=', args)
  * 
  * 	def on_cellpress(self, *args):             # <<<<<<<<<<<<<<
@@ -9221,7 +9217,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_4on_cellpress(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":367
+/* "kivyblocks/dg.pyx":366
  * 		print('on_cesspress fire, args=', args)
  * 
  * 	def on_headerpress(self, *args):             # <<<<<<<<<<<<<<
@@ -9271,7 +9267,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_7on_headerpress(PyObject *_
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 1) ? pos_args : 1;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_headerpress") < 0)) __PYX_ERR(0, 367, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_headerpress") < 0)) __PYX_ERR(0, 366, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 1) {
       goto __pyx_L5_argtuple_error;
@@ -9282,7 +9278,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_7on_headerpress(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_headerpress", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 367, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_headerpress", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 366, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.on_headerpress", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -9306,14 +9302,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_6on_headerpress(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_headerpress", 0);
 
-  /* "kivyblocks/dg.pyx":368
+  /* "kivyblocks/dg.pyx":367
  * 
  * 	def on_headerpress(self, *args):
  * 		print('on_headerpress fire, args=', args)             # <<<<<<<<<<<<<<
  * 
  * 	def cell_pressed(self, o):
  */
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 368, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_kp_s_on_headerpress_fire_args);
   __Pyx_GIVEREF(__pyx_kp_s_on_headerpress_fire_args);
@@ -9321,10 +9317,10 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_6on_headerpress(CYTHON_UNUS
   __Pyx_INCREF(__pyx_v_args);
   __Pyx_GIVEREF(__pyx_v_args);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_args);
-  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 368, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":367
+  /* "kivyblocks/dg.pyx":366
  * 		print('on_cesspress fire, args=', args)
  * 
  * 	def on_headerpress(self, *args):             # <<<<<<<<<<<<<<
@@ -9345,7 +9341,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_6on_headerpress(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":370
+/* "kivyblocks/dg.pyx":369
  * 		print('on_headerpress fire, args=', args)
  * 
  * 	def cell_pressed(self, o):             # <<<<<<<<<<<<<<
@@ -9388,11 +9384,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_9cell_pressed(PyObject *__p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_o)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cell_pressed", 1, 2, 2, 1); __PYX_ERR(0, 370, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cell_pressed", 1, 2, 2, 1); __PYX_ERR(0, 369, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cell_pressed") < 0)) __PYX_ERR(0, 370, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cell_pressed") < 0)) __PYX_ERR(0, 369, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -9405,7 +9401,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_9cell_pressed(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("cell_pressed", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 370, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cell_pressed", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 369, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.cell_pressed", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -9434,29 +9430,29 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cell_pressed", 0);
 
-  /* "kivyblocks/dg.pyx":371
+  /* "kivyblocks/dg.pyx":370
  * 
  * 	def cell_pressed(self, o):
  * 		if o.cell_type == 'header':             # <<<<<<<<<<<<<<
  * 			self.dispatch('on_headerpress', o.colume_name)
  * 			return
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_cell_type); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 371, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_cell_type); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 370, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_header, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 371, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_header, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 370, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":372
+    /* "kivyblocks/dg.pyx":371
  * 	def cell_pressed(self, o):
  * 		if o.cell_type == 'header':
  * 			self.dispatch('on_headerpress', o.colume_name)             # <<<<<<<<<<<<<<
  * 			return
  * 		row = o.row
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 372, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 371, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_colume_name); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 372, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_colume_name); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 371, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     __pyx_t_6 = 0;
@@ -9473,7 +9469,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_s_on_headerpress, __pyx_t_4};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 372, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 371, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -9482,14 +9478,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_s_on_headerpress, __pyx_t_4};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 372, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 371, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else
     #endif
     {
-      __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 372, __pyx_L1_error)
+      __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 371, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -9500,14 +9496,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 372, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 371, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":373
+    /* "kivyblocks/dg.pyx":372
  * 		if o.cell_type == 'header':
  * 			self.dispatch('on_headerpress', o.colume_name)
  * 			return             # <<<<<<<<<<<<<<
@@ -9518,7 +9514,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/dg.pyx":371
+    /* "kivyblocks/dg.pyx":370
  * 
  * 	def cell_pressed(self, o):
  * 		if o.cell_type == 'header':             # <<<<<<<<<<<<<<
@@ -9527,41 +9523,41 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
  */
   }
 
-  /* "kivyblocks/dg.pyx":374
+  /* "kivyblocks/dg.pyx":373
  * 			self.dispatch('on_headerpress', o.colume_name)
  * 			return
  * 		row = o.row             # <<<<<<<<<<<<<<
  * 		if self.selected_rowid:
  * 			self.unselect_row(self.selected_rowid)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_row); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_row = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":375
+  /* "kivyblocks/dg.pyx":374
  * 			return
  * 		row = o.row
  * 		if self.selected_rowid:             # <<<<<<<<<<<<<<
  * 			self.unselect_row(self.selected_rowid)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 375, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 374, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 375, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 374, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":376
+    /* "kivyblocks/dg.pyx":375
  * 		row = o.row
  * 		if self.selected_rowid:
  * 			self.unselect_row(self.selected_rowid)             # <<<<<<<<<<<<<<
  * 
  * 		self.selected_rowid = row.row_id
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_unselect_row); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 376, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_unselect_row); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 375, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 376, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 375, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -9576,12 +9572,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_7);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 376, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 375, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":375
+    /* "kivyblocks/dg.pyx":374
  * 			return
  * 		row = o.row
  * 		if self.selected_rowid:             # <<<<<<<<<<<<<<
@@ -9590,28 +9586,28 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
  */
   }
 
-  /* "kivyblocks/dg.pyx":378
+  /* "kivyblocks/dg.pyx":377
  * 			self.unselect_row(self.selected_rowid)
  * 
  * 		self.selected_rowid = row.row_id             # <<<<<<<<<<<<<<
  * 		self.select_row(row.row_id)
  * 		self.dispatch('on_cellpress', o)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 378, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid, __pyx_t_1) < 0) __PYX_ERR(0, 378, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid, __pyx_t_1) < 0) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":379
+  /* "kivyblocks/dg.pyx":378
  * 
  * 		self.selected_rowid = row.row_id
  * 		self.select_row(row.row_id)             # <<<<<<<<<<<<<<
  * 		self.dispatch('on_cellpress', o)
  * 		self.dispatch('on_rowpress', row)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select_row); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 379, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select_row); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_id); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 379, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_id); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -9626,19 +9622,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_7);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 379, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":380
+  /* "kivyblocks/dg.pyx":379
  * 		self.selected_rowid = row.row_id
  * 		self.select_row(row.row_id)
  * 		self.dispatch('on_cellpress', o)             # <<<<<<<<<<<<<<
  * 		self.dispatch('on_rowpress', row)
  * 		self.dispatch('on_selected', row)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 380, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 379, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_7 = NULL;
   __pyx_t_6 = 0;
@@ -9655,7 +9651,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_n_s_on_cellpress, __pyx_v_o};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 379, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -9663,13 +9659,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_n_s_on_cellpress, __pyx_v_o};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 379, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_4 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 380, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 379, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -9680,21 +9676,21 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
     __Pyx_INCREF(__pyx_v_o);
     __Pyx_GIVEREF(__pyx_v_o);
     PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_6, __pyx_v_o);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 379, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":381
+  /* "kivyblocks/dg.pyx":380
  * 		self.select_row(row.row_id)
  * 		self.dispatch('on_cellpress', o)
  * 		self.dispatch('on_rowpress', row)             # <<<<<<<<<<<<<<
  * 		self.dispatch('on_selected', row)
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 381, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 380, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_6 = 0;
@@ -9711,7 +9707,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_s_on_rowpress, __pyx_v_row};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 381, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -9719,13 +9715,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_s_on_rowpress, __pyx_v_row};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 381, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 381, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 380, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -9736,21 +9732,21 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
     __Pyx_INCREF(__pyx_v_row);
     __Pyx_GIVEREF(__pyx_v_row);
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_v_row);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 381, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 380, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":382
+  /* "kivyblocks/dg.pyx":381
  * 		self.dispatch('on_cellpress', o)
  * 		self.dispatch('on_rowpress', row)
  * 		self.dispatch('on_selected', row)             # <<<<<<<<<<<<<<
  * 
  * 	def unselect_row(self, row_id):
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 382, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dispatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 381, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_7 = NULL;
   __pyx_t_6 = 0;
@@ -9767,7 +9763,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_n_s_on_selected, __pyx_v_row};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 382, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 381, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -9775,13 +9771,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_n_s_on_selected, __pyx_v_row};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 382, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 381, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_4 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 382, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -9792,14 +9788,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
     __Pyx_INCREF(__pyx_v_row);
     __Pyx_GIVEREF(__pyx_v_row);
     PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_6, __pyx_v_row);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 382, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":370
+  /* "kivyblocks/dg.pyx":369
  * 		print('on_headerpress fire, args=', args)
  * 
  * 	def cell_pressed(self, o):             # <<<<<<<<<<<<<<
@@ -9825,7 +9821,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_8cell_pressed(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":384
+/* "kivyblocks/dg.pyx":383
  * 		self.dispatch('on_selected', row)
  * 
  * 	def unselect_row(self, row_id):             # <<<<<<<<<<<<<<
@@ -9868,11 +9864,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_11unselect_row(PyObject *__
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_row_id)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("unselect_row", 1, 2, 2, 1); __PYX_ERR(0, 384, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("unselect_row", 1, 2, 2, 1); __PYX_ERR(0, 383, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unselect_row") < 0)) __PYX_ERR(0, 384, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unselect_row") < 0)) __PYX_ERR(0, 383, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -9885,7 +9881,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_11unselect_row(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("unselect_row", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 384, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("unselect_row", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 383, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.unselect_row", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -9911,32 +9907,32 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_10unselect_row(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("unselect_row", 0);
 
-  /* "kivyblocks/dg.pyx":385
+  /* "kivyblocks/dg.pyx":384
  * 
  * 	def unselect_row(self, row_id):
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			row.unselected()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":386
+    /* "kivyblocks/dg.pyx":385
  * 	def unselect_row(self, row_id):
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)             # <<<<<<<<<<<<<<
  * 			row.unselected()
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 386, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 385, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 386, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 385, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 386, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 385, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -9951,20 +9947,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_10unselect_row(CYTHON_UNUSE
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_row_id) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_row_id);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 386, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 385, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_row = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":387
+    /* "kivyblocks/dg.pyx":386
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			row.unselected()             # <<<<<<<<<<<<<<
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  * 		row.unselected()
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_unselected); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 387, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_unselected); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 386, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -9978,12 +9974,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_10unselect_row(CYTHON_UNUSE
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 387, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 386, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":385
+    /* "kivyblocks/dg.pyx":384
  * 
  * 	def unselect_row(self, row_id):
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -9992,19 +9988,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_10unselect_row(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/dg.pyx":388
+  /* "kivyblocks/dg.pyx":387
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			row.unselected()
  * 		row = self.normal_part.body.get_row_by_id(row_id)             # <<<<<<<<<<<<<<
  * 		row.unselected()
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 387, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 388, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 387, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 387, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -10019,20 +10015,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_10unselect_row(CYTHON_UNUSE
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_row_id) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_row_id);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 388, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 387, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_XDECREF_SET(__pyx_v_row, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":389
+  /* "kivyblocks/dg.pyx":388
  * 			row.unselected()
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  * 		row.unselected()             # <<<<<<<<<<<<<<
  * 
  * 	def select_row(self, row_id):
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_unselected); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 389, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_unselected); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -10046,12 +10042,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_10unselect_row(CYTHON_UNUSE
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 389, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":384
+  /* "kivyblocks/dg.pyx":383
  * 		self.dispatch('on_selected', row)
  * 
  * 	def unselect_row(self, row_id):             # <<<<<<<<<<<<<<
@@ -10075,7 +10071,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_10unselect_row(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":391
+/* "kivyblocks/dg.pyx":390
  * 		row.unselected()
  * 
  * 	def select_row(self, row_id):             # <<<<<<<<<<<<<<
@@ -10118,11 +10114,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_13select_row(PyObject *__py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_row_id)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("select_row", 1, 2, 2, 1); __PYX_ERR(0, 391, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("select_row", 1, 2, 2, 1); __PYX_ERR(0, 390, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "select_row") < 0)) __PYX_ERR(0, 391, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "select_row") < 0)) __PYX_ERR(0, 390, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -10135,7 +10131,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_13select_row(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("select_row", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 391, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("select_row", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 390, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.select_row", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -10161,32 +10157,32 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_12select_row(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("select_row", 0);
 
-  /* "kivyblocks/dg.pyx":392
+  /* "kivyblocks/dg.pyx":391
  * 
  * 	def select_row(self, row_id):
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			row.selected()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 392, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 391, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 392, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 391, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":393
+    /* "kivyblocks/dg.pyx":392
  * 	def select_row(self, row_id):
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)             # <<<<<<<<<<<<<<
  * 			row.selected()
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 393, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 392, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 393, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 392, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 393, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 392, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -10201,20 +10197,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_12select_row(CYTHON_UNUSED 
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_row_id) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_row_id);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 393, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 392, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_row = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":394
+    /* "kivyblocks/dg.pyx":393
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			row.selected()             # <<<<<<<<<<<<<<
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  * 		row.selected()
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_selected); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 394, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_selected); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 393, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -10228,12 +10224,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_12select_row(CYTHON_UNUSED 
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 394, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 393, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":392
+    /* "kivyblocks/dg.pyx":391
  * 
  * 	def select_row(self, row_id):
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -10242,19 +10238,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_12select_row(CYTHON_UNUSED 
  */
   }
 
-  /* "kivyblocks/dg.pyx":395
+  /* "kivyblocks/dg.pyx":394
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			row.selected()
  * 		row = self.normal_part.body.get_row_by_id(row_id)             # <<<<<<<<<<<<<<
  * 		row.selected()
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 395, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 395, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 395, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -10269,20 +10265,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_12select_row(CYTHON_UNUSED 
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_row_id) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_row_id);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 395, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_XDECREF_SET(__pyx_v_row, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":396
+  /* "kivyblocks/dg.pyx":395
  * 			row.selected()
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  * 		row.selected()             # <<<<<<<<<<<<<<
  * 
  * 	def on_ready(self, *args):
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_selected); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 396, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_selected); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -10296,12 +10292,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_12select_row(CYTHON_UNUSED 
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 396, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":391
+  /* "kivyblocks/dg.pyx":390
  * 		row.unselected()
  * 
  * 	def select_row(self, row_id):             # <<<<<<<<<<<<<<
@@ -10325,7 +10321,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_12select_row(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":398
+/* "kivyblocks/dg.pyx":397
  * 		row.selected()
  * 
  * 	def on_ready(self, *args):             # <<<<<<<<<<<<<<
@@ -10375,7 +10371,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_15on_ready(PyObject *__pyx_
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 1) ? pos_args : 1;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_ready") < 0)) __PYX_ERR(0, 398, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "on_ready") < 0)) __PYX_ERR(0, 397, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 1) {
       goto __pyx_L5_argtuple_error;
@@ -10386,7 +10382,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_15on_ready(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_ready", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 398, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_ready", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 397, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.on_ready", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -10412,14 +10408,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_14on_ready(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_ready", 0);
 
-  /* "kivyblocks/dg.pyx":399
+  /* "kivyblocks/dg.pyx":398
  * 
  * 	def on_ready(self, *args):
  * 		self.loadData()             # <<<<<<<<<<<<<<
  * 
  * 	def build_tailer(self, tailer_desc):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_loadData); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 399, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_loadData); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 398, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -10433,12 +10429,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_14on_ready(CYTHON_UNUSED Py
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 399, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 398, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":398
+  /* "kivyblocks/dg.pyx":397
  * 		row.selected()
  * 
  * 	def on_ready(self, *args):             # <<<<<<<<<<<<<<
@@ -10461,7 +10457,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_14on_ready(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":401
+/* "kivyblocks/dg.pyx":400
  * 		self.loadData()
  * 
  * 	def build_tailer(self, tailer_desc):             # <<<<<<<<<<<<<<
@@ -10504,11 +10500,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_17build_tailer(PyObject *__
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_tailer_desc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("build_tailer", 1, 2, 2, 1); __PYX_ERR(0, 401, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("build_tailer", 1, 2, 2, 1); __PYX_ERR(0, 400, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "build_tailer") < 0)) __PYX_ERR(0, 401, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "build_tailer") < 0)) __PYX_ERR(0, 400, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -10521,7 +10517,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_17build_tailer(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("build_tailer", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 401, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("build_tailer", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 400, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.build_tailer", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -10552,16 +10548,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("build_tailer", 0);
 
-  /* "kivyblocks/dg.pyx":402
+  /* "kivyblocks/dg.pyx":401
  * 
  * 	def build_tailer(self, tailer_desc):
  * 		kw = tailer_desc.get('options', {})             # <<<<<<<<<<<<<<
  * 		kw.update({
  * 			'size_hint_y':None,
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 401, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -10578,7 +10574,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_s_options, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -10587,14 +10583,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_s_options, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 402, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -10605,7 +10601,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
@@ -10613,37 +10609,37 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   __pyx_v_kw = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":403
+  /* "kivyblocks/dg.pyx":402
  * 	def build_tailer(self, tailer_desc):
  * 		kw = tailer_desc.get('options', {})
  * 		kw.update({             # <<<<<<<<<<<<<<
  * 			'size_hint_y':None,
  * 			'height':self.rowheight
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_kw, __pyx_n_s_update); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_kw, __pyx_n_s_update); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 402, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "kivyblocks/dg.pyx":404
+  /* "kivyblocks/dg.pyx":403
  * 		kw = tailer_desc.get('options', {})
  * 		kw.update({
  * 			'size_hint_y':None,             # <<<<<<<<<<<<<<
  * 			'height':self.rowheight
  * 		})
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 404, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_size_hint_y, Py_None) < 0) __PYX_ERR(0, 404, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_size_hint_y, Py_None) < 0) __PYX_ERR(0, 403, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":405
+  /* "kivyblocks/dg.pyx":404
  * 		kw.update({
  * 			'size_hint_y':None,
  * 			'height':self.rowheight             # <<<<<<<<<<<<<<
  * 		})
  * 		w = HBox(**kw)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowheight); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowheight); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_height, __pyx_t_3) < 0) __PYX_ERR(0, 404, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_height, __pyx_t_3) < 0) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -10658,46 +10654,46 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":407
+  /* "kivyblocks/dg.pyx":406
  * 			'height':self.rowheight
  * 		})
  * 		w = HBox(**kw)             # <<<<<<<<<<<<<<
  * 		self.add_widget(w)
  * 		self.show_infos(w, tailer_desc.get('info'))
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_HBox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_HBox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_kw == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-    __PYX_ERR(0, 407, __pyx_L1_error)
+    __PYX_ERR(0, 406, __pyx_L1_error)
   }
   if (likely(PyDict_CheckExact(__pyx_v_kw))) {
-    __pyx_t_2 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
+    __pyx_t_2 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   } else {
-    __pyx_t_2 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_kw, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
+    __pyx_t_2 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_v_kw, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 407, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_w = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":408
+  /* "kivyblocks/dg.pyx":407
  * 		})
  * 		w = HBox(**kw)
  * 		self.add_widget(w)             # <<<<<<<<<<<<<<
  * 		self.show_infos(w, tailer_desc.get('info'))
  * 		if tailer_desc.get('others'):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 408, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -10711,21 +10707,21 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   }
   __pyx_t_6 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_v_w) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_w);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 408, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":409
+  /* "kivyblocks/dg.pyx":408
  * 		w = HBox(**kw)
  * 		self.add_widget(w)
  * 		self.show_infos(w, tailer_desc.get('info'))             # <<<<<<<<<<<<<<
  * 		if tailer_desc.get('others'):
  * 			w1 = self.build_tailer_other(tailer_desc.get('others'))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_infos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_infos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -10739,7 +10735,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_n_s_info) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_n_s_info);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 408, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -10757,7 +10753,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_w, __pyx_t_1};
-    __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 409, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 408, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -10766,14 +10762,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_w, __pyx_t_1};
-    __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 409, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 408, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else
   #endif
   {
-    __pyx_t_4 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 409, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 408, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -10784,21 +10780,21 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_5, __pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 409, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 408, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "kivyblocks/dg.pyx":410
+  /* "kivyblocks/dg.pyx":409
  * 		self.add_widget(w)
  * 		self.show_infos(w, tailer_desc.get('info'))
  * 		if tailer_desc.get('others'):             # <<<<<<<<<<<<<<
  * 			w1 = self.build_tailer_other(tailer_desc.get('others'))
  * 			if w1:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 409, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -10812,23 +10808,23 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   }
   __pyx_t_6 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_4, __pyx_n_s_others) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_s_others);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 410, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 409, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 409, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_7) {
 
-    /* "kivyblocks/dg.pyx":411
+    /* "kivyblocks/dg.pyx":410
  * 		self.show_infos(w, tailer_desc.get('info'))
  * 		if tailer_desc.get('others'):
  * 			w1 = self.build_tailer_other(tailer_desc.get('others'))             # <<<<<<<<<<<<<<
  * 			if w1:
  * 				w.add_widget(w1)
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_build_tailer_other); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 411, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_build_tailer_other); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 411, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_desc, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -10842,7 +10838,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
     }
     __pyx_t_4 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_n_s_others) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_n_s_others);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 411, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 410, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = NULL;
@@ -10858,30 +10854,30 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
     __pyx_t_6 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 411, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 410, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_w1 = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "kivyblocks/dg.pyx":412
+    /* "kivyblocks/dg.pyx":411
  * 		if tailer_desc.get('others'):
  * 			w1 = self.build_tailer_other(tailer_desc.get('others'))
  * 			if w1:             # <<<<<<<<<<<<<<
  * 				w.add_widget(w1)
  * 
  */
-    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_w1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 412, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_w1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 411, __pyx_L1_error)
     if (__pyx_t_7) {
 
-      /* "kivyblocks/dg.pyx":413
+      /* "kivyblocks/dg.pyx":412
  * 			w1 = self.build_tailer_other(tailer_desc.get('others'))
  * 			if w1:
  * 				w.add_widget(w1)             # <<<<<<<<<<<<<<
  * 
  * 	def update_tailer_info(self, *args):
  */
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 413, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_w, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 412, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_4 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -10895,12 +10891,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
       }
       __pyx_t_6 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_4, __pyx_v_w1) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_w1);
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 413, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 412, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "kivyblocks/dg.pyx":412
+      /* "kivyblocks/dg.pyx":411
  * 		if tailer_desc.get('others'):
  * 			w1 = self.build_tailer_other(tailer_desc.get('others'))
  * 			if w1:             # <<<<<<<<<<<<<<
@@ -10909,7 +10905,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
  */
     }
 
-    /* "kivyblocks/dg.pyx":410
+    /* "kivyblocks/dg.pyx":409
  * 		self.add_widget(w)
  * 		self.show_infos(w, tailer_desc.get('info'))
  * 		if tailer_desc.get('others'):             # <<<<<<<<<<<<<<
@@ -10918,7 +10914,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
  */
   }
 
-  /* "kivyblocks/dg.pyx":401
+  /* "kivyblocks/dg.pyx":400
  * 		self.loadData()
  * 
  * 	def build_tailer(self, tailer_desc):             # <<<<<<<<<<<<<<
@@ -10946,7 +10942,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_16build_tailer(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":415
+/* "kivyblocks/dg.pyx":414
  * 				w.add_widget(w1)
  * 
  * 	def update_tailer_info(self, *args):             # <<<<<<<<<<<<<<
@@ -10996,7 +10992,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_19update_tailer_info(PyObje
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 1) ? pos_args : 1;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "update_tailer_info") < 0)) __PYX_ERR(0, 415, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "update_tailer_info") < 0)) __PYX_ERR(0, 414, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 1) {
       goto __pyx_L5_argtuple_error;
@@ -11007,7 +11003,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_19update_tailer_info(PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("update_tailer_info", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 415, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("update_tailer_info", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 414, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.update_tailer_info", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -11042,18 +11038,18 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update_tailer_info", 0);
 
-  /* "kivyblocks/dg.pyx":416
+  /* "kivyblocks/dg.pyx":415
  * 
  * 	def update_tailer_info(self, *args):
  * 		if not hasattr(self, 'tailer_widgets'):             # <<<<<<<<<<<<<<
  * 			return
  * 		for n,w in self.tailer_widgets.items():
  */
-  __pyx_t_1 = __Pyx_HasAttr(__pyx_v_self, __pyx_n_s_tailer_widgets); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 416, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_HasAttr(__pyx_v_self, __pyx_n_s_tailer_widgets); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 415, __pyx_L1_error)
   __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":417
+    /* "kivyblocks/dg.pyx":416
  * 	def update_tailer_info(self, *args):
  * 		if not hasattr(self, 'tailer_widgets'):
  * 			return             # <<<<<<<<<<<<<<
@@ -11064,7 +11060,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/dg.pyx":416
+    /* "kivyblocks/dg.pyx":415
  * 
  * 	def update_tailer_info(self, *args):
  * 		if not hasattr(self, 'tailer_widgets'):             # <<<<<<<<<<<<<<
@@ -11073,16 +11069,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
  */
   }
 
-  /* "kivyblocks/dg.pyx":418
+  /* "kivyblocks/dg.pyx":417
  * 		if not hasattr(self, 'tailer_widgets'):
  * 			return
  * 		for n,w in self.tailer_widgets.items():             # <<<<<<<<<<<<<<
  * 			w.text = self.loader_info(n)
  * 
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer_widgets); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 418, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer_widgets); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 417, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_items); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 418, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_items); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 417, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -11097,16 +11093,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
   }
   __pyx_t_3 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 418, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 417, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
     __pyx_t_5 = __pyx_t_3; __Pyx_INCREF(__pyx_t_5); __pyx_t_6 = 0;
     __pyx_t_7 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 418, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 417, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 418, __pyx_L1_error)
+    __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 417, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   for (;;) {
@@ -11114,17 +11110,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
       if (likely(PyList_CheckExact(__pyx_t_5))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_5)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 418, __pyx_L1_error)
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 417, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 418, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 417, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_5)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 418, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 417, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 418, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 417, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
@@ -11134,7 +11130,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 418, __pyx_L1_error)
+          else __PYX_ERR(0, 417, __pyx_L1_error)
         }
         break;
       }
@@ -11146,7 +11142,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 418, __pyx_L1_error)
+        __PYX_ERR(0, 417, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -11159,15 +11155,15 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
       __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(__pyx_t_8);
       #else
-      __pyx_t_4 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 418, __pyx_L1_error)
+      __pyx_t_4 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 417, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 418, __pyx_L1_error)
+      __pyx_t_8 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 417, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       #endif
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_9 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 418, __pyx_L1_error)
+      __pyx_t_9 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 417, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_t_10 = Py_TYPE(__pyx_t_9)->tp_iternext;
@@ -11175,7 +11171,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
       __Pyx_GOTREF(__pyx_t_4);
       index = 1; __pyx_t_8 = __pyx_t_10(__pyx_t_9); if (unlikely(!__pyx_t_8)) goto __pyx_L6_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_8);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_10(__pyx_t_9), 2) < 0) __PYX_ERR(0, 418, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_10(__pyx_t_9), 2) < 0) __PYX_ERR(0, 417, __pyx_L1_error)
       __pyx_t_10 = NULL;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       goto __pyx_L7_unpacking_done;
@@ -11183,7 +11179,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_t_10 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 418, __pyx_L1_error)
+      __PYX_ERR(0, 417, __pyx_L1_error)
       __pyx_L7_unpacking_done:;
     }
     __Pyx_XDECREF_SET(__pyx_v_n, __pyx_t_4);
@@ -11191,14 +11187,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
     __Pyx_XDECREF_SET(__pyx_v_w, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "kivyblocks/dg.pyx":419
+    /* "kivyblocks/dg.pyx":418
  * 			return
  * 		for n,w in self.tailer_widgets.items():
  * 			w.text = self.loader_info(n)             # <<<<<<<<<<<<<<
  * 
  * 	def show_infos(self, tailer_widget, info_names):
  */
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_loader_info); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 419, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_loader_info); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 418, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
@@ -11212,13 +11208,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
     }
     __pyx_t_3 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_4, __pyx_v_n) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_v_n);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 419, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 418, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_w, __pyx_n_s_text, __pyx_t_3) < 0) __PYX_ERR(0, 419, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_w, __pyx_n_s_text, __pyx_t_3) < 0) __PYX_ERR(0, 418, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "kivyblocks/dg.pyx":418
+    /* "kivyblocks/dg.pyx":417
  * 		if not hasattr(self, 'tailer_widgets'):
  * 			return
  * 		for n,w in self.tailer_widgets.items():             # <<<<<<<<<<<<<<
@@ -11228,7 +11224,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/dg.pyx":415
+  /* "kivyblocks/dg.pyx":414
  * 				w.add_widget(w1)
  * 
  * 	def update_tailer_info(self, *args):             # <<<<<<<<<<<<<<
@@ -11255,7 +11251,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_18update_tailer_info(CYTHON
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":421
+/* "kivyblocks/dg.pyx":420
  * 			w.text = self.loader_info(n)
  * 
  * 	def show_infos(self, tailer_widget, info_names):             # <<<<<<<<<<<<<<
@@ -11301,17 +11297,17 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_21show_infos(PyObject *__py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_tailer_widget)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("show_infos", 1, 3, 3, 1); __PYX_ERR(0, 421, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("show_infos", 1, 3, 3, 1); __PYX_ERR(0, 420, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_info_names)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("show_infos", 1, 3, 3, 2); __PYX_ERR(0, 421, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("show_infos", 1, 3, 3, 2); __PYX_ERR(0, 420, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "show_infos") < 0)) __PYX_ERR(0, 421, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "show_infos") < 0)) __PYX_ERR(0, 420, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -11326,7 +11322,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_21show_infos(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("show_infos", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 421, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("show_infos", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 420, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.show_infos", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -11358,7 +11354,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("show_infos", 0);
 
-  /* "kivyblocks/dg.pyx":422
+  /* "kivyblocks/dg.pyx":421
  * 
  * 	def show_infos(self, tailer_widget, info_names):
  * 		for n in info_names:             # <<<<<<<<<<<<<<
@@ -11369,26 +11365,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
     __pyx_t_1 = __pyx_v_info_names; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_info_names); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 422, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_info_names); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 421, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 422, __pyx_L1_error)
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 421, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 422, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 421, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 422, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 421, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 422, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 421, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 422, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 421, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -11398,7 +11394,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 422, __pyx_L1_error)
+          else __PYX_ERR(0, 421, __pyx_L1_error)
         }
         break;
       }
@@ -11407,51 +11403,51 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
     __Pyx_XDECREF_SET(__pyx_v_n, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":424
+    /* "kivyblocks/dg.pyx":423
  * 		for n in info_names:
  * 			desc = {
  * 				"widgettype":"Text",             # <<<<<<<<<<<<<<
  * 				"options":{
  * 					"text":n,
  */
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 424, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 423, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widgettype, __pyx_n_s_Text) < 0) __PYX_ERR(0, 424, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_widgettype, __pyx_n_s_Text) < 0) __PYX_ERR(0, 423, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":426
+    /* "kivyblocks/dg.pyx":425
  * 				"widgettype":"Text",
  * 				"options":{
  * 					"text":n,             # <<<<<<<<<<<<<<
  * 					"i18n":True,
  * 				}
  */
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 425, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_text, __pyx_v_n) < 0) __PYX_ERR(0, 426, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_text, __pyx_v_n) < 0) __PYX_ERR(0, 425, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":427
+    /* "kivyblocks/dg.pyx":426
  * 				"options":{
  * 					"text":n,
  * 					"i18n":True,             # <<<<<<<<<<<<<<
  * 				}
  * 			}
  */
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_i18n, Py_True) < 0) __PYX_ERR(0, 426, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_options, __pyx_t_5) < 0) __PYX_ERR(0, 424, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_i18n, Py_True) < 0) __PYX_ERR(0, 425, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_options, __pyx_t_5) < 0) __PYX_ERR(0, 423, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_desc, ((PyObject*)__pyx_t_4));
     __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":430
+    /* "kivyblocks/dg.pyx":429
  * 				}
  * 			}
  * 			w = Factory.Blocks().widgetBuild(desc)             # <<<<<<<<<<<<<<
  * 			tailer_widget.add_widget(w)
  * 			tailer_widget.add_widget(Label(text=':'))
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Factory); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 430, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Factory); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 429, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 430, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 429, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = NULL;
@@ -11466,10 +11462,10 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
     }
     __pyx_t_5 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 430, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 429, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 430, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 429, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -11484,20 +11480,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
     }
     __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_5, __pyx_v_desc) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_desc);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 430, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 429, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_XDECREF_SET(__pyx_v_w, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":431
+    /* "kivyblocks/dg.pyx":430
  * 			}
  * 			w = Factory.Blocks().widgetBuild(desc)
  * 			tailer_widget.add_widget(w)             # <<<<<<<<<<<<<<
  * 			tailer_widget.add_widget(Label(text=':'))
  * 			self.tailer_widgets[n] = Label(text=self.loader_info(n))
  */
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_widget, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 431, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_widget, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 430, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
@@ -11511,26 +11507,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
     }
     __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_5, __pyx_v_w) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_w);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 431, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 430, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":432
+    /* "kivyblocks/dg.pyx":431
  * 			w = Factory.Blocks().widgetBuild(desc)
  * 			tailer_widget.add_widget(w)
  * 			tailer_widget.add_widget(Label(text=':'))             # <<<<<<<<<<<<<<
  * 			self.tailer_widgets[n] = Label(text=self.loader_info(n))
  * 			tailer_widget.add_widget(self.tailer_widgets[n])
  */
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_widget, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 432, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_widget, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 431, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Label); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 432, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Label); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 431, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 432, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 431, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_text, __pyx_kp_s__6) < 0) __PYX_ERR(0, 432, __pyx_L1_error)
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 432, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_text, __pyx_kp_s__6) < 0) __PYX_ERR(0, 431, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 431, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -11547,23 +11543,23 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
     __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_6, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_8);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 432, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 431, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":433
+    /* "kivyblocks/dg.pyx":432
  * 			tailer_widget.add_widget(w)
  * 			tailer_widget.add_widget(Label(text=':'))
  * 			self.tailer_widgets[n] = Label(text=self.loader_info(n))             # <<<<<<<<<<<<<<
  * 			tailer_widget.add_widget(self.tailer_widgets[n])
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Label); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 433, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Label); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 433, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_loader_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 433, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_loader_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -11577,33 +11573,33 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
     }
     __pyx_t_8 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_5, __pyx_v_n) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_v_n);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 433, __pyx_L1_error)
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_text, __pyx_t_8) < 0) __PYX_ERR(0, 433, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_text, __pyx_t_8) < 0) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 433, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer_widgets); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 433, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer_widgets); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (unlikely(PyObject_SetItem(__pyx_t_7, __pyx_v_n, __pyx_t_8) < 0)) __PYX_ERR(0, 433, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(__pyx_t_7, __pyx_v_n, __pyx_t_8) < 0)) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kivyblocks/dg.pyx":434
+    /* "kivyblocks/dg.pyx":433
  * 			tailer_widget.add_widget(Label(text=':'))
  * 			self.tailer_widgets[n] = Label(text=self.loader_info(n))
  * 			tailer_widget.add_widget(self.tailer_widgets[n])             # <<<<<<<<<<<<<<
  * 
  * 	def build_tailer_others(desc):
  */
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_widget, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 434, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_tailer_widget, __pyx_n_s_add_widget); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 433, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer_widgets); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 434, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_tailer_widgets); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 433, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_4, __pyx_v_n); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 434, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_4, __pyx_v_n); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 433, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -11619,12 +11615,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
     __pyx_t_8 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_4, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 434, __pyx_L1_error)
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 433, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kivyblocks/dg.pyx":422
+    /* "kivyblocks/dg.pyx":421
  * 
  * 	def show_infos(self, tailer_widget, info_names):
  * 		for n in info_names:             # <<<<<<<<<<<<<<
@@ -11634,7 +11630,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":421
+  /* "kivyblocks/dg.pyx":420
  * 			w.text = self.loader_info(n)
  * 
  * 	def show_infos(self, tailer_widget, info_names):             # <<<<<<<<<<<<<<
@@ -11663,7 +11659,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_20show_infos(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":436
+/* "kivyblocks/dg.pyx":435
  * 			tailer_widget.add_widget(self.tailer_widgets[n])
  * 
  * 	def build_tailer_others(desc):             # <<<<<<<<<<<<<<
@@ -11697,7 +11693,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_22build_tailer_others(CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("build_tailer_others", 0);
 
-  /* "kivyblocks/dg.pyx":437
+  /* "kivyblocks/dg.pyx":436
  * 
  * 	def build_tailer_others(desc):
  * 		return Factory.Blocks().widgetBuild(desc)             # <<<<<<<<<<<<<<
@@ -11705,9 +11701,9 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_22build_tailer_others(CYTHO
  * 	def loader_info(self, n):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Factory); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 437, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Factory); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 436, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 437, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_Blocks); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 436, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -11722,10 +11718,10 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_22build_tailer_others(CYTHO
   }
   __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 437, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 436, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 437, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_widgetBuild); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 436, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -11740,14 +11736,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_22build_tailer_others(CYTHO
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_2, __pyx_v_desc) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_desc);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 437, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 436, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":436
+  /* "kivyblocks/dg.pyx":435
  * 			tailer_widget.add_widget(self.tailer_widgets[n])
  * 
  * 	def build_tailer_others(desc):             # <<<<<<<<<<<<<<
@@ -11769,7 +11765,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_22build_tailer_others(CYTHO
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":439
+/* "kivyblocks/dg.pyx":438
  * 		return Factory.Blocks().widgetBuild(desc)
  * 
  * 	def loader_info(self, n):             # <<<<<<<<<<<<<<
@@ -11812,11 +11808,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_25loader_info(PyObject *__p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_n)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("loader_info", 1, 2, 2, 1); __PYX_ERR(0, 439, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("loader_info", 1, 2, 2, 1); __PYX_ERR(0, 438, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "loader_info") < 0)) __PYX_ERR(0, 439, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "loader_info") < 0)) __PYX_ERR(0, 438, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -11829,7 +11825,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_25loader_info(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("loader_info", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 439, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("loader_info", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 438, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.loader_info", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -11855,36 +11851,36 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_24loader_info(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("loader_info", 0);
 
-  /* "kivyblocks/dg.pyx":440
+  /* "kivyblocks/dg.pyx":439
  * 
  * 	def loader_info(self, n):
  * 		if hasattr(self._dataloader, n):             # <<<<<<<<<<<<<<
  * 			txt=getattr(self._dataloader, n, 0)
  * 			if txt is None:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 440, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_HasAttr(__pyx_t_1, __pyx_v_n); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 440, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_HasAttr(__pyx_t_1, __pyx_v_n); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":441
+    /* "kivyblocks/dg.pyx":440
  * 	def loader_info(self, n):
  * 		if hasattr(self._dataloader, n):
  * 			txt=getattr(self._dataloader, n, 0)             # <<<<<<<<<<<<<<
  * 			if txt is None:
  * 				txt = '0'
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 441, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 440, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_GetAttr3(__pyx_t_1, __pyx_v_n, __pyx_int_0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 441, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetAttr3(__pyx_t_1, __pyx_v_n, __pyx_int_0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 440, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_txt = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":442
+    /* "kivyblocks/dg.pyx":441
  * 		if hasattr(self._dataloader, n):
  * 			txt=getattr(self._dataloader, n, 0)
  * 			if txt is None:             # <<<<<<<<<<<<<<
@@ -11895,7 +11891,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_24loader_info(CYTHON_UNUSED
     __pyx_t_2 = (__pyx_t_3 != 0);
     if (__pyx_t_2) {
 
-      /* "kivyblocks/dg.pyx":443
+      /* "kivyblocks/dg.pyx":442
  * 			txt=getattr(self._dataloader, n, 0)
  * 			if txt is None:
  * 				txt = '0'             # <<<<<<<<<<<<<<
@@ -11905,7 +11901,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_24loader_info(CYTHON_UNUSED
       __Pyx_INCREF(__pyx_kp_s_0);
       __Pyx_DECREF_SET(__pyx_v_txt, __pyx_kp_s_0);
 
-      /* "kivyblocks/dg.pyx":442
+      /* "kivyblocks/dg.pyx":441
  * 		if hasattr(self._dataloader, n):
  * 			txt=getattr(self._dataloader, n, 0)
  * 			if txt is None:             # <<<<<<<<<<<<<<
@@ -11914,19 +11910,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_24loader_info(CYTHON_UNUSED
  */
     }
 
-    /* "kivyblocks/dg.pyx":444
+    /* "kivyblocks/dg.pyx":443
  * 			if txt is None:
  * 				txt = '0'
  * 			txt = str(txt)             # <<<<<<<<<<<<<<
  * 			return txt
  * 
  */
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_txt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 444, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_txt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 443, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF_SET(__pyx_v_txt, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":445
+    /* "kivyblocks/dg.pyx":444
  * 				txt = '0'
  * 			txt = str(txt)
  * 			return txt             # <<<<<<<<<<<<<<
@@ -11938,7 +11934,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_24loader_info(CYTHON_UNUSED
     __pyx_r = __pyx_v_txt;
     goto __pyx_L0;
 
-    /* "kivyblocks/dg.pyx":440
+    /* "kivyblocks/dg.pyx":439
  * 
  * 	def loader_info(self, n):
  * 		if hasattr(self._dataloader, n):             # <<<<<<<<<<<<<<
@@ -11947,7 +11943,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_24loader_info(CYTHON_UNUSED
  */
   }
 
-  /* "kivyblocks/dg.pyx":439
+  /* "kivyblocks/dg.pyx":438
  * 		return Factory.Blocks().widgetBuild(desc)
  * 
  * 	def loader_info(self, n):             # <<<<<<<<<<<<<<
@@ -11970,7 +11966,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_24loader_info(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":447
+/* "kivyblocks/dg.pyx":446
  * 			return txt
  * 
  * 	def locater(self,pos):             # <<<<<<<<<<<<<<
@@ -12013,11 +12009,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_27locater(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pos)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("locater", 1, 2, 2, 1); __PYX_ERR(0, 447, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("locater", 1, 2, 2, 1); __PYX_ERR(0, 446, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "locater") < 0)) __PYX_ERR(0, 447, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "locater") < 0)) __PYX_ERR(0, 446, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -12030,7 +12026,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_27locater(PyObject *__pyx_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("locater", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 447, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("locater", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 446, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.locater", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -12054,50 +12050,50 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_26locater(CYTHON_UNUSED PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("locater", 0);
 
-  /* "kivyblocks/dg.pyx":448
+  /* "kivyblocks/dg.pyx":447
  * 
  * 	def locater(self,pos):
  * 		self.normal_part.body.scroll_y = pos             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			self.freeze_part.body.scroll_y = pos
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 448, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 447, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 448, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 447, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_scroll_y, __pyx_v_pos) < 0) __PYX_ERR(0, 448, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_scroll_y, __pyx_v_pos) < 0) __PYX_ERR(0, 447, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":449
+  /* "kivyblocks/dg.pyx":448
  * 	def locater(self,pos):
  * 		self.normal_part.body.scroll_y = pos
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			self.freeze_part.body.scroll_y = pos
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 449, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 448, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 449, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 448, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":450
+    /* "kivyblocks/dg.pyx":449
  * 		self.normal_part.body.scroll_y = pos
  * 		if self.freeze_part:
  * 			self.freeze_part.body.scroll_y = pos             # <<<<<<<<<<<<<<
  * 
  * 	def scrollstop(self,o,v=None):
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 450, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 449, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_body); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 450, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_body); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 449, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_scroll_y, __pyx_v_pos) < 0) __PYX_ERR(0, 450, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_scroll_y, __pyx_v_pos) < 0) __PYX_ERR(0, 449, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":449
+    /* "kivyblocks/dg.pyx":448
  * 	def locater(self,pos):
  * 		self.normal_part.body.scroll_y = pos
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -12106,7 +12102,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_26locater(CYTHON_UNUSED PyO
  */
   }
 
-  /* "kivyblocks/dg.pyx":447
+  /* "kivyblocks/dg.pyx":446
  * 			return txt
  * 
  * 	def locater(self,pos):             # <<<<<<<<<<<<<<
@@ -12128,7 +12124,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_26locater(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":452
+/* "kivyblocks/dg.pyx":451
  * 			self.freeze_part.body.scroll_y = pos
  * 
  * 	def scrollstop(self,o,v=None):             # <<<<<<<<<<<<<<
@@ -12175,7 +12171,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_29scrollstop(PyObject *__py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_o)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("scrollstop", 0, 2, 3, 1); __PYX_ERR(0, 452, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("scrollstop", 0, 2, 3, 1); __PYX_ERR(0, 451, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -12185,7 +12181,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_29scrollstop(PyObject *__py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "scrollstop") < 0)) __PYX_ERR(0, 452, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "scrollstop") < 0)) __PYX_ERR(0, 451, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -12203,7 +12199,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_29scrollstop(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("scrollstop", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 452, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("scrollstop", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 451, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.scrollstop", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -12230,16 +12226,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("scrollstop", 0);
 
-  /* "kivyblocks/dg.pyx":453
+  /* "kivyblocks/dg.pyx":452
  * 
  * 	def scrollstop(self,o,v=None):
  * 		if not self.noheader and o == self.normal_part.header:             # <<<<<<<<<<<<<<
  * 			self.normal_part.body.scroll_x = o.scroll_x
  * 			return
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_noheader); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_noheader); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 452, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 452, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_4 = ((!__pyx_t_3) != 0);
   if (__pyx_t_4) {
@@ -12247,38 +12243,38 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
     __pyx_t_1 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 452, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_header); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_header); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 452, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_o, __pyx_t_5, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_o, __pyx_t_5, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 452, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 452, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_1 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "kivyblocks/dg.pyx":454
+    /* "kivyblocks/dg.pyx":453
  * 	def scrollstop(self,o,v=None):
  * 		if not self.noheader and o == self.normal_part.header:
  * 			self.normal_part.body.scroll_x = o.scroll_x             # <<<<<<<<<<<<<<
  * 			return
  * 		if o == self.normal_part.body:
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 454, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 454, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_body); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 454, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_body); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_6, __pyx_n_s_scroll_x, __pyx_t_2) < 0) __PYX_ERR(0, 454, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_6, __pyx_n_s_scroll_x, __pyx_t_2) < 0) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "kivyblocks/dg.pyx":455
+    /* "kivyblocks/dg.pyx":454
  * 		if not self.noheader and o == self.normal_part.header:
  * 			self.normal_part.body.scroll_x = o.scroll_x
  * 			return             # <<<<<<<<<<<<<<
@@ -12289,7 +12285,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/dg.pyx":453
+    /* "kivyblocks/dg.pyx":452
  * 
  * 	def scrollstop(self,o,v=None):
  * 		if not self.noheader and o == self.normal_part.header:             # <<<<<<<<<<<<<<
@@ -12298,57 +12294,57 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
  */
   }
 
-  /* "kivyblocks/dg.pyx":456
+  /* "kivyblocks/dg.pyx":455
  * 			self.normal_part.body.scroll_x = o.scroll_x
  * 			return
  * 		if o == self.normal_part.body:             # <<<<<<<<<<<<<<
  * 			if not self.noheader:
  * 				self.normal_part.header.scroll_x = o.scroll_x
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 456, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 455, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 456, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 455, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyObject_RichCompare(__pyx_v_o, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 456, __pyx_L1_error)
+  __pyx_t_6 = PyObject_RichCompare(__pyx_v_o, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 455, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 456, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 455, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_1) {
 
-    /* "kivyblocks/dg.pyx":457
+    /* "kivyblocks/dg.pyx":456
  * 			return
  * 		if o == self.normal_part.body:
  * 			if not self.noheader:             # <<<<<<<<<<<<<<
  * 				self.normal_part.header.scroll_x = o.scroll_x
  * 			if self.freeze_part:
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_noheader); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 457, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_noheader); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 456, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 457, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 456, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_4 = ((!__pyx_t_1) != 0);
     if (__pyx_t_4) {
 
-      /* "kivyblocks/dg.pyx":458
+      /* "kivyblocks/dg.pyx":457
  * 		if o == self.normal_part.body:
  * 			if not self.noheader:
  * 				self.normal_part.header.scroll_x = o.scroll_x             # <<<<<<<<<<<<<<
  * 			if self.freeze_part:
  * 				self.freeze_part.body.scroll_y = o.scroll_y
  */
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_x); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_x); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 457, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 457, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_header); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_header); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 457, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (__Pyx_PyObject_SetAttrStr(__pyx_t_5, __pyx_n_s_scroll_x, __pyx_t_6) < 0) __PYX_ERR(0, 458, __pyx_L1_error)
+      if (__Pyx_PyObject_SetAttrStr(__pyx_t_5, __pyx_n_s_scroll_x, __pyx_t_6) < 0) __PYX_ERR(0, 457, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "kivyblocks/dg.pyx":457
+      /* "kivyblocks/dg.pyx":456
  * 			return
  * 		if o == self.normal_part.body:
  * 			if not self.noheader:             # <<<<<<<<<<<<<<
@@ -12357,38 +12353,38 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
  */
     }
 
-    /* "kivyblocks/dg.pyx":459
+    /* "kivyblocks/dg.pyx":458
  * 			if not self.noheader:
  * 				self.normal_part.header.scroll_x = o.scroll_x
  * 			if self.freeze_part:             # <<<<<<<<<<<<<<
  * 				self.freeze_part.body.scroll_y = o.scroll_y
  * 		if self.freeze_part and o == self.freeze_part.body:
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 459, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 458, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 459, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 458, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_4) {
 
-      /* "kivyblocks/dg.pyx":460
+      /* "kivyblocks/dg.pyx":459
  * 				self.normal_part.header.scroll_x = o.scroll_x
  * 			if self.freeze_part:
  * 				self.freeze_part.body.scroll_y = o.scroll_y             # <<<<<<<<<<<<<<
  * 		if self.freeze_part and o == self.freeze_part.body:
  * 			self.normal_part.body.scroll_y = o.scroll_y
  */
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_y); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 460, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_y); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 459, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 460, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 459, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 460, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 459, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_scroll_y, __pyx_t_5) < 0) __PYX_ERR(0, 460, __pyx_L1_error)
+      if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_scroll_y, __pyx_t_5) < 0) __PYX_ERR(0, 459, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "kivyblocks/dg.pyx":459
+      /* "kivyblocks/dg.pyx":458
  * 			if not self.noheader:
  * 				self.normal_part.header.scroll_x = o.scroll_x
  * 			if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -12397,7 +12393,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
  */
     }
 
-    /* "kivyblocks/dg.pyx":456
+    /* "kivyblocks/dg.pyx":455
  * 			self.normal_part.body.scroll_x = o.scroll_x
  * 			return
  * 		if o == self.normal_part.body:             # <<<<<<<<<<<<<<
@@ -12406,54 +12402,54 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
  */
   }
 
-  /* "kivyblocks/dg.pyx":461
+  /* "kivyblocks/dg.pyx":460
  * 			if self.freeze_part:
  * 				self.freeze_part.body.scroll_y = o.scroll_y
  * 		if self.freeze_part and o == self.freeze_part.body:             # <<<<<<<<<<<<<<
  * 			self.normal_part.body.scroll_y = o.scroll_y
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 461, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 461, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_1) {
   } else {
     __pyx_t_4 = __pyx_t_1;
     goto __pyx_L10_bool_binop_done;
   }
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 461, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 461, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_o, __pyx_t_5, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 461, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_o, __pyx_t_5, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 461, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_4 = __pyx_t_1;
   __pyx_L10_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "kivyblocks/dg.pyx":462
+    /* "kivyblocks/dg.pyx":461
  * 				self.freeze_part.body.scroll_y = o.scroll_y
  * 		if self.freeze_part and o == self.freeze_part.body:
  * 			self.normal_part.body.scroll_y = o.scroll_y             # <<<<<<<<<<<<<<
  * 
  * 		if o.scroll_y <= 0.01:
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_y); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 462, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_y); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 461, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 462, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 461, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_body); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 462, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_body); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 461, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_6, __pyx_n_s_scroll_y, __pyx_t_2) < 0) __PYX_ERR(0, 462, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_6, __pyx_n_s_scroll_y, __pyx_t_2) < 0) __PYX_ERR(0, 461, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "kivyblocks/dg.pyx":461
+    /* "kivyblocks/dg.pyx":460
  * 			if self.freeze_part:
  * 				self.freeze_part.body.scroll_y = o.scroll_y
  * 		if self.freeze_part and o == self.freeze_part.body:             # <<<<<<<<<<<<<<
@@ -12462,31 +12458,31 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
  */
   }
 
-  /* "kivyblocks/dg.pyx":464
+  /* "kivyblocks/dg.pyx":463
  * 			self.normal_part.body.scroll_y = o.scroll_y
  * 
  * 		if o.scroll_y <= 0.01:             # <<<<<<<<<<<<<<
  * 			self._dataloader.loadNextPage()
  * 		if o.scroll_y >= 0.99:
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_y); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 464, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_y); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 463, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_6, __pyx_float_0_01, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_6, __pyx_float_0_01, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 463, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 464, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 463, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "kivyblocks/dg.pyx":465
+    /* "kivyblocks/dg.pyx":464
  * 
  * 		if o.scroll_y <= 0.01:
  * 			self._dataloader.loadNextPage()             # <<<<<<<<<<<<<<
  * 		if o.scroll_y >= 0.99:
  * 			self._dataloader.loadPreviousPage()
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 465, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 464, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_loadNextPage); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 465, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_loadNextPage); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 464, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = NULL;
@@ -12501,12 +12497,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
     }
     __pyx_t_2 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 465, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kivyblocks/dg.pyx":464
+    /* "kivyblocks/dg.pyx":463
  * 			self.normal_part.body.scroll_y = o.scroll_y
  * 
  * 		if o.scroll_y <= 0.01:             # <<<<<<<<<<<<<<
@@ -12515,31 +12511,31 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
  */
   }
 
-  /* "kivyblocks/dg.pyx":466
+  /* "kivyblocks/dg.pyx":465
  * 		if o.scroll_y <= 0.01:
  * 			self._dataloader.loadNextPage()
  * 		if o.scroll_y >= 0.99:             # <<<<<<<<<<<<<<
  * 			self._dataloader.loadPreviousPage()
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_y); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_scroll_y); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 465, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_t_2, __pyx_float_0_99, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 466, __pyx_L1_error)
+  __pyx_t_5 = PyObject_RichCompare(__pyx_t_2, __pyx_float_0_99, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 465, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 466, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 465, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__pyx_t_4) {
 
-    /* "kivyblocks/dg.pyx":467
+    /* "kivyblocks/dg.pyx":466
  * 			self._dataloader.loadNextPage()
  * 		if o.scroll_y >= 0.99:
  * 			self._dataloader.loadPreviousPage()             # <<<<<<<<<<<<<<
  * 
  * 	def getValue(self):
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 467, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_loadPreviousPage); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 467, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_loadPreviousPage); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 466, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -12554,12 +12550,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
     }
     __pyx_t_5 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 467, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 466, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":466
+    /* "kivyblocks/dg.pyx":465
  * 		if o.scroll_y <= 0.01:
  * 			self._dataloader.loadNextPage()
  * 		if o.scroll_y >= 0.99:             # <<<<<<<<<<<<<<
@@ -12568,7 +12564,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
  */
   }
 
-  /* "kivyblocks/dg.pyx":452
+  /* "kivyblocks/dg.pyx":451
  * 			self.freeze_part.body.scroll_y = pos
  * 
  * 	def scrollstop(self,o,v=None):             # <<<<<<<<<<<<<<
@@ -12591,7 +12587,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_28scrollstop(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":469
+/* "kivyblocks/dg.pyx":468
  * 			self._dataloader.loadPreviousPage()
  * 
  * 	def getValue(self):             # <<<<<<<<<<<<<<
@@ -12627,21 +12623,21 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_30getValue(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getValue", 0);
 
-  /* "kivyblocks/dg.pyx":470
+  /* "kivyblocks/dg.pyx":469
  * 
  * 	def getValue(self):
  * 		if not self.select_rowid:             # <<<<<<<<<<<<<<
  * 			return None
  * 		return self._getRowData(self.select_rowid)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 470, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 469, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 470, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 469, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":471
+    /* "kivyblocks/dg.pyx":470
  * 	def getValue(self):
  * 		if not self.select_rowid:
  * 			return None             # <<<<<<<<<<<<<<
@@ -12652,7 +12648,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_30getValue(CYTHON_UNUSED Py
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "kivyblocks/dg.pyx":470
+    /* "kivyblocks/dg.pyx":469
  * 
  * 	def getValue(self):
  * 		if not self.select_rowid:             # <<<<<<<<<<<<<<
@@ -12661,7 +12657,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_30getValue(CYTHON_UNUSED Py
  */
   }
 
-  /* "kivyblocks/dg.pyx":472
+  /* "kivyblocks/dg.pyx":471
  * 		if not self.select_rowid:
  * 			return None
  * 		return self._getRowData(self.select_rowid)             # <<<<<<<<<<<<<<
@@ -12669,9 +12665,9 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_30getValue(CYTHON_UNUSED Py
  * 	def _getRowData(self, rowid):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getRowData); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getRowData); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select_rowid); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_select_rowid); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -12686,14 +12682,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_30getValue(CYTHON_UNUSED Py
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 472, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":469
+  /* "kivyblocks/dg.pyx":468
  * 			self._dataloader.loadPreviousPage()
  * 
  * 	def getValue(self):             # <<<<<<<<<<<<<<
@@ -12715,7 +12711,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_30getValue(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":474
+/* "kivyblocks/dg.pyx":473
  * 		return self._getRowData(self.select_rowid)
  * 
  * 	def _getRowData(self, rowid):             # <<<<<<<<<<<<<<
@@ -12758,11 +12754,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_33_getRowData(PyObject *__p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_rowid)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_getRowData", 1, 2, 2, 1); __PYX_ERR(0, 474, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_getRowData", 1, 2, 2, 1); __PYX_ERR(0, 473, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_getRowData") < 0)) __PYX_ERR(0, 474, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_getRowData") < 0)) __PYX_ERR(0, 473, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -12775,7 +12771,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_33_getRowData(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_getRowData", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 474, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_getRowData", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 473, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid._getRowData", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -12801,44 +12797,44 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_32_getRowData(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_getRowData", 0);
 
-  /* "kivyblocks/dg.pyx":475
+  /* "kivyblocks/dg.pyx":474
  * 
  * 	def _getRowData(self, rowid):
  * 		d = {}             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			d.update(self.freeze_part.body.getRowData(rowid))
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 475, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 474, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_d = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":476
+  /* "kivyblocks/dg.pyx":475
  * 	def _getRowData(self, rowid):
  * 		d = {}
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			d.update(self.freeze_part.body.getRowData(rowid))
  * 		d.update(self.normal_part.body.getRowData(rowid))
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 476, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 476, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":477
+    /* "kivyblocks/dg.pyx":476
  * 		d = {}
  * 		if self.freeze_part:
  * 			d.update(self.freeze_part.body.getRowData(rowid))             # <<<<<<<<<<<<<<
  * 		d.update(self.normal_part.body.getRowData(rowid))
  * 		return DictObject(**d)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 477, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 477, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_getRowData_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 477, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_getRowData_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -12853,15 +12849,15 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_32_getRowData(CYTHON_UNUSED
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_rowid) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_rowid);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 477, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_d, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 477, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_d, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "kivyblocks/dg.pyx":476
+    /* "kivyblocks/dg.pyx":475
  * 	def _getRowData(self, rowid):
  * 		d = {}
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -12870,19 +12866,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_32_getRowData(CYTHON_UNUSED
  */
   }
 
-  /* "kivyblocks/dg.pyx":478
+  /* "kivyblocks/dg.pyx":477
  * 		if self.freeze_part:
  * 			d.update(self.freeze_part.body.getRowData(rowid))
  * 		d.update(self.normal_part.body.getRowData(rowid))             # <<<<<<<<<<<<<<
  * 		return DictObject(**d)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 478, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 478, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_getRowData_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 478, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_getRowData_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -12897,15 +12893,15 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_32_getRowData(CYTHON_UNUSED
   }
   __pyx_t_3 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_4, __pyx_v_rowid) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_rowid);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 478, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_d, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 478, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_d, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":479
+  /* "kivyblocks/dg.pyx":478
  * 			d.update(self.freeze_part.body.getRowData(rowid))
  * 		d.update(self.normal_part.body.getRowData(rowid))
  * 		return DictObject(**d)             # <<<<<<<<<<<<<<
@@ -12913,11 +12909,11 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_32_getRowData(CYTHON_UNUSED
  * 	def bodyOnSize(self,o,s):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 479, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_DictObject); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyDict_Copy(__pyx_v_d); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 479, __pyx_L1_error)
+  __pyx_t_3 = PyDict_Copy(__pyx_v_d); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 479, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -12925,7 +12921,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_32_getRowData(CYTHON_UNUSED
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":474
+  /* "kivyblocks/dg.pyx":473
  * 		return self._getRowData(self.select_rowid)
  * 
  * 	def _getRowData(self, rowid):             # <<<<<<<<<<<<<<
@@ -12947,7 +12943,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_32_getRowData(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":481
+/* "kivyblocks/dg.pyx":480
  * 		return DictObject(**d)
  * 
  * 	def bodyOnSize(self,o,s):             # <<<<<<<<<<<<<<
@@ -12993,17 +12989,17 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_35bodyOnSize(PyObject *__py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_o)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("bodyOnSize", 1, 3, 3, 1); __PYX_ERR(0, 481, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("bodyOnSize", 1, 3, 3, 1); __PYX_ERR(0, 480, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_s)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("bodyOnSize", 1, 3, 3, 2); __PYX_ERR(0, 481, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("bodyOnSize", 1, 3, 3, 2); __PYX_ERR(0, 480, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "bodyOnSize") < 0)) __PYX_ERR(0, 481, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "bodyOnSize") < 0)) __PYX_ERR(0, 480, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -13018,7 +13014,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_35bodyOnSize(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("bodyOnSize", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 481, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("bodyOnSize", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 480, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.bodyOnSize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -13047,30 +13043,30 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_34bodyOnSize(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("bodyOnSize", 0);
 
-  /* "kivyblocks/dg.pyx":482
+  /* "kivyblocks/dg.pyx":481
  * 
  * 	def bodyOnSize(self,o,s):
  * 		if self.on_sizeTask is not None:             # <<<<<<<<<<<<<<
  * 			self.on_sizeTask.cancel()
  * 		self.on_sizeTask = Clock.schedule_once(self.calculateShowRows,0.3)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_on_sizeTask); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_on_sizeTask); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 481, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = (__pyx_t_1 != Py_None);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":483
+    /* "kivyblocks/dg.pyx":482
  * 	def bodyOnSize(self,o,s):
  * 		if self.on_sizeTask is not None:
  * 			self.on_sizeTask.cancel()             # <<<<<<<<<<<<<<
  * 		self.on_sizeTask = Clock.schedule_once(self.calculateShowRows,0.3)
  * 
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_on_sizeTask); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 483, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_on_sizeTask); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 482, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_cancel); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_cancel); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 482, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -13085,12 +13081,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_34bodyOnSize(CYTHON_UNUSED 
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":482
+    /* "kivyblocks/dg.pyx":481
  * 
  * 	def bodyOnSize(self,o,s):
  * 		if self.on_sizeTask is not None:             # <<<<<<<<<<<<<<
@@ -13099,19 +13095,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_34bodyOnSize(CYTHON_UNUSED 
  */
   }
 
-  /* "kivyblocks/dg.pyx":484
+  /* "kivyblocks/dg.pyx":483
  * 		if self.on_sizeTask is not None:
  * 			self.on_sizeTask.cancel()
  * 		self.on_sizeTask = Clock.schedule_once(self.calculateShowRows,0.3)             # <<<<<<<<<<<<<<
  * 
  * 	def rowHeight(self):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Clock); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 484, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Clock); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_schedule_once); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 484, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_schedule_once); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 483, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_calculateShowRows); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 484, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_calculateShowRows); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   __pyx_t_7 = 0;
@@ -13128,7 +13124,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_34bodyOnSize(CYTHON_UNUSED 
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_5, __pyx_float_0_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 484, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -13137,14 +13133,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_34bodyOnSize(CYTHON_UNUSED 
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_5, __pyx_float_0_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 484, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else
   #endif
   {
-    __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 484, __pyx_L1_error)
+    __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -13155,15 +13151,15 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_34bodyOnSize(CYTHON_UNUSED 
     __Pyx_GIVEREF(__pyx_float_0_3);
     PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_float_0_3);
     __pyx_t_5 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 484, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_on_sizeTask, __pyx_t_1) < 0) __PYX_ERR(0, 484, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_on_sizeTask, __pyx_t_1) < 0) __PYX_ERR(0, 483, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":481
+  /* "kivyblocks/dg.pyx":480
  * 		return DictObject(**d)
  * 
  * 	def bodyOnSize(self,o,s):             # <<<<<<<<<<<<<<
@@ -13188,7 +13184,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_34bodyOnSize(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":486
+/* "kivyblocks/dg.pyx":485
  * 		self.on_sizeTask = Clock.schedule_once(self.calculateShowRows,0.3)
  * 
  * 	def rowHeight(self):             # <<<<<<<<<<<<<<
@@ -13224,30 +13220,30 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_36rowHeight(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rowHeight", 0);
 
-  /* "kivyblocks/dg.pyx":487
+  /* "kivyblocks/dg.pyx":486
  * 
  * 	def rowHeight(self):
  * 		if not self.rowheight:             # <<<<<<<<<<<<<<
  * 			self.rowheight = CSize(self.row_height)
  * 		return self.rowheight
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowheight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 487, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowheight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 487, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":488
+    /* "kivyblocks/dg.pyx":487
  * 	def rowHeight(self):
  * 		if not self.rowheight:
  * 			self.rowheight = CSize(self.row_height)             # <<<<<<<<<<<<<<
  * 		return self.rowheight
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_CSize); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 488, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_CSize); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 487, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row_height); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 488, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_row_height); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 487, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -13262,13 +13258,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_36rowHeight(CYTHON_UNUSED P
     __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 488, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 487, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rowheight, __pyx_t_1) < 0) __PYX_ERR(0, 488, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rowheight, __pyx_t_1) < 0) __PYX_ERR(0, 487, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":487
+    /* "kivyblocks/dg.pyx":486
  * 
  * 	def rowHeight(self):
  * 		if not self.rowheight:             # <<<<<<<<<<<<<<
@@ -13277,7 +13273,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_36rowHeight(CYTHON_UNUSED P
  */
   }
 
-  /* "kivyblocks/dg.pyx":489
+  /* "kivyblocks/dg.pyx":488
  * 		if not self.rowheight:
  * 			self.rowheight = CSize(self.row_height)
  * 		return self.rowheight             # <<<<<<<<<<<<<<
@@ -13285,13 +13281,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_36rowHeight(CYTHON_UNUSED P
  * 	def calculateShowRows(self,t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowheight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 489, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowheight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 488, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":486
+  /* "kivyblocks/dg.pyx":485
  * 		self.on_sizeTask = Clock.schedule_once(self.calculateShowRows,0.3)
  * 
  * 	def rowHeight(self):             # <<<<<<<<<<<<<<
@@ -13313,7 +13309,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_36rowHeight(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":491
+/* "kivyblocks/dg.pyx":490
  * 		return self.rowheight
  * 
  * 	def calculateShowRows(self,t):             # <<<<<<<<<<<<<<
@@ -13356,11 +13352,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_39calculateShowRows(PyObjec
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calculateShowRows", 1, 2, 2, 1); __PYX_ERR(0, 491, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculateShowRows", 1, 2, 2, 1); __PYX_ERR(0, 490, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "calculateShowRows") < 0)) __PYX_ERR(0, 491, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "calculateShowRows") < 0)) __PYX_ERR(0, 490, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -13373,7 +13369,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_39calculateShowRows(PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("calculateShowRows", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 491, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("calculateShowRows", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 490, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.calculateShowRows", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -13398,14 +13394,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_38calculateShowRows(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("calculateShowRows", 0);
 
-  /* "kivyblocks/dg.pyx":492
+  /* "kivyblocks/dg.pyx":491
  * 
  * 	def calculateShowRows(self,t):
  * 		self.getShowRows()             # <<<<<<<<<<<<<<
  * 		self._dataloader.setPageRows(self.show_rows * 2)
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getShowRows); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 492, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getShowRows); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -13419,26 +13415,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_38calculateShowRows(CYTHON_
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 492, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":493
+  /* "kivyblocks/dg.pyx":492
  * 	def calculateShowRows(self,t):
  * 		self.getShowRows()
  * 		self._dataloader.setPageRows(self.show_rows * 2)             # <<<<<<<<<<<<<<
  * 
  * 	def getShowRows(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 493, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 492, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_setPageRows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 493, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_setPageRows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 492, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 493, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 492, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_int_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 493, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_int_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 492, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -13454,12 +13450,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_38calculateShowRows(CYTHON_
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 493, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 492, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":491
+  /* "kivyblocks/dg.pyx":490
  * 		return self.rowheight
  * 
  * 	def calculateShowRows(self,t):             # <<<<<<<<<<<<<<
@@ -13483,7 +13479,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_38calculateShowRows(CYTHON_
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":495
+/* "kivyblocks/dg.pyx":494
  * 		self._dataloader.setPageRows(self.show_rows * 2)
  * 
  * 	def getShowRows(self):             # <<<<<<<<<<<<<<
@@ -13517,23 +13513,23 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_40getShowRows(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getShowRows", 0);
 
-  /* "kivyblocks/dg.pyx":496
+  /* "kivyblocks/dg.pyx":495
  * 
  * 	def getShowRows(self):
  * 		if self.show_rows == 0:             # <<<<<<<<<<<<<<
  * 			return 60
  * 		self.show_rows = int(self.rowHeight() / self.normal_part.body.height)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_1, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_1, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":497
+    /* "kivyblocks/dg.pyx":496
  * 	def getShowRows(self):
  * 		if self.show_rows == 0:
  * 			return 60             # <<<<<<<<<<<<<<
@@ -13545,7 +13541,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_40getShowRows(CYTHON_UNUSED
     __pyx_r = __pyx_int_60;
     goto __pyx_L0;
 
-    /* "kivyblocks/dg.pyx":496
+    /* "kivyblocks/dg.pyx":495
  * 
  * 	def getShowRows(self):
  * 		if self.show_rows == 0:             # <<<<<<<<<<<<<<
@@ -13554,14 +13550,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_40getShowRows(CYTHON_UNUSED
  */
   }
 
-  /* "kivyblocks/dg.pyx":498
+  /* "kivyblocks/dg.pyx":497
  * 		if self.show_rows == 0:
  * 			return 60
  * 		self.show_rows = int(self.rowHeight() / self.normal_part.body.height)             # <<<<<<<<<<<<<<
  * 		return self.show_rows * 2
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 498, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rowHeight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -13575,28 +13571,28 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_40getShowRows(CYTHON_UNUSED
   }
   __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 498, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 498, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 498, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_height); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 498, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_height); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 498, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 498, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_show_rows, __pyx_t_1) < 0) __PYX_ERR(0, 498, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_show_rows, __pyx_t_1) < 0) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":499
+  /* "kivyblocks/dg.pyx":498
  * 			return 60
  * 		self.show_rows = int(self.rowHeight() / self.normal_part.body.height)
  * 		return self.show_rows * 2             # <<<<<<<<<<<<<<
@@ -13604,16 +13600,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_40getShowRows(CYTHON_UNUSED
  * 	def clearRows(self, *args):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 499, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_int_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 499, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_int_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":495
+  /* "kivyblocks/dg.pyx":494
  * 		self._dataloader.setPageRows(self.show_rows * 2)
  * 
  * 	def getShowRows(self):             # <<<<<<<<<<<<<<
@@ -13634,7 +13630,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_40getShowRows(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":501
+/* "kivyblocks/dg.pyx":500
  * 		return self.show_rows * 2
  * 
  * 	def clearRows(self, *args):             # <<<<<<<<<<<<<<
@@ -13684,7 +13680,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_43clearRows(PyObject *__pyx
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 1) ? pos_args : 1;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "clearRows") < 0)) __PYX_ERR(0, 501, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "clearRows") < 0)) __PYX_ERR(0, 500, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 1) {
       goto __pyx_L5_argtuple_error;
@@ -13695,7 +13691,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_43clearRows(PyObject *__pyx
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("clearRows", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 501, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("clearRows", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 500, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.clearRows", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -13722,32 +13718,32 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_42clearRows(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("clearRows", 0);
 
-  /* "kivyblocks/dg.pyx":502
+  /* "kivyblocks/dg.pyx":501
  * 
  * 	def clearRows(self, *args):
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			self.freeze_part.body.clearRows()
  * 		self.normal_part.body.clearRows()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 502, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 501, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 502, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 501, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":503
+    /* "kivyblocks/dg.pyx":502
  * 	def clearRows(self, *args):
  * 		if self.freeze_part:
  * 			self.freeze_part.body.clearRows()             # <<<<<<<<<<<<<<
  * 		self.normal_part.body.clearRows()
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 503, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 502, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 503, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 502, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_clearRows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 503, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_clearRows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 502, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -13762,12 +13758,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_42clearRows(CYTHON_UNUSED P
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 503, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 502, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":502
+    /* "kivyblocks/dg.pyx":501
  * 
  * 	def clearRows(self, *args):
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -13776,19 +13772,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_42clearRows(CYTHON_UNUSED P
  */
   }
 
-  /* "kivyblocks/dg.pyx":504
+  /* "kivyblocks/dg.pyx":503
  * 		if self.freeze_part:
  * 			self.freeze_part.body.clearRows()
  * 		self.normal_part.body.clearRows()             # <<<<<<<<<<<<<<
  * 
  * 	def add_page(self,o,data):
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 504, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 504, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_clearRows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 504, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_clearRows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -13803,12 +13799,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_42clearRows(CYTHON_UNUSED P
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 504, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":501
+  /* "kivyblocks/dg.pyx":500
  * 		return self.show_rows * 2
  * 
  * 	def clearRows(self, *args):             # <<<<<<<<<<<<<<
@@ -13831,7 +13827,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_42clearRows(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":506
+/* "kivyblocks/dg.pyx":505
  * 		self.normal_part.body.clearRows()
  * 
  * 	def add_page(self,o,data):             # <<<<<<<<<<<<<<
@@ -13877,17 +13873,17 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_45add_page(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_o)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_page", 1, 3, 3, 1); __PYX_ERR(0, 506, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_page", 1, 3, 3, 1); __PYX_ERR(0, 505, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_page", 1, 3, 3, 2); __PYX_ERR(0, 506, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_page", 1, 3, 3, 2); __PYX_ERR(0, 505, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_page") < 0)) __PYX_ERR(0, 506, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_page") < 0)) __PYX_ERR(0, 505, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -13902,7 +13898,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_45add_page(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_page", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 506, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_page", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 505, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.add_page", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -13948,40 +13944,40 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_page", 0);
 
-  /* "kivyblocks/dg.pyx":507
+  /* "kivyblocks/dg.pyx":506
  * 
  * 	def add_page(self,o,data):
  * 		dir = data['dir']             # <<<<<<<<<<<<<<
  * 		if not self.show_rows:
  * 			self.getShowRows()
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 506, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_dir = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":508
+  /* "kivyblocks/dg.pyx":507
  * 	def add_page(self,o,data):
  * 		dir = data['dir']
  * 		if not self.show_rows:             # <<<<<<<<<<<<<<
  * 			self.getShowRows()
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 508, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 508, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 507, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":509
+    /* "kivyblocks/dg.pyx":508
  * 		dir = data['dir']
  * 		if not self.show_rows:
  * 			self.getShowRows()             # <<<<<<<<<<<<<<
  * 
  * 		ids = []
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getShowRows); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 509, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getShowRows); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 508, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -13995,12 +13991,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 509, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 508, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":508
+    /* "kivyblocks/dg.pyx":507
  * 	def add_page(self,o,data):
  * 		dir = data['dir']
  * 		if not self.show_rows:             # <<<<<<<<<<<<<<
@@ -14009,31 +14005,31 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
  */
   }
 
-  /* "kivyblocks/dg.pyx":511
+  /* "kivyblocks/dg.pyx":510
  * 			self.getShowRows()
  * 
  * 		ids = []             # <<<<<<<<<<<<<<
  * 		recs = data['data']
  * 		idx = 0
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 511, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 510, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_ids = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":512
+  /* "kivyblocks/dg.pyx":511
  * 
  * 		ids = []
  * 		recs = data['data']             # <<<<<<<<<<<<<<
  * 		idx = 0
  * 		if dir == 'up':
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 512, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 511, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_recs = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":513
+  /* "kivyblocks/dg.pyx":512
  * 		ids = []
  * 		recs = data['data']
  * 		idx = 0             # <<<<<<<<<<<<<<
@@ -14042,24 +14038,24 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
  */
   __pyx_v_idx = 0;
 
-  /* "kivyblocks/dg.pyx":514
+  /* "kivyblocks/dg.pyx":513
  * 		recs = data['data']
  * 		idx = 0
  * 		if dir == 'up':             # <<<<<<<<<<<<<<
  * 			recs.reverse()
  * 			idx = -1
  */
-  __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_dir, __pyx_n_s_up, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_dir, __pyx_n_s_up, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 513, __pyx_L1_error)
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":515
+    /* "kivyblocks/dg.pyx":514
  * 		idx = 0
  * 		if dir == 'up':
  * 			recs.reverse()             # <<<<<<<<<<<<<<
  * 			idx = -1
  * 		recs1 = recs[:self.show_rows]
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_recs, __pyx_n_s_reverse); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 515, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_recs, __pyx_n_s_reverse); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 514, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -14073,12 +14069,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 515, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 514, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":516
+    /* "kivyblocks/dg.pyx":515
  * 		if dir == 'up':
  * 			recs.reverse()
  * 			idx = -1             # <<<<<<<<<<<<<<
@@ -14087,7 +14083,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
  */
     __pyx_v_idx = -1L;
 
-    /* "kivyblocks/dg.pyx":514
+    /* "kivyblocks/dg.pyx":513
  * 		recs = data['data']
  * 		idx = 0
  * 		if dir == 'up':             # <<<<<<<<<<<<<<
@@ -14096,59 +14092,59 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
  */
   }
 
-  /* "kivyblocks/dg.pyx":517
+  /* "kivyblocks/dg.pyx":516
  * 			recs.reverse()
  * 			idx = -1
  * 		recs1 = recs[:self.show_rows]             # <<<<<<<<<<<<<<
  * 		recs2 = recs[self.show_rows:]
  * 		self._fbo = Fbo(size=self.size)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 517, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 516, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_GetSlice(__pyx_v_recs, 0, 0, NULL, &__pyx_t_1, NULL, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 517, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetSlice(__pyx_v_recs, 0, 0, NULL, &__pyx_t_1, NULL, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 516, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_recs1 = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":518
+  /* "kivyblocks/dg.pyx":517
  * 			idx = -1
  * 		recs1 = recs[:self.show_rows]
  * 		recs2 = recs[self.show_rows:]             # <<<<<<<<<<<<<<
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 518, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_show_rows); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 517, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_recs, 0, 0, &__pyx_t_4, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 518, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_recs, 0, 0, &__pyx_t_4, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 517, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_recs2 = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":519
+  /* "kivyblocks/dg.pyx":518
  * 		recs1 = recs[:self.show_rows]
  * 		recs2 = recs[self.show_rows:]
  * 		self._fbo = Fbo(size=self.size)             # <<<<<<<<<<<<<<
  * 		with self._fbo:
  * 			self._background_color = Color(0,0,0,1)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Fbo); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Fbo); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 518, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 518, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 518, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_size, __pyx_t_5) < 0) __PYX_ERR(0, 519, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_size, __pyx_t_5) < 0) __PYX_ERR(0, 518, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 518, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fbo, __pyx_t_5) < 0) __PYX_ERR(0, 519, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fbo, __pyx_t_5) < 0) __PYX_ERR(0, 518, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/dg.pyx":520
+  /* "kivyblocks/dg.pyx":519
  * 		recs2 = recs[self.show_rows:]
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:             # <<<<<<<<<<<<<<
@@ -14156,11 +14152,11 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
  * 			self._background_rect = Rectangle(size=self.size)
  */
   /*with:*/ {
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fbo); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 520, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fbo); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 519, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 520, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 519, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 520, __pyx_L5_error)
+    __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 519, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -14174,7 +14170,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     }
     __pyx_t_4 = (__pyx_t_7) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_7) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 520, __pyx_L5_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 519, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -14189,44 +14185,44 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
         __Pyx_XGOTREF(__pyx_t_10);
         /*try:*/ {
 
-          /* "kivyblocks/dg.pyx":521
+          /* "kivyblocks/dg.pyx":520
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:
  * 			self._background_color = Color(0,0,0,1)             # <<<<<<<<<<<<<<
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs1:
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Color); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 521, __pyx_L9_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Color); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 520, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 521, __pyx_L9_error)
+          __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 520, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_background_color, __pyx_t_4) < 0) __PYX_ERR(0, 521, __pyx_L9_error)
+          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_background_color, __pyx_t_4) < 0) __PYX_ERR(0, 520, __pyx_L9_error)
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-          /* "kivyblocks/dg.pyx":522
+          /* "kivyblocks/dg.pyx":521
  * 		with self._fbo:
  * 			self._background_color = Color(0,0,0,1)
  * 			self._background_rect = Rectangle(size=self.size)             # <<<<<<<<<<<<<<
  * 		for r in recs1:
  * 			id = self.addRow(r,index=idx)
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Rectangle); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 522, __pyx_L9_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Rectangle); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 521, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 522, __pyx_L9_error)
+          __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 521, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 522, __pyx_L9_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 521, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_1);
-          if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_size, __pyx_t_1) < 0) __PYX_ERR(0, 522, __pyx_L9_error)
+          if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_size, __pyx_t_1) < 0) __PYX_ERR(0, 521, __pyx_L9_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 522, __pyx_L9_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 521, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_background_rect, __pyx_t_1) < 0) __PYX_ERR(0, 522, __pyx_L9_error)
+          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_background_rect, __pyx_t_1) < 0) __PYX_ERR(0, 521, __pyx_L9_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "kivyblocks/dg.pyx":520
+          /* "kivyblocks/dg.pyx":519
  * 		recs2 = recs[self.show_rows:]
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:             # <<<<<<<<<<<<<<
@@ -14245,20 +14241,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("kivyblocks.dg.DataGrid.add_page", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 520, __pyx_L11_except_error)
+          if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 519, __pyx_L11_except_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_7 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 520, __pyx_L11_except_error)
+          __pyx_t_7 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 519, __pyx_L11_except_error)
           __Pyx_GOTREF(__pyx_t_7);
           __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_7, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 520, __pyx_L11_except_error)
+          if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 519, __pyx_L11_except_error)
           __Pyx_GOTREF(__pyx_t_11);
           __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          if (__pyx_t_3 < 0) __PYX_ERR(0, 520, __pyx_L11_except_error)
+          if (__pyx_t_3 < 0) __PYX_ERR(0, 519, __pyx_L11_except_error)
           __pyx_t_2 = ((!(__pyx_t_3 != 0)) != 0);
           if (__pyx_t_2) {
             __Pyx_GIVEREF(__pyx_t_1);
@@ -14266,7 +14262,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
             __Pyx_XGIVEREF(__pyx_t_4);
             __Pyx_ErrRestoreWithState(__pyx_t_1, __pyx_t_5, __pyx_t_4);
             __pyx_t_1 = 0; __pyx_t_5 = 0; __pyx_t_4 = 0; 
-            __PYX_ERR(0, 520, __pyx_L11_except_error)
+            __PYX_ERR(0, 519, __pyx_L11_except_error)
           }
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -14292,7 +14288,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
         if (__pyx_t_6) {
           __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__8, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 520, __pyx_L1_error)
+          if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 519, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         }
@@ -14307,7 +14303,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     __pyx_L18:;
   }
 
-  /* "kivyblocks/dg.pyx":523
+  /* "kivyblocks/dg.pyx":522
  * 			self._background_color = Color(0,0,0,1)
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs1:             # <<<<<<<<<<<<<<
@@ -14318,26 +14314,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     __pyx_t_4 = __pyx_v_recs1; __Pyx_INCREF(__pyx_t_4); __pyx_t_12 = 0;
     __pyx_t_13 = NULL;
   } else {
-    __pyx_t_12 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_recs1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 523, __pyx_L1_error)
+    __pyx_t_12 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_recs1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 522, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_13 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 523, __pyx_L1_error)
+    __pyx_t_13 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 522, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_13)) {
       if (likely(PyList_CheckExact(__pyx_t_4))) {
         if (__pyx_t_12 >= PyList_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_12); __Pyx_INCREF(__pyx_t_5); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 523, __pyx_L1_error)
+        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_12); __Pyx_INCREF(__pyx_t_5); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 522, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 523, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 522, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       } else {
         if (__pyx_t_12 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_12); __Pyx_INCREF(__pyx_t_5); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 523, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_12); __Pyx_INCREF(__pyx_t_5); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 522, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 523, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 522, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       }
@@ -14347,7 +14343,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 523, __pyx_L1_error)
+          else __PYX_ERR(0, 522, __pyx_L1_error)
         }
         break;
       }
@@ -14356,27 +14352,27 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     __Pyx_XDECREF_SET(__pyx_v_r, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":524
+    /* "kivyblocks/dg.pyx":523
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs1:
  * 			id = self.addRow(r,index=idx)             # <<<<<<<<<<<<<<
  * 			ids.append(id)
  * 		with self.canvas:
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_addRow); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 524, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_addRow); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 524, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_v_r);
     __Pyx_GIVEREF(__pyx_v_r);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_r);
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 524, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_14 = __Pyx_PyInt_From_long(__pyx_v_idx); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 524, __pyx_L1_error)
+    __pyx_t_14 = __Pyx_PyInt_From_long(__pyx_v_idx); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_14);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_index, __pyx_t_14) < 0) __PYX_ERR(0, 524, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_index, __pyx_t_14) < 0) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-    __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, __pyx_t_7); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 524, __pyx_L1_error)
+    __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, __pyx_t_7); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_14);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -14384,16 +14380,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     __Pyx_XDECREF_SET(__pyx_v_id, __pyx_t_14);
     __pyx_t_14 = 0;
 
-    /* "kivyblocks/dg.pyx":525
+    /* "kivyblocks/dg.pyx":524
  * 		for r in recs1:
  * 			id = self.addRow(r,index=idx)
  * 			ids.append(id)             # <<<<<<<<<<<<<<
  * 		with self.canvas:
  * 			self._fbo_rect = Rectangle(size=self.size,
  */
-    __pyx_t_15 = __Pyx_PyList_Append(__pyx_v_ids, __pyx_v_id); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 525, __pyx_L1_error)
+    __pyx_t_15 = __Pyx_PyList_Append(__pyx_v_ids, __pyx_v_id); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 524, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":523
+    /* "kivyblocks/dg.pyx":522
  * 			self._background_color = Color(0,0,0,1)
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs1:             # <<<<<<<<<<<<<<
@@ -14403,7 +14399,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":526
+  /* "kivyblocks/dg.pyx":525
  * 			id = self.addRow(r,index=idx)
  * 			ids.append(id)
  * 		with self.canvas:             # <<<<<<<<<<<<<<
@@ -14411,11 +14407,11 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
  * 								texture=self._fbo.texture)
  */
   /*with:*/ {
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_canvas); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 526, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_canvas); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 525, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_4, __pyx_n_s_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 526, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_4, __pyx_n_s_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 525, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_LookupSpecial(__pyx_t_4, __pyx_n_s_enter); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 526, __pyx_L21_error)
+    __pyx_t_7 = __Pyx_PyObject_LookupSpecial(__pyx_t_4, __pyx_n_s_enter); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 525, __pyx_L21_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
@@ -14429,7 +14425,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     }
     __pyx_t_14 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 526, __pyx_L21_error)
+    if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 525, __pyx_L21_error)
     __Pyx_GOTREF(__pyx_t_14);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -14444,52 +14440,52 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
         __Pyx_XGOTREF(__pyx_t_8);
         /*try:*/ {
 
-          /* "kivyblocks/dg.pyx":527
+          /* "kivyblocks/dg.pyx":526
  * 			ids.append(id)
  * 		with self.canvas:
  * 			self._fbo_rect = Rectangle(size=self.size,             # <<<<<<<<<<<<<<
  * 								texture=self._fbo.texture)
  * 
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Rectangle); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 527, __pyx_L25_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Rectangle); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 526, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_14 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 527, __pyx_L25_error)
+          __pyx_t_14 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 526, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 527, __pyx_L25_error)
+          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 526, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_7);
-          if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_size, __pyx_t_7) < 0) __PYX_ERR(0, 527, __pyx_L25_error)
+          if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_size, __pyx_t_7) < 0) __PYX_ERR(0, 526, __pyx_L25_error)
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-          /* "kivyblocks/dg.pyx":528
+          /* "kivyblocks/dg.pyx":527
  * 		with self.canvas:
  * 			self._fbo_rect = Rectangle(size=self.size,
  * 								texture=self._fbo.texture)             # <<<<<<<<<<<<<<
  * 
  * 		data['idx'] = idx
  */
-          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fbo); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 528, __pyx_L25_error)
+          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fbo); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 527, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_7);
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_texture); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 528, __pyx_L25_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_texture); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 527, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_texture, __pyx_t_1) < 0) __PYX_ERR(0, 527, __pyx_L25_error)
+          if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_texture, __pyx_t_1) < 0) __PYX_ERR(0, 526, __pyx_L25_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "kivyblocks/dg.pyx":527
+          /* "kivyblocks/dg.pyx":526
  * 			ids.append(id)
  * 		with self.canvas:
  * 			self._fbo_rect = Rectangle(size=self.size,             # <<<<<<<<<<<<<<
  * 								texture=self._fbo.texture)
  * 
  */
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_14); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 527, __pyx_L25_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_14); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 526, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fbo_rect, __pyx_t_1) < 0) __PYX_ERR(0, 527, __pyx_L25_error)
+          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fbo_rect, __pyx_t_1) < 0) __PYX_ERR(0, 526, __pyx_L25_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "kivyblocks/dg.pyx":526
+          /* "kivyblocks/dg.pyx":525
  * 			id = self.addRow(r,index=idx)
  * 			ids.append(id)
  * 		with self.canvas:             # <<<<<<<<<<<<<<
@@ -14509,20 +14505,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("kivyblocks.dg.DataGrid.add_page", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_14, &__pyx_t_4) < 0) __PYX_ERR(0, 526, __pyx_L27_except_error)
+          if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_14, &__pyx_t_4) < 0) __PYX_ERR(0, 525, __pyx_L27_except_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_7 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_14, __pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 526, __pyx_L27_except_error)
+          __pyx_t_7 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_14, __pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 525, __pyx_L27_except_error)
           __Pyx_GOTREF(__pyx_t_7);
           __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_7, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 526, __pyx_L27_except_error)
+          if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 525, __pyx_L27_except_error)
           __Pyx_GOTREF(__pyx_t_11);
           __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          if (__pyx_t_2 < 0) __PYX_ERR(0, 526, __pyx_L27_except_error)
+          if (__pyx_t_2 < 0) __PYX_ERR(0, 525, __pyx_L27_except_error)
           __pyx_t_3 = ((!(__pyx_t_2 != 0)) != 0);
           if (__pyx_t_3) {
             __Pyx_GIVEREF(__pyx_t_1);
@@ -14530,7 +14526,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
             __Pyx_XGIVEREF(__pyx_t_4);
             __Pyx_ErrRestoreWithState(__pyx_t_1, __pyx_t_14, __pyx_t_4);
             __pyx_t_1 = 0; __pyx_t_14 = 0; __pyx_t_4 = 0; 
-            __PYX_ERR(0, 526, __pyx_L27_except_error)
+            __PYX_ERR(0, 525, __pyx_L27_except_error)
           }
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -14556,7 +14552,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
         if (__pyx_t_6) {
           __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__8, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 526, __pyx_L1_error)
+          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 525, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         }
@@ -14571,46 +14567,46 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     __pyx_L34:;
   }
 
-  /* "kivyblocks/dg.pyx":530
+  /* "kivyblocks/dg.pyx":529
  * 								texture=self._fbo.texture)
  * 
  * 		data['idx'] = idx             # <<<<<<<<<<<<<<
  * 		data['ids'] = ids
  * 		data['data'] = recs2
  */
-  __pyx_t_4 = __Pyx_PyInt_From_long(__pyx_v_idx); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 530, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_long(__pyx_v_idx); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 529, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (unlikely(PyObject_SetItem(__pyx_v_data, __pyx_n_s_idx, __pyx_t_4) < 0)) __PYX_ERR(0, 530, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_data, __pyx_n_s_idx, __pyx_t_4) < 0)) __PYX_ERR(0, 529, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":531
+  /* "kivyblocks/dg.pyx":530
  * 
  * 		data['idx'] = idx
  * 		data['ids'] = ids             # <<<<<<<<<<<<<<
  * 		data['data'] = recs2
  * 		f = partial(self.add_page_delay,data)
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_data, __pyx_n_s_ids, __pyx_v_ids) < 0)) __PYX_ERR(0, 531, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_data, __pyx_n_s_ids, __pyx_v_ids) < 0)) __PYX_ERR(0, 530, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":532
+  /* "kivyblocks/dg.pyx":531
  * 		data['idx'] = idx
  * 		data['ids'] = ids
  * 		data['data'] = recs2             # <<<<<<<<<<<<<<
  * 		f = partial(self.add_page_delay,data)
  * 		Clock.schedule_once(f, 0)
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_data, __pyx_n_s_data, __pyx_v_recs2) < 0)) __PYX_ERR(0, 532, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_data, __pyx_n_s_data, __pyx_v_recs2) < 0)) __PYX_ERR(0, 531, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":533
+  /* "kivyblocks/dg.pyx":532
  * 		data['ids'] = ids
  * 		data['data'] = recs2
  * 		f = partial(self.add_page_delay,data)             # <<<<<<<<<<<<<<
  * 		Clock.schedule_once(f, 0)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_partial); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 533, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_partial); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_page_delay); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 533, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_page_delay); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = NULL;
   __pyx_t_16 = 0;
@@ -14627,7 +14623,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_14)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_1, __pyx_v_data};
-    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_14, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 533, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_14, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 532, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -14636,14 +14632,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_14)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_1, __pyx_v_data};
-    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_14, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 533, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_14, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 532, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 533, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 532, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -14654,7 +14650,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     __Pyx_GIVEREF(__pyx_v_data);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_16, __pyx_v_data);
     __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 533, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 532, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -14662,16 +14658,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
   __pyx_v_f = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":534
+  /* "kivyblocks/dg.pyx":533
  * 		data['data'] = recs2
  * 		f = partial(self.add_page_delay,data)
  * 		Clock.schedule_once(f, 0)             # <<<<<<<<<<<<<<
  * 
  * 	def add_page_delay(self, data, *args):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_Clock); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 534, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_Clock); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 533, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_schedule_once); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 534, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_schedule_once); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 533, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   __pyx_t_14 = NULL;
@@ -14689,7 +14685,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_5)) {
     PyObject *__pyx_temp[3] = {__pyx_t_14, __pyx_v_f, __pyx_int_0};
-    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 534, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 533, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
     __Pyx_GOTREF(__pyx_t_4);
   } else
@@ -14697,13 +14693,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
     PyObject *__pyx_temp[3] = {__pyx_t_14, __pyx_v_f, __pyx_int_0};
-    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 534, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 533, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
     __Pyx_GOTREF(__pyx_t_4);
   } else
   #endif
   {
-    __pyx_t_1 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 534, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 533, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (__pyx_t_14) {
       __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_14); __pyx_t_14 = NULL;
@@ -14714,14 +14710,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_GIVEREF(__pyx_int_0);
     PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_16, __pyx_int_0);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 534, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 533, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":506
+  /* "kivyblocks/dg.pyx":505
  * 		self.normal_part.body.clearRows()
  * 
  * 	def add_page(self,o,data):             # <<<<<<<<<<<<<<
@@ -14754,7 +14750,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_44add_page(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":536
+/* "kivyblocks/dg.pyx":535
  * 		Clock.schedule_once(f, 0)
  * 
  * 	def add_page_delay(self, data, *args):             # <<<<<<<<<<<<<<
@@ -14808,12 +14804,12 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_47add_page_delay(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_page_delay", 0, 2, 2, 1); __PYX_ERR(0, 536, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_page_delay", 0, 2, 2, 1); __PYX_ERR(0, 535, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 2) ? pos_args : 2;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "add_page_delay") < 0)) __PYX_ERR(0, 536, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "add_page_delay") < 0)) __PYX_ERR(0, 535, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 2) {
       goto __pyx_L5_argtuple_error;
@@ -14826,7 +14822,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_47add_page_delay(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_page_delay", 0, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 536, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_page_delay", 0, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 535, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.add_page_delay", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -14872,77 +14868,77 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_page_delay", 0);
 
-  /* "kivyblocks/dg.pyx":537
+  /* "kivyblocks/dg.pyx":536
  * 
  * 	def add_page_delay(self, data, *args):
  * 		recs = data['data']             # <<<<<<<<<<<<<<
  * 		page = data['page']
  * 		idx = data['idx']
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 537, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 536, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_recs = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":538
+  /* "kivyblocks/dg.pyx":537
  * 	def add_page_delay(self, data, *args):
  * 		recs = data['data']
  * 		page = data['page']             # <<<<<<<<<<<<<<
  * 		idx = data['idx']
  * 		ids = data['ids']
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_page); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 538, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_page); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 537, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_page = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":539
+  /* "kivyblocks/dg.pyx":538
  * 		recs = data['data']
  * 		page = data['page']
  * 		idx = data['idx']             # <<<<<<<<<<<<<<
  * 		ids = data['ids']
  * 		self._fbo = Fbo(size=self.size)
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_idx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 539, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_idx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 538, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_idx = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":540
+  /* "kivyblocks/dg.pyx":539
  * 		page = data['page']
  * 		idx = data['idx']
  * 		ids = data['ids']             # <<<<<<<<<<<<<<
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_ids); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_n_s_ids); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_ids = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":541
+  /* "kivyblocks/dg.pyx":540
  * 		idx = data['idx']
  * 		ids = data['ids']
  * 		self._fbo = Fbo(size=self.size)             # <<<<<<<<<<<<<<
  * 		with self._fbo:
  * 			self._background_color = Color(0,0,0,1)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Fbo); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 541, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Fbo); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 540, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 541, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 540, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 541, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 540, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_size, __pyx_t_3) < 0) __PYX_ERR(0, 541, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_size, __pyx_t_3) < 0) __PYX_ERR(0, 540, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 541, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 540, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fbo, __pyx_t_3) < 0) __PYX_ERR(0, 541, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fbo, __pyx_t_3) < 0) __PYX_ERR(0, 540, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/dg.pyx":542
+  /* "kivyblocks/dg.pyx":541
  * 		ids = data['ids']
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:             # <<<<<<<<<<<<<<
@@ -14950,11 +14946,11 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
  * 			self._background_rect = Rectangle(size=self.size)
  */
   /*with:*/ {
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fbo); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 542, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fbo); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 541, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_LookupSpecial(__pyx_t_3, __pyx_n_s_exit); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 542, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_LookupSpecial(__pyx_t_3, __pyx_n_s_exit); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 541, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_3, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 542, __pyx_L3_error)
+    __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_3, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 541, __pyx_L3_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -14968,7 +14964,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
     }
     __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 542, __pyx_L3_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 541, __pyx_L3_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -14983,44 +14979,44 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
         __Pyx_XGOTREF(__pyx_t_8);
         /*try:*/ {
 
-          /* "kivyblocks/dg.pyx":543
+          /* "kivyblocks/dg.pyx":542
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:
  * 			self._background_color = Color(0,0,0,1)             # <<<<<<<<<<<<<<
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs:
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Color); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 543, __pyx_L7_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Color); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 542, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 543, __pyx_L7_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 542, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_background_color, __pyx_t_2) < 0) __PYX_ERR(0, 543, __pyx_L7_error)
+          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_background_color, __pyx_t_2) < 0) __PYX_ERR(0, 542, __pyx_L7_error)
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-          /* "kivyblocks/dg.pyx":544
+          /* "kivyblocks/dg.pyx":543
  * 		with self._fbo:
  * 			self._background_color = Color(0,0,0,1)
  * 			self._background_rect = Rectangle(size=self.size)             # <<<<<<<<<<<<<<
  * 		for r in recs:
  * 			id = self.addRow(r,index=idx)
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Rectangle); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 544, __pyx_L7_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Rectangle); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 543, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 544, __pyx_L7_error)
+          __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 543, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 544, __pyx_L7_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 543, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_1);
-          if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_size, __pyx_t_1) < 0) __PYX_ERR(0, 544, __pyx_L7_error)
+          if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_size, __pyx_t_1) < 0) __PYX_ERR(0, 543, __pyx_L7_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 544, __pyx_L7_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 543, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_background_rect, __pyx_t_1) < 0) __PYX_ERR(0, 544, __pyx_L7_error)
+          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_background_rect, __pyx_t_1) < 0) __PYX_ERR(0, 543, __pyx_L7_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "kivyblocks/dg.pyx":542
+          /* "kivyblocks/dg.pyx":541
  * 		ids = data['ids']
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:             # <<<<<<<<<<<<<<
@@ -15039,20 +15035,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("kivyblocks.dg.DataGrid.add_page_delay", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_3, &__pyx_t_2) < 0) __PYX_ERR(0, 542, __pyx_L9_except_error)
+          if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_3, &__pyx_t_2) < 0) __PYX_ERR(0, 541, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 542, __pyx_L9_except_error)
+          __pyx_t_5 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 541, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_5);
           __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 542, __pyx_L9_except_error)
+          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 541, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_9);
           __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (__pyx_t_10 < 0) __PYX_ERR(0, 542, __pyx_L9_except_error)
+          if (__pyx_t_10 < 0) __PYX_ERR(0, 541, __pyx_L9_except_error)
           __pyx_t_11 = ((!(__pyx_t_10 != 0)) != 0);
           if (__pyx_t_11) {
             __Pyx_GIVEREF(__pyx_t_1);
@@ -15060,7 +15056,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
             __Pyx_XGIVEREF(__pyx_t_2);
             __Pyx_ErrRestoreWithState(__pyx_t_1, __pyx_t_3, __pyx_t_2);
             __pyx_t_1 = 0; __pyx_t_3 = 0; __pyx_t_2 = 0; 
-            __PYX_ERR(0, 542, __pyx_L9_except_error)
+            __PYX_ERR(0, 541, __pyx_L9_except_error)
           }
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -15086,7 +15082,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
         if (__pyx_t_4) {
           __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__8, NULL);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 542, __pyx_L1_error)
+          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 541, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         }
@@ -15101,7 +15097,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
     __pyx_L16:;
   }
 
-  /* "kivyblocks/dg.pyx":545
+  /* "kivyblocks/dg.pyx":544
  * 			self._background_color = Color(0,0,0,1)
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs:             # <<<<<<<<<<<<<<
@@ -15112,26 +15108,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
     __pyx_t_2 = __pyx_v_recs; __Pyx_INCREF(__pyx_t_2); __pyx_t_12 = 0;
     __pyx_t_13 = NULL;
   } else {
-    __pyx_t_12 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_recs); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 545, __pyx_L1_error)
+    __pyx_t_12 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_recs); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 544, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_13 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 545, __pyx_L1_error)
+    __pyx_t_13 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 544, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_13)) {
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_12 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_12); __Pyx_INCREF(__pyx_t_3); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 545, __pyx_L1_error)
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_12); __Pyx_INCREF(__pyx_t_3); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 544, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 545, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 544, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
         if (__pyx_t_12 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_12); __Pyx_INCREF(__pyx_t_3); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 545, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_12); __Pyx_INCREF(__pyx_t_3); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 544, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 545, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 544, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
@@ -15141,7 +15137,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 545, __pyx_L1_error)
+          else __PYX_ERR(0, 544, __pyx_L1_error)
         }
         break;
       }
@@ -15150,24 +15146,24 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
     __Pyx_XDECREF_SET(__pyx_v_r, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "kivyblocks/dg.pyx":546
+    /* "kivyblocks/dg.pyx":545
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs:
  * 			id = self.addRow(r,index=idx)             # <<<<<<<<<<<<<<
  * 			ids.append(id)
  * 		with self.canvas:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_addRow); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 546, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_addRow); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 545, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 546, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 545, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_v_r);
     __Pyx_GIVEREF(__pyx_v_r);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_r);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 546, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 545, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_index, __pyx_v_idx) < 0) __PYX_ERR(0, 546, __pyx_L1_error)
-    __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 546, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_index, __pyx_v_idx) < 0) __PYX_ERR(0, 545, __pyx_L1_error)
+    __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 545, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_14);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -15175,16 +15171,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
     __Pyx_XDECREF_SET(__pyx_v_id, __pyx_t_14);
     __pyx_t_14 = 0;
 
-    /* "kivyblocks/dg.pyx":547
+    /* "kivyblocks/dg.pyx":546
  * 		for r in recs:
  * 			id = self.addRow(r,index=idx)
  * 			ids.append(id)             # <<<<<<<<<<<<<<
  * 		with self.canvas:
  * 			self._fbo_rect = Rectangle(size=self.size,
  */
-    __pyx_t_15 = __Pyx_PyObject_Append(__pyx_v_ids, __pyx_v_id); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 547, __pyx_L1_error)
+    __pyx_t_15 = __Pyx_PyObject_Append(__pyx_v_ids, __pyx_v_id); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 546, __pyx_L1_error)
 
-    /* "kivyblocks/dg.pyx":545
+    /* "kivyblocks/dg.pyx":544
  * 			self._background_color = Color(0,0,0,1)
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs:             # <<<<<<<<<<<<<<
@@ -15194,7 +15190,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":548
+  /* "kivyblocks/dg.pyx":547
  * 			id = self.addRow(r,index=idx)
  * 			ids.append(id)
  * 		with self.canvas:             # <<<<<<<<<<<<<<
@@ -15202,11 +15198,11 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
  * 								texture=self._fbo.texture)
  */
   /*with:*/ {
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_canvas); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 548, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_canvas); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 547, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 548, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 547, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 548, __pyx_L19_error)
+    __pyx_t_5 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 547, __pyx_L19_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -15220,7 +15216,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
     }
     __pyx_t_14 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 548, __pyx_L19_error)
+    if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 547, __pyx_L19_error)
     __Pyx_GOTREF(__pyx_t_14);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -15235,52 +15231,52 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
         __Pyx_XGOTREF(__pyx_t_6);
         /*try:*/ {
 
-          /* "kivyblocks/dg.pyx":549
+          /* "kivyblocks/dg.pyx":548
  * 			ids.append(id)
  * 		with self.canvas:
  * 			self._fbo_rect = Rectangle(size=self.size,             # <<<<<<<<<<<<<<
  * 								texture=self._fbo.texture)
  * 		self._dataloader.bufferObjects(page,ids)
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Rectangle); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 549, __pyx_L23_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Rectangle); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 548, __pyx_L23_error)
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_14 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 549, __pyx_L23_error)
+          __pyx_t_14 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 548, __pyx_L23_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 549, __pyx_L23_error)
+          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 548, __pyx_L23_error)
           __Pyx_GOTREF(__pyx_t_5);
-          if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_size, __pyx_t_5) < 0) __PYX_ERR(0, 549, __pyx_L23_error)
+          if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_size, __pyx_t_5) < 0) __PYX_ERR(0, 548, __pyx_L23_error)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-          /* "kivyblocks/dg.pyx":550
+          /* "kivyblocks/dg.pyx":549
  * 		with self.canvas:
  * 			self._fbo_rect = Rectangle(size=self.size,
  * 								texture=self._fbo.texture)             # <<<<<<<<<<<<<<
  * 		self._dataloader.bufferObjects(page,ids)
  * 		x = self._dataloader.getLocater()
  */
-          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fbo); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 550, __pyx_L23_error)
+          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fbo); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 549, __pyx_L23_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_texture); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 550, __pyx_L23_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_texture); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 549, __pyx_L23_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_texture, __pyx_t_1) < 0) __PYX_ERR(0, 549, __pyx_L23_error)
+          if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_texture, __pyx_t_1) < 0) __PYX_ERR(0, 548, __pyx_L23_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "kivyblocks/dg.pyx":549
+          /* "kivyblocks/dg.pyx":548
  * 			ids.append(id)
  * 		with self.canvas:
  * 			self._fbo_rect = Rectangle(size=self.size,             # <<<<<<<<<<<<<<
  * 								texture=self._fbo.texture)
  * 		self._dataloader.bufferObjects(page,ids)
  */
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_14); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 549, __pyx_L23_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_14); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 548, __pyx_L23_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fbo_rect, __pyx_t_1) < 0) __PYX_ERR(0, 549, __pyx_L23_error)
+          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fbo_rect, __pyx_t_1) < 0) __PYX_ERR(0, 548, __pyx_L23_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "kivyblocks/dg.pyx":548
+          /* "kivyblocks/dg.pyx":547
  * 			id = self.addRow(r,index=idx)
  * 			ids.append(id)
  * 		with self.canvas:             # <<<<<<<<<<<<<<
@@ -15300,20 +15296,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("kivyblocks.dg.DataGrid.add_page_delay", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_14, &__pyx_t_2) < 0) __PYX_ERR(0, 548, __pyx_L25_except_error)
+          if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_14, &__pyx_t_2) < 0) __PYX_ERR(0, 547, __pyx_L25_except_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_14, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 548, __pyx_L25_except_error)
+          __pyx_t_5 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_14, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 547, __pyx_L25_except_error)
           __Pyx_GOTREF(__pyx_t_5);
           __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 548, __pyx_L25_except_error)
+          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 547, __pyx_L25_except_error)
           __Pyx_GOTREF(__pyx_t_9);
           __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (__pyx_t_11 < 0) __PYX_ERR(0, 548, __pyx_L25_except_error)
+          if (__pyx_t_11 < 0) __PYX_ERR(0, 547, __pyx_L25_except_error)
           __pyx_t_10 = ((!(__pyx_t_11 != 0)) != 0);
           if (__pyx_t_10) {
             __Pyx_GIVEREF(__pyx_t_1);
@@ -15321,7 +15317,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
             __Pyx_XGIVEREF(__pyx_t_2);
             __Pyx_ErrRestoreWithState(__pyx_t_1, __pyx_t_14, __pyx_t_2);
             __pyx_t_1 = 0; __pyx_t_14 = 0; __pyx_t_2 = 0; 
-            __PYX_ERR(0, 548, __pyx_L25_except_error)
+            __PYX_ERR(0, 547, __pyx_L25_except_error)
           }
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -15347,7 +15343,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
         if (__pyx_t_4) {
           __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__8, NULL);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 548, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 547, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         }
@@ -15362,16 +15358,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
     __pyx_L32:;
   }
 
-  /* "kivyblocks/dg.pyx":551
+  /* "kivyblocks/dg.pyx":550
  * 			self._fbo_rect = Rectangle(size=self.size,
  * 								texture=self._fbo.texture)
  * 		self._dataloader.bufferObjects(page,ids)             # <<<<<<<<<<<<<<
  * 		x = self._dataloader.getLocater()
  * 		self.locater(x)
  */
-  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 551, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 550, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_bufferObjects); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 551, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_bufferObjects); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 550, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   __pyx_t_14 = NULL;
@@ -15389,7 +15385,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_14, __pyx_v_page, __pyx_v_ids};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 551, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 550, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
     __Pyx_GOTREF(__pyx_t_2);
   } else
@@ -15397,13 +15393,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_14, __pyx_v_page, __pyx_v_ids};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 551, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_16, 2+__pyx_t_16); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 550, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
     __Pyx_GOTREF(__pyx_t_2);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 551, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 550, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_14) {
       __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_14); __pyx_t_14 = NULL;
@@ -15414,23 +15410,23 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
     __Pyx_INCREF(__pyx_v_ids);
     __Pyx_GIVEREF(__pyx_v_ids);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_16, __pyx_v_ids);
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 551, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 550, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":552
+  /* "kivyblocks/dg.pyx":551
  * 								texture=self._fbo.texture)
  * 		self._dataloader.bufferObjects(page,ids)
  * 		x = self._dataloader.getLocater()             # <<<<<<<<<<<<<<
  * 		self.locater(x)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 552, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 551, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_getLocater); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 552, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_getLocater); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 551, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -15445,20 +15441,20 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
   }
   __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 552, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 551, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_x = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":553
+  /* "kivyblocks/dg.pyx":552
  * 		self._dataloader.bufferObjects(page,ids)
  * 		x = self._dataloader.getLocater()
  * 		self.locater(x)             # <<<<<<<<<<<<<<
  * 
  * 	def delete_page(self,o,data):
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_locater); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 553, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_locater); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 552, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -15472,12 +15468,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
   }
   __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_1, __pyx_v_x) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_x);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 553, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 552, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":536
+  /* "kivyblocks/dg.pyx":535
  * 		Clock.schedule_once(f, 0)
  * 
  * 	def add_page_delay(self, data, *args):             # <<<<<<<<<<<<<<
@@ -15509,7 +15505,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_46add_page_delay(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":555
+/* "kivyblocks/dg.pyx":554
  * 		self.locater(x)
  * 
  * 	def delete_page(self,o,data):             # <<<<<<<<<<<<<<
@@ -15555,17 +15551,17 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_49delete_page(PyObject *__p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_o)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("delete_page", 1, 3, 3, 1); __PYX_ERR(0, 555, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("delete_page", 1, 3, 3, 1); __PYX_ERR(0, 554, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("delete_page", 1, 3, 3, 2); __PYX_ERR(0, 555, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("delete_page", 1, 3, 3, 2); __PYX_ERR(0, 554, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "delete_page") < 0)) __PYX_ERR(0, 555, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "delete_page") < 0)) __PYX_ERR(0, 554, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -15580,7 +15576,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_49delete_page(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("delete_page", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 555, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("delete_page", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 554, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.delete_page", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -15608,7 +15604,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_48delete_page(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delete_page", 0);
 
-  /* "kivyblocks/dg.pyx":556
+  /* "kivyblocks/dg.pyx":555
  * 
  * 	def delete_page(self,o,data):
  * 		for id in data:             # <<<<<<<<<<<<<<
@@ -15619,26 +15615,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_48delete_page(CYTHON_UNUSED
     __pyx_t_1 = __pyx_v_data; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 556, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 555, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 556, __pyx_L1_error)
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 555, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 556, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 555, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 556, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 555, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 556, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 555, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 556, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 555, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -15648,7 +15644,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_48delete_page(CYTHON_UNUSED
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 556, __pyx_L1_error)
+          else __PYX_ERR(0, 555, __pyx_L1_error)
         }
         break;
       }
@@ -15657,14 +15653,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_48delete_page(CYTHON_UNUSED
     __Pyx_XDECREF_SET(__pyx_v_id, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":557
+    /* "kivyblocks/dg.pyx":556
  * 	def delete_page(self,o,data):
  * 		for id in data:
  * 			self.delRow(id)             # <<<<<<<<<<<<<<
  * 
  * 	def addRow(self,data, **kw):
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_delRow); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 557, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_delRow); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 556, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -15678,12 +15674,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_48delete_page(CYTHON_UNUSED
     }
     __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_v_id) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_id);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 557, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 556, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":556
+    /* "kivyblocks/dg.pyx":555
  * 
  * 	def delete_page(self,o,data):
  * 		for id in data:             # <<<<<<<<<<<<<<
@@ -15693,7 +15689,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_48delete_page(CYTHON_UNUSED
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":555
+  /* "kivyblocks/dg.pyx":554
  * 		self.locater(x)
  * 
  * 	def delete_page(self,o,data):             # <<<<<<<<<<<<<<
@@ -15718,7 +15714,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_48delete_page(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":559
+/* "kivyblocks/dg.pyx":558
  * 			self.delRow(id)
  * 
  * 	def addRow(self,data, **kw):             # <<<<<<<<<<<<<<
@@ -15764,11 +15760,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_51addRow(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("addRow", 1, 2, 2, 1); __PYX_ERR(0, 559, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("addRow", 1, 2, 2, 1); __PYX_ERR(0, 558, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "addRow") < 0)) __PYX_ERR(0, 559, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "addRow") < 0)) __PYX_ERR(0, 558, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -15781,7 +15777,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_51addRow(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("addRow", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 559, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("addRow", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 558, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kw); __pyx_v_kw = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.addRow", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -15811,14 +15807,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_50addRow(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("addRow", 0);
 
-  /* "kivyblocks/dg.pyx":560
+  /* "kivyblocks/dg.pyx":559
  * 
  * 	def addRow(self,data, **kw):
  * 		id = getID()             # <<<<<<<<<<<<<<
  * 		f_row = None
  * 		if self.freeze_part:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_getID); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 560, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_getID); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 559, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -15832,13 +15828,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_50addRow(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 560, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 559, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_id = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":561
+  /* "kivyblocks/dg.pyx":560
  * 	def addRow(self,data, **kw):
  * 		id = getID()
  * 		f_row = None             # <<<<<<<<<<<<<<
@@ -15848,35 +15844,35 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_50addRow(CYTHON_UNUSED PyOb
   __Pyx_INCREF(Py_None);
   __pyx_v_f_row = Py_None;
 
-  /* "kivyblocks/dg.pyx":562
+  /* "kivyblocks/dg.pyx":561
  * 		id = getID()
  * 		f_row = None
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			self.freeze_part.body.addRow(id, data, **kw)
  * 		self.normal_part.body.addRow(id, data, **kw)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 562, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 561, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 562, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 561, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_4) {
 
-    /* "kivyblocks/dg.pyx":563
+    /* "kivyblocks/dg.pyx":562
  * 		f_row = None
  * 		if self.freeze_part:
  * 			self.freeze_part.body.addRow(id, data, **kw)             # <<<<<<<<<<<<<<
  * 		self.normal_part.body.addRow(id, data, **kw)
  * 		return id
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 563, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 562, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 563, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 562, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_addRow); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 563, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_addRow); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 562, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 563, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 562, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_id);
     __Pyx_GIVEREF(__pyx_v_id);
@@ -15884,16 +15880,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_50addRow(CYTHON_UNUSED PyOb
     __Pyx_INCREF(__pyx_v_data);
     __Pyx_GIVEREF(__pyx_v_data);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_data);
-    __pyx_t_3 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 563, __pyx_L1_error)
+    __pyx_t_3 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 562, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 563, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 562, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "kivyblocks/dg.pyx":562
+    /* "kivyblocks/dg.pyx":561
  * 		id = getID()
  * 		f_row = None
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -15902,22 +15898,22 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_50addRow(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "kivyblocks/dg.pyx":564
+  /* "kivyblocks/dg.pyx":563
  * 		if self.freeze_part:
  * 			self.freeze_part.body.addRow(id, data, **kw)
  * 		self.normal_part.body.addRow(id, data, **kw)             # <<<<<<<<<<<<<<
  * 		return id
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_body); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_body); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_addRow); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_addRow); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_v_id);
   __Pyx_GIVEREF(__pyx_v_id);
@@ -15925,16 +15921,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_50addRow(CYTHON_UNUSED PyOb
   __Pyx_INCREF(__pyx_v_data);
   __Pyx_GIVEREF(__pyx_v_data);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_data);
-  __pyx_t_2 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_2 = PyDict_Copy(__pyx_v_kw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":565
+  /* "kivyblocks/dg.pyx":564
  * 			self.freeze_part.body.addRow(id, data, **kw)
  * 		self.normal_part.body.addRow(id, data, **kw)
  * 		return id             # <<<<<<<<<<<<<<
@@ -15946,7 +15942,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_50addRow(CYTHON_UNUSED PyOb
   __pyx_r = __pyx_v_id;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":559
+  /* "kivyblocks/dg.pyx":558
  * 			self.delRow(id)
  * 
  * 	def addRow(self,data, **kw):             # <<<<<<<<<<<<<<
@@ -15970,7 +15966,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_50addRow(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":567
+/* "kivyblocks/dg.pyx":566
  * 		return id
  * 
  * 	def delRow(self,id,**kw):             # <<<<<<<<<<<<<<
@@ -16016,11 +16012,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_53delRow(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_id)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("delRow", 1, 2, 2, 1); __PYX_ERR(0, 567, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("delRow", 1, 2, 2, 1); __PYX_ERR(0, 566, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "delRow") < 0)) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kw, values, pos_args, "delRow") < 0)) __PYX_ERR(0, 566, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -16033,7 +16029,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_53delRow(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("delRow", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 567, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("delRow", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 566, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kw); __pyx_v_kw = 0;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.delRow", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -16060,32 +16056,32 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_52delRow(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delRow", 0);
 
-  /* "kivyblocks/dg.pyx":568
+  /* "kivyblocks/dg.pyx":567
  * 
  * 	def delRow(self,id,**kw):
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			self.freeze_part.body.delRowById(id)
  * 		self.normal_part.body.delRowById(id)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 568, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 567, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 568, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 567, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":569
+    /* "kivyblocks/dg.pyx":568
  * 	def delRow(self,id,**kw):
  * 		if self.freeze_part:
  * 			self.freeze_part.body.delRowById(id)             # <<<<<<<<<<<<<<
  * 		self.normal_part.body.delRowById(id)
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 569, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 568, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 569, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 568, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_delRowById); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 569, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_delRowById); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 568, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -16100,12 +16096,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_52delRow(CYTHON_UNUSED PyOb
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_id) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_id);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 569, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 568, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":568
+    /* "kivyblocks/dg.pyx":567
  * 
  * 	def delRow(self,id,**kw):
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -16114,19 +16110,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_52delRow(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "kivyblocks/dg.pyx":570
+  /* "kivyblocks/dg.pyx":569
  * 		if self.freeze_part:
  * 			self.freeze_part.body.delRowById(id)
  * 		self.normal_part.body.delRowById(id)             # <<<<<<<<<<<<<<
  * 
  * 	def createToolbar(self):
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 570, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 569, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 570, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_body); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 569, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_delRowById); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 570, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_delRowById); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 569, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -16141,12 +16137,12 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_52delRow(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_id) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_id);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 570, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 569, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":567
+  /* "kivyblocks/dg.pyx":566
  * 		return id
  * 
  * 	def delRow(self,id,**kw):             # <<<<<<<<<<<<<<
@@ -16169,7 +16165,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_52delRow(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":572
+/* "kivyblocks/dg.pyx":571
  * 		self.normal_part.body.delRowById(id)
  * 
  * 	def createToolbar(self):             # <<<<<<<<<<<<<<
@@ -16203,51 +16199,51 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_54createToolbar(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("createToolbar", 0);
 
-  /* "kivyblocks/dg.pyx":573
+  /* "kivyblocks/dg.pyx":572
  * 
  * 	def createToolbar(self):
  * 		if self.toolbar:             # <<<<<<<<<<<<<<
  * 			self._toolbar = Toolbar(**self.toolbar)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_toolbar_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 573, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_toolbar_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 572, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 573, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 572, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":574
+    /* "kivyblocks/dg.pyx":573
  * 	def createToolbar(self):
  * 		if self.toolbar:
  * 			self._toolbar = Toolbar(**self.toolbar)             # <<<<<<<<<<<<<<
  * 
  * 	def on_selected(self,row):
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Toolbar); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 574, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Toolbar); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 573, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_toolbar_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 574, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_toolbar_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 573, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     if (unlikely(__pyx_t_4 == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-      __PYX_ERR(0, 574, __pyx_L1_error)
+      __PYX_ERR(0, 573, __pyx_L1_error)
     }
     if (likely(PyDict_CheckExact(__pyx_t_4))) {
-      __pyx_t_3 = PyDict_Copy(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 574, __pyx_L1_error)
+      __pyx_t_3 = PyDict_Copy(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 573, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
-      __pyx_t_3 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 574, __pyx_L1_error)
+      __pyx_t_3 = PyObject_CallFunctionObjArgs((PyObject*)&PyDict_Type, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 573, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 574, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 573, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_toolbar, __pyx_t_4) < 0) __PYX_ERR(0, 574, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_toolbar, __pyx_t_4) < 0) __PYX_ERR(0, 573, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":573
+    /* "kivyblocks/dg.pyx":572
  * 
  * 	def createToolbar(self):
  * 		if self.toolbar:             # <<<<<<<<<<<<<<
@@ -16256,7 +16252,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_54createToolbar(CYTHON_UNUS
  */
   }
 
-  /* "kivyblocks/dg.pyx":572
+  /* "kivyblocks/dg.pyx":571
  * 		self.normal_part.body.delRowById(id)
  * 
  * 	def createToolbar(self):             # <<<<<<<<<<<<<<
@@ -16279,7 +16275,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_54createToolbar(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":576
+/* "kivyblocks/dg.pyx":575
  * 			self._toolbar = Toolbar(**self.toolbar)
  * 
  * 	def on_selected(self,row):             # <<<<<<<<<<<<<<
@@ -16322,11 +16318,11 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_57on_selected(PyObject *__p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_row)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("on_selected", 1, 2, 2, 1); __PYX_ERR(0, 576, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("on_selected", 1, 2, 2, 1); __PYX_ERR(0, 575, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "on_selected") < 0)) __PYX_ERR(0, 576, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "on_selected") < 0)) __PYX_ERR(0, 575, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -16339,7 +16335,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_57on_selected(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("on_selected", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 576, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("on_selected", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 575, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.on_selected", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -16360,16 +16356,16 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_56on_selected(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_selected", 0);
 
-  /* "kivyblocks/dg.pyx":577
+  /* "kivyblocks/dg.pyx":576
  * 
  * 	def on_selected(self,row):
  * 		print("DataGrid():on_selected fire")             # <<<<<<<<<<<<<<
  * 
  * 	def loadData(self,*args, **kwargs):
  */
-  if (__Pyx_PrintOne(0, __pyx_kp_s_DataGrid_on_selected_fire) < 0) __PYX_ERR(0, 577, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_kp_s_DataGrid_on_selected_fire) < 0) __PYX_ERR(0, 576, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":576
+  /* "kivyblocks/dg.pyx":575
  * 			self._toolbar = Toolbar(**self.toolbar)
  * 
  * 	def on_selected(self,row):             # <<<<<<<<<<<<<<
@@ -16389,7 +16385,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_56on_selected(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":579
+/* "kivyblocks/dg.pyx":578
  * 		print("DataGrid():on_selected fire")
  * 
  * 	def loadData(self,*args, **kwargs):             # <<<<<<<<<<<<<<
@@ -16443,7 +16439,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_59loadData(PyObject *__pyx_
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 1) ? pos_args : 1;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, used_pos_args, "loadData") < 0)) __PYX_ERR(0, 579, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, used_pos_args, "loadData") < 0)) __PYX_ERR(0, 578, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 1) {
       goto __pyx_L5_argtuple_error;
@@ -16454,7 +16450,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_59loadData(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("loadData", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 579, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("loadData", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 578, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
@@ -16484,34 +16480,34 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_58loadData(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("loadData", 0);
 
-  /* "kivyblocks/dg.pyx":580
+  /* "kivyblocks/dg.pyx":579
  * 
  * 	def loadData(self,*args, **kwargs):
  * 		kwargs['page'] = 1             # <<<<<<<<<<<<<<
  * 		self.selected_rowid = None
  * 		self._dataloader.do_search(None,kwargs)
  */
-  if (unlikely(PyDict_SetItem(__pyx_v_kwargs, __pyx_n_s_page, __pyx_int_1) < 0)) __PYX_ERR(0, 580, __pyx_L1_error)
+  if (unlikely(PyDict_SetItem(__pyx_v_kwargs, __pyx_n_s_page, __pyx_int_1) < 0)) __PYX_ERR(0, 579, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":581
+  /* "kivyblocks/dg.pyx":580
  * 	def loadData(self,*args, **kwargs):
  * 		kwargs['page'] = 1
  * 		self.selected_rowid = None             # <<<<<<<<<<<<<<
  * 		self._dataloader.do_search(None,kwargs)
  * 
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid, Py_None) < 0) __PYX_ERR(0, 581, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid, Py_None) < 0) __PYX_ERR(0, 580, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":582
+  /* "kivyblocks/dg.pyx":581
  * 		kwargs['page'] = 1
  * 		self.selected_rowid = None
  * 		self._dataloader.do_search(None,kwargs)             # <<<<<<<<<<<<<<
  * 
  * 	def createDataGridPart(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dataloader_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 581, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_do_search); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_do_search); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 581, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -16529,7 +16525,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_58loadData(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, Py_None, __pyx_v_kwargs};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 582, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 581, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -16537,13 +16533,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_58loadData(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, Py_None, __pyx_v_kwargs};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 582, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 581, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 582, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 581, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_2) {
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -16554,14 +16550,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_58loadData(CYTHON_UNUSED Py
     __Pyx_INCREF(__pyx_v_kwargs);
     __Pyx_GIVEREF(__pyx_v_kwargs);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_kwargs);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 582, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 581, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":579
+  /* "kivyblocks/dg.pyx":578
  * 		print("DataGrid():on_selected fire")
  * 
  * 	def loadData(self,*args, **kwargs):             # <<<<<<<<<<<<<<
@@ -16585,7 +16581,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_58loadData(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":584
+/* "kivyblocks/dg.pyx":583
  * 		self._dataloader.do_search(None,kwargs)
  * 
  * 	def createDataGridPart(self):             # <<<<<<<<<<<<<<
@@ -16622,47 +16618,47 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("createDataGridPart", 0);
 
-  /* "kivyblocks/dg.pyx":585
+  /* "kivyblocks/dg.pyx":584
  * 
  * 	def createDataGridPart(self):
  * 		self.freeze_part = None             # <<<<<<<<<<<<<<
  * 		self.normal_part = None
  * 		if self.freeze_fields:
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part, Py_None) < 0) __PYX_ERR(0, 585, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part, Py_None) < 0) __PYX_ERR(0, 584, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":586
+  /* "kivyblocks/dg.pyx":585
  * 	def createDataGridPart(self):
  * 		self.freeze_part = None
  * 		self.normal_part = None             # <<<<<<<<<<<<<<
  * 		if self.freeze_fields:
  * 			self.freeze_part = DataGridPart(self,True, self.freeze_fields)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_normal_part, Py_None) < 0) __PYX_ERR(0, 586, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_normal_part, Py_None) < 0) __PYX_ERR(0, 585, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":587
+  /* "kivyblocks/dg.pyx":586
  * 		self.freeze_part = None
  * 		self.normal_part = None
  * 		if self.freeze_fields:             # <<<<<<<<<<<<<<
  * 			self.freeze_part = DataGridPart(self,True, self.freeze_fields)
  * 		if self.normal_fields:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_fields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 587, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_fields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 587, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":588
+    /* "kivyblocks/dg.pyx":587
  * 		self.normal_part = None
  * 		if self.freeze_fields:
  * 			self.freeze_part = DataGridPart(self,True, self.freeze_fields)             # <<<<<<<<<<<<<<
  * 		if self.normal_fields:
  * 			self.normal_part = DataGridPart(self, False, self.normal_fields)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DataGridPart); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 588, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DataGridPart); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 587, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_fields); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 588, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_fields); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 587, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     __pyx_t_6 = 0;
@@ -16679,7 +16675,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_v_self, Py_True, __pyx_t_4};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 588, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 587, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -16688,14 +16684,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_v_self, Py_True, __pyx_t_4};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 588, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 587, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else
     #endif
     {
-      __pyx_t_7 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 588, __pyx_L1_error)
+      __pyx_t_7 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 587, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -16709,15 +16705,15 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_7, 2+__pyx_t_6, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 588, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 587, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part, __pyx_t_1) < 0) __PYX_ERR(0, 588, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part, __pyx_t_1) < 0) __PYX_ERR(0, 587, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":587
+    /* "kivyblocks/dg.pyx":586
  * 		self.freeze_part = None
  * 		self.normal_part = None
  * 		if self.freeze_fields:             # <<<<<<<<<<<<<<
@@ -16726,29 +16722,29 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
  */
   }
 
-  /* "kivyblocks/dg.pyx":589
+  /* "kivyblocks/dg.pyx":588
  * 		if self.freeze_fields:
  * 			self.freeze_part = DataGridPart(self,True, self.freeze_fields)
  * 		if self.normal_fields:             # <<<<<<<<<<<<<<
  * 			self.normal_part = DataGridPart(self, False, self.normal_fields)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_fields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 589, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_fields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 588, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 589, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 588, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "kivyblocks/dg.pyx":590
+    /* "kivyblocks/dg.pyx":589
  * 			self.freeze_part = DataGridPart(self,True, self.freeze_fields)
  * 		if self.normal_fields:
  * 			self.normal_part = DataGridPart(self, False, self.normal_fields)             # <<<<<<<<<<<<<<
  * 
  * 	def getPartFields(self,freeze_flag:bool=False) -> list:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DataGridPart); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 590, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DataGridPart); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 589, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_fields); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 590, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_fields); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 589, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_4 = NULL;
     __pyx_t_6 = 0;
@@ -16765,7 +16761,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_v_self, Py_False, __pyx_t_7};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 590, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 589, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -16774,14 +16770,14 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[4] = {__pyx_t_4, __pyx_v_self, Py_False, __pyx_t_7};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 590, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 589, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 590, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 589, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_4) {
         __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -16795,15 +16791,15 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
       __Pyx_GIVEREF(__pyx_t_7);
       PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_6, __pyx_t_7);
       __pyx_t_7 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 590, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 589, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_normal_part, __pyx_t_1) < 0) __PYX_ERR(0, 590, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_normal_part, __pyx_t_1) < 0) __PYX_ERR(0, 589, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":589
+    /* "kivyblocks/dg.pyx":588
  * 		if self.freeze_fields:
  * 			self.freeze_part = DataGridPart(self,True, self.freeze_fields)
  * 		if self.normal_fields:             # <<<<<<<<<<<<<<
@@ -16812,7 +16808,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
  */
   }
 
-  /* "kivyblocks/dg.pyx":584
+  /* "kivyblocks/dg.pyx":583
  * 		self._dataloader.do_search(None,kwargs)
  * 
  * 	def createDataGridPart(self):             # <<<<<<<<<<<<<<
@@ -16837,7 +16833,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_60createDataGridPart(CYTHON
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":592
+/* "kivyblocks/dg.pyx":591
  * 			self.normal_part = DataGridPart(self, False, self.normal_fields)
  * 
  * 	def getPartFields(self,freeze_flag:bool=False) -> list:             # <<<<<<<<<<<<<<
@@ -16885,7 +16881,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_63getPartFields(PyObject *_
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "getPartFields") < 0)) __PYX_ERR(0, 592, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "getPartFields") < 0)) __PYX_ERR(0, 591, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -16901,7 +16897,7 @@ static PyObject *__pyx_pw_10kivyblocks_2dg_8DataGrid_63getPartFields(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getPartFields", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 592, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getPartFields", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 591, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kivyblocks.dg.DataGrid.getPartFields", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -16932,34 +16928,34 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getPartFields", 0);
 
-  /* "kivyblocks/dg.pyx":593
+  /* "kivyblocks/dg.pyx":592
  * 
  * 	def getPartFields(self,freeze_flag:bool=False) -> list:
  * 		fs = []             # <<<<<<<<<<<<<<
  * 		for f in self.fields:
  * 			if freeze_flag:
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 593, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 592, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_fs = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":594
+  /* "kivyblocks/dg.pyx":593
  * 	def getPartFields(self,freeze_flag:bool=False) -> list:
  * 		fs = []
  * 		for f in self.fields:             # <<<<<<<<<<<<<<
  * 			if freeze_flag:
  * 				if f.get('freeze',False):
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 594, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fields); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 593, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 594, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 593, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 594, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 593, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -16967,17 +16963,17 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 594, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 593, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 594, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 593, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 594, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 593, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 594, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 593, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -16987,7 +16983,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 594, __pyx_L1_error)
+          else __PYX_ERR(0, 593, __pyx_L1_error)
         }
         break;
       }
@@ -16996,42 +16992,42 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
     __Pyx_XDECREF_SET(__pyx_v_f, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":595
+    /* "kivyblocks/dg.pyx":594
  * 		fs = []
  * 		for f in self.fields:
  * 			if freeze_flag:             # <<<<<<<<<<<<<<
  * 				if f.get('freeze',False):
  * 					fs.append(f)
  */
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_freeze_flag); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 595, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_freeze_flag); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 594, __pyx_L1_error)
     if (__pyx_t_5) {
 
-      /* "kivyblocks/dg.pyx":596
+      /* "kivyblocks/dg.pyx":595
  * 		for f in self.fields:
  * 			if freeze_flag:
  * 				if f.get('freeze',False):             # <<<<<<<<<<<<<<
  * 					fs.append(f)
  * 			else:
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 596, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 595, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 596, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 595, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 596, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 595, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (__pyx_t_5) {
 
-        /* "kivyblocks/dg.pyx":597
+        /* "kivyblocks/dg.pyx":596
  * 			if freeze_flag:
  * 				if f.get('freeze',False):
  * 					fs.append(f)             # <<<<<<<<<<<<<<
  * 			else:
  * 				if not f.get('freeze',False):
  */
-        __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_fs, __pyx_v_f); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 597, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_fs, __pyx_v_f); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 596, __pyx_L1_error)
 
-        /* "kivyblocks/dg.pyx":596
+        /* "kivyblocks/dg.pyx":595
  * 		for f in self.fields:
  * 			if freeze_flag:
  * 				if f.get('freeze',False):             # <<<<<<<<<<<<<<
@@ -17040,7 +17036,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
  */
       }
 
-      /* "kivyblocks/dg.pyx":595
+      /* "kivyblocks/dg.pyx":594
  * 		fs = []
  * 		for f in self.fields:
  * 			if freeze_flag:             # <<<<<<<<<<<<<<
@@ -17050,7 +17046,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
       goto __pyx_L5;
     }
 
-    /* "kivyblocks/dg.pyx":599
+    /* "kivyblocks/dg.pyx":598
  * 					fs.append(f)
  * 			else:
  * 				if not f.get('freeze',False):             # <<<<<<<<<<<<<<
@@ -17058,26 +17054,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
  * 		return fs
  */
     /*else*/ {
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 599, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 598, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 599, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 598, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 599, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 598, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_8 = ((!__pyx_t_5) != 0);
       if (__pyx_t_8) {
 
-        /* "kivyblocks/dg.pyx":600
+        /* "kivyblocks/dg.pyx":599
  * 			else:
  * 				if not f.get('freeze',False):
  * 					fs.append(f)             # <<<<<<<<<<<<<<
  * 		return fs
  * 
  */
-        __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_fs, __pyx_v_f); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 600, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_fs, __pyx_v_f); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 599, __pyx_L1_error)
 
-        /* "kivyblocks/dg.pyx":599
+        /* "kivyblocks/dg.pyx":598
  * 					fs.append(f)
  * 			else:
  * 				if not f.get('freeze',False):             # <<<<<<<<<<<<<<
@@ -17088,7 +17084,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
     }
     __pyx_L5:;
 
-    /* "kivyblocks/dg.pyx":594
+    /* "kivyblocks/dg.pyx":593
  * 	def getPartFields(self,freeze_flag:bool=False) -> list:
  * 		fs = []
  * 		for f in self.fields:             # <<<<<<<<<<<<<<
@@ -17098,7 +17094,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":601
+  /* "kivyblocks/dg.pyx":600
  * 				if not f.get('freeze',False):
  * 					fs.append(f)
  * 		return fs             # <<<<<<<<<<<<<<
@@ -17110,7 +17106,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
   __pyx_r = __pyx_v_fs;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":592
+  /* "kivyblocks/dg.pyx":591
  * 			self.normal_part = DataGridPart(self, False, self.normal_fields)
  * 
  * 	def getPartFields(self,freeze_flag:bool=False) -> list:             # <<<<<<<<<<<<<<
@@ -17133,7 +17129,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_62getPartFields(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "kivyblocks/dg.pyx":603
+/* "kivyblocks/dg.pyx":602
  * 		return fs
  * 
  * 	def get_selected_data(self):             # <<<<<<<<<<<<<<
@@ -17171,21 +17167,21 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_selected_data", 0);
 
-  /* "kivyblocks/dg.pyx":604
+  /* "kivyblocks/dg.pyx":603
  * 
  * 	def get_selected_data(self):
  * 		if not self.selected_rowid:             # <<<<<<<<<<<<<<
  * 			return {}
  * 		data = {}
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 604, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 603, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 604, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 603, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":605
+    /* "kivyblocks/dg.pyx":604
  * 	def get_selected_data(self):
  * 		if not self.selected_rowid:
  * 			return {}             # <<<<<<<<<<<<<<
@@ -17193,13 +17189,13 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_
  * 		row_id = self.selected_rowid
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 605, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 604, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "kivyblocks/dg.pyx":604
+    /* "kivyblocks/dg.pyx":603
  * 
  * 	def get_selected_data(self):
  * 		if not self.selected_rowid:             # <<<<<<<<<<<<<<
@@ -17208,56 +17204,56 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_
  */
   }
 
-  /* "kivyblocks/dg.pyx":606
+  /* "kivyblocks/dg.pyx":605
  * 		if not self.selected_rowid:
  * 			return {}
  * 		data = {}             # <<<<<<<<<<<<<<
  * 		row_id = self.selected_rowid
  * 		if self.freeze_part:
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 606, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 605, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_data = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":607
+  /* "kivyblocks/dg.pyx":606
  * 			return {}
  * 		data = {}
  * 		row_id = self.selected_rowid             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 607, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_selected_rowid); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 606, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_row_id = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":608
+  /* "kivyblocks/dg.pyx":607
  * 		data = {}
  * 		row_id = self.selected_rowid
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			data.update(row.row_data)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 608, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 607, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 608, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 607, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_3) {
 
-    /* "kivyblocks/dg.pyx":609
+    /* "kivyblocks/dg.pyx":608
  * 		row_id = self.selected_rowid
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)             # <<<<<<<<<<<<<<
  * 			data.update(row.row_data)
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 609, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_freeze_part); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 608, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 609, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 608, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 609, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 608, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -17272,27 +17268,27 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_v_row_id) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_row_id);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 609, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 608, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_row = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "kivyblocks/dg.pyx":610
+    /* "kivyblocks/dg.pyx":609
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			data.update(row.row_data)             # <<<<<<<<<<<<<<
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  * 		data.update(row.row_data)
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 610, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 609, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_data, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 610, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_data, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 609, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kivyblocks/dg.pyx":608
+    /* "kivyblocks/dg.pyx":607
  * 		data = {}
  * 		row_id = self.selected_rowid
  * 		if self.freeze_part:             # <<<<<<<<<<<<<<
@@ -17301,19 +17297,19 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_
  */
   }
 
-  /* "kivyblocks/dg.pyx":611
+  /* "kivyblocks/dg.pyx":610
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  * 			data.update(row.row_data)
  * 		row = self.normal_part.body.get_row_by_id(row_id)             # <<<<<<<<<<<<<<
  * 		data.update(row.row_data)
  * 		return data
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 611, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normal_part); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 610, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 611, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_body); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 610, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 611, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_get_row_by_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 610, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -17328,26 +17324,26 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_
   }
   __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_v_row_id) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_row_id);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 611, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 610, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_XDECREF_SET(__pyx_v_row, __pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":612
+  /* "kivyblocks/dg.pyx":611
  * 			data.update(row.row_data)
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  * 		data.update(row.row_data)             # <<<<<<<<<<<<<<
  * 		return data
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 612, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_row, __pyx_n_s_row_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 611, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_data, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 612, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_data, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 611, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":613
+  /* "kivyblocks/dg.pyx":612
  * 		row = self.normal_part.body.get_row_by_id(row_id)
  * 		data.update(row.row_data)
  * 		return data             # <<<<<<<<<<<<<<
@@ -17357,7 +17353,7 @@ static PyObject *__pyx_pf_10kivyblocks_2dg_8DataGrid_64get_selected_data(CYTHON_
   __pyx_r = __pyx_v_data;
   goto __pyx_L0;
 
-  /* "kivyblocks/dg.pyx":603
+  /* "kivyblocks/dg.pyx":602
  * 		return fs
  * 
  * 	def get_selected_data(self):             # <<<<<<<<<<<<<<
@@ -17659,7 +17655,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ScrollView, __pyx_k_ScrollView, sizeof(__pyx_k_ScrollView), 0, 0, 1, 1},
   {&__pyx_n_s_StringProperty, __pyx_k_StringProperty, sizeof(__pyx_k_StringProperty), 0, 0, 1, 1},
   {&__pyx_n_s_Text, __pyx_k_Text, sizeof(__pyx_k_Text), 0, 0, 1, 1},
-  {&__pyx_n_s_TimeCost, __pyx_k_TimeCost, sizeof(__pyx_k_TimeCost), 0, 0, 1, 1},
   {&__pyx_n_s_Toolbar, __pyx_k_Toolbar, sizeof(__pyx_k_Toolbar), 0, 0, 1, 1},
   {&__pyx_n_s_UiFactory, __pyx_k_UiFactory, sizeof(__pyx_k_UiFactory), 0, 0, 1, 1},
   {&__pyx_n_s_VBox, __pyx_k_VBox, sizeof(__pyx_k_VBox), 0, 0, 1, 1},
@@ -17673,7 +17668,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_add_widget, __pyx_k_add_widget, sizeof(__pyx_k_add_widget), 0, 0, 1, 1},
   {&__pyx_n_s_appPublic_dictObject, __pyx_k_appPublic_dictObject, sizeof(__pyx_k_appPublic_dictObject), 0, 0, 1, 1},
   {&__pyx_n_s_appPublic_myTE, __pyx_k_appPublic_myTE, sizeof(__pyx_k_appPublic_myTE), 0, 0, 1, 1},
-  {&__pyx_n_s_appPublic_timecost, __pyx_k_appPublic_timecost, sizeof(__pyx_k_appPublic_timecost), 0, 0, 1, 1},
   {&__pyx_n_s_appPublic_uniqueID, __pyx_k_appPublic_uniqueID, sizeof(__pyx_k_appPublic_uniqueID), 0, 0, 1, 1},
   {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
@@ -17921,8 +17915,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 57, __pyx_L1_error)
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 145, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -17932,803 +17926,803 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "kivyblocks/dg.pyx":57
+  /* "kivyblocks/dg.pyx":56
  * 		self.desc = desc
  * 		self.row = row
  * 		super().__init__(size_hint=(None,None),             # <<<<<<<<<<<<<<
  * 							width = self.desc['width'],
  * 							height = self.row.part.datagrid.rowHeight()
  */
-  __pyx_tuple_ = PyTuple_Pack(2, Py_None, Py_None); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(2, Py_None, Py_None); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "kivyblocks/dg.pyx":156
+  /* "kivyblocks/dg.pyx":155
  * 		SUPER(Body, self, kw)
  * 		self._inner.spacing = self.part.datagrid.linewidth
  * 		self.size_hint=(1,1)             # <<<<<<<<<<<<<<
  * 		self.idRow = {}
  * 		self.bind(on_scroll_stop=self.part.datagrid.scrollstop)
  */
-  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_int_1, __pyx_int_1); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_int_1, __pyx_int_1); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "kivyblocks/dg.pyx":218
+  /* "kivyblocks/dg.pyx":217
  * 		for f in self.fields:
  * 			r = f.copy()
  * 			r['width'] = CSize(f.get('width',10))             # <<<<<<<<<<<<<<
  * 			rd.append(r)
  * 		self.rowdesc = rd
  */
-  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_s_width, __pyx_int_10); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_s_width, __pyx_int_10); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "kivyblocks/dg.pyx":227
+  /* "kivyblocks/dg.pyx":226
  * 			kw['size_hint'] = (None,None)
  * 		else:
  * 			kw['size_hint'] = (1,None)             # <<<<<<<<<<<<<<
  * 		kw['height'] = self.datagrid.rowHeight()
  * 
  */
-  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_int_1, Py_None); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_int_1, Py_None); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 226, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "kivyblocks/dg.pyx":336
+  /* "kivyblocks/dg.pyx":335
  * 		self.normal_fields = self.getPartFields(freeze_flag=False)
  * 		if not self.dataloader:
  * 			raise Exception('DataGrid need a DataLoader')             # <<<<<<<<<<<<<<
  * 		self._dataloader = RelatedLoader(target=self, **self.dataloader)
  * 		self._dataloader.bind(on_deletepage=self.delete_page)
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_DataGrid_need_a_DataLoader); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 336, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_DataGrid_need_a_DataLoader); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 335, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "kivyblocks/dg.pyx":521
+  /* "kivyblocks/dg.pyx":520
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:
  * 			self._background_color = Color(0,0,0,1)             # <<<<<<<<<<<<<<
  * 			self._background_rect = Rectangle(size=self.size)
  * 		for r in recs1:
  */
-  __pyx_tuple__7 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 521, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 520, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "kivyblocks/dg.pyx":520
+  /* "kivyblocks/dg.pyx":519
  * 		recs2 = recs[self.show_rows:]
  * 		self._fbo = Fbo(size=self.size)
  * 		with self._fbo:             # <<<<<<<<<<<<<<
  * 			self._background_color = Color(0,0,0,1)
  * 			self._background_rect = Rectangle(size=self.size)
  */
-  __pyx_tuple__8 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 520, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 519, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "kivyblocks/dg.pyx":596
+  /* "kivyblocks/dg.pyx":595
  * 		for f in self.fields:
  * 			if freeze_flag:
  * 				if f.get('freeze',False):             # <<<<<<<<<<<<<<
  * 					fs.append(f)
  * 			else:
  */
-  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_freeze, Py_False); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 596, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_freeze, Py_False); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 595, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "kivyblocks/dg.pyx":36
+  /* "kivyblocks/dg.pyx":35
  * 
  * class BLabel(ButtonBehavior, Text):
  * 	def __init__(self, **kw):             # <<<<<<<<<<<<<<
  * 		ButtonBehavior.__init__(self)
  * 		Text.__init__(self,**kw)
  */
-  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_kw); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_kw); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 35, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 35, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":43
+  /* "kivyblocks/dg.pyx":42
  * class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
  * 	colume_name = StringProperty(None)
  * 	cell_type = OptionProperty('data', \             # <<<<<<<<<<<<<<
  * 			options=['data', 'header'])
  * 	def __init__(self,row,desc, **kw):
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_n_s_data); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_n_s_data); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "kivyblocks/dg.pyx":45
+  /* "kivyblocks/dg.pyx":44
  * 	cell_type = OptionProperty('data', \
  * 			options=['data', 'header'])
  * 	def __init__(self,row,desc, **kw):             # <<<<<<<<<<<<<<
  * 		"""
  * 		desc:{
  */
-  __pyx_tuple__14 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_row, __pyx_n_s_desc, __pyx_n_s_kw, __pyx_n_s_bl); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_row, __pyx_n_s_desc, __pyx_n_s_kw, __pyx_n_s_bl); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 45, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 44, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":78
+  /* "kivyblocks/dg.pyx":77
  * 
  * class Row(BoxLayout):
  * 	def __init__(self,part, rowdesc,header=False,data=None, **kw):             # <<<<<<<<<<<<<<
  * 		"""
  * 		rowdesc=[
  */
-  __pyx_tuple__16 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_part, __pyx_n_s_rowdesc, __pyx_n_s_header, __pyx_n_s_data, __pyx_n_s_kw, __pyx_n_s_opts); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_part, __pyx_n_s_rowdesc, __pyx_n_s_header, __pyx_n_s_data, __pyx_n_s_kw, __pyx_n_s_opts); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(5, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 78, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 78, __pyx_L1_error)
-  __pyx_tuple__18 = PyTuple_Pack(2, ((PyObject *)Py_False), ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(5, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(2, ((PyObject *)Py_False), ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
 
-  /* "kivyblocks/dg.pyx":104
+  /* "kivyblocks/dg.pyx":103
  * 		self.init(0)
  * 
  * 	def on_row_press(self, *args):             # <<<<<<<<<<<<<<
  * 		pass
  * 
  */
-  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_row_press, 104, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_row_press, 103, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 103, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":107
+  /* "kivyblocks/dg.pyx":106
  * 		pass
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
  * 		w = 0
  * 		h = 0
  */
-  __pyx_tuple__21 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_t, __pyx_n_s_w, __pyx_n_s_h, __pyx_n_s_c, __pyx_n_s_cell); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_t, __pyx_n_s_w, __pyx_n_s_h, __pyx_n_s_c, __pyx_n_s_cell); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init_2, 107, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init_2, 106, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 106, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":119
+  /* "kivyblocks/dg.pyx":118
  * 		self.width = w + self.linewidth * (len(self.rowdesc)+1)
  * 
  * 	def unselected(self):             # <<<<<<<<<<<<<<
  * 		self.select(False)
  * 
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_unselected, 119, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_unselected, 118, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 118, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":122
+  /* "kivyblocks/dg.pyx":121
  * 		self.select(False)
  * 
  * 	def selected(self):             # <<<<<<<<<<<<<<
  * 		self.select(True)
  * 
  */
-  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_selected, 122, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_selected, 121, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 121, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":125
+  /* "kivyblocks/dg.pyx":124
  * 		self.select(True)
  * 
  * 	def select(self, flag):             # <<<<<<<<<<<<<<
  * 		for c in self.children:
  * 			if flag:
  */
-  __pyx_tuple__27 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_flag, __pyx_n_s_c); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_flag, __pyx_n_s_c); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_select, 125, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_select, 124, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 124, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":133
+  /* "kivyblocks/dg.pyx":132
  * 
  * class Header(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
  * 		SUPER(Header, self, kw)
  * 		self.part = part
  */
-  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_part, __pyx_n_s_kw); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_part, __pyx_n_s_kw); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 133, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 132, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 132, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":142
+  /* "kivyblocks/dg.pyx":141
  * 		self.bar_width = 0
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
  * 		rd = [ f.copy() for f in self.part.rowdesc ]
  * 		[ f.update({'value':self.part.fields[i].get('label', \
  */
-  __pyx_tuple__31 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_t, __pyx_n_s_rd, __pyx_n_s_f, __pyx_n_s_i); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_tuple__31 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_t, __pyx_n_s_rd, __pyx_n_s_f, __pyx_n_s_i); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init_2, 142, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init_2, 141, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 141, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":152
+  /* "kivyblocks/dg.pyx":151
  * 
  * class Body(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
  * 		self.part = part
  * 		SUPER(Body, self, kw)
  */
-  __pyx_tuple__33 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_part, __pyx_n_s_kw); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_tuple__33 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_part, __pyx_n_s_kw); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 151, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__33);
   __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 152, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 151, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 151, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":162
+  /* "kivyblocks/dg.pyx":161
  * 			self.bar_width = 0
  * 
  * 	def addRow(self,id, data,index=0):             # <<<<<<<<<<<<<<
  * 		rd = [ f.copy() for f in self.part.rowdesc ]
  * 		[ f.update({'value':data.get(f['name'])}) for f in rd ]
  */
-  __pyx_tuple__35 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_data, __pyx_n_s_index, __pyx_n_s_rd, __pyx_n_s_row, __pyx_n_s_f); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_tuple__35 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_data, __pyx_n_s_index, __pyx_n_s_rd, __pyx_n_s_row, __pyx_n_s_f); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
-  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(4, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_addRow, 162, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 162, __pyx_L1_error)
-  __pyx_tuple__37 = PyTuple_Pack(1, ((PyObject *)__pyx_int_0)); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(4, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_addRow, 161, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_tuple__37 = PyTuple_Pack(1, ((PyObject *)__pyx_int_0)); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__37);
   __Pyx_GIVEREF(__pyx_tuple__37);
 
-  /* "kivyblocks/dg.pyx":171
+  /* "kivyblocks/dg.pyx":170
  * 		return row
  * 
  * 	def clearRows(self):             # <<<<<<<<<<<<<<
  * 		self.idRow = {}
  * 		self.clear_widgets()
  */
-  __pyx_tuple__38 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_tuple__38 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__38);
   __Pyx_GIVEREF(__pyx_tuple__38);
-  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_clearRows, 171, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_clearRows, 170, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 170, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":175
+  /* "kivyblocks/dg.pyx":174
  * 		self.clear_widgets()
  * 
  * 	def delRowById(self,id):             # <<<<<<<<<<<<<<
  * 		row = self.idRow.get(id)
  * 		if row:
  */
-  __pyx_tuple__40 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_row); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_row); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
-  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_delRowById, 175, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_delRowById, 174, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 174, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":182
+  /* "kivyblocks/dg.pyx":181
  * 			del self.idRow[id]
  * 
  * 	def getRowData(self,rowid):             # <<<<<<<<<<<<<<
  * 		return self.idRow[rowid].row_data
  * 
  */
-  __pyx_tuple__42 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_rowid); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_tuple__42 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_rowid); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__42);
   __Pyx_GIVEREF(__pyx_tuple__42);
-  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getRowData_2, 182, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getRowData_2, 181, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 181, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":185
+  /* "kivyblocks/dg.pyx":184
  * 		return self.idRow[rowid].row_data
  * 
  * 	def getRowHeight(self):             # <<<<<<<<<<<<<<
  * 		return self.part.datagrid.rowHeight()
  * 
  */
-  __pyx_tuple__44 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_tuple__44 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 184, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__44);
   __Pyx_GIVEREF(__pyx_tuple__44);
-  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getRowHeight, 185, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getRowHeight, 184, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) __PYX_ERR(0, 184, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":188
+  /* "kivyblocks/dg.pyx":187
  * 		return self.part.datagrid.rowHeight()
  * 
  * 	def get_row_by_id(self, rowid):             # <<<<<<<<<<<<<<
  * 		return self.idRow.get(rowid)
  * 
  */
-  __pyx_tuple__46 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_rowid); if (unlikely(!__pyx_tuple__46)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_tuple__46 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_rowid); if (unlikely(!__pyx_tuple__46)) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__46);
   __Pyx_GIVEREF(__pyx_tuple__46);
-  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_get_row_by_id, 188, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_get_row_by_id, 187, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) __PYX_ERR(0, 187, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":192
+  /* "kivyblocks/dg.pyx":191
  * 
  * class DataGridPart(WidgetReady, BoxLayout):
  * 	def __init__(self,dg, freeze_flag, fields):             # <<<<<<<<<<<<<<
  * 		self.datagrid = dg
  * 		self.fields = fields
  */
-  __pyx_tuple__48 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_dg, __pyx_n_s_freeze_flag, __pyx_n_s_fields); if (unlikely(!__pyx_tuple__48)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_tuple__48 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_dg, __pyx_n_s_freeze_flag, __pyx_n_s_fields); if (unlikely(!__pyx_tuple__48)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__48);
   __Pyx_GIVEREF(__pyx_tuple__48);
-  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 192, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 191, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) __PYX_ERR(0, 191, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":201
+  /* "kivyblocks/dg.pyx":200
  * 		self.init(0)
  * 
  * 	def setWidth(self):             # <<<<<<<<<<<<<<
  * 		if self.freeze_flag:
  * 			self.size_hint_x = None
  */
-  __pyx_tuple__50 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__50)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_tuple__50 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__50)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__50);
   __Pyx_GIVEREF(__pyx_tuple__50);
-  __pyx_codeobj__51 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__50, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_setWidth, 201, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__51)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_codeobj__51 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__50, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_setWidth, 200, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__51)) __PYX_ERR(0, 200, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":206
+  /* "kivyblocks/dg.pyx":205
  * 			self.width = self.getFieldsWidth()
  * 
  * 	def getFieldsWidth(self):             # <<<<<<<<<<<<<<
  * 		if not self.fields_width:
  * 			width = 0
  */
-  __pyx_tuple__52 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_width, __pyx_n_s_f); if (unlikely(!__pyx_tuple__52)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_tuple__52 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_width, __pyx_n_s_f); if (unlikely(!__pyx_tuple__52)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__52);
   __Pyx_GIVEREF(__pyx_tuple__52);
-  __pyx_codeobj__53 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__52, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getFieldsWidth, 206, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__53)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_codeobj__53 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__52, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getFieldsWidth, 205, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__53)) __PYX_ERR(0, 205, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":214
+  /* "kivyblocks/dg.pyx":213
  * 		return self.fields_width
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
  * 		rd = []
  * 		for f in self.fields:
  */
-  __pyx_tuple__54 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_t, __pyx_n_s_rd, __pyx_n_s_f, __pyx_n_s_r, __pyx_n_s_kw, __pyx_n_s_inner_2); if (unlikely(!__pyx_tuple__54)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_tuple__54 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_t, __pyx_n_s_rd, __pyx_n_s_f, __pyx_n_s_r, __pyx_n_s_kw, __pyx_n_s_inner_2); if (unlikely(!__pyx_tuple__54)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__54);
   __Pyx_GIVEREF(__pyx_tuple__54);
-  __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(2, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init_2, 214, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(2, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init_2, 213, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) __PYX_ERR(0, 213, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":245
+  /* "kivyblocks/dg.pyx":244
  * 							size=self.datagrid.bodyOnSize)
  * 
  * 	def clearRows(self):             # <<<<<<<<<<<<<<
  * 		return self.body.clearRows()
  * 
  */
-  __pyx_tuple__56 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__56)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_tuple__56 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__56)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__56);
   __Pyx_GIVEREF(__pyx_tuple__56);
-  __pyx_codeobj__57 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__56, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_clearRows, 245, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__57)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_codeobj__57 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__56, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_clearRows, 244, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__57)) __PYX_ERR(0, 244, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":248
+  /* "kivyblocks/dg.pyx":247
  * 		return self.body.clearRows()
  * 
  * 	def addRow(self,id, data):             # <<<<<<<<<<<<<<
  * 		return self.body.addRow(id, data)
  * 
  */
-  __pyx_tuple__58 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_data); if (unlikely(!__pyx_tuple__58)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_tuple__58 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_data); if (unlikely(!__pyx_tuple__58)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__58);
   __Pyx_GIVEREF(__pyx_tuple__58);
-  __pyx_codeobj__59 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__58, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_addRow, 248, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__59)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_codeobj__59 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__58, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_addRow, 247, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__59)) __PYX_ERR(0, 247, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":251
+  /* "kivyblocks/dg.pyx":250
  * 		return self.body.addRow(id, data)
  * 
  * 	def on_size(self, o, s=None):             # <<<<<<<<<<<<<<
  * 		if not hasattr(self, 'body'):
  * 			return
  */
-  __pyx_tuple__60 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_s); if (unlikely(!__pyx_tuple__60)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_tuple__60 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_s); if (unlikely(!__pyx_tuple__60)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__60);
   __Pyx_GIVEREF(__pyx_tuple__60);
-  __pyx_codeobj__61 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__60, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_size, 251, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__61)) __PYX_ERR(0, 251, __pyx_L1_error)
-  __pyx_tuple__62 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__62)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_codeobj__61 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__60, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_size, 250, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__61)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_tuple__62 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__62)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__62);
   __Pyx_GIVEREF(__pyx_tuple__62);
 
-  /* "kivyblocks/dg.pyx":323
+  /* "kivyblocks/dg.pyx":322
  * 	fields = ListProperty(None)
  * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):             # <<<<<<<<<<<<<<
  * 		self.select_rowid = None
  * 		self.rowheight = None
  */
-  __pyx_tuple__63 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_options, __pyx_n_s_b); if (unlikely(!__pyx_tuple__63)) __PYX_ERR(0, 323, __pyx_L1_error)
+  __pyx_tuple__63 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_options, __pyx_n_s_b); if (unlikely(!__pyx_tuple__63)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__63);
   __Pyx_GIVEREF(__pyx_tuple__63);
-  __pyx_codeobj__64 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__63, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 323, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__64)) __PYX_ERR(0, 323, __pyx_L1_error)
+  __pyx_codeobj__64 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__63, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_init, 322, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__64)) __PYX_ERR(0, 322, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":361
+  /* "kivyblocks/dg.pyx":360
  * 			self.build_tailer(self.tailer)
  * 
  * 	def on_rowpress(self, *args):             # <<<<<<<<<<<<<<
  * 		print('on_rowpress fire, args=', args)
  * 
  */
-  __pyx_tuple__65 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__65)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __pyx_tuple__65 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__65)) __PYX_ERR(0, 360, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__65);
   __Pyx_GIVEREF(__pyx_tuple__65);
-  __pyx_codeobj__66 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__65, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_rowpress, 361, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__66)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __pyx_codeobj__66 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__65, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_rowpress, 360, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__66)) __PYX_ERR(0, 360, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":364
+  /* "kivyblocks/dg.pyx":363
  * 		print('on_rowpress fire, args=', args)
  * 
  * 	def on_cellpress(self, *args):             # <<<<<<<<<<<<<<
  * 		print('on_cesspress fire, args=', args)
  * 
  */
-  __pyx_tuple__67 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__67)) __PYX_ERR(0, 364, __pyx_L1_error)
+  __pyx_tuple__67 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__67)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__67);
   __Pyx_GIVEREF(__pyx_tuple__67);
-  __pyx_codeobj__68 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__67, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_cellpress, 364, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__68)) __PYX_ERR(0, 364, __pyx_L1_error)
+  __pyx_codeobj__68 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__67, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_cellpress, 363, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__68)) __PYX_ERR(0, 363, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":367
+  /* "kivyblocks/dg.pyx":366
  * 		print('on_cesspress fire, args=', args)
  * 
  * 	def on_headerpress(self, *args):             # <<<<<<<<<<<<<<
  * 		print('on_headerpress fire, args=', args)
  * 
  */
-  __pyx_tuple__69 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__69)) __PYX_ERR(0, 367, __pyx_L1_error)
+  __pyx_tuple__69 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__69)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__69);
   __Pyx_GIVEREF(__pyx_tuple__69);
-  __pyx_codeobj__70 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__69, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_headerpress, 367, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__70)) __PYX_ERR(0, 367, __pyx_L1_error)
+  __pyx_codeobj__70 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__69, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_headerpress, 366, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__70)) __PYX_ERR(0, 366, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":370
+  /* "kivyblocks/dg.pyx":369
  * 		print('on_headerpress fire, args=', args)
  * 
  * 	def cell_pressed(self, o):             # <<<<<<<<<<<<<<
  * 		if o.cell_type == 'header':
  * 			self.dispatch('on_headerpress', o.colume_name)
  */
-  __pyx_tuple__71 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_row); if (unlikely(!__pyx_tuple__71)) __PYX_ERR(0, 370, __pyx_L1_error)
+  __pyx_tuple__71 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_row); if (unlikely(!__pyx_tuple__71)) __PYX_ERR(0, 369, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__71);
   __Pyx_GIVEREF(__pyx_tuple__71);
-  __pyx_codeobj__72 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__71, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_cell_pressed, 370, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__72)) __PYX_ERR(0, 370, __pyx_L1_error)
+  __pyx_codeobj__72 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__71, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_cell_pressed, 369, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__72)) __PYX_ERR(0, 369, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":384
+  /* "kivyblocks/dg.pyx":383
  * 		self.dispatch('on_selected', row)
  * 
  * 	def unselect_row(self, row_id):             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  */
-  __pyx_tuple__73 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_row_id, __pyx_n_s_row); if (unlikely(!__pyx_tuple__73)) __PYX_ERR(0, 384, __pyx_L1_error)
+  __pyx_tuple__73 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_row_id, __pyx_n_s_row); if (unlikely(!__pyx_tuple__73)) __PYX_ERR(0, 383, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__73);
   __Pyx_GIVEREF(__pyx_tuple__73);
-  __pyx_codeobj__74 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__73, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_unselect_row, 384, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__74)) __PYX_ERR(0, 384, __pyx_L1_error)
+  __pyx_codeobj__74 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__73, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_unselect_row, 383, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__74)) __PYX_ERR(0, 383, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":391
+  /* "kivyblocks/dg.pyx":390
  * 		row.unselected()
  * 
  * 	def select_row(self, row_id):             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  */
-  __pyx_tuple__75 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_row_id, __pyx_n_s_row); if (unlikely(!__pyx_tuple__75)) __PYX_ERR(0, 391, __pyx_L1_error)
+  __pyx_tuple__75 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_row_id, __pyx_n_s_row); if (unlikely(!__pyx_tuple__75)) __PYX_ERR(0, 390, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__75);
   __Pyx_GIVEREF(__pyx_tuple__75);
-  __pyx_codeobj__76 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__75, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_select_row, 391, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__76)) __PYX_ERR(0, 391, __pyx_L1_error)
+  __pyx_codeobj__76 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__75, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_select_row, 390, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__76)) __PYX_ERR(0, 390, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":398
+  /* "kivyblocks/dg.pyx":397
  * 		row.selected()
  * 
  * 	def on_ready(self, *args):             # <<<<<<<<<<<<<<
  * 		self.loadData()
  * 
  */
-  __pyx_tuple__77 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__77)) __PYX_ERR(0, 398, __pyx_L1_error)
+  __pyx_tuple__77 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__77)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__77);
   __Pyx_GIVEREF(__pyx_tuple__77);
-  __pyx_codeobj__78 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__77, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_ready, 398, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__78)) __PYX_ERR(0, 398, __pyx_L1_error)
+  __pyx_codeobj__78 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__77, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_ready, 397, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__78)) __PYX_ERR(0, 397, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":401
+  /* "kivyblocks/dg.pyx":400
  * 		self.loadData()
  * 
  * 	def build_tailer(self, tailer_desc):             # <<<<<<<<<<<<<<
  * 		kw = tailer_desc.get('options', {})
  * 		kw.update({
  */
-  __pyx_tuple__79 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_tailer_desc, __pyx_n_s_kw, __pyx_n_s_w, __pyx_n_s_w1); if (unlikely(!__pyx_tuple__79)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_tuple__79 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_tailer_desc, __pyx_n_s_kw, __pyx_n_s_w, __pyx_n_s_w1); if (unlikely(!__pyx_tuple__79)) __PYX_ERR(0, 400, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__79);
   __Pyx_GIVEREF(__pyx_tuple__79);
-  __pyx_codeobj__80 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__79, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_build_tailer, 401, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__80)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_codeobj__80 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__79, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_build_tailer, 400, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__80)) __PYX_ERR(0, 400, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":415
+  /* "kivyblocks/dg.pyx":414
  * 				w.add_widget(w1)
  * 
  * 	def update_tailer_info(self, *args):             # <<<<<<<<<<<<<<
  * 		if not hasattr(self, 'tailer_widgets'):
  * 			return
  */
-  __pyx_tuple__81 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_args, __pyx_n_s_n, __pyx_n_s_w); if (unlikely(!__pyx_tuple__81)) __PYX_ERR(0, 415, __pyx_L1_error)
+  __pyx_tuple__81 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_args, __pyx_n_s_n, __pyx_n_s_w); if (unlikely(!__pyx_tuple__81)) __PYX_ERR(0, 414, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__81);
   __Pyx_GIVEREF(__pyx_tuple__81);
-  __pyx_codeobj__82 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__81, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_update_tailer_info, 415, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__82)) __PYX_ERR(0, 415, __pyx_L1_error)
+  __pyx_codeobj__82 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__81, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_update_tailer_info, 414, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__82)) __PYX_ERR(0, 414, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":421
+  /* "kivyblocks/dg.pyx":420
  * 			w.text = self.loader_info(n)
  * 
  * 	def show_infos(self, tailer_widget, info_names):             # <<<<<<<<<<<<<<
  * 		for n in info_names:
  * 			desc = {
  */
-  __pyx_tuple__83 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_tailer_widget, __pyx_n_s_info_names, __pyx_n_s_n, __pyx_n_s_desc, __pyx_n_s_w); if (unlikely(!__pyx_tuple__83)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __pyx_tuple__83 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_tailer_widget, __pyx_n_s_info_names, __pyx_n_s_n, __pyx_n_s_desc, __pyx_n_s_w); if (unlikely(!__pyx_tuple__83)) __PYX_ERR(0, 420, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__83);
   __Pyx_GIVEREF(__pyx_tuple__83);
-  __pyx_codeobj__84 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__83, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_show_infos, 421, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__84)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __pyx_codeobj__84 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__83, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_show_infos, 420, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__84)) __PYX_ERR(0, 420, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":436
+  /* "kivyblocks/dg.pyx":435
  * 			tailer_widget.add_widget(self.tailer_widgets[n])
  * 
  * 	def build_tailer_others(desc):             # <<<<<<<<<<<<<<
  * 		return Factory.Blocks().widgetBuild(desc)
  * 
  */
-  __pyx_tuple__85 = PyTuple_Pack(1, __pyx_n_s_desc); if (unlikely(!__pyx_tuple__85)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_tuple__85 = PyTuple_Pack(1, __pyx_n_s_desc); if (unlikely(!__pyx_tuple__85)) __PYX_ERR(0, 435, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__85);
   __Pyx_GIVEREF(__pyx_tuple__85);
-  __pyx_codeobj__86 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__85, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_build_tailer_others, 436, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__86)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_codeobj__86 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__85, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_build_tailer_others, 435, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__86)) __PYX_ERR(0, 435, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":439
+  /* "kivyblocks/dg.pyx":438
  * 		return Factory.Blocks().widgetBuild(desc)
  * 
  * 	def loader_info(self, n):             # <<<<<<<<<<<<<<
  * 		if hasattr(self._dataloader, n):
  * 			txt=getattr(self._dataloader, n, 0)
  */
-  __pyx_tuple__87 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_n, __pyx_n_s_txt); if (unlikely(!__pyx_tuple__87)) __PYX_ERR(0, 439, __pyx_L1_error)
+  __pyx_tuple__87 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_n, __pyx_n_s_txt); if (unlikely(!__pyx_tuple__87)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__87);
   __Pyx_GIVEREF(__pyx_tuple__87);
-  __pyx_codeobj__88 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__87, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_loader_info, 439, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__88)) __PYX_ERR(0, 439, __pyx_L1_error)
+  __pyx_codeobj__88 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__87, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_loader_info, 438, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__88)) __PYX_ERR(0, 438, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":447
+  /* "kivyblocks/dg.pyx":446
  * 			return txt
  * 
  * 	def locater(self,pos):             # <<<<<<<<<<<<<<
  * 		self.normal_part.body.scroll_y = pos
  * 		if self.freeze_part:
  */
-  __pyx_tuple__89 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_pos); if (unlikely(!__pyx_tuple__89)) __PYX_ERR(0, 447, __pyx_L1_error)
+  __pyx_tuple__89 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_pos); if (unlikely(!__pyx_tuple__89)) __PYX_ERR(0, 446, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__89);
   __Pyx_GIVEREF(__pyx_tuple__89);
-  __pyx_codeobj__90 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__89, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_locater, 447, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__90)) __PYX_ERR(0, 447, __pyx_L1_error)
+  __pyx_codeobj__90 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__89, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_locater, 446, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__90)) __PYX_ERR(0, 446, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":452
+  /* "kivyblocks/dg.pyx":451
  * 			self.freeze_part.body.scroll_y = pos
  * 
  * 	def scrollstop(self,o,v=None):             # <<<<<<<<<<<<<<
  * 		if not self.noheader and o == self.normal_part.header:
  * 			self.normal_part.body.scroll_x = o.scroll_x
  */
-  __pyx_tuple__91 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_v); if (unlikely(!__pyx_tuple__91)) __PYX_ERR(0, 452, __pyx_L1_error)
+  __pyx_tuple__91 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_v); if (unlikely(!__pyx_tuple__91)) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__91);
   __Pyx_GIVEREF(__pyx_tuple__91);
-  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__91, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_scrollstop, 452, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) __PYX_ERR(0, 452, __pyx_L1_error)
-  __pyx_tuple__93 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__93)) __PYX_ERR(0, 452, __pyx_L1_error)
+  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__91, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_scrollstop, 451, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) __PYX_ERR(0, 451, __pyx_L1_error)
+  __pyx_tuple__93 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__93)) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__93);
   __Pyx_GIVEREF(__pyx_tuple__93);
 
-  /* "kivyblocks/dg.pyx":469
+  /* "kivyblocks/dg.pyx":468
  * 			self._dataloader.loadPreviousPage()
  * 
  * 	def getValue(self):             # <<<<<<<<<<<<<<
  * 		if not self.select_rowid:
  * 			return None
  */
-  __pyx_tuple__94 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__94)) __PYX_ERR(0, 469, __pyx_L1_error)
+  __pyx_tuple__94 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__94)) __PYX_ERR(0, 468, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__94);
   __Pyx_GIVEREF(__pyx_tuple__94);
-  __pyx_codeobj__95 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__94, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getValue, 469, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__95)) __PYX_ERR(0, 469, __pyx_L1_error)
+  __pyx_codeobj__95 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__94, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getValue, 468, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__95)) __PYX_ERR(0, 468, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":474
+  /* "kivyblocks/dg.pyx":473
  * 		return self._getRowData(self.select_rowid)
  * 
  * 	def _getRowData(self, rowid):             # <<<<<<<<<<<<<<
  * 		d = {}
  * 		if self.freeze_part:
  */
-  __pyx_tuple__96 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_rowid, __pyx_n_s_d); if (unlikely(!__pyx_tuple__96)) __PYX_ERR(0, 474, __pyx_L1_error)
+  __pyx_tuple__96 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_rowid, __pyx_n_s_d); if (unlikely(!__pyx_tuple__96)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__96);
   __Pyx_GIVEREF(__pyx_tuple__96);
-  __pyx_codeobj__97 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__96, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getRowData, 474, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__97)) __PYX_ERR(0, 474, __pyx_L1_error)
+  __pyx_codeobj__97 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__96, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getRowData, 473, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__97)) __PYX_ERR(0, 473, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":481
+  /* "kivyblocks/dg.pyx":480
  * 		return DictObject(**d)
  * 
  * 	def bodyOnSize(self,o,s):             # <<<<<<<<<<<<<<
  * 		if self.on_sizeTask is not None:
  * 			self.on_sizeTask.cancel()
  */
-  __pyx_tuple__98 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_s); if (unlikely(!__pyx_tuple__98)) __PYX_ERR(0, 481, __pyx_L1_error)
+  __pyx_tuple__98 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_s); if (unlikely(!__pyx_tuple__98)) __PYX_ERR(0, 480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__98);
   __Pyx_GIVEREF(__pyx_tuple__98);
-  __pyx_codeobj__99 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__98, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_bodyOnSize, 481, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__99)) __PYX_ERR(0, 481, __pyx_L1_error)
+  __pyx_codeobj__99 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__98, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_bodyOnSize, 480, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__99)) __PYX_ERR(0, 480, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":486
+  /* "kivyblocks/dg.pyx":485
  * 		self.on_sizeTask = Clock.schedule_once(self.calculateShowRows,0.3)
  * 
  * 	def rowHeight(self):             # <<<<<<<<<<<<<<
  * 		if not self.rowheight:
  * 			self.rowheight = CSize(self.row_height)
  */
-  __pyx_tuple__100 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__100)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_tuple__100 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__100)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__100);
   __Pyx_GIVEREF(__pyx_tuple__100);
-  __pyx_codeobj__101 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__100, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_rowHeight, 486, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__101)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_codeobj__101 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__100, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_rowHeight, 485, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__101)) __PYX_ERR(0, 485, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":491
+  /* "kivyblocks/dg.pyx":490
  * 		return self.rowheight
  * 
  * 	def calculateShowRows(self,t):             # <<<<<<<<<<<<<<
  * 		self.getShowRows()
  * 		self._dataloader.setPageRows(self.show_rows * 2)
  */
-  __pyx_tuple__102 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_t); if (unlikely(!__pyx_tuple__102)) __PYX_ERR(0, 491, __pyx_L1_error)
+  __pyx_tuple__102 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_t); if (unlikely(!__pyx_tuple__102)) __PYX_ERR(0, 490, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__102);
   __Pyx_GIVEREF(__pyx_tuple__102);
-  __pyx_codeobj__103 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__102, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_calculateShowRows, 491, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__103)) __PYX_ERR(0, 491, __pyx_L1_error)
+  __pyx_codeobj__103 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__102, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_calculateShowRows, 490, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__103)) __PYX_ERR(0, 490, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":495
+  /* "kivyblocks/dg.pyx":494
  * 		self._dataloader.setPageRows(self.show_rows * 2)
  * 
  * 	def getShowRows(self):             # <<<<<<<<<<<<<<
  * 		if self.show_rows == 0:
  * 			return 60
  */
-  __pyx_tuple__104 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__104)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_tuple__104 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__104)) __PYX_ERR(0, 494, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__104);
   __Pyx_GIVEREF(__pyx_tuple__104);
-  __pyx_codeobj__105 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__104, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getShowRows, 495, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__105)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_codeobj__105 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__104, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getShowRows, 494, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__105)) __PYX_ERR(0, 494, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":501
+  /* "kivyblocks/dg.pyx":500
  * 		return self.show_rows * 2
  * 
  * 	def clearRows(self, *args):             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			self.freeze_part.body.clearRows()
  */
-  __pyx_tuple__106 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__106)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_tuple__106 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_args); if (unlikely(!__pyx_tuple__106)) __PYX_ERR(0, 500, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__106);
   __Pyx_GIVEREF(__pyx_tuple__106);
-  __pyx_codeobj__107 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__106, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_clearRows, 501, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__107)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_codeobj__107 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__106, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_clearRows, 500, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__107)) __PYX_ERR(0, 500, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":506
+  /* "kivyblocks/dg.pyx":505
  * 		self.normal_part.body.clearRows()
  * 
  * 	def add_page(self,o,data):             # <<<<<<<<<<<<<<
  * 		dir = data['dir']
  * 		if not self.show_rows:
  */
-  __pyx_tuple__108 = PyTuple_Pack(12, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_data, __pyx_n_s_dir, __pyx_n_s_ids, __pyx_n_s_recs, __pyx_n_s_idx, __pyx_n_s_recs1, __pyx_n_s_recs2, __pyx_n_s_r, __pyx_n_s_id, __pyx_n_s_f); if (unlikely(!__pyx_tuple__108)) __PYX_ERR(0, 506, __pyx_L1_error)
+  __pyx_tuple__108 = PyTuple_Pack(12, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_data, __pyx_n_s_dir, __pyx_n_s_ids, __pyx_n_s_recs, __pyx_n_s_idx, __pyx_n_s_recs1, __pyx_n_s_recs2, __pyx_n_s_r, __pyx_n_s_id, __pyx_n_s_f); if (unlikely(!__pyx_tuple__108)) __PYX_ERR(0, 505, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__108);
   __Pyx_GIVEREF(__pyx_tuple__108);
-  __pyx_codeobj__109 = (PyObject*)__Pyx_PyCode_New(3, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__108, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_add_page, 506, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__109)) __PYX_ERR(0, 506, __pyx_L1_error)
+  __pyx_codeobj__109 = (PyObject*)__Pyx_PyCode_New(3, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__108, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_add_page, 505, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__109)) __PYX_ERR(0, 505, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":536
+  /* "kivyblocks/dg.pyx":535
  * 		Clock.schedule_once(f, 0)
  * 
  * 	def add_page_delay(self, data, *args):             # <<<<<<<<<<<<<<
  * 		recs = data['data']
  * 		page = data['page']
  */
-  __pyx_tuple__110 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_args, __pyx_n_s_recs, __pyx_n_s_page, __pyx_n_s_idx, __pyx_n_s_ids, __pyx_n_s_r, __pyx_n_s_id, __pyx_n_s_x); if (unlikely(!__pyx_tuple__110)) __PYX_ERR(0, 536, __pyx_L1_error)
+  __pyx_tuple__110 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_args, __pyx_n_s_recs, __pyx_n_s_page, __pyx_n_s_idx, __pyx_n_s_ids, __pyx_n_s_r, __pyx_n_s_id, __pyx_n_s_x); if (unlikely(!__pyx_tuple__110)) __PYX_ERR(0, 535, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__110);
   __Pyx_GIVEREF(__pyx_tuple__110);
-  __pyx_codeobj__111 = (PyObject*)__Pyx_PyCode_New(2, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__110, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_add_page_delay, 536, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__111)) __PYX_ERR(0, 536, __pyx_L1_error)
+  __pyx_codeobj__111 = (PyObject*)__Pyx_PyCode_New(2, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__110, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_add_page_delay, 535, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__111)) __PYX_ERR(0, 535, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":555
+  /* "kivyblocks/dg.pyx":554
  * 		self.locater(x)
  * 
  * 	def delete_page(self,o,data):             # <<<<<<<<<<<<<<
  * 		for id in data:
  * 			self.delRow(id)
  */
-  __pyx_tuple__112 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_data, __pyx_n_s_id); if (unlikely(!__pyx_tuple__112)) __PYX_ERR(0, 555, __pyx_L1_error)
+  __pyx_tuple__112 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_o, __pyx_n_s_data, __pyx_n_s_id); if (unlikely(!__pyx_tuple__112)) __PYX_ERR(0, 554, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__112);
   __Pyx_GIVEREF(__pyx_tuple__112);
-  __pyx_codeobj__113 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__112, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_delete_page, 555, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__113)) __PYX_ERR(0, 555, __pyx_L1_error)
+  __pyx_codeobj__113 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__112, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_delete_page, 554, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__113)) __PYX_ERR(0, 554, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":559
+  /* "kivyblocks/dg.pyx":558
  * 			self.delRow(id)
  * 
  * 	def addRow(self,data, **kw):             # <<<<<<<<<<<<<<
  * 		id = getID()
  * 		f_row = None
  */
-  __pyx_tuple__114 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_kw, __pyx_n_s_id, __pyx_n_s_f_row); if (unlikely(!__pyx_tuple__114)) __PYX_ERR(0, 559, __pyx_L1_error)
+  __pyx_tuple__114 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_kw, __pyx_n_s_id, __pyx_n_s_f_row); if (unlikely(!__pyx_tuple__114)) __PYX_ERR(0, 558, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__114);
   __Pyx_GIVEREF(__pyx_tuple__114);
-  __pyx_codeobj__115 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__114, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_addRow, 559, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__115)) __PYX_ERR(0, 559, __pyx_L1_error)
+  __pyx_codeobj__115 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__114, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_addRow, 558, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__115)) __PYX_ERR(0, 558, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":567
+  /* "kivyblocks/dg.pyx":566
  * 		return id
  * 
  * 	def delRow(self,id,**kw):             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			self.freeze_part.body.delRowById(id)
  */
-  __pyx_tuple__116 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_kw); if (unlikely(!__pyx_tuple__116)) __PYX_ERR(0, 567, __pyx_L1_error)
+  __pyx_tuple__116 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_id, __pyx_n_s_kw); if (unlikely(!__pyx_tuple__116)) __PYX_ERR(0, 566, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__116);
   __Pyx_GIVEREF(__pyx_tuple__116);
-  __pyx_codeobj__117 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__116, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_delRow, 567, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__117)) __PYX_ERR(0, 567, __pyx_L1_error)
+  __pyx_codeobj__117 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__116, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_delRow, 566, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__117)) __PYX_ERR(0, 566, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":572
+  /* "kivyblocks/dg.pyx":571
  * 		self.normal_part.body.delRowById(id)
  * 
  * 	def createToolbar(self):             # <<<<<<<<<<<<<<
  * 		if self.toolbar:
  * 			self._toolbar = Toolbar(**self.toolbar)
  */
-  __pyx_tuple__118 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__118)) __PYX_ERR(0, 572, __pyx_L1_error)
+  __pyx_tuple__118 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__118)) __PYX_ERR(0, 571, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__118);
   __Pyx_GIVEREF(__pyx_tuple__118);
-  __pyx_codeobj__119 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__118, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_createToolbar, 572, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__119)) __PYX_ERR(0, 572, __pyx_L1_error)
+  __pyx_codeobj__119 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__118, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_createToolbar, 571, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__119)) __PYX_ERR(0, 571, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":576
+  /* "kivyblocks/dg.pyx":575
  * 			self._toolbar = Toolbar(**self.toolbar)
  * 
  * 	def on_selected(self,row):             # <<<<<<<<<<<<<<
  * 		print("DataGrid():on_selected fire")
  * 
  */
-  __pyx_tuple__120 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_row); if (unlikely(!__pyx_tuple__120)) __PYX_ERR(0, 576, __pyx_L1_error)
+  __pyx_tuple__120 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_row); if (unlikely(!__pyx_tuple__120)) __PYX_ERR(0, 575, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__120);
   __Pyx_GIVEREF(__pyx_tuple__120);
-  __pyx_codeobj__121 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__120, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_selected, 576, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__121)) __PYX_ERR(0, 576, __pyx_L1_error)
+  __pyx_codeobj__121 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__120, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_on_selected, 575, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__121)) __PYX_ERR(0, 575, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":579
+  /* "kivyblocks/dg.pyx":578
  * 		print("DataGrid():on_selected fire")
  * 
  * 	def loadData(self,*args, **kwargs):             # <<<<<<<<<<<<<<
  * 		kwargs['page'] = 1
  * 		self.selected_rowid = None
  */
-  __pyx_tuple__122 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_args, __pyx_n_s_kwargs); if (unlikely(!__pyx_tuple__122)) __PYX_ERR(0, 579, __pyx_L1_error)
+  __pyx_tuple__122 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_args, __pyx_n_s_kwargs); if (unlikely(!__pyx_tuple__122)) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__122);
   __Pyx_GIVEREF(__pyx_tuple__122);
-  __pyx_codeobj__123 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__122, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_loadData, 579, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__123)) __PYX_ERR(0, 579, __pyx_L1_error)
+  __pyx_codeobj__123 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__122, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_loadData, 578, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__123)) __PYX_ERR(0, 578, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":584
+  /* "kivyblocks/dg.pyx":583
  * 		self._dataloader.do_search(None,kwargs)
  * 
  * 	def createDataGridPart(self):             # <<<<<<<<<<<<<<
  * 		self.freeze_part = None
  * 		self.normal_part = None
  */
-  __pyx_tuple__124 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__124)) __PYX_ERR(0, 584, __pyx_L1_error)
+  __pyx_tuple__124 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__124)) __PYX_ERR(0, 583, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__124);
   __Pyx_GIVEREF(__pyx_tuple__124);
-  __pyx_codeobj__125 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__124, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_createDataGridPart, 584, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__125)) __PYX_ERR(0, 584, __pyx_L1_error)
+  __pyx_codeobj__125 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__124, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_createDataGridPart, 583, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__125)) __PYX_ERR(0, 583, __pyx_L1_error)
 
-  /* "kivyblocks/dg.pyx":592
+  /* "kivyblocks/dg.pyx":591
  * 			self.normal_part = DataGridPart(self, False, self.normal_fields)
  * 
  * 	def getPartFields(self,freeze_flag:bool=False) -> list:             # <<<<<<<<<<<<<<
  * 		fs = []
  * 		for f in self.fields:
  */
-  __pyx_tuple__126 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_freeze_flag, __pyx_n_s_fs, __pyx_n_s_f); if (unlikely(!__pyx_tuple__126)) __PYX_ERR(0, 592, __pyx_L1_error)
+  __pyx_tuple__126 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_freeze_flag, __pyx_n_s_fs, __pyx_n_s_f); if (unlikely(!__pyx_tuple__126)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__126);
   __Pyx_GIVEREF(__pyx_tuple__126);
-  __pyx_codeobj__127 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__126, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getPartFields, 592, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__127)) __PYX_ERR(0, 592, __pyx_L1_error)
-  __pyx_tuple__128 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__128)) __PYX_ERR(0, 592, __pyx_L1_error)
+  __pyx_codeobj__127 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__126, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_getPartFields, 591, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__127)) __PYX_ERR(0, 591, __pyx_L1_error)
+  __pyx_tuple__128 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__128)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__128);
   __Pyx_GIVEREF(__pyx_tuple__128);
 
-  /* "kivyblocks/dg.pyx":603
+  /* "kivyblocks/dg.pyx":602
  * 		return fs
  * 
  * 	def get_selected_data(self):             # <<<<<<<<<<<<<<
  * 		if not self.selected_rowid:
  * 			return {}
  */
-  __pyx_tuple__129 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_row_id, __pyx_n_s_row); if (unlikely(!__pyx_tuple__129)) __PYX_ERR(0, 603, __pyx_L1_error)
+  __pyx_tuple__129 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_row_id, __pyx_n_s_row); if (unlikely(!__pyx_tuple__129)) __PYX_ERR(0, 602, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__129);
   __Pyx_GIVEREF(__pyx_tuple__129);
-  __pyx_codeobj__130 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__129, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_get_selected_data, 603, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__130)) __PYX_ERR(0, 603, __pyx_L1_error)
+  __pyx_codeobj__130 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__129, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_kivyblocks_dg_pyx, __pyx_n_s_get_selected_data, 602, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__130)) __PYX_ERR(0, 602, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -19385,8 +19379,8 @@ if (!__Pyx_RefNanny) {
  * from kivy.factory import Factory
  * 
  * from appPublic.dictObject import DictObject             # <<<<<<<<<<<<<<
- * from appPublic.timecost import TimeCost
  * from appPublic.uniqueID import getID
+ * from appPublic.myTE import string_template_render
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -19405,363 +19399,342 @@ if (!__Pyx_RefNanny) {
   /* "kivyblocks/dg.pyx":21
  * 
  * from appPublic.dictObject import DictObject
- * from appPublic.timecost import TimeCost             # <<<<<<<<<<<<<<
- * from appPublic.uniqueID import getID
+ * from appPublic.uniqueID import getID             # <<<<<<<<<<<<<<
  * from appPublic.myTE import string_template_render
+ * 
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_INCREF(__pyx_n_s_TimeCost);
-  __Pyx_GIVEREF(__pyx_n_s_TimeCost);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_TimeCost);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_appPublic_timecost, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_INCREF(__pyx_n_s_getID);
+  __Pyx_GIVEREF(__pyx_n_s_getID);
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_getID);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_appPublic_uniqueID, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_TimeCost); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_getID); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_TimeCost, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_getID, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kivyblocks/dg.pyx":22
  * from appPublic.dictObject import DictObject
- * from appPublic.timecost import TimeCost
- * from appPublic.uniqueID import getID             # <<<<<<<<<<<<<<
- * from appPublic.myTE import string_template_render
- * 
- */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_n_s_getID);
-  __Pyx_GIVEREF(__pyx_n_s_getID);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_getID);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_appPublic_uniqueID, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_getID); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_getID, __pyx_t_1) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "kivyblocks/dg.pyx":23
- * from appPublic.timecost import TimeCost
  * from appPublic.uniqueID import getID
  * from appPublic.myTE import string_template_render             # <<<<<<<<<<<<<<
  * 
  * from .utils import *
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_string_template_render);
   __Pyx_GIVEREF(__pyx_n_s_string_template_render);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_string_template_render);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_appPublic_myTE, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_string_template_render); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_string_template_render);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_appPublic_myTE, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_string_template_render, __pyx_t_2) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_string_template_render); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_string_template_render, __pyx_t_1) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":25
+  /* "kivyblocks/dg.pyx":24
  * from appPublic.myTE import string_template_render
  * 
  * from .utils import *             # <<<<<<<<<<<<<<
  * from .baseWidget import Text, HBox, VBox
  * from .scrollpanel import ScrollPanel
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s__10);
   __Pyx_GIVEREF(__pyx_n_s__10);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s__10);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_utils, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_import_star(__pyx_t_2) < 0) __PYX_ERR(0, 25, __pyx_L1_error);
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s__10);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_utils, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_import_star(__pyx_t_1) < 0) __PYX_ERR(0, 24, __pyx_L1_error);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":26
+  /* "kivyblocks/dg.pyx":25
  * 
  * from .utils import *
  * from .baseWidget import Text, HBox, VBox             # <<<<<<<<<<<<<<
  * from .scrollpanel import ScrollPanel
  * from .paging import Paging, RelatedLoader
  */
-  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_Text);
   __Pyx_GIVEREF(__pyx_n_s_Text);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Text);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_Text);
   __Pyx_INCREF(__pyx_n_s_HBox);
   __Pyx_GIVEREF(__pyx_n_s_HBox);
-  PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_HBox);
+  PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_HBox);
   __Pyx_INCREF(__pyx_n_s_VBox);
   __Pyx_GIVEREF(__pyx_n_s_VBox);
-  PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_s_VBox);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_baseWidget, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_Text); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_1, 2, __pyx_n_s_VBox);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_baseWidget, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Text, __pyx_t_2) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_HBox); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_HBox, __pyx_t_2) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_VBox); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_VBox, __pyx_t_2) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Text); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Text, __pyx_t_1) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_HBox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_HBox, __pyx_t_1) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_VBox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_VBox, __pyx_t_1) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":27
+  /* "kivyblocks/dg.pyx":26
  * from .utils import *
  * from .baseWidget import Text, HBox, VBox
  * from .scrollpanel import ScrollPanel             # <<<<<<<<<<<<<<
  * from .paging import Paging, RelatedLoader
  * from .ready import WidgetReady
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_ScrollPanel);
   __Pyx_GIVEREF(__pyx_n_s_ScrollPanel);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_ScrollPanel);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_scrollpanel, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_ScrollPanel); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_ScrollPanel);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_scrollpanel, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ScrollPanel, __pyx_t_1) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_ScrollPanel); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ScrollPanel, __pyx_t_2) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":28
+  /* "kivyblocks/dg.pyx":27
  * from .baseWidget import Text, HBox, VBox
  * from .scrollpanel import ScrollPanel
  * from .paging import Paging, RelatedLoader             # <<<<<<<<<<<<<<
  * from .ready import WidgetReady
  * from .toolbar import Toolbar
  */
-  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_Paging);
   __Pyx_GIVEREF(__pyx_n_s_Paging);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Paging);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_Paging);
   __Pyx_INCREF(__pyx_n_s_RelatedLoader);
   __Pyx_GIVEREF(__pyx_n_s_RelatedLoader);
-  PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_RelatedLoader);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_paging, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_Paging); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_RelatedLoader);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_paging, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Paging, __pyx_t_2) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_RelatedLoader); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RelatedLoader, __pyx_t_2) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Paging); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Paging, __pyx_t_1) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_RelatedLoader); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RelatedLoader, __pyx_t_1) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":29
+  /* "kivyblocks/dg.pyx":28
  * from .scrollpanel import ScrollPanel
  * from .paging import Paging, RelatedLoader
  * from .ready import WidgetReady             # <<<<<<<<<<<<<<
  * from .toolbar import Toolbar
  * from .bgcolorbehavior import BGColorBehavior
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_WidgetReady);
   __Pyx_GIVEREF(__pyx_n_s_WidgetReady);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_WidgetReady);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_ready, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_WidgetReady);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_ready, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_WidgetReady, __pyx_t_1) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_WidgetReady, __pyx_t_2) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":30
+  /* "kivyblocks/dg.pyx":29
  * from .paging import Paging, RelatedLoader
  * from .ready import WidgetReady
  * from .toolbar import Toolbar             # <<<<<<<<<<<<<<
  * from .bgcolorbehavior import BGColorBehavior
  * from .widget_css import WidgetCSS
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_Toolbar);
   __Pyx_GIVEREF(__pyx_n_s_Toolbar);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Toolbar);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_toolbar_2, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_Toolbar); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_Toolbar);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_toolbar_2, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Toolbar, __pyx_t_2) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Toolbar); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Toolbar, __pyx_t_1) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":31
+  /* "kivyblocks/dg.pyx":30
  * from .ready import WidgetReady
  * from .toolbar import Toolbar
  * from .bgcolorbehavior import BGColorBehavior             # <<<<<<<<<<<<<<
  * from .widget_css import WidgetCSS
  * from .uitype.factory import UiFactory
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_BGColorBehavior);
   __Pyx_GIVEREF(__pyx_n_s_BGColorBehavior);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_BGColorBehavior);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_bgcolorbehavior, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_BGColorBehavior); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_BGColorBehavior);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_bgcolorbehavior, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BGColorBehavior, __pyx_t_1) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_BGColorBehavior); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BGColorBehavior, __pyx_t_2) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":32
+  /* "kivyblocks/dg.pyx":31
  * from .toolbar import Toolbar
  * from .bgcolorbehavior import BGColorBehavior
  * from .widget_css import WidgetCSS             # <<<<<<<<<<<<<<
  * from .uitype.factory import UiFactory
  * 
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_WidgetCSS);
   __Pyx_GIVEREF(__pyx_n_s_WidgetCSS);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_WidgetCSS);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_widget_css, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_WidgetCSS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_WidgetCSS);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_widget_css, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_WidgetCSS, __pyx_t_2) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_WidgetCSS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_WidgetCSS, __pyx_t_1) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":33
+  /* "kivyblocks/dg.pyx":32
  * from .bgcolorbehavior import BGColorBehavior
  * from .widget_css import WidgetCSS
  * from .uitype.factory import UiFactory             # <<<<<<<<<<<<<<
  * 
  * class BLabel(ButtonBehavior, Text):
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_UiFactory);
   __Pyx_GIVEREF(__pyx_n_s_UiFactory);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_UiFactory);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_uitype_factory, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_UiFactory); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_UiFactory);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_uitype_factory, __pyx_t_2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_UiFactory, __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_UiFactory); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_UiFactory, __pyx_t_2) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":35
+  /* "kivyblocks/dg.pyx":34
  * from .uitype.factory import UiFactory
  * 
  * class BLabel(ButtonBehavior, Text):             # <<<<<<<<<<<<<<
  * 	def __init__(self, **kw):
  * 		ButtonBehavior.__init__(self)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_ButtonBehavior); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Text); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ButtonBehavior); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Text); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
-  __pyx_t_2 = 0;
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_3, __pyx_n_s_BLabel, __pyx_n_s_BLabel, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_3, __pyx_n_s_BLabel, __pyx_n_s_BLabel, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
 
-  /* "kivyblocks/dg.pyx":36
+  /* "kivyblocks/dg.pyx":35
  * 
  * class BLabel(ButtonBehavior, Text):
  * 	def __init__(self, **kw):             # <<<<<<<<<<<<<<
  * 		ButtonBehavior.__init__(self)
  * 		Text.__init__(self,**kw)
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_6BLabel_1__init__, 0, __pyx_n_s_BLabel___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_6BLabel_1__init__, 0, __pyx_n_s_BLabel___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 36, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":35
+  /* "kivyblocks/dg.pyx":34
  * from .uitype.factory import UiFactory
  * 
  * class BLabel(ButtonBehavior, Text):             # <<<<<<<<<<<<<<
  * 	def __init__(self, **kw):
  * 		ButtonBehavior.__init__(self)
  */
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_BLabel, __pyx_t_3, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_BLabel, __pyx_t_3, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BLabel, __pyx_t_4) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BLabel, __pyx_t_4) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/dg.pyx":41
+  /* "kivyblocks/dg.pyx":40
  * 		self.csscls = 'dummy'
  * 
  * class Cell(ButtonBehavior, WidgetCSS, BoxLayout):             # <<<<<<<<<<<<<<
  * 	colume_name = StringProperty(None)
  * 	cell_type = OptionProperty('data', \
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ButtonBehavior); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ButtonBehavior); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_WidgetCSS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_WidgetCSS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_1);
   __pyx_t_3 = 0;
-  __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_4, __pyx_n_s_Cell, __pyx_n_s_Cell, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_4, __pyx_n_s_Cell, __pyx_n_s_Cell, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "kivyblocks/dg.pyx":42
+  /* "kivyblocks/dg.pyx":41
  * 
  * class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
  * 	colume_name = StringProperty(None)             # <<<<<<<<<<<<<<
  * 	cell_type = OptionProperty('data', \
  * 			options=['data', 'header'])
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_StringProperty); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_StringProperty); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -19775,32 +19748,32 @@ if (!__Pyx_RefNanny) {
   }
   __pyx_t_5 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_7, Py_None) : __Pyx_PyObject_CallOneArg(__pyx_t_6, Py_None);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_colume_name, __pyx_t_5) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_colume_name, __pyx_t_5) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "kivyblocks/dg.pyx":43
+  /* "kivyblocks/dg.pyx":42
  * class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
  * 	colume_name = StringProperty(None)
  * 	cell_type = OptionProperty('data', \             # <<<<<<<<<<<<<<
  * 			options=['data', 'header'])
  * 	def __init__(self,row,desc, **kw):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_OptionProperty); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_OptionProperty); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "kivyblocks/dg.pyx":44
+  /* "kivyblocks/dg.pyx":43
  * 	colume_name = StringProperty(None)
  * 	cell_type = OptionProperty('data', \
  * 			options=['data', 'header'])             # <<<<<<<<<<<<<<
  * 	def __init__(self,row,desc, **kw):
  * 		"""
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyList_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_7 = PyList_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_n_s_data);
   __Pyx_GIVEREF(__pyx_n_s_data);
@@ -19808,237 +19781,174 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_s_header);
   __Pyx_GIVEREF(__pyx_n_s_header);
   PyList_SET_ITEM(__pyx_t_7, 1, __pyx_n_s_header);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_options, __pyx_t_7) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_options, __pyx_t_7) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":43
+  /* "kivyblocks/dg.pyx":42
  * class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
  * 	colume_name = StringProperty(None)
  * 	cell_type = OptionProperty('data', \             # <<<<<<<<<<<<<<
  * 			options=['data', 'header'])
  * 	def __init__(self,row,desc, **kw):
  */
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__13, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__13, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_cell_type, __pyx_t_7) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_cell_type, __pyx_t_7) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":45
+  /* "kivyblocks/dg.pyx":44
  * 	cell_type = OptionProperty('data', \
  * 			options=['data', 'header'])
  * 	def __init__(self,row,desc, **kw):             # <<<<<<<<<<<<<<
  * 		"""
  * 		desc:{
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Cell_1__init__, 0, __pyx_n_s_Cell___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Cell_1__init__, 0, __pyx_n_s_Cell___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_t_7);
   PyList_Append(__pyx_t_3, __pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":41
+  /* "kivyblocks/dg.pyx":40
  * 		self.csscls = 'dummy'
  * 
  * class Cell(ButtonBehavior, WidgetCSS, BoxLayout):             # <<<<<<<<<<<<<<
  * 	colume_name = StringProperty(None)
  * 	cell_type = OptionProperty('data', \
  */
-  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_Cell, __pyx_t_4, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_Cell, __pyx_t_4, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_CyFunction_InitClassCell(__pyx_t_3, __pyx_t_7) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (__Pyx_CyFunction_InitClassCell(__pyx_t_3, __pyx_t_7) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Cell, __pyx_t_7) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Cell, __pyx_t_7) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "kivyblocks/dg.pyx":77
+  /* "kivyblocks/dg.pyx":76
  * 			self.add_widget(bl)
  * 
  * class Row(BoxLayout):             # <<<<<<<<<<<<<<
  * 	def __init__(self,part, rowdesc,header=False,data=None, **kw):
  * 		"""
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_4);
-  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4);
-  __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_2, __pyx_n_s_Row, __pyx_n_s_Row, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
+  __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_1, __pyx_n_s_Row, __pyx_n_s_Row, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
 
-  /* "kivyblocks/dg.pyx":78
+  /* "kivyblocks/dg.pyx":77
  * 
  * class Row(BoxLayout):
  * 	def __init__(self,part, rowdesc,header=False,data=None, **kw):             # <<<<<<<<<<<<<<
  * 		"""
  * 		rowdesc=[
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_1__init__, 0, __pyx_n_s_Row___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_1__init__, 0, __pyx_n_s_Row___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__18);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 78, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":104
+  /* "kivyblocks/dg.pyx":103
  * 		self.init(0)
  * 
  * 	def on_row_press(self, *args):             # <<<<<<<<<<<<<<
  * 		pass
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_3on_row_press, 0, __pyx_n_s_Row_on_row_press, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_3on_row_press, 0, __pyx_n_s_Row_on_row_press, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_on_row_press, __pyx_t_7) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_on_row_press, __pyx_t_7) < 0) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":107
+  /* "kivyblocks/dg.pyx":106
  * 		pass
  * 
  * 	def init(self,t):             # <<<<<<<<<<<<<<
  * 		w = 0
  * 		h = 0
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_5init, 0, __pyx_n_s_Row_init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_5init, 0, __pyx_n_s_Row_init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init_2, __pyx_t_7) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init_2, __pyx_t_7) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":119
+  /* "kivyblocks/dg.pyx":118
  * 		self.width = w + self.linewidth * (len(self.rowdesc)+1)
  * 
  * 	def unselected(self):             # <<<<<<<<<<<<<<
  * 		self.select(False)
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_7unselected, 0, __pyx_n_s_Row_unselected, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_7unselected, 0, __pyx_n_s_Row_unselected, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_unselected, __pyx_t_7) < 0) __PYX_ERR(0, 119, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_unselected, __pyx_t_7) < 0) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":122
+  /* "kivyblocks/dg.pyx":121
  * 		self.select(False)
  * 
  * 	def selected(self):             # <<<<<<<<<<<<<<
  * 		self.select(True)
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_9selected, 0, __pyx_n_s_Row_selected, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_9selected, 0, __pyx_n_s_Row_selected, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_selected, __pyx_t_7) < 0) __PYX_ERR(0, 122, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_selected, __pyx_t_7) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":125
+  /* "kivyblocks/dg.pyx":124
  * 		self.select(True)
  * 
  * 	def select(self, flag):             # <<<<<<<<<<<<<<
  * 		for c in self.children:
  * 			if flag:
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_11select, 0, __pyx_n_s_Row_select, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_3Row_11select, 0, __pyx_n_s_Row_select, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_select, __pyx_t_7) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_select, __pyx_t_7) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":77
+  /* "kivyblocks/dg.pyx":76
  * 			self.add_widget(bl)
  * 
  * class Row(BoxLayout):             # <<<<<<<<<<<<<<
  * 	def __init__(self,part, rowdesc,header=False,data=None, **kw):
  * 		"""
  */
-  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_Row, __pyx_t_2, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_Row, __pyx_t_1, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Row, __pyx_t_7) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Row, __pyx_t_7) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kivyblocks/dg.pyx":132
+  /* "kivyblocks/dg.pyx":131
  * 				c.csscls = self.part.datagrid.row_normal_css
  * 
  * class Header(WidgetReady, ScrollPanel):             # <<<<<<<<<<<<<<
  * 	def __init__(self,part,**kw):
  * 		SUPER(Header, self, kw)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ScrollPanel); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_4);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
-  __pyx_t_2 = 0;
-  __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ScrollPanel); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_1, __pyx_n_s_Header, __pyx_n_s_Header, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-
-  /* "kivyblocks/dg.pyx":133
- * 
- * class Header(WidgetReady, ScrollPanel):
- * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
- * 		SUPER(Header, self, kw)
- * 		self.part = part
- */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_6Header_1__init__, 0, __pyx_n_s_Header___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":142
- * 		self.bar_width = 0
- * 
- * 	def init(self,t):             # <<<<<<<<<<<<<<
- * 		rd = [ f.copy() for f in self.part.rowdesc ]
- * 		[ f.update({'value':self.part.fields[i].get('label', \
- */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_6Header_3init, 0, __pyx_n_s_Header_init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init_2, __pyx_t_7) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":132
- * 				c.csscls = self.part.datagrid.row_normal_css
- * 
- * class Header(WidgetReady, ScrollPanel):             # <<<<<<<<<<<<<<
- * 	def __init__(self,part,**kw):
- * 		SUPER(Header, self, kw)
- */
-  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_Header, __pyx_t_1, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Header, __pyx_t_7) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "kivyblocks/dg.pyx":151
- * 		self.height = self.header.height
- * 
- * class Body(WidgetReady, ScrollPanel):             # <<<<<<<<<<<<<<
- * 	def __init__(self,part,**kw):
- * 		self.part = part
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ScrollPanel); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -20046,123 +19956,62 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_4);
   __pyx_t_1 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_2, __pyx_n_s_Body, __pyx_n_s_Body, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_2, __pyx_n_s_Header, __pyx_n_s_Header, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "kivyblocks/dg.pyx":152
+  /* "kivyblocks/dg.pyx":132
  * 
- * class Body(WidgetReady, ScrollPanel):
+ * class Header(WidgetReady, ScrollPanel):
  * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
+ * 		SUPER(Header, self, kw)
  * 		self.part = part
- * 		SUPER(Body, self, kw)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_1__init__, 0, __pyx_n_s_Body___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_6Header_1__init__, 0, __pyx_n_s_Header___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":162
- * 			self.bar_width = 0
+  /* "kivyblocks/dg.pyx":141
+ * 		self.bar_width = 0
  * 
- * 	def addRow(self,id, data,index=0):             # <<<<<<<<<<<<<<
+ * 	def init(self,t):             # <<<<<<<<<<<<<<
  * 		rd = [ f.copy() for f in self.part.rowdesc ]
- * 		[ f.update({'value':data.get(f['name'])}) for f in rd ]
+ * 		[ f.update({'value':self.part.fields[i].get('label', \
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_3addRow, 0, __pyx_n_s_Body_addRow, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_6Header_3init, 0, __pyx_n_s_Header_init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__37);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_addRow, __pyx_t_7) < 0) __PYX_ERR(0, 162, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init_2, __pyx_t_7) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":171
- * 		return row
+  /* "kivyblocks/dg.pyx":131
+ * 				c.csscls = self.part.datagrid.row_normal_css
  * 
- * 	def clearRows(self):             # <<<<<<<<<<<<<<
- * 		self.idRow = {}
- * 		self.clear_widgets()
+ * class Header(WidgetReady, ScrollPanel):             # <<<<<<<<<<<<<<
+ * 	def __init__(self,part,**kw):
+ * 		SUPER(Header, self, kw)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_5clearRows, 0, __pyx_n_s_Body_clearRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_Header, __pyx_t_2, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_clearRows, __pyx_t_7) < 0) __PYX_ERR(0, 171, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Header, __pyx_t_7) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kivyblocks/dg.pyx":175
- * 		self.clear_widgets()
- * 
- * 	def delRowById(self,id):             # <<<<<<<<<<<<<<
- * 		row = self.idRow.get(id)
- * 		if row:
- */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_7delRowById, 0, __pyx_n_s_Body_delRowById, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 175, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_delRowById, __pyx_t_7) < 0) __PYX_ERR(0, 175, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":182
- * 			del self.idRow[id]
- * 
- * 	def getRowData(self,rowid):             # <<<<<<<<<<<<<<
- * 		return self.idRow[rowid].row_data
- * 
- */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_9getRowData, 0, __pyx_n_s_Body_getRowData, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 182, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_getRowData_2, __pyx_t_7) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":185
- * 		return self.idRow[rowid].row_data
- * 
- * 	def getRowHeight(self):             # <<<<<<<<<<<<<<
- * 		return self.part.datagrid.rowHeight()
- * 
- */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_11getRowHeight, 0, __pyx_n_s_Body_getRowHeight, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__45)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 185, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_getRowHeight, __pyx_t_7) < 0) __PYX_ERR(0, 185, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":188
- * 		return self.part.datagrid.rowHeight()
- * 
- * 	def get_row_by_id(self, rowid):             # <<<<<<<<<<<<<<
- * 		return self.idRow.get(rowid)
- * 
- */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_13get_row_by_id, 0, __pyx_n_s_Body_get_row_by_id, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__47)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 188, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_get_row_by_id, __pyx_t_7) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":151
+  /* "kivyblocks/dg.pyx":150
  * 		self.height = self.header.height
  * 
  * class Body(WidgetReady, ScrollPanel):             # <<<<<<<<<<<<<<
  * 	def __init__(self,part,**kw):
  * 		self.part = part
  */
-  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_Body, __pyx_t_2, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 151, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Body, __pyx_t_7) < 0) __PYX_ERR(0, 151, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "kivyblocks/dg.pyx":191
- * 		return self.idRow.get(rowid)
- * 
- * class DataGridPart(WidgetReady, BoxLayout):             # <<<<<<<<<<<<<<
- * 	def __init__(self,dg, freeze_flag, fields):
- * 		self.datagrid = dg
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ScrollPanel); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20170,138 +20019,262 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
   __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_1, __pyx_n_s_DataGridPart, __pyx_n_s_DataGridPart, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_1, __pyx_n_s_Body, __pyx_n_s_Body, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "kivyblocks/dg.pyx":192
+  /* "kivyblocks/dg.pyx":151
  * 
- * class DataGridPart(WidgetReady, BoxLayout):
- * 	def __init__(self,dg, freeze_flag, fields):             # <<<<<<<<<<<<<<
- * 		self.datagrid = dg
- * 		self.fields = fields
+ * class Body(WidgetReady, ScrollPanel):
+ * 	def __init__(self,part,**kw):             # <<<<<<<<<<<<<<
+ * 		self.part = part
+ * 		SUPER(Body, self, kw)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_1__init__, 0, __pyx_n_s_DataGridPart___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_1__init__, 0, __pyx_n_s_Body___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 151, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 192, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 151, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":201
- * 		self.init(0)
+  /* "kivyblocks/dg.pyx":161
+ * 			self.bar_width = 0
  * 
- * 	def setWidth(self):             # <<<<<<<<<<<<<<
- * 		if self.freeze_flag:
- * 			self.size_hint_x = None
+ * 	def addRow(self,id, data,index=0):             # <<<<<<<<<<<<<<
+ * 		rd = [ f.copy() for f in self.part.rowdesc ]
+ * 		[ f.update({'value':data.get(f['name'])}) for f in rd ]
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_3setWidth, 0, __pyx_n_s_DataGridPart_setWidth, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__51)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_3addRow, 0, __pyx_n_s_Body_addRow, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_setWidth, __pyx_t_7) < 0) __PYX_ERR(0, 201, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__37);
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_addRow, __pyx_t_7) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":206
- * 			self.width = self.getFieldsWidth()
- * 
- * 	def getFieldsWidth(self):             # <<<<<<<<<<<<<<
- * 		if not self.fields_width:
- * 			width = 0
- */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_5getFieldsWidth, 0, __pyx_n_s_DataGridPart_getFieldsWidth, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__53)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 206, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_getFieldsWidth, __pyx_t_7) < 0) __PYX_ERR(0, 206, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":214
- * 		return self.fields_width
- * 
- * 	def init(self,t):             # <<<<<<<<<<<<<<
- * 		rd = []
- * 		for f in self.fields:
- */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_7init, 0, __pyx_n_s_DataGridPart_init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__55)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 214, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init_2, __pyx_t_7) < 0) __PYX_ERR(0, 214, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":245
- * 							size=self.datagrid.bodyOnSize)
+  /* "kivyblocks/dg.pyx":170
+ * 		return row
  * 
  * 	def clearRows(self):             # <<<<<<<<<<<<<<
- * 		return self.body.clearRows()
- * 
+ * 		self.idRow = {}
+ * 		self.clear_widgets()
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_9clearRows, 0, __pyx_n_s_DataGridPart_clearRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__57)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_5clearRows, 0, __pyx_n_s_Body_clearRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_clearRows, __pyx_t_7) < 0) __PYX_ERR(0, 245, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_clearRows, __pyx_t_7) < 0) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":248
- * 		return self.body.clearRows()
+  /* "kivyblocks/dg.pyx":174
+ * 		self.clear_widgets()
  * 
- * 	def addRow(self,id, data):             # <<<<<<<<<<<<<<
- * 		return self.body.addRow(id, data)
- * 
+ * 	def delRowById(self,id):             # <<<<<<<<<<<<<<
+ * 		row = self.idRow.get(id)
+ * 		if row:
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_11addRow, 0, __pyx_n_s_DataGridPart_addRow, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__59)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_7delRowById, 0, __pyx_n_s_Body_delRowById, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_addRow, __pyx_t_7) < 0) __PYX_ERR(0, 248, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_delRowById, __pyx_t_7) < 0) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":251
- * 		return self.body.addRow(id, data)
+  /* "kivyblocks/dg.pyx":181
+ * 			del self.idRow[id]
  * 
- * 	def on_size(self, o, s=None):             # <<<<<<<<<<<<<<
- * 		if not hasattr(self, 'body'):
- * 			return
+ * 	def getRowData(self,rowid):             # <<<<<<<<<<<<<<
+ * 		return self.idRow[rowid].row_data
+ * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_13on_size, 0, __pyx_n_s_DataGridPart_on_size, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__61)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_9getRowData, 0, __pyx_n_s_Body_getRowData, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__62);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_on_size, __pyx_t_7) < 0) __PYX_ERR(0, 251, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_getRowData_2, __pyx_t_7) < 0) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":191
+  /* "kivyblocks/dg.pyx":184
+ * 		return self.idRow[rowid].row_data
+ * 
+ * 	def getRowHeight(self):             # <<<<<<<<<<<<<<
+ * 		return self.part.datagrid.rowHeight()
+ * 
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_11getRowHeight, 0, __pyx_n_s_Body_getRowHeight, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__45)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_getRowHeight, __pyx_t_7) < 0) __PYX_ERR(0, 184, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":187
+ * 		return self.part.datagrid.rowHeight()
+ * 
+ * 	def get_row_by_id(self, rowid):             # <<<<<<<<<<<<<<
+ * 		return self.idRow.get(rowid)
+ * 
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_4Body_13get_row_by_id, 0, __pyx_n_s_Body_get_row_by_id, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__47)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_get_row_by_id, __pyx_t_7) < 0) __PYX_ERR(0, 187, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":150
+ * 		self.height = self.header.height
+ * 
+ * class Body(WidgetReady, ScrollPanel):             # <<<<<<<<<<<<<<
+ * 	def __init__(self,part,**kw):
+ * 		self.part = part
+ */
+  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_Body, __pyx_t_1, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Body, __pyx_t_7) < 0) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "kivyblocks/dg.pyx":190
  * 		return self.idRow.get(rowid)
  * 
  * class DataGridPart(WidgetReady, BoxLayout):             # <<<<<<<<<<<<<<
  * 	def __init__(self,dg, freeze_flag, fields):
  * 		self.datagrid = dg
  */
-  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_DataGridPart, __pyx_t_1, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 191, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DataGridPart, __pyx_t_7) < 0) __PYX_ERR(0, 191, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_WidgetReady); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_BoxLayout); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_4);
+  __pyx_t_1 = 0;
+  __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_2, __pyx_n_s_DataGridPart, __pyx_n_s_DataGridPart, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
 
-  /* "kivyblocks/dg.pyx":261
+  /* "kivyblocks/dg.pyx":191
+ * 
+ * class DataGridPart(WidgetReady, BoxLayout):
+ * 	def __init__(self,dg, freeze_flag, fields):             # <<<<<<<<<<<<<<
+ * 		self.datagrid = dg
+ * 		self.fields = fields
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_1__init__, 0, __pyx_n_s_DataGridPart___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 191, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":200
+ * 		self.init(0)
+ * 
+ * 	def setWidth(self):             # <<<<<<<<<<<<<<
+ * 		if self.freeze_flag:
+ * 			self.size_hint_x = None
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_3setWidth, 0, __pyx_n_s_DataGridPart_setWidth, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__51)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_setWidth, __pyx_t_7) < 0) __PYX_ERR(0, 200, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":205
+ * 			self.width = self.getFieldsWidth()
+ * 
+ * 	def getFieldsWidth(self):             # <<<<<<<<<<<<<<
+ * 		if not self.fields_width:
+ * 			width = 0
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_5getFieldsWidth, 0, __pyx_n_s_DataGridPart_getFieldsWidth, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__53)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_getFieldsWidth, __pyx_t_7) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":213
+ * 		return self.fields_width
+ * 
+ * 	def init(self,t):             # <<<<<<<<<<<<<<
+ * 		rd = []
+ * 		for f in self.fields:
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_7init, 0, __pyx_n_s_DataGridPart_init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__55)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 213, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init_2, __pyx_t_7) < 0) __PYX_ERR(0, 213, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":244
+ * 							size=self.datagrid.bodyOnSize)
+ * 
+ * 	def clearRows(self):             # <<<<<<<<<<<<<<
+ * 		return self.body.clearRows()
+ * 
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_9clearRows, 0, __pyx_n_s_DataGridPart_clearRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__57)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_clearRows, __pyx_t_7) < 0) __PYX_ERR(0, 244, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":247
+ * 		return self.body.clearRows()
+ * 
+ * 	def addRow(self,id, data):             # <<<<<<<<<<<<<<
+ * 		return self.body.addRow(id, data)
+ * 
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_11addRow, 0, __pyx_n_s_DataGridPart_addRow, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__59)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_addRow, __pyx_t_7) < 0) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":250
+ * 		return self.body.addRow(id, data)
+ * 
+ * 	def on_size(self, o, s=None):             # <<<<<<<<<<<<<<
+ * 		if not hasattr(self, 'body'):
+ * 			return
+ */
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_12DataGridPart_13on_size, 0, __pyx_n_s_DataGridPart_on_size, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__61)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__62);
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_on_size, __pyx_t_7) < 0) __PYX_ERR(0, 250, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":190
+ * 		return self.idRow.get(rowid)
+ * 
+ * class DataGridPart(WidgetReady, BoxLayout):             # <<<<<<<<<<<<<<
+ * 	def __init__(self,dg, freeze_flag, fields):
+ * 		self.datagrid = dg
+ */
+  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_DataGridPart, __pyx_t_2, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DataGridPart, __pyx_t_7) < 0) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "kivyblocks/dg.pyx":260
  * 
  * 
  * class DataGrid(VBox):             # <<<<<<<<<<<<<<
  * 	"""
  * 	DataGrid data format:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_VBox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 261, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_4, __pyx_n_s_DataGrid, __pyx_n_s_DataGrid, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, __pyx_kp_s_DataGrid_data_format_widgettype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_VBox); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 260, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_4, __pyx_n_s_DataGrid, __pyx_n_s_DataGrid, (PyObject *) NULL, __pyx_n_s_kivyblocks_dg, __pyx_kp_s_DataGrid_data_format_widgettype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
 
-  /* "kivyblocks/dg.pyx":311
+  /* "kivyblocks/dg.pyx":310
  * 	}
  * 	"""
  * 	row_selected = BooleanProperty(False)             # <<<<<<<<<<<<<<
  * 	row_normal_css = StringProperty('default')
  * 	row_selected_css = StringProperty('default')
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_BooleanProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_BooleanProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -20315,18 +20288,45 @@ if (!__Pyx_RefNanny) {
   }
   __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, Py_False) : __Pyx_PyObject_CallOneArg(__pyx_t_3, Py_False);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 311, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_row_selected, __pyx_t_7) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_row_selected, __pyx_t_7) < 0) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":312
+  /* "kivyblocks/dg.pyx":311
  * 	"""
  * 	row_selected = BooleanProperty(False)
  * 	row_normal_css = StringProperty('default')             # <<<<<<<<<<<<<<
  * 	row_selected_css = StringProperty('default')
  * 	header_css = StringProperty('default')
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_StringProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_6 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_6)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_6);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_n_s_default) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_n_s_default);
+  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_row_normal_css, __pyx_t_7) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":312
+ * 	row_selected = BooleanProperty(False)
+ * 	row_normal_css = StringProperty('default')
+ * 	row_selected_css = StringProperty('default')             # <<<<<<<<<<<<<<
+ * 	header_css = StringProperty('default')
+ * 	body_css = StringProperty('default')
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_StringProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -20345,15 +20345,15 @@ if (!__Pyx_RefNanny) {
   if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_row_normal_css, __pyx_t_7) < 0) __PYX_ERR(0, 312, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_row_selected_css, __pyx_t_7) < 0) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
   /* "kivyblocks/dg.pyx":313
- * 	row_selected = BooleanProperty(False)
  * 	row_normal_css = StringProperty('default')
- * 	row_selected_css = StringProperty('default')             # <<<<<<<<<<<<<<
- * 	header_css = StringProperty('default')
+ * 	row_selected_css = StringProperty('default')
+ * 	header_css = StringProperty('default')             # <<<<<<<<<<<<<<
  * 	body_css = StringProperty('default')
+ * 	row_height = NumericProperty(2)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_StringProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -20372,15 +20372,15 @@ if (!__Pyx_RefNanny) {
   if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_row_selected_css, __pyx_t_7) < 0) __PYX_ERR(0, 313, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_header_css, __pyx_t_7) < 0) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
   /* "kivyblocks/dg.pyx":314
- * 	row_normal_css = StringProperty('default')
  * 	row_selected_css = StringProperty('default')
- * 	header_css = StringProperty('default')             # <<<<<<<<<<<<<<
- * 	body_css = StringProperty('default')
+ * 	header_css = StringProperty('default')
+ * 	body_css = StringProperty('default')             # <<<<<<<<<<<<<<
  * 	row_height = NumericProperty(2)
+ * 	noheader = BooleanProperty(False)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_StringProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 314, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -20399,44 +20399,17 @@ if (!__Pyx_RefNanny) {
   if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 314, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_header_css, __pyx_t_7) < 0) __PYX_ERR(0, 314, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_body_css, __pyx_t_7) < 0) __PYX_ERR(0, 314, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
   /* "kivyblocks/dg.pyx":315
- * 	row_selected_css = StringProperty('default')
- * 	header_css = StringProperty('default')
- * 	body_css = StringProperty('default')             # <<<<<<<<<<<<<<
- * 	row_height = NumericProperty(2)
- * 	noheader = BooleanProperty(False)
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_StringProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_6);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_n_s_default) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_n_s_default);
-  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 315, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_body_css, __pyx_t_7) < 0) __PYX_ERR(0, 315, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":316
  * 	header_css = StringProperty('default')
  * 	body_css = StringProperty('default')
  * 	row_height = NumericProperty(2)             # <<<<<<<<<<<<<<
  * 	noheader = BooleanProperty(False)
  * 	linewidth = NumericProperty(1)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_NumericProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_NumericProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -20450,20 +20423,20 @@ if (!__Pyx_RefNanny) {
   }
   __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_int_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_int_2);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 316, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_row_height, __pyx_t_7) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_row_height, __pyx_t_7) < 0) __PYX_ERR(0, 315, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":317
+  /* "kivyblocks/dg.pyx":316
  * 	body_css = StringProperty('default')
  * 	row_height = NumericProperty(2)
  * 	noheader = BooleanProperty(False)             # <<<<<<<<<<<<<<
  * 	linewidth = NumericProperty(1)
  * 	toolbar = DictProperty(None)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_BooleanProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_BooleanProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -20477,20 +20450,20 @@ if (!__Pyx_RefNanny) {
   }
   __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, Py_False) : __Pyx_PyObject_CallOneArg(__pyx_t_3, Py_False);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 317, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_noheader, __pyx_t_7) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_noheader, __pyx_t_7) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":318
+  /* "kivyblocks/dg.pyx":317
  * 	row_height = NumericProperty(2)
  * 	noheader = BooleanProperty(False)
  * 	linewidth = NumericProperty(1)             # <<<<<<<<<<<<<<
  * 	toolbar = DictProperty(None)
  * 	dataloader = DictProperty(None)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_NumericProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_NumericProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -20504,18 +20477,45 @@ if (!__Pyx_RefNanny) {
   }
   __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_int_1);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 318, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 317, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_linewidth, __pyx_t_7) < 0) __PYX_ERR(0, 318, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_linewidth, __pyx_t_7) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":319
+  /* "kivyblocks/dg.pyx":318
  * 	noheader = BooleanProperty(False)
  * 	linewidth = NumericProperty(1)
  * 	toolbar = DictProperty(None)             # <<<<<<<<<<<<<<
  * 	dataloader = DictProperty(None)
  * 	fields = ListProperty(None)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DictProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_6 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_6)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_6);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, Py_None) : __Pyx_PyObject_CallOneArg(__pyx_t_3, Py_None);
+  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_toolbar_2, __pyx_t_7) < 0) __PYX_ERR(0, 318, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "kivyblocks/dg.pyx":319
+ * 	linewidth = NumericProperty(1)
+ * 	toolbar = DictProperty(None)
+ * 	dataloader = DictProperty(None)             # <<<<<<<<<<<<<<
+ * 	fields = ListProperty(None)
+ * 	tailer = DictProperty(None)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DictProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -20534,17 +20534,17 @@ if (!__Pyx_RefNanny) {
   if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_toolbar_2, __pyx_t_7) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_dataloader, __pyx_t_7) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
   /* "kivyblocks/dg.pyx":320
- * 	linewidth = NumericProperty(1)
  * 	toolbar = DictProperty(None)
- * 	dataloader = DictProperty(None)             # <<<<<<<<<<<<<<
- * 	fields = ListProperty(None)
+ * 	dataloader = DictProperty(None)
+ * 	fields = ListProperty(None)             # <<<<<<<<<<<<<<
  * 	tailer = DictProperty(None)
+ * 	def __init__(self,**options):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DictProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 320, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ListProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -20561,17 +20561,17 @@ if (!__Pyx_RefNanny) {
   if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_dataloader, __pyx_t_7) < 0) __PYX_ERR(0, 320, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_fields, __pyx_t_7) < 0) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
   /* "kivyblocks/dg.pyx":321
- * 	toolbar = DictProperty(None)
  * 	dataloader = DictProperty(None)
- * 	fields = ListProperty(None)             # <<<<<<<<<<<<<<
- * 	tailer = DictProperty(None)
+ * 	fields = ListProperty(None)
+ * 	tailer = DictProperty(None)             # <<<<<<<<<<<<<<
  * 	def __init__(self,**options):
+ * 		self.select_rowid = None
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ListProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DictProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 321, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -20588,453 +20588,426 @@ if (!__Pyx_RefNanny) {
   if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 321, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_fields, __pyx_t_7) < 0) __PYX_ERR(0, 321, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_tailer, __pyx_t_7) < 0) __PYX_ERR(0, 321, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
   /* "kivyblocks/dg.pyx":322
- * 	dataloader = DictProperty(None)
- * 	fields = ListProperty(None)
- * 	tailer = DictProperty(None)             # <<<<<<<<<<<<<<
- * 	def __init__(self,**options):
- * 		self.select_rowid = None
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_DictProperty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 322, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_6);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, Py_None) : __Pyx_PyObject_CallOneArg(__pyx_t_3, Py_None);
-  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 322, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_tailer, __pyx_t_7) < 0) __PYX_ERR(0, 322, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "kivyblocks/dg.pyx":323
  * 	fields = ListProperty(None)
  * 	tailer = DictProperty(None)
  * 	def __init__(self,**options):             # <<<<<<<<<<<<<<
  * 		self.select_rowid = None
  * 		self.rowheight = None
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_1__init__, 0, __pyx_n_s_DataGrid___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__64)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 323, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_1__init__, 0, __pyx_n_s_DataGrid___init, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__64)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 323, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":361
+  /* "kivyblocks/dg.pyx":360
  * 			self.build_tailer(self.tailer)
  * 
  * 	def on_rowpress(self, *args):             # <<<<<<<<<<<<<<
  * 		print('on_rowpress fire, args=', args)
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_3on_rowpress, 0, __pyx_n_s_DataGrid_on_rowpress, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__66)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_3on_rowpress, 0, __pyx_n_s_DataGrid_on_rowpress, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__66)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 360, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_on_rowpress, __pyx_t_7) < 0) __PYX_ERR(0, 361, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_on_rowpress, __pyx_t_7) < 0) __PYX_ERR(0, 360, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":364
+  /* "kivyblocks/dg.pyx":363
  * 		print('on_rowpress fire, args=', args)
  * 
  * 	def on_cellpress(self, *args):             # <<<<<<<<<<<<<<
  * 		print('on_cesspress fire, args=', args)
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_5on_cellpress, 0, __pyx_n_s_DataGrid_on_cellpress, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__68)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 364, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_5on_cellpress, 0, __pyx_n_s_DataGrid_on_cellpress, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__68)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_on_cellpress, __pyx_t_7) < 0) __PYX_ERR(0, 364, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_on_cellpress, __pyx_t_7) < 0) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":367
+  /* "kivyblocks/dg.pyx":366
  * 		print('on_cesspress fire, args=', args)
  * 
  * 	def on_headerpress(self, *args):             # <<<<<<<<<<<<<<
  * 		print('on_headerpress fire, args=', args)
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_7on_headerpress, 0, __pyx_n_s_DataGrid_on_headerpress, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__70)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 367, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_7on_headerpress, 0, __pyx_n_s_DataGrid_on_headerpress, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__70)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_on_headerpress, __pyx_t_7) < 0) __PYX_ERR(0, 367, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_on_headerpress, __pyx_t_7) < 0) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":370
+  /* "kivyblocks/dg.pyx":369
  * 		print('on_headerpress fire, args=', args)
  * 
  * 	def cell_pressed(self, o):             # <<<<<<<<<<<<<<
  * 		if o.cell_type == 'header':
  * 			self.dispatch('on_headerpress', o.colume_name)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_9cell_pressed, 0, __pyx_n_s_DataGrid_cell_pressed, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__72)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 370, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_9cell_pressed, 0, __pyx_n_s_DataGrid_cell_pressed, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__72)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 369, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_cell_pressed, __pyx_t_7) < 0) __PYX_ERR(0, 370, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_cell_pressed, __pyx_t_7) < 0) __PYX_ERR(0, 369, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":384
+  /* "kivyblocks/dg.pyx":383
  * 		self.dispatch('on_selected', row)
  * 
  * 	def unselect_row(self, row_id):             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_11unselect_row, 0, __pyx_n_s_DataGrid_unselect_row, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__74)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 384, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_11unselect_row, 0, __pyx_n_s_DataGrid_unselect_row, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__74)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 383, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_unselect_row, __pyx_t_7) < 0) __PYX_ERR(0, 384, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_unselect_row, __pyx_t_7) < 0) __PYX_ERR(0, 383, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":391
+  /* "kivyblocks/dg.pyx":390
  * 		row.unselected()
  * 
  * 	def select_row(self, row_id):             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			row = self.freeze_part.body.get_row_by_id(row_id)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_13select_row, 0, __pyx_n_s_DataGrid_select_row, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__76)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 391, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_13select_row, 0, __pyx_n_s_DataGrid_select_row, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__76)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 390, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_select_row, __pyx_t_7) < 0) __PYX_ERR(0, 391, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_select_row, __pyx_t_7) < 0) __PYX_ERR(0, 390, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":398
+  /* "kivyblocks/dg.pyx":397
  * 		row.selected()
  * 
  * 	def on_ready(self, *args):             # <<<<<<<<<<<<<<
  * 		self.loadData()
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_15on_ready, 0, __pyx_n_s_DataGrid_on_ready, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__78)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 398, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_15on_ready, 0, __pyx_n_s_DataGrid_on_ready, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__78)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_on_ready, __pyx_t_7) < 0) __PYX_ERR(0, 398, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_on_ready, __pyx_t_7) < 0) __PYX_ERR(0, 397, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":401
+  /* "kivyblocks/dg.pyx":400
  * 		self.loadData()
  * 
  * 	def build_tailer(self, tailer_desc):             # <<<<<<<<<<<<<<
  * 		kw = tailer_desc.get('options', {})
  * 		kw.update({
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_17build_tailer, 0, __pyx_n_s_DataGrid_build_tailer, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__80)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_17build_tailer, 0, __pyx_n_s_DataGrid_build_tailer, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__80)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 400, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_build_tailer, __pyx_t_7) < 0) __PYX_ERR(0, 401, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_build_tailer, __pyx_t_7) < 0) __PYX_ERR(0, 400, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":415
+  /* "kivyblocks/dg.pyx":414
  * 				w.add_widget(w1)
  * 
  * 	def update_tailer_info(self, *args):             # <<<<<<<<<<<<<<
  * 		if not hasattr(self, 'tailer_widgets'):
  * 			return
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_19update_tailer_info, 0, __pyx_n_s_DataGrid_update_tailer_info, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__82)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 415, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_19update_tailer_info, 0, __pyx_n_s_DataGrid_update_tailer_info, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__82)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 414, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_update_tailer_info, __pyx_t_7) < 0) __PYX_ERR(0, 415, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_update_tailer_info, __pyx_t_7) < 0) __PYX_ERR(0, 414, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":421
+  /* "kivyblocks/dg.pyx":420
  * 			w.text = self.loader_info(n)
  * 
  * 	def show_infos(self, tailer_widget, info_names):             # <<<<<<<<<<<<<<
  * 		for n in info_names:
  * 			desc = {
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_21show_infos, 0, __pyx_n_s_DataGrid_show_infos, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__84)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_21show_infos, 0, __pyx_n_s_DataGrid_show_infos, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__84)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 420, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_show_infos, __pyx_t_7) < 0) __PYX_ERR(0, 421, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_show_infos, __pyx_t_7) < 0) __PYX_ERR(0, 420, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":436
+  /* "kivyblocks/dg.pyx":435
  * 			tailer_widget.add_widget(self.tailer_widgets[n])
  * 
  * 	def build_tailer_others(desc):             # <<<<<<<<<<<<<<
  * 		return Factory.Blocks().widgetBuild(desc)
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_23build_tailer_others, 0, __pyx_n_s_DataGrid_build_tailer_others, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__86)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_23build_tailer_others, 0, __pyx_n_s_DataGrid_build_tailer_others, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__86)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 435, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_build_tailer_others, __pyx_t_7) < 0) __PYX_ERR(0, 436, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_build_tailer_others, __pyx_t_7) < 0) __PYX_ERR(0, 435, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":439
+  /* "kivyblocks/dg.pyx":438
  * 		return Factory.Blocks().widgetBuild(desc)
  * 
  * 	def loader_info(self, n):             # <<<<<<<<<<<<<<
  * 		if hasattr(self._dataloader, n):
  * 			txt=getattr(self._dataloader, n, 0)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_25loader_info, 0, __pyx_n_s_DataGrid_loader_info, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__88)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 439, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_25loader_info, 0, __pyx_n_s_DataGrid_loader_info, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__88)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_loader_info, __pyx_t_7) < 0) __PYX_ERR(0, 439, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_loader_info, __pyx_t_7) < 0) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":447
+  /* "kivyblocks/dg.pyx":446
  * 			return txt
  * 
  * 	def locater(self,pos):             # <<<<<<<<<<<<<<
  * 		self.normal_part.body.scroll_y = pos
  * 		if self.freeze_part:
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_27locater, 0, __pyx_n_s_DataGrid_locater, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__90)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 447, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_27locater, 0, __pyx_n_s_DataGrid_locater, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__90)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 446, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_locater, __pyx_t_7) < 0) __PYX_ERR(0, 447, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_locater, __pyx_t_7) < 0) __PYX_ERR(0, 446, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":452
+  /* "kivyblocks/dg.pyx":451
  * 			self.freeze_part.body.scroll_y = pos
  * 
  * 	def scrollstop(self,o,v=None):             # <<<<<<<<<<<<<<
  * 		if not self.noheader and o == self.normal_part.header:
  * 			self.normal_part.body.scroll_x = o.scroll_x
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_29scrollstop, 0, __pyx_n_s_DataGrid_scrollstop, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__92)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 452, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_29scrollstop, 0, __pyx_n_s_DataGrid_scrollstop, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__92)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__93);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_scrollstop, __pyx_t_7) < 0) __PYX_ERR(0, 452, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_scrollstop, __pyx_t_7) < 0) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":469
+  /* "kivyblocks/dg.pyx":468
  * 			self._dataloader.loadPreviousPage()
  * 
  * 	def getValue(self):             # <<<<<<<<<<<<<<
  * 		if not self.select_rowid:
  * 			return None
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_31getValue, 0, __pyx_n_s_DataGrid_getValue, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__95)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 469, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_31getValue, 0, __pyx_n_s_DataGrid_getValue, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__95)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 468, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_getValue, __pyx_t_7) < 0) __PYX_ERR(0, 469, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_getValue, __pyx_t_7) < 0) __PYX_ERR(0, 468, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":474
+  /* "kivyblocks/dg.pyx":473
  * 		return self._getRowData(self.select_rowid)
  * 
  * 	def _getRowData(self, rowid):             # <<<<<<<<<<<<<<
  * 		d = {}
  * 		if self.freeze_part:
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_33_getRowData, 0, __pyx_n_s_DataGrid__getRowData, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__97)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 474, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_33_getRowData, 0, __pyx_n_s_DataGrid__getRowData, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__97)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_getRowData, __pyx_t_7) < 0) __PYX_ERR(0, 474, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_getRowData, __pyx_t_7) < 0) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":481
+  /* "kivyblocks/dg.pyx":480
  * 		return DictObject(**d)
  * 
  * 	def bodyOnSize(self,o,s):             # <<<<<<<<<<<<<<
  * 		if self.on_sizeTask is not None:
  * 			self.on_sizeTask.cancel()
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_35bodyOnSize, 0, __pyx_n_s_DataGrid_bodyOnSize, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__99)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 481, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_35bodyOnSize, 0, __pyx_n_s_DataGrid_bodyOnSize, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__99)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_bodyOnSize, __pyx_t_7) < 0) __PYX_ERR(0, 481, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_bodyOnSize, __pyx_t_7) < 0) __PYX_ERR(0, 480, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":486
+  /* "kivyblocks/dg.pyx":485
  * 		self.on_sizeTask = Clock.schedule_once(self.calculateShowRows,0.3)
  * 
  * 	def rowHeight(self):             # <<<<<<<<<<<<<<
  * 		if not self.rowheight:
  * 			self.rowheight = CSize(self.row_height)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_37rowHeight, 0, __pyx_n_s_DataGrid_rowHeight, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__101)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_37rowHeight, 0, __pyx_n_s_DataGrid_rowHeight, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__101)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_rowHeight, __pyx_t_7) < 0) __PYX_ERR(0, 486, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_rowHeight, __pyx_t_7) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":491
+  /* "kivyblocks/dg.pyx":490
  * 		return self.rowheight
  * 
  * 	def calculateShowRows(self,t):             # <<<<<<<<<<<<<<
  * 		self.getShowRows()
  * 		self._dataloader.setPageRows(self.show_rows * 2)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_39calculateShowRows, 0, __pyx_n_s_DataGrid_calculateShowRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__103)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 491, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_39calculateShowRows, 0, __pyx_n_s_DataGrid_calculateShowRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__103)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 490, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_calculateShowRows, __pyx_t_7) < 0) __PYX_ERR(0, 491, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_calculateShowRows, __pyx_t_7) < 0) __PYX_ERR(0, 490, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":495
+  /* "kivyblocks/dg.pyx":494
  * 		self._dataloader.setPageRows(self.show_rows * 2)
  * 
  * 	def getShowRows(self):             # <<<<<<<<<<<<<<
  * 		if self.show_rows == 0:
  * 			return 60
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_41getShowRows, 0, __pyx_n_s_DataGrid_getShowRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__105)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_41getShowRows, 0, __pyx_n_s_DataGrid_getShowRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__105)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 494, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_getShowRows, __pyx_t_7) < 0) __PYX_ERR(0, 495, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_getShowRows, __pyx_t_7) < 0) __PYX_ERR(0, 494, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":501
+  /* "kivyblocks/dg.pyx":500
  * 		return self.show_rows * 2
  * 
  * 	def clearRows(self, *args):             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			self.freeze_part.body.clearRows()
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_43clearRows, 0, __pyx_n_s_DataGrid_clearRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__107)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_43clearRows, 0, __pyx_n_s_DataGrid_clearRows, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__107)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 500, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_clearRows, __pyx_t_7) < 0) __PYX_ERR(0, 501, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_clearRows, __pyx_t_7) < 0) __PYX_ERR(0, 500, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":506
+  /* "kivyblocks/dg.pyx":505
  * 		self.normal_part.body.clearRows()
  * 
  * 	def add_page(self,o,data):             # <<<<<<<<<<<<<<
  * 		dir = data['dir']
  * 		if not self.show_rows:
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_45add_page, 0, __pyx_n_s_DataGrid_add_page, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__109)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 506, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_45add_page, 0, __pyx_n_s_DataGrid_add_page, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__109)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 505, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_add_page, __pyx_t_7) < 0) __PYX_ERR(0, 506, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_add_page, __pyx_t_7) < 0) __PYX_ERR(0, 505, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":536
+  /* "kivyblocks/dg.pyx":535
  * 		Clock.schedule_once(f, 0)
  * 
  * 	def add_page_delay(self, data, *args):             # <<<<<<<<<<<<<<
  * 		recs = data['data']
  * 		page = data['page']
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_47add_page_delay, 0, __pyx_n_s_DataGrid_add_page_delay, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__111)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 536, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_47add_page_delay, 0, __pyx_n_s_DataGrid_add_page_delay, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__111)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 535, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_add_page_delay, __pyx_t_7) < 0) __PYX_ERR(0, 536, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_add_page_delay, __pyx_t_7) < 0) __PYX_ERR(0, 535, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":555
+  /* "kivyblocks/dg.pyx":554
  * 		self.locater(x)
  * 
  * 	def delete_page(self,o,data):             # <<<<<<<<<<<<<<
  * 		for id in data:
  * 			self.delRow(id)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_49delete_page, 0, __pyx_n_s_DataGrid_delete_page, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__113)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 555, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_49delete_page, 0, __pyx_n_s_DataGrid_delete_page, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__113)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 554, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_delete_page, __pyx_t_7) < 0) __PYX_ERR(0, 555, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_delete_page, __pyx_t_7) < 0) __PYX_ERR(0, 554, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":559
+  /* "kivyblocks/dg.pyx":558
  * 			self.delRow(id)
  * 
  * 	def addRow(self,data, **kw):             # <<<<<<<<<<<<<<
  * 		id = getID()
  * 		f_row = None
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_51addRow, 0, __pyx_n_s_DataGrid_addRow, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__115)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 559, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_51addRow, 0, __pyx_n_s_DataGrid_addRow, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__115)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 558, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_addRow, __pyx_t_7) < 0) __PYX_ERR(0, 559, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_addRow, __pyx_t_7) < 0) __PYX_ERR(0, 558, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":567
+  /* "kivyblocks/dg.pyx":566
  * 		return id
  * 
  * 	def delRow(self,id,**kw):             # <<<<<<<<<<<<<<
  * 		if self.freeze_part:
  * 			self.freeze_part.body.delRowById(id)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_53delRow, 0, __pyx_n_s_DataGrid_delRow, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__117)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 567, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_53delRow, 0, __pyx_n_s_DataGrid_delRow, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__117)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 566, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_delRow, __pyx_t_7) < 0) __PYX_ERR(0, 567, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_delRow, __pyx_t_7) < 0) __PYX_ERR(0, 566, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":572
+  /* "kivyblocks/dg.pyx":571
  * 		self.normal_part.body.delRowById(id)
  * 
  * 	def createToolbar(self):             # <<<<<<<<<<<<<<
  * 		if self.toolbar:
  * 			self._toolbar = Toolbar(**self.toolbar)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_55createToolbar, 0, __pyx_n_s_DataGrid_createToolbar, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__119)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 572, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_55createToolbar, 0, __pyx_n_s_DataGrid_createToolbar, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__119)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 571, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_createToolbar, __pyx_t_7) < 0) __PYX_ERR(0, 572, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_createToolbar, __pyx_t_7) < 0) __PYX_ERR(0, 571, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":576
+  /* "kivyblocks/dg.pyx":575
  * 			self._toolbar = Toolbar(**self.toolbar)
  * 
  * 	def on_selected(self,row):             # <<<<<<<<<<<<<<
  * 		print("DataGrid():on_selected fire")
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_57on_selected, 0, __pyx_n_s_DataGrid_on_selected, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__121)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 576, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_57on_selected, 0, __pyx_n_s_DataGrid_on_selected, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__121)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 575, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_on_selected, __pyx_t_7) < 0) __PYX_ERR(0, 576, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_on_selected, __pyx_t_7) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":579
+  /* "kivyblocks/dg.pyx":578
  * 		print("DataGrid():on_selected fire")
  * 
  * 	def loadData(self,*args, **kwargs):             # <<<<<<<<<<<<<<
  * 		kwargs['page'] = 1
  * 		self.selected_rowid = None
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_59loadData, 0, __pyx_n_s_DataGrid_loadData, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__123)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 579, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_59loadData, 0, __pyx_n_s_DataGrid_loadData, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__123)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_loadData, __pyx_t_7) < 0) __PYX_ERR(0, 579, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_loadData, __pyx_t_7) < 0) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":584
+  /* "kivyblocks/dg.pyx":583
  * 		self._dataloader.do_search(None,kwargs)
  * 
  * 	def createDataGridPart(self):             # <<<<<<<<<<<<<<
  * 		self.freeze_part = None
  * 		self.normal_part = None
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_61createDataGridPart, 0, __pyx_n_s_DataGrid_createDataGridPart, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__125)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 584, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_61createDataGridPart, 0, __pyx_n_s_DataGrid_createDataGridPart, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__125)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 583, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_createDataGridPart, __pyx_t_7) < 0) __PYX_ERR(0, 584, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_createDataGridPart, __pyx_t_7) < 0) __PYX_ERR(0, 583, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "kivyblocks/dg.pyx":592
+  /* "kivyblocks/dg.pyx":591
  * 			self.normal_part = DataGridPart(self, False, self.normal_fields)
  * 
  * 	def getPartFields(self,freeze_flag:bool=False) -> list:             # <<<<<<<<<<<<<<
  * 		fs = []
  * 		for f in self.fields:
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 592, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_freeze_flag, ((PyObject*)&PyBool_Type)) < 0) __PYX_ERR(0, 592, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_u_list) < 0) __PYX_ERR(0, 592, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_63getPartFields, 0, __pyx_n_s_DataGrid_getPartFields, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__127)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 592, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_freeze_flag, ((PyObject*)&PyBool_Type)) < 0) __PYX_ERR(0, 591, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_u_list) < 0) __PYX_ERR(0, 591, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_63getPartFields, 0, __pyx_n_s_DataGrid_getPartFields, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__127)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_tuple__128);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_getPartFields, __pyx_t_3) < 0) __PYX_ERR(0, 592, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_getPartFields, __pyx_t_3) < 0) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/dg.pyx":603
+  /* "kivyblocks/dg.pyx":602
  * 		return fs
  * 
  * 	def get_selected_data(self):             # <<<<<<<<<<<<<<
  * 		if not self.selected_rowid:
  * 			return {}
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_65get_selected_data, 0, __pyx_n_s_DataGrid_get_selected_data, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__130)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 603, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_10kivyblocks_2dg_8DataGrid_65get_selected_data, 0, __pyx_n_s_DataGrid_get_selected_data, NULL, __pyx_n_s_kivyblocks_dg, __pyx_d, ((PyObject *)__pyx_codeobj__130)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 602, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_get_selected_data, __pyx_t_3) < 0) __PYX_ERR(0, 603, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_get_selected_data, __pyx_t_3) < 0) __PYX_ERR(0, 602, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "kivyblocks/dg.pyx":261
+  /* "kivyblocks/dg.pyx":260
  * 
  * 
  * class DataGrid(VBox):             # <<<<<<<<<<<<<<
  * 	"""
  * 	DataGrid data format:
  */
-  __pyx_t_3 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_DataGrid, __pyx_t_4, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_DataGrid, __pyx_t_4, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 260, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DataGrid, __pyx_t_3) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DataGrid, __pyx_t_3) < 0) __PYX_ERR(0, 260, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "kivyblocks/dg.pyx":1
