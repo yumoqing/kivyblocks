@@ -383,8 +383,12 @@ class DataGrid(VBox):
 	def unselect_row(self, row_id):
 		if self.freeze_part:
 			row = self.freeze_part.body.get_row_by_id(row_id)
+			if not row:
+				return
 			row.unselected()
 		row = self.normal_part.body.get_row_by_id(row_id)
+		if not row:
+			return
 		row.unselected()
 
 	def select_row(self, row_id):
