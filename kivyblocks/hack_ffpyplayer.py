@@ -16,6 +16,9 @@ def get_spec_headers(filename):
 	return None
 
 def hack_play(self):
+	print('****************')
+	print('****************')
+	print('hack_play() called ...')
 	if self._ffplayer and self._state == 'paused':
 		self._ffplayer.toggle_pause()
 		self._state = 'playing'

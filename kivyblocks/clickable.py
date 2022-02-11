@@ -48,13 +48,40 @@ class ClickableBox(TouchRippleButtonBehavior, Box):
 	def on_press(self,o=None):
 		pass
 
-class ClickableText(ClickableBox):
+class _IconBehavior:
+	source=StringProperty(None)
+	img_kw = DictProperty(None)
+
+	def on_source(self, o, source):
+		if self.source is None:
+			try:
+				self.remove_widget(self.img_w)
+			except:
+				pass
+			self.img_w = None
+			return
+		self.build_icon()
+
+	def on_img_kw(self, o, img_kw):
+		self.build_icon()
+
+	def build_icon(self):
+		if not self.source:
+			return
+		if not self.img_kw:
+			self.img_kw = {}
+
+		if self.img_w:
+			self.img_w.source = self.source
+			for k,v in self.img_kw.items():
+				setattr(self.img_w, k,v)
+			return
+		self.img_w = AsyncImage(source=self.source, **self.img_kw)
+		self.add_widget(self.img_w)
+
+class _TextBehavior:
 	text = StringProperty(None)
 	fontsize = NumericProperty(1)
-	def __init__(self, **kw):
-		self.txt_w = None
-		SUPER(ClickableText, self, kw)
-		self.create_text_widget()
 
 	def create_text_widget(self):
 		if self.text is None:
@@ -64,9 +91,9 @@ class ClickableText(ClickableBox):
 						font_size=CSize(self.fontsize))
 		self.txt_w.font_size = CSize(self.fontsize)
 		self.txt_w.bind(texture_size=self.reset_size)
-		self.add_widget(self.txt_w)
 		self.txt_w.size_hint = (None, None)
 		self.txt_w.size = self.txt_w.texture_size
+		self.add_widget(self.txt_w)
 
 	def on_fontsize(self, o, fs):
 		if self.txt_w:
@@ -83,23 +110,27 @@ class ClickableText(ClickableBox):
 			self.txt_w.text = self.text
 			self.txt_w.texture_update()
 
-class ClickableIconText(ClickableText):
-	source = StringProperty(None)
-	img_kw = DictProperty({})
+class ClickableText(_TextBehavior, ClickableBox):
 	def __init__(self, **kw):
+		self.txt_w = None
+		SUPER(ClickableText, self, kw)
+		self.create_text_widget()
+
+class ClickableIconText(_IconBehavior, _TextBehavior, ClickableBox):
+	def __init__(self, **kw):
+		self.txt_w = None
 		self.img_w = None
 		SUPER(ClickableIconText, self, kw)
+		self.create_text_widget()
+		self.build_icon()
 
-	def on_source(self, o, source):
-		if source is None:
-			source = blockIamge('broken.png')
+class CommandBox(ClickableIconText):
+	value = DictProperty(None)
+	def setValue(self, value:dict):
+		self.value = value
 
-		if self.img_w:
-			self.img_w.source = source
-			return
-
-		self.img_w = AsyncImage(source=source, **self.img_kw)
-		self.add_widget(self.img_w, index=len(self.children))
+	def getValue(self):
+		return self.value
 
 class ToggleText(ClickableText):
 	"""
@@ -164,34 +195,11 @@ class ToggleIconText(ToggleText):
 		if self.img_w:
 			self.img_w.source = self.source
 
-class ClickableImage(ClickableBox):
-	source=StringProperty(None)
-	img_kw = DictProperty(None)
+class ClickableImage(_IconBehavior, ClickableBox):
 	def __init__(self, **kw):	
 		self.img_w = None
 		SUPER(ClickableImage, self, kw)
-
-	def on_source(self, o, source):
-		if self.source is None:
-			self.source = blockImage('broken.png')
-		self.build_widget()
-
-	def on_img_kw(self, o, img_kw):
-		self.build_widget()
-
-	def build_widget(self):
-		if not self.source:
-			return
-		if not self.img_kw:
-			self.img_kw = {}
-
-		if self.img_w:
-			self.img_w.source = self.source
-			for k,v in self.img_kw.items():
-				setattr(self.img_w, k,v)
-			return
-		self.img_w = AsyncImage(source=self.source, **self.img_kw)
-		self.add_widget(self.img_w)
+		self.build_icon()
 
 class ToggleImage(ClickableImage):
 	source_on = StringProperty(None)
@@ -286,7 +294,19 @@ def build_checkbox(desc, rec=None):
 	x = SingleCheckBox(select_state=v)
 	return x
 
+def build_cmdbox_view(desc, rec=None):
+	vd = None
+	if rec is not None:
+		vd = {f:rec.get(f) for f in desc.get('data') }
+	text = desc.get('label')
+	source = desc.get('icon')
+	img_kw = desc.get('img_kw')
+	x = CommandBox(text=text, source=source, img_kw=img_kw)
+	x.setValue(vd)
+	return x
+
 UiFactory.register('checkbox', build_checkbox, build_checkbox)
+UiFactory.register('cmdbox', None, build_cmdbox_view)
 
 r = Factory.register
 r('TinyText', TinyText)
