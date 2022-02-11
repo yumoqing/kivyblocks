@@ -8,6 +8,7 @@ from kivy.clock import Clock
 
 from ffpyplayer.tools import set_log_callback
 
+from hack_ffpyplayer import *
 logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
                'fatal': Logger.critical, 'error': Logger.error,
                'warning': Logger.warning, 'info': Logger.info,
@@ -28,6 +29,11 @@ class NewVideo(Video):
 		self.bind(loaded=self.on_video_loaded)
 		self.load_status = None
 		Clock.schedule_interval(self.check_focus,0.2)
+
+	def set_patternheaders(self, pattern, headers_str):
+		if not hasattr(self, '_video'):
+			return
+		self._video.set_headers_pattern(pattern, headers_str)
 
 	def on_enter_focus(self, v=None):
 		pass
