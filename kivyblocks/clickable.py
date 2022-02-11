@@ -309,6 +309,7 @@ UiFactory.register('checkbox', build_checkbox, build_checkbox)
 UiFactory.register('cmdbox', None, build_cmdbox_view)
 
 r = Factory.register
+r('CommandBox', CommandBox)
 r('TinyText', TinyText)
 r('SingleCheckBox', SingleCheckBox)
 r('ClickableBox', ClickableBox)
