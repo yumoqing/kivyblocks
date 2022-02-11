@@ -1,17 +1,18 @@
 
+from ffpyplayer.player import MediaPlayer
+from threading import Thread
 from kivy.core.video.video_ffpyplayer import VideoFFPy
 
-def set_headers_pattern(self, pattern, headers_str):
-	if not hasattr(self, 'headers_pattern'):
-		self.headers_pattern = {}
-	self.headers_pattern[pattern] = headers_str
+headers_pattern = {
+}
 
-def get_spec_headers(self, filename):
-	if not hasattr(self, 'headers_pattern'):
-		return None
-	for p in self.headers_pattern.keys:
+def set_headers_pattern(pattern, headers_str):
+	headers_pattern[pattern] = headers_str
+
+def get_spec_headers(filename):
+	for p in headers_pattern.keys():
 		if p in filename:
-			return self.headers_pattern[p]
+			return headers_pattern[p]
 	return None
 
 def hack_play(self):
@@ -30,7 +31,7 @@ def hack_play(self):
 	}
 	if self._filename.startswith('http://') or \
 			self._filename.startswith('https://'):
-		headers = self.get_spec_headers(self._filename)
+		headers = get_spec_headers(self._filename)
 		if headers is not None:
 			ff_opts['headers'] = headers
 			print('****************')
@@ -49,6 +50,4 @@ def hack_play(self):
 	self._thread.daemon = True
 	self._thread.start()
 
-setattr(VideoFFPy, 'set_headers_pattern', set_headers_pattern)
-setattr(VideoFFPy, 'get_spec_headers', get_spec_headers)
 setattr(VideoFFPy, 'play', hack_play)

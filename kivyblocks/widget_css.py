@@ -84,8 +84,7 @@ class WidgetCSS(object):
 			self.width = self.width_nm
 
 	def on_csscls(self, o, csscls):
-		if isinstance(self.csscls, str):
-			self.set_css(self.csscls)
+		self.set_css(self.csscls)
 
 	def set_css(self, css_str):
 		css = {}
@@ -95,13 +94,13 @@ class WidgetCSS(object):
 			setattr(self,k,v)
 
 	def on_height_c(self, o, c):
-		if not height_c:
+		if not self.height_c:
 			return
 		self.size_hint_y = None
 		self.height = CSize(self.height_c)
 
 	def on_width_c(self, o, c):
-		if not width_c:
+		if not self.width_c:
 			return
 		self.size_hint_x = None
 		self.width = CSize(self.width_c)
