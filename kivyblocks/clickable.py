@@ -14,6 +14,7 @@ from kivyblocks.utils import CSize, SUPER, blockImage
 from kivyblocks.baseWidget import Box, Text
 from kivyblocks.widget_css import WidgetCSS
 from .uitype.factory import UiFactory, get_value
+from .command_action import cmd_action
 
 class TinyText(Text):
 	def __init__(self, **kw):
@@ -104,7 +105,6 @@ class _TextBehavior:
 		if self.text is None:
 			return
 		if not self.txt_w:
-			self.create_text_widget()
 			return
 		if self.txt_w:
 			self.txt_w.text = self.text
@@ -121,11 +121,35 @@ class ClickableIconText(_IconBehavior, _TextBehavior, ClickableBox):
 		self.txt_w = None
 		self.img_w = None
 		SUPER(ClickableIconText, self, kw)
-		self.create_text_widget()
 		self.build_icon()
+		self.create_text_widget()
 
 class CommandBox(ClickableIconText):
 	value = DictProperty(None)
+	target = StringProperty(None)
+	datawidget = StringProperty(None)
+	datamethod = StringProperty(None)
+	url = StringProperty(None)
+	rfname = StringProperty(None)
+	method = StringProperty(None)
+	script = StringProperty(None)
+	actions = DictProperty(None)
+	def on_press(self, *args):
+		if self.datawidget is None:
+			self.datawidget = 'self'
+			self.datamethod = 'getValue'
+
+		desc = dict(target=self.target,
+			datawidget = self.datawidget,
+			datamethod = self.method,
+			url=self.url,
+			rfname = self.rfname,
+			method = self.method,
+			script = self.script,
+			actions = self.actions
+		)
+		cmd_action(desc, self)
+
 	def setValue(self, value:dict):
 		self.value = value
 
@@ -298,15 +322,26 @@ def build_cmdbox_view(desc, rec=None):
 	vd = None
 	if rec is not None:
 		vd = {f:rec.get(f) for f in desc.get('data') }
-	text = desc.get('label')
-	source = desc.get('icon')
-	img_kw = desc.get('img_kw')
-	x = CommandBox(text=text, source=source, img_kw=img_kw)
+	kw = {
+		'text' : desc.get('label'),
+		'source' : desc.get('icon'),
+		'img_kw' : desc.get('img_kw'),
+		'rfname':desc.get('rfname'),
+		'script':desc.get('script'),
+		'target':desc.get('target'),
+		'datawidget':desc.get('datawidget'),
+		'datamethod':desc.get('datamethod'),
+		'method':desc.get('method'),
+		'url':desc.get('url')
+	}
+	if desc.get('uiparams'):
+		kw.update(desc.get('uiparams'))
+	x = CommandBox(**kw)
 	x.setValue(vd)
 	return x
 
 UiFactory.register('checkbox', build_checkbox, build_checkbox)
-UiFactory.register('cmdbox', None, build_cmdbox_view)
+UiFactory.register('cmdbox', build_cmdbox_view, build_cmdbox_view)
 
 r = Factory.register
 r('CommandBox', CommandBox)
