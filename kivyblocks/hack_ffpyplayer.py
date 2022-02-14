@@ -36,7 +36,7 @@ def hack_play(self):
 			self._filename.startswith('https://'):
 		headers = get_spec_headers(self._filename)
 		if headers is not None:
-			ff_opts['headers'] = headers
+			ff_opts['headers'] = "$'%s'" % headers
 			print('****************')
 			print('*VideoFFPy():ff_opts=', ff_opts)
 			print('****************')
