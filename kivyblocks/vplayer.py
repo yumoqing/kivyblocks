@@ -21,7 +21,6 @@ from kivy.logger import Logger
 
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, \
     NumericProperty, DictProperty, OptionProperty
-from pythonosc import dispatcher, osc_server
 from ffpyplayer.tools import set_log_callback
 from .utils import *
 from .paging import PageLoader
@@ -238,42 +237,6 @@ class Swipe_VPlayer(BaseVPlayer, SwipeBehavior):
 		SwipeBehavior.__init__(self)
 		self.bind(on_swipe_down=self.previous)
 		self.bind(on_swipe_up=self.next)
-
-class OSC_VPlayer(BaseVPlayer):
-	def __init__(self,vfile=None, loop=False, mute=False):
-		self.dispatcher = dispatcher.Dispatcher()
-		self.ip,self.port = get_free_local_addr()
-		self.server = osc_server.ThreadingOSCUDPServer( (self.ip,self.port), 
-									self.dispatcher)
-		BaseVPlayer.__init__(self,vfile=vfile, loop=loop, mute=mute)
-		self.map('/mute',self.mute)
-		self.map('/pause',self.pause)
-		self.map('/atrack',self.audioswitch)
-		self.map('/endplay',self.endplay)
-		self.map('/replay',self.replay)
-		self.map('/next',self.next)
-		self.map('/previous',self.previous)
-		t = threading.Thread(target=self.server.serve_forever)
-		t.daemon_threads = True
-		t.start()
-
-	def osc_server_quit(self):
-		self.server.shutdown()
-		self.server.server_close()
-
-	def __del__(self):
-		print("*******************VPlayer deleted**********")
-		self.quit()
-
-	def map(self,p,f):
-		self.dispatcher.map(p,f,None)
-
-	def get_osc_info(self):
-		return {
-			"host":self.ip,
-			"port":self.port
-		}
-
 
 class VPlayer(Swipe_VPlayer):
 	def __init__(self,vfile=None, loop=False,mute=False, opbar=True):
