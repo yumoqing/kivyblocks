@@ -19,6 +19,8 @@ email = "yumoqing@icloud.com"
 packages=find_packages()
 package_data = {
 	"kivyblocks":[
+		"blocks.pyx",
+		"dg.pyx",
 		'imgs/*.png', 
 		'imgs/*.atlas', 
 		'imgs/*.gif',

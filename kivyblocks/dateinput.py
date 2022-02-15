@@ -9,6 +9,7 @@ from kivyblocks.baseWidget import SelectInput, HBox
 from kivyblocks.utils import CSize
 
 class YearInput(SelectInput):
+	nullable = BooleanProperty(True)
 	e_year = NumericProperty(None)
 	def __init__(self, show_years=10, **kw):
 		super(YearInput, self).__init__(**kw)
@@ -41,6 +42,10 @@ class YearInput(SelectInput):
 				self.textField:'%4d' % smin
 			})
 			smin += 1
+		if self.nullable:
+			d.append({
+				None, ''
+			})
 		d.append({
 			self.valueField:10000,
 			self.textField:'+'
@@ -73,10 +78,22 @@ class YearInput(SelectInput):
 		self.reopen = False
 
 	def setValue(self, v):
+		if v is None:
+			super().setValue('')
+			return
+
 		super().setValue(v)
 		self.e_year_change(v)
 
 class DateInput(HBox):
+	default_date = OptionProperty(None, options=[None, 'today'])
+	date_format = OptionProperty('yyyy-mm-dd', options=[
+						'yyyy-mm-dd',
+						'dd-mm-yyyy',
+						'mm-dd-yyyy',
+						'yyyymmdd',
+						'mmddyyyy',
+						'ddmmyyyy']
 	def __init__(self, allow_copy=True, **kw):
 		print('DateInput():kw=', kw)
 		self.datetype = 'yyyy-mm-dd'
@@ -85,8 +102,12 @@ class DateInput(HBox):
 		super(DateInput, self).__init__(**kw)
 		self.register_event_type('on_changed')
 		self.old_datestr = None
-		value = kw.get('value',kw.get('defautvalue',curDateString()))
-		y, m, d = self.str2ymd(value)
+		value = kw.get('value',self.defaultdate())
+		if value:
+			y, m, d = self.str2ymd(value)
+		else:
+			y, m, d = None, None, None
+
 		months_data = []
 		days_data = []
 		for i in range(12):
@@ -102,7 +123,10 @@ class DateInput(HBox):
 				'value':j
 			})
 		self.days_data = days_data
-		self.yw = YearInput(data=[],
+		nullable = False
+		if value is None:
+			nullable = True
+		self.yw = YearInput(data=[], nullable=nullable,
 						size_hint_x=None, width=3.6)
 		self.mw = SelectInput(size_hint_x=None, width=2,
 						data=months_data)
@@ -123,6 +147,11 @@ class DateInput(HBox):
 		self.dw.bind(on_changed=self.data_changed)
 		self.on_size()
 
+	def defaultdate(self):
+		if self.default_date == 'today':
+			return curDateString()
+		return None
+
 	def on_size(self, *args):
 		if not hasattr(self, 'yw'):
 			return 
@@ -131,6 +160,9 @@ class DateInput(HBox):
 		self.dw.height = self.height
 
 	def str2ymd(self, datestr):
+		if datestr is None or datestr == '':
+			return None, None, None
+
 		if len(datestr) == 8:
 			self.datetype = 'yyyymmdd'
 			y = int(datestr[:4])
@@ -144,39 +176,46 @@ class DateInput(HBox):
 		return y, m, d
 
 	def ymd2str(self, y, m, d):
+		if y is None:
+			return None
+
 		if self.datetype == 'yyyymmdd':
 			return '%4d%02d%02d' % (y,m,d)
 		return '%04d-%02d-%02d' % (y, m, d)
 
 	def data_changed(self, o, d):
-		y = self.yw.getValue()
-		m = self.mw.getValue()
-		d = self.dw.getValue()
-		mdays = monthMaxDay(y,m)
-		if o == self.yw or o == self.mw:
-			data = self.days_data[:mdays]
-			self.dw.set_selectable_data(data)
-		if d <= mdays and d>0:
-			datestr = self.ymd2str(y,m,d)
-			if self.old_datestr != datestr:
-				self.old_datestr = datestr
-				self.dispatch('on_changed', datestr)
+		datestr = None
+		if y is not None:
+			y = self.yw.getValue()
+			m = self.mw.getValue()
+			d = self.dw.getValue()
+			mdays = monthMaxDay(y,m)
+			if o == self.yw or o == self.mw:
+				data = self.days_data[:mdays]
+				self.dw.set_selectable_data(data)
+			if d <= mdays and d>0:
+				datestr = self.ymd2str(y,m,d)
+
+		if self.old_datestr != datestr:
+			self.old_datestr = datestr
+			self.dispatch('on_changed', datestr)
 
 	def on_changed(self, *args):
 		pass
 
 	def getValue(self):
 		y = self.yw.getValue()
-		m = self.mw.getValue()
-		d = self.dw.getValue()
-		mdays = monthMaxDay(y,m)
-		if d <= mdays and d>0:
-			return self.ymd2str(y,m,d)
+		if y is not None:
+			m = self.mw.getValue()
+			d = self.dw.getValue()
+			mdays = monthMaxDay(y,m)
+			if d <= mdays and d>0:
+				return self.ymd2str(y,m,d)
 		return None
 
 	def setValue(self, datestr):
-		if datestr == '':
-			datestr = curDateString()
+		if datestr == '' or datestr is None:
+			datestr = self.defaultdate()
 		self.old_value = datestr
 		y, m, d = self.str2ymd(datestr)
 		self.yw.setValue(y)
