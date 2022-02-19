@@ -461,6 +461,7 @@ class Blocks(EventDispatcher):
 				data.update(rt)
 			if desc.get('keymapping'):
 				data = keyMapping(data, desc.get('keymapping'))
+		Logger.info('getActionData():rtdesc=%s, data=%s', rtdesc, data)
 		return data
 
 	def registedfunctionAction(self, widget:Widget, desc, *args):

@@ -7,6 +7,7 @@ def get_cmd_desc(cmd_desc):
 	desc = {
 	}
 	v = cmd_desc
+	desc['conform'] = v.get('conform')
 	desc['target'] = v.get('target')
 	if v.get('datawidget'):
 		desc['datawidget'] = v.get('datawidget')
@@ -14,6 +15,7 @@ def get_cmd_desc(cmd_desc):
 			desc['datamethod'] = v['datamethod']
 	keys = v.keys()
 	if 'url' in keys:
+		Logger.info('get_cmd_desc():cmd_desc=%s', cmd_desc)
 		desc['actiontype'] = 'urlwidget'
 		desc['mode'] = 'replace'
 		options = {
@@ -43,14 +45,22 @@ def get_cmd_desc(cmd_desc):
 def cmd_action(cmd_desc, widget):
 	desc = get_cmd_desc(cmd_desc)
 	if desc is None:
-		Logger.error('CommandAction: cmd_desc=%s error')
+		Logger.error('CommandAction: desc is None cmd_desc=%s error', \
+						cmd_desc)
 		return
 	blocks = Factory.Blocks()
-	if 'conform' in cmd_desc:
-		options = cmd_desc['conform']
-		w = Factory.Conform(**options)
-		f = partial(blocks.uniaction, widget, desc)
-		w.bind(on_conform=f)
+	conform_desc = desc.get('conform')
+	if conform_desc is None:
+		Logger.info('cmd_action():desc=%s', desc)
+		blocks.uniaction(widget, desc)
 		return
-	blocks.uniaction(widget, desc)
+
+	w = blocks.widgetBuild({
+			"widgettype":"Conform",
+			"options":conform_desc
+	})
+	w.bind(on_conform=partial(blocks.uniaction, widget, desc))
+	w.open()
+	Logger.info('cmd_action():desc=%s, conform and action', desc)
+
 

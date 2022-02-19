@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 
 
-from distutils.core import setup
-from setuptools import setup, find_packages
+try:
+	from setuptools import setup
+except ImportError:
+	from distutils.core import setup
 from Cython.Build import cythonize
-from version import version
 
 # usage:
 # python setup.py bdist_wininst generate a window executable file
 # python setup.py bdist_egg generate a egg file
 # Release information about eway
 
-# version = "0.0.4"
+version = "0.1.1"
 description = "kivy blocks is a tool to build kivy ui with json format uidesc files"
 author = "yumoqing"
 email = "yumoqing@icloud.com"
 
-packages=find_packages()
 package_data = {
 	"kivyblocks":[
 		"blocks.pyx",
@@ -52,7 +52,14 @@ setup(
 	"appPublic",
 	"sqlor"
     ],
-    packages=packages,
+    packages=[
+		'kivyblocks',
+		'kivyblocks.image_processing',
+		'kivyblocks.mapview',
+		'kivyblocks.uitype',
+		'kivyblocks.widgetExt',
+		'kivyblocks.xcamera'
+	],
     package_data=package_data,
     keywords = [
     ],

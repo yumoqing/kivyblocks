@@ -273,6 +273,8 @@ class Modal(VBox):
 			self.pos = w.pos[0] + x, w.pos[1] + y
 
 	def open(self, widget=None):
+		if self.parent:
+			return
 		self.dispatch('on_pre_open')
 		if widget is None:
 			widget = Window

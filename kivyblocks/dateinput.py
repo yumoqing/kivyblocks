@@ -2,11 +2,78 @@ from appPublic.timeUtils import curDateString, monthMaxDay
 
 from kivy.clock import Clock
 from kivy.factory import Factory
-from kivy.properties import NumericProperty
+from kivy.properties import NumericProperty, BooleanProperty, \
+			OptionProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivyblocks.baseWidget import SelectInput, HBox
 from kivyblocks.utils import CSize
+
+date_format_info = {
+	'yyyy-mm-dd':{
+		'ystart':0,
+		'mstart':5,
+		'dstart':8
+	},
+	'mm-dd-yyyy':{
+		'ystart':6,
+		'mstart':0,
+		'dstart':3
+	},
+	'dd-mm-yyyy':{
+		'ystart':6,
+		'mstart':3,
+		'dstart':0
+	},
+	'yyyymmdd':{
+		'ystart':0,
+		'mstart':4,
+		'dstart':6
+	},
+	'mmddyyyy':{
+		'ystart':4,
+		'mstart':0,
+		'dstart':2
+	},
+	'ddmmyyyy':{
+		'ystart':4,
+		'mstart':2,
+		'dstart':0
+	}
+}
+def get_datestr(y, m, d, dateformat):
+	def replace_slice(s, v, pos,length):
+		x = '%0' + str(length) + 'd'
+		sv = x % v
+		d = ''
+		if pos > 0:
+			d = s[0:pos]
+		d = d + sv
+		d = d + s[pos+length:]
+		return d
+	if y is None:
+		return None
+
+	info = date_format_info.get(dateformat)
+	if info is None:
+		return None
+	ret = dateformat
+	ret = replace_slice(ret, y, info['ystart'], 4)
+	ret = replace_slice(ret, m, info['mstart'], 4)
+	ret = replace_slice(ret, d, info['dstart'], 4)
+	return ret
+
+def get_ymd(dstr, dateformat):
+	if not dstr:
+		return None, None, None
+
+	info = date_format_info.get(dateformat)
+	if info is None:
+		return None, None, None
+	y = int(dstr[info['ystart'], info['ystart']+4])
+	m = int(dstr[info['mstart'], info['mstart']+2])
+	d = int(dstr[info['dstart'], info['dstart']+2])
+	return y, m, d
 
 class YearInput(SelectInput):
 	nullable = BooleanProperty(True)
@@ -87,27 +154,16 @@ class YearInput(SelectInput):
 
 class DateInput(HBox):
 	default_date = OptionProperty(None, options=[None, 'today'])
-	date_format = OptionProperty('yyyy-mm-dd', options=[
-						'yyyy-mm-dd',
-						'dd-mm-yyyy',
-						'mm-dd-yyyy',
-						'yyyymmdd',
-						'mmddyyyy',
-						'ddmmyyyy']
+	date_format = OptionProperty('yyyy-mm-dd', options=[k for k in date_format_info.keys() ])
 	def __init__(self, allow_copy=True, **kw):
 		print('DateInput():kw=', kw)
-		self.datetype = 'yyyy-mm-dd'
 		kw['size_hint_x'] = None
 		kw['width'] = 10
 		super(DateInput, self).__init__(**kw)
 		self.register_event_type('on_changed')
 		self.old_datestr = None
 		value = kw.get('value',self.defaultdate())
-		if value:
-			y, m, d = self.str2ymd(value)
-		else:
-			y, m, d = None, None, None
-
+		y, m, d = get_ymd(value, 'yyyy-mm-dd')
 		months_data = []
 		days_data = []
 		for i in range(12):
@@ -162,26 +218,13 @@ class DateInput(HBox):
 	def str2ymd(self, datestr):
 		if datestr is None or datestr == '':
 			return None, None, None
-
-		if len(datestr) == 8:
-			self.datetype = 'yyyymmdd'
-			y = int(datestr[:4])
-			m = int(datestr[4:6])
-			d = int(datestr[6:8])
-			return y, m, d
-		self.datetype = 'yyyy-mm-dd'
-		y = int(datestr[:4])
-		m = int(datestr[5:7])
-		d = int(datestr[8:10])
-		return y, m, d
+		return get_ymd(datestr, self.dateformat)
 
 	def ymd2str(self, y, m, d):
 		if y is None:
 			return None
 
-		if self.datetype == 'yyyymmdd':
-			return '%4d%02d%02d' % (y,m,d)
-		return '%04d-%02d-%02d' % (y, m, d)
+		return get_datestr(y, m, d, self.dateformat)
 
 	def data_changed(self, o, d):
 		datestr = None

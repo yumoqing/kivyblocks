@@ -126,6 +126,8 @@ class ClickableIconText(_IconBehavior, _TextBehavior, ClickableBox):
 
 class CommandBox(ClickableIconText):
 	value = DictProperty(None)
+	params = DictProperty(None)
+	conform = DictProperty(None)
 	target = StringProperty(None)
 	datawidget = StringProperty(None)
 	datamethod = StringProperty(None)
@@ -143,6 +145,8 @@ class CommandBox(ClickableIconText):
 			datawidget = self.datawidget,
 			datamethod = self.method,
 			url=self.url,
+			params=self.params,
+			conform = self.conform,
 			rfname = self.rfname,
 			method = self.method,
 			script = self.script,
@@ -325,9 +329,15 @@ def build_cmdbox_view(desc, rec=None):
 	kw = {
 		'text' : desc.get('label'),
 		'source' : desc.get('icon'),
-		'img_kw' : desc.get('img_kw'),
+		'img_kw' : desc.get('img_kw',{
+			'size_hint':[None, None],
+			'height':CSize(1),
+			'width':CSize(1)
+		}),
 		'rfname':desc.get('rfname'),
 		'script':desc.get('script'),
+		'params':desc.get('params'),
+		'conform':desc.get('conform'),
 		'target':desc.get('target'),
 		'datawidget':desc.get('datawidget'),
 		'datamethod':desc.get('datamethod'),
