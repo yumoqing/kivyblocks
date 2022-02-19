@@ -250,6 +250,9 @@ class DataGridPart(WidgetReady, BoxLayout):
 	def on_size(self, o, s=None):
 		if not hasattr(self, 'body'):
 			return
+		if hasattr(self, '_toolbar'):
+			if self._toolbar is not None:
+				self._toolbar.width = self.width
 		self.body.size_hint_y = None
 		if self.header:
 			self.body.height = self.height - self.header.height

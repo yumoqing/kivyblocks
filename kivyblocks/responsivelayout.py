@@ -46,7 +46,6 @@ class VResponsiveLayout(WidgetCSS, WidgetReady, ScrollView):
 			spacing = w.spacing[0]
 		else:
 			spacing = (w.spacing[0] + w.spacing[2]) / 2
-		print('w.padding=', w.padding, 'w.spacing=', w.spacing, 'padding=', padding)
 		width = (w.width - 2 * padding - cnt * spacing) / cnt
 		return width
 
@@ -59,6 +58,7 @@ class VResponsiveLayout(WidgetCSS, WidgetReady, ScrollView):
 	def set_col_width(self, o, s):
 		if self._inner is None:
 			return
+		self._inner.size_hint = [None, None]
 		self._inner.size = self.size
 		if isHandHold() and self.width < self.height:
 			self.cols = 1
