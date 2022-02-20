@@ -158,9 +158,12 @@ class Text(Label):
 				ps = self.parent.padding
 
 			self.width = self.parent.width - ps[0] - ps[2]
-			self.set_widget_height()
+			if self.width > 0:
+				self.set_widget_height()
 
 	def set_widget_height(self, *args):
+		if self.width == 0:
+			return
 		self.text_size = self.width, None
 		rows = len(self.text) * (self.font_size * 0.621) / self.width
 		rows = math.ceil(rows)
