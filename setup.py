@@ -12,15 +12,13 @@ from Cython.Build import cythonize
 # python setup.py bdist_egg generate a egg file
 # Release information about eway
 
-version = "0.1.2"
+version = "0.1.3"
 description = "kivy blocks is a tool to build kivy ui with json format uidesc files"
 author = "yumoqing"
 email = "yumoqing@icloud.com"
 
 package_data = {
 	"kivyblocks":[
-		"blocks.pyx",
-		"dg.pyx",
 		'imgs/*.png', 
 		'imgs/*.atlas', 
 		'imgs/*.gif',
@@ -35,13 +33,9 @@ package_data = {
 
 setup(
     name="kivyblocks",
-	ext_modules=cythonize(
-        [
-			'kivyblocks/dg.pyx',
-			'kivyblocks/blocks.pyx'
-		]),
+	# ext_modules= cythonize( [ ]),
+	ext_modules= [],
     version=version,
-    
     # uncomment the following lines if you fill them out in release.py
     description=description,
     author=author,

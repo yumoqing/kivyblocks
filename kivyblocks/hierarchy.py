@@ -139,6 +139,12 @@ class Menu(Hierarchy):
 		self.target_w = None
 		super(Menu, self).__init__(**kw)
 
+	def node_selected(self, o, v):
+		if not v.is_leaf:
+			self.tree.toggle_node(v)
+			return
+		super().node_selected(o, v)
+
 	def on_press(self, node):
 		self.tree.deselect_node()
 		data = {}

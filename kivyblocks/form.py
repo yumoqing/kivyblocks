@@ -250,24 +250,12 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 		self.register_event_type('on_submit')
 
 	def setup_cols_and_inputwidth(self):
-		if isHandHold() and Window.width < Window.height:
-			self._cols = 1
-			self.input_width = 1
-			return
-		if self.cols is None and self.inputwidth is None:
-			self.input_width = 1
-			self._cols = 1
-			return
 		if self.inputwidth > 1:
 			self.input_width = CSize(self.inputwidth)
-			self._cols = -1			# auto calculate
 			return
 		self.input_width = self.inputwidth
-		self._cols = 1
 
 	def set_grid_attrs(self):
-		if self._cols == 1 and self.input_width <= 1:
-			self.input_width = self.width
 		self.fsc.box_width = self.input_width
 
 	def on_size(self, *args):
@@ -277,13 +265,17 @@ class Form(WidgetCSS, WidgetReady, BoxLayout):
 		if not self.notoolbar:
 			if self.toolbar_at in ['top', 'bottom']:
 				self.fsc.height = self.height - self.toolbar_w.height
+				self.fsc.width = self.width
 			else:
 				self.fsc.width = self.width - self.toolbar_w.width
+				self.fsc.height = self.height
 		else:
 			if self.toolbar_at in ['top', 'bottom']:
 				self.fsc.height = self.height
+				self.fsc.width = self.width
 			else:
 				self.fsc.width = self.width
+				self.fsc.height = self.height
 		self.set_grid_attrs()
 
 	def init(self):

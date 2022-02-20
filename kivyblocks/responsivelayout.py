@@ -79,7 +79,7 @@ class VResponsiveLayout(WidgetCSS, WidgetReady, ScrollView):
 
 		if self.box_width is not None:
 			if self.box_width <= 1:
-				sef.cols = floor(1 / self.box)
+				self.cols = floor(1 / self.box_width)
 				self.col_width = self.calculate_col_width(self.cols)
 				return self.setCols()
 			else:
