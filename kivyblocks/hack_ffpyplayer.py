@@ -53,4 +53,4 @@ def hack_play(self):
 	self._thread.daemon = True
 	self._thread.start()
 
-setattr(VideoFFPy, 'play', hack_play)
+# setattr(VideoFFPy, 'play', hack_play)

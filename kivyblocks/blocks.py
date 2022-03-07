@@ -450,9 +450,6 @@ class Blocks(EventDispatcher):
 		b.widgetBuild(d)
 			
 	def getActionData(self, widget:Widget, desc, *args):
-		Logger.info('Block: getActionData(): desc=%s args=%s'
-							,str(desc), args)
-		
 		data = {}
 		rtdesc = self.build_rtdesc(desc)
 		if rtdesc:
