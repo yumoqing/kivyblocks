@@ -1,4 +1,5 @@
 
+from functools import partial
 from ffpyplayer.player import MediaPlayer
 from threading import Thread
 from kivy.core.video.video_ffpyplayer import VideoFFPy
@@ -15,42 +16,15 @@ def get_spec_headers(filename):
 			return headers_pattern[p]
 	return None
 
-def hack_play(self):
-	print('****************')
-	print('****************')
-	print('hack_play() called ...')
-	if self._ffplayer and self._state == 'paused':
-		self._ffplayer.toggle_pause()
-		self._state = 'playing'
-		return
+old_init = getattr(MediaPlayer, '__init__')
 
-	self.load()
-	self._out_fmt = 'rgba'
-	ff_opts = {
-		'paused': True,
-		'out_fmt': self._out_fmt,
-		'sn': True,
-		'volume': self._volume,
-	}
+def mediaplayer_init(self, filename, *args, lib_opts={}, **kw):
+	print('******************** MediaPlayer __init__ hacked *****')
 	if self._filename.startswith('http://') or \
 			self._filename.startswith('https://'):
 		headers = get_spec_headers(self._filename)
 		if headers is not None:
-			ff_opts['headers'] = "$'%s'" % headers
-			print('****************')
-			print('*VideoFFPy():ff_opts=', ff_opts)
-			print('****************')
+			lib_opts['headers'] = "$'%s'" % headers
+	old_init(self, file, *args, lib_opts=lib_opts, **kw)
 
-	self._ffplayer = MediaPlayer(
-			self._filename, callback=self._player_callback,
-			thread_lib='SDL',
-			loglevel='info', ff_opts=ff_opts)
-
-	# Disabled as an attempt to fix kivy issue #6210
-	# self._ffplayer.set_volume(self._volume)
-
-	self._thread = Thread(target=self._next_frame_run, name='Next frame')
-	self._thread.daemon = True
-	self._thread.start()
-
-# setattr(VideoFFPy, 'play', hack_play)
+# setattr(MediaPlayer, '__init__', mediaplayer_init)
