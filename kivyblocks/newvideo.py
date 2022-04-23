@@ -8,7 +8,7 @@ from kivy.clock import Clock
 
 from ffpyplayer.tools import set_log_callback
 
-from .hack_ffpyplayer import set_headers_pattern
+from .hack_ffpyplayer import set_headers_pattern, hack_mediaplayer
 logger_func = {'quiet': Logger.critical, 'panic': Logger.critical,
                'fatal': Logger.critical, 'error': Logger.error,
                'warning': Logger.warning, 'info': Logger.info,
@@ -19,6 +19,7 @@ class NewVideo(Video):
 	center_screen = BooleanProperty(False)
 	h_pattern = DictProperty(None)
 	def __init__(self, **kw):
+		hack_mediaplayer()
 		Video.__init__(self, **kw)
 		Window.allow_screensaver = False
 		set_log_callback(self.ffplayerLog)
