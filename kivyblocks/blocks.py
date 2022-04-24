@@ -323,7 +323,7 @@ class Blocks(EventDispatcher):
 		# w = Blocks.getWidgetById(desc.get('wid','self'),from_widget=widget)
 		w = Blocks.findWidget(desc.get('wid','self'),from_widget=widget)
 		if not w:
-			Logger.info('Block: %s %s',desc.get('wid','self'),
+			Logger.info('Block: id(%s) %s',desc.get('wid','self'),
 							'not found via Blocks.getWidgetById()')
 			return
 		event = desc.get('event')
@@ -716,15 +716,20 @@ class Blocks(EventDispatcher):
 				children = [i for i in from_widget.children]
 				if hasattr(from_widget, 'get_subwidgets'):
 					children = from_widget.get_subwidgets()
+				Logger.info('children=%s', str(children))
 				for c in children:
-					ret = find_func(id,from_widget=c)
+					ret = _find_widget(name, from_widget=c, dir=dir)
 					if ret:
 						return ret
 			else:
 				if isinstance(from_widget, WindowBase):
 					return None
 				if from_widget.parent:
-					return find_func(id, from_widget=from_widget.parent)
+					return _find_widget(name, 
+								from_widget=from_widget.parent,
+								dir=dir)
+			Logger.info('Block:_find_widget(), %s, %s %s return None',
+						name, from_widget.__class__.__name__, dir)
 			return None
 
 		def find_widget(step, from_widget):
@@ -734,6 +739,7 @@ class Blocks(EventDispatcher):
 				step = step[1:]
 			find_func = find_widget_by_id
 			if step[0:1] == '@':
+				step = step[1:]
 				find_func = find_widget_by_class
 			return _find_widget(step, from_widget=from_widget, 
 						dir=dir, find_func=find_func)
