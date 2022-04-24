@@ -299,7 +299,8 @@ class Blocks(EventDispatcher):
 		for pos,sw in enumerate(desc.get('subwidgets',[])):
 			b = Blocks()
 			if isinstance(sw, str):
-				w = Blocks.getWidgetById(sw, from_widget=widget)
+				# w = Blocks.getWidgetById(sw, from_widget=widget)
+				w = Blocks.findWidget(sw, from_widget=widget)
 				if w:
 					widget.add_widget(w)
 				continue
@@ -319,7 +320,8 @@ class Blocks(EventDispatcher):
 
 	def buildBind(self, widget:Widget, desc:dict):
 		wid = desc.get('wid','self')
-		w = Blocks.getWidgetById(desc.get('wid','self'),from_widget=widget)
+		# w = Blocks.getWidgetById(desc.get('wid','self'),from_widget=widget)
+		w = Blocks.findWidget(desc.get('wid','self'),from_widget=widget)
 		if not w:
 			Logger.info('Block: %s %s',desc.get('wid','self'),
 							'not found via Blocks.getWidgetById()')
@@ -395,7 +397,8 @@ class Blocks(EventDispatcher):
 	def get_target(self, widget:Widget, desc):
 		if not desc.get('target'):
 			return None
-		return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
+		# return Blocks.getWidgetById(desc.get('target'),from_widget=widget)
+		return Blocks.findWidget(desc.get('target'),from_widget=widget)
 
 	def blocksAction(self, widget:Widget, desc, *args):
 		target = self.get_target(widget, desc)
@@ -543,7 +546,8 @@ class Blocks(EventDispatcher):
 			w = args[0]
 		target = desc.get('target')
 		if target:
-			w = Blocks.getWidgetById(target, from_widget=widget)
+			# w = Blocks.getWidgetById(target, from_widget=widget)
+			w = Blocks.findWidget(target, from_widget=widget)
 		if w is None:
 			print('get_rtdata():w is None', desc)
 			return {}
@@ -694,18 +698,18 @@ class Blocks(EventDispatcher):
 				return w
 			return None
 
-		def find_widget_by_class(klass, from_widget)
+		def find_widget_by_class(klass, from_widget):
 			if from_widget.__class__.__name__ == klass:
 				return from_widget
 			for k, v in from_widget.__dict__.items():
 				if isinstance(v, Widget):
 					if v.__class__.__name__ == klass:
 						return v
-			retur None
+			return None
 		
 		def _find_widget(name, from_widget, dir='down', 
 					find_func=find_widget_by_id):
-			w = ff(name, from_widget)
+			w = find_func(name, from_widget)
 			if w:
 				return w
 			if dir == 'down':
@@ -713,14 +717,14 @@ class Blocks(EventDispatcher):
 				if hasattr(from_widget, 'get_subwidgets'):
 					children = from_widget.get_subwidgets()
 				for c in children:
-					ret = ff(id,from_widget=c)
+					ret = find_func(id,from_widget=c)
 					if ret:
 						return ret
 			else:
 				if isinstance(from_widget, WindowBase):
 					return None
 				if from_widget.parent:
-					return ff(id, from_widget=from_widget.parent)
+					return find_func(id, from_widget=from_widget.parent)
 			return None
 
 		def find_widget(step, from_widget):
@@ -736,7 +740,23 @@ class Blocks(EventDispatcher):
 
 		steps = id.split('.')
 		w = from_widget
-		for s in steps:
+		for i, s in enumerate(steps):
+			if i==0:
+				app = App.get_running_app()
+				fid = s
+				if fid == '/self' or fid == 'root':
+					w = app.root
+					if len(steps) == 1:
+						return from_widget
+					continue
+				if fid == 'Window':
+					w = Window
+					if len(steps) == 1:
+						return w
+					continue
+				if fid == 'app':
+					return app
+
 			w = find_widget(s, w)
 			if not w:
 				return None
@@ -744,68 +764,7 @@ class Blocks(EventDispatcher):
 			
 	@classmethod
 	def getWidgetById(self, id:str, from_widget:Widget=None) -> Widget:
-		def find_widget_by_id(id, from_widget):
-			if id=='self':
-				return from_widget
-			if hasattr(from_widget,'widget_id'):
-				if from_widget.widget_id == id:
-					return from_widget
-				if id[0] == '-' and from_widget.widget_id == id[1:]:
-					return from_widget
-			if hasattr(from_widget, id):
-				w = getattr(from_widget,id)
-				return w
-
-			if id[0] == '-':
-				print('find_widget_by_id(), id=', id, 
-							'widget=', from_widget)
-				if isinstance(from_widget, WindowBase):
-					return None
-				if from_widget.parent:
-					return find_widget_by_id(id, 
-							from_widget=from_widget.parent)
-				return None
-			else:
-				children = [i for i in from_widget.children]
-				if hasattr(from_widget, 'get_subwidgets'):
-					children = from_widget.get_subwidgets()
-				for c in children:
-					ret = find_widget_by_id(id,from_widget=c)
-					if ret:
-						return ret
-			return None
-
-		ids = id.split('.')
-		app = App.get_running_app()
-		fid = ids[0]
-		if fid == '/self' or fid == 'root':
-			from_widget = app.root
-			if len(ids) == 1:
-				return from_widget
-			ids = ids[1:]
-		if fid == 'Window':
-			from_widget == Window
-			if len(ids) == 1:
-				return from_widget
-			ids = ids[1:]
-		if fid == 'app':
-			return app
-
-		if from_widget is None:
-			from_widget = app.root
-		for id in ids:
-			w = find_widget_by_id(id,from_widget=from_widget)
-			if w is None \
-					and id == ids[0] \
-					and Window.fullscreen == True \
-					and app.root != app.fs_widget:
-				w = find_widget_by_id(id, app.fs_widget)
-
-			if w is None:
-				print(id, 'not found ....')
-				return None
-			from_widget = w
-		return w
+		return Blocks.findWidget(id, from_widget=from_widget)
 
 	def on_built(self,v=None):
 		return
