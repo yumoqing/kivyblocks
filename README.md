@@ -18,7 +18,7 @@ The Customized json data has it own format to descript the UI and it's interacti
 
 ## installation
 ```
-pip install git+https://github.com/yumoqing/kivy-blocks
+pip install git+https://github.com/yumoqing/kivyblocks
 ```
 Use above command to install the newest version of kivyblocks
 ## How to use
