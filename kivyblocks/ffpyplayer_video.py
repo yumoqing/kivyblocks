@@ -46,7 +46,7 @@ class FFVideo(Image):
 	def set_lib_opt(self, k, v):
 		self.lib_opts.update({k:v})
 
-	def set_pattern_headers(self, pattern, k,v):
+	def set_pattern_header(self, pattern, k,v):
 		dic = self.headers_pattern.get(pattern,{})
 		dic.update({k:v})
 		self.headers_pattern[pattern] = dic
@@ -55,8 +55,8 @@ class FFVideo(Image):
 		for p in self.headers_pattern.keys():
 			if filename.startswith(p):
 				headers = self.headers_pattern[p]
-				headers_str = '\\r\\n'.join([f'{k}:{v}' for k,v in headers.items()])
-				return "$'%s'" % headers_str
+				headers_str = ''.join([f'{k}:{v}\r\n' for k,v in headers.items()])
+				return headers_str
 		return None
 
 	def on_volume(self, *args):
@@ -154,6 +154,7 @@ class FFVideo(Image):
 		heads = self._get_spec_headers(self.v_src)
 		if heads:
 			lib_opts.update({'headers':heads})
+			ff_opts.update({'headers':heads})
 
 		print('ff_opts=', ff_opts)
 		print('lib_opts=', lib_opts)
