@@ -431,8 +431,11 @@ class Blocks(EventDispatcher):
 	def urlwidgetAction(self, widget:Widget, desc, *args):
 		target = self.get_target(widget, desc)
 		add_mode = desc.get('mode','replace')
-		opts = desc.get('options').copy()
-		p = opts.get('params',{}).copy()
+		opts = desc.get('options', {}).copy()
+		p1 = opts.get('params',{})
+		p = {}
+		if p1:
+			p.update(p1)
 		if len(args) >= 1 and isinstance(args[0],dict):
 			p.update(args[0])
 		d = self.getActionData(widget, desc, *args)

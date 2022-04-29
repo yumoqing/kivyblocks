@@ -19,9 +19,9 @@ def MediaPlayer(filename, *args, ff_opts={}, lib_opts={}, **kw):
 	lib_opts.update(external_lib_opts)
 	if filename.startswith('http://') or \
 			filename.startswith('https://'):
-		headers = get_spec_headers(filename)
-		if headers is not None:
-			lib_opts['headers'] = "$'%s'" % headers
+		headers_str = get_spec_headers(filename)
+		if headers_str is not None:
+			lib_opts['headers'] = headers_str
 
 	return OldMediaPlayer(filename, *args, ff_opts=ff_opts,
 						lib_opts=lib_opts, **kw)
@@ -38,5 +38,7 @@ def set_headers_pattern(pattern, headers_str):
 def get_spec_headers(filename):
 	for p in headers_pattern.keys():
 		if p in filename:
-			return headers_pattern[p]
+			headers = headers_pattern[p]
+			headers_str = ';'.join([f'{k}={v}' for k,v in headers.items()])
+			return "$'%s'" % headers_str
 	return None
