@@ -38,6 +38,7 @@ from .dateinput import DateInput
 from .block_test import BlockTest
 from .hierarchy import Hierarchy
 from .price import PriceView
+from .ffpyplayer_video import FFVideo
 
 r = Factory.register
 if kivy.platform in ['win','linux', 'macosx']:

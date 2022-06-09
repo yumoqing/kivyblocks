@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from kivyblocks.version import __version__
 
 try:
 	from setuptools import setup
@@ -12,7 +12,7 @@ from Cython.Build import cythonize
 # python setup.py bdist_egg generate a egg file
 # Release information about eway
 
-version = "0.2.2"
+version = __version__
 description = "kivy blocks is a tool to build kivy ui with json format uidesc files"
 author = "yumoqing"
 email = "yumoqing@icloud.com"

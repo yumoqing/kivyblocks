@@ -22,10 +22,11 @@ class FFVideo(Image):
 			options=['normal', 'preview', 'audioonly'])
 	header_callback = StringProperty(None)
 	audio_id = NumericProperty(None)
-	duration = NumericProperty(None)
-	position = NumericProperty(None)
-	volume = NumericProperty(None)
+	duration = NumericProperty(-1)
+	position = NumericProperty(-1)
+	volume = NumericProperty(-1)
 	framerate = NumericProperty(180)
+	in_center_focus = BooleanProperty(Fasle)
 
 	def __init__(self, **kwargs):
 		self._player = None
@@ -37,8 +38,56 @@ class FFVideo(Image):
 		self.ff_opts = {}
 		self.lib_opts = {}
 		self.headers_pattern = {}
+		self.playing_task = None
+		self.playing_tasks = []
 		super(FFVideo, self).__init__(**kwargs)
-		self.register_event_type('on_start_play')
+		self.register_event_type('on_frame')
+		self.register_event_type('on_open_failed')
+		self.register_event_type('on_leave_focus')
+		self.register_event_type('on_enter_focus')
+		self.register_event_type('on_load_success')
+
+	def add_playing_task(self, f):
+		if f in self.playing_tasks:
+			return
+		self.playing_tasks.append(f)
+
+	def del_playing_task(self, f):
+		self.playing_tasks = [ i for i in self.playing_tasks if i != f ]
+
+	def do_playing_tasks(self, *args):
+		for f in self.playing_tasks:
+			try:
+				f()
+			except Exception as e:
+				print('error:', e)
+				print_exc()
+
+	def on_open_failed(self, *args):
+		pass
+
+	def on_load_syccess(self, *args):
+		pass
+
+	def on_enter_focus(self, *args):
+		pass
+
+	def on_leave_focus(self, *args):
+		pass
+
+	def check_focus(self,*args):
+		if not self.parent:
+			self.in_center_screen = False
+			return
+		if not self.get_root_window():
+			self.in_center_screen = False
+
+		w = self.parent
+		pos = w.to_widget(*Window.center)
+		if self.collide_point(*pos):
+			self.in_center_screen = True
+		else:
+			self.in_center_screen = False
 
 	def set_ff_opt(self, k,v):
 		self.ff_opts.update({k:v})
@@ -79,7 +128,7 @@ class FFVideo(Image):
 		else:
 			pass
 
-	def on_start_play(self, *args):
+	def on_frame(self, *args):
 		if self._player is None:
 			return
 		if self.audio_id is None:
@@ -190,7 +239,10 @@ class FFVideo(Image):
 			self._out_fmt = meta['src_pix_fmt']
 			self.frame_rate = meta['frame_rate']
 			self.videosize = meta['src_vid_size']
-			self.dispatch('on_start_play', self.v_src)
+			if self.playing_task:
+				self.playing_task.cancel()
+				self.playing_taks = None
+			self.playing_task = self.
 
 	def _play_stop(self):
 		if self._player is None:
@@ -201,9 +253,9 @@ class FFVideo(Image):
 		self._player = None
 		self.timepass = 0
 		self.next_frame = None
-		self.duration = None
-		self.position = None
-		self.frame_rte = None
+		self.duration = -1
+		self.position = -1
+		self.frame_rate = None
 		self.videosize = None
 		
 	def on_size(self, *args):
@@ -228,7 +280,6 @@ class FFVideo(Image):
 		image_texture.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
 		self.texture = image_texture
 		self.is_black = True
-		print('set black ..........................')
 
 	def show_yuv420(self, img):
 		w, h = img.get_size()
@@ -304,6 +355,7 @@ class FFVideo(Image):
 			self.show_yuv420(img)
 		else:
 			self.show_others(img)
+		self.dispatch('on_frame', self.last_frame)
 		self.last_frame = None
 
 Factory.register('FFVideo', FFVideo)
