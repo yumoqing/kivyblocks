@@ -5,7 +5,7 @@ try:
 	from setuptools import setup
 except ImportError:
 	from distutils.core import setup
-from Cython.Build import cythonize
+# from Cython.Build import cythonize
 
 # usage:
 # python setup.py bdist_wininst generate a window executable file

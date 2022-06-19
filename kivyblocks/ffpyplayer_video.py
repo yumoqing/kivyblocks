@@ -38,30 +38,12 @@ class FFVideo(Image):
 		self.ff_opts = {}
 		self.lib_opts = {}
 		self.headers_pattern = {}
-		self.playing_task = None
-		self.playing_tasks = []
 		super(FFVideo, self).__init__(**kwargs)
 		self.register_event_type('on_frame')
 		self.register_event_type('on_open_failed')
 		self.register_event_type('on_leave_focus')
 		self.register_event_type('on_enter_focus')
 		self.register_event_type('on_load_success')
-
-	def add_playing_task(self, f):
-		if f in self.playing_tasks:
-			return
-		self.playing_tasks.append(f)
-
-	def del_playing_task(self, f):
-		self.playing_tasks = [ i for i in self.playing_tasks if i != f ]
-
-	def do_playing_tasks(self, *args):
-		for f in self.playing_tasks:
-			try:
-				f()
-			except Exception as e:
-				print('error:', e)
-				print_exc()
 
 	def on_open_failed(self, *args):
 		pass
@@ -239,10 +221,6 @@ class FFVideo(Image):
 			self._out_fmt = meta['src_pix_fmt']
 			self.frame_rate = meta['frame_rate']
 			self.videosize = meta['src_vid_size']
-			if self.playing_task:
-				self.playing_task.cancel()
-				self.playing_taks = None
-			self.playing_task = self.
 
 	def _play_stop(self):
 		if self._player is None:
