@@ -1,4 +1,7 @@
-import ujson as json
+try:
+	import ujson as json
+except:
+	import json
 from kivy.factory import Factory
 from .factory import UiFactory
 from appPublic.myTE import MyTemplateEngine
