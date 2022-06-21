@@ -1,5 +1,8 @@
 import time
-import ujson as json
+try:
+    import ujson as json
+except:
+	import json
 from functools import partial
 
 from kivy.logger import Logger

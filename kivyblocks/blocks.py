@@ -1,7 +1,11 @@
 import os
 import sys
 import codecs
-import ujson as json
+# import ujson as json
+try:
+    import ujson as json
+except:
+    import json
 from traceback import print_exc
 
 from functools import partial
