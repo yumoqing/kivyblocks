@@ -1,6 +1,7 @@
 import os
 # from kivy.logger import logging
 __version_info__ = "0.5.0"
+from .defaultimage import DefaultImage
 from .version import __version__
 
 path = os.path.dirname(__file__)
