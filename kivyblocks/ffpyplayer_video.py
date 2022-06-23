@@ -26,7 +26,7 @@ class FFVideo(Image):
 	position = NumericProperty(-1)
 	volume = NumericProperty(-1)
 	framerate = NumericProperty(180)
-	in_center_focus = BooleanProperty(Fasle)
+	in_center_focus = BooleanProperty(False)
 
 	def __init__(self, **kwargs):
 		self._player = None
