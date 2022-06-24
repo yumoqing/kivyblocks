@@ -134,8 +134,6 @@ class WidgetCSS(object):
 		self.bgcolor = toArrayColor(c)
 
 	def on_fgcolor(self, o, c):
-		#Logger.info('WidgetCSS:on_fgcolor:%s fgcolor=%s', self.__class__.__name__,
-		#				self.fgcolor)
 		if not self.fgcolor:
 			return
 		if isinstance(self, TextInput):
@@ -148,8 +146,6 @@ class WidgetCSS(object):
 		return
 
 	def on_bgcolor(self, o, c):
-		#Logger.info('WidgetCSS:on_bgcolor:%s bgcolor=%s', self.__class__.__name__,
-		#				self.bgcolor)
 		if not self.bgcolor:
 			return
 		if isinstance(self, TextInput):
@@ -169,14 +165,13 @@ class WidgetCSS(object):
 
 	def set_background_color(self, *args):
 		if not self.bgcolor:
-			#Logger.info('WidgetCSS: set_bg_color(), bgcolor is null, (%s)',
-			#		self.__class__.__name__)
 			return
 		if not self.canvas:
 			#Logger.info('WidgetCSS: set_bg_color(), canvas is null(%s)',
 			#		self.__class__.__name__)
 			return
 
+		# self.canvas.before.clear()
 		with self.canvas.before:
 			Color(*self.bgcolor)
 			if self.radius:
