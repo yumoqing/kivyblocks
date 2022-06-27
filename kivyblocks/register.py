@@ -27,7 +27,7 @@ from .mapview import MapView
 from .message import Conform
 from .pagepanel import PagePanel
 from .markdown import Markdown
-from .custom_camera import CustomCamera, QrReader
+# from .custom_camera import CustomCamera, QrReader
 from .defaultimage import *
 from .price import *
 
@@ -54,8 +54,8 @@ r('UdpWidget', UdpWidget)
 r('ScrollPanel', ScrollPanel)
 r('TextInput', TextInput)
 r('CameraWithMic', CameraWithMic)
-r('CustomCamera', CustomCamera)
-r('QrReader', QrReader)
+# r('CustomCamera', CustomCamera)
+# r('QrReader', QrReader)
 r('Markdown', Markdown)
 r('PagePanel', PagePanel)
 r('Conform', Conform)
