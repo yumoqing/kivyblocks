@@ -5,4 +5,6 @@
 # fix bug in ffpyplayer_video.py
 #__version__ = '0.2.10'
 # fix bug in __init__.py, can not import kivy here
-__version__ = '0.2.11'
+# __version__ = '0.2.11'
+# move all the source using opencv to a independent module
+__version__ = '0.2.12'
