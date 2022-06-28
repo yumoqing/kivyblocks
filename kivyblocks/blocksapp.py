@@ -15,7 +15,7 @@ import json
 from appPublic.jsonConfig import getConfig
 from appPublic.folderUtils import ProgramPath
 from appPublic.uniqueID import getID
-from appPublic.rsa import RSA
+from appPublic.rsawrap import RSA
 
 from kivy.factory import Factory
 from kivy.metrics import sp,dp,mm

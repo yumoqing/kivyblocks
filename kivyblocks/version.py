@@ -13,4 +13,6 @@
 # use json replace ujson because kivy-ios can not compile ujson
 # __version__ = '0.2.14'
 # delete xcamera module
-__version__ = '0.2.15'
+# __version__ = '0.2.15'
+# use apppublic.rsawrap instead of apppublic.rsa
+__version__ = '0.2.16'
