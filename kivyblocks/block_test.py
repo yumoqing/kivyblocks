@@ -1,5 +1,5 @@
 from traceback import print_exc
-import ujson as json
+import json
 from kivy.properties import StringProperty
 from kivy.factory import Factory
 from .toolbar import Toolbar

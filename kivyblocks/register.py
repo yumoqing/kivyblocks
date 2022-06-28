@@ -31,9 +31,9 @@ from .markdown import Markdown
 from .defaultimage import *
 from .price import *
 
-if kivy.platform in ['win','linux', 'macosx']:
-	from .camerawithmic import ScreenWithMic
-from .camerawithmic import CameraWithMic
+#if kivy.platform in ['win','linux', 'macosx']:
+#	from .camerawithmic import ScreenWithMic
+#from .camerawithmic import CameraWithMic
 from .scrollpanel import ScrollPanel
 from .udp_widget import UdpWidget
 from .paging import PageLoader
@@ -44,8 +44,8 @@ from .price import PriceView
 from .ffpyplayer_video import FFVideo
 
 r = Factory.register
-if kivy.platform in ['win','linux', 'macosx']:
-	r('ScreenWithMic', ScreenWithMic)
+# if kivy.platform in ['win','linux', 'macosx']:
+#	r('ScreenWithMic', ScreenWithMic)
 r('DateInput', DateInput)
 r('HTTPSeriesData', HTTPSeriesData)
 r('HTTPDataHandler', HTTPDataHandler)
@@ -53,7 +53,7 @@ r('PageLoader', PageLoader)
 r('UdpWidget', UdpWidget)
 r('ScrollPanel', ScrollPanel)
 r('TextInput', TextInput)
-r('CameraWithMic', CameraWithMic)
+# r('CameraWithMic', CameraWithMic)
 # r('CustomCamera', CustomCamera)
 # r('QrReader', QrReader)
 r('Markdown', Markdown)

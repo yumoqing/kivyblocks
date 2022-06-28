@@ -26,7 +26,7 @@ package_data = {
 		'ttf/*.ttf', 
 		'ui/*.uidesc',
 		'xcamera/xcamera.kv',
-		'image_processing/cascades/haarcascade_frontalface_default.xml',
+		# 'image_processing/cascades/haarcascade_frontalface_default.xml',
 		'xcamera/data/*'
 	],
 }
@@ -48,11 +48,11 @@ setup(
     ],
     packages=[
 		'kivyblocks',
-		'kivyblocks.image_processing',
+		# 'kivyblocks.image_processing',
 		'kivyblocks.mapview',
 		'kivyblocks.uitype',
-		'kivyblocks.widgetExt',
-		'kivyblocks.xcamera'
+		'kivyblocks.widgetExt'
+		# 'kivyblocks.xcamera'
 	],
     package_data=package_data,
     keywords = [
