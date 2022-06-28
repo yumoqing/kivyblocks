@@ -11,4 +11,6 @@
 # move code using pyaudio to a independent module
 # __version__ = '0.2.13'
 # use json replace ujson because kivy-ios can not compile ujson
-__version__ = '0.2.14'
+# __version__ = '0.2.14'
+# delete xcamera module
+__version__ = '0.2.15'
