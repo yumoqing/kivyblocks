@@ -41,6 +41,7 @@ setup(
     # uncomment the following lines if you fill them out in release.py
     description=description,
 	long_description=long_description,
+	long_description_content_type="text/markdown",
     author=author,
     author_email=email,
    
