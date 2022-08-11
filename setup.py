@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from kivyblocks.version import __version__
 
 try:
 	from setuptools import setup
@@ -7,12 +6,15 @@ except ImportError:
 	from distutils.core import setup
 # from Cython.Build import cythonize
 
-# usage:
-# python setup.py bdist_wininst generate a window executable file
-# python setup.py bdist_egg generate a egg file
-# Release information about eway
+with open('kivyblocks/version.py', 'r') as f:
+	x = f.read()
+	y = x[x.index("'")+1:]
+	z = y[:y.index("'")]
+	version = z
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
-version = __version__
+
 description = "kivy blocks is a tool to build kivy ui with json format uidesc files"
 author = "yumoqing"
 email = "yumoqing@icloud.com"
@@ -38,6 +40,7 @@ setup(
     version=version,
     # uncomment the following lines if you fill them out in release.py
     description=description,
+	long_description=long_description,
     author=author,
     author_email=email,
    
