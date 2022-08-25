@@ -32,6 +32,7 @@ from .newvideo import Video
 from .orientationlayout import OrientationLayout
 from .threadcall import HttpClient
 from .register import *
+from .script import Script
 
 class WidgetNotFoundById(Exception):
 	def __init__(self, id):
@@ -108,6 +109,11 @@ class Blocks(EventDispatcher):
 		self.register_event_type('on_built')
 		self.register_event_type('on_failed')
 		self.env = GlobalEnv()
+		config = getConfig()
+		if config.script_root:
+			self.script = Script(config.script_root)
+		else:
+			self.script = Script(config.workdir)
 
 	def set(self, k:str, v):
 		self.env[k] = v
@@ -157,11 +163,7 @@ class Blocks(EventDispatcher):
 				return None
 
 		if url.startswith('file://'):
-			filename = url[7:]
-			with codecs.open(filename,'r','utf-8') as f:
-				b = f.read()
-				dic = json.loads(b)
-				return dic
+			return self.script.dispatch(url, **params)
 		elif url.startswith('http://') or url.startswith('https://'):
 			try:
 				hc = HttpClient()
