@@ -6,6 +6,16 @@ from os.path import join, sep, dirname, basename
 from appPublic.Singleton import GlobalEnv
 from appPublic.jsonConfig import getConfig
 from appPublic.myTE import MyTemplateEngine
+from appPublic.Singleton import SingletonDecorator
+from appPublic.dictObject import DictObject
+
+@SingletonDecorator
+class ScriptEnv(DictObject):
+	pass
+
+def set_script_env(n,v):
+	env = ScriptEnv()
+	env.update({n:v})
 
 class Script:
 	def __init__(self, root):
@@ -26,6 +36,7 @@ class Script:
 		for suffix, handler in self.handlers.items():
 			if filepath.endswith(suffix):
 				env = self.env.copy()
+				env.update(ScriptEnv())
 				env.update(kw)
 				env['root_path'] = self.root
 				env['url'] = url

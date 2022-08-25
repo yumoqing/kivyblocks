@@ -32,7 +32,7 @@ from .newvideo import Video
 from .orientationlayout import OrientationLayout
 from .threadcall import HttpClient
 from .register import *
-from .script import Script
+from .script import Script, set_script_env
 
 class WidgetNotFoundById(Exception):
 	def __init__(self, id):
@@ -242,7 +242,6 @@ class Blocks(EventDispatcher):
 		return obj
 
 	def w_build(self,desc) -> Widget:
-		# print('w_build(),desc=',desc)
 		widgetClass = desc.get('widgettype',None)
 		if not widgetClass:
 			Logger.info("Block: w_build(), desc invalid", desc)
@@ -786,6 +785,36 @@ class Blocks(EventDispatcher):
 
 	def on_failed(self,e=None):
 		return
+
+	def buildKlass(self, desc):
+		"""
+		desc = {
+			"classname":"MyClass",
+			"base":["Box", "WidgetReady"],
+			"properties":[
+				{
+					"name":"aaa",
+					"type":"str",
+					"default":1
+				}
+			]
+			"subwidgets":[
+			],
+			
+		"""
+		codes = """
+{% for b in bases %}
+{{b}} = Factory.{{b}}
+{% endfor %}
+
+class {{ classname }}({% for b in bases -%}{{b}}{% endfor %})
+{% for p in properties %}
+	{{p.name}} {{p.type}}({{p.default}})
+{% endfor %}
+	def __init__(self, **kw):
+		super({{classname}}, self).__init__(**kw)
+
+"""
 
 Factory.register('Blocks',Blocks)
 Factory.register('Video',Video)
