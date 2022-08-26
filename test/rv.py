@@ -41,6 +41,14 @@ class ResponsiveLayout(ScrollView):
 		self.options = options
 		super().__init__(**options)
 		self._inner = VGridLayout(cols=cols,box_width=box_width)
+		self._inner.bind(minimum_height=self._inner.setter('height'))
+		super().add_widget(self._inner)
+
+	def add_widget(self, widget,**kw):
+		self._inner.add_widget(widget, **kw)
+		print('here')
+
+
 
 class Box(BoxLayout):
 	def __init__(self,**kw):
