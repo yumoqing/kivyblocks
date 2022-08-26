@@ -84,4 +84,5 @@ if you running it on window, it will show the following:
 Build app for android please see [Buildozer](https://github.com/kivy/buildozer)
 kivy introduct and API please see [kivy](https://kivy.org)
 
-
+## Changelog
+[changelog](docs/changelog.md)

@@ -1,6 +1,6 @@
 import os
 import codecs
-
+from weakref import ref
 import locale
 from kivy.app import App
 from kivy.properties import StringProperty
@@ -18,7 +18,7 @@ class I18n:
 		self.i18nWidgets = []
 
 	def addI18nWidget(self,w):
-		self.i18nWidgets.append(w)
+		self.i18nWidgets.append(ref(w))
 	
 	def loadI18nFromI18nFolder(self, lang):
 		config = gtConfig()
@@ -63,6 +63,8 @@ class I18n:
 		if not d:
 			self.loadI18n(lang)
 		self.lang = lang
+		ws = [ w for w in self.i18nWidgets if w is not None ]
+		self.i18nWidgets = ws
 		for w in self.i18nWidgets:
 			w.changeLang(lang)
 	
