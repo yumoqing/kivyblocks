@@ -8,6 +8,7 @@ from kivy.clock import Clock
 from kivy.utils import platform
 from kivy.app import App
 from kivy.properties import BooleanProperty
+from plyer import filechooser
 
 desktopOSs=[
 	"win",
@@ -124,3 +125,24 @@ class WidgetReady(object):
 			self.size = state['size']
 			if state['parent'] is not window:
 				state['parent'].add_widget(self)
+
+	def file_open_for_read(self, *args, **kw):
+		method_name = kw.get('on_selection')
+		if method_name is None:
+			return
+		f = getattr(self, method_name)
+		if f is None:
+			return 
+		kw['on_selection'] = f
+		filechooser.open_file(**kw)
+
+	def file_open_for_write(self, *args, **kw):
+		method_name = kw.get('on_selection')
+		if method_name is None:
+			return
+		f = getattr(self, method_name)
+		if f is None:
+			return 
+		kw['on_selection'] = f
+		filechooser.save_file(**kw)
+		

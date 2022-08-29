@@ -46,6 +46,13 @@ from .ffpyplayer_video import FFVideo
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('AnchorBox', AnchorBox)
+r('FloatBox', FloatBox)
+r('RelativeBox', RelativeBox)
+r('GridBox', GridBox)
+r('PageBox', PageBox)
+r('ScatterBox', ScatterBox)
+r('StackBox', StackBox)
 r('DateInput', DateInput)
 r('HTTPSeriesData', HTTPSeriesData)
 r('HTTPDataHandler', HTTPDataHandler)
@@ -109,6 +116,8 @@ r('HBox',HBox)
 r('VBox',VBox)
 r('SwipeBox',SwipeBox)
 r('ToggleItems',ToggleItems)
+r('ExAccordion', ExAccordion)
+r('Slider', Slider)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)
 	r('AWebView',AWebView)

@@ -4,6 +4,7 @@ from traceback import print_exc
 
 from kivy.properties import ObjectProperty, StringProperty, \
 			NumericProperty, BooleanProperty, OptionProperty
+from kivy.properties import DictProperty
 from kivy.app import App
 from kivy.utils import platform
 from kivy.uix.button import Button, ButtonBehavior
@@ -85,6 +86,34 @@ class WrapText(Label):
 		Label.__init__(self, **kw)
 		self.bind(width=lambda *x: self.setter('text_size')(self, (self.width, None)),
 				texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
+
+class StackBox(WidgetCSS, WidgetReady, StackLayout):
+	def __init__(self, **kw):
+		super().__init__(**kw)
+
+class AnchorBox(WidgetCSS, WidgetReady, AnchorLayout):
+	def __init__(self, **kw):
+		super().__init__(**kw)
+
+def FloatBox(WidgetCSS, WidgetReady, FloatLayout):
+	def __init__(self, **kw):
+		super().__init__(**kw)
+
+def RelativeBox(WidgetCSS, WidgetReady, RelativeLayout):
+	def __init__(self, **kw):
+		super().__init__(**kw)
+
+def GridBox(WidgetCSS, WidgetReady, GridLayout):
+	def __init__(self, **kw):
+		super().__init__(**kw)
+
+def PageBox(WidgetCSS, WidgetReady, PageLayout):
+	def __init__(self, **kw):
+		super().__init__(**kw)
+
+def ScatterBox(WidgetCSS, WidgetReady, ScatterLayout):
+	def __init__(self, **kw):
+		super().__init__(**kw)
 
 class Box(WidgetCSS, WidgetReady, BoxLayout):
 	def __init__(self, **kw):
@@ -470,4 +499,70 @@ def device_type():
 		return "tablet"
 	else:
 		return "mobile"
+
+class ExAccordion(WidgetCSS, WidgetReady, Accordion):
+	"""
+	{
+		"widgettype":"Accordion",
+		"options":{
+			"csscls",
+			"items":[{
+				"title":"titl1",
+				"active":false,
+				"widget":{
+				}
+			}
+			]
+		}
+	}
+	"""
+	items = ListProperty(None)
+	def __init__(self, **kw):
+		print('ExAccordion() init...')
+		super().__init__(**kw)
+		self.width = self.height = 800
+		# Clock.schedule_once(self._build_children, 0.1)
+		self._build_children()
+
+	def _build_children(self, *args):
+		for i in self.items:
+			bk = Factory.Blocks()
+			w = bk.widgetBuild(i['widget'])
+			if w is None:
+				continue
+			tw = AccordionItem()
+			if isinstance(i['title'], str):
+				tw.title = i['title']
+			else:
+				tw.title = bk.widgetBuild(i['title'])
+			tw.add_widget(w)
+			if i.get('active'):
+				self.collapse = False
+			else:
+				self.collapse = True
+			self.add_widget(tw)
+
+class Slider(Carousel):
+	"""
+	{
+		"widgettype":"Slider",
+		"options":{
+			"direction":"right",
+			"loop":true,
+			"items":[
+				{
+					"widgettype":....
+				}
+			]
+		}
+	}
+	"""
+	items = ListProperty(None)
+	def __init__(self, **kw):
+		print('Carousel pro=', dir(Carousel))
+		super().__init__(**kw)
+		bk = Factory.Blocks()
+		for desc in self.items:
+			w = bk.widgetBuild(desc)
+			self.add_widget(w)
 

@@ -286,7 +286,7 @@ class Blocks(EventDispatcher):
 			if isinstance(v,dict) and v.get('widgettype'):
 				b = Blocks()
 				v = self.valueExpr(v, localnamespace={'self':widget})
-				w = b.w_build(v)
+				w = b.widgetBuild(v)
 				if hasattr(widget,k):
 					aw = getattr(widget,k)
 					if isinstance(aw,Layout):

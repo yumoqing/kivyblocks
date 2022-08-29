@@ -12,7 +12,7 @@
 	"root":{
 		"widgettype":"urlwidget",
 		"options":{
-			"url":"file://index.tmpl"
+			"url":"file://index.ui"
 		}
 	}
 }

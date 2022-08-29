@@ -13,12 +13,9 @@ from kivyblocks.baseWidget import PressableImage, StrInput
 
 import os
 
-def i18n(s):
-	return s
-
 class FileLoaderBrowser(Popup):
 	def __init__(self,rootpath='/', title='load file', choose_dir=False, **kwargs):
-		# i18n = I18n()
+		i18n = I18n()
 		self.content = BoxLayout(orientation='vertical')
 		Popup.__init__(self, content = self.content, 
 					title=i18n(title), 

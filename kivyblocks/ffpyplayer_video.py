@@ -12,9 +12,10 @@ from kivy.clock import Clock
 from kivy.properties import StringProperty, BooleanProperty, \
 			OptionProperty, NumericProperty
 from kivy.graphics.texture import Texture
+from kivyblocks.ready import WidgetReady
 
 
-class FFVideo(Image):
+class FFVideo(WidgetReady, Image):
 	v_src = StringProperty(None)
 	status = OptionProperty('stop', \
 			options=['stop', 'play', 'pause'])
@@ -39,6 +40,7 @@ class FFVideo(Image):
 		self.lib_opts = {}
 		self.headers_pattern = {}
 		super(FFVideo, self).__init__(**kwargs)
+		self.set_black()
 		self.register_event_type('on_frame')
 		self.register_event_type('on_open_failed')
 		self.register_event_type('on_leave_focus')
@@ -48,7 +50,7 @@ class FFVideo(Image):
 	def on_open_failed(self, *args):
 		pass
 
-	def on_load_syccess(self, *args):
+	def on_load_success(self, *args):
 		pass
 
 	def on_enter_focus(self, *args):
@@ -194,6 +196,9 @@ class FFVideo(Image):
 						lib_opts=lib_opts) 
 		self._play_start()
 
+	def file_opened(self, files):
+		self.v_src = files[0]
+
 	def play(self):
 		if self._player is None:
 			return
@@ -254,7 +259,7 @@ class FFVideo(Image):
 			return
 		image_texture = Texture.create(
             size=self.size, colorfmt='rgb')
-		buf = b'\x00' * self.width * self.height * 3
+		buf = b'\x00' * int(self.width * self.height * 3)
 		image_texture.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
 		self.texture = image_texture
 		self.is_black = True

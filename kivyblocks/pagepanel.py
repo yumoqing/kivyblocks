@@ -352,7 +352,7 @@ sub-widget's description file format
 			return True
 		mc = MenuContainer()
 		mc.add_widget(w.menu_widget)
-		self.w.menu_widget.bind(on_press=mc.dismiss)
+		w.menu_widget.bind(on_press=mc.dismiss)
 		mc.size_hint = (None,None)
 		mc.height = self.content.height
 		mc.width = self.width * 0.4

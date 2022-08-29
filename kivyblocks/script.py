@@ -19,12 +19,12 @@ def set_script_env(n,v):
 
 class Script:
 	def __init__(self, root):
-		print('root=', root)
 		self.root = root
 		self.env = {}
 		self.handlers = {}
 		self.register('.tmpl', TemplateHandler)
 		self.register('.dspy', DspyHandler)
+		self.register('.ui', TemplateHandler)
 
 	def url2filepath(self, url):
 		if url.startswith('file://'):
@@ -41,7 +41,7 @@ class Script:
 				env['root_path'] = self.root
 				env['url'] = url
 				env['filepath'] = filepath
-				h = handler(env, **kw)
+				h = handler(env)
 				d = h.render()
 				try:
 					return json.loads(d)
@@ -60,9 +60,15 @@ class BaseHandler:
 				url.startswith('http://') or \
 				url.startswith('hppts://'):
 			return url
+		tokens = url.split('/')
+		if tokens[0] == '':
+			root = self.env['root_path']
+			tokens[0] = root
+			return '/'.join(tokens)
+
 		p1 = self.env['url'].split('/')[:-1]
-		p2 = url.split('/')
-		return '/'.join(p1+p2)
+		return '/'.join(p1+tokens)
+
 	def __init__(self, env):
 		self.env = env
 		self.env['entire_url'] = self.entire_url
@@ -80,6 +86,7 @@ class TemplateHandler(BaseHandler):
 			cpath = join(cpath, p)
 			paths.append(cpath)
 
+		paths.reverse()
 		self.engine = MyTemplateEngine(paths)
 
 	def render(self):
