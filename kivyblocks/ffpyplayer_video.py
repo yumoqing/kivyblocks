@@ -12,6 +12,7 @@ from kivy.clock import Clock
 from kivy.properties import StringProperty, BooleanProperty, \
 			OptionProperty, NumericProperty
 from kivy.graphics.texture import Texture
+from kivy.graphics import Color, Line
 from kivyblocks.ready import WidgetReady
 
 
@@ -115,9 +116,14 @@ class FFVideo(WidgetReady, Image):
 	def on_frame(self, *args):
 		if self._player is None:
 			return
-		if self.audio_id is None:
-			return
-		self._player.request_channel(self, 'audio', 'open', self.audio_id)
+		# self._player.request_channel(self, 'audio', 'open', self.audio_id)
+		p = self._player.get_pts() / self.duration * self.width
+		with self.canvas.after:
+			Color(1,1,1,1)
+			Line()
+			Line(points=[0, 0, self.width, 0], width=1)
+			Color(1,0,0,1)
+			Line(points=[0,1,p,0], width=2)
 
 	def __del__(self):
 		if self._update_task:

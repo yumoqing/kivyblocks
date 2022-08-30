@@ -115,12 +115,7 @@ class BlocksApp(App):
 		print('profile_path=', fname)
 		return fname
 
-	def write_profile(self, dic):
-		fname = self.get_profile_name()
-		with codecs.open(fname,'w','utf-8') as f:
-			json.dump(dic,f)
-
-	def write_default_profile(self):
+	def default_profile(self):
 		device_id = getID()
 		try:
 			device_id = plyer.uniqueid.id
@@ -132,6 +127,15 @@ class BlocksApp(App):
 		d = {
 			'device_id': device_id
 		}
+		return d
+
+	def write_profile(self, dic):
+		fname = self.get_profile_name()
+		with codecs.open(fname,'w','utf-8') as f:
+			json.dump(dic,f)
+
+	def write_default_profile(self):
+		d = self.default_profile()
 		self.write_profile(d)
 
 	def read_profile(self):
