@@ -262,6 +262,10 @@ class Modal(VBox):
 
 	def __init__(self, **kw):
 		SUPER(Modal, self, kw)
+		self.register_event_type('on_open')
+		self.register_event_type('on_pre_open')
+		self.register_event_type('on_pre_dismiss')
+		self.register_event_type('on_dismiss')
 		if self.content:
 			blocks = Factory.Blocks()
 			self.content_w = blocks.widgetBuild(self.content)
@@ -269,10 +273,6 @@ class Modal(VBox):
 				self.add_widget(self.content_w)
 			else:
 				print(content,':cannot build widget')
-		self.register_event_type('on_open')
-		self.register_event_type('on_pre_open')
-		self.register_event_type('on_pre_dismiss')
-		self.register_event_type('on_dismiss')
 
 	def on_touch_down(self, touch):
 		if 	not self.collide_point(touch.x, touch.y):
@@ -333,7 +333,6 @@ class Modal(VBox):
 
 	def add_widget(self, w, *args, **kw):
 		super().add_widget(w, *args, **kw)
-		# super().add_widget(Label(text='1111'))
 		if self.auto_open:
 			self.open()
 

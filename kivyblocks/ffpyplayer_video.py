@@ -32,6 +32,8 @@ class FFVideo(WidgetReady, Image):
 
 	def __init__(self, **kwargs):
 		self._player = None
+		self._volume = 0
+		self._position = 0
 		self._update_task = None
 		self._texture = None
 		self.is_black = False
@@ -98,6 +100,7 @@ class FFVideo(WidgetReady, Image):
 			return
 
 		self._player.set_volume(self.volume)
+		self._volume = self.volume
 		
 	def on_status(self, *args):
 		print('on_status called, ', self.status)
@@ -113,11 +116,17 @@ class FFVideo(WidgetReady, Image):
 		else:
 			pass
 
+	def on_parent(self, *args):
+		if self.parent:
+			return
+		self._play_stop()
+		del self
+
 	def on_frame(self, *args):
 		if self._player is None:
 			return
 		# self._player.request_channel(self, 'audio', 'open', self.audio_id)
-		p = self._player.get_pts() / self.duration * self.width
+		p = self._position / self.duration * self.width
 		with self.canvas.after:
 			Color(1,1,1,1)
 			Line()
@@ -154,7 +163,7 @@ class FFVideo(WidgetReady, Image):
 		if self.status != 'play':
 			return
 		self._player.seek(pts)
-		self.position = self._player.get_pts()
+		self._position = self._player.get_pts()
 
 	def mute(self, flag):
 		if self.play_mode == 'preview':
@@ -330,7 +339,8 @@ class FFVideo(WidgetReady, Image):
 			self._get_video_info()
 			
 		self.timepass += self.timeperiod
-		self.position = self._player.get_pts()
+		self._position = self._player.get_pts()
+		self._volume = self._player.get_volume()
 		if self.timepass < self.video_ts:
 			return
 

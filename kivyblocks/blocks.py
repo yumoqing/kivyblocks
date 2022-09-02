@@ -415,7 +415,7 @@ class Blocks(EventDispatcher):
 			p.update(d)
 		opts['options'] = p
 		def doit(target:Widget, add_mode:str, o, w:Widget):
-			if isinstance(w, ModalView):
+			if isinstance(w, Modal):
 				return
 
 			if target and not w.parent:
