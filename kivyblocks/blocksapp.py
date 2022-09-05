@@ -39,6 +39,8 @@ from .android_rotation import get_rotation
 
 def  signal_handler(signal, frame):
 	app = App.get_running_app()
+	if app is None:
+		return
 	app.workers.running = False
 	app.stop()
 	print('Singal handled .........')

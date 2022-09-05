@@ -162,17 +162,20 @@ class FFVideo(WidgetReady, Image):
 			return
 		if self.status != 'play':
 			return
-		self._player.seek(pts)
+		self._player.seek(pts, relative=False)
+		self.last_frame, self.timepass = self._player.get_frame()
 		self._position = self._player.get_pts()
 
-	def mute(self, flag):
+	def mute(self, flag=None):
 		if self.play_mode == 'preview':
 			return
 		if self._player is None:
 			return
 		if self.status != 'play':
 			return
-		self._player.set_mute(flag)
+		x = self._player.get_mute()
+		print('Video(), mute=', x)
+		self._player.set_mute(not x)
 		
 	def switch_audio(self):
 		if self.play_mode == 'preview':
