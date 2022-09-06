@@ -49,6 +49,7 @@ class FFVideo(WidgetReady, Image):
 		self.register_event_type('on_leave_focus')
 		self.register_event_type('on_enter_focus')
 		self.register_event_type('on_load_success')
+		self.register_event_type('on_startplay')
 
 	def on_open_failed(self, *args):
 		pass
@@ -122,17 +123,26 @@ class FFVideo(WidgetReady, Image):
 		self._play_stop()
 		del self
 
+	def on_startplay(self, *args):
+		pass
+
 	def on_frame(self, *args):
 		if self._player is None:
 			return
-		# self._player.request_channel(self, 'audio', 'open', self.audio_id)
+		if not self.playing:
+			self.dispatch('on_startplay')
+			self._player.request_channel( \
+								'audio', 'open', self.audio_id)
+			self.seek(self.position)
+			self.playing = True
 		p = self._position / self.duration * self.width
+		self.position = self._position
 		with self.canvas.after:
 			Color(1,1,1,1)
 			Line()
 			Line(points=[0, 0, self.width, 0], width=1)
 			Color(1,0,0,1)
-			Line(points=[0,1,p,0], width=2)
+			Line(points=[0,2,p,0], width=2)
 
 	def __del__(self):
 		if self._update_task:
@@ -188,6 +198,8 @@ class FFVideo(WidgetReady, Image):
 
 	def on_v_src(self, o, src):
 		self._play_stop()
+		self.playing = False
+
 		ff_opts = {
 			'pause':False
 		}
@@ -233,14 +245,12 @@ class FFVideo(WidgetReady, Image):
 		self.timepass = 0.0
 		self.last_frame = None
 		self.is_black = False
-		self.first_play = True
 		self._update_task = Clock.schedule_interval(self._update, self.timeperiod)
 
 	def _get_video_info(self):
-		if self.first_play:
+		if not self.playing:
 			meta = self._player.get_metadata()
 			self.duration = meta['duration']
-			self.position = 0
 			self._out_fmt = meta['src_pix_fmt']
 			self.frame_rate = meta['frame_rate']
 			self.videosize = meta['src_vid_size']
@@ -255,7 +265,7 @@ class FFVideo(WidgetReady, Image):
 		self.timepass = 0
 		self.next_frame = None
 		self.duration = -1
-		self.position = -1
+		self.position = 0
 		self.frame_rate = None
 		self.videosize = None
 		
@@ -326,7 +336,6 @@ class FFVideo(WidgetReady, Image):
 		if self.last_frame is None:
 			frame, val = self._player.get_frame()
 			if val == 'eof':
-				print('*****EOF******')
 				self.status = 'stop'
 				self.set_black()
 				return
@@ -334,7 +343,6 @@ class FFVideo(WidgetReady, Image):
 				self.status = 'pause'
 				return
 			if frame is None:
-				# print('video null', time.time())
 				self.set_black()
 				return
 			self.last_frame = frame

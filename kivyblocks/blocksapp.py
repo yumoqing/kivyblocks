@@ -2,12 +2,6 @@
 import os
 import sys
 from kivy.resources import resource_add_path
-from kivy.config import Config
-resource_add_path(os.path.join(os.path.dirname(__file__),'./ttf'))
-Config.set('kivy', 'default_font', [
-	'msgothic',
-	'DroidSansFallback.ttf'])
-
 import signal
 import codecs
 import json
