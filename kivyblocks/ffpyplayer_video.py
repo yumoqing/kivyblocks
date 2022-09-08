@@ -135,14 +135,15 @@ class FFVideo(WidgetReady, Image):
 								'audio', 'open', self.audio_id)
 			self.seek(self.position)
 			self.playing = True
-		p = self._position / self.duration * self.width
+		if self.duration > 0:
+			p = self._position / self.duration * self.width
+			with self.canvas.after:
+				Color(1,1,1,1)
+				Line()
+				Line(points=[0, 0, self.width, 0], width=1)
+				Color(1,0,0,1)
+				Line(points=[0,2,p,0], width=2)
 		self.position = self._position
-		with self.canvas.after:
-			Color(1,1,1,1)
-			Line()
-			Line(points=[0, 0, self.width, 0], width=1)
-			Color(1,0,0,1)
-			Line(points=[0,2,p,0], width=2)
 
 	def __del__(self):
 		if self._update_task:
