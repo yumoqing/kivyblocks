@@ -142,7 +142,7 @@ class FFVideo(WidgetReady, Image):
 				Line()
 				Line(points=[0, 0, self.width, 0], width=1)
 				Color(1,0,0,1)
-				Line(points=[0,2,p,0], width=2)
+				Line(points=[0,1,p,1], width=1)
 		self.position = self._position
 
 	def __del__(self):

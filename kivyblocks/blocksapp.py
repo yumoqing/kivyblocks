@@ -17,6 +17,7 @@ from kivy.core.window import WindowBase, Window
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.utils import platform
+from kivy.metrics import Metrics
 from kivy.app import App
 
 import plyer
@@ -76,6 +77,8 @@ class BlocksApp(App):
 		self.public_headers = {
 			"platform":self.platform
 		}
+		# Window.borderless = True
+		print('Window.dpi=', Window.dpi, 'Metrics.dpi=', Metrics.dpi)
 		Window.bind(on_request_close=self.on_close)
 		Window.bind(on_rotate=self.on_rotate)
 		Window.bind(size=self.device_info)
