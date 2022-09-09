@@ -137,6 +137,7 @@ class FFVideo(WidgetReady, Image):
 			self.playing = True
 		if self.duration > 0:
 			p = self._position / self.duration * self.width
+			self.canvas.after.clear()
 			with self.canvas.after:
 				Color(1,1,1,1)
 				Line()
