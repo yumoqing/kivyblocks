@@ -1,3 +1,4 @@
+import traceback
 try:
 	import ujson as json
 except:
@@ -90,7 +91,12 @@ class TemplateHandler(BaseHandler):
 		self.engine = MyTemplateEngine(paths)
 
 	def render(self):
-		return self.engine.render(self.templ_file, self.env)
+		try:
+			return self.engine.render(self.templ_file, self.env)
+		except Exception as e:
+			print('Exception:', str(e))
+			print('filename=', self.env['filepath'])
+			traceback.print_exc()
 
 class DspyHandler(BaseHandler):
 	def __init__(self, env):
@@ -107,9 +113,15 @@ class DspyHandler(BaseHandler):
 		return txt
 
 	def render(self, params={}):
-		lenv = self.env.copy()
-		lenv.update(params)
-		txt = self.loadScript(self.env['filepath'])
-		exec(txt,lenv,lenv)
-		func = lenv['myfunc']
-		return func(self.env, **lenv)
+		try:
+			lenv = self.env.copy()
+			lenv.update(params)
+			txt = self.loadScript(self.env['filepath'])
+			exec(txt,lenv,lenv)
+			func = lenv['myfunc']
+			return func(self.env, **lenv)
+		except Exception as e:
+			print('Exception:', str(e))
+			print('filename=', self.env['filepath'])
+			traceback.print_exc()
+
