@@ -121,18 +121,18 @@ class HttpClient(Http_Client):
 
 		self.workers.add(self.webcall,callback,errback,kwargs=kwargs)
 
-	def get(self, url, params={}, headers={}, callback=None, errback=None):
+	def get(self, url, params={}, headers={}, stream=False, callback=None, errback=None):
 		return self.__call__(url,method='GET',params=params,
-				headers=headers, callback=callback,
+				headers=headers, stream=stream, callback=callback,
 				errback=errback)
-	def post(self, url, params={}, headers={}, files={}, callback=None, errback=None):
+	def post(self, url, params={}, headers={}, files={}, stream=False, callback=None, errback=None):
 		return self.__call__(url,method='POST',params=params, files=files,
-				headers=headers, callback=callback,
+				headers=headers, stream=stream, callback=callback,
 				errback=errback)
 
-	def put(self, url, params={}, headers={}, callback=None, errback=None):
+	def put(self, url, params={}, headers={}, stream=False, callback=None, errback=None):
 		return self.__call__(url,method='PUT',params=params,
-				headers=headers, callback=callback,
+				headers=headers, stream=stream, callback=callback,
 				errback=errback)
 
 	def delete(self, url, params={}, headers={}, callback=None, errback=None):
