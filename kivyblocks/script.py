@@ -1,3 +1,4 @@
+import os
 import traceback
 try:
 	import ujson as json
@@ -9,6 +10,9 @@ from appPublic.jsonConfig import getConfig
 from appPublic.myTE import MyTemplateEngine
 from appPublic.Singleton import SingletonDecorator
 from appPublic.dictObject import DictObject
+
+from kivy.logger import Logger
+from kivy.utils import platform
 
 @SingletonDecorator
 class ScriptEnv(DictObject):
@@ -32,6 +36,20 @@ class Script:
 			url = url[7:]
 		return join(self.root, *url.split('/'))
 
+	def show_info(self, env):
+		workdir = env['workdir']
+		sfile = env['filepath']
+		url = env['url']
+		Logger.info(f'script:workdir={workdir}')
+		Logger.info(f'script:script_file={sfile}')
+		Logger.info(f'script:url={url}')
+		sdir = os.path.join(workdir, 'scripts')
+		sf_exists = os.path.isdir(sdir)
+		conf_f = os.path.join(workdir, 'conf', 'config.json')
+		conf_exists = os.path.isfile(conf_f)
+		Logger.info(f'script:script exists {sf_exists}')
+		Logger.info(f'script:config.json exists {conf_exists}')
+
 	def dispatch(self, url, **kw):
 		filepath = self.url2filepath(url)
 		for suffix, handler in self.handlers.items():
@@ -42,6 +60,9 @@ class Script:
 				env['root_path'] = self.root
 				env['url'] = url
 				env['filepath'] = filepath
+				# if platform == 'android':
+				self.show_info(env)
+
 				h = handler(env)
 				d = h.render()
 				try:

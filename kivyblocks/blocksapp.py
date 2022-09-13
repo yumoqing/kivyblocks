@@ -26,12 +26,14 @@ from .register import *
 from .threadcall import HttpClient,Workers
 from .utils import *
 from .widget_css import register_css
+from .version import __version__
 
 if platform == 'android':
 	from jnius import autoclass
 
 from .android_rotation import get_rotation
 
+Logger.info(f'KivyBlocks:version={__version__}')
 def  signal_handler(signal, frame):
 	app = App.get_running_app()
 	if app is None:
@@ -41,6 +43,7 @@ def  signal_handler(signal, frame):
 	print('Singal handled .........')
 
 signal.signal(signal.SIGINT, signal_handler)
+
 
 class BlocksApp(App):
 	def get_rotation(self):
