@@ -40,15 +40,15 @@ class Script:
 		workdir = env['workdir']
 		sfile = env['filepath']
 		url = env['url']
-		Logger.info(f'script:workdir={workdir}')
-		Logger.info(f'script:script_file={sfile}')
-		Logger.info(f'script:url={url}')
+		print(f'script:workdir={workdir}')
+		print(f'script:script_file={sfile}')
+		print(f'script:url={url}')
 		sdir = os.path.join(workdir, 'scripts')
 		sf_exists = os.path.isdir(sdir)
 		conf_f = os.path.join(workdir, 'conf', 'config.json')
 		conf_exists = os.path.isfile(conf_f)
-		Logger.info(f'script:script exists {sf_exists}')
-		Logger.info(f'script:config.json exists {conf_exists}')
+		print(f'script:script exists {sf_exists}')
+		print(f'script:config.json exists {conf_exists}')
 
 	def dispatch(self, url, **kw):
 		filepath = self.url2filepath(url)
@@ -60,8 +60,9 @@ class Script:
 				env['root_path'] = self.root
 				env['url'] = url
 				env['filepath'] = filepath
-				# if platform == 'android':
-				self.show_info(env)
+				print(f'workdir={env['workdir']}--------')
+				if platform == 'android':
+					self.show_info(env)
 
 				h = handler(env)
 				d = h.render()
