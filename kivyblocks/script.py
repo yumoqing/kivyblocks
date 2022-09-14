@@ -62,7 +62,7 @@ class Script:
 				env['root_path'] = self.root
 				env['url'] = url
 				env['filepath'] = filepath
-				print(f'workdir={env['workdir']}--------')
+				print(f"workdir={env['workdir']}--------")
 				if platform == 'android':
 					self.show_info(env)
 
