@@ -23,6 +23,7 @@ from kivy.metrics import sp,dp,mm
 from kivy.core.window import WindowBase, Window
 from kivy.properties import BooleanProperty
 from kivy.uix.widget import Widget
+from kivy.clock import mainthread
 from kivy.uix.modalview import ModalView
 from kivy.app import App
 from kivy.factory import Factory
