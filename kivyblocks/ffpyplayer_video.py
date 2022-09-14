@@ -370,4 +370,3 @@ class FFVideo(WidgetReady, Image):
 		self.dispatch('on_frame', self.last_frame)
 		self.last_frame = None
 
-Factory.register('FFVideo', FFVideo)

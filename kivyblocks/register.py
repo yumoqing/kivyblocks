@@ -46,6 +46,7 @@ from .ffpyplayer_video import FFVideo
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('FFVideo', FFVideo)
 r('AnchorBox', AnchorBox)
 r('FloatBox', FloatBox)
 r('RelativeBox', RelativeBox)
