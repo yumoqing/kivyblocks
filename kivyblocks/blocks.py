@@ -110,10 +110,7 @@ class Blocks(EventDispatcher):
 		self.register_event_type('on_failed')
 		self.env = GlobalEnv()
 		config = getConfig()
-		if config.script_root:
-			self.script = Script(config.script_root)
-		else:
-			self.script = Script(config.workdir)
+		self.script = Script()
 
 	def set(self, k:str, v):
 		self.env[k] = v

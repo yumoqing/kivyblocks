@@ -23,8 +23,10 @@ def set_script_env(n,v):
 	env.update({n:v})
 
 class Script:
-	def __init__(self, root):
-		self.root = root
+	def __init__(self):
+		config = getConfig()
+		self.root = config.script_root
+		print('Script.root=', self.root)
 		self.env = {}
 		self.handlers = {}
 		self.register('.tmpl', TemplateHandler)
