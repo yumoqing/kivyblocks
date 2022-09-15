@@ -6,6 +6,7 @@ from ffpyplayer.tools import set_log_callback
 
 from kivy.factory import Factory
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.uix.image import Image
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
