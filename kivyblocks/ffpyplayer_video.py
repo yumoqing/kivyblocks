@@ -108,7 +108,9 @@ class FFVideo(WidgetReady, Image):
 		if self._player is None:
 			return
 
+		Window.allow_screensaver = True
 		if self.status == 'play':
+			Window.allow_screensaver = False
 			self._player.set_pause(False)
 		elif self.status == 'pause':
 			self._player.set_pause(True)
