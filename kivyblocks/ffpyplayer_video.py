@@ -354,15 +354,17 @@ class FFVideo(WidgetReady, Image):
 			self.video_ts = val
 			self._get_video_info()
 			
-		self.timepass += self.timeperiod
 		self._position = self._player.get_pts()
 		self._volume = self._player.get_volume()
+		"""
+		self.timepass += self.timeperiod
 		if self.timepass < self.video_ts:
 			return
 
 		if self.timepass > self.video_ts +0.2:
 			self.last_frame = None
 			return
+		"""
 
 		self.status = 'play'
 		img, t = self.last_frame
