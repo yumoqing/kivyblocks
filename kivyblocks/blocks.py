@@ -722,7 +722,7 @@ class Blocks(EventDispatcher):
 				children = [i for i in from_widget.children]
 				if hasattr(from_widget, 'get_subwidgets'):
 					children = from_widget.get_subwidgets()
-				Logger.info('children=%s', str(children))
+				# Logger.info('children=%s', str(children))
 				for c in children:
 					ret = _find_widget(name, from_widget=c, dir=dir)
 					if ret:
@@ -734,8 +734,6 @@ class Blocks(EventDispatcher):
 					return _find_widget(name, 
 								from_widget=from_widget.parent,
 								dir=dir)
-			Logger.info('Block:_find_widget(), %s, %s %s return None',
-						name, from_widget.__class__.__name__, dir)
 			return None
 
 		def find_widget(step, from_widget):

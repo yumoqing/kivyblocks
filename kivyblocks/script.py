@@ -26,7 +26,7 @@ class Script:
 	def __init__(self):
 		config = getConfig()
 		self.root = config.script_root
-		print('Script.root=', self.root)
+		# print('Script.root=', self.root)
 		self.env = {}
 		self.handlers = {}
 		self.register('.tmpl', TemplateHandler)
@@ -62,9 +62,9 @@ class Script:
 				env['root_path'] = self.root
 				env['url'] = url
 				env['filepath'] = filepath
-				print(f"workdir={env['workdir']}--------")
-				if platform == 'android':
-					self.show_info(env)
+				# print(f"workdir={env['workdir']}--------")
+				# if platform == 'android':
+				# 	self.show_info(env)
 
 				h = handler(env)
 				d = h.render()
