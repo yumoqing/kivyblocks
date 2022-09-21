@@ -28,19 +28,16 @@ class FFVideo(WidgetReady, Image):
 	duration = NumericProperty(-1)
 	position = NumericProperty(-1)
 	volume = NumericProperty(-1)
-	framerate = NumericProperty(180)
 	in_center_focus = BooleanProperty(False)
 
 	def __init__(self, **kwargs):
 		self._player = None
-		self._volume = 0
-		self._position = 0
 		self._update_task = None
-		self._texture = None
 		self.is_black = False
 		self.videosize = None
-		self.timeperiod = 1.0 / self.framerate
-		self.ff_opts = {}
+		self.ff_opts = {
+			"framedrop":True
+		}
 		self.lib_opts = {}
 		self.headers_pattern = {}
 		super(FFVideo, self).__init__(**kwargs)
@@ -102,17 +99,18 @@ class FFVideo(WidgetReady, Image):
 			return
 
 		self._player.set_volume(self.volume)
-		self._volume = self.volume
 		
 	def on_status(self, *args):
 		print('on_status called, ', self.status)
 		if self._player is None:
+			print('no _player, do nothing')
 			return
 
 		Window.allow_screensaver = True
 		if self.status == 'play':
 			Window.allow_screensaver = False
 			self._player.set_pause(False)
+			self.video_handle()
 		elif self.status == 'pause':
 			self._player.set_pause(True)
 		elif self.status == 'stop':
@@ -139,7 +137,7 @@ class FFVideo(WidgetReady, Image):
 			self.seek(self.position)
 			self.playing = True
 		if self.duration > 0:
-			p = self._position / self.duration * self.width
+			p = self.position / self.duration * self.width
 			self.canvas.after.clear()
 			with self.canvas.after:
 				Color(1,1,1,1)
@@ -147,7 +145,6 @@ class FFVideo(WidgetReady, Image):
 				Line(points=[0, 0, self.width, 0], width=1)
 				Color(1,0,0,1)
 				Line(points=[0,1,p,1], width=1)
-		self.position = self._position
 
 	def __del__(self):
 		if self._update_task:
@@ -171,6 +168,7 @@ class FFVideo(WidgetReady, Image):
 		self.volume = v
 
 	def seek(self, pts):
+		self.vsync = False
 		if self.play_mode == 'preview':
 			return
 		if self._player is None:
@@ -178,8 +176,8 @@ class FFVideo(WidgetReady, Image):
 		if self.status != 'play':
 			return
 		self._player.seek(pts, relative=False)
-		self.last_frame, self.timepass = self._player.get_frame()
-		self._position = self._player.get_pts()
+		self.position = self._player.get_pts()
+		self.last_val = None
 
 	def mute(self, flag=None):
 		if self.play_mode == 'preview':
@@ -202,7 +200,7 @@ class FFVideo(WidgetReady, Image):
 		self._player.request_channel('audio', action='cycle')
 
 	def on_v_src(self, o, src):
-		self._play_stop()
+		self.status = 'stop'
 		self.playing = False
 
 		ff_opts = {
@@ -229,7 +227,8 @@ class FFVideo(WidgetReady, Image):
 		# self._player = MediaPlayer(self.v_src) 
 		self._player = MediaPlayer(self.v_src, ff_opts=ff_opts, \
 						lib_opts=lib_opts) 
-		self._play_start()
+		# self._play_start()
+		self.status = 'play'
 
 	def file_opened(self, files):
 		self.v_src = files[0]
@@ -237,7 +236,6 @@ class FFVideo(WidgetReady, Image):
 	def play(self):
 		if self._player is None:
 			return
-		# self._player.set_pause(False)
 		self.status = 'play'
 
 	def pause(self):
@@ -250,10 +248,11 @@ class FFVideo(WidgetReady, Image):
 		self.timepass = 0.0
 		self.last_frame = None
 		self.is_black = False
-		self._update_task = Clock.schedule_interval(self._update, self.timeperiod)
+		self.vsync = False
 
 	def _get_video_info(self):
 		if not self.playing:
+			self.playing = True
 			meta = self._player.get_metadata()
 			self.duration = meta['duration']
 			self._out_fmt = meta['src_pix_fmt']
@@ -263,7 +262,8 @@ class FFVideo(WidgetReady, Image):
 	def _play_stop(self):
 		if self._player is None:
 			return
-		self._update_task.cancel()
+		if self._update_task:
+			self._update_task.cancel()
 		self._update_task = None
 		self._player.close_player()
 		self._player = None
@@ -316,7 +316,6 @@ class FFVideo(WidgetReady, Image):
 		fbo['tex_y'] = 0
 		fbo['tex_u'] = 1
 		fbo['tex_v'] = 2
-		self._texture = fbo.texture
 		dy, du, dv, _ = img.to_memoryview()
 		if dy and du and dv:
 			self._tex_y.blit_buffer(dy, colorfmt='luminance')
@@ -337,36 +336,42 @@ class FFVideo(WidgetReady, Image):
 		self.texture = texture
 		# print('img_size=', w, h, 'window size=', self.size)
 
-	def _update(self, dt):
-		if self.last_frame is None:
-			frame, val = self._player.get_frame()
-			if val == 'eof':
-				self.status = 'stop'
-				self.set_black()
-				return
-			if val == 'pause':
-				self.status = 'pause'
-				return
-			if frame is None:
-				self.set_black()
-				return
-			self.last_frame = frame
-			self.video_ts = val
-			self._get_video_info()
-			
-		self._position = self._player.get_pts()
-		self._volume = self._player.get_volume()
-		"""
-		self.timepass += self.timeperiod
-		if self.timepass < self.video_ts:
+	def video_handle(self, *args):
+		if self._update_task:
+			self._update_task.cancel()
+			self._update_task = None
+		frame, val = self._player.get_frame()
+		if val == 'eof':
+			self.status = 'stop'
+			self.set_black()
+			self.last_val = None
+			return
+		if val == 'pause':
+			self.status = 'pause'
+			self.last_val = None
+			return
+		if frame is None:
+			self.set_black()
+			self.last_val = None
+			Clock.schedule_once(self.video_handle, 0.1)
 			return
 
-		if self.timepass > self.video_ts +0.2:
-			self.last_frame = None
-			return
-		"""
+		self. _get_video_info()
+		self.last_frame = frame
+		self.video_ts = val
+		if self.last_val is None:
+			self.last_val = val
+			self.do_update()
+		else:
+			t = val - self.last_val
+			if t > 0:
+				self._update_task = Clock.schedule_once(self.do_update, t)
+			else:
+				self.do_update()
 
-		self.status = 'play'
+	def do_update(self, *args):
+		self.position = self._player.get_pts()
+		self.volume = self._player.get_volume()
 		img, t = self.last_frame
 		if self._out_fmt == 'yuv420p':
 			self.show_yuv420(img)
@@ -374,4 +379,5 @@ class FFVideo(WidgetReady, Image):
 			self.show_others(img)
 		self.dispatch('on_frame', self.last_frame)
 		self.last_frame = None
-
+		self.video_handle()
+		
