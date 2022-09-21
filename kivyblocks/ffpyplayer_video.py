@@ -361,13 +361,13 @@ class FFVideo(WidgetReady, Image):
 		self.video_ts = val
 		if self.last_val is None:
 			self.last_val = val
-			self.do_update()
+			self._update_task = Clock.schedule_once(self.do_update, 0)
 		else:
 			t = val - self.last_val
 			if t > 0:
 				self._update_task = Clock.schedule_once(self.do_update, t)
 			else:
-				self.do_update()
+				self._update_task = Clock.schedule_once(self.do_update, 0)
 
 	def do_update(self, *args):
 		self.position = self._player.get_pts()
@@ -379,5 +379,5 @@ class FFVideo(WidgetReady, Image):
 			self.show_others(img)
 		self.dispatch('on_frame', self.last_frame)
 		self.last_frame = None
-		self.video_handle()
+		Clock.schedule_once(self.video_handle, 0)
 		
