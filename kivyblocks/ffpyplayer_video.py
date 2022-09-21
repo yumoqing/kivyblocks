@@ -340,6 +340,8 @@ class FFVideo(WidgetReady, Image):
 		if self._update_task:
 			self._update_task.cancel()
 			self._update_task = None
+		if self._player is None:
+			return 
 		frame, val = self._player.get_frame()
 		if val == 'eof':
 			self.status = 'stop'
