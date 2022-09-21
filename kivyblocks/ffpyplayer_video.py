@@ -33,6 +33,7 @@ class FFVideo(WidgetReady, Image):
 	def __init__(self, **kwargs):
 		self._player = None
 		self._update_task = None
+		self.vh_task = None
 		self.is_black = False
 		self.videosize = None
 		self.ff_opts = {
@@ -122,7 +123,6 @@ class FFVideo(WidgetReady, Image):
 		if self.parent:
 			return
 		self._play_stop()
-		del self
 
 	def on_startplay(self, *args):
 		pass
@@ -147,12 +147,7 @@ class FFVideo(WidgetReady, Image):
 				Line(points=[0,1,p,1], width=1)
 
 	def __del__(self):
-		if self._update_task:
-			self._update_task.cancel()
-			self._update_task = None
-		if self._player:
-			self._player.close_player()
-			self._player = None
+		self._play_stop()
 
 	def set_volume(self, v):
 		if self.play_mode == 'preview':
@@ -245,7 +240,6 @@ class FFVideo(WidgetReady, Image):
 		self.status = 'pause'
 
 	def _play_start(self):
-		self.timepass = 0.0
 		self.last_frame = None
 		self.is_black = False
 		self.vsync = False
@@ -260,18 +254,18 @@ class FFVideo(WidgetReady, Image):
 			self.videosize = meta['src_vid_size']
 
 	def _play_stop(self):
-		if self._player is None:
-			return
+		if self._player:
+			self._player.close_player()
+			self._player = None
 		if self._update_task:
 			self._update_task.cancel()
-		self._update_task = None
-		self._player.close_player()
-		self._player = None
-		self.timepass = 0
+			self._update_task = None
+		if self.vh_task:
+			self.vh_task.cancel()
+			self.vh_task = None
 		self.next_frame = None
 		self.duration = -1
 		self.position = 0
-		self.frame_rate = None
 		self.videosize = None
 		
 	def on_size(self, *args):
@@ -355,7 +349,7 @@ class FFVideo(WidgetReady, Image):
 		if frame is None:
 			self.set_black()
 			self.last_val = None
-			Clock.schedule_once(self.video_handle, 0.1)
+			self.vh_task = Clock.schedule_once(self.video_handle, 0.1)
 			return
 
 		self. _get_video_info()
@@ -381,5 +375,5 @@ class FFVideo(WidgetReady, Image):
 			self.show_others(img)
 		self.dispatch('on_frame', self.last_frame)
 		self.last_frame = None
-		Clock.schedule_once(self.video_handle, 0)
+		self.vh_task = Clock.schedule_once(self.video_handle, 0)
 		
