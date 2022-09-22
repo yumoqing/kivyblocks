@@ -13,31 +13,33 @@ from .scrollpanel import ScrollPanel
 from .clickable import SingleCheckBox
 from .baseWidget import Text
 from .utils import CSize
+from .command_action import cmd_action
 
 from appPublic.registerfunction import getRegisterFunctionByName
 
-class TreeViewComplexNode(BoxLayout, TreeViewLabel):
+class TreeViewComplexNode(BoxLayout, TreeViewNode):
 	otext = StringProperty(None)
+	font_size_c = NumericProperty(1)
+	node_height = NumericProperty(2)
 	checkbox = BooleanProperty(False)
 	icon = StringProperty(None)
 	data = DictProperty(None)
 	def __init__(self, **kw):
 		super(TreeViewComplexNode, self).__init__(**kw)
 		self.orientation = 'horizontal'
-		self.size_hint_x = None
 		if self.checkbox:
 			cb = SingleCheckBox(size_hint=(None,None))
 			cb.bind(on_press=self.set_checked)
 			self.add_widget(cb)
 		if self.icon:
 			img = AsyncImage(source=self.icon, size_hint=(None,None))
-			img.size = CSize(1,1)
+			img.size = CSize(self.font_size_c,self.font_size_c)
 			self.add_widget(img)
-		txt = Text(otext=self.otext, i18n=True)
-		txt.texture_update()
-		txt.size_hint = (None, None)
-		txt.size = txt.texture_size
+		txt = Text(otext=self.otext, i18n=True, 
+				font_size=CSize(self.font_size_c),halign='left')
 		self.add_widget(txt)
+		self.size_hint_y = None
+		self.height = CSize(self.node_height)
 		
 	def set_checked(self, o):
 		if not self.data:
@@ -52,6 +54,8 @@ class Hierarchy(ScrollPanel):
 	params = DictProperty(None)
 	method = StringProperty('get')
 	idField = StringProperty(None)
+	node_height = NumericProperty(2)
+	font_size_c = NumericProperty(1)
 	textField = StringProperty(None)
 	data = ListProperty(None)
 	checkbox = BooleanProperty(False)
@@ -95,6 +99,8 @@ class Hierarchy(ScrollPanel):
 	def create_new_node(self, data, node=None):
 		n = TreeViewComplexNode(otext=data[self.textField],
 			checkbox=self.checkbox,
+			node_height=self.node_height,
+			font_size_c=self.font_size_c,
 			icon=data.get('icon') or self.icon
 		)
 		n.data = data
@@ -148,9 +154,15 @@ class Menu(Hierarchy):
 	def on_press(self, node):
 		self.tree.deselect_node()
 		data = {}
+		data = node.data.copy()
+		if self.target and data.get('target') is None:
+			data['target'] = self.target
+		return cmd_action(data, self)
+		###### change to use cmd_action ########
+		id2widget = Factory.Blocks.getWidgetById
 		dw = node.data.get('datawidget')
 		if dw:
-			data_widget = Factory.Blocks.getWidgetById(dw)
+			data_widget = id2widget(dw)
 			if data_widget:
 				vn = node.data.get('datamethod', 'getValue')
 				if hasattr(data_widget, vn):
@@ -160,7 +172,7 @@ class Menu(Hierarchy):
 						data = {}
 
 		url = node.data.get('url')
-		target = Factory.Blocks.getWidgetById(node.data.get('target',self.target),self)
+		target = id2widget(node.data.get('target',self.target),self)
 		if url:
 			params = node.data.get('params',{})
 			params.update(data)
@@ -187,7 +199,7 @@ class Menu(Hierarchy):
 		script = node.data.get('script')
 		if script:
 			target_name = node.data.get('target', self.target)
-			target =  Factory.Blocks.getWidgetById(target_name, self)
+			target =  id2widget(target_name, self)
 			data.update({'self':target})
 			if target:
 				eval(script,data)

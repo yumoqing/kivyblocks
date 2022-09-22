@@ -145,4 +145,3 @@ def register_blocks(name, value):
 	except:
 		Logger.info(f'plugin : register_blocks():{name} register error')
 
-
