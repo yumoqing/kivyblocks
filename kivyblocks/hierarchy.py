@@ -35,9 +35,10 @@ class TreeViewComplexNode(BoxLayout, TreeViewNode):
 			img = AsyncImage(source=self.icon, size_hint=(None,None))
 			img.size = CSize(self.font_size_c,self.font_size_c)
 			self.add_widget(img)
-		txt = Text(otext=self.otext, i18n=True, 
+		txt = Text(otext=self.otext, i18n=True, wrap=True,
 				font_size=CSize(self.font_size_c),halign='left')
 		self.add_widget(txt)
+		self.size_hint_x = 1
 		self.size_hint_y = None
 		self.height = CSize(self.node_height)
 		
@@ -64,12 +65,16 @@ class Hierarchy(ScrollPanel):
 	def __init__(self, **kw):
 		self.register_event_type('on_press')
 		self.tree = TreeView(hide_root=True)
-		self.tree.size_hint = (None, None)
+		self.tree.size_hint = (1, None)
 		self.tree.bind(on_node_expand=self.check_load_subnodes)
 		self.tree.bind(selected_node=self.node_selected)
 		super(Hierarchy, self).__init__(inner=self.tree, **kw)
 		if self.url:
 			self.data = self.get_remote_data()
+
+	def on_size(self, *args):
+		self.tree.size_hint_x = 1
+		self.tree.width = self.width
 
 	def on_press(self, node):
 		print('selected node=', node)
@@ -104,9 +109,9 @@ class Hierarchy(ScrollPanel):
 			icon=data.get('icon') or self.icon
 		)
 		n.data = data
-		n.width = self.tree.indent_start + \
-						self.tree.indent_level * n.level \
-						+ sum([i.width for i in n.children])
+		# n.width = self.tree.indent_start + \
+		#				self.tree.indent_level * n.level \
+		#				+ sum([i.width for i in n.children])
 		if node:
 			self.tree.add_node(n, node)
 		else:
@@ -158,52 +163,6 @@ class Menu(Hierarchy):
 		if self.target and data.get('target') is None:
 			data['target'] = self.target
 		return cmd_action(data, self)
-		###### change to use cmd_action ########
-		id2widget = Factory.Blocks.getWidgetById
-		dw = node.data.get('datawidget')
-		if dw:
-			data_widget = id2widget(dw)
-			if data_widget:
-				vn = node.data.get('datamethod', 'getValue')
-				if hasattr(data_widget, vn):
-					f = getattr(data_widget, vn)
-					data = f()
-					if not isinstance(data, dict):
-						data = {}
-
-		url = node.data.get('url')
-		target = id2widget(node.data.get('target',self.target),self)
-		if url:
-			params = node.data.get('params',{})
-			params.update(data)
-			blocks = Factory.Blocks()
-			desc = {
-				"widgettype":"urlwidget",
-				"options":{
-					"url":url,
-					"params":params
-				}
-			}
-			w = blocks.widgetBuild(desc)
-			if w and target:
-				target.add_widget(w)
-			return 
-
-		rfname = node.data.get('rfname')
-		if rfname:
-			f = getRegisterFunctionByName(rfname)
-			if f:
-				f(self, **data)
-			return
-		
-		script = node.data.get('script')
-		if script:
-			target_name = node.data.get('target', self.target)
-			target =  id2widget(target_name, self)
-			data.update({'self':target})
-			if target:
-				eval(script,data)
-			return
 		
 Factory.register('Hierarchy', Hierarchy)
 Factory.register('Menu', Menu)
