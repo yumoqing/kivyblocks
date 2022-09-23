@@ -29,9 +29,9 @@ from .widget_css import register_css
 from .version import __version__
 
 if platform == 'android':
+	from android.storage import app_storage_path
 	from jnius import autoclass
-
-from .android_rotation import get_rotation
+	from .android_rotation import get_rotation
 
 Logger.info(f'KivyBlocks:version={__version__}')
 def  signal_handler(signal, frame):
@@ -106,14 +106,15 @@ class BlocksApp(App):
 
 	def get_user_data_path(self):
 		if platform == 'android':
-			Environment = autoclass('android.os.Environment')
-			sdpath = Environment.getExternalStorageDirectory()
-			return str(sdpath)
+			# Environment = autoclass('android.os.Environment')
+			# sdpath = Environment.getExternalStorageDirectory()
+			# return str(sdpath)
+			return str(app_storage_path())
 		sdpath = App.get_running_app().user_data_dir
 		return str(sdpath)
 
 	def get_profile_name(self):
-		fname = os.path.join(self.user_data_dir,'.profile.json')
+		fname = os.path.join(self.get_user_data_path(),'.profile.json')
 		print('profile_path=', fname)
 		return fname
 
