@@ -256,11 +256,13 @@ class Modal(VBox):
 	content = DictProperty(None)
 	auto_open = BooleanProperty(True)
 	auto_dismiss = BooleanProperty(True)
-	position = OptionProperty('tc',options=['tl', 'tc', 'tr',
+	target = StringProperty(None)
+	position = OptionProperty('cc',options=['tl', 'tc', 'tr',
 											'cl', 'cc', 'cr',
 											'bl', 'bc', 'br'])
 
 	def __init__(self, **kw):
+		self._target = None
 		SUPER(Modal, self, kw)
 		self.register_event_type('on_open')
 		self.register_event_type('on_pre_open')
@@ -283,7 +285,15 @@ class Modal(VBox):
 				
 		return super().on_touch_down(touch)
 
-	def set_modal_position(self, w):
+	def set_modal_position(self):
+		if self._target is None:
+			if self.target is None:
+				w = Window
+			else:
+				w = Factory.Blocks.getWidgetById(self.target)
+				if w is None:
+					w = Window
+			self._target = w
 		xn = self.position[1]
 		yn = self.position[0]
 		x, y = 0, 0
@@ -295,7 +305,7 @@ class Modal(VBox):
 			x = 0
 		if yn == 'c':
 			y = (w.height - self.height) / 2
-		elif yn == 'b':
+		elif yn == 't':
 			y = w.height - self.height
 		if y < 0:
 			y = 0
@@ -308,16 +318,18 @@ class Modal(VBox):
 		if self.parent:
 			return
 		self.dispatch('on_pre_open')
-		if widget is None:
-			widget = Window
-		self.set_modal_position(widget)
+		self.set_modal_position()
 		Window.add_widget(self)
 		self.dispatch('on_open')
+		if self._target != Window:
+			self._target.disable()
 
 	def dismiss(self, *args):
 		self.dispatch('on_pre_dismiss')
 		self.dispatch('on_dismiss')
 		Window.remove_widget(self)
+		if self._target != Window:
+			self._Target.enable()
 			
 	def on_open(self, *args):
 		pass

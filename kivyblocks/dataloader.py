@@ -129,7 +129,7 @@ class DataLoader(EventDispatcher):
 class HttpDataLoader(DataLoader):
 	def load(self, *args, **kw):
 		app = App.get_running_app()
-		url = app.realurl(self.data_user.url)
+		url = self.data_user.url
 		method = self.data_user.method
 		params = self.data_user.params.copy()
 		params.update({
