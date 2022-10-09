@@ -7,6 +7,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.clock import Clock
 from kivy.app import App
+from kivy.properties import BooleanProperty
 from functools import partial
 from appPublic.dictObject import DictObject
 from appPublic.jsonConfig import getConfig
@@ -40,8 +41,8 @@ it fires two type of event
 """
 
 class PageLoader(EventDispatcher):
+	loading = BooleanProperty(False)
 	def __init__(self,target=None, **options):
-		self.loading = False
 		self.target = target
 		self.options = options
 		self.filter = None
@@ -72,6 +73,12 @@ class PageLoader(EventDispatcher):
 		self.loader.bind(on_success=self.show_page)
 		self.loader.bind(on_error=self.onerror)
 	
+	def on_loading(self, *args):
+		if self.loading:
+			self.running = Running(self.target)
+		else:
+			self.running.dismiss()
+
 	def on_newbegin(self):
 		pass
 

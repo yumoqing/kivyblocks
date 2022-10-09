@@ -67,7 +67,7 @@ from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, Password
 from .widgetExt.messager import Messager
 from .bgcolorbehavior import BGColorBehavior
-from .utils import NeedLogin, InsufficientPrivilege, HTTPError
+from .utils import NeedLogin, InsufficientPrivilege, HTTPError, blockImage
 from .login import LoginForm
 from .tab import TabsPanel
 from .threadcall import HttpClient
@@ -76,6 +76,7 @@ from .widget_css import WidgetCSS
 from .ready import WidgetReady
 from .utils import CSize, SUPER
 from .swipebehavior import SwipeBehavior
+from .widgetExt.inputext import MyDropDown
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
@@ -171,7 +172,6 @@ class Text(Label):
 		
 		SUPER(Text, self, kwargs)
 		if self._i18n:
-			self.i18n = I18n()
 			self.i18n.addI18nWidget(self)
 		if self.wrap:
 			self.size_hint_y = None
@@ -220,7 +220,8 @@ class Text(Label):
 		self.lang = lang
 
 	def on_lang(self,o,lang):
-		self.text = self.i18n(self.otext)
+		if self._i18n and self.otext:
+			self.text = self.i18n(self.otext)
 
 class Title1(Text):
 	def __init__(self, **kw):
@@ -260,10 +261,11 @@ class Modal(VBox):
 	position = OptionProperty('cc',options=['tl', 'tc', 'tr',
 											'cl', 'cc', 'cr',
 											'bl', 'bc', 'br'])
-
 	def __init__(self, **kw):
 		self._target = None
-		SUPER(Modal, self, kw)
+		super(Modal, self).__init__(**kw)
+		self.set_size_position()
+		self._target.bind(size=self.set_size_position)
 		self.register_event_type('on_open')
 		self.register_event_type('on_pre_open')
 		self.register_event_type('on_pre_dismiss')
@@ -285,7 +287,16 @@ class Modal(VBox):
 				
 		return super().on_touch_down(touch)
 
-	def set_modal_position(self):
+	def on_target(self):
+		w = Window
+		if self.target is not None:
+			w = Factory.Blocks.getWidgetById(self.target)
+		if w is None:
+			w = Window
+		if w != self._target:
+			self._target = w
+		
+	def set_target(self):
 		if self._target is None:
 			if self.target is None:
 				w = Window
@@ -294,42 +305,56 @@ class Modal(VBox):
 				if w is None:
 					w = Window
 			self._target = w
+
+	def set_size_position(self, *args):
+		self.set_target()
+		if self.size_hint_x:
+			self.width = self.size_hint_x * self._target.width
+		if self.size_hint_y:
+			self.height = self.size_hint_y * self._target.height
+		print(self.width, self.height, 
+					self.size_hint_x, self.size_hint_y,
+					self._target.size
+					)
+		self.set_modal_position()
+
+	def set_modal_position(self):
+		self.set_target()
 		xn = self.position[1]
 		yn = self.position[0]
 		x, y = 0, 0
 		if xn == 'c':
-			x = (w.width - self.width) / 2
+			x = (self._target.width - self.width) / 2
 		elif xn == 'r':
-			x = w.width - self.width
+			x = self._target.width - self.width
 		if x < 0:
 			x = 0
 		if yn == 'c':
-			y = (w.height - self.height) / 2
+			y = (self._target.height - self.height) / 2
 		elif yn == 't':
-			y = w.height - self.height
+			y = self._target.height - self.height
 		if y < 0:
 			y = 0
-		if w == Window:
+		if self._target == Window:
 			self.pos = x, y
 		else:
-			self.pos = w.pos[0] + x, w.pos[1] + y
+			self.pos = self._target.pos[0] + x, self._target.pos[1] + y
 
-	def open(self, widget=None):
+	def open(self):
 		if self.parent:
-			return
+			self.parent.remove_widget(self)
 		self.dispatch('on_pre_open')
-		self.set_modal_position()
 		Window.add_widget(self)
 		self.dispatch('on_open')
 		if self._target != Window:
-			self._target.disable()
+			self._target.disabled = True
 
 	def dismiss(self, *args):
 		self.dispatch('on_pre_dismiss')
 		self.dispatch('on_dismiss')
 		Window.remove_widget(self)
 		if self._target != Window:
-			self._Target.enable()
+			self._target.enabled = False
 			
 	def on_open(self, *args):
 		pass
@@ -369,11 +394,41 @@ class TimedModal(Modal):
 			self.time_task = None
 		super().dismiss()
 
+class Running(AsyncImage):
+	def __init__(self, widget, **kw):
+		super().__init__(**kw)
+		self.host_widget = widget
+		self.source = blockImage('running.gif')
+		self.host_widget.bind(size=self.set_size)
+		self.set_size()
+		self.open()
+
+	def open(self):
+		if self.parent:
+			self.parent.remove_widget(self)
+		Window.add_widget(self)
+		self.host_widget.disabled = True
+
+	def dismiss(self):
+		if self.parent:
+			self.parent.remove_widget(self)
+		self.host_widget.disabled = False
+
+	def set_size(self, *args):
+		self.size_hint = (None, None)
+		self.width = CSize(2)
+		self.height = CSize(2)
+		self.center = self.host_widget.center
+		
 class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):
 		pass
 
 class PressableLabel(ButtonBehavior, Text):
+	def on_press(self):
+		pass
+
+class PressableText(ButtonBehavior, Text):
 	def on_press(self):
 		pass
 
@@ -576,4 +631,29 @@ class Slider(Carousel):
 		for desc in self.items:
 			w = bk.widgetBuild(desc)
 			self.add_widget(w)
+
+i18n = I18n()
+
+class I18nWidget(PressableText):
+	lang = StringProperty(None)
+	def __init__(self, **kw):
+		super().__init__(**kw)
+		self.lang = i18n.lang
+
+	def on_lang(self, *args):
+		self.otext = self.lang
+
+	def on_press(self, *args):
+		langs = i18n.get_languages()
+		data = [ {'lang':l} for l in langs ]
+		mdd = MyDropDown(textField='lang', valueField='lang',
+						value=self.lang,
+						data=data)
+		mdd.bind(on_select=self.selected_lang)
+		mdd.showme(self)
+
+	def selected_lang(self, o, v):
+		lang = v[0]
+		self.lang = lang
+		i18n.changeLang(self.lang)
 

@@ -5,7 +5,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.utils import platform
-from .baseWidget import VBox, HBox
+from .baseWidget import VBox, HBox, I18nWidget
 from .toggleitems import PressableBox
 from .utils import *
 from .swipebehavior import SwipeBehavior
@@ -61,6 +61,7 @@ PagePanel description file format
 		"bar_autohide": true when page is idle
 		"bar_size": bar size in CSize unit
 		"bar_at": "top" or "bottom"
+		"i18n": true of false
 		"bar_css":
 		"panel_css":
 		"left_menu": if defined, it must be a widget instance or a dict 
@@ -136,6 +137,7 @@ sub-widget's description file format
 	"""
 	def __init__(self, bar_size=2, 
 					bar_css='default',
+					i18n=False,
 					csscls='default',
 					singlepage=False,
 					fixed_before=None,
@@ -147,6 +149,7 @@ sub-widget's description file format
 		self.bar_size = bar_size
 		self.bar_autohide = bar_autohide
 		self.bar_at = bar_at
+		self.i18n = i18n
 		self.singlepage = singlepage
 		self.idle_status = False
 		self.idle_threshold = 10
@@ -218,6 +221,10 @@ sub-widget's description file format
 			})
 			self.bar.add_widget(self.bar_left_menu)
 			self.bar_left_menu.bind(on_press=self.show_left_menu)
+		if self.i18n:
+			self.i18n_w = I18nWidget(size_hint_x=None, width=CSize(5))
+			self.bar.add_widget(self.i18n_w)
+
 		self.bar_title = HBox(csscls=bar_css)
 		self.bar.add_widget(self.bar_title)
 		self.bar_right_menu = VBox(size_hint=(None,None),size=CSize(bcsize,bcsize))

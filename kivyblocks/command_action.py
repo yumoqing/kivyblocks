@@ -15,7 +15,6 @@ def get_cmd_desc(cmd_desc):
 			desc['datamethod'] = v['datamethod']
 	keys = v.keys()
 	if 'url' in keys:
-		Logger.info('get_cmd_desc():cmd_desc=%s', cmd_desc)
 		desc['actiontype'] = 'urlwidget'
 		desc['mode'] = 'replace'
 		options = {
@@ -24,18 +23,22 @@ def get_cmd_desc(cmd_desc):
 		}
 		desc['options'] = options
 		return desc
+
 	if 'rfname' in keys:
 		desc['actiontype'] = 'registedfunction'
 		desc['params'] = v.get('params',{})
 		return desc
+
 	if 'script' in keys:
 		desc['actiontype'] = 'script'
 		desc['script'] = v.get('script')
 		return desc
+
 	if 'method' in keys:
 		desc['actiontype'] = 'method'
 		desc['method'] = v.get('method')
 		return desc
+
 	if 'actions' in keys:
 		desc['actiontype'] = 'multiple'
 		desc['actions'] = v.get('actions')
@@ -61,6 +64,6 @@ def cmd_action(cmd_desc, widget):
 	})
 	w.bind(on_conform=partial(blocks.uniaction, widget, desc))
 	w.open()
-	Logger.info('cmd_action():desc=%s, conform and action', desc)
+	print('cmd_action():desc=', desc, ' conform and action', desc)
 
 
