@@ -632,20 +632,18 @@ class Slider(Carousel):
 			w = bk.widgetBuild(desc)
 			self.add_widget(w)
 
-i18n = None
-
 class I18nWidget(PressableText):
 	lang = StringProperty(None)
 	def __init__(self, **kw):
 		super().__init__(**kw)
-		if i18n is None:
-			i18n = I18n()
+		i18n = I18n()
 		self.lang = i18n.lang
 
 	def on_lang(self, *args):
 		self.otext = self.lang
 
 	def on_press(self, *args):
+		i18n = I18n()
 		langs = i18n.get_languages()
 		data = [ {'lang':l} for l in langs ]
 		mdd = MyDropDown(textField='lang', valueField='lang',
@@ -657,5 +655,6 @@ class I18nWidget(PressableText):
 	def selected_lang(self, o, v):
 		lang = v[0]
 		self.lang = lang
+		i18n = I18n()
 		i18n.changeLang(self.lang)
 
