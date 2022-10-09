@@ -632,12 +632,14 @@ class Slider(Carousel):
 			w = bk.widgetBuild(desc)
 			self.add_widget(w)
 
-i18n = I18n()
+i18n = None
 
 class I18nWidget(PressableText):
 	lang = StringProperty(None)
 	def __init__(self, **kw):
 		super().__init__(**kw)
+		if i18n is None:
+			i18n = I18n()
 		self.lang = i18n.lang
 
 	def on_lang(self, *args):
