@@ -2,6 +2,7 @@ import sys
 import math
 from traceback import print_exc
 
+from kivy.resources import resource_find
 from kivy.properties import ObjectProperty, StringProperty, \
 			NumericProperty, BooleanProperty, OptionProperty
 from kivy.properties import DictProperty
@@ -78,6 +79,26 @@ from .utils import CSize, SUPER
 from .swipebehavior import SwipeBehavior
 from .widgetExt.inputext import MyDropDown
 
+font_names = {
+	'text':resource_find('DroidSansFallback.ttf'),
+	'title6':resource_find('TsangerYuYangT_W01_W01.ttf'),
+	'title5':resource_find('TsangerYuYangT_W01_W02.ttf'),
+	'title4':resource_find('TsangerYuYangT_W01_W03.ttf'),
+	'title3':resource_find('TsangerYuYangT_W01_W04.ttf'),
+	'title2':resource_find('TsangerYuYangT_W01_W05.ttf'),
+	'title1':resource_find('Alimama_ShuHeiTi_Bold.ttf')
+}
+
+font_sizes = {
+	'text':CSize(1),
+	'title6':CSize(1.1),
+	'title5':CSize(1.3),
+	'title4':CSize(1.5),
+	'title3':CSize(1.7),
+	'title2':CSize(1.9),
+	'title1':CSize(2.1)
+}
+
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
 	from .widgetExt.androidwebview import AWebView
@@ -146,27 +167,18 @@ class Text(Label):
 	def __init__(self,i18n=False, texttype='text', wrap=False,
 					fgcolor=None, **kw):
 		
-		fontsize={'font_size':CSize(1)}
-		offset={
-			'text':0,
-			'title1':CSize(0.6),
-			'title2':CSize(0.5),
-			'title3':CSize(0.4),
-			'title4':CSize(0.3),
-			'title5':CSize(0.2),
-			'title6':CSize(0.1),
-		}
-		fontsize = {'font_size': CSize(1) + offset.get(texttype,0)}
+		fontsize = font_sizes.get(texttype)
+		fontname = font_names.get(texttype)
 		self._i18n = i18n
 		self.i18n = I18n()
 		self.bgcolor = fgcolor
 		kwargs = kw.copy()
 		config = getConfig()
 		self.wrap = wrap
-		if kwargs.get('font_size') and texttype=='text':
-			pass
-		else:
-			kwargs.update(fontsize)
+		kwargs.update({
+			'font_size':fontsize,
+			'font_name':fontname
+		})
 		if not kwargs.get('text'):
 			kwargs['text'] = kwargs.get('otext','')
 		
