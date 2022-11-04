@@ -168,7 +168,6 @@ class Blocks(EventDispatcher):
 			try:
 				hc = HttpClient()
 				resp=hc(url,method=method,params=params,files=files)
-				# print('Blocks.py :resp=',resp)
 				return resp
 			except Exception as e:
 				print_exc()

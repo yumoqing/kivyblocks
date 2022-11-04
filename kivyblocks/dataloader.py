@@ -6,6 +6,12 @@ from .threadcall import HttpClient
 from .utils import absurl
 from appPublic.registerfunction import RegisterFunction
 
+def getUrlData(url, method='GET', params={}):
+	blocks = Factory.Blocks()
+	d = blocks.getUrlData(url, method=method, 
+						params=params)
+	return d
+
 class DataGraber(EventDispatcher):
 	"""
 	Graber format
@@ -17,7 +23,7 @@ class DataGraber(EventDispatcher):
 			"target":"third",
 			"params":
 			"method":
-			"pagging":"default false"
+			"paging":"default false"
 		}
 	}
 	if dataurl present, the DataGraber using this dataurl to get and 
@@ -36,6 +42,11 @@ class DataGraber(EventDispatcher):
 
 	def load(self, *args, **kw):
 		ret = None
+		if self.options['paging']:
+			if kw.get('rows') is None:
+				kw['rows'] = 60
+			if kw.get('page') is None:
+				kw['page'] = 1
 		while True:
 			try:
 				dataurl = self.options.get('dataurl')
@@ -62,11 +73,11 @@ class DataGraber(EventDispatcher):
 
 	def loadUrlData(self, *args, **kw):
 		dataurl = self.options.get('dataurl')
-		hc = HttpClient()
 		params = self.options.get('params',{}).copy()
 		params.update(kw)
 		method = self.options.get('method','GET')
-		d = hc(dataurl, params=params,method=method)
+		d = getUrlData(dataurl, method=method, 
+						params=params)
 		return d
 
 	def loadRFData(self, *args, **kw):
@@ -126,7 +137,7 @@ class DataLoader(EventDispatcher):
 	def load(self):
 		pass
 
-class HttpDataLoader(DataLoader):
+class UrlDataLoader(DataLoader):
 	def load(self, *args, **kw):
 		app = App.get_running_app()
 		url = app.realurl(self.data_user.url)
@@ -136,9 +147,9 @@ class HttpDataLoader(DataLoader):
 			"page":self.data_user.curpage,
 			"rows":self.data_user.page_rows
 		})
-		hc = HttpClient()
+		
 		try:
-			r = hc(url, method=method, params=params)
+			r = getUrlData(url, method=method, params=params)
 			self.dispatch('on_success', r)
 			return r
 		except Exception as e:

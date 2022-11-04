@@ -13,7 +13,7 @@ from appPublic.jsonConfig import getConfig
 from .baseWidget import Text, HTTPDataHandler
 from .utils import CSize, absurl, alert
 from .form import StrSearchForm
-from .dataloader import HttpDataLoader
+from .dataloader import UrlDataLoader
 from .dataloader import ListDataLoader
 from .dataloader import RegisterFunctionDataLoader
 
@@ -62,7 +62,7 @@ class PageLoader(EventDispatcher):
 		self.register_event_type('on_pageloaded')
 		self.newbegin = True
 		if self.url:
-			self.loader = HttpDataLoader(self)
+			self.loader = UrlDataLoader(self)
 		elif self.rfname:
 			self.loader = RegisterFunctionDataLoader(self)
 		elif self.data:
