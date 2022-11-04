@@ -2,12 +2,6 @@
 import os
 import sys
 from kivy.resources import resource_add_path
-from kivy.config import Config
-resource_add_path(os.path.join(os.path.dirname(__file__),'./ttf'))
-Config.set('kivy', 'default_font', [
-	'msgothic',
-	'DroidSansFallback.ttf'])
-
 import signal
 import codecs
 import json
@@ -23,6 +17,7 @@ from kivy.core.window import WindowBase, Window
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.utils import platform
+from kivy.metrics import Metrics
 from kivy.app import App
 
 import plyer
@@ -31,19 +26,24 @@ from .register import *
 from .threadcall import HttpClient,Workers
 from .utils import *
 from .widget_css import register_css
+from .version import __version__
 
 if platform == 'android':
+	from android.storage import app_storage_path
 	from jnius import autoclass
+	from .android_rotation import get_rotation
 
-from .android_rotation import get_rotation
-
+Logger.info(f'KivyBlocks:version={__version__}')
 def  signal_handler(signal, frame):
 	app = App.get_running_app()
+	if app is None:
+		return
 	app.workers.running = False
 	app.stop()
 	print('Singal handled .........')
 
 signal.signal(signal.SIGINT, signal_handler)
+
 
 class BlocksApp(App):
 	def get_rotation(self):
@@ -80,6 +80,8 @@ class BlocksApp(App):
 		self.public_headers = {
 			"platform":self.platform
 		}
+		# Window.borderless = True
+		print('Window.dpi=', Window.dpi, 'Metrics.dpi=', Metrics.dpi)
 		Window.bind(on_request_close=self.on_close)
 		Window.bind(on_rotate=self.on_rotate)
 		Window.bind(size=self.device_info)
@@ -104,23 +106,19 @@ class BlocksApp(App):
 
 	def get_user_data_path(self):
 		if platform == 'android':
-			Environment = autoclass('android.os.Environment')
-			sdpath = Environment.getExternalStorageDirectory()
-			return str(sdpath)
+			# Environment = autoclass('android.os.Environment')
+			# sdpath = Environment.getExternalStorageDirectory()
+			# return str(sdpath)
+			return str(app_storage_path())
 		sdpath = App.get_running_app().user_data_dir
 		return str(sdpath)
 
 	def get_profile_name(self):
-		fname = os.path.join(self.user_data_dir,'.profile.json')
+		fname = os.path.join(self.get_user_data_path(),'.profile.json')
 		print('profile_path=', fname)
 		return fname
 
-	def write_profile(self, dic):
-		fname = self.get_profile_name()
-		with codecs.open(fname,'w','utf-8') as f:
-			json.dump(dic,f)
-
-	def write_default_profile(self):
+	def default_profile(self):
 		device_id = getID()
 		try:
 			device_id = plyer.uniqueid.id
@@ -132,6 +130,15 @@ class BlocksApp(App):
 		d = {
 			'device_id': device_id
 		}
+		return d
+
+	def write_profile(self, dic):
+		fname = self.get_profile_name()
+		with codecs.open(fname,'w','utf-8') as f:
+			json.dump(dic,f)
+
+	def write_default_profile(self):
+		d = self.default_profile()
 		self.write_profile(d)
 
 	def read_profile(self):

@@ -191,7 +191,7 @@ class MarkdownBody(VBox):
 		self.md_obj = md_obj
 		super().__init__(**kw)
 		self.padding=padding
-		self.size_hint = None,None
+		self.size_hint = 1,None
 		self.bind(parent=self.resize)
 		self.resize()
 	
@@ -205,6 +205,7 @@ class MarkdownBody(VBox):
 				f(v)
 
 	def resize(self, *args):
+		return
 		Logger.info('MDBody:resize called')
 		if self.parent:
 			ps = [0,0,0,0]

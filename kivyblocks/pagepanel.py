@@ -2,8 +2,10 @@
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.factory import Factory
-from .baseWidget import VBox, HBox
+from kivy.utils import platform
+from .baseWidget import VBox, HBox, I18nWidget
 from .toggleitems import PressableBox
 from .utils import *
 from .swipebehavior import SwipeBehavior
@@ -56,8 +58,10 @@ in control bar, there is a optional left menu icon, page title, right menu icon,
 PagePanel description file format
 ```
 	{
+		"bar_autohide": true when page is idle
 		"bar_size": bar size in CSize unit
 		"bar_at": "top" or "bottom"
+		"i18n": true of false
 		"bar_css":
 		"panel_css":
 		"left_menu": if defined, it must be a widget instance or a dict 
@@ -133,16 +137,24 @@ sub-widget's description file format
 	"""
 	def __init__(self, bar_size=2, 
 					bar_css='default',
+					i18n=False,
 					csscls='default',
 					singlepage=False,
 					fixed_before=None,
+					bar_autohide=False,
 					fixed_after=None,
 					bar_at='top', 
 					enable_on_close=False, 
 					left_menu=None, **kw):
 		self.bar_size = bar_size
+		self.bar_autohide = bar_autohide
 		self.bar_at = bar_at
+		self.i18n = i18n
 		self.singlepage = singlepage
+		self.idle_status = False
+		self.idle_threshold = 10
+		self.bar_show = True
+		self.idle_task = None
 		self.swipe_buffer = []
 		self.swipe_right = False
 		self.fixed_before = None
@@ -209,6 +221,10 @@ sub-widget's description file format
 			})
 			self.bar.add_widget(self.bar_left_menu)
 			self.bar_left_menu.bind(on_press=self.show_left_menu)
+		if self.i18n:
+			self.i18n_w = I18nWidget(size_hint_x=None, width=CSize(5))
+			self.bar.add_widget(self.i18n_w)
+
 		self.bar_title = HBox(csscls=bar_css)
 		self.bar.add_widget(self.bar_title)
 		self.bar_right_menu = VBox(size_hint=(None,None),size=CSize(bcsize,bcsize))
@@ -229,15 +245,47 @@ sub-widget's description file format
 		})
 		self.bar.add_widget(self.bar_right_menu)
 		self.bar_right_menu_w.bind(on_press=self.show_right_menu)
+		self.construct()
+		if self.bar_autohide:
+			Window.bind(on_touch_down=self.set_normal_bar)
+			self.idle_task = Clock.schedule_once(self.set_idle_bar, \
+													self.idle_threshold)
 
-		if bar_at == 'top':
+	def set_idle_bar(self, *args):
+		if not self.bar_show:
+			return
+		try:
+			self.bar_pos = self.children.index(self.bar)
+			print('self.bar_pos=', self.bar_pos, '......................')
+			super().remove_widget(self.bar)
+			if platform in ['win', 'macosx','linux']:
+				Window.borderless = True
+		except:
+			pass
+		self.bar_show = False
+
+	def set_normal_bar(self, *args):
+		if self.idle_task:
+			self.idle_task.cancel()
+		self.idle_task = Clock.schedule_once(self.set_idle_bar, \
+													self.idle_threshold)
+		if self.bar_show:
+			return
+		super().add_widget(self.bar, index=self.bar_pos)
+		if platform in ['win', 'macosx','linux']:
+			Window.borderless = False
+		self.bar_show = True
+
+	def construct(self):
+		self.clear_widgets()
+		if self.bar_show and self.bar_at == 'top':
 			super().add_widget(self.bar)
 		if self.fixed_before:
 			super().add_widget(self.fixed_before)
 		super().add_widget(self.content)
 		if self.fixed_after:
 			super().add_widget(self.fixed_after)
-		if bar_at != 'top':
+		if self.bar_show and self.bar_at != 'top':
 			super().add_widget(self.bar)
 		self.left_menu_showed = False
 		self.right_menu_showed = False

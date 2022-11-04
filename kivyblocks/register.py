@@ -42,10 +42,13 @@ from .block_test import BlockTest
 from .hierarchy import Hierarchy
 from .price import PriceView
 from .ffpyplayer_video import FFVideo
+from .upload import UploadFile
 
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('UploadFile', UploadFile)
+r('FFVideo', FFVideo)
 r('AnchorBox', AnchorBox)
 r('FloatBox', FloatBox)
 r('RelativeBox', RelativeBox)
@@ -143,5 +146,4 @@ def register_blocks(name, value):
 		b.register_widget(name, value)
 	except:
 		Logger.info(f'plugin : register_blocks():{name} register error')
-
 

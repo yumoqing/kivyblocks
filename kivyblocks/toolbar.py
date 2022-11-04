@@ -67,16 +67,22 @@ class Toolbar(ScrollPanel):
 		self.register_event_type('on_delete_tool')
 		if self.toolbar_orient == 'H':
 			self._inner.orientation = 'horizontal'
+			self.size_hint_x = 1
 		else:
 			self._inner.orientation = 'vertical'
+			self.size_hint_y = 1
 		self.clear_widgets()
 		for t in self.tools:
 			self.add_tool(t)
 		
 		self.bar_width = 0
 		if self.toolbar_orient == 'H':
+			self.size_hint_y = None
+			self.height = self._inner.height * 1.6
 			self.do_scroll_y = False
 		else:
+			self.size_hint_x = None
+			self.width = self._inner.width * 1.6
 			self.do_scroll_x = False
 
 	def on_children_size(self, o, size):

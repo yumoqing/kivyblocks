@@ -2,6 +2,7 @@ import sys
 import math
 from traceback import print_exc
 
+from kivy.resources import resource_find
 from kivy.properties import ObjectProperty, StringProperty, \
 			NumericProperty, BooleanProperty, OptionProperty
 from kivy.properties import DictProperty
@@ -67,7 +68,7 @@ from .widgetExt.inputext import FloatInput,IntegerInput, \
 		StrInput,SelectInput, BoolInput, Password
 from .widgetExt.messager import Messager
 from .bgcolorbehavior import BGColorBehavior
-from .utils import NeedLogin, InsufficientPrivilege, HTTPError
+from .utils import NeedLogin, InsufficientPrivilege, HTTPError, blockImage
 from .login import LoginForm
 from .tab import TabsPanel
 from .threadcall import HttpClient
@@ -76,6 +77,27 @@ from .widget_css import WidgetCSS
 from .ready import WidgetReady
 from .utils import CSize, SUPER
 from .swipebehavior import SwipeBehavior
+from .widgetExt.inputext import MyDropDown
+
+font_names = {
+	'text':resource_find('DroidSansFallback.ttf'),
+	'title6':resource_find('TsangerYuYangT_W01_W01.ttf'),
+	'title5':resource_find('TsangerYuYangT_W01_W02.ttf'),
+	'title4':resource_find('TsangerYuYangT_W01_W03.ttf'),
+	'title3':resource_find('TsangerYuYangT_W01_W04.ttf'),
+	'title2':resource_find('TsangerYuYangT_W01_W05.ttf'),
+	'title1':resource_find('Alimama_ShuHeiTi_Bold.ttf')
+}
+
+font_sizes = {
+	'text':CSize(1),
+	'title6':CSize(1.1),
+	'title5':CSize(1.3),
+	'title4':CSize(1.5),
+	'title3':CSize(1.7),
+	'title2':CSize(1.9),
+	'title1':CSize(2.1)
+}
 
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
@@ -145,33 +167,23 @@ class Text(Label):
 	def __init__(self,i18n=False, texttype='text', wrap=False,
 					fgcolor=None, **kw):
 		
-		fontsize={'font_size':CSize(1)}
-		offset={
-			'text':0,
-			'title1':CSize(0.6),
-			'title2':CSize(0.5),
-			'title3':CSize(0.4),
-			'title4':CSize(0.3),
-			'title5':CSize(0.2),
-			'title6':CSize(0.1),
-		}
-		fontsize = {'font_size': CSize(1) + offset.get(texttype,0)}
+		fontsize = font_sizes.get(texttype)
+		fontname = font_names.get(texttype)
 		self._i18n = i18n
 		self.i18n = I18n()
 		self.bgcolor = fgcolor
 		kwargs = kw.copy()
 		config = getConfig()
 		self.wrap = wrap
-		if kwargs.get('font_size') and texttype=='text':
-			pass
-		else:
-			kwargs.update(fontsize)
+		kwargs.update({
+			'font_size':fontsize,
+			'font_name':fontname
+		})
 		if not kwargs.get('text'):
 			kwargs['text'] = kwargs.get('otext','')
 		
 		SUPER(Text, self, kwargs)
 		if self._i18n:
-			self.i18n = I18n()
 			self.i18n.addI18nWidget(self)
 		if self.wrap:
 			self.size_hint_y = None
@@ -220,7 +232,8 @@ class Text(Label):
 		self.lang = lang
 
 	def on_lang(self,o,lang):
-		self.text = self.i18n(self.otext)
+		if self._i18n and self.otext:
+			self.text = self.i18n(self.otext)
 
 class Title1(Text):
 	def __init__(self, **kw):
@@ -256,12 +269,19 @@ class Modal(VBox):
 	content = DictProperty(None)
 	auto_open = BooleanProperty(True)
 	auto_dismiss = BooleanProperty(True)
-	position = OptionProperty('tc',options=['tl', 'tc', 'tr',
+	target = StringProperty(None)
+	position = OptionProperty('cc',options=['tl', 'tc', 'tr',
 											'cl', 'cc', 'cr',
 											'bl', 'bc', 'br'])
-
 	def __init__(self, **kw):
-		SUPER(Modal, self, kw)
+		self._target = None
+		super(Modal, self).__init__(**kw)
+		self.set_size_position()
+		self._target.bind(size=self.set_size_position)
+		self.register_event_type('on_open')
+		self.register_event_type('on_pre_open')
+		self.register_event_type('on_pre_dismiss')
+		self.register_event_type('on_dismiss')
 		if self.content:
 			blocks = Factory.Blocks()
 			self.content_w = blocks.widgetBuild(self.content)
@@ -269,10 +289,6 @@ class Modal(VBox):
 				self.add_widget(self.content_w)
 			else:
 				print(content,':cannot build widget')
-		self.register_event_type('on_open')
-		self.register_event_type('on_pre_open')
-		self.register_event_type('on_pre_dismiss')
-		self.register_event_type('on_dismiss')
 
 	def on_touch_down(self, touch):
 		if 	not self.collide_point(touch.x, touch.y):
@@ -283,41 +299,74 @@ class Modal(VBox):
 				
 		return super().on_touch_down(touch)
 
-	def set_modal_position(self, w):
+	def on_target(self):
+		w = Window
+		if self.target is not None:
+			w = Factory.Blocks.getWidgetById(self.target)
+		if w is None:
+			w = Window
+		if w != self._target:
+			self._target = w
+		
+	def set_target(self):
+		if self._target is None:
+			if self.target is None:
+				w = Window
+			else:
+				w = Factory.Blocks.getWidgetById(self.target)
+				if w is None:
+					w = Window
+			self._target = w
+
+	def set_size_position(self, *args):
+		self.set_target()
+		if self.size_hint_x:
+			self.width = self.size_hint_x * self._target.width
+		if self.size_hint_y:
+			self.height = self.size_hint_y * self._target.height
+		print(self.width, self.height, 
+					self.size_hint_x, self.size_hint_y,
+					self._target.size
+					)
+		self.set_modal_position()
+
+	def set_modal_position(self):
+		self.set_target()
 		xn = self.position[1]
 		yn = self.position[0]
 		x, y = 0, 0
 		if xn == 'c':
-			x = (w.width - self.width) / 2
+			x = (self._target.width - self.width) / 2
 		elif xn == 'r':
-			x = w.width - self.width
+			x = self._target.width - self.width
 		if x < 0:
 			x = 0
 		if yn == 'c':
-			y = (w.height - self.height) / 2
-		elif yn == 'b':
-			y = w.height - self.height
+			y = (self._target.height - self.height) / 2
+		elif yn == 't':
+			y = self._target.height - self.height
 		if y < 0:
 			y = 0
-		if w == Window:
+		if self._target == Window:
 			self.pos = x, y
 		else:
-			self.pos = w.pos[0] + x, w.pos[1] + y
+			self.pos = self._target.pos[0] + x, self._target.pos[1] + y
 
-	def open(self, widget=None):
+	def open(self):
 		if self.parent:
-			return
+			self.parent.remove_widget(self)
 		self.dispatch('on_pre_open')
-		if widget is None:
-			widget = Window
-		self.set_modal_position(widget)
 		Window.add_widget(self)
 		self.dispatch('on_open')
+		if self._target != Window:
+			self._target.disabled = True
 
 	def dismiss(self, *args):
 		self.dispatch('on_pre_dismiss')
 		self.dispatch('on_dismiss')
 		Window.remove_widget(self)
+		if self._target != Window:
+			self._target.enabled = False
 			
 	def on_open(self, *args):
 		pass
@@ -333,7 +382,6 @@ class Modal(VBox):
 
 	def add_widget(self, w, *args, **kw):
 		super().add_widget(w, *args, **kw)
-		# super().add_widget(Label(text='1111'))
 		if self.auto_open:
 			self.open()
 
@@ -358,11 +406,41 @@ class TimedModal(Modal):
 			self.time_task = None
 		super().dismiss()
 
+class Running(AsyncImage):
+	def __init__(self, widget, **kw):
+		super().__init__(**kw)
+		self.host_widget = widget
+		self.source = blockImage('running.gif')
+		self.host_widget.bind(size=self.set_size)
+		self.set_size()
+		self.open()
+
+	def open(self):
+		if self.parent:
+			self.parent.remove_widget(self)
+		Window.add_widget(self)
+		self.host_widget.disabled = True
+
+	def dismiss(self):
+		if self.parent:
+			self.parent.remove_widget(self)
+		self.host_widget.disabled = False
+
+	def set_size(self, *args):
+		self.size_hint = (None, None)
+		self.width = CSize(2)
+		self.height = CSize(2)
+		self.center = self.host_widget.center
+		
 class PressableImage(ButtonBehavior,AsyncImage):
 	def on_press(self):
 		pass
 
 class PressableLabel(ButtonBehavior, Text):
+	def on_press(self):
+		pass
+
+class PressableText(ButtonBehavior, Text):
 	def on_press(self):
 		pass
 
@@ -565,4 +643,30 @@ class Slider(Carousel):
 		for desc in self.items:
 			w = bk.widgetBuild(desc)
 			self.add_widget(w)
+
+class I18nWidget(PressableText):
+	lang = StringProperty(None)
+	def __init__(self, **kw):
+		super().__init__(**kw)
+		i18n = I18n()
+		self.lang = i18n.lang
+
+	def on_lang(self, *args):
+		self.otext = self.lang
+
+	def on_press(self, *args):
+		i18n = I18n()
+		langs = i18n.get_languages()
+		data = [ {'lang':l} for l in langs ]
+		mdd = MyDropDown(textField='lang', valueField='lang',
+						value=self.lang,
+						data=data)
+		mdd.bind(on_select=self.selected_lang)
+		mdd.showme(self)
+
+	def selected_lang(self, o, v):
+		lang = v[0]
+		self.lang = lang
+		i18n = I18n()
+		i18n.changeLang(self.lang)
 

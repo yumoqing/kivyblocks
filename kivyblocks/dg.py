@@ -25,7 +25,7 @@ from appPublic.uniqueID import getID
 from appPublic.myTE import string_template_render
 
 from .utils import *
-from .baseWidget import Text, HBox, VBox
+from .baseWidget import Text, HBox, VBox, Running
 from .scrollpanel import ScrollPanel
 from .paging import Paging, RelatedLoader
 from .ready import WidgetReady
@@ -64,7 +64,7 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 		if self.row.header:
 			self.csscls=self.row.part.datagrid.header_css
 		if desc['header']:
-			bl = Text(i18n=True, text=str(desc['value']),
+			bl = Text(i18n=True, otext=str(desc['value']),
 				font_size=CSize(1),wrap=True,
 				halign='left', valign='middle'
 			)
@@ -432,7 +432,7 @@ class DataGrid(VBox):
 			desc = {
 				"widgettype":"Text",
 				"options":{
-					"text":n,
+					"otext":n,
 					"i18n":True,
 				}
 			}

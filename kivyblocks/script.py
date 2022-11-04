@@ -1,3 +1,5 @@
+import os
+import traceback
 try:
 	import ujson as json
 except:
@@ -9,6 +11,9 @@ from appPublic.myTE import MyTemplateEngine
 from appPublic.Singleton import SingletonDecorator
 from appPublic.dictObject import DictObject
 
+from kivy.logger import Logger
+from kivy.utils import platform
+
 @SingletonDecorator
 class ScriptEnv(DictObject):
 	pass
@@ -18,8 +23,10 @@ def set_script_env(n,v):
 	env.update({n:v})
 
 class Script:
-	def __init__(self, root):
-		self.root = root
+	def __init__(self):
+		config = getConfig()
+		self.root = config.script_root
+		# print('Script.root=', self.root)
 		self.env = {}
 		self.handlers = {}
 		self.register('.tmpl', TemplateHandler)
@@ -31,6 +38,20 @@ class Script:
 			url = url[7:]
 		return join(self.root, *url.split('/'))
 
+	def show_info(self, env):
+		workdir = env['workdir']
+		sfile = env['filepath']
+		url = env['url']
+		print(f'script:workdir={workdir}')
+		print(f'script:script_file={sfile}')
+		print(f'script:url={url}')
+		sdir = os.path.join(workdir, 'scripts')
+		sf_exists = os.path.isdir(sdir)
+		conf_f = os.path.join(workdir, 'conf', 'config.json')
+		conf_exists = os.path.isfile(conf_f)
+		print(f'script:script exists {sf_exists}')
+		print(f'script:config.json exists {conf_exists}')
+
 	def dispatch(self, url, **kw):
 		filepath = self.url2filepath(url)
 		for suffix, handler in self.handlers.items():
@@ -41,6 +62,10 @@ class Script:
 				env['root_path'] = self.root
 				env['url'] = url
 				env['filepath'] = filepath
+				# print(f"workdir={env['workdir']}--------")
+				# if platform == 'android':
+				# 	self.show_info(env)
+
 				h = handler(env)
 				d = h.render()
 				try:
@@ -90,7 +115,12 @@ class TemplateHandler(BaseHandler):
 		self.engine = MyTemplateEngine(paths)
 
 	def render(self):
-		return self.engine.render(self.templ_file, self.env)
+		try:
+			return self.engine.render(self.templ_file, self.env)
+		except Exception as e:
+			print('Exception:', str(e))
+			print('filename=', self.env['filepath'])
+			traceback.print_exc()
 
 class DspyHandler(BaseHandler):
 	def __init__(self, env):
@@ -107,9 +137,15 @@ class DspyHandler(BaseHandler):
 		return txt
 
 	def render(self, params={}):
-		lenv = self.env.copy()
-		lenv.update(params)
-		txt = self.loadScript(self.env['filepath'])
-		exec(txt,lenv,lenv)
-		func = lenv['myfunc']
-		return func(self.env, **lenv)
+		try:
+			lenv = self.env.copy()
+			lenv.update(params)
+			txt = self.loadScript(self.env['filepath'])
+			exec(txt,lenv,lenv)
+			func = lenv['myfunc']
+			return func(self.env, **lenv)
+		except Exception as e:
+			print('Exception:', str(e))
+			print('filename=', self.env['filepath'])
+			traceback.print_exc()
+
