@@ -1,4 +1,5 @@
 import os
+import codecs
 import traceback
 try:
 	import ujson as json
@@ -34,26 +35,29 @@ class Script:
 		self.register('.ui', TemplateHandler)
 
 	def url2filepath(self, url):
-		if url.startswith('file://'):
-			url = url[7:]
-		return join(self.root, *url.split('/'))
+		if url.startswith('file:///'):
+			url = url[8:]
+		ret = join(self.root, *url.split('/'))
+		# print('url2filepath():root=', self.root, url, ret)
+		return ret
 
 	def show_info(self, env):
 		workdir = env['workdir']
 		sfile = env['filepath']
 		url = env['url']
-		print(f'script:workdir={workdir}')
-		print(f'script:script_file={sfile}')
-		print(f'script:url={url}')
+		# print(f'script:workdir={workdir}')
+		# print(f'script:script_file={sfile}')
+		# print(f'script:url={url}')
 		sdir = os.path.join(workdir, 'scripts')
 		sf_exists = os.path.isdir(sdir)
 		conf_f = os.path.join(workdir, 'conf', 'config.json')
 		conf_exists = os.path.isfile(conf_f)
-		print(f'script:script exists {sf_exists}')
-		print(f'script:config.json exists {conf_exists}')
+		# print(f'script:script exists {sf_exists}')
+		# print(f'script:config.json exists {conf_exists}')
 
 	def dispatch(self, url, **kw):
 		filepath = self.url2filepath(url)
+		# print('dispatch():url=', url, 'filepath=', filepath)
 		for suffix, handler in self.handlers.items():
 			if filepath.endswith(suffix):
 				env = self.env.copy()
@@ -62,10 +66,6 @@ class Script:
 				env['root_path'] = self.root
 				env['url'] = url
 				env['filepath'] = filepath
-				# print(f"workdir={env['workdir']}--------")
-				# if platform == 'android':
-				# 	self.show_info(env)
-
 				h = handler(env)
 				d = h.render()
 				try:
@@ -92,7 +92,15 @@ class BaseHandler:
 			return '/'.join(tokens)
 
 		p1 = self.env['url'].split('/')[:-1]
-		return '/'.join(p1+tokens)
+		ret = '/'.join(p1+tokens)
+		"""
+		print('entire_url(): org_url=', self.env['url'],
+				'url=', url,
+				'p1=', p1,
+				'tokens=', tokens,
+				'ret=', ret)
+		"""
+		return ret
 
 	def __init__(self, env):
 		self.env = env

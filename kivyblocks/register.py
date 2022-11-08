@@ -43,10 +43,12 @@ from .hierarchy import Hierarchy
 from .price import PriceView
 from .ffpyplayer_video import FFVideo
 from .upload import UploadFile
+from .pyinterpreter import PyInterpreter
 
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('PyInterpreter', PyInterpreter)
 r('UploadFile', UploadFile)
 r('FFVideo', FFVideo)
 r('AnchorBox', AnchorBox)
