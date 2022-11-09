@@ -60,6 +60,9 @@ class UdpWidget(EventDispatcher):
 		}
 		bd = self.dataencoder.pack('none', d, uncrypt=True)
 		self.udp_transport.broadcast(bd)
+		return
+		"""
+		# seem to not need to wait
 		if peer_id is None:
 			# print('get_peer_pubkey():return')
 			return
@@ -71,6 +74,7 @@ class UdpWidget(EventDispatcher):
 			if self.dataencoder.exist_peer_publickeys(peer_id):
 				return self.dataencder.public_keys[peer_id]
 		raise Exception('timeout')
+		"""
 
 	def comm_callback(self, data, addr):
 		# print('comm_callback():', data, 'addr=', addr)
