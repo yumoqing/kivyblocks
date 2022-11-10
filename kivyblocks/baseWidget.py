@@ -422,14 +422,14 @@ class Running(AsyncImage):
 		self.host_widget.disabled = True
 
 	def dismiss(self):
-		if self.parent:
-			self.parent.remove_widget(self)
+		Window.remove_widget(self)
 		self.host_widget.disabled = False
+		print('dismiss() called ..')
 
 	def set_size(self, *args):
 		self.size_hint = (None, None)
-		self.width = CSize(2)
-		self.height = CSize(2)
+		self.width = CSize(3)
+		self.height = CSize(3)
 		self.center = self.host_widget.center
 		
 class PressableImage(ButtonBehavior,AsyncImage):

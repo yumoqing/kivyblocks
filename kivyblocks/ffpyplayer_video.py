@@ -15,7 +15,7 @@ from kivy.properties import StringProperty, BooleanProperty, \
 from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Line
 from kivyblocks.ready import WidgetReady
-
+from kivyblocks.baseWidget import Running
 
 class FFVideo(WidgetReady, Image):
 	v_src = StringProperty(None)
@@ -28,11 +28,13 @@ class FFVideo(WidgetReady, Image):
 	duration = NumericProperty(-1)
 	position = NumericProperty(-1)
 	volume = NumericProperty(-1)
+	timeout = NumericProperty(5)
 	in_center_focus = BooleanProperty(False)
 
 	def __init__(self, **kwargs):
 		self._player = None
 		self._update_task = None
+		self.running = None
 		self.vh_task = None
 		self.is_black = False
 		self.videosize = None
@@ -43,6 +45,8 @@ class FFVideo(WidgetReady, Image):
 		self.headers_pattern = {}
 		super(FFVideo, self).__init__(**kwargs)
 		self.set_black()
+		self.start_task = None
+		self.block_task = None
 		self.register_event_type('on_frame')
 		self.register_event_type('on_open_failed')
 		self.register_event_type('on_leave_focus')
@@ -50,8 +54,12 @@ class FFVideo(WidgetReady, Image):
 		self.register_event_type('on_load_success')
 		self.register_event_type('on_startplay')
 
-	def on_open_failed(self, *args):
-		pass
+	def video_blocked(self, *args):
+		self._play_stop()
+		self.on_v_src(None, None)
+
+	def on_open_failed(self, source):
+		print(f'{source} open failed')
 
 	def on_load_success(self, *args):
 		pass
@@ -195,6 +203,7 @@ class FFVideo(WidgetReady, Image):
 		self._player.request_channel('audio', action='cycle')
 
 	def on_v_src(self, o, src):
+		# self.running = Running(self)
 		self.status = 'stop'
 		self.playing = False
 
@@ -224,6 +233,13 @@ class FFVideo(WidgetReady, Image):
 						lib_opts=lib_opts) 
 		# self._play_start()
 		self.status = 'play'
+		self.start_task = Clock.schedule_once(self.open_failed, self.timeout)
+
+	def open_failed(self, *args):
+		self.dispatch('on_open_failed', self.v_src)
+
+	def on_open_failed(self, source):
+		print(f'{source} open failed')
 
 	def file_opened(self, files):
 		self.v_src = files[0]
@@ -366,6 +382,15 @@ class FFVideo(WidgetReady, Image):
 				self._update_task = Clock.schedule_once(self.do_update, 0)
 
 	def do_update(self, *args):
+		if self.start_task:
+			self.start_task.cancel()
+			self.start_task = None
+		if self.block_task:
+			self.block_task.cancel()
+		# if self.running:
+		# 	print('runnung dismiss ........')
+		# 	self.running.dismiss()
+		# 	self.running = None
 		self.position = self._player.get_pts()
 		self.volume = self._player.get_volume()
 		img, t = self.last_frame
@@ -376,4 +401,5 @@ class FFVideo(WidgetReady, Image):
 		self.dispatch('on_frame', self.last_frame)
 		self.last_frame = None
 		self.vh_task = Clock.schedule_once(self.video_handle, 0)
+		self.block_task = Clock.schedule_once(self.video_blocked, self.timeout)
 		

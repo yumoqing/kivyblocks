@@ -56,6 +56,8 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 		"""
 		self.desc = desc
 		self.row = row
+		self.part = self.row.part
+		self.datagrid = self.part.datagrid
 		super().__init__(size_hint=(None,None),
 							width = self.desc['width'],
 							height = self.row.part.datagrid.rowHeight()
@@ -72,6 +74,14 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 		else:
 			self.cell_type = 'data'
 			bl = UiFactory.build_view_widget(desc,self.row.row_data) 
+		if self.row.header and desc['name'] == '_checkable_action_':
+			id = self.row.row_data[idfield]
+			if self.row.part.datagrid.is_checked(id):
+				bl.setValue(True)
+			else:
+				bl.setValue(False)
+			bl.bind(select_state=self.row.checkable_action)
+
 		self.colume_name = desc['name']
 		if bl:
 			self.add_widget(bl)
@@ -89,6 +99,7 @@ class Row(BoxLayout):
 
 		"""
 		self.part = part
+		self.datagrid = self.part.datagrid
 		self.header = header
 		self.row_data = data
 		self.row_id = None
@@ -102,6 +113,9 @@ class Row(BoxLayout):
 		super(Row, self).__init__(**opts)
 		self.height = self.part.datagrid.rowHeight()
 		self.init(0)
+
+	def checkable_action(self, o, *args):
+		self.datagrid.set_checked_rows(self.row_id, o.select_state)
 
 	def on_row_press(self, *args):
 		pass
@@ -313,6 +327,7 @@ class DataGrid(VBox):
 		]
 	}
 	"""
+	checkable = BooleanProperty(False)
 	row_selected = BooleanProperty(False)
 	row_normal_css = StringProperty('default')
 	row_selected_css = StringProperty('default')
@@ -326,6 +341,16 @@ class DataGrid(VBox):
 	fields = ListProperty(None)
 	tailer = DictProperty(None)
 	def __init__(self,**options):
+		if self.checkable:
+			self.fields.insert(0, {
+				"name":"_checkable_action_",
+				"label":" ",
+				"type":"checkbox",
+				"width":CSize(2),
+				"freeze_flag":True
+			})
+
+		self.checked_rows = []
 		self.select_rowid = None
 		self.rowheight = None
 		self.on_sizeTask = None
@@ -363,6 +388,11 @@ class DataGrid(VBox):
 			self.tailer_widgets = {}
 			self.build_tailer(self.tailer)
 
+	def set_checked_rows(self, rowid, flag):
+		if flag and rowid not in self.checked_ids:
+			self.checked_ids.append(rowid)
+		if not flag:
+			self.checked_ids = [ id for id in self.checked_ids if id !=rowid]
 	def on_rowpress(self, *args):
 		print('on_rowpress fire, args=', args)
 
