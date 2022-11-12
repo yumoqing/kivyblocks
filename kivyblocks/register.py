@@ -44,10 +44,12 @@ from .price import PriceView
 from .ffpyplayer_video import FFVideo
 from .upload import UploadFile
 from .pyinterpreter import PyInterpreter
+from .circle_progress import CircleProgress
 
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('CircleProgress', CircleProgress)
 r('PyInterpreter', PyInterpreter)
 r('UploadFile', UploadFile)
 r('FFVideo', FFVideo)
@@ -121,7 +123,7 @@ r('HBox',HBox)
 r('VBox',VBox)
 r('SwipeBox',SwipeBox)
 r('ToggleItems',ToggleItems)
-r('ExAccordion', ExAccordion)
+r('Accordion', ExAccordion)
 r('Slider', Slider)
 if platform == 'android':
 	r('PhoneButton',PhoneButton)

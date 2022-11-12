@@ -42,7 +42,7 @@ class TestApp(BlocksApp):
 				{
 					"widgettype":"Title1",
 					"options":{
-						"text":"Say Hello",
+						"otext":"Say Hello",
 						"i18n":True,
 						"size_hint_y":None,
 						"height":"py::CSize(2)"
@@ -51,7 +51,8 @@ class TestApp(BlocksApp):
 				{
 					"widgettype":"Text",
 					"options":{
-						"text":"Hello KivyBlocks"
+						"i18n":True,
+						"otext":"Hello KivyBlocks"
 					}
 				}
 			]
@@ -59,7 +60,6 @@ class TestApp(BlocksApp):
 		blocks = Blocks()
 		x = blocks.widgetBuild(widget_desc)
 		return x
-
 
 if __name__ == '__main__':
 	pp = ProgramPath()
@@ -75,6 +75,188 @@ if __name__ == '__main__':
 if you running it on window, it will show the following:
 ![hello](./docs/imgs/hello_window.png)
 
+## BlocksApp
+inherited from kivy.app.App, for kivyblocks, it get root widget description dictionary from kivyblocks app's json configuration file, and uses Blocks to build the app's root widget.
+
+## Blocks
+A class to constructs all the GUI Widgets in kivyblocks from a widget description dictionary, 
+The Blocks class is register in kivy.factory.Factory, so you can get Blocks class use following script:
+```
+from kivy.factory import Factory
+
+Blocks = Factory.Blocks
+```
+### getWidgetById get widget by id
+#### Syntax
+getWidgetById(id:str, from_widget:Widget) -> Widget
+#### Description
+getWidgetById find the widget identified by "id", the widgets can be found, cause it have a "id" attribute in the widget description dictionary.
+#### Use Case
+get app
+```
+app = Factory.Blocks.getWidgetById('app')
+```
+
+get root widget
+```
+root = Factory.blocks.getWidgetById('root')
+```
+get Window 
+```
+w = Factory.Blocks.getWidgetById('Window')
+```
+find app.root descendant widget with widget_id is 'myid' 
+```
+Factory.Blocks.getWidgetById('root.myid')
+```
+find specified widget's descendant widget
+```
+from_w = Factory.Blocks.getWidgetById('root.one_id')
+w = Factory.Blocks.getWidgetById('mychild', from_widget=from_w)
+```
+find a widget, widget_id is 'descendant' which has a ancester widget_id is 'myancester' and it is from_widget widget's ancester. 
+```
+from_w = Factory.Blocks.getWidgetById('root.one_id')
+w = Factory.Blocks.getWidgetById('-myancester.descendant', from_widget=from_w)
+```
+
+getWidgetById(id:str, from_widget:Widget) -> Widget
+#### Arguments:
+* id a '.' splited string, each part must be a widget_id in the widget tree 
+if id part is start with a '-', it mean to find widget upward, else it find widget downward
+
+* from_widget, default is None, it mean find widget from app.root
+
+#### Return
+if widget found, return the found widget, else return None
+
+### widgetBuild()
+#### Syntax
+x = widgetBuild(desc)
+
+#### Use Case
+
+#### Arguments
+* desc
+widget description dictionary(wdd), it has the following attributes:
+** widgettype
+A string, the name of widget class registered by kivyblocks into kviy.factory.Factory
+** options
+A dictionary, it is the **kwargs argument of __init__() method of the class
+** subwidgets:
+a list, contains one or more wdd or id, when wdd mean widget description dictionary, and string mean the id can be find with Factory.Blocks.getWidgetById()
+** binds
+a list of dictionary, each items bind a event to a action or actions
+for further information, please read use case of this function
+
+** any other attributes will be handle like a wdd, use to build a widget and the attributes key will be the attribute name of the class instance.
+
+#### Return
+if success, return the widget, else return None
+## Registered class
+### Hierarchy
+### Menu
+### DataGrid
+### Toolbar
+### PagePanel
+### ToolPage
+### Form
+### Charts
+### Video
+### FFVideo
+### CircleProgress
+### BlocksTest
+### DefaultImage
+### CommandBox
+### Text
+### TinyText
+### PriceView
+### SingleCheckBox
+### ClickableBox
+### ClickableText
+### ClickableIconText
+### ToggleText
+### ToggleIconText
+### ClickableImage
+### ToggleImage
+### CircleProgress
+### PyInterpreter
+### UploadFile
+### FFVideo
+### AnchorBox
+### FloatBox
+### RelativeBox
+### GridBox
+### PageBox
+### ScatterBox
+### StackBox
+### DateInput
+### HTTPSeriesData
+### HTTPDataHandler
+### PageLoader
+### UdpWidget
+### ScrollPanel
+### TextInput
+### CameraWithMic
+### CustomCamera
+### QrReader
+### Markdown
+### PagePanel
+### Conform
+### Popup
+### MapView
+### DataGrid
+### FileLoaderBrowser
+### KivyCamera
+### QRCodeWidget
+### TabsPanel
+### TwoSides
+### PageContainer
+### BoxViewer
+### Form
+### StrSearchForm
+### VPlayer
+### DataGrid
+### Toolbar
+### ToolPage
+### HTTPDataHandler
+### Text
+### ScrollWidget
+### BinStateImage
+### JsonCodeInput
+### FloatInput
+### IntegerInput
+### StrInput
+### SelectInput
+### BoolInput
+### Messager
+### LoginForm
+### PressableImage
+### PressableLabel
+### Tree
+### TextTree
+### MenuTree
+### PopupMenu
+### HostImage
+### APlayer
+### WrapText
+### PressableBox
+### Title1
+### Title2
+### Title3
+### Title4
+### Title5
+### Title6
+### Modal
+### TimedModal
+### HBox
+### VBox
+### SwipeBox
+### ToggleItems
+### ExAccordion
+### Slider
+### PhoneButton
+### AWebView
 ## Documents
 [中文文档](./docs/cn/index.md)
 [English](./docs/en/index.md)
