@@ -1,0 +1,7 @@
+{
+	"widgettype":"Text",
+	"options":{
+		"text":"Welcome to Kivyblocks",
+		"i18n":true
+	}
+}

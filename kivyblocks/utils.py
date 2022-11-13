@@ -11,6 +11,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.modalview import ModalView
 from kivy.uix.image import AsyncImage
 from appPublic.dictObject import DictObject
+from .mixin import filter_mixin, get_mixins, mixin_behaviors
 
 from .kivysize import KivySizes
 
@@ -40,16 +41,21 @@ def kwarg_pop(obj, kw):
 			setattr(obj, k, kw.pop(k))
 
 def SUPER(klass, obj, kw):
+	mixins_kw = get_mixins(kw)
+	kw = filter_mixin(kw)
 	keys = [ k for k in kw.keys() ]
 	dic = { k:kw.pop(k) for k in keys if hasattr(obj, k) }
 	super(klass, obj).__init__(**kw)
 	for k,v in dic.items():
 		try:
-			setattr(obj, k, v)
+			if v is not None:
+				setattr(obj, k, v)
 		except Exception as e:
 			print(f'obj={obj}, setattr(obj, "{k}","{v}") error')
 			print_exc()
 			raise e
+
+	mixin_behaviors(obj, mixins_kw)
 
 def blockImage(name):
 	p = os.path.dirname(os.path.abspath(__file__))

@@ -33,6 +33,7 @@ from .orientationlayout import OrientationLayout
 from .threadcall import HttpClient
 from .register import *
 from .script import Script, set_script_env
+from .mixin import filter_mixin, get_mixins, mixin_behaviors
 
 class WidgetNotFoundById(Exception):
 	def __init__(self, id):
@@ -237,18 +238,22 @@ class Blocks(EventDispatcher):
 			return self.dictValueExpr(obj,localnamespace)
 		return obj
 
-	def w_build(self,desc) -> Widget:
+	def w_build(self, desc:dict) -> Widget:
 		widgetClass = desc.get('widgettype',None)
 		if not widgetClass:
 			Logger.info("Block: w_build(), desc invalid", desc)
 			raise Exception(desc)
 
 		widgetClass = desc['widgettype']
-		opts = self.valueExpr(desc.get('options',{}).copy())
+		opts_org = self.valueExpr(desc.get('options',{}).copy())
+		opts = filter_mixin(opts_org)
+		bopts = get_mixins(opts_org)
 		widget = None
 		try:
 			klass = Factory.get(widgetClass)
 			widget = klass(**opts)
+			mixin_behaviors(widget, bopts)
+
 		except Exception as e:
 			print('Error:',widgetClass,'contructon error')
 			print_exc()

@@ -1,0 +1,30 @@
+{
+	"id":"mainctrl",
+    "widgettype":"PagePanel",
+	"options":{
+		"bar_autohide":true,
+		"i18n":true,
+		"bar_size":2,
+		"bar_at":"top",
+		"csscls":"mainctrl",
+		"singlepage":true,
+		"left_menu":{
+			"widgettype":"urlwidget",
+			"options":{
+				"params":{
+					"userid":"testuser"
+				},
+				"url":"{{entire_url('mainmenu.ui')}}"
+			}
+		}
+	},
+	"subwidgets":[
+		{
+			"widgettype":"urlwidget",
+			"options":{
+				"url":"{{entire_url('t.ui')}}"
+			}
+		}
+	]
+}
+

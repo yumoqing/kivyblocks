@@ -1,0 +1,20 @@
+{
+	"widgettype":"Menu",
+	"options":{
+		"single_expand":true,
+		"idField":"id",
+		"font_size_c":1,
+		"node_height":2.5,
+		"textField":"label",
+		"bgcolor":[0.2,0.2,0.2,1],
+		"target":"root.mainctrl",
+		"data":[
+			{
+				"id":"setting",
+				"label":"Setting",
+				"icon":"{{entire_url('/imgs/setting.png')}}",
+				"url":"{{entire_url('t.ui')}}"
+			}
+		]
+	}
+}
