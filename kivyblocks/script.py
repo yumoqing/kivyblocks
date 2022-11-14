@@ -29,6 +29,7 @@ class Script:
 		self.root = config.script_root
 		# print('Script.root=', self.root)
 		self.env = {}
+		self.env['uihome'] = config.uihome
 		self.handlers = {}
 		self.register('.tmpl', TemplateHandler)
 		self.register('.dspy', DspyHandler)
@@ -87,7 +88,7 @@ class BaseHandler:
 			return url
 		tokens = url.split('/')
 		if tokens[0] == '':
-			root = self.env['root_path']
+			root = self.env['uihome']
 			tokens[0] = root
 			return '/'.join(tokens)
 
