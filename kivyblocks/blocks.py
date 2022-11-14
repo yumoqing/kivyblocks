@@ -136,7 +136,6 @@ class Blocks(EventDispatcher):
 				'klass':Factory.get(n),
 				'opts':d
 			})
-		print('mixins=', mixins)
 		env['klasses'] = klasses
 		ids = [ i for i in range(len(klasses))]
 		ids.reverse()
@@ -144,12 +143,11 @@ class Blocks(EventDispatcher):
 		code = f"""class ClassX{klass_cnt}({klasslist}):
 	def __init__(self):
 		for i in range(len(klasses)):
-			print(klasses[i]['opts'])
 			klasses[i]['klass'].__init__(self, **klasses[i]['opts'])
 
 x = ClassX{klass_cnt}()
 """
-		print(code)
+		# print(code)
 		exec(code, env, lenv)
 		w = lenv.get('x', None)
 		klass_cnt += 1

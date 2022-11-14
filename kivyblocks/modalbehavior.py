@@ -28,17 +28,11 @@ class ModalBehavior(object):
 			self.open()
 
 	def on_touchdown(self, o, touch):
-		print('on_touchdown() called')
 		if not self.collide_point(touch.x, touch.y):
 			if self.auto_dismiss:
-				print('on_touchdown():auto_dismiss()')
 				self.dispatch('on_pre_dismiss')
 				self.dismiss()
 				return True
-			else:
-				print('on_touchdown(): not auto_dismiss')
-		else:
-			print('on_touchdown():inside modal')
 				
 	def on_target(self, *args):
 		self._target = None
