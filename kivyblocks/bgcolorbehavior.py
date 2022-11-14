@@ -2,8 +2,8 @@ from kivy.logger import Logger
 from kivy.graphics import Color, Rectangle, RoundedRectangle
 from kivy.properties import ListProperty, NumericProperty
 from .color_definitions import getColors
+from .mixin import register_mixin
 
-_logcnt = 0
 class BGColorBehavior(object):
 	color_level=NumericProperty(0)
 	radius = ListProperty([])
@@ -65,3 +65,5 @@ class BGColorBehavior(object):
 		self.bgcolor = self.normal_bgcolor
 		self.color = self.fgcolor = self.normal_fgcolor
 		self.on_bgcolor()
+
+register_mixin('BGColorBehavior', BGColorBehavior)

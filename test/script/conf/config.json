@@ -8,6 +8,7 @@
 		"hugest":6.5
 	},
 	"font_name":"normal",
+	"uihome":"file://",
 	"script_root":"$[workdir]$/scripts",
 	"root":{
 		"widgettype":"urlwidget",

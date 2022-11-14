@@ -1,9 +1,8 @@
 
+from kivy.core.window import Window
 from kivy.properties import DictProperty, BooleanProperty, \
 							StringProperty, OptionProperty, \
 							NumericProperty
-
-from mixin import register_mixin
 
 class ModalBehavior(object):
 	auto_open = BooleanProperty(True)
@@ -14,9 +13,10 @@ class ModalBehavior(object):
 											'cl', 'cc', 'cr',
 											'bl', 'bc', 'br'])
 	def __init__(self, **kw):
+		for k,v in kw.items():
+			setattr(self, k,v)
 		self.time_task = None
 		self._target = None
-		super(Modal, self).__init__(**kw)
 		self.set_size_position()
 		self._target.bind(size=self.set_size_position)
 		self.register_event_type('on_open')
@@ -28,11 +28,17 @@ class ModalBehavior(object):
 			self.open()
 
 	def on_touchdown(self, o, touch):
-		if 	not self.collide_point(touch.x, touch.y):
+		print('on_touchdown() called')
+		if not self.collide_point(touch.x, touch.y):
 			if self.auto_dismiss:
+				print('on_touchdown():auto_dismiss()')
 				self.dispatch('on_pre_dismiss')
 				self.dismiss()
 				return True
+			else:
+				print('on_touchdown(): not auto_dismiss')
+		else:
+			print('on_touchdown():inside modal')
 				
 	def on_target(self, *args):
 		self._target = None
@@ -77,6 +83,7 @@ class ModalBehavior(object):
 			self.pos = x, y
 		else:
 			self.pos = self._target.pos[0] + x, self._target.pos[1] + y
+		print("modal",self._target.size, self.position, self.pos, self.size, self.size_hint)
 
 	def open(self):
 		if self.time_task is not None:
@@ -94,6 +101,7 @@ class ModalBehavior(object):
 			self._target.disabled = True
 
 	def dismiss(self, *args):
+		print('dismiss() called')
 		if self.time_task:
 			self.time_task.cancel()
 			self.time_task = None
@@ -115,4 +123,3 @@ class ModalBehavior(object):
 	def on_pre_dismiss(self, *args):
 		pass
 
-register_mixin('modalbehavior', ModalBehavior)

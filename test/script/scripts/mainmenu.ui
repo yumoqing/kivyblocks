@@ -14,6 +14,21 @@
 				"label":"Setting",
 				"icon":"{{entire_url('/imgs/setting.png')}}",
 				"url":"{{entire_url('t.ui')}}"
+			},
+			{
+				"id":"behavior1",
+				"label":"behavior1",
+				"url":"{{entire_url('boxlayout/behavior.ui')}}"
+			},
+			{
+				"id":"modal1",
+				"label":"Modal Text",
+				"url":"{{entire_url('boxlayout/modalbehavior.ui')}}"
+			},
+			{
+				"id":"boxlayout",
+				"label":"WBoxLayout",
+				"url":"{{entire_url('boxlayout/normal.ui')}}"
 			}
 		]
 	}

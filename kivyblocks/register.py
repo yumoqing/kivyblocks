@@ -45,10 +45,12 @@ from .ffpyplayer_video import FFVideo
 from .upload import UploadFile
 from .pyinterpreter import PyInterpreter
 from .circle_progress import CircleProgress
+from .modalbehavior import ModalBehavior
 
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('ModalBehavior', ModalBehavior)
 r('CircleProgress', CircleProgress)
 r('PyInterpreter', PyInterpreter)
 r('UploadFile', UploadFile)

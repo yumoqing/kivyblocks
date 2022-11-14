@@ -103,6 +103,7 @@ def registerWidget(name:str,widget):
 	globals()[name] = widget
 
 
+klass_cnt = 0
 class Blocks(EventDispatcher):
 	def __init__(self):
 		EventDispatcher.__init__(self)
@@ -112,6 +113,47 @@ class Blocks(EventDispatcher):
 		self.env = GlobalEnv()
 		config = getConfig()
 		self.script = Script()
+
+	def klassBuild(self, klass_name, options):
+		global klass_cnt
+		exclude_mixin = filter_mixin(options)
+		mixins = get_mixins(options)
+		klasses = [
+			{
+				'name':klass_name,
+				'klass':Factory.get(klass_name),
+				'opts':exclude_mixin
+			}
+		]
+		if mixins == {}:
+			return Factory.get(klass_name)(**options)
+
+		env = globals().copy()
+		lenv = {}
+		for n, d, in mixins.items():
+			klasses.append({
+				'name':n,
+				'klass':Factory.get(n),
+				'opts':d
+			})
+		print('mixins=', mixins)
+		env['klasses'] = klasses
+		ids = [ i for i in range(len(klasses))]
+		ids.reverse()
+		klasslist = ','.join([f'klasses[{i}]["klass"]' for i in ids])
+		code = f"""class ClassX{klass_cnt}({klasslist}):
+	def __init__(self):
+		for i in range(len(klasses)):
+			print(klasses[i]['opts'])
+			klasses[i]['klass'].__init__(self, **klasses[i]['opts'])
+
+x = ClassX{klass_cnt}()
+"""
+		print(code)
+		exec(code, env, lenv)
+		w = lenv.get('x', None)
+		klass_cnt += 1
+		return w
 
 	def set(self, k:str, v):
 		self.env[k] = v
@@ -243,19 +285,17 @@ class Blocks(EventDispatcher):
 		if not widgetClass:
 			Logger.info("Block: w_build(), desc invalid", desc)
 			raise Exception(desc)
-
-		widgetClass = desc['widgettype']
 		opts_org = self.valueExpr(desc.get('options',{}).copy())
-		opts = filter_mixin(opts_org)
-		bopts = get_mixins(opts_org)
 		widget = None
 		try:
+			"""
 			klass = Factory.get(widgetClass)
 			widget = klass(**opts)
-			mixin_behaviors(widget, bopts)
+			"""
+			widget = self.klassBuild(widgetClass, opts_org)
 
 		except Exception as e:
-			print('Error:',widgetClass,'contructon error')
+			print('Error:',widgetClass,'construction error')
 			print_exc()
 			raise NotExistsObject(widgetClass)
 
@@ -314,7 +354,7 @@ class Blocks(EventDispatcher):
 			kw = self.valueExpr(sw.copy(), 
 						localnamespace={'self':widget})
 			w = b.widgetBuild(kw)
-			if w:
+			if w and not w.parent:
 				widget.add_widget(w)
 
 
@@ -684,7 +724,9 @@ class Blocks(EventDispatcher):
 		if widgettype is None:
 			print('Block3: desc must be a dict object not None')
 			return None
-		return doit(desc)
+		w =  doit(desc)
+		print('widgetBuild():w=', w)
+		return w
 	
 	@classmethod
 	def findWidget(self, id:str, from_widget:Widget=None) -> Widget:

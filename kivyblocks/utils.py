@@ -48,8 +48,7 @@ def SUPER(klass, obj, kw):
 	super(klass, obj).__init__(**kw)
 	for k,v in dic.items():
 		try:
-			if v is not None:
-				setattr(obj, k, v)
+			setattr(obj, k, v)
 		except Exception as e:
 			print(f'obj={obj}, setattr(obj, "{k}","{v}") error')
 			print_exc()

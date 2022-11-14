@@ -35,10 +35,10 @@ class Script:
 		self.register('.ui', TemplateHandler)
 
 	def url2filepath(self, url):
-		if url.startswith('file:///'):
-			url = url[8:]
+		if url.startswith('file://'):
+			url = url[7:]
 		ret = join(self.root, *url.split('/'))
-		# print('url2filepath():root=', self.root, url, ret)
+		print('url2filepath():root=', self.root, url, ret)
 		return ret
 
 	def show_info(self, env):

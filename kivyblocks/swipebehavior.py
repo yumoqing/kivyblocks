@@ -1,5 +1,6 @@
 import time
 from kivy.logger import Logger
+from .mixin import register_mixin
 
 class SwipeBehavior(object):
 	def __init__(self, **kwargs):
@@ -56,6 +57,7 @@ class SwipeBehavior(object):
 		# Logger.info('SwipeBehavior:touch_down fired')
 		if self.swipeenable:
 			# Logger.info('SwipeBehavior:touch_down fired')
+			touch.grab(self)
 			self.sb_start_point = touch.pos
 			self.sb_start_time = time.time()
 
@@ -69,8 +71,10 @@ class SwipeBehavior(object):
 
 	def on_touchup(self,o,touch):
 		ret = False
-		if self.collide_point(*touch.pos) and self.swipeenable:
+		if self.collide_point(*touch.pos) and self.swipeenable and \
+								touch.grab_current is self:
 			# Logger.info('SwipeBehavior:touch_up fired')
+			touch.ungrab(self)
 			self.sb_end_point = touch.pos
 			self.sb_end_time = time.time()
 			self.check_context_menu()
@@ -116,3 +120,5 @@ class SwipeBehavior(object):
 			elif self.sb_start_point[1] - self.sb_end_point[1] >= \
 						self.threshold:
 				self.dispatch('on_swipe_down')
+
+register_mixin('SwipeBehavior', SwipeBehavior)
