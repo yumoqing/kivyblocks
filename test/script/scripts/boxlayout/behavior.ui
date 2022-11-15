@@ -1,0 +1,15 @@
+{
+	"widgettype":"BoxLayout",
+	"options":{
+	},
+	"subwidgets":[
+		{
+			"widgettype":"Text",
+			"options":{
+				"otext":"this is a button text",
+				"i18n":true,
+				"TouchRippleButtonBehavior":{}
+			}
+		}
+	]
+}

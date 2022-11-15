@@ -26,6 +26,11 @@
 				"url":"{{entire_url('boxlayout/modalbehavior.ui')}}"
 			},
 			{
+				"id":"video",
+				"label":"Video test",
+				"url":"{{entire_url('video/behavior.ui')}}"
+			},
+			{
 				"id":"boxlayout",
 				"label":"WBoxLayout",
 				"url":"{{entire_url('boxlayout/normal.ui')}}"

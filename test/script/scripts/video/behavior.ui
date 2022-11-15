@@ -1,0 +1,20 @@
+{
+	"widgettype":"BoxLayout",
+	"options":{
+			"VideoBehavior":{
+				"v_src":"/home/ymq/c/songs/alone-braver.mkv",
+				"renderto":"background",
+				"auto_play":true
+			}
+	},
+	"subwidgets":[
+		{
+			"widgettype":"Text",
+			"options":{
+			"TouchRippleButtonBehavior":{},
+				"otext":"this is a button text",
+				"i18n":true
+			}
+		}
+	]
+}

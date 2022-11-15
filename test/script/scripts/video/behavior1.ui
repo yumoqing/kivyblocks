@@ -1,0 +1,19 @@
+{
+	"widgettype":"BoxLayout",
+	"options":{
+			"VideoBehavior":{
+				"v_src":"/home/ymq/c/songs/undr-sky.mkv",
+				"renderto":"background",
+				"auto_play":true
+			}
+	},
+	"subwidgets":[
+		{
+			"widgettype":"Text",
+			"options":{
+				"otext":"this is a button text",
+				"i18n":true
+			}
+		}
+	]
+}

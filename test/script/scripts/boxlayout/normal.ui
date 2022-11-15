@@ -1,0 +1,13 @@
+{
+	"widgettype":"BoxLayout",
+	"option":{},
+	"subwidgets":[
+		{
+			"widgettype":"Text",
+			"options":{
+				"otext":"this is a BoxLayout",
+				"i18n":true
+			}
+		}
+	]
+}

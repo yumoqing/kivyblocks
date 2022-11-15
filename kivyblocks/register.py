@@ -46,10 +46,12 @@ from .upload import UploadFile
 from .pyinterpreter import PyInterpreter
 from .circle_progress import CircleProgress
 from .modalbehavior import ModalBehavior
+from .videobehavior import VideoBehavior
 
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('VideoBehavior', VideoBehavior)
 r('ModalBehavior', ModalBehavior)
 r('CircleProgress', CircleProgress)
 r('PyInterpreter', PyInterpreter)

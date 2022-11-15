@@ -1,0 +1,21 @@
+{
+	"widgettype":"BoxLayout",
+	"options":{
+		"size_hint":[0.5, 0.5],
+		"ModalBehavior":{
+			"auto_open":true,
+			"position":"tr",
+			"auto_dismiss":true
+		}
+	},
+
+	"subwidgets":[
+		{
+			"widgettype":"Text",
+			"options":{
+				"otext":"this is a Modal Test",
+				"i18n":true
+			}
+		}
+	]
+}
