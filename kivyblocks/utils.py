@@ -63,7 +63,7 @@ def blocksImage(name):
 blockImage = blocksImage
 
 def blocksttf(name):
-	p = os.path_dirname(os.path.abspath(__file__))
+	p = os.path.dirname(os.path.abspath(__file__))
 	return os.path.join(p, 'ttf', name)
 
 def loaded(widget):
