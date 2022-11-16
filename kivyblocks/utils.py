@@ -56,9 +56,15 @@ def SUPER(klass, obj, kw):
 
 	mixin_behaviors(obj, mixins_kw)
 
-def blockImage(name):
+def blocksImage(name):
 	p = os.path.dirname(os.path.abspath(__file__))
 	return os.path.join(p,'imgs',name)
+
+blockImage = blocksImage
+
+def blocksttf(name):
+	p = os.path_dirname(os.path.abspath(__file__))
+	return os.path.join(p, 'ttf', name)
 
 def loaded(widget):
 	widget.loadingwidget.dismiss()
