@@ -155,3 +155,8 @@ def register_blocks(name, value):
 	except:
 		Logger.info(f'plugin : register_blocks():{name} register error')
 
+def widget_build(desc):
+	b = Factory.Blocks()
+	w = b.widgetBuild(desc)
+	return w
+
