@@ -47,10 +47,12 @@ from .pyinterpreter import PyInterpreter
 from .circle_progress import CircleProgress
 from .modalbehavior import ModalBehavior
 from .videobehavior import VideoBehavior
+from .landscopehide import LandscopeHide
 
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('LandscopeHide', LandscopeHide)
 r('VideoBehavior', VideoBehavior)
 r('ModalBehavior', ModalBehavior)
 r('CircleProgress', CircleProgress)
@@ -155,8 +157,4 @@ def register_blocks(name, value):
 	except:
 		Logger.info(f'plugin : register_blocks():{name} register error')
 
-def widget_build(desc):
-	b = Factory.Blocks()
-	w = b.widgetBuild(desc)
-	return w
 

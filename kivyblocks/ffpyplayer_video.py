@@ -1,4 +1,5 @@
 
+from traceback import print_exc
 import time
 import numpy as np
 from ffpyplayer.player import MediaPlayer
@@ -16,7 +17,32 @@ from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Line
 from kivyblocks.ready import WidgetReady
 from kivyblocks.baseWidget import Running
+from kivyblocks.videobehavior import VideoBehavior
 
+vhks = ['v_src', 
+		'play_mode', 
+		'header_callback',
+		'audio_id',
+		'duration',
+		'position',
+		'volume',
+		'timeout',
+		'in_center_focus',
+		'renderto',
+		'auto_play',
+		'repeat'
+]
+
+class FFVideo(WidgetReady, VideoBehavior, Widget):
+	def __init__(self, **kw):
+		kw1 = {k:v for k,v in kw.items() if k in vhks}
+		kw1['renderto'] = 'background'
+		kw2 = {k:v for k,v in kw.items() if k not in vhks}
+		Widget.__init__(self, **kw2)
+		VideoBehavior.__init__(self, **kw1)
+		WidgetReady.__init__(self)
+
+"""
 class FFVideo(WidgetReady, Image):
 	v_src = StringProperty(None)
 	status = OptionProperty('stop', \
@@ -130,7 +156,8 @@ class FFVideo(WidgetReady, Image):
 	def on_parent(self, *args):
 		if self.parent:
 			return
-		self._play_stop()
+		# self._play_stop()
+		print('on_parent() called -----------')
 
 	def on_startplay(self, *args):
 		pass
@@ -228,7 +255,9 @@ class FFVideo(WidgetReady, Image):
 
 		print('ff_opts=', ff_opts)
 		print('lib_opts=', lib_opts)
-		# self._player = MediaPlayer(self.v_src) 
+		print('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe')
+		print_exc()
+		print('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe')
 		self._player = MediaPlayer(self.v_src, ff_opts=ff_opts, \
 						lib_opts=lib_opts) 
 		# self._play_start()
@@ -403,3 +432,4 @@ class FFVideo(WidgetReady, Image):
 		self.vh_task = Clock.schedule_once(self.video_handle, 0)
 		self.block_task = Clock.schedule_once(self.video_blocked, self.timeout)
 		
+"""

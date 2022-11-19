@@ -3,13 +3,14 @@ from traceback import print_exc
 from traceback import print_exc
 from kivy.app import App
 from kivy.logger import Logger
-from appPublic.jsonConfig import getConfig
+from kivy.factory import Factory
 from kivy.uix.popup import Popup
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.modalview import ModalView
 from kivy.uix.image import AsyncImage
+from appPublic.jsonConfig import getConfig
 from appPublic.dictObject import DictObject
 from .mixin import filter_mixin, get_mixins, mixin_behaviors
 
@@ -244,3 +245,9 @@ def show_widget_info(w, tag='DEBUG'):
 	id = getattr(w, 'widget_id', 'null')
 	msg=f"""{tag}:size_hint={w.size_hint},size={w.size},pos={w.pos},widget_id={id},{w}"""
 	Logger.info(msg)
+
+def widget_build(desc):
+	b = Factory.Blocks()
+	w = b.widgetBuild(desc)
+	return w
+

@@ -2,9 +2,8 @@
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
 from kivyblocks.bgcolorbehavior import BGColorBehavior
-from kivyblocks.utils import SUPER
+from kivyblocks.utils import widget_build
 from kivyblocks.mixin import get_mixins, filter_mixin
-from kivyblocks.register import widget_build
 
 class LandscopeHide(FloatLayout):
 	def __init__(self, fix_desc=None, float_desc=None, **kw):

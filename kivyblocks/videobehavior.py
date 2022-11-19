@@ -1,4 +1,5 @@
 
+from traceback import print_exc
 import time
 import numpy as np
 from ffpyplayer.player import MediaPlayer
@@ -32,10 +33,11 @@ class VideoBehavior(object):
 	auto_play=BooleanProperty(True)
 	repeat=BooleanProperty(False)
 	in_center_focus = BooleanProperty(False)
-	render_to = OptionProperty('foreground', options=['background', 'foreground', 'cover'])
+	renderto = OptionProperty('foreground', options=['background', 'foreground', 'cover'])
 
 	def __init__(self, **kwargs):
 		self._player = None
+		self.change_size_task = None
 		self._update_task = None
 		self.running = None
 		self.vh_task = None
@@ -56,7 +58,7 @@ class VideoBehavior(object):
 		self.register_event_type('on_load_success')
 		self.register_event_type('on_startplay')
 		self.bind(size=self.set_video_size)
-		self.bind(parent=self.stop_when_remove)
+		# self.bind(parent=self.stop_when_remove)
 		for k, v in kwargs.items():
 			setattr(self, k, v)
 
@@ -142,6 +144,7 @@ class VideoBehavior(object):
 		pass
 
 	def on_frame(self, *args):
+		return
 		w = self.get_root_window()
 		if w is None:
 			self.status = 'stop'
@@ -149,12 +152,6 @@ class VideoBehavior(object):
 
 		if self._player is None:
 			return
-		if not self.playing:
-			self.dispatch('on_startplay')
-			self._player.request_channel( \
-								'audio', 'open', self.audio_id)
-			self.seek(self.position)
-			self.playing = True
 
 	def __del__(self):
 		self._play_stop()
@@ -205,34 +202,27 @@ class VideoBehavior(object):
 		self._player.request_channel('audio', action='cycle')
 
 	def on_v_src(self, o, src):
-		# self.running = Running(self)
 		self.status = 'stop'
-		self.playing = False
-
 		ff_opts = {
 			'pause':False
 		}
-
 		if self.play_mode == 'preview':
 			ff_opts['lowres'] = 2 # 1/4 size
 			ff_opts['an'] = True
 		elif self.play_mode == 'audioonly':
 			ff_opts['vn'] = True
 		ff_opts.update(self.ff_opts)
-
 		lib_opts = {
 		}
 		lib_opts.update(self.lib_opts)
 		heads = self._get_spec_headers(self.v_src)
 		if heads:
 			lib_opts.update({'headers':heads})
-			ff_opts.update({'headers':heads})
+			# ff_opts.update({'headers':heads})
 
-		print('ff_opts=', ff_opts)
-		print('lib_opts=', lib_opts)
-		# self._player = MediaPlayer(self.v_src) 
 		self._player = MediaPlayer(self.v_src, ff_opts=ff_opts, \
 						lib_opts=lib_opts) 
+		self.playing = False
 		if self.auto_play:
 			self.play()
 
@@ -257,13 +247,11 @@ class VideoBehavior(object):
 		self.status = 'pause'
 
 	def _get_video_info(self):
-		if not self.playing:
-			self.playing = True
-			meta = self._player.get_metadata()
-			self.duration = meta['duration']
-			self._out_fmt = meta['src_pix_fmt']
-			self.frame_rate = meta['frame_rate']
-			self.videosize = meta['src_vid_size']
+		meta = self._player.get_metadata()
+		self.duration = meta['duration']
+		self._out_fmt = meta['src_pix_fmt']
+		self.frame_rate = meta['frame_rate']
+		self.videosize = meta['src_vid_size']
 
 	def _play_stop(self):
 		if self._player:
@@ -287,6 +275,10 @@ class VideoBehavior(object):
 		self.videosize = None
 		
 	def set_video_size(self, *args):
+		if self.change_size_task:
+			self.change_size_task.cancel()
+		self.change_size_task = Clock.schedule_once(self._set_video_size, 0.1)
+	def _set_video_size(self, *args):
 		if self._player is None:
 			return
 		if self.videosize == None:
@@ -294,10 +286,13 @@ class VideoBehavior(object):
 		w, h = self.videosize
 		r = w / h
 		r1 = self.width / self.height
+		# position = self.position
 		if r1 >= r:
 			self._player.set_size(-1, self.height)
 		else:
 			self._player.set_size(self.width, -1)
+		# self.seek(position)
+		# print('_set_video_size():position=', position)
 
 	def set_black(self):
 		if self.is_black:
@@ -365,7 +360,6 @@ class VideoBehavior(object):
 		canvas.clear()
 		with canvas:
 			Rectangle(texture=texture, pos=pos, size=(w, h))
-			self.canvas.after.clear()
 			Color(1,1,1,1)
 			Line(points=[0, 1, self.width, 1], width=2)
 			Color(1,0,0,1)
@@ -397,7 +391,6 @@ class VideoBehavior(object):
 			self.vh_task = Clock.schedule_once(self.video_handle, 0.1)
 			return
 
-		self. _get_video_info()
 		self.last_frame = frame
 		self.video_ts = val
 		if self.last_val is None:
@@ -416,10 +409,10 @@ class VideoBehavior(object):
 			self.start_task = None
 		if self.block_task:
 			self.block_task.cancel()
-		# if self.running:
-		# 	print('runnung dismiss ........')
-		# 	self.running.dismiss()
-		# 	self.running = None
+		if not self.playing:
+			self.playing = True
+			self._get_video_info()
+			self.dispatch('on_startplay')
 		self.position = self._player.get_pts()
 		self.volume = self._player.get_volume()
 		img, t = self.last_frame

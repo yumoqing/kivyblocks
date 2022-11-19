@@ -27,6 +27,8 @@ class Script:
 	def __init__(self):
 		config = getConfig()
 		self.root = config.script_root
+		if sep != '/':
+			self.root = self.root.replace(sep, '/')
 		# print('Script.root=', self.root)
 		self.env = {}
 		self.env['uihome'] = config.uihome
@@ -38,8 +40,13 @@ class Script:
 	def url2filepath(self, url):
 		if url.startswith('file://'):
 			url = url[7:]
-		ret = join(self.root, *url.split('/'))
-		print('url2filepath():root=', self.root, url, ret)
+		parts = self.root.split('/')
+		if url[0] == '/':
+			url = url[1:]
+		parts += url.split('/')
+		ret = '/'.join(parts)
+		# ret = join(self.root, *url.split('/'))
+		print('url2filepath():root=', self.root, url, parts, ret)
 		return ret
 
 	def show_info(self, env):
@@ -67,12 +74,13 @@ class Script:
 				env['root_path'] = self.root
 				env['url'] = url
 				env['filepath'] = filepath
-				h = handler(env)
+				h = handler(self, env)
 				d = h.render()
 				try:
 					return json.loads(d)
 				except:
 					return d
+		return filepath
 
 	def register(self, suffix, handler):
 		self.handlers[suffix] = handler
@@ -81,6 +89,10 @@ class Script:
 		self.env.update({n:v})
 
 class BaseHandler:
+	def real_filepath(self, url):
+		myurl = self.entire_url(url)
+		return self.script.url2filepath(myurl)
+
 	def entire_url(self, url):
 		if url.startswith('file://') or \
 				url.startswith('http://') or \
@@ -89,38 +101,42 @@ class BaseHandler:
 		tokens = url.split('/')
 		if tokens[0] == '':
 			root = self.env['uihome']
-			tokens[0] = root
-			return '/'.join(tokens)
+			if root[-1] == '/':
+				return root + url[1:]
+			else:
+				tokens[0] = root
+				return '/'.join(tokens)
 
 		p1 = self.env['url'].split('/')[:-1]
 		ret = '/'.join(p1+tokens)
-		"""
 		print('entire_url(): org_url=', self.env['url'],
 				'url=', url,
 				'p1=', p1,
 				'tokens=', tokens,
 				'ret=', ret)
-		"""
 		return ret
 
-	def __init__(self, env):
+	def __init__(self, script, env):
+		self.script = script
 		self.env = env
 		self.env['entire_url'] = self.entire_url
+		self.env['real_filepath'] = self.real_filepath
 
 class TemplateHandler(BaseHandler):
-	def __init__(self, env):
-		super().__init__(env)
+	def __init__(self, script, env):
+		super().__init__(script, env)
 		root = env['root_path']
 		paths = [root]
-		fp = env['filepath'][len(root):]
-		plst = fp.split(sep)[:-1]
+		fp = env['filepath'][len(root)+1:]
+		plst = fp.split('/')[:-1]
 		self.templ_file = basename(env['filepath'])
 		cpath = root
 		for p in plst:
-			cpath = join(cpath, p)
+			cpath = f'{cpath}/{p}'
 			paths.append(cpath)
 
 		paths.reverse()
+		print(f'paths={paths}')
 		self.engine = MyTemplateEngine(paths)
 
 	def render(self):
@@ -132,8 +148,8 @@ class TemplateHandler(BaseHandler):
 			traceback.print_exc()
 
 class DspyHandler(BaseHandler):
-	def __init__(self, env):
-		super().__init__(env)
+	def __init__(self, script, env):
+		super().__init__(script, env)
 
 	def loadScript(self, path):
 		data = ''
