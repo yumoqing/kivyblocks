@@ -145,13 +145,6 @@ class VideoBehavior(object):
 
 	def on_frame(self, *args):
 		return
-		w = self.get_root_window()
-		if w is None:
-			self.status = 'stop'
-			print('root is None................')
-
-		if self._player is None:
-			return
 
 	def __del__(self):
 		self._play_stop()
@@ -301,7 +294,7 @@ class VideoBehavior(object):
             size=self.size, colorfmt='rgb')
 		buf = b'\x00' * int(self.width * self.height * 3)
 		image_texture.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
-		self.texture = image_texture
+		self._draw_texture(image_texture, *self.size)
 		self.is_black = True
 
 	def show_yuv420(self, img):
@@ -346,14 +339,23 @@ class VideoBehavior(object):
 		# print('img_size=', w, h, 'window size=', self.size)
 
 	def draw_texture(self, texture, w, h):
-		if self.width != w and self.height != h:
-			self.set_video_size()
-			return
+		d = self._draw_texture(texture, w, h)
+		if d:
+			self.dispatch('on_frame', d)
+
+	def _draw_texture(self, texture, w, h):
+		if abs(self.width - w) > 1 and abs(self.height - h) > 1:
+			self._set_video_size()
+		if w > self.width:
+			w = self.width
+		if h > self.height:
+			h = self.height
 		canvas = self.canvas
 		if self.renderto == 'background':
 			canvas = self.canvas.before
 		elif self.renderto == 'cover':
 			canvas = self.canvas.after
+		p = 0
 		if self.duration > 0:
 			p = self.position / self.duration * self.width
 		pos = (self.width - w)/2, (self.height - h)/2
@@ -364,6 +366,15 @@ class VideoBehavior(object):
 			Line(points=[0, 1, self.width, 1], width=2)
 			Color(1,0,0,1)
 			Line(points=[0,1,p,1], width=2)
+		d = {
+			'texture':texture,
+			'position':self.position,
+			'duration':self.duration,
+			'pos':pos,
+			'texture_size':(w, h),
+			'size':self.size
+		}
+		return d
 
 	def video_handle(self, *args):
 		if self._update_task:
@@ -420,7 +431,6 @@ class VideoBehavior(object):
 			self.show_yuv420(img)
 		else:
 			self.show_others(img)
-		self.dispatch('on_frame', self.last_frame)
 		self.last_frame = None
 		self.vh_task = Clock.schedule_once(self.video_handle, 0)
 		self.block_task = Clock.schedule_once(self.video_blocked, self.timeout)
