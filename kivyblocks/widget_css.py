@@ -164,6 +164,8 @@ class WidgetCSS(object):
 		self.set_background_color()
 
 	def set_background_color(self, *args):
+		if self.width == 100 and self.height == 100:
+			return
 		if not self.bgcolor:
 			return
 		if not self.canvas:
@@ -171,7 +173,7 @@ class WidgetCSS(object):
 			#		self.__class__.__name__)
 			return
 
-		# self.canvas.before.clear()
+		self.canvas.before.clear()
 		with self.canvas.before:
 			Color(*self.bgcolor)
 			if self.radius:

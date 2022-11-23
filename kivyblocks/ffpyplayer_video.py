@@ -35,6 +35,7 @@ vhks = ['v_src',
 ]
 
 class FFVideo(WidgetReady, VideoBehavior, BoxLayout):
+# class FFVideo(VideoBehavior, BoxLayout):
 	def __init__(self, **kw):
 		kw1 = {k:v for k,v in kw.items() if k in vhks}
 		kw1['renderto'] = 'background'
@@ -43,9 +44,9 @@ class FFVideo(WidgetReady, VideoBehavior, BoxLayout):
 		BoxLayout.__init__(self, **kw2)
 		VideoBehavior.__init__(self, **kw1)
 		WidgetReady.__init__(self)
-		self.msg_w = Label(text='Hello')
-		self.add_widget(self.msg_w)
-		self.bind(on_frame=self.show_info)
+		# self.msg_w = Label(text='Hello')
+		# self.add_widget(self.msg_w)
+		# self.bind(on_frame=self.show_info)
 
 	def show_info(self, o, d):
 		txt = f"size={d['size']}, vpos={d['pos']}, vsize={d['texture_size']}"

@@ -1,6 +1,7 @@
 
 import os
 import sys
+from kivyblocks import setconfig
 from kivy.resources import resource_add_path
 import signal
 import codecs
@@ -22,6 +23,7 @@ from kivy.app import App
 
 import plyer
 
+from .i18n import I18n
 from .register import *
 from .threadcall import HttpClient,Workers
 from .utils import *
@@ -74,6 +76,7 @@ class BlocksApp(App):
 				register_css(k,v)
 
 	def build(self):
+		i18n = I18n()
 		self.platform = platform
 		self.is_desktop = platform in ['win', 'linux', 'macosx']
 		config = getConfig()

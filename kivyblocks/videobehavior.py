@@ -48,7 +48,7 @@ class VideoBehavior(object):
 		}
 		self.lib_opts = {}
 		self.headers_pattern = {}
-		self.set_black()
+		# self.set_black()
 		self.start_task = None
 		self.block_task = None
 		self.register_event_type('on_frame')
@@ -292,9 +292,9 @@ class VideoBehavior(object):
 			return
 		image_texture = Texture.create(
             size=self.size, colorfmt='rgb')
-		buf = b'\x00' * int(self.width * self.height * 3)
+		buf = b'\x33' * int(self.width * self.height * 3)
 		image_texture.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
-		self._draw_texture(image_texture, *self.size)
+		self._my_show_texture(image_texture, *self.size)
 		self.is_black = True
 
 	def show_yuv420(self, img):
@@ -324,7 +324,7 @@ class VideoBehavior(object):
 			self._fbo.ask_update()
 			self._fbo.draw()
 		texture.flip_vertical()
-		self.draw_texture(texture, w, h)
+		self.my_show_texture(texture, w, h)
 		# self.texture = texture
 
 	def show_others(self, img):
@@ -334,16 +334,18 @@ class VideoBehavior(object):
 				img.to_memoryview()[0], colorfmt='rgb',
 				bufferfmt='ubyte')
 		texture.flip_vertical()
-		self.draw_texture(texture, w, h)
+		self.my_show_texture(texture, w, h)
 		# self.texture = texture
 		# print('img_size=', w, h, 'window size=', self.size)
 
-	def draw_texture(self, texture, w, h):
-		d = self._draw_texture(texture, w, h)
+	def my_show_texture(self, texture, w, h):
+		d = self._my_show_texture(texture, w, h)
 		if d:
 			self.dispatch('on_frame', d)
 
-	def _draw_texture(self, texture, w, h):
+	def _my_show_texture(self, texture, w, h):
+		if self.width == 100 and self.height== 100:
+			return
 		if abs(self.width - w) > 1 and abs(self.height - h) > 1:
 			self._set_video_size()
 		if w > self.width:
@@ -365,7 +367,9 @@ class VideoBehavior(object):
 			Color(1,1,1,1)
 			Line(points=[0, 1, self.width, 1], width=2)
 			Color(1,0,0,1)
-			Line(points=[0,1,p,1], width=2)
+			Line(points=[1,1,p,1], width=2)
+			# Color(1,1,0,1)
+			# Line(rectangle=[0,0, self.width, self.height], width=4)
 		d = {
 			'texture':texture,
 			'position':self.position,
@@ -389,7 +393,7 @@ class VideoBehavior(object):
 				self.play()
 				return
 			self.status = 'stop'
-			self.set_black()
+			# self.set_black()
 			self.last_val = None
 			return
 		if val == 'pause':
@@ -397,7 +401,7 @@ class VideoBehavior(object):
 			self.last_val = None
 			return
 		if frame is None:
-			self.set_black()
+			# self.set_black()
 			self.last_val = None
 			self.vh_task = Clock.schedule_once(self.video_handle, 0.1)
 			return

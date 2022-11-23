@@ -9,7 +9,7 @@ class ModalBehavior(object):
 	auto_dismiss = BooleanProperty(True)
 	target = StringProperty(None)
 	show_time = NumericProperty(0)
-	position = OptionProperty('cc',options=['tl', 'tc', 'tr',
+	anchor = OptionProperty('cc',options=['tl', 'tc', 'tr',
 											'cl', 'cc', 'cr',
 											'bl', 'bc', 'br'])
 	def __init__(self, **kw):
@@ -17,8 +17,8 @@ class ModalBehavior(object):
 			setattr(self, k,v)
 		self.time_task = None
 		self._target = None
-		self.set_size_position()
-		self._target.bind(size=self.set_size_position)
+		self.set_size_anchor()
+		self._target.bind(size=self.set_size_anchor)
 		self.register_event_type('on_open')
 		self.register_event_type('on_pre_open')
 		self.register_event_type('on_pre_dismiss')
@@ -48,18 +48,18 @@ class ModalBehavior(object):
 					w = Window
 			self._target = w
 
-	def set_size_position(self, *args):
+	def set_size_anchor(self, *args):
 		self.set_target()
 		if self.size_hint_x:
 			self.width = self.size_hint_x * self._target.width
 		if self.size_hint_y:
 			self.height = self.size_hint_y * self._target.height
-		self.set_modal_position()
+		self.set_modal_anchor()
 
-	def set_modal_position(self):
+	def set_modal_anchor(self):
 		self.set_target()
-		xn = self.position[1]
-		yn = self.position[0]
+		xn = self.anchor[1]
+		yn = self.anchor[0]
 		x, y = 0, 0
 		if xn == 'c':
 			x = (self._target.width - self.width) / 2
@@ -77,7 +77,7 @@ class ModalBehavior(object):
 			self.pos = x, y
 		else:
 			self.pos = self._target.pos[0] + x, self._target.pos[1] + y
-		print("modal",self._target.size, self.position, self.pos, self.size, self.size_hint)
+		print("modal",self._target.size, self.anchor, self.pos, self.size, self.size_hint)
 
 	def open(self):
 		if self.time_task is not None:

@@ -30,6 +30,7 @@ from .markdown import Markdown
 # from .custom_camera import CustomCamera, QrReader
 from .defaultimage import *
 from .price import *
+from .blocks import Blocks
 
 #if kivy.platform in ['win','linux', 'macosx']:
 #	from .camerawithmic import ScreenWithMic

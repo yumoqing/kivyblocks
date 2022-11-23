@@ -147,11 +147,14 @@ class Blocks(EventDispatcher):
 
 x = ClassX{klass_cnt}()
 """
-		# print(code)
-		exec(code, env, lenv)
-		w = lenv.get('x', None)
-		klass_cnt += 1
-		return w
+		try:
+			exec(code, env, lenv)
+			w = lenv.get('x', None)
+			klass_cnt += 1
+			return w
+		except Exception as e:
+			print(code)
+			raise e
 
 	def set(self, k:str, v):
 		self.env[k] = v
@@ -501,8 +504,9 @@ x = ClassX{klass_cnt}()
 				target.add_widget(w)
 
 		def doerr(o,e):
-			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error'
-								,str(desc))
+			Logger.info('Block: urlwidgetAction(): desc=%s widgetBuild error e=%s'
+								,str(desc), str(e))
+			print('d=', d)
 
 		b = Blocks()
 		b.bind(on_built=partial(doit,target,add_mode))
@@ -858,5 +862,3 @@ class {{ classname }}({% for b in bases -%}{{b}}{% endfor %})
 """
 
 Factory.register('Blocks',Blocks)
-Factory.register('Video',Video)
-Factory.register('OrientationLayout', OrientationLayout)
