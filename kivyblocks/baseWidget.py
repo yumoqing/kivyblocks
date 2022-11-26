@@ -343,7 +343,7 @@ class Modal(VBox):
 			x = 0
 		if yn == 'c':
 			y = (self._target.height - self.height) / 2
-		elif yn == 't':
+		elif yn == 'b':
 			y = self._target.height - self.height
 		if y < 0:
 			y = 0
@@ -351,6 +351,9 @@ class Modal(VBox):
 			self.pos = x, y
 		else:
 			self.pos = self._target.pos[0] + x, self._target.pos[1] + y
+		Mx = Window.width
+		My = Window.height
+		self.pos_hint = {'x':self.pos[0]/Mx, 'y':self.pos[1]/My}
 
 	def open(self):
 		if self.parent:

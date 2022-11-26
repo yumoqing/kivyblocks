@@ -78,7 +78,7 @@ class ModalBehavior(object):
 		else:
 			self.pos = self._target.pos[0] + x, self._target.pos[1] + y
 		Mx, My = Window.width, Window.height
-		self.pos_hint = {'x':x/Mx, 'y':y/My}
+		self.pos_hint = {'x':self.pos[0]/Mx, 'y':self.pos[1]/My}
 		print("modal",self._target.size, self.anchor, self.pos, self.size, self.size_hint)
 
 	def open(self):

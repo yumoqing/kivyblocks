@@ -53,12 +53,8 @@ class Message(TimedModal):
 	show_position = OptionProperty('br', options=['tl','tc','tr',
 													'cl','cc','cr',
 													'bl','bc','br'])
-	width_c = NumericProperty(15)
-	height_c = NumericProperty(6)
 	def __init__(self, **kw):
 		SUPER(Message, self, kw)
-		self.size_hint = None, None
-		self.set_position()
 		b = VBox(csscls=self.title_css)
 		b1 = HBox(size_hint_y=None, height=CSize(2))
 		b1.add_widget(AsyncImage(source=self.title_icon,
@@ -83,34 +79,6 @@ class Message(TimedModal):
 		b.add_widget(b2)
 		self.add_widget(b)
 	
-	def on_size(self, *args):
-		self.set_position()
-		try:
-			super().on_size(*args)
-		except:
-			pass
-
-	def set_position(self):
-		# self.pos_hint = None, None
-		self.size_hint = None, None
-		self.width = CSize(self.width_c)
-		self.height = CSize(self.height_c)
-		xn = self.show_position[1]
-		yn = self.show_position[0]
-
-		if xn == 'l':	
-			self.anchor_x = 'left'
-		elif xn == 'c':
-			self.anchor_x = 'center'
-		else:
-			self.anchor_x = 'right'
-		if yn == 't':
-			self.anchor_y = 'top'
-		elif yn == 'c':
-			self.anchor_y = 'center'
-		else:
-			self.anchor_y = 'bottom'
-
 class Error(Message):
 	default_title = 'Error'
 	default_message = 'Error message'

@@ -24,7 +24,7 @@ from .qrdata import QRCodeWidget
 # from .kivycamera import KivyCamera
 from .filebrowser import FileLoaderBrowser
 from .mapview import MapView
-from .message import Conform
+from .message import Conform, Error, Message
 from .pagepanel import PagePanel
 from .markdown import Markdown
 # from .custom_camera import CustomCamera, QrReader
@@ -80,6 +80,8 @@ r('TextInput', TextInput)
 r('Markdown', Markdown)
 r('PagePanel', PagePanel)
 r('Conform', Conform)
+r('Message', Message)
+r('Error', Error)
 r('Popup', Popup)
 r('MapView', MapView)
 r('DataGrid',DataGrid)
