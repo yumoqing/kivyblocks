@@ -21,6 +21,7 @@ class UploadFile(ClickableIconText):
 			"height":CSize(1)
 		}
 		self.source = blockImage('upload.png')
+		self.text = self.name
 		self.file_url = None
 		self.running = None
 
@@ -44,6 +45,7 @@ class UploadFile(ClickableIconText):
 				yield d
 		fpath = files[0]
 		fn = os.path.basename(fpath)
+		self.text = fn
 		print('fn=', fn)
 		headers={
 			'Content-Type': 'application/octet-stream',
