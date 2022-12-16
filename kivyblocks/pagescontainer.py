@@ -4,15 +4,16 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.app import App
-from .utils import CSize
-from .bgcolorbehavior import BGColorBehavior
+from .utils import CSize, SUPER
+from .widget_css import WidgetCSS
 from .ready import WidgetReady
 
-class PageContainer(WidgetReady, BGColorBehavior, FloatLayout):
+class PageContainer(WidgetReady, WidgetCSS, FloatLayout):
 	def __init__(self,**kw):
-		FloatLayout.__init__(self, **kw)
-		BGColorBehavior.__init__(self)
-		WidgetReady.__init__(self)
+		SUPER(PageContainer, self, kw)
+		# FloatLayout.__init__(self, **kw)
+		# BGColorBehavior.__init__(self)
+		# WidgetReady.__init__(self)
 		self.show_back = True
 		self.pageWidgets = []
 		self.backButton = Button(text='<',size_hint=(None,None),

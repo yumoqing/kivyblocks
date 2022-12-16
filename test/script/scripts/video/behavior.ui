@@ -2,8 +2,9 @@
 	"widgettype":"BoxLayout",
 	"options":{
 			"VideoBehavior":{
-				"v_src":"/home/ymq/c/songs/alone-braver.mkv",
+				"v_src":"/Volumes/data/share/songs/alone-braver.mkv",
 				"renderto":"background",
+				"repeat":true,
 				"auto_play":true
 			}
 	},

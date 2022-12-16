@@ -1,10 +1,13 @@
 
+import io
 from traceback import print_exc
 import time
 import numpy as np
 from ffpyplayer.player import MediaPlayer
 from ffpyplayer.tools import set_log_callback
 
+from PIL import Image as PILImage
+from ffpyplayer.pic import Image as FFImage
 from kivy.factory import Factory
 from kivy.app import App
 from kivy.core.window import Window
@@ -12,11 +15,12 @@ from kivy.uix.image import Image
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
 from kivy.properties import StringProperty, BooleanProperty, \
-			OptionProperty, NumericProperty
+			OptionProperty, NumericProperty, ListProperty
 from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Line, Rectangle
 from kivyblocks.ready import WidgetReady
 from kivyblocks.baseWidget import Running
+from appPublic.registerfunction import getRegisterFunctionByName
 
 class VideoBehavior(object):
 	v_src = StringProperty(None)
@@ -31,6 +35,7 @@ class VideoBehavior(object):
 	volume = NumericProperty(-1)
 	timeout = NumericProperty(5)
 	auto_play=BooleanProperty(True)
+	prehandlers = ListProperty([])
 	repeat=BooleanProperty(False)
 	in_center_focus = BooleanProperty(False)
 	renderto = OptionProperty('foreground', options=['background', 'foreground', 'cover'])
@@ -61,6 +66,15 @@ class VideoBehavior(object):
 		# self.bind(parent=self.stop_when_remove)
 		for k, v in kwargs.items():
 			setattr(self, k, v)
+
+	def prehandle(self, img):
+		if len(self.prehandlers) == 0:
+			return img
+		for her in self.prehandlers:
+			f = getRegisterFunctionByName(her)
+			if f:
+				img = f(img)
+		return img
 
 	def video_blocked(self, *args):
 		self._play_stop()
@@ -298,6 +312,7 @@ class VideoBehavior(object):
 		self.is_black = True
 
 	def show_yuv420(self, img):
+		img = self.prehandle(img)
 		w, h = img.get_size()
 		w2 = int(w / 2)
 		h2 = int(h / 2)
@@ -328,6 +343,7 @@ class VideoBehavior(object):
 		# self.texture = texture
 
 	def show_others(self, img):
+		img = self.prehandle(img)
 		w, h = img.get_size()
 		texture = Texture.create(size=(w, h), colorfmt='rgb')
 		texture.blit_buffer(

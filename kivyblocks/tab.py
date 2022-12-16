@@ -24,18 +24,15 @@ from appPublic.uniqueID import getID
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivy.clock import Clock
 from kivy.factory import Factory
+from .utils import SUPER
+from .widget_css import WidgetCSS
 
-from .bgcolorbehavior import BGColorBehavior
-
-class TabsPanel(BGColorBehavior, TabbedPanel):
-	def __init__(self,color_level=-1,
-					radius=[],
-					tabs=[],
-					**options):
+class TabsPanel(WidgetCSS, TabbedPanel):
+	def __init__(self, tabs=[], **options):
 		self.tabs_list = tabs
-		TabbedPanel.__init__(self,**options)
-		BGColorBehavior.__init__(self,color_level=color_level,
-						radius=radius)
+		SUPER(TabsPanel, self, options)
+		# TabbedPanel.__init__(self,**options)
+		# BGColorBehavior.__init__(self)
 		Clock.schedule_once(self.add_tabs,0)
 
 	def newname(self):

@@ -2,7 +2,7 @@
 	"widgettype":"BoxLayout",
 	"options":{
 			"VideoBehavior":{
-				"v_src":"/home/ymq/c/songs/undr-sky.mkv",
+				"v_src":"/home/ymq/d/share/songs/undr-sky.mkv",
 				"renderto":"background",
 				"auto_play":true
 			}
