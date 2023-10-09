@@ -12,6 +12,7 @@ from appPublic.myTE import MyTemplateEngine
 from appPublic.Singleton import SingletonDecorator
 from appPublic.dictObject import DictObject
 
+from kivy.app import App
 from kivy.logger import Logger
 from kivy.utils import platform
 
@@ -26,7 +27,7 @@ def set_script_env(n,v):
 class Script:
 	def __init__(self):
 		config = getConfig()
-		self.root = config.script_root
+		self.root = config.uihome[7:]
 		if sep != '/':
 			self.root = self.root.replace(sep, '/')
 		# print('Script.root=', self.root)
@@ -63,16 +64,17 @@ class Script:
 		# print(f'script:script exists {sf_exists}')
 		# print(f'script:config.json exists {conf_exists}')
 
-	def dispatch(self, url, **kw):
+	def dispatch(self, url, kw):
 		filepath = self.url2filepath(url)
 		# print('dispatch():url=', url, 'filepath=', filepath)
 		for suffix, handler in self.handlers.items():
 			if filepath.endswith(suffix):
 				env = self.env.copy()
 				env.update(ScriptEnv())
-				env.update(kw)
+				# env.update(kw)
 				env['root_path'] = self.root
 				env['url'] = url
+				env['params_kw'] = kw
 				env['filepath'] = filepath
 				h = handler(self, env)
 				d = h.render()
@@ -120,6 +122,9 @@ class BaseHandler:
 		self.script = script
 		self.env = env
 		self.env['entire_url'] = self.entire_url
+		app = App.get_running_app()
+		if hasattr(app, 'default_params'):
+			self.env.update(app.default_params)
 		self.env['real_filepath'] = self.real_filepath
 
 class TemplateHandler(BaseHandler):

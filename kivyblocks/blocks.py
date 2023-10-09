@@ -204,7 +204,7 @@ x = ClassX{klass_cnt}()
 				return None
 
 		if url.startswith('file://'):
-			return self.script.dispatch(url, **params)
+			return self.script.dispatch(url, params)
 		elif url.startswith('http://') or url.startswith('https://'):
 			try:
 				hc = HttpClient()

@@ -25,7 +25,7 @@ from appPublic.uniqueID import getID
 from appPublic.myTE import string_template_render
 
 from .utils import *
-from .baseWidget import Text, HBox, VBox, Running
+from .baseWidget import Text, HBox, VBox
 from .scrollpanel import ScrollPanel
 from .paging import Paging, RelatedLoader
 from .ready import WidgetReady
@@ -56,17 +56,19 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 		"""
 		self.desc = desc
 		self.row = row
-		self.part = self.row.part
-		self.datagrid = self.part.datagrid
+		width = self.desc['width']
+		height = self.row.part.datagrid.rowHeight()
+		print(f'Cell:{width=}, {height=},value={desc["value"]}')
 		super().__init__(size_hint=(None,None),
-							width = self.desc['width'],
-							height = self.row.part.datagrid.rowHeight()
+							width=width, 
+							bgcolor=[0.1,0.5,0.5],
+							height=height
 		)
 		self.csscls=self.row.part.datagrid.row_normal_css
 		if self.row.header:
 			self.csscls=self.row.part.datagrid.header_css
 		if desc['header']:
-			bl = Text(i18n=True, otext=str(desc['value']),
+			bl = Text(i18n=True, text=str(desc['value']),
 				font_size=CSize(1),wrap=True,
 				halign='left', valign='middle'
 			)
@@ -74,14 +76,6 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 		else:
 			self.cell_type = 'data'
 			bl = UiFactory.build_view_widget(desc,self.row.row_data) 
-		if self.row.header and desc['name'] == '_checkable_action_':
-			id = self.row.row_data[idfield]
-			if self.row.part.datagrid.is_checked(id):
-				bl.setValue(True)
-			else:
-				bl.setValue(False)
-			bl.bind(select_state=self.row.checkable_action)
-
 		self.colume_name = desc['name']
 		if bl:
 			self.add_widget(bl)
@@ -99,7 +93,6 @@ class Row(BoxLayout):
 
 		"""
 		self.part = part
-		self.datagrid = self.part.datagrid
 		self.header = header
 		self.row_data = data
 		self.row_id = None
@@ -113,9 +106,6 @@ class Row(BoxLayout):
 		super(Row, self).__init__(**opts)
 		self.height = self.part.datagrid.rowHeight()
 		self.init(0)
-
-	def checkable_action(self, o, *args):
-		self.datagrid.set_checked_rows(self.row_id, o.select_state)
 
 	def on_row_press(self, *args):
 		pass
@@ -162,6 +152,7 @@ class Header(WidgetReady, ScrollPanel):
 							for i,f in enumerate(rd) ]
 		self.header = Row(self.part,rd,header=True)
 		self.add_widget(self.header)
+		self.size_hint_y = None
 		self.height = self.header.height
 
 class Body(WidgetReady, ScrollPanel):
@@ -182,6 +173,7 @@ class Body(WidgetReady, ScrollPanel):
 		row.row_id = id
 		self.add_widget(row,index=index)
 		self.idRow[id] = row
+		print(f'row size={row.size}, hint={row.size_hint}')
 		return row
 	
 	def clearRows(self):
@@ -327,7 +319,6 @@ class DataGrid(VBox):
 		]
 	}
 	"""
-	checkable = BooleanProperty(False)
 	row_selected = BooleanProperty(False)
 	row_normal_css = StringProperty('default')
 	row_selected_css = StringProperty('default')
@@ -341,16 +332,6 @@ class DataGrid(VBox):
 	fields = ListProperty(None)
 	tailer = DictProperty(None)
 	def __init__(self,**options):
-		if self.checkable:
-			self.fields.insert(0, {
-				"name":"_checkable_action_",
-				"label":" ",
-				"type":"checkbox",
-				"width":CSize(2),
-				"freeze_flag":True
-			})
-
-		self.checked_rows = []
 		self.select_rowid = None
 		self.rowheight = None
 		self.on_sizeTask = None
@@ -388,16 +369,11 @@ class DataGrid(VBox):
 			self.tailer_widgets = {}
 			self.build_tailer(self.tailer)
 
-	def set_checked_rows(self, rowid, flag):
-		if flag and rowid not in self.checked_ids:
-			self.checked_ids.append(rowid)
-		if not flag:
-			self.checked_ids = [ id for id in self.checked_ids if id !=rowid]
 	def on_rowpress(self, *args):
 		print('on_rowpress fire, args=', args)
 
 	def on_cellpress(self, *args):
-		print('on_cesspress fire, args=', args)
+		print('on_cellpress fire, args=', args)
 
 	def on_headerpress(self, *args):
 		print('on_headerpress fire, args=', args)
@@ -462,7 +438,7 @@ class DataGrid(VBox):
 			desc = {
 				"widgettype":"Text",
 				"options":{
-					"otext":n,
+					"text":n,
 					"i18n":True,
 				}
 			}
@@ -596,6 +572,7 @@ class DataGrid(VBox):
 			self.delRow(id)
 
 	def addRow(self,data, **kw):
+		# print('addRow()', data)
 		id = getID()
 		f_row = None
 		if self.freeze_part:
@@ -639,6 +616,23 @@ class DataGrid(VBox):
 					fs.append(f)
 		return fs
 	
+	def show_size(self, *args, **kw):
+		print(f'dg:{self.size}')
+		print(f'normal_part:{self.normal_part.size}')
+		print(f'body:{self.normal_part.body.size}')
+		print(f'row:{self.normal_part.body.children[0].size}')
+		print(f'row:{self.normal_part.body.children[0].size}')
+		sp = self.normal_part.body.children[0]
+		print(f'rows={len(sp.children) - 1}')
+		for i, r in enumerate(sp.children):
+			print(f'{i} {r.size=}')
+		if self.normal_part.parent.parent == self:
+			print('part ok')
+		else:
+			print('part parent=', self.normal_part.parent)
+		if self.normal_part.body.parent == self.normal_part:
+			print('body ok')
+
 	def get_selected_data(self):
 		if not self.selected_rowid:
 			return {}

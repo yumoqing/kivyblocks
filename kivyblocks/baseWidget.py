@@ -75,7 +75,7 @@ from .threadcall import HttpClient
 from .i18n import I18n
 from .widget_css import WidgetCSS
 from .ready import WidgetReady
-from .utils import CSize, SUPER
+from .utils import CSize
 from .swipebehavior import SwipeBehavior
 from .widgetExt.inputext import MyDropDown
 
@@ -140,7 +140,7 @@ def ScatterBox(WidgetCSS, WidgetReady, ScatterLayout):
 class Box(WidgetCSS, WidgetReady, BoxLayout):
 	def __init__(self, **kw):
 		try:
-			SUPER(Box, self, kw)
+			super(Box, self).__init__(**kw)
 		except Exception as e:
 			print('Box(',kw,') Error')
 			raise e
@@ -157,9 +157,7 @@ class VBox(Box):
 		Box.__init__(self, **kw)
 
 class SwipeBox(SwipeBehavior, Box):
-	def __init__(self, **kw):
-		SUPER(SwipeBox, self, kw)
-
+	pass
 
 class Text(Label):
 	lang=StringProperty('')
@@ -182,7 +180,7 @@ class Text(Label):
 		if not kwargs.get('text'):
 			kwargs['text'] = kwargs.get('otext','')
 		
-		SUPER(Text, self, kwargs)
+		super(Text, self).__init__(**kwargs)
 		if self._i18n:
 			self.i18n.addI18nWidget(self)
 		if self.wrap:
@@ -277,6 +275,7 @@ class Modal(VBox):
 		self._target = None
 		super(Modal, self).__init__(**kw)
 		self.set_size_position()
+		print('size_hint=', self.size_hint, kw)
 		self._target.bind(size=self.set_size_position)
 		self.register_event_type('on_open')
 		self.register_event_type('on_pre_open')
@@ -299,7 +298,7 @@ class Modal(VBox):
 				
 		return super().on_touch_down(touch)
 
-	def on_target(self):
+	def on_target(self, o, target):
 		w = Window
 		if self.target is not None:
 			w = Factory.Blocks.getWidgetById(self.target)
@@ -324,9 +323,9 @@ class Modal(VBox):
 			self.width = self.size_hint_x * self._target.width
 		if self.size_hint_y:
 			self.height = self.size_hint_y * self._target.height
-		print(self.width, self.height, 
-					self.size_hint_x, self.size_hint_y,
-					self._target.size
+		print("size with target:", self.width, self.height, 
+					self.size_hint, self.size_hint,
+					"target size=", self._target.size
 					)
 		self.set_modal_position()
 
@@ -392,7 +391,7 @@ class TimedModal(Modal):
 	show_time = NumericProperty(0)
 	def __init__(self, **kw):
 		self.time_task = None
-		SUPER(TimedModal, self, kw)
+		super(TimedModal, self).__init__(**kw)
 
 	def open(self, *args, **kw):
 		if self.time_task is not None:

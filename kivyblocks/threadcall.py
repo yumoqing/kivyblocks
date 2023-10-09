@@ -4,6 +4,8 @@ import time
 from threading import Thread, Lock, BoundedSemaphore
 import requests
 from functools import wraps
+from requests.packages import urllib3
+urllib3.disable_warnings()
 
 from kivy.event import EventDispatcher
 from kivy.clock import Clock
@@ -110,10 +112,16 @@ class HttpClient(Http_Client):
 				return cb(None,resp)
 			except Exception as e:
 				raise e
+		
+		app = App.get_running_app()
+		p = {}
+		if hasattr(app, 'default_params'):
+			p = App.get_running_app().default_params
+		p.update(params)
 		kwargs = {
 			"url":url,
 			"method":method,
-			"params":params,
+			"params":p,
 			"files":files,
 			"stream":stream,
 			"headers":headers

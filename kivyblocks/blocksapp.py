@@ -60,10 +60,13 @@ class BlocksApp(App):
 			with codecs.open(config.css.css_filename, 'r', 'utf-8') as f:
 				d = json.load(f)
 				self.buildCsses(d)
-		if config.css.css_url:
-			hc = HttpClient()
-			d = hc.get(self.realurl(config.css.css_url))
-			self.buildCsses(d)
+		try:
+			if config.css.css_url:
+				hc = HttpClient()
+				d = hc.get(self.realurl(config.css.css_url))
+				self.buildCsses(d)
+		except:
+			pass
 
 	def on_rotate(self,*largs):
 		self.current_rotation = Window.rotation
@@ -76,10 +79,19 @@ class BlocksApp(App):
 				register_css(k,v)
 
 	def build(self):
-		i18n = I18n()
+		config = getConfig()
+		self.workers = Workers(maxworkers=config.maxworkers or 80)
+		self.workers.start()
+		try:
+			i18n = I18n()
+		except:
+			i18n = None
 		self.platform = platform
 		self.is_desktop = platform in ['win', 'linux', 'macosx']
-		config = getConfig()
+		self.default_params = {}
+		if config.default_params:
+			self.default_params.update(config.default_params)
+
 		self.public_headers = {
 			"platform":self.platform
 		}
@@ -88,8 +100,6 @@ class BlocksApp(App):
 		Window.bind(on_request_close=self.on_close)
 		Window.bind(on_rotate=self.on_rotate)
 		Window.bind(size=self.device_info)
-		self.workers = Workers(maxworkers=config.maxworkers or 80)
-		self.workers.start()
 		self.load_csses()
 		self.running = True
 		if config.root:
@@ -163,7 +173,7 @@ class BlocksApp(App):
 		}
 		self.public_headers.update(device)
 
-	def on_close(self, *args):
+	def on_close(self, *args, **kwargs):
 		self.workers.running = False
 		return False
 

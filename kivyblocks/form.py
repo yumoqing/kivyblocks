@@ -32,6 +32,7 @@ form options
 		"method"
 	}
 	"cols":"1"
+	"inputwidth",
 	"labelwidth":
 	"textsize":
 	"inputheight":

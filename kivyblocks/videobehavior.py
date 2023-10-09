@@ -342,6 +342,9 @@ class VideoBehavior(object):
 		self.my_show_texture(texture, w, h)
 		# self.texture = texture
 
+	def set_source(self, src):
+		self.v_src = src
+
 	def show_others(self, img):
 		img = self.prehandle(img)
 		w, h = img.get_size()
