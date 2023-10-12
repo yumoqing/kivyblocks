@@ -10,7 +10,6 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
-from kivy.graphics import Fbo
 from kivy.uix.button import ButtonBehavior
 from kivy.clock import Clock
 from kivy.properties import BooleanProperty, StringProperty, \
@@ -533,19 +532,6 @@ class DataGrid(VBox):
 		for r in recs1:
 			id = self.addRow(r,index=idx)
 			ids.append(id)
-		"""
-		self._fbo = Fbo(size=self.size)
-		with self._fbo:
-			self._background_color = Color(0,0,0,1)
-			self._background_rect = Rectangle(size=self.size)
-		for r in recs1:
-			id = self.addRow(r,index=idx)
-			ids.append(id)
-		with self.canvas:
-			self._fbo_rect = Rectangle(size=self.size,
-								texture=self._fbo.texture)
-		"""
-
 		data['idx'] = idx
 		data['ids'] = ids
 		data['data'] = recs2
@@ -557,16 +543,9 @@ class DataGrid(VBox):
 		page = data['page']
 		idx = data['idx']
 		ids = data['ids']
-		self._fbo = Fbo(size=self.size)
-		with self._fbo:
-			self._background_color = Color(0,0,0,1)
-			self._background_rect = Rectangle(size=self.size)
 		for r in recs:
 			id = self.addRow(r,index=idx)
 			ids.append(id)
-		with self.canvas:
-			self._fbo_rect = Rectangle(size=self.size,
-								texture=self._fbo.texture)
 		self._dataloader.bufferObjects(page,ids)
 		x = self._dataloader.getLocater()
 		self.locater(x)
@@ -576,12 +555,13 @@ class DataGrid(VBox):
 			self.delRow(id)
 
 	def addRow(self,data, **kw):
-		# print('addRow()', data)
+		# print('#########addRow() ---------')
 		id = getID()
 		f_row = None
 		if self.freeze_part:
 			self.freeze_part.body.addRow(id, data, **kw)
 		self.normal_part.body.addRow(id, data, **kw)
+		# print('#########addRow()==========')
 		return id
 
 	def delRow(self,id,**kw):

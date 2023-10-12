@@ -122,15 +122,9 @@ class BoxViewer(VBox):
 		idx = data['idx']
 		widgets = data['widgets']
 
-		self._fbo = Fbo(size=self.size)
-		with self._fbo:
-			self._background_color = Color(0,0,0,1)
-			self._background_rect = Rectangle(size=self.size)
-		for r in recs:
-			self.showObject(widgets, r, index=idx)
-		with self.canvas:
-			self._fbo_rect = Rectangle(size=self.size,
-								texture=self._fbo.texture)
+		with self.fboContext():
+			for r in recs:
+				self.showObject(widgets, r, index=idx)
 
 		self.subwidgets += widgets
 

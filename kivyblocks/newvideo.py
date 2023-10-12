@@ -19,14 +19,14 @@ class NewVideo(Video):
 	center_screen = BooleanProperty(False)
 	h_pattern = DictProperty(None)
 	def __init__(self, **kw):
-		hack_mediaplayer()
-		Video.__init__(self, **kw)
-		Window.allow_screensaver = False
-		set_log_callback(self.ffplayerLog)
 		self.register_event_type('on_open_failed')
 		self.register_event_type('on_leave_focus')
 		self.register_event_type('on_enter_focus')
 		self.register_event_type('on_load_success')
+		hack_mediaplayer()
+		Video.__init__(self, **kw)
+		Window.allow_screensaver = False
+		set_log_callback(self.ffplayerLog)
 		self.bind(source=self.record_start_time)
 		self.bind(loaded=self.on_video_loaded)
 		self.load_status = None
@@ -34,6 +34,9 @@ class NewVideo(Video):
 		if self.h_pattern:
 			[ set_headers_pattern(k,v) for k,v in self.h_pattern.items() ]
 
+	def on_h_pattern(self, o, v):
+		pass
+	
 	def set_patternheaders(self, pattern, headers_str):
 		set_headers_pattern(pattern, headers_str)
 

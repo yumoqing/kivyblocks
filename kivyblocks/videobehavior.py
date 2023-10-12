@@ -23,6 +23,7 @@ from kivyblocks.baseWidget import Running
 from appPublic.registerfunction import getRegisterFunctionByName
 
 class VideoBehavior(object):
+	_player = None
 	v_src = StringProperty(None)
 	status = OptionProperty('stop', \
 			options=['stop', 'play', 'pause'])
@@ -41,7 +42,6 @@ class VideoBehavior(object):
 	renderto = OptionProperty('foreground', options=['background', 'foreground', 'cover'])
 
 	def __init__(self, **kwargs):
-		self._player = None
 		self.change_size_task = None
 		self._update_task = None
 		self.running = None
