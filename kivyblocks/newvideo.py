@@ -40,6 +40,9 @@ class NewVideo(Video):
 	def on_enter_focus(self, v=None):
 		pass
 
+	def set_source(self, source):
+		self.source = source
+
 	def on_leave_focus(self, v=None):
 		pass
 

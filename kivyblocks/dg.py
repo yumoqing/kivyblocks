@@ -58,7 +58,7 @@ class Cell(ButtonBehavior, WidgetCSS, BoxLayout):
 		self.row = row
 		width = self.desc['width']
 		height = self.row.part.datagrid.rowHeight()
-		print(f'Cell:{width=}, {height=},value={desc["value"]}')
+		# print(f'Cell:{width=}, {height=},value={desc["value"]}')
 		super().__init__(size_hint=(None,None),
 							width=width, 
 							bgcolor=[0.1,0.5,0.5],
@@ -173,7 +173,6 @@ class Body(WidgetReady, ScrollPanel):
 		row.row_id = id
 		self.add_widget(row,index=index)
 		self.idRow[id] = row
-		print(f'row size={row.size}, hint={row.size_hint}')
 		return row
 	
 	def clearRows(self):
@@ -531,6 +530,10 @@ class DataGrid(VBox):
 			idx = -1
 		recs1 = recs[:self.show_rows]
 		recs2 = recs[self.show_rows:]
+		for r in recs1:
+			id = self.addRow(r,index=idx)
+			ids.append(id)
+		"""
 		self._fbo = Fbo(size=self.size)
 		with self._fbo:
 			self._background_color = Color(0,0,0,1)
@@ -541,6 +544,7 @@ class DataGrid(VBox):
 		with self.canvas:
 			self._fbo_rect = Rectangle(size=self.size,
 								texture=self._fbo.texture)
+		"""
 
 		data['idx'] = idx
 		data['ids'] = ids

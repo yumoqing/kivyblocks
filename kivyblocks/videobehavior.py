@@ -126,6 +126,8 @@ class VideoBehavior(object):
 		return None
 
 	def on_volume(self, *args):
+		if not hasattr(self, '_player'):
+			return 
 		if self._player is None:
 			return
 
@@ -261,6 +263,8 @@ class VideoBehavior(object):
 		self.videosize = meta['src_vid_size']
 
 	def _play_stop(self):
+		if not hasattr(self, '_player'):
+			return 
 		if self._player:
 			self._player.close_player()
 			self._player = None

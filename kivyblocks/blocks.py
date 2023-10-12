@@ -769,7 +769,7 @@ x = ClassX{klass_cnt}()
 				children = [i for i in from_widget.children]
 				if hasattr(from_widget, 'get_subwidgets'):
 					children = from_widget.get_subwidgets()
-				# Logger.info('children=%s', str(children))
+				Logger.info('children=%s', str(children))
 				for c in children:
 					ret = _find_widget(name, from_widget=c, dir=dir)
 					if ret:
@@ -781,8 +781,16 @@ x = ClassX{klass_cnt}()
 					return _find_widget(name, 
 								from_widget=from_widget.parent,
 								dir=dir)
-			Logger.info('Block:_find_widget(), %s, %s %s return None',
-						name, from_widget.__class__.__name__, dir)
+			wid = None
+			if hasattr(from_widget, 'widget_id'):
+				wid = getattr(from_widget, 'widget_id')
+			if wid == 'channel_list':
+				print('channel_list=', from_widget.__class__.__name__, 'children cnt=', len(from_widget.children))
+				for c in children:
+					cid = None
+					if hasattr(c, 'widget_id'):
+						cid = getattr(c, 'widget_id')
+					print('channel_list children:', c.__class__.__name__, cid)
 			return None
 
 		def find_widget(step, from_widget):
