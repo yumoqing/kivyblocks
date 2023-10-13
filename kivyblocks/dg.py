@@ -26,7 +26,7 @@ from appPublic.myTE import string_template_render
 from .utils import *
 from .baseWidget import Text, HBox, VBox
 from .scrollpanel import ScrollPanel
-from .paging import Paging, RelatedLoader
+from .paging import RelatedLoader
 from .ready import WidgetReady
 from .toolbar import Toolbar
 from .bgcolorbehavior import BGColorBehavior
