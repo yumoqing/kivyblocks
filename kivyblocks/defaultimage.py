@@ -1,3 +1,4 @@
+import os
 from kivy.uix.image import AsyncImage
 from kivy.factory import Factory
 from kivy.properties import StringProperty

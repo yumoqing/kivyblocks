@@ -29,7 +29,7 @@ from kivy.graphics import Fbo, Color, Rectangle
 from kivy.properties import NumericProperty, StringProperty, DictProperty
 from .responsivelayout import VResponsiveLayout
 from .toolbar import Toolbar
-from .paging import Paging, RelatedLoader
+from .paging import RelatedLoader
 from .utils import CSize, SUPER
 from .ready import WidgetReady
 from .baseWidget import VBox

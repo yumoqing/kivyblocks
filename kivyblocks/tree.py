@@ -158,12 +158,28 @@ class TreeNode(BoxLayout):
 			self.node_box1.width = width
 		for n in self.nodes:
 			n.setMinWidth(width)
+	def build_content(self):
+		self.buildContent()
+		x = self.content
+		cf = self.treeObj.checkField
+		if cf:
+			self.content = HBox(size_hint_y=None, 
+									height=self.treeObj.rowHeight)
+			self.checkbox_w = CheckBox(active=self.data.get(cf, False)
+			self.content.add_widget(self.checkbox_w)
+			self.content.add_widget(x)
+			self.checkbox_w.bind(active=self.on_checkbox_active)
 
+	def on_checkbox_active(self, o, v):
+		cf = self.treeObj.checkField
+		self.data[cf] = v
+		self.treeObj.node_checkbox_changed(self)
+		
 	def buildContent(self):
 		pass
 
 	def addContent(self):
-		self.buildContent()
+		self.build_content()
 		self.node_box.add_widget(self.content)
 		self.node_box.height = self.treeObj.rowheight
 		self.node_box.width = self.trigger.width + \
@@ -304,8 +320,7 @@ tree options
 	"single_expand",
 	"select_leaf_only",
 	"bgcolor",
-	"checkbox",
-	"multplecheck",
+	"checkField",
 	"idField",
 	"textFiled",
 	"data" # array of {children:{},...}
@@ -313,7 +328,7 @@ tree options
 """
 class Tree(WidgetCSS, ScrollWidget):
 	data = ListProperty([])
-	def __init__(self,
+	def __init__(self,nodeKlass=TreeNode,
 			url=None,
 			params={},
 			single_expand=False,
@@ -322,13 +337,13 @@ class Tree(WidgetCSS, ScrollWidget):
 			normal_css="default",
 			row_height=2,
 			selected_css="selected",
-			checkbox=False,
-			multiplecheck=False,
+			checkField=None,
 			idField='id',
 			textField='text',
 			data=None,
 			**options):
 		self.url = url
+		self.nodeKlass = nodeKlass
 		self.params = params
 		self.data = data
 		self.single_expand=single_expand
@@ -338,8 +353,7 @@ class Tree(WidgetCSS, ScrollWidget):
 		self.bgcolor = bgcolor
 		self.normal_css = normal_css
 		self.selected_css = selected_css
-		self.checkbox = checkbox
-		self.multiplecheck = multiplecheck
+		self.checkFiled = checkField
 		self.idField = idField
 		self.textField = textField
 		print('options=',options)
@@ -351,6 +365,10 @@ class Tree(WidgetCSS, ScrollWidget):
 		self.buildTree()
 		self.bind(size=self.onSize,pos=self.onSize)
 		self.register_event_type('on_press')
+		self.register_event_type('on_checked')
+
+	def node_checkbox_changed(self, node):
+		self.dispatch('on_checked', node.data)
 
 	def on_press(self,*larg):
 		pass

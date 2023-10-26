@@ -214,7 +214,14 @@ x = ClassX{klass_cnt}()
 				print_exc()
 				if errback:
 					return errback(None,e)
-				return None
+				return {
+					"widgettype":"Text",
+					"options":{
+						"text":f"{url=} error",
+						"wrap":True,
+						"halign":"left"
+					}
+				}
 		else:
 			config = getConfig()
 			url = config.uihome + url
@@ -727,7 +734,7 @@ x = ClassX{klass_cnt}()
 			print('Block3: desc must be a dict object not None')
 			return None
 		w =  doit(desc)
-		print('widgetBuild():w=', w)
+		# print('widgetBuild():w=', w)
 		return w
 	
 	@classmethod
@@ -769,7 +776,7 @@ x = ClassX{klass_cnt}()
 				children = [i for i in from_widget.children]
 				if hasattr(from_widget, 'get_subwidgets'):
 					children = from_widget.get_subwidgets()
-				Logger.info('children=%s', str(children))
+				# Logger.info('children=%s', str(children))
 				for c in children:
 					ret = _find_widget(name, from_widget=c, dir=dir)
 					if ret:

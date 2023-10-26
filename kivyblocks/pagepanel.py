@@ -177,6 +177,8 @@ sub-widget's description file format
 			self.left_menu = Factory.Blocks().widgetBuild(left_menu)
 		self.sub_widgets = []
 		VBox.__init__(self, **kw)
+		app = App.get_running_app()
+		print('========================barsize=', CSize(bar_size), bar_size, app.font_size)
 		self.bar = HBox(size_hint_y=None,
 						csscls=bar_css,
 						spacing=CSize(bar_size/6),

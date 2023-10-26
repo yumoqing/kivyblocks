@@ -8,6 +8,7 @@ import kivyblocks.clickable
 import kivyblocks.multi_select
 
 from .baseWidget import *
+from .container import Container
 from .tree import Tree, TextTree, MenuTree, PopupMenu
 from .toolbar import ToolPage, Toolbar
 from .dg import DataGrid
@@ -53,6 +54,7 @@ from .landscopehide import LandscopeHide
 r = Factory.register
 # if kivy.platform in ['win','linux', 'macosx']:
 #	r('ScreenWithMic', ScreenWithMic)
+r('Container', Container)
 r('LandscopeHide', LandscopeHide)
 r('VideoBehavior', VideoBehavior)
 r('ModalBehavior', ModalBehavior)

@@ -12,6 +12,7 @@ from appPublic.folderUtils import ProgramPath
 from appPublic.uniqueID import getID
 from appPublic.rsawrap import RSA
 
+from kivy.properties import NumericProperty
 from kivy.factory import Factory
 from kivy.metrics import sp,dp,mm
 from kivy.core.window import WindowBase, Window
@@ -48,6 +49,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 
 class BlocksApp(App):
+	font_size = NumericProperty(24)
 	def get_rotation(self):
 		return get_rotation()
 
@@ -78,7 +80,26 @@ class BlocksApp(App):
 			if isinstance(v,dict):
 				register_css(k,v)
 
+	def set_fontsize(self, x):
+		self.font_size = x
+
+	def get_font_size(self, ttype='text'):
+		text_fontrates = {
+			'text':1,
+			'title6':1.1,
+			'title5':1.3,
+			'title4':1.5,
+			'title3':1.7,
+			'title2':1.9,
+			'title1':2.1
+		}
+		v = text_fontrates.get(ttype, 'text')
+		return v * self.font_size
+		
 	def build(self):
+		tl = Label(text='test')
+		self.font_size = tl.font_size
+		print('##################app_font_size=', self.font_size) 
 		config = getConfig()
 		self.workers = Workers(maxworkers=config.maxworkers or 80)
 		self.workers.start()
@@ -93,10 +114,10 @@ class BlocksApp(App):
 			self.default_params.update(config.default_params)
 
 		self.public_headers = {
+			"client_uuid":getID(),
 			"platform":self.platform
 		}
 		# Window.borderless = True
-		print('Window.dpi=', Window.dpi, 'Metrics.dpi=', Metrics.dpi)
 		Window.bind(on_request_close=self.on_close)
 		Window.bind(on_rotate=self.on_rotate)
 		Window.bind(size=self.device_info)

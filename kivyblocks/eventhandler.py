@@ -1,11 +1,11 @@
 import inspect
 import asyncio
-from functools improt wraps
+from functools import wraps
 
 def eventhandler(func):
 	@wraps(func)
 	def wrapper_func(*args, **kw):
-		if inspect.inspect.iscoroutinefunction(func):
+		if inspect.iscoroutinefunction(func):
 			return asyncio.gather(func(*args, **kw))
 		return func(*args, **kw)
 	return wrapper_func

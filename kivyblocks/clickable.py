@@ -3,6 +3,12 @@ from kivy.logger import Logger
 from kivy.uix.behaviors import TouchRippleButtonBehavior
 from kivy.graphics import Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.relativelayout import RelativeLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scatterlayout import ScatterLayout
+from kivy.uix.stacklayout import StackLayout
 from kivy.factory import Factory
 from kivy.uix.image import AsyncImage
 from kivy.properties import NumericProperty, DictProperty, \
@@ -395,6 +401,34 @@ def build_cmdbox_view(desc, rec=None):
 	x.setValue(vd)
 	return x
 
+class PressableAnchorLayout(TouchRippleButtonBehavior, AnchorLayout):
+	def on_press(self, o=None, d=None):
+		pass
+
+class PressableBoxLayout(TouchRippleButtonBehavior, BoxLayout):
+	def on_press(self, o=None, d=None):
+		pass
+
+class PressableFloatLayout(TouchRippleButtonBehavior, FloatLayout):
+	def on_press(self, o=None, d=None):
+		pass
+
+class PressableRelativeLayout(TouchRippleButtonBehavior, RelativeLayout):
+	def on_press(self, o=None, d=None):
+		pass
+
+class PressableGridLayout(TouchRippleButtonBehavior, GridLayout):
+	def on_press(self, o=None, d=None):
+		pass
+
+class PressableScatterLayout(TouchRippleButtonBehavior, ScatterLayout):
+	def on_press(self, o=None, d=None):
+		pass
+
+class PressableStackLayout(TouchRippleButtonBehavior, StackLayout):
+	def on_press(self, o=None, d=None):
+		pass
+
 UiFactory.register('checkbox', build_checkbox, build_checkbox)
 UiFactory.register('cmdbox', build_cmdbox_view, build_cmdbox_view)
 
@@ -409,3 +443,10 @@ r('ToggleText',ToggleText)
 r('ToggleIconText',ToggleIconText)
 r('ClickableImage',ClickableImage)
 r('ToggleImage',ToggleImage)
+r('PressableAnchorLayout',PressableAnchorLayout)
+r('PressableBoxLayout',PressableBoxLayout)
+r('PressableFloatLayout',PressableFloatLayout)
+r('PressableRelativeLayout',PressableRelativeLayout)
+r('PressableGridLayout',PressableGridLayout)
+r('PressableScatterLayout',PressableScatterLayout)
+r('PressableStackLayout',PressableStackLayout)

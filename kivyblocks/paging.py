@@ -17,28 +17,6 @@ from .dataloader import UrlDataLoader
 from .dataloader import ListDataLoader
 from .dataloader import RegisterFunctionDataLoader
 
-class PagingButton(Button):
-	def __init__(self, **kw):
-		super().__init__(**kw)
-		self.size_hint = (None,None)
-		self.size = CSize(2,1.8)
-		self.font_size = CSize(1)
-
-"""
-{
-	dataurl
-	params
-	method
-	locater
-	filter
-}
-
-PageLoader load data in a page size once.
-it fires two type of event
-'on_newbegin':fire when start a new parameters loading series
-'on_pageloaded':fire when a page data loads success
-"""
-
 class PageLoader(EventDispatcher):
 	def __init__(self,target=None, **options):
 		self.loading = False
@@ -113,11 +91,11 @@ class PageLoader(EventDispatcher):
 			p += 1
 		self.total_cnt = d['total']
 		self.calculateTotalPage()
-		d = {
+		d.update( {
 			"page":self.curpage,
+			"data":d['rows'],
 			"dir":self.dir,
-			"data":d['rows']
-		}
+		})
 		self.dispatch('on_pageloaded',d)
 		self.loading = False
 		
@@ -129,10 +107,10 @@ class PageLoader(EventDispatcher):
 	def loadNextPage(self):
 		if self.loading:
 			print('is loading, return')
-			return
+			return -1
 
 		if self.total_page > 0 and self.curpage >=self.total_page:
-			return
+			return -1
 		p = self.curpage + 1
 		self.loadPage(p)
 
@@ -163,39 +141,18 @@ class PageLoader(EventDispatcher):
 		self.curpage = p
 		self.loader.load()
 	
-"""
-{
-	adder,
-	remover
-	target,
-	locater,
-	dataurl,
-	params,
-	method,
-	filter
-}
-events:
-'on_deletepage': erase
-
-"""
 class RelatedLoader(PageLoader):
 	def __init__(self, **options):
 		super().__init__(**options)
 		self.objectPages = {}
 		self.totalObj = 0
 		self.MaxbufferPage = 3
-		self.locater = 1/self.MaxbufferPage
-		if self.filter:
-			self.widget = self.filter
-		else:
-			self.widget = None
+		self.buffered_pages = 0
 		self.register_event_type('on_deletepage')
 
 	def do_search(self,o,params):
 		self.objectPages = {}
 		self.totalObj = 0
-		self.MaxbufferPage = 3
-		self.locater = 1/self.MaxbufferPage
 		super().do_search(o, params)
 		
 	def getLocater(self):
@@ -216,13 +173,15 @@ class RelatedLoader(PageLoader):
 			self.calculateTotalPage()
 	
 	def doBufferMaintain(self):
-		siz = len(self.objectPages.keys())
-		if siz >= self.MaxbufferPage:
+		siz = len([k for k in self.objectPages.keys()])
+		self.buffered_pages = siz
+		if siz > self.MaxbufferPage:
 			if self.dir == 'up':
 				p = max(self.objectPages.keys())
 			else:
 				p = min(self.objectPages.keys())
 			self.deleteBuffer(p)
+			self.buffered_pages = self.MaxbufferPage
 
 	def deleteBuffer(self,page):
 		d = self.objectPages[page]
@@ -237,18 +196,25 @@ class RelatedLoader(PageLoader):
 	def show_page(self,o,data):
 		if self.objectPages.get(self.curpage):
 			self.deleteBuffer(self.curpage)
-		else:
-			self.doBufferMaintain()
+		self.bufferObjects(self.curpage, data['rows'])
+		self.doBufferMaintain()
 		self.totalObj += len(data['rows'])
+		if self.dir == 'down':
+			data['locator'] = 1/self.buffered_pages
+		else:
+			data['locator'] = 1 - 1/self.buffered_pages
+
 		super().show_page(o,data)
 	
 	def loadPreviousPage(self):
 		pages = self.objectPages.keys()
 		if len(pages) < 1:
+			print('self.objectPages is null')
 			return
 
 		page = min(pages)
 		if page <= 1:
+			print('page < 1')
 			return
 
 		page -= 1
@@ -257,68 +223,12 @@ class RelatedLoader(PageLoader):
 	def loadNextPage(self):
 		pages = self.objectPages.keys()
 		if len(pages) == 0:
+			print('self.objectPages is null')
 			return
 		page = max(pages)
 		if page>=self.total_page:
+			print('page > total page')
 			return
 		page += 1
 		self.loadPage(page)
-
-"""
-{
-	adder,
-	clearer
-	target,
-	dataurl
-	params,
-	method
-}
-"""
-class Paging(PageLoader):
-	def __init__(self,**options):
-		PageLoader.__init__(self,**options)
-		self.target = options.get('target')
-		self.init()
-
-	def init(self):
-		kwargs = {}
-		kwargs['size_hint_y'] = None
-		kwargs['height'] = CSize(2)
-		kwargs['orientation'] = 'horizontal'
-		kwargs['spacing'] = CSize(1)
-		self.widget = BoxLayout(**kwargs)
-		self.b_f = PagingButton(text="|<")
-		self.b_p = PagingButton(text="<")
-		self.b_n = PagingButton(text=">")
-		self.b_l = PagingButton(text=">|")
-		self.b_f.bind(on_press=self.loadFirstPage)
-		self.b_p.bind(on_press=self.loadPreviousPage)
-		self.b_n.bind(on_press=self.loadNextPage)
-		self.b_l.bind(on_press=self.loadLastPage)
-		self.widget.add_widget(self.b_f)
-		self.widget.add_widget(self.b_p)
-		self.widget.add_widget(self.b_n)
-		self.widget.add_widget(self.b_l)
-		if self.filter:
-			self.widget.add_widget(self.filter)
-
-	def loadFirstPage(self,o=None):
-		if self.curpage == 1:
-			return
-		self.loadPage(1)
-	
-	def loadPreviousPage(self,o=None):
-		if self.curpage < 2:
-			return
-		self.loadPage(self.curpage-1)
-	
-	def loadNextPage(self,o=None):
-		if self.curpage >= self.total_page:
-			return
-		self.loadPage(self.curpage+1)
-	
-	def loadLastPage(self,o=None):
-		if self.curpage >= self.total_page:
-			return
-		self.loadPage(self.total_page)
 

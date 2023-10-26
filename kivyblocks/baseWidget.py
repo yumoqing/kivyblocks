@@ -89,16 +89,6 @@ font_names = {
 	'title1':resource_find('Alimama_ShuHeiTi_Bold.ttf')
 }
 
-font_sizes = {
-	'text':CSize(1),
-	'title6':CSize(1.1),
-	'title5':CSize(1.3),
-	'title4':CSize(1.5),
-	'title3':CSize(1.7),
-	'title2':CSize(1.9),
-	'title1':CSize(2.1)
-}
-
 if platform == 'android':
 	from .widgetExt.phonebutton import PhoneButton
 	from .widgetExt.androidwebview import AWebView
@@ -162,10 +152,12 @@ class SwipeBox(SwipeBehavior, Box):
 class Text(Label):
 	lang=StringProperty('')
 	otext = StringProperty('')
-	def __init__(self,i18n=False, texttype='text', wrap=False,
+	def __init__(self,i18n=False, texttype='text', wrap=False, rate=1,
 					fgcolor=None, **kw):
 		
-		fontsize = font_sizes.get(texttype)
+		app = App.get_running_app()
+		self.rate = 1
+		fontsize = app.get_font_size(texttype) * self.rate
 		fontname = font_names.get(texttype)
 		self._i18n = i18n
 		self.i18n = I18n()
@@ -181,6 +173,8 @@ class Text(Label):
 			kwargs['text'] = kwargs.get('otext','')
 		
 		super(Text, self).__init__(**kwargs)
+		app.bind(font_size=self.reset_font_size)
+		# self.bind(texture_size=self.setter('size'))
 		if self._i18n:
 			self.i18n.addI18nWidget(self)
 		if self.wrap:
@@ -189,6 +183,9 @@ class Text(Label):
 			self.bind(width=self.set_widget_height)
 		if self.bgcolor:
 			self.color = self.bgcolor
+
+	def reset_font_size(self, app, fsize):
+		self.font_size = fsize * self.rate
 
 	def resize(self, *args):
 		if not self.size_hint_y:

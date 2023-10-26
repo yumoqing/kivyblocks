@@ -194,8 +194,11 @@ def getWidgetById(w,id):
 	return w.ids.get(id)
 		
 def CSize(x,y=None,name=None):
-	ks = KivySizes()
-	return ks.CSize(x,y=y,name=name)
+	app = App.get_running_app()
+	r = app.font_size
+	if not y:
+		return r * x
+	return r * x, r * y
 
 def screenSize():
 	ks = KivySizes()

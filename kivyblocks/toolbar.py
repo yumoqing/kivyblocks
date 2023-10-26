@@ -221,6 +221,9 @@ class ToolPage(Box):
 			self.orientation = 'vertical'
 		else:
 			self.orientation = 'horizontal'
+		self.current_sub_content = None
+		self.register_event_type('on_content_show')
+		self.register_event_type('on_content_hide')
 		if not self.toolbar_size:
 			self.toolbar_size = self.img_size + self.text_size + 0.3
 		self.content_widgets = {}
@@ -259,6 +262,7 @@ class ToolPage(Box):
 
 	def init(self):
 		self.content_w = BoxLayout()
+		self.curr_sub_content = None
 		self.content_w.widget_id = 'content'
 		self.toolbar_w = Toolbar(**self.toolbar)
 		if self.tool_at in ['top','left']:
@@ -300,24 +304,37 @@ class ToolPage(Box):
 		refresh = v.get('refresh', False)
 		# self.print_all()
 
+		if self.current_sub_content:
+			self.dispatch('on_content_hide', self.current_sub_content)
+
 		w = self.content_widgets.get(name)
 		self.content_w.clear_widgets()
 		if w and not refresh:
 			self.content_w.add_widget(w)
-			return
-		url = v.get('url')
-		if url:
-			w = self.build_widget(url)
-			if w:
-				self.content_widgets[name] = w
-				self.content_w.add_widget(w)
-			return
-		rfname = v.get('rfname')
-		if rfname:
-			rf = RegisterFunction()
-			f = rf.get(rfname)
-			if f:
-				r = f()
-				if isinstance(r,Widget):
-						self.content_w.add_widget(r)
+		else:
+			w = None
+			url = v.get('url')
+			if url:
+				w = self.build_widget(url)
+				if w:
+					self.content_widgets[name] = w
+					self.content_w.add_widget(w)
+			else:
+				rfname = v.get('rfname')
+				if rfname:
+					rf = RegisterFunction()
+					f = rf.get(rfname)
+					if f:
+						w = f()
+						if isinstance(w,Widget):
+							self.content_widgets[name] = w
+							self.content_w.add_widget(w)
+		if w:
+			self.current_sub_content = w
+			self.dispatch('on_content_show', w)
 
+	def on_content_show(self, content):
+		pass
+	
+	def on_content_hide(self, content):
+		pass

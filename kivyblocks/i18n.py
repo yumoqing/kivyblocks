@@ -58,9 +58,12 @@ class I18n:
 		if config.i18n_url:
 			url = '%s%s' % (config.uihome, config.i18n_url)
 			hc = HttpClient()
-			d = hc.get(url)
-			if isinstance(d, list):
-				return d
+			try:
+				d = hc.get(url)
+				if isinstance(d, list):
+					return d
+			except:
+				pass
 		return []
 			
 	def loadI18n(self,lang):
@@ -74,9 +77,12 @@ class I18n:
 		if config.i18n_url:
 			url = '%s%s/%s' % (config.uihome, config.i18n_url, lang)
 			hc = HttpClient()
-			d = hc.get(url)
-			print('i18n() %s get data=' % url, d, type(d))
-			self.kvlang[lang] = d
+			try:
+				d = hc.get(url)
+				print('i18n() %s get data=' % url, d, type(d))
+				self.kvlang[lang] = d
+			except:
+				pass
 		
 	def __call__(self,msg,lang=None):
 		if lang is None:
